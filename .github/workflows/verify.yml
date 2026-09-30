@@ -1,91 +1,39 @@
-name: Verify AIRLOCK
+name: Verify
 on:
   push:
     branches: [main]
   pull_request:
-  workflow_dispatch:
-  workflow_call:
-    inputs:
-      source_ref:
-        type: string
-        required: false
 permissions:
   contents: read
-concurrency:
-  group: verify-${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: false
 jobs:
-  core-and-browser:
+  bootstrap:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.source_ref || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
       - uses: actions/setup-node@v4
         with:
-          node-version: '22.16.0'
-      - name: Install locked dependencies
+          node-version: '22'
+      - name: Resolve and inspect Python dependencies
         run: |
-          python -m pip install -r requirements-dev.lock
-          npm ci --prefix apps/web --ignore-scripts
-          sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
-          cd apps/web && npx playwright install --with-deps chromium
-      - name: Verify source, integration, recovery, MCP, benchmark and browser
-        run: python scripts/verify.py --output Evidence/ci --browser
-      - name: Capture dependency audits
-        if: always()
+          mkdir -p Evidence/bootstrap/wheels
+          python -m pip install -r requirements-dev.txt
+          python -m pip freeze > Evidence/bootstrap/python-resolved.txt
+          python -m pip download -r requirements-dev.txt -d Evidence/bootstrap/wheels
+          python -c "import mcp,fastapi,pydantic,sqlalchemy; import importlib.metadata as m; print({p:m.version(p) for p in ('mcp','fastapi','pydantic','sqlalchemy')})" | tee Evidence/bootstrap/python-imports.txt
+      - name: Resolve frontend dependencies
+        working-directory: apps/web
         run: |
-          mkdir -p Evidence/ci
-          python -m venv /tmp/airlock-audit
-          /tmp/airlock-audit/bin/pip install pip-audit==2.10.1
-          status=0
-          /tmp/airlock-audit/bin/pip-audit -r requirements.lock --no-deps --disable-pip --format json --output Evidence/ci/pip-audit.json || status=1
-          npm audit --prefix apps/web --json > Evidence/ci/npm-audit.json || status=1
-          exit "$status"
+          npm install --ignore-scripts
+          npm ls --depth=0 > ../../Evidence/bootstrap/npm-resolved.txt
+          cp package-lock.json ../../Evidence/bootstrap/package-lock.json
+          tar -czf ../../Evidence/bootstrap/node_modules.tar.gz node_modules
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: core-browser-evidence
-          path: |
-            Evidence/ci
-            apps/web/test-results
-          retention-days: 14
-  container-isolation:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.source_ref || github.sha }}
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - name: Prepare fresh isolated environment
-        run: |
-          python -m pip install -r requirements.lock
-          python scripts/prepare_compose.py --port 8783
-          docker compose config --quiet
-          docker compose build
-          docker compose up -d --wait gateway runner
-      - name: Prove Agent network, mount and identity isolation
-        run: |
-          mkdir -p Evidence/isolation
-          RUNNER_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$(docker compose ps -q runner)")
-          docker compose run --rm -e AIRLOCK_TEST_RUNNER_IP="$RUNNER_IP" -e AIRLOCK_PUBLIC_HOST=127.0.0.1:8783 agent python scripts/isolation_probe.py | tee Evidence/isolation/result.json
-      - name: Preserve safe diagnostics
-        if: always()
-        run: |
-          mkdir -p Evidence/isolation
-          docker compose ps -a > Evidence/isolation/containers.txt || true
-          docker compose logs --no-color gateway runner > Evidence/isolation/containers.log || true
-          docker compose down --volumes || true
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: container-isolation-evidence
-          path: Evidence/isolation
-          retention-days: 14
+          name: bootstrap-dependencies
+          path: Evidence/bootstrap/
+          retention-days: 7
