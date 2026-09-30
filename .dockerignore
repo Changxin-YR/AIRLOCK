@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+runtime
+**/.env
+**/__pycache__
+**/node_modules
+**/dist
+.pytest_cache
+Evidence
+.transfer
+*.zip

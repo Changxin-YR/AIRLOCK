@@ -1,39 +1,110 @@
-name: Verify
+name: Verify AIRLOCK
 on:
   push:
     branches: [main]
-  pull_request:
+  workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+  actions: read
 jobs:
-  bootstrap:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Restore previously verified dependency lock
+        uses: actions/download-artifact@v4
+        with:
+          name: bootstrap-dependencies
+          run-id: '36706956059'
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/airlock-bootstrap
+      - name: Persist exact frontend lock from this repository's bootstrap
+        env:
+          BOOTSTRAP_DIR: ${{ runner.temp }}/airlock-bootstrap
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          source = Path(os.environ['BOOTSTRAP_DIR']) / 'package-lock.json'
+          data = json.loads(source.read_text())
+          package = json.loads(Path('apps/web/package.json').read_text())
+          data['packages']['']['dependencies'] = package['dependencies']
+          data['packages']['']['devDependencies'] = package['devDependencies']
+          content = (json.dumps(data, indent=2) + '\n').encode()
+          assert hashlib.sha256(content).hexdigest() == '0db7adf2c4134fccfe2002baac4209236757c877ea0057b4d0ae6b8b7b66eb6c'
+          Path('apps/web/package-lock.json').write_bytes(content)
+          PY
+          git config user.name 'AIRLOCK verification'
+          git config user.email 'actions@users.noreply.github.com'
+          git add apps/web/package-lock.json
+          if ! git diff --cached --quiet; then
+            git fetch origin main
+            test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+            git commit -m 'build: persist exact verified frontend dependency lock'
+            git push origin HEAD:main
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Resolve and inspect Python dependencies
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - name: Install exact dependencies
         run: |
-          mkdir -p Evidence/bootstrap/wheels
-          python -m pip install -r requirements-dev.txt
-          python -m pip freeze > Evidence/bootstrap/python-resolved.txt
-          python -m pip download -r requirements-dev.txt -d Evidence/bootstrap/wheels
-          python -c "import mcp,fastapi,pydantic,sqlalchemy; import importlib.metadata as m; print({p:m.version(p) for p in ('mcp','fastapi','pydantic','sqlalchemy')})" | tee Evidence/bootstrap/python-imports.txt
-      - name: Resolve frontend dependencies
-        working-directory: apps/web
+          python -m pip install -r requirements.lock
+          python -m pip install --no-deps -e .
+          npm ci --ignore-scripts --prefix apps/web
+          python -m playwright install --with-deps chromium
+      - name: Record environment
         run: |
-          npm install --ignore-scripts
-          npm ls --depth=0 > ../../Evidence/bootstrap/npm-resolved.txt
-          cp package-lock.json ../../Evidence/bootstrap/package-lock.json
-          tar -czf ../../Evidence/bootstrap/node_modules.tar.gz node_modules
-      - uses: actions/upload-artifact@v4
+          mkdir -p Evidence/ci
+          git rev-parse HEAD > Evidence/ci/commit.txt
+          git archive --format=zip --output=Evidence/ci/source.zip HEAD
+          python -m pip freeze > Evidence/ci/python.txt
+          node --version > Evidence/ci/node.txt
+          npm ls --depth=0 --prefix apps/web > Evidence/ci/npm.txt
+      - name: Backend, real process recovery and MCP
+        run: |
+          set -o pipefail
+          python -m pytest -q --cov=airlock --cov-report=term-missing --cov-report=json:Evidence/ci/coverage.json --junitxml=Evidence/ci/pytest.xml | tee Evidence/ci/pytest.txt
+      - name: Frontend typecheck and production build
+        run: |
+          set -o pipefail
+          npm run build --prefix apps/web | tee Evidence/ci/frontend-build.txt
+      - name: Contract regression and independent preview oracle
+        run: python scripts/evaluate.py --out Evidence/ci/evaluation.json
+      - name: Real Chromium workflow and responsive screenshots
+        run: |
+          set -o pipefail
+          python scripts/browser_check.py --out Evidence/ci/browser | tee Evidence/ci/browser.txt
+      - name: Container deployment and restricted-agent boundary
+        run: |
+          set -o pipefail
+          python -m airlock.cli init --data-dir runtime
+          sudo "$(which python)" scripts/prepare_compose.py
+          docker compose up --build -d --wait --wait-timeout 180 2>&1 | tee Evidence/ci/compose-build.txt
+          python scripts/compose_check.py | tee Evidence/ci/compose-test.txt
+          cp Evidence/compose-boundary.json Evidence/ci/
+      - name: Dependency advisories
         if: always()
+        run: |
+          mkdir -p Evidence/ci
+          python -m pip install pip-audit
+          python -m pip_audit -r requirements.lock -f json -o Evidence/ci/pip-audit.json || echo 'Review advisories in pip-audit.json' > Evidence/ci/pip-audit-status.txt
+          npm audit --json --prefix apps/web > Evidence/ci/npm-audit.json || echo 'Review advisories in npm-audit.json' > Evidence/ci/npm-audit-status.txt
+      - name: Container logs and cleanup
+        if: always()
+        run: |
+          docker compose logs --no-color > Evidence/ci/compose-logs.txt 2>&1 || true
+          docker compose down --remove-orphans || true
+      - name: Upload actual verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: bootstrap-dependencies
-          path: Evidence/bootstrap/
-          retention-days: 7
+          name: airlock-verification-${{ github.sha }}
+          path: Evidence/ci/
+          retention-days: 30
+          if-no-files-found: error

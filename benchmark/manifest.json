@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "sha256": "59f3bd4a55a8ae85797be8c95265903cb54c55355f92d3e5b2b0a63b07b4f00d",
+  "cases": 28,
+  "source": "all synthetic; none are real incident logs",
+  "scope": "fixed-policy contract regression, not an independently labelled security benchmark",
+  "partition": "whole scenario families; both splits are public and developer-known",
+  "human_study": "NOT_TESTABLE: not conducted",
+  "llm_ablation": "NOT_TESTABLE: no real provider credential supplied"
+}
