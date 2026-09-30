@@ -1,0 +1,78 @@
+import { test, expect, type Page } from '@playwright/test'
+import { mkdir } from 'node:fs/promises'
+const artifacts='../../Evidence/ci/screenshots'
+async function login(page:Page){
+  await page.goto('/')
+  await expect(page).toHaveTitle('AIRLOCK · 变更审批工作台')
+  await page.locator('#password').fill('test-e2e-password')
+  await page.getByRole('button',{name:'安全登录'}).click()
+  await expect(page.getByRole('button',{name:'新建演示请求'})).toBeVisible()
+}
+async function demo(page:Page,label:string){
+  await page.getByRole('button',{name:'新建演示请求'}).click()
+  await page.getByRole('button',{name:label,exact:true}).click()
+}
+test.beforeAll(async()=>{await mkdir(artifacts,{recursive:true})})
+test('real UI approval commits a change and retains an audit trail',async({page})=>{
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message))
+  await page.goto('/');await expect(page.locator('#password')).toBeVisible()
+  await page.screenshot({path:`${artifacts}/login-desktop.png`,fullPage:true})
+  await login(page)
+  await demo(page,'创建待审批请求')
+  await expect(page.getByRole('button',{name:'批准这次变更'})).toBeVisible()
+  await expect(page.locator('.diff-record')).toHaveCount(3)
+  await page.getByRole('button',{name:'下一组'}).click()
+  await expect(page.locator('.diff-record').last()).toContainText('#6')
+  await page.getByRole('button',{name:'上一组'}).click()
+  await page.screenshot({path:`${artifacts}/review-desktop.png`,fullPage:false})
+  await expect(page.getByRole('button',{name:'批准这次变更'})).toBeDisabled()
+  await page.locator('#reason').fill('已核对 6 条测试客户及其字段变化。')
+  await page.getByRole('button',{name:'批准这次变更'}).click()
+  await expect(page.getByText('执行完成，回执已保存')).toBeVisible()
+  await expect(page.locator('.receipt')).toContainText('6')
+  await page.reload();await expect(page.getByRole('button',{name:'新建演示请求'})).toBeVisible()
+  await page.locator('.request-row').first().click()
+  await expect(page.getByText('执行完成，回执已保存')).toBeVisible()
+  await page.screenshot({path:`${artifacts}/success-desktop.png`,fullPage:false})
+  expect(errors).toEqual([])
+})
+test('blocked destructive proposal cannot be approved',async({page})=>{
+  await login(page);await demo(page,'运行阻断场景')
+  await expect(page.locator('.review-detail .status-badge')).toHaveText('已阻止')
+  await expect(page.getByRole('button',{name:'批准这次变更'})).toHaveCount(0)
+  await expect(page.locator('.impact-main')).toContainText('1230')
+  await page.screenshot({path:`${artifacts}/blocked-desktop.png`,fullPage:false})
+})
+test('mobile cascade preview and rejection stay readable',async({page})=>{
+  await page.setViewportSize({width:390,height:844})
+  await login(page);await demo(page,'检查级联删除')
+  await expect(page.getByRole('button',{name:'批准这次变更'})).toBeVisible()
+  await expect(page.locator('.impact-main')).toContainText('18')
+  await page.locator('.review-detail').scrollIntoViewIfNeeded()
+  await page.screenshot({path:`${artifacts}/review-mobile.png`,fullPage:false})
+  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth)
+  expect(overflow).toBeFalsy()
+  await page.locator('#reason').fill('需要保留备注，拒绝删除。')
+  await page.getByRole('button',{name:'拒绝请求',exact:true}).click()
+  await expect(page.locator('.review-detail .status-badge')).toHaveText('已拒绝')
+})
+test('readonly flow hides unauthorized fields and exposes honest boundaries',async({page})=>{
+  await login(page);await demo(page,'运行只读请求')
+  await expect(page.getByText('执行完成，回执已保存')).toBeVisible()
+  await expect(page.locator('.receipt')).not.toContainText('@example.invalid')
+  await page.getByRole('button',{name:'项目边界'}).click()
+  await expect(page.getByText('一个范围明确、证据可核对的个人项目。')).toBeVisible()
+  expect(await page.evaluate(()=>document.querySelector('vite-error-overlay'))).toBeNull()
+})
+
+test('untrusted rejection text is rendered as text, never HTML',async({page})=>{
+  await login(page);await demo(page,'检查级联删除')
+  await expect(page.getByRole('button',{name:'批准这次变更'})).toBeVisible()
+  const text='<img src=x onerror="window.airlockInjected=1">'
+  await page.locator('#reason').fill(text)
+  await page.getByRole('button',{name:'拒绝请求',exact:true}).click()
+  await expect(page.locator('.review-detail .status-badge')).toHaveText('已拒绝')
+  await expect(page.locator('.review-detail')).toContainText(text)
+  expect(await page.evaluate(()=>Reflect.get(window,'airlockInjected'))).toBeUndefined()
+  expect(await page.locator('img[src="x"]').count()).toBe(0)
+})

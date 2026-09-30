@@ -1,0 +1,63 @@
+name: airlock
+services:
+  gateway:
+    image: airlock-change-review:local
+    build: .
+    user: "${AIRLOCK_UID:-1000}:${AIRLOCK_GID:-1000}"
+    environment:
+      AIRLOCK_CONFIG: /state/config.json
+    ports:
+      - "127.0.0.1:${AIRLOCK_WEB_PORT:-8080}:8080"
+    volumes:
+      - "${AIRLOCK_DATA_DIR:-./.airlock-compose}/gateway:/state"
+      - "${AIRLOCK_DATA_DIR:-./.airlock-compose}/policy.yaml:/config/policy.yaml:ro"
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [edge, control]
+    depends_on:
+      runner:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import json,urllib.request,urllib.parse; c=json.load(open('/state/config.json')); r=urllib.request.Request('http://127.0.0.1:8080/health',headers={'Host':urllib.parse.urlsplit(c['public_origin']).netloc}); urllib.request.urlopen(r,timeout=3).read()"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+  runner:
+    image: airlock-change-review:local
+    user: "${AIRLOCK_UID:-1000}:${AIRLOCK_GID:-1000}"
+    command: [python, -m, uvicorn, "airlock.runner_api:create_runner_app", --factory, --host, 0.0.0.0, --port, '8081', --no-access-log]
+    environment:
+      AIRLOCK_RUNNER_CONFIG: /state/config.json
+    volumes:
+      - "${AIRLOCK_DATA_DIR:-./.airlock-compose}/runner:/state"
+      - "${AIRLOCK_DATA_DIR:-./.airlock-compose}/policy.yaml:/config/policy.yaml:ro"
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [control]
+    healthcheck:
+      test: [CMD, python, -c, "import json,urllib.request; c=json.load(open('/state/config.json')); r=urllib.request.Request('http://127.0.0.1:8081/internal/resource',headers={'Authorization':'Bearer '+c['runner_secret']}); urllib.request.urlopen(r,timeout=3).read()"]
+      interval: 5s
+      timeout: 4s
+      retries: 12
+  agent:
+    image: airlock-change-review:local
+    user: "${AIRLOCK_UID:-1000}:${AIRLOCK_GID:-1000}"
+    profiles: [agent]
+    command: [python, -m, airlock.mcp_server]
+    stdin_open: true
+    env_file: ["${AIRLOCK_DATA_DIR:-./.airlock-compose}/agent/client.env"]
+    volumes:
+      - "${AIRLOCK_DATA_DIR:-./.airlock-compose}/agent:/client"
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    networks: [edge]
+networks:
+  edge: {}
+  control:
+    internal: true

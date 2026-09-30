@@ -1,0 +1,15 @@
+.git
+.airlock*
+.env
+**/node_modules
+**/dist
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+Evidence
+*.zip
+*.tgz
+*.b64
+.delivery
+test-results
+playwright-report
