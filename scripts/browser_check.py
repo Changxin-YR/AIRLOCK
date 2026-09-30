@@ -28,7 +28,9 @@ def main():
         page=context.new_page();errors=[];console_errors=[]
         page.on('pageerror',lambda e:errors.append(str(e)))
         page.on('console',lambda msg:console_errors.append(msg.text) if msg.type=='error' else None)
-        def shot(name):page.screenshot(path=str(args.out/(name+'.png')),full_page=True)
+        def shot(name):
+            expect(page.locator('.el-message')).to_have_count(0,timeout=6000)
+            page.screenshot(path=str(args.out/(name+'.png')),full_page=True)
         def check(name,passed=True):
             report['checks'].append({'name':name,'pass':bool(passed)})
             assert passed,name
@@ -44,6 +46,8 @@ def main():
             page.get_by_role('button',name='进入工作台',exact=True).click()
             expect(page.get_by_role('heading',name='变更审批',exact=True)).to_be_visible()
             check('independent human login')
+            expect(page.get_by_role('button',name='退出登录',exact=True)).to_have_count(1)
+            check('one visible desktop logout')
             expect(page.get_by_text('事件流已连接',exact=True)).to_be_visible(timeout=10000)
             check('SSE connected')
             propose('归档三条测试客户');pending()
@@ -51,6 +55,8 @@ def main():
             check('real field diff and pending state')
             shot('02-review-desktop')
             page.set_viewport_size({'width':390,'height':844})
+            expect(page.get_by_role('button',name='退出登录',exact=True)).to_have_count(1)
+            check('one visible mobile logout')
             check('mobile does not overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
             shot('03-review-mobile')
             page.set_viewport_size({'width':1440,'height':1080})

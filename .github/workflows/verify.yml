@@ -2,10 +2,13 @@ name: Verify AIRLOCK
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
-  contents: write
-  actions: read
+  contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -15,38 +18,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Restore previously verified dependency lock
-        uses: actions/download-artifact@v4
-        with:
-          name: bootstrap-dependencies
-          run-id: '36706956059'
-          github-token: ${{ github.token }}
-          path: ${{ runner.temp }}/airlock-bootstrap
-      - name: Persist exact frontend lock from this repository's bootstrap
-        env:
-          BOOTSTRAP_DIR: ${{ runner.temp }}/airlock-bootstrap
-        run: |
-          python - <<'PY'
-          import hashlib, json, os
-          from pathlib import Path
-          source = Path(os.environ['BOOTSTRAP_DIR']) / 'package-lock.json'
-          data = json.loads(source.read_text())
-          package = json.loads(Path('apps/web/package.json').read_text())
-          data['packages']['']['dependencies'] = package['dependencies']
-          data['packages']['']['devDependencies'] = package['devDependencies']
-          content = (json.dumps(data, indent=2) + '\n').encode()
-          assert hashlib.sha256(content).hexdigest() == '0db7adf2c4134fccfe2002baac4209236757c877ea0057b4d0ae6b8b7b66eb6c'
-          Path('apps/web/package-lock.json').write_bytes(content)
-          PY
-          git config user.name 'AIRLOCK verification'
-          git config user.email 'actions@users.noreply.github.com'
-          git add apps/web/package-lock.json
-          if ! git diff --cached --quiet; then
-            git fetch origin main
-            test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
-            git commit -m 'build: persist exact verified frontend dependency lock'
-            git push origin HEAD:main
-          fi
+          cache: pip
+          cache-dependency-path: requirements.lock
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -56,11 +29,14 @@ jobs:
         run: |
           python -m pip install -r requirements.lock
           python -m pip install --no-deps -e .
+          python -m pip check
           npm ci --ignore-scripts --prefix apps/web
           python -m playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
       - name: Record environment
         run: |
-          mkdir -p Evidence/ci
+          mkdir -p Evidence/ci/updated-wheels
+          python -m pip download --no-deps fastapi==0.142.1 starlette==1.7.0 pytest==9.0.3 -d Evidence/ci/updated-wheels
           git rev-parse HEAD > Evidence/ci/commit.txt
           git archive --format=zip --output=Evidence/ci/source.zip HEAD
           python -m pip freeze > Evidence/ci/python.txt
@@ -93,8 +69,12 @@ jobs:
         run: |
           mkdir -p Evidence/ci
           python -m pip install pip-audit
-          python -m pip_audit -r requirements.lock -f json -o Evidence/ci/pip-audit.json || echo 'Review advisories in pip-audit.json' > Evidence/ci/pip-audit-status.txt
-          npm audit --json --prefix apps/web > Evidence/ci/npm-audit.json || echo 'Review advisories in npm-audit.json' > Evidence/ci/npm-audit-status.txt
+          python -m pip_audit -r requirements.lock -f json -o Evidence/ci/pip-audit.json
+      - name: Frontend dependency audit
+        if: always()
+        run: |
+          mkdir -p Evidence/ci
+          npm audit --json --prefix apps/web > Evidence/ci/npm-audit.json
       - name: Container logs and cleanup
         if: always()
         run: |

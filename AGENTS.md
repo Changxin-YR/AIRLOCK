@@ -1,9 +1,7 @@
 # AIRLOCK engineering contract
 
-This is a small personal portfolio project, not a universal security gateway.
+Read README.md and docs/ARCHITECTURE.md. This is a constrained personal SQLite review project, not a universal security gateway. Codex is the final independent reviewer, not the primary implementer.
 
-Read README.md and docs/PLAN.md. Agent credentials must never approve a request. Human approval cannot override authorization or block rules. Only registered structured SQLite operations are supported; no raw SQL, shell, arbitrary URL, or bypass switch. Preview must modify only a consistent shadow snapshot. Bind approval to immutable arguments, identity, policy, schema and business state. Recheck inside the final write transaction. Commit business mutations and the operation receipt atomically. Recover uncertain outcomes through that receipt. Persist state; SSE is notification only.
+Agent identity cannot approve. Approval cannot override authorization or block rules. Never add raw SQL, shell, arbitrary resource URLs, bypass flags or model-controlled permissions. Preview writes only an SQLite Backup API shadow. Bind immutable request, principal, policy, schema, snapshot and expiry. Recheck within the final target transaction. Business changes and receipt commit atomically. Recover uncertain results via receipts. Never hold a target transaction while a human decides. SSE is notification, not durable state.
 
-Do not manufacture benchmarks, model responses, user studies, screenshots or green test output. Report unavailable external checks as NOT_TESTABLE. Do not weaken tests to obtain a green build. Do not touch other repositories. Never commit runtime credentials or databases.
-
-Implementation is being completed in this conversation. Codex's final role is independent review and repair, not silently replacing the design.
+Run `python -m pytest -q`, `npm ci --ignore-scripts --prefix apps/web`, `npm run build --prefix apps/web`, `python scripts/evaluate.py`, actual browser and Compose checks. Preserve raw results. Do not weaken assertions or fake external model calls, screenshots, user studies or performance. Unavailable checks are NOT_TESTABLE. Credentials, runtime databases and private checkpoints must never enter Git, logs or public artifacts. Restrict work to this repository. See CODEX_REVIEW.md for final gates.
