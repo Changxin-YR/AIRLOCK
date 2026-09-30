@@ -36,7 +36,7 @@ jobs:
       - name: Record environment
         run: |
           mkdir -p Evidence/ci/updated-wheels
-          python -m pip download --no-deps fastapi==0.142.1 starlette==1.7.0 pytest==9.0.3 -d Evidence/ci/updated-wheels
+          python -m pip download --no-deps fastapi==0.142.1 starlette==1.7.0 pytest==9.0.3 opentelemetry-api==1.45.0 -d Evidence/ci/updated-wheels
           git rev-parse HEAD > Evidence/ci/commit.txt
           git archive --format=zip --output=Evidence/ci/source.zip HEAD
           python -m pip freeze > Evidence/ci/python.txt

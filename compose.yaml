@@ -15,7 +15,7 @@ services:
   runner:
     <<: *hardened
     command: [python, -m, airlock.cli, runner, --host, 0.0.0.0, --port, '8090']
-    env_file: runtime/runner/.env
+    env_file: runtime/compose/runner.env
     environment:
       AIRLOCK_TARGET_DB: /data/target.db
     volumes:
@@ -29,7 +29,7 @@ services:
   gateway:
     <<: *hardened
     command: [python, -m, airlock.cli, gateway, --host, 0.0.0.0, --port, '8080']
-    env_file: runtime/gateway/.env
+    env_file: runtime/compose/gateway.env
     environment:
       AIRLOCK_META_DB: /data/meta.db
       AIRLOCK_RUNNER_URL: http://runner:8090
