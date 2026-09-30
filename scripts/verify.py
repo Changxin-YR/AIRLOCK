@@ -107,7 +107,11 @@ def main() -> None:
             p: importlib.metadata.version(p)
             for p in ["fastapi", "pydantic", "sqlalchemy", "mcp", "pytest", "ruff"]
         },
-        "git_sha": os.environ.get("GITHUB_SHA"),
+        "git_sha": subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True
+        ).stdout.strip()
+        or None,
+        "workflow_trigger_sha": os.environ.get("GITHUB_SHA"),
         "gates": results,
         "live_model": {
             "status": "NOT_TESTABLE",

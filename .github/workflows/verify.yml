@@ -2,7 +2,6 @@ name: Verify AIRLOCK
 on:
   push:
     branches: [main]
-    paths-ignore: ['.github/workflows/restore-source.yml']
   pull_request:
   workflow_dispatch:
   workflow_call:
@@ -17,8 +16,6 @@ concurrency:
   cancel-in-progress: false
 jobs:
   core-and-browser:
-    if: >-
-      inputs.source_ref != '' || github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore: restore transport')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -35,6 +32,7 @@ jobs:
         run: |
           python -m pip install -r requirements-dev.lock
           npm ci --prefix apps/web --ignore-scripts
+          sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
           cd apps/web && npx playwright install --with-deps chromium
       - name: Verify source, integration, recovery, MCP, benchmark and browser
         run: python scripts/verify.py --output Evidence/ci --browser
@@ -57,8 +55,6 @@ jobs:
             apps/web/test-results
           retention-days: 14
   container-isolation:
-    if: >-
-      inputs.source_ref != '' || github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore: restore transport')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
