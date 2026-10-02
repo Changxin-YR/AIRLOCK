@@ -124,6 +124,13 @@ def main():
                         'reviewer is automated test code, not a human A/B participant']}
                 (args.output / 'docker-report.json').write_text(json.dumps(report, indent=2) + '\n')
                 print(json.dumps(report, indent=2))
+        except BaseException:
+            for command in (['ps', '-a'], ['logs', '--no-color', '--tail', '120', 'airlock'], ['port', 'airlock', '8000']):
+                try:
+                    run(command, timeout=20)
+                except Exception as diagnostic_error:
+                    logs.append('Diagnostic unavailable: ' + str(diagnostic_error))
+            raise
         finally:
             try:
                 run(['down', '--volumes', '--remove-orphans'], timeout=60)

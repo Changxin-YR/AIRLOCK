@@ -21,7 +21,7 @@ for package in ('fastapi', 'starlette', 'pydantic', 'uvicorn', 'httpx', 'pytest'
 result = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True)
 files = {}
 for path in sorted(TARGET.iterdir()):
-    if path.is_file() and path.name != 'manifest.json' and path.suffix in {'.json', '.jsonl', '.log', '.txt', '.png', '.zip'}:
+    if path.is_file() and path.name != 'manifest.json' and path.suffix in {'.json', '.jsonl', '.log', '.txt', '.png', '.zip', '.xml'}:
         data = path.read_bytes()
         files[path.name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
 report = {'commit': result.stdout.strip() if result.returncode == 0 else None,
