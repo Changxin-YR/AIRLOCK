@@ -1,185 +1,50 @@
-# AIRLOCK 最新闭环状态：25d4f52已推送，最终CI待结束
+# AIRLOCK 闭环交付：受控工程通过，真实研究验证仍受阻
 
-2026-10-02。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支 codex/full-audit-2026-10-02 已推送25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb，PR #1未合并。
+2026-10-02。开始接续时仍应先 fetch 并核对真实分支、HEAD、工作区、main 与 memory/progress。此文件是记忆，验收事实以原始收据和源码为准。历史进度保存在本分支 Git 历史；上一检查点 eb888b0447e266c2cea76292c360625343dee641。
 
-cc9d687完整Linux CI37024249256成功：216 Python/6 JS/23 browser、真实受保护上游网络、固定官方源码构建S3、研究/证据门禁。完整ZIP已下载校验78载荷，SHA256 e7b48439c920447e6ce121676a57191bb6272fb1cbf2c523c94f431f841329bc，存本机待提交 evidence/closure-20261002/ci/acceptance-cc9d687.zip。
+## 实际交付
 
-最终身份反例又发现SSE热映射后仍使用旧通知范围的P1（无批准/业务写越权）。25d4f52修复为当前身份必须等于连接身份；旧Git模块重放复现467字节动作通知，修复后0字节，目标均1206行。14项相关测试通过。最新全CI37026082667在跑，预计217项；不能把旧216项CI当作新修复完整证明。
+- main：704b5035cf69f9a6c40c44eecd84c0d0741de849，未合并。
+- 独立工作分支：codex/full-audit-2026-10-02；远端 HEAD fac683600e79c2635cf8f9073b597d4c36846e4b。
+- 应用源码测试提交：25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb。代码/报告/完整证据提交68492cd04174de5c3ccd5cb3211cb34ee1fb2d7d；最终fac6836只校正报告一处测试数。应用源码与25d4f52无差异。
+- 草稿PR https://github.com/Changxin-YR/AIRLOCK/pull/1 已更新，open/draft/unmerged。
+- 126条原目标完整矩阵：111 IMPLEMENTED / 15 PARTIAL；105限定范围PASS / 21 BLOCKED_EXTERNAL，没有NOT_RUN。含父项，不是独立测试数量或完成率。
+- 全部原始目标尚未通过。已知且可安全实施的受控功能和实验工具已完成，外部研究与生产接入不能用合成结果代替。
 
-真实模型新增4调用全部有效，累计642、626有效/16历史无效，保守预算占用¥1.1211824/¥3，同一ledger。没有真人，保持n=0/κ=null/真实数据受阻。源码、归档、运维、研究工具与来源补核已完成；最终126矩阵草稿111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL，需在最终CI证据到位后重新生成校验并提交。
+## 验证与修复
 
-工作区有尚未提交的 docs 与 evidence/closure-20261002；不得清空。需要继续：等待新CI、下载hash核验、更新最终SHA/矩阵/报告/保留期、提交推送、更新草稿PR、最后同步本memory。两次失败CI日志已保留（旧镜像不可拉取、只读启动探测ConnectionClosedError）。
+最终应用CI https://github.com/Changxin-YR/AIRLOCK/actions/runs/37026082667 成功，job110900936649：217 Python、6 JavaScript、23原生浏览器检查、Next构建、依赖审计、官方MCP SDK、冻结benchmark、真实Compose/受保护上游网络/S3 Object Lock/Envoy/Collector和研究/证据门禁全部通过。对应完整ZIP已独立验证78个manifest载荷和217条JUnit，verify_evidence实际exit0；矩阵126条与23份真实收据校验exit0。188个Git证据载荷与manifest逐个核对通过。
 
-<details><summary>上一进度检查点</summary>
+报告/证据提交68492cd的CI37027516945也成功。最终交付fac6836的CI37028190235已完整成功，job110908065123；原始日志再次记录217 Python、6 JS及全部证据门禁成功。真实元数据与原始job日志在本分支CLOSURE_CI_20261002.json / CLOSURE_DELIVERY_JOB_20261002.log。
 
-# AIRLOCK 本轮闭环进展：新代码已推送，最终 CI 与矩阵复验进行中
+新增闭环：OIDC RS256 access-token受信issuer/audience/JWKS与撤销、DNS/TLS实际连接绑定、MCP会话/SSE、独立S3归档连接器、operator健康/告警/Prometheus、按reviewer路由过滤的白名单导出、受保护上游网络、研究导入/双人模板/仲裁/κ/理解题/金标重算/治理工具。MCP真实SDK、来源事故与成本均保留原始证据。
 
-2026-10-02。实际 main 仍为 704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支 codex/full-audit-2026-10-02 已推送 c3dd6ad9de5e0be6be57eb3809300f2b2ea7c088；PR #1 未合并。
+新增P1反例：SSE长连接身份映射变化后沿用旧通知范围。25d4f52改为当前身份必须等于连接身份；独立加载旧Git模块重放得到467字节动作通知，修复后0字节，业务目标均1206行，无批准/写入越权。新增回归进入217项CI。另修正危险语义预测与授权保护率混算，缺标签不产生验收结论。完整修复清单见FINDINGS_AND_FIXES.md。
 
-新增：RS256 access-token 受信 issuer/JWKS 校验与主体撤销、域名 DNS pin/TLS SNI、MCP 会话/SSE、有版本绑定的独立 S3 Object Lock 归档连接器、运维告警/Prometheus、按路由过滤的白名单审计导出、研究导入/双人模板/仲裁/语义指标独立计算/理解题/治理统计，以及受保护上游双内网检查。
+Windows Compose仍因auth.docker.io认证网络超时exit1，原日志保留；Linux成功不改写本机失败。两次中间CI失败（旧官方镜像不可拉取、只读启动探测ConnectionClosedError）已修复为固定官方源码构建与只读就绪重试，原日志保存。Starlette TestClient弃用warning保留。
 
-本地绑定该 SHA 的 pytest 215 项已过；真实 DeepSeek→注册 MCP 上游拒绝/批准闭环通过，新增 4 调用。共用 var/deepseek-continuation-ledger 现 642 调用，保守累计估价 ¥1.1211824 / ¥3，不是账单。S3 临时容器 6 条契约通过；不代表长期云归档。Windows Docker build 仍因 auth.docker.io 连接失败退出 1，原日志保留。
+## 真实模型与预算
 
-CI 37022113155 正在运行，尚不能计完整通过。126 矩阵的上一版只代表下述旧交付，最终矩阵和新 CI 包将随后补入。用户无真人，保持真人/真实日志/独立金标验证受阻；不停止可执行工具工作。当前请继续完成 CI 诊断、证据归档、逐项矩阵和最终报告。
+用户已授权DeepSeek V4.1 Flash、本机DEEPSEEK_API_KEY，费用约每个3元；实际所有实验共用var/deepseek-continuation-ledger，保守累计预算硬上限¥3，不重新起账。本次新增4调用全部有效，真实模型→AIRLOCK→MCP counter证明待审无效果、拒绝后停止、独立测试审核批准后0→3且版本仅增1。该真实轨迹收据绑定c3dd6ad，后续修复后的CI绑定25d4f52，未改写旧模型收据。
 
-<details><summary>上一轮交付记录</summary>
+累计642调用，626有效/16历史无效；保守预留/结算占用¥1.1211824/¥3，有效usage估价¥0.8526124；本轮4次增量¥0.00338424。均为估价，未核对供应商账单。无需继续付费调用。原600次四臂v1负结果保留；v2只复验既有开发失败样例，未冒称完整v2重跑。审核者是独立脚本，不是人类参与者。
 
-# AIRLOCK 执行记忆：真实模型与功能补齐已交付，全部原目标仍部分满足
+## 剩余外部条件
 
-更新：2026-10-02。先核对实际 main、工作分支和本分支；当前状态以本段与 STATE.json 为准，历史叙述在下方折叠保留。
+未关闭原记录：G4、C8、C8.5、C11、C11.2、T1、T2、B1、B2、B3、B4、H1、H2、H3、H4、H5、K1、K2、K3、K4、K6。用户已明确目前没有真人，保留n=0、独立标注0、κ=null、真实召回/FPR/疲劳效果未知。需要授权真实业务日志、两名独立标注者、全新保留集和知情A/B参与者；工具与模板完整，不自动创造金标或参与者。
 
-## 实际提交与验证
+真实IdP发证/交互登录及MFA需要外部客户端配置；长期独立云桶保管与生产告警接收器、实际业务适配器、真实账单和用户现场讲解尚未验证。通用第三方工具需按真实目标实现preview/CAS/收据/补偿；不宣称任意工具零适配、任意Shell沙箱、通用生产数据库灾备或多租户列权限。
 
-- main仍为704b5035cf69f9a6c40c44eecd84c0d0741de849；未合并、未force-push。
-- 工作分支codex/full-audit-2026-10-02，代码/报告/原始证据已推送661cf9024e56df4dd88a6d789be25d46c7c8eace。
-- 应用测试SHA17ccd2c5942aa316ee94509109cc01fbca925a26；到报告提交的应用源码差异为空。
-- 草稿PR https://github.com/Changxin-YR/AIRLOCK/pull/1 已更新，待审未合并。
-- 最终应用CI36998200376成功，原包已下载核对摘要和57载荷，再独立verifier exit0；177 Python、6 JS、22原生浏览器、Next构建、真实Compose/Envoy/Collector、依赖审计通过。
-- Windows Compose基础镜像认证网络仍exit1，Linux成功不改写本机失败。Starlette TestClient/httpx warning保留。
-- 报告提交CI37000362930亦completed/success，全部步骤通过；最终元数据与Actions期限记录在STATE.json及CONTINUATION_CI_20261002.json。
+## 原始证据与保留期
 
-126原记录：97 IMPLEMENTED / 29 PARTIAL；104范围限定PASS / 21 BLOCKED_EXTERNAL / 1 NOT_RUN（C1父项聚合）。父项通过不能代替子项，完整原目标仍未满足。全部字段和实际收据见工作分支docs/acceptance/COMPLETION_MATRIX.json。
+Git的evidence/closure-20261002/包含原始日志、真实退出码、JUnit、PNG、真实模型轨迹和来源摘要。最终应用完整ZIP：ci/acceptance-25d4f52.zip，1,397,386字节，SHA256 cdb3092b25ec8867d62c3943a0f9adedb7e0b7b63273be198e3934ba480d087c。Actions副本11235800383到期2026-12-31T15:18:49Z；Git副本无自动到期，依赖仓库历史/备份，非WORM。
 
-## 本轮补齐和反例
+最终交付CI完整ZIP仅Actions：artifact11236286987，1,412,685字节，SHA256 8cc239d81fdac081a93ea455aff667d46e5de06b281f8d5eff79dacd6d004a9f，到期2026-12-31T15:36:38Z；其元数据和job日志在本memory分支。应用25d4f52完整包已在代码分支Git永久归档（无自动到期），不因重复交付CI包到期丢失应用证据。中间68492cd的Actions包11236520683到期2026-12-31T15:30:58Z。失败CI完整ZIP仍仅Actions，Git保存日志/元数据，精确期限见EVIDENCE_RETENTION.md。
 
-Streamable HTTP MCP、注册stateless MCP JSON上游、跨进程持久策略激活、可逆性/恢复分类、独立远端补偿、Next.js/React迁移、DeepSeek CNY持久预算/缓存、审计key-id轮换/签名检查点/9状态完整率、真实OTLP Collector及受限Envoy CEL映射。浏览器新增stale/expired/failed/unknown对账、长文本注入/键盘/退出/CSP路径。
+临时S3测试容器已移除，不代表部署了永久云归档。数据库、密钥、私有ledger、签名下载URL、解压副本与公共网页全文未入Git。原始任务正文及126索引保留完整，未被旧MVP范围覆盖。
 
-新增模型输出诊断并限制提示中的理由长度，严格schema不放宽。远端审计完整率绑定原持久执行声明，缺失声明仍失败。历史Windows MIME、假绿门禁、stdio环境、依赖UNC、TTL等修复和负例全部保留。已测范围无已知未修复P0/P1；不是全域安全认证。
+## 接续边界
 
-## 用户授权和真实模型结果
+当前实测声明范围无已知、未修复、可复现P0/P1；不代表全域或生产认证。Agent必须无服务器文件/数据库/reviewer或audit密钥/宿主管理权限；上游实际执行CAS与持久幂等收据。所有写入和补偿保持独立批准，可逆性、预算、模型和学习建议均不产生批准权。
 
-用户授权DeepSeek V4.1 Flash、本机DEEPSEEK_API_KEY，费用“每个约3元”。实际从严实施为全部继续完善实验共用累计¥3和一个持久账本，最多650调用。本轮638次：622有效、16schema失败；保守预算占用¥1.11779816，有效usage估价¥0.84922816，均非供应商账单。不得更换ledger重置预算；当前无必要继续付费调用。
-
-四臂原v1提示、冻结200例分别跑dev120/test80，三模型臂共600真实调用。dev一致率：70/120、54/120、99/120、102/120；test：60/80、50/80、80/80、76/80。14次schema失败原样保留。dev诊断又复现2次超长理由；v2的10个dev失败样例重放全部有效，但没有全套v2消融或真实危险召回结论。真实HTTP Agent在脚本reviewer拒绝后改道只读count，1206行/余额总和1206000保持。
-
-用户确认没有真人参与者，要求保留受阻并完成工具。真实标注者0、真人n=0、κ=null；没有真实业务危险金标、授权日常日志或新独立保留集。OpenAI路径本轮仅离线契约，不冒称调用。
-
-## 余项与保留期限
-
-任意第三方透明代理仍需可信预演/CAS/收据适配；域名/OAuth/生产SSO、会话/SSE上游、通用影响估算/灾备、生产多租户/PII、生产告警和外部WORM未齐。真实数据、双人标注、真人A/B、用户日/归并质量与外部采用结果仍受阻。Next迁移和真实模型接入不再列作未实现。
-
-Git中的evidence/continuation-20261002长期随仓库历史保留（无自动到期，非WORM）。完整最终Linux ZIP为ci/acceptance-17ccd2c.zip，SHA256 a0d3854ab3a17581ae28e053cd0f34111ff2a5fe117c16d9fa6b22856df530fc；Actions原包11222458811到期2026-12-31T10:55:52Z，Git副本不随其到期。另存400024b完整ZIP。124个Git载荷已逐个重算哈希。旧首轮Actions包仅部分文本/本机证据入Git，不能冒称旧完整包均已永久归档。数据库、凭据、临时下载URL、解压副本和公共页面缓存不入Git。
-
-继续任务时保留完整任务正文和126索引，先查工作区/远端，按缺项所需外部输入推进。所有写入/补偿仍需独立批准；模型、可逆、预算、学习均不授权。禁止清空、覆盖用户改动、伪造人类/真实日志或自动合并main。
-
-<details><summary>历史进度（已被上方继续完善结果更新，保留原文供追溯）</summary>
-
-# AIRLOCK 执行记忆：全面审查与安全增量已交付，完整原目标部分实现
-
-更新：2026-10-02。先核对远端 main、工作分支与本分支；本文件不替代代码和原始证据。
-
-## 本轮实际交付
-
-- actual main：704b5035cf69f9a6c40c44eecd84c0d0741de849，保持未合并。
-- 工作分支：codex/full-audit-2026-10-02；已推送代码/报告/证据提交：d7856a8ceaea75578083b4365ea9bca0e378265c。
-- 最终应用测试 SHA：b9de71085e9b3027b8127c4da6d7193d8f19ba88；冻结核心及延迟/合成评测 SHA：266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4。
-- 草稿 PR：https://github.com/Changxin-YR/AIRLOCK/pull/1；未合并、未 force-push。
-- 126 条原目标逐项矩阵：74 IMPLEMENTED、52 PARTIAL；86 范围限定 PASS、36 BLOCKED_EXTERNAL、4 NOT_RUN，含父项。原始全目标未通过。
-
-修复 Windows 空白页 MIME、门禁接受失败证据、stdio 环境与依赖/UNC 风险；新增受控 HTTP 上游、真实受限 CEL/YAML、独立恢复审批、可选真实模型 provider、reviewer 路由、批量/预算、仅显示的学习建议、指标及研究工具。后续反例补全 TTL 绑定、时钟回退、远端丢响应/审计失败恢复；修复移动导航和指标表列宽。所有写入仍独立审批，不因可逆/预算/模型而免审。
-
-最终交付 SHA 的完整 CI 36989289641 也已成功；其 artifact 到期时间与元数据保存在 AUDIT_CI_20261002.json / STATE.json。
-
-## 已运行的证据与失败
-
-最终代码 151 Python、6 JS、14 原生浏览器通过；Linux CI 36988565652 全部成功，包括真实 Docker 和最终证据门禁。Windows Docker 镜像认证网络超时，实际退出1，随后本机总证据门禁也退出1，保留失败。Starlette TestClient httpx 弃用 warning 保留。
-
-故意 exit23 的 run36986618577 确实 failure，正常 verify 作业 success；临时失败作业已删除。此历史用于证明失败传播，不能当现存产品故障或删掉。
-
-合成 dev120/test80、40 模板族仍是作者构造的策略一致性回归，非真实危险金标。真实真人0、真实模型调用0、独立人工标注0、κ与成本为null。60对本机只读增量均值8.095ms/p95 10.356ms，30次静态规则/预演p95 0.061/6.657ms，只适用所测规模/并发1环境。
-
-## 仍缺和受阻
-
-完整余项在工作分支 docs/acceptance/COMPLETION_MATRIX.json，不得把 PARTIAL+PASS 改成原目标完成。通用 MCP/恢复/生产身份/分布式观测/审计外部锚点、Next.js 偏差尚存；全部失败状态原生 UI、辅助技术和部分安全组合仍待验证。
-
-真实模型/四臂消融/真实Agent改道需要本项目授权key、model、价格来源和预算；多来源benchmark需要授权日志及业务意图；κ需要两名真实独立标注者；A/B需要知情参与者和真实任务。研究工具已经交付，不能把自动化参与者当真人。没有外部采用或用户面试能力的证据。
-
-## 原始证据保存
-
-工作分支 Git 的 evidence/full-audit-20261002 保存原始日志/退出码/JUnit/逐例数据/截图和 CI 文本，随仓库历史长期保存。Linux 完整运行 ZIP 仍仅 Actions 90天，最终代码 artifact11218408231 到期2026-12-31T09:13:44Z，未下载校验也未永久ZIP归档。两份原始临时testtoken traceback仅本机，Git为脱敏副本并记录前后hash。
-
-docs/acceptance/FINAL_REPORT.md 回答七项结论，EVIDENCE_RETENTION.md 逐项区分Git与Actions。本轮已测范围没有未修复且可复现P0/P1，不代表全功能、生产或真实模型验收通过。
-
-## 接续纪律
-
-从本轮矩阵和运行手册接续，保留原始附件、全部失败历史、Git历史和用户改动。先确认真实分支/SHA/工作区，再复现具体缺口。不清空、不回退用户工作、不force-push、不自动合main。当前授权不包括真实模型付费凭据或第三方发帖。修复与复验同一执行者完成，新增反例不等于独立真人评审。
-
-<details><summary>此前 MVP 交付记忆原文（历史快照，范围和结果不覆盖本轮）</summary>
-
-# AIRLOCK 执行记忆：个人 MVP 已交付，等待 Codex 独立验收
-
-更新：2026-10-02。本分支记录实际进度，不替代代码、测试或授权。禁止再次清空仓库；保留 Git 历史，不 force-push。开始新会话先 fetch main + memory/progress，核对本文件与 STATE.json 的提交和证据。
-
-## 用户目标与已冻结范围
-
-个人 AI 全栈简历/面试工程项目，由 ChatGPT 实现，Codex 独立验收。定位是服务端 Agent 写操作审批与影响预演，不是首个 HITL，也不是任意工具透明代理。
-
-当前限定 SQLite synthetic customers 表，初始1206行；Python/FastAPI/Pydantic、SQLite、模块化原生 JavaScript/CSS、最小 stdio MCP。前端不是 Vue/Next.js，原先 npm 环境受限后采用无需构建且已实际运行的实现。
-
-## 最终远端代码与 CI
-
-- main：704b5035cf69f9a6c40c44eecd84c0d0741de849
-- Git tree：1715976a1e43f4cb6a56d0e6af12a07c9fd620e9
-- 最终 GitHub Actions run：36965666756，completed / success
-- run：https://github.com/Changxin-YR/AIRLOCK/actions/runs/36965666756
-- artifact：11210150290，名称 acceptance-evidence，432627 bytes
-- artifact SHA256：ae2ef02b26253686386338257b0b77352492366249aefb3b149eb00954c3417a
-- GitHub artifact 保留期至2026-12-31；交付包应单独保存，不依赖临时下载URL。
-
-已下载最终artifact，核对它的SHA256和manifest中25个文件哈希；七份逐命令退出码收据均为0。解包source.zip重算Git树，与上述远端tree完全一致。Markdown相对文件链接均有效；源码包不含运行密钥、数据库或字体文件。用最终源码的verify_evidence.py再次核验最终产物，退出码0。
-
-## 最终实际结果
-
-- Python：88 passed，1条上游弃用warning，5.54s；官方mcp Python SDK 1.26.0互通在其中。
-- JavaScript：6项通过，语法检查通过。
-- 原生Playwright：10项检查通过，mode=native_browser_e2e，无脚本错误；包括105条新只读记录后pending仍可见。
-- Docker：real_docker_compose，进程exit_code=0；非root UID10001、能力位0、只读根、Agent无审核/审计密钥及服务器卷/配置/socket，不能伪造审批或读取控制表。
-- 数据：独立测试审批前1206行，pending重启不自执行；批准演示删除后再重启仍0行，没有自动重新播种，审计有效。
-- 网络：服务器ingress+protected双网络，Agent仅内部protected；宿主端口只发布到loopback。
-- 合成评测：总200条/40模板族，dev120/test80按族切分；test三态80/80、支持只读误报0/30、支持写入影响20/20。这不是真实世界危险召回率。
-- runner：Python3.13.15、SQLite3.45.1；完整依赖版本、原始日志、JUnit、逐样例输出和截图均在artifact。
-- warning：Starlette引用AnyIO已弃用的BlockingPortal别名；未隐藏，不是本轮功能失败。
-
-最终原生截图逐张查看：桌面viewport1440×1100，PNG1440×1513；移动viewport390×844，PNG390×1844。影响数量、状态、SQL与样本diff、完整决策表单可读，移动端无横向溢出，时延单位不再单独换行。没有声称独立设计稿像素保真、WCAG或全浏览器安全认证。
-
-## 实际修复历史必须保留
-
-- 1f5d33b：清空旧当前文件，历史父提交d9499abc仍保留。
-- 67df890：把先前已写入但未提交的源码对象恢复并发布MVP。
-- 0433671 / run36963123248：官方SDK和原生浏览器通过，但Docker实际失败；旧tee管道丢失退出码导致GitHub假绿。这一轮不能算整体通过。
-- 6544e63 / run36963919651：真实退出码收据、JUnit/产物门禁和日志器回归修复假绿，CI正确失败；保留的日志显示容器healthy但宿主PORTS为空。
-- 525ea8f / run36964267162：修正服务器入口网络与Agent内部网络分离，真实Docker及严格门禁通过。
-- 031489d / run36964992992：修复新只读历史挤掉pending，以及NaN/Infinity错误响应自身不可序列化；新增回归后88项Python、10项native及Docker通过。
-- 704b503 / run36965666756：完成交付文档后，最终源码再次独立全套通过，并下载逐项核验证据。
-
-## 关键工程约束
-
-所有支持写入，包括零变化写入都需要独立reviewer。客户端不能用approved/risk/principal取得权限。受限克隆预演失败就阻断；精确只对当前支持模式与快照成立，未验证备份不编造时间，不承诺提交后恢复。
-
-审批绑定请求、策略、影响与版本，在BEGIN IMMEDIATE事务内检查TTL、身份、摘要与数据漂移；业务效果、终态和HMAC审计同库提交。不是分布式exactly-once。重复键同内容返回原收据，内容不同冲突；结果未知时先查旧action，不能换键盲重试。
-
-Agent不得拥有服务器文件/数据库、reviewer/audit密钥、Docker socket或宿主管理权限，否则不可宣传不可绕过。HMAC没有外部锚点，无法证明尾部未删或抵御服务器与密钥一起失陷。
-
-MCP只sql_execute/action_status；pending不是成功，SSE只通知。官方SDK测试证明所测子集，不是完整规范认证或真实LLM行为证明。UI token仅内存，可见时间是untrusted遥测。队列必须先服务端筛选pending再分页。
-
-合成集冻结SHA256：243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7。作者构造的相关变体，不是真实事故/独立人工金标，不编造κ或真人效率。内部计时不含最终持久化/提交、HTTP与人工等待。
-
-## 交付文档
-
-README.md；AGENTS.md；CODEX_REVIEW.md；LICENSE；docs/PLAN.md、SPEC.md、THREAT_MODEL.md、EVALUATION.md、RESEARCH.md、INTERVIEW.md（13组问答）、UX_QA.md、API_EXAMPLES.md；evidence/ACCEPTANCE.md保留031运行基线和失败历史，最终704由本分支STATE.json锚定。
-
-## 未实现或未验证，不得改写成已完成
-
-真实LLM业务行为与语义风险评估；真人A/B（n=0）、独立人工标注与κ；生产数据库/远端副作用连接器；SSO、多租户、多人路由；学习型自动降级；外部审计锚定；提交后恢复；任意MCP透明代理。Docker与浏览器smoke也不是全面渗透或规范认证。
-
-## 接续唯一优先动作
-
-让Codex从CODEX_REVIEW.md开展独立复核，首先核对main SHA、原始命令退出码、必需JUnit和真实产物；构造新的反例，不能删测试/降断言来变绿。若发现真实P0/P1，最小复现、定点修复、增加回归、全套重跑，再更新本分支。没有新需求或证据，不再从零重建，也不把这份记忆当验收事实。
-
-</details>
-
-</details>
-
-</details>
-
-</details>
+接续入口为docs/CLOSURE_RUNBOOK.md及126条COMPLETION_MATRIX.json。外部输入可用后按各条retest_command复验；保留原始失败和历史tested_commit_sha。不清空、不覆盖用户工作、不force-push；未经用户授权不合并main。

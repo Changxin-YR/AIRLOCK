@@ -1,18 +1,19 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "updated_date": "2026-10-02",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "closure_sse_fix_pushed_final_ci_pending",
+  "phase": "bounded_engineering_closure_complete_external_research_blocked",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
-  "tested_commit": "cc9d687c71effc77e317b12560bd23659c4bd0c0",
+  "working_commit": "fac683600e79c2635cf8f9073b597d4c36846e4b",
+  "code_and_evidence_commit": "68492cd04174de5c3ccd5cb3211cb34ee1fb2d7d",
+  "tested_commit": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
   "application_diff_tested_to_delivery": [],
-  "previous_full_audit_progress_commit": "0bf05db3f9b0c8f785b975d86e253cb78bc260b8",
+  "previous_memory_commit": "eb888b0447e266c2cea76292c360625343dee641",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
-    "memory_update": "This commit updates memory; verify its remote ref."
+    "memory_update": "This commit records final delivery; verify its remote ref."
   },
   "pr": {
     "number": 1,
@@ -26,42 +27,31 @@
   "target_count": 126,
   "target_counts": {
     "implementation": {
-      "IMPLEMENTED": 97,
-      "PARTIAL": 29
+      "IMPLEMENTED": 111,
+      "PARTIAL": 15
     },
     "verification": {
-      "PASS": 104,
-      "BLOCKED_EXTERNAL": 21,
-      "NOT_RUN": 1
+      "PASS": 105,
+      "BLOCKED_EXTERNAL": 21
     }
   },
   "not_closed_ids": [
     "G4",
-    "A2",
-    "C1",
-    "C1.3",
-    "C1.5",
     "C8",
     "C8.5",
     "C11",
     "C11.2",
     "T1",
     "T2",
-    "T5",
     "B1",
     "B2",
     "B3",
     "B4",
-    "B6",
     "H1",
     "H2",
     "H3",
     "H4",
     "H5",
-    "R1",
-    "R6",
-    "E1",
-    "E4",
     "K1",
     "K2",
     "K3",
@@ -69,154 +59,400 @@
     "K6"
   ],
   "code_ci": {
-    "tested_commit_sha": "17ccd2c5942aa316ee94509109cc01fbca925a26",
-    "run_id": 36998200376,
-    "job_id": 110809640795,
+    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37026082667",
+    "run_id": 37026082667,
+    "job_id": 110900936649,
+    "tested_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
+    "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/36998200376",
     "artifact": {
-      "id": 11222458811,
+      "id": 11235800383,
       "name": "acceptance-evidence",
-      "size_in_bytes": 4523055,
-      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11222458811",
-      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11222458811/zip",
+      "size_in_bytes": 1397386,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11235800383",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11235800383/zip",
       "expired": false,
-      "created_at": "2026-10-02T10:59:02Z",
-      "expires_at": "2026-12-31T10:55:52Z",
-      "updated_at": "2026-10-02T10:59:02Z",
-      "digest": "sha256:a0d3854ab3a17581ae28e053cd0f34111ff2a5fe117c16d9fa6b22856df530fc",
+      "created_at": "2026-10-02T15:24:17Z",
+      "expires_at": "2026-12-31T15:18:49Z",
+      "updated_at": "2026-10-02T15:24:17Z",
+      "digest": "sha256:cdb3092b25ec8867d62c3943a0f9adedb7e0b7b63273be198e3934ba480d087c",
       "workflow_run": {
-        "id": 36998200376,
+        "id": 37026082667,
         "repository_id": 1396912712,
         "head_repository_id": 1396912712,
         "head_branch": "codex/full-audit-2026-10-02",
-        "head_sha": "17ccd2c5942aa316ee94509109cc01fbca925a26"
+        "head_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb"
       }
     },
     "git_evidence": [
-      "evidence/continuation-20261002/ci/final-job.log",
-      "evidence/continuation-20261002/ci/final-jobs.json",
-      "evidence/continuation-20261002/ci/final-artifacts.json",
-      "evidence/continuation-20261002/ci/acceptance-17ccd2c.zip",
-      "evidence/continuation-20261002/ci/download-final-verification.json",
-      "evidence/continuation-20261002/ci/final-artifact-verifier.log",
-      "evidence/continuation-20261002/ci/final-artifact-verifier.log.status.json"
+      "evidence/closure-20261002/ci/acceptance-25d4f52.zip",
+      "evidence/closure-20261002/ci/archive-verification-25d4f52.json",
+      "evidence/closure-20261002/ci/evidence-verifier-25d4f52.log",
+      "evidence/closure-20261002/ci/evidence-verifier-25d4f52.log.status.json",
+      "evidence/closure-20261002/ci/25d4f52-job.log"
     ],
-    "retention": "Actions expires 2026-12-31T10:55:52Z; full ZIP and verification receipts archived in Git without automatic expiry, subject to repository/backup retention; not WORM"
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2
+      },
+      {
+        "name": "Snapshot source",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5
+      },
+      {
+        "name": "Run python -m pip install -r requirements-dev.txt",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6
+      },
+      {
+        "name": "Run npm ci",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/next-build.log -- npm run build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/frontend-check.log -- npm run check",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/frontend-tests.log -- npm test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12
+      },
+      {
+        "name": "Run python -m benchmark.generate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13
+      },
+      {
+        "name": "Run cp benchmark/cases.jsonl evidence/synthetic-cases.jsonl",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/benchmark-dev.log -- python -m benchmark.evaluate --split dev --tuning --output evidence/benchmark-dev.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.evaluate --split test --output evidence/benchmark-test.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16
+      },
+      {
+        "name": "Run python -m playwright install --with-deps chromium",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/upstream-isolation.log -- python scripts/upstream_isolation.py",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21
+      },
+      {
+        "name": "Run actions/setup-go@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 22
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/archive-build.log -- python scripts/build_archive_fixture.py --output evidence/archive-image.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 23
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/archive-integration.log -- python scripts/archive_integration.py --output evidence/archive-integration.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 24
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/research-pipeline.log -- python scripts/research_pipeline.py --output evidence/research-pipeline",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 26
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements-archive.txt --format json --output evidence/dependency-audit.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 28
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/study-analysis.log -- python -m benchmark.research --output evidence/study-analysis.json study evidence/study-automation.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 30
+      },
+      {
+        "name": "Run python scripts/run_logged.py evidence/comparison.log -- python scripts/demo_comparison.py --output evidence/comparison.json",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 31
+      },
+      {
+        "name": "Run python scripts/verify_evidence.py",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 32
+      },
+      {
+        "name": "Inventory evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 33
+      },
+      {
+        "name": "Run actions/upload-artifact@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 34
+      },
+      {
+        "name": "Post Run actions/setup-go@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 65
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 66
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 67
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 68
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 69
+      }
+    ]
   },
   "delivery_ci": {
-    "id": 37000362930,
-    "head_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace",
+    "id": 37028190235,
+    "head_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37000362930",
-    "created_at": "2026-10-02T11:19:23Z",
-    "updated_at": "2026-10-02T11:21:52Z",
+    "html_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37028190235",
+    "created_at": "2026-10-02T15:36:38Z",
+    "updated_at": "2026-10-02T15:42:11Z",
     "artifacts": [
       {
-        "id": 11222934850,
+        "id": 11236286987,
         "name": "acceptance-evidence",
-        "size_in_bytes": 25966880,
-        "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11222934850",
-        "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11222934850/zip",
+        "size_in_bytes": 1412685,
+        "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11236286987",
+        "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11236286987/zip",
         "expired": false,
-        "created_at": "2026-10-02T11:21:49Z",
-        "expires_at": "2026-12-31T11:19:23Z",
-        "updated_at": "2026-10-02T11:21:49Z",
-        "digest": "sha256:91b5520eb1d5d5e1adba2ca3d0b3053563bb135b3ad61277875dc6b636ae4dce",
+        "created_at": "2026-10-02T15:42:06Z",
+        "expires_at": "2026-12-31T15:36:38Z",
+        "updated_at": "2026-10-02T15:42:06Z",
+        "digest": "sha256:8cc239d81fdac081a93ea455aff667d46e5de06b281f8d5eff79dacd6d004a9f",
         "workflow_run": {
-          "id": 37000362930,
+          "id": 37028190235,
           "repository_id": 1396912712,
           "head_repository_id": 1396912712,
           "head_branch": "codex/full-audit-2026-10-02",
-          "head_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace"
+          "head_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b"
         }
       }
     ],
-    "metadata_path": "CONTINUATION_CI_20261002.json",
+    "metadata_path": "CLOSURE_CI_20261002.json",
+    "job_log_path": "CLOSURE_DELIVERY_JOB_20261002.log",
+    "full_zip_in_git": false,
     "application_source_unchanged_from_tested_commit": true
   },
   "checks": {
-    "pytest_passed": 177,
-    "pytest_warning": "Starlette TestClient httpx deprecation preserved",
+    "pytest_passed": 217,
     "javascript_passed": 6,
-    "native_browser_checks": 22,
+    "native_browser_checks": 23,
     "next_build_exit": 0,
     "dependency_audits_exit": 0,
-    "docker_linux_ci": "passed_real_compose",
+    "docker_linux_ci": "real Compose and protected upstream networks passed",
+    "s3_archive_fixture": "official pinned source build; versioned Object Lock COMPLIANCE contracts passed; temporary test instance removed",
+    "envoy_collector": "real container integration passed",
     "docker_windows_local": {
       "exit": 1,
-      "reason": "auth.docker.io base image authentication network timeout"
+      "reason": "auth.docker.io base-image authentication network timeout"
     },
-    "envoy_collector": "real containers passed locally and in CI",
+    "pytest_warning": "Starlette TestClient httpx deprecation preserved",
     "downloaded_ci_evidence_verifier_exit": 0,
+    "manifest_payloads_verified": 78,
     "matrix_validation_exit": 0,
-    "archived_git_payloads_hash_verified": 124
+    "matrix_receipts_checked": 23,
+    "git_evidence_payloads_hash_verified": 188
   },
   "code_scope": [
-    "bounded SQLite clone/diff/CEL-YAML three-state gate",
-    "registered HTTP/stateless MCP JSON upstream, server-owned approval, CAS and durable receipt reconciliation",
-    "stdio and stateless Streamable HTTP MCP via official SDK",
-    "cross-process persistent policy activation and revocation",
-    "independent reviewer routing and separate local/remote compensation approval",
-    "Next.js 16.3.8 / React 19.3.0, real native browser failure paths and strict hash CSP",
-    "DeepSeek CNY call/concurrency/budget ledger, strict output, active cache invalidation",
-    "bound batch review, persistent risk budgets, display-only learning proposals",
-    "original audit snapshots, atomic key-id rotation, independent signed checkpoints, completeness by state",
-    "bounded OTLP outbox with actual Collector, limited Envoy CEL mapping tests",
-    "real synthetic model ablation/safe-reroute, research annotation/kappa/human-study tools"
+    "Bounded SQLite clone/diff and CEL/YAML tri-state policy gate",
+    "Registered HTTP/MCP tools with preview, CAS, durable receipts, recovery and independently approved compensation",
+    "Official MCP SDK session/SSE/streamable HTTP; DNS and actual TLS connection binding",
+    "OIDC resource-server RS256 access-token verification, revocation and server-owned review routing",
+    "SSE leases end immediately when validated identity changes",
+    "Next.js/React diff-first approval UI, batch binding, persistent risk budget and display-only learning proposals",
+    "DeepSeek semantic suggestions with persistent shared CNY budget and cache invalidation",
+    "Original audit snapshots, key rotation, external checkpoints and version-pinned S3 Object Lock archival connector",
+    "Operator health/Prometheus alerts, reviewer-scoped whitelist export and OTLP collector integration",
+    "Multi-source research import, annotation/adjudication/kappa, study gold recheck, governance metrics and research pipeline"
   ],
-  "missing_functionality": [
-    "arbitrary third-party MCP transparent adapters with trustworthy preview/CAS/receipts",
-    "domain/DNS management, OAuth/production SSO, session/SSE upstream adapters",
-    "general external impact estimation and business recovery connectors",
-    "production multi-tenant/PII export governance, third-party deployment isolation",
-    "external WORM backend and production alerting"
+  "missing_functionality_or_provisioning": [
+    "Specific production tool adapters beyond the registered preview/CAS/receipt/compensation contract",
+    "Interactive SSO/MFA client integration with an actual IdP configuration",
+    "Production cloud archive custodians, bucket retention and alert receivers",
+    "Arbitrary-tool zero-adaptation proxy, arbitrary shell sandbox, general production database disaster recovery and multi-tenant column permissions are not implemented"
   ],
   "external_validation": {
-    "live_model_calls": 638,
-    "valid_model_outputs": 622,
-    "invalid_model_outputs": 16,
     "provider": "DeepSeek-V4.1-Flash",
+    "added_calls": 4,
+    "added_valid": 4,
+    "added_usage_estimate_cny": 0.00338424,
+    "cumulative_calls": 642,
+    "cumulative_valid": 626,
+    "cumulative_errors": 16,
+    "cumulative_reserved_or_settled_cny": 1.1211824,
+    "known_usage_estimate_cny": 0.8526124,
+    "budget_cny": 3,
+    "invoice_reconciled": false,
+    "ledger_reused": true,
+    "source": "final/live-upstream.json; previous 638 calls in evidence/continuation-20261002",
     "human_participants": 0,
     "independent_human_labels": 0,
     "real_cohen_kappa": null,
     "real_danger_recall": null,
+    "real_false_positive_rate": null,
     "real_model_billed_amount": null,
-    "combined_budget_cny": 3,
-    "reserved_or_settled_estimate_cny": 1.11779816,
-    "known_valid_usage_estimate_cny": 0.84922816,
-    "no_further_paid_calls_needed": true,
     "needs": [
-      "authorized real logs and independently reproducible business tasks",
-      "two independent human annotators and new held-out corpus",
-      "consenting A/B participants and gold business tasks",
-      "specific production provider/identity/network context"
+      "authorized real business logs and an independent new held-out corpus",
+      "two independent annotators and adjudication",
+      "consenting A/B participants and real business-task gold",
+      "real IdP issuance/login and long-running cloud archive/alerts",
+      "provider invoice reconciliation",
+      "user live interview and independent operation"
     ]
   },
   "evidence": {
-    "git_directory": "evidence/continuation-20261002",
-    "previous_git_directory": "evidence/full-audit-20261002",
-    "git_retention": "repository history without automatic expiry; not external WORM",
+    "git_directory": "evidence/closure-20261002",
+    "archive_manifest": "evidence/closure-20261002/ARCHIVE_MANIFEST.json",
+    "git_retention": "No automatic expiry; subject to repository history and backups; not WORM",
     "actions_retention_days": 90,
-    "permanent_linux_zip_archived_in_git": true,
-    "zip_path": "evidence/continuation-20261002/ci/acceptance-17ccd2c.zip",
-    "zip_sha256": "a0d3854ab3a17581ae28e053cd0f34111ff2a5fe117c16d9fa6b22856df530fc",
-    "archive_manifest": "evidence/continuation-20261002/ARCHIVE_MANIFEST.json",
-    "manifest_payload_hashes_verified": 57,
-    "model_ledger_path": "evidence/continuation-20261002/model-ledger-export.json"
+    "full_application_zip_in_git": true,
+    "zip_path": "evidence/closure-20261002/ci/acceptance-25d4f52.zip",
+    "zip_sha256": "cdb3092b25ec8867d62c3943a0f9adedb7e0b7b63273be198e3934ba480d087c",
+    "actions_expiry": "2026-12-31T15:18:49Z",
+    "temporary_s3_is_permanent_archive": false,
+    "failed_ci_full_zips": "Actions only; original job logs/metadata in Git; per-artifact dates in EVIDENCE_RETENTION.md",
+    "delivery_ci_metadata": "CLOSURE_CI_20261002.json",
+    "private_ledger_committed": false,
+    "credentials_committed": false
   },
   "reports": [
     "docs/acceptance/FINAL_REPORT.md",
-    "docs/acceptance/COMPLETION_MATRIX.md",
     "docs/acceptance/COMPLETION_MATRIX.json",
+    "docs/acceptance/COMPLETION_MATRIX.md",
     "docs/acceptance/FINDINGS_AND_FIXES.md",
     "docs/acceptance/EVIDENCE_RETENTION.md",
-    "docs/EVALUATION.md",
-    "docs/OPERATIONS.md"
+    "docs/CLOSURE_RUNBOOK.md"
   ],
-  "unresolved_reproduced_P0_P1_in_tested_scope": 0,
-  "critical_precondition": "Agent lacks server files/database/reviewer/audit secrets/host administration; upstream must actually enforce CAS and idempotent durable receipts.",
-  "next_step": "Use the current 126-row matrix for remaining third-party adapters and genuine data/human experiments. Do not relabel synthetic results or rerun paid models without need. Preserve independent approval, history, user changes and all negative results. No main merge without authorization.",
-  "closure_pending_ci": 37026082667
+  "known_unresolved_reproduced_p0_p1_in_tested_scope": 0,
+  "critical_precondition": "Agent has no server/database/reviewer/audit secrets/host administration; upstream enforces CAS and durable idempotent receipts.",
+  "next_step": "Use the exact 126-record matrix and closure runbook when real external inputs become available. Preserve synthetic/real distinctions, all historical failures and independent approval. No further paid runs are needed now; no main merge without user authorization."
 }
