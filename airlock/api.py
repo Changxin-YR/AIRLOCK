@@ -18,6 +18,16 @@ from .service import Gate, agent_view
 STATIC = Path(__file__).parent / "static"
 
 
+class ConsoleAssets(StaticFiles):
+    """Module MIME types must not depend on the Windows registry."""
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        media = {'.js': 'text/javascript', '.css': 'text/css', '.html': 'text/html'}.get(Path(path).suffix)
+        if media and response.status_code == 200:
+            response.headers['content-type'] = media + '; charset=utf-8'
+        return response
+
+
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
     gate = Gate(settings)
@@ -157,5 +167,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             return JSONResponse({"error": "console_assets_missing", "next_step": "Reinstall the package with bundled static assets."}, status_code=503)
         return FileResponse(STATIC / "index.html")
 
-    app.mount("/assets", StaticFiles(directory=STATIC, check_dir=False), name="assets")
+    app.mount("/assets", ConsoleAssets(directory=STATIC, check_dir=False), name="assets")
     return app

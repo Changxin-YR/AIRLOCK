@@ -95,6 +95,9 @@ class Bridge:
 
 
 def main():
+    # MCP stdio is UTF-8, independently of the host console code page.
+    sys.stdin.reconfigure(encoding="utf-8", errors="strict")
+    sys.stdout.reconfigure(encoding="utf-8", errors="strict")
     url = os.getenv("AIRLOCK_URL", "http://127.0.0.1:8000")
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"} or (parsed.scheme == "http" and parsed.hostname not in {"localhost", "127.0.0.1", "::1"}):

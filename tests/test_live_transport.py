@@ -14,8 +14,10 @@ def rpc(method, identifier=None, **params):
 
 def exchange(url,token,messages):
     env={'PATH':os.environ.get('PATH',''),'PYTHONPATH':os.getcwd(),'AIRLOCK_URL':url,'AIRLOCK_AGENT_TOKEN':token}
+    # Windows TLS needs SystemRoot; keep the environment allowlisted, without reviewer secrets.
+    env.update({name: os.environ[name] for name in ('SYSTEMROOT','WINDIR','TEMP','TMP') if name in os.environ})
     result=subprocess.run([sys.executable,'-m','airlock.mcp'],input=''.join(json.dumps(m)+'\n' for m in messages),
-                          text=True,capture_output=True,env=env,timeout=15)
+                          text=True,encoding='utf-8',capture_output=True,env=env,timeout=15)
     assert result.returncode==0,result.stderr
     return [json.loads(line) for line in result.stdout.splitlines()]
 
