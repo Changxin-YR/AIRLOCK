@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+var/
+.env
+*.db
+*.db-wal
+*.db-shm
+*.egg-info/
+dist/
+build/
+node_modules/
+benchmark/cases.jsonl
+evidence/*.png
+evidence/*.zip

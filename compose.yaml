@@ -1,0 +1,45 @@
+services:
+  airlock:
+    build: .
+    environment:
+      AIRLOCK_DB: /data/airlock.db
+      AIRLOCK_ORIGIN: http://127.0.0.1:8000
+      AIRLOCK_INTERNAL_HOST: airlock
+      AIRLOCK_AGENT_TOKEN: ${AIRLOCK_AGENT_TOKEN:?Set a random agent token}
+      AIRLOCK_REVIEWER_TOKEN: ${AIRLOCK_REVIEWER_TOKEN:?Set a different reviewer token}
+      AIRLOCK_AUDIT_KEY: ${AIRLOCK_AUDIT_KEY:?Set a third random audit key}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - state:/data
+    networks: [protected]
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  agent:
+    build: .
+    profiles: [demo]
+    entrypoint: [python, scripts/demo_agent.py]
+    command: [--scenario, delete, --allow-internal-http]
+    environment:
+      AIRLOCK_URL: http://airlock:8000
+      AIRLOCK_AGENT_TOKEN: ${AIRLOCK_AGENT_TOKEN:?Set a random agent token}
+    networks: [protected]
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=16m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    depends_on:
+      airlock:
+        condition: service_healthy
+networks:
+  protected:
+    internal: true
+volumes:
+  state:

@@ -1,0 +1,40 @@
+name: Verify Airlock
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Snapshot source
+        run: |
+          mkdir -p evidence
+          git archive --format=zip HEAD -o evidence/source.zip
+          git rev-parse HEAD > evidence/commit.txt
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python -m pytest -q 2>&1 | tee evidence/pytest.log
+      - run: npm run check 2>&1 | tee evidence/frontend-check.log
+      - run: npm test 2>&1 | tee evidence/frontend-tests.log
+      - run: python -m benchmark.generate
+      - run: cp benchmark/cases.jsonl evidence/synthetic-cases.jsonl
+      - run: python -m benchmark.evaluate --split dev --tuning --output evidence/benchmark-dev.json
+      - run: python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
+      - run: python -m playwright install --with-deps chromium
+      - run: python scripts/browser_smoke.py 2>&1 | tee evidence/browser-native.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: acceptance-evidence
+          path: evidence/
