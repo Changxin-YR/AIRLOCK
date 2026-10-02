@@ -22,7 +22,8 @@ TERMINAL = {"executed", "blocked", "rejected", "expired", "stale", "failed", "un
 class Gate:
     def __init__(self, settings: Settings, clock=time.time):
         self.settings, self.clock, self.store = settings, clock, Store(settings)
-        self.policy = PolicyManager(settings.policy_file)
+        self.policy = PolicyManager(settings.policy_file,self.store)
+        self.policy.reload_hook=self.reload_policy
         self.access = AccessControl(settings)
         self.access.accounts()
         self.registry=Registry(settings.upstream_file)
@@ -30,6 +31,8 @@ class Gate:
         self.semantic=SemanticAdvisor(settings.semantic_file,settings.database)
 
     def assess_semantics(self,action):
+        if action.get('impact'):
+            action['impact']['recovery_classification']=recovery.classification(action['impact'],action['request']['tool'])
         if action['state']=='blocked': return
         started=time.perf_counter()
         request={k:v for k,v in action['request'].items() if k!='idempotency_key'}
@@ -91,10 +94,17 @@ class Gate:
         with self.policy.lock:
             previous=self.policy.active
             try:
-                version=self.policy.reload()
+                from .policy import Policy
+                if self.policy.path is None:raise ValueError('no configured policy file')
+                text=self.policy.read_candidate();replacement=Policy.parse(text)
+                version=replacement.version
                 with self.store.transaction() as conn:
+                    self.policy.synchronize(conn)
+                    previous=self.policy.active
+                    conn.execute("UPDATE meta SET value=? WHERE key='active_policy'",(text,))
                     self.store.audit(conn,'governance:policy',{'kind':'governance.changed','at':self.clock(),
                         'state':'activated','detail':{'kind':'policy_reload','previous':previous.version,'version':version}})
+                self.policy.active,self.policy._source=replacement,text
                 return {'version':version,'pending_effect':'prior policy approvals become stale'}
             except Exception:
                 self.policy.active=previous
@@ -111,6 +121,7 @@ class Gate:
         request_hash = digest({"principal": principal, "call": call.model_dump()})
         self.expire()
         with self.store.transaction() as conn:
+            self.policy.synchronize(conn)
             existing = conn.execute("SELECT request_hash,document FROM actions WHERE principal=? AND idem=?",
                                     (principal, call.idempotency_key)).fetchone()
             if existing:
@@ -239,6 +250,7 @@ class Gate:
     def _decide(self, action_id: str, decision: Decision, reviewer: str) -> dict:
         self.expire()
         with self.store.transaction() as conn:
+            self.policy.synchronize(conn)
             row = conn.execute("SELECT document FROM actions WHERE id=?", (action_id,)).fetchone()
             if not row:
                 raise GateError("not_found", 404)
@@ -298,6 +310,7 @@ class Gate:
             return self._finish(conn, action, "executed", "human_approved", **human)
 
     def metrics(self, reviewer: str | None = None) -> dict:
+        from . import telemetry
         self.expire()
         with self.store.connection() as conn:
             counts = dict(conn.execute("SELECT state,count(*) FROM actions GROUP BY state"))
@@ -317,6 +330,8 @@ class Gate:
                 "evaluation_p95_ms": p95("evaluation_ms"), "preview_p95_ms": p95("preview_ms"),
                 "static_p95_ms": p95("static_ms"),
                 'idempotent_receipts_total':int(duplicate[0]) if duplicate and not self.settings.reviewer_file else None,
+                'provider_admission':self.semantic.ledger_summary() if not self.settings.reviewer_file else None,
+                'telemetry':telemetry.metrics(self.store) if not self.settings.reviewer_file else None,
                 **observability.summarize(records)}
 
     def audit_events(self,reviewer,action_id=None,after=0,limit=200):

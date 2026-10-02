@@ -20,6 +20,9 @@ def summarize(actions):
     receipts=[s for s in semantics if s.get('provider_call_id') and not s.get('application_cache_hit')]
     known=[s['cost_usd'] for s in receipts if s.get('cost_usd') is not None]
     usage=[s['usage'] for s in receipts if s.get('usage')]
+    currencies={s.get('currency','USD') for s in receipts}
+    currency_costs={currency:sum(s['cost_amount'] for s in receipts if s.get('currency','USD')==currency)
+        if all(s.get('cost_amount') is not None for s in receipts if s.get('currency','USD')==currency) else None for currency in currencies}
     return {'decisions':dict(Counter(a['decision'] for a in actions)),
       'stages_ms':{key:distribution([a[key] for a in actions if key in a]) for key in
           ('static_ms','preview_ms','semantic_ms','evaluation_ms','execution_ms','queue_ms')},
@@ -27,11 +30,11 @@ def summarize(actions):
       'semantic':{'assessments':len(semantics),'provider_receipts':len(receipts),
           'application_cache_hits':sum(bool(s.get('application_cache_hit')) for s in semantics),
           'errors':sum(s['status']=='error' for s in semantics),'cost_usd':sum(known) if receipts and len(known)==len(receipts) else None,
-          'known_cost_usd':sum(known) if known else None,'usage_records':len(usage),
+          'known_cost_usd':sum(known) if known else None,'cost_by_currency':currency_costs,'usage_records':len(usage),
           'input_tokens':sum(s['input_tokens'] for s in usage) if usage else None,
           'output_tokens':sum(s['output_tokens'] for s in usage) if usage else None,
           'provider_cache_read_tokens':sum(s['cache_read_tokens'] for s in usage) if usage else None,
-          'provider_cache_write_tokens':None,'currency':'USD'},
+          'provider_cache_write_tokens':None,'currency':next(iter(currencies)) if len(currencies)==1 else None},
       'governance':{'readonly_passes':sum(a['decision']=='pass' for a in actions),
                     'sample_requests':len(actions),'eligible_pending_members':len(pending),'display_groups_default_window':len(grouped),
                     'fold_ratio_default_window':1-len(grouped)/len(pending) if pending else None,

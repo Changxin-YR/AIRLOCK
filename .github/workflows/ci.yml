@@ -12,7 +12,9 @@ defaults:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,6 +31,9 @@ jobs:
         with:
           node-version: '22'
       - run: python -m pip install -r requirements-dev.txt
+      - run: npm ci
+      - run: python scripts/run_logged.py evidence/next-build.log -- npm run build
+      - run: python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev
       - run: python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml
       - run: python scripts/run_logged.py evidence/frontend-check.log -- npm run check
       - run: python scripts/run_logged.py evidence/frontend-tests.log -- npm test
@@ -38,7 +43,9 @@ jobs:
       - run: python scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
       - run: python -m playwright install --with-deps chromium
       - run: python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py
+      - run: python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py
       - run: python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
+      - run: python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py
       - run: python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements.txt --format json --output evidence/dependency-audit.json
       - run: python scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json
       - run: python scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json

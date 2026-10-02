@@ -36,7 +36,9 @@ export function metricsPanel(metrics) {
         ...['p50','p95','p99'].map(q=>el('td',{},v[q]==null?'尚无数据':duration(v[q])))))))),
     el('h3',{},'模型、成本与缓存'),el('p',{},`有效供应商回执 ${semantic.provider_receipts||0} · 应用结果缓存命中 ${semantic.application_cache_hits||0} · 评估错误 ${semantic.errors||0}`),
     el('p',{},`输入 token ${number(semantic.input_tokens)} · 输出 token ${number(semantic.output_tokens)} · 供应商 cache-read ${number(semantic.provider_cache_read_tokens)}`),
-    el('p',{},semantic.cost_usd==null?'费用：尚无完整 usage 与价格证据':`按所配价格表计算费用：USD ${semantic.cost_usd.toFixed(6)}`),
+    el('p',{},Object.keys(semantic.cost_by_currency||{}).length ? `按所配价格表计算费用：${Object.entries(semantic.cost_by_currency).map(([unit,value])=>`${unit} ${value==null?'尚无完整用量':value.toFixed(6)}`).join(' · ')}` : semantic.cost_usd==null?'费用：尚无完整 usage 与价格证据':`按所配价格表计算费用：USD ${semantic.cost_usd.toFixed(6)}`),
+    metrics.provider_admission&&el('pre',{class:'result'},JSON.stringify(metrics.provider_admission,null,2)),
+    metrics.telemetry&&el('p',{},`遥测：待导出 ${metrics.telemetry.pending_spans} · 已导出 ${metrics.telemetry.exported_spans} · 容量丢弃 ${metrics.telemetry.dropped_spans}`),
     el('p',{class:'muted'},'应用结果缓存与供应商 prompt cache 分开计量。无数据不表示费用为零；这些指标不参与授权。'),
     el('h3',{},'三态分布与预演覆盖'),el('pre',{class:'result'},JSON.stringify({decisions:metrics.decisions,preview_coverage:metrics.preview_coverage,idempotent_receipts_total:metrics.idempotent_receipts_total,governance:metrics.governance},null,2)));
 }

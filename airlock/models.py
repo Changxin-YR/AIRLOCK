@@ -105,6 +105,10 @@ class Settings:
     reviewer_file: Path | None = None
     upstream_file: Path | None = None
     semantic_file: Path | None = None
+    audit_key_file: Path | None = None
+    audit_anchor_file: Path | None = None
+    otlp_url: str | None = None
+    otlp_allow_loopback: bool = False
     budget_units: int = 10000
     budget_window_seconds: int = 86400
 
@@ -141,6 +145,10 @@ class Settings:
             reviewer_file=Path(os.environ['AIRLOCK_REVIEWER_FILE']) if os.getenv('AIRLOCK_REVIEWER_FILE') else None,
             upstream_file=Path(os.environ['AIRLOCK_UPSTREAM_FILE']) if os.getenv('AIRLOCK_UPSTREAM_FILE') else None,
             semantic_file=Path(os.environ['AIRLOCK_SEMANTIC_FILE']) if os.getenv('AIRLOCK_SEMANTIC_FILE') else None,
+            audit_key_file=Path(os.environ['AIRLOCK_AUDIT_KEY_FILE']) if os.getenv('AIRLOCK_AUDIT_KEY_FILE') else None,
+            audit_anchor_file=Path(os.environ['AIRLOCK_AUDIT_ANCHOR_FILE']) if os.getenv('AIRLOCK_AUDIT_ANCHOR_FILE') else None,
+            otlp_url=os.getenv('AIRLOCK_OTLP_URL'),
+            otlp_allow_loopback=os.getenv('AIRLOCK_OTLP_ALLOW_LOOPBACK')=='1',
             budget_units=int(os.getenv('AIRLOCK_BUDGET_UNITS','10000')),
             budget_window_seconds=int(os.getenv('AIRLOCK_BUDGET_WINDOW','86400')),
         )

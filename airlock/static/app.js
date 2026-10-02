@@ -104,7 +104,7 @@ function auditPanel() {
       `HMAC 链${state.verification.valid?'校验通过':'校验失败'} · ${state.verification.events} 个事件 · 链头 ${short(state.verification.head)}`),
     el('p',{class:'warning small'},'没有外部锚定：无法证明尾部未被截断，也不能抵御服务器及密钥同时失陷。'),
     el('ol',{class:'timeline'},state.audit.map(item=>{
-      const event=item.event, snapshot=event.detail.snapshot;
+      const event={...item.event,detail:item.event.detail||{}}, snapshot=event.detail.snapshot;
       return el('li',{},el('div',{class:'section-top'},el('strong',{},`${states[event.state]||event.state} · #${short(item.action_id)}`),
         el('time',{class:'muted small'},date(event.at))),
         el('p',{class:'small'},snapshot ? `${snapshot.request.sql} · 原始影响 ${number(snapshot.impact?.changed_rows)} 行` : `${event.detail.reviewer||'system'} · ${event.detail.reason||event.kind}`),

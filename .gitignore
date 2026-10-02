@@ -16,6 +16,9 @@ benchmark/cases.jsonl
 evidence/*.png
 evidence/*.zip
 .firecrawl/
+frontend/.next/
+frontend/out/
+airlock/console/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm

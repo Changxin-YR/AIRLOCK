@@ -86,17 +86,17 @@ operator 使用部署拥有者的原 `AIRLOCK_REVIEWER_TOKEN`；自定义 review
 {"tools":[{"name":"upstream:counter","resource":"synthetic:counter","url":"http://127.0.0.1:8123","credential_env":"AIRLOCK_UPSTREAM_TEST_TOKEN","allow_loopback":true,"arguments":{"delta":"integer"},"principals":["agent:demo"]}]}
 ```
 
-只支持 literal IP origin；公网强制 HTTPS，证书必须对该 IP 有效；loopback HTTP 需显式 opt-in，仅作测试。拒绝 DNS 名称、私网/link-local、URL 用户信息/路径/query/fragment、重定向。Agent 不能新增 URL 或命令；入站令牌不透传，上游专用凭据不下发给 MCP 进程。注册上限 16，参数 16/4 KiB，响应 16 KiB，有限连接/读取/总时限。生产第三方域名/OAuth/任意 MCP 上游还未实现，不冒称零配置或通用透明代理。
+只支持 literal IP origin；公网强制 HTTPS，证书必须对该 IP 有效；loopback HTTP 需显式 opt-in，仅作测试。拒绝 DNS 名称、私网/link-local、URL 用户信息/路径/query/fragment、重定向。Agent 不能新增 URL 或命令；入站令牌不透传，上游专用凭据不下发给 MCP 进程。注册上限 16，参数 16/4 KiB，响应 16 KiB，有限连接/读取/总时限。生产第三方域名/OAuth/任意 MCP 上游还未实现；注册的 stateless JSON MCP 上游已支持，不冒称零配置或通用透明代理。
 
 上游 `POST /preview` 接收 arguments，返回 target_version、impact_units、summary、before、after；必须无副作用。`POST /execute` 接收 action_id、request_hash、expected_version、arguments，原子 CAS 与持久化幂等收据；`GET /receipts/{id}` 返回绑定 action_id/request_hash 的 executed/stale/failed 与 result。测试进程故意在提交后断连接，验证 unknown 后重启对账只发生一次效果。
 
-HTTP 与 stdio MCP 共用 Gate。MCP 协商 2025-06-18/2025-11-25，暴露 SQL、状态及注册工具。实现回执/查询；没有 Tasks capability，也没有 Streamable HTTP MCP 服务端。HTTP API 不等同 MCP HTTP transport。普通客户需改连接配置；同步业务调用需适配 pending/轮询；已有上游需实现本契约。官方 SDK 测试不等于所有 host 认证。
+HTTP 与 stdio MCP 共用 Gate。MCP 协商 2025-06-18/2025-11-25，暴露 SQL、状态及注册工具。实现回执/查询；没有 Tasks capability。`POST /mcp` 提供无会话 Streamable HTTP JSON；GET/DELETE 返回 405，不提供服务端主动 SSE。普通客户需改连接配置；同步业务调用需适配 pending/轮询；已有上游需实现本契约。官方 SDK 测试不等于所有 host 认证。
 
 ## 恢复、预算、学习
 
 本地成功写入保存完整合成 before snapshot 和 before/after 指纹；补偿用 `tool=restore, sql=<原 action_id>` 新建动作，先在独立克隆演练，再独立批准。后续变化导致 stale；不同申请人不能读取或恢复别人的动作。backup_age 没有外部备份证据时为 null；本地补偿能力不代表真实灾备、业务可逆或远端恢复能力。
 
-风险预算单位为 `max(matched_rows,changed_rows,1)`，按主体/资源/固定时间窗原子预占，成功结算，明确未执行时释放，unknown 保留。`AIRLOCK_BUDGET_UNITS` 默认 10000，`AIRLOCK_BUDGET_WINDOW_SECONDS` 默认 86400。固定窗边缘可跨窗，预算不是滑动事故概率界限，也不提供任何批准权。模型、恢复和剩余预算都不能免审写入。
+风险预算单位为 `max(matched_rows,changed_rows,1)`，按主体/资源/固定时间窗原子预占，成功结算，明确未执行时释放，unknown 保留。`AIRLOCK_BUDGET_UNITS` 默认 10000，`AIRLOCK_BUDGET_WINDOW` 默认 86400。固定窗边缘可跨窗，预算不是滑动事故概率界限，也不提供任何批准权。模型、恢复和剩余预算都不能免审写入。
 
 组按主体、工具、资源、策略、风险、reviewer 路由及默认 60 秒窗口划分。批准绑定可见成员列表和累计确认；逐成员原子执行，一个成员的写入可能使另一个 stale，UI 如实列回执。历史 3 次明确批准只生成扩大显示分组窗口至 120 秒的 shadow 建议；operator 显式激活，最多一天、版本 CAS、可撤回。不会生成授权规则或自动降级高危请求。
 
@@ -133,4 +133,30 @@ python -m benchmark.research --output evidence/study.json study <匿名导出.js
 
 pending：不执行，查原动作；stale：新意图重新预演审批；clock_regression：修复系统时钟；unknown：只查询原上游收据；审计失败：本地事务不提交，远端可能已发生效果，重启对账。策略/路由文件损坏时修复受信配置，不关闭鉴权。
 
-每库上限 10000 动作和固定合成数据上限 5000 行；当前无在线清理/归档 API。恢复快照、原 SQL 和审计均为敏感服务端数据，只授予实际所需 reviewer 权限。备份/轮换审计密钥须停写并保留旧密钥分段链及离线校验记录；当前没有自动 key-id 轮换、外部 WORM 或截尾锚定，不宣称相关保证。数据库和 provider ledger 不进 Git；导出仅限合成证据。
+每库上限 10000 动作和固定合成数据上限 5000 行；当前无在线清理/归档 API。恢复快照、原 SQL 和审计均为敏感服务端数据，只授予实际所需 reviewer 权限。备份/轮换审计密钥须停写并保留旧密钥分段链及离线校验记录；当前支持操作者触发 key-id 原子轮换和签名检查点；没有外部 WORM，不宣称相关保证。数据库和 provider ledger 不进 Git；导出仅限合成证据。
+
+
+## 本轮新增配置与复验入口
+
+审批台首次启动前执行 `npm ci && npm run build`。Docker 多阶段构建自动完成 Next.js 静态导出。未构建时首页明确返回 503；没有关闭 CSP 的隐式开发回退。前端原生浏览器检查包括真实过期、漂移、执行失败、远端丢回执、长文本和脚本注入。
+
+策略激活内容存入 SQLite `meta.active_policy`。所有本地和远端的入队/决定在同一写事务内同步版本；文件编辑本身不会激活。跨进程重载测试使用真正独立 Python 进程；重启保留已激活内容。
+
+MCP 上游配置设置 `transport=mcp_json`、`mcp_path=/mcp`、`mcp_tools={"preview":"counter_preview","execute":"counter_execute","receipt":"counter_receipt"}`。只接受无会话 JSON、固定注册工具与明确 CAS/收据；初始化、发现、调用、协议绑定和错误全部校验。动态任意工具、SSE 上游和需要会话的上游阻断。入站 `/mcp` 每次独立鉴权，Accept 必须含 application/json 和 text/event-stream。
+
+远端补偿注册第二个工具，设置 `compensates=upstream:counter` 和 `arguments={"source_action_id":"string"}`，同时保持原工具的 origin、resource、专用 credential_env。原动作必须属于申请人且已确认为 executed；unknown 先对账。补偿仍经过新预演、风险预算、路由、快照绑定、独立审批和上游 CAS。合成 counter 只有当前版本仍为原执行后的版本才可恢复，后续变更不覆盖。
+
+DeepSeek 配置示例 `configs/deepseek-flash.example.json` 使用官方 `deepseek-flash`（DeepSeek-V4.1-Flash），只读 `DEEPSEEK_API_KEY`，固定 `https://api.deepseek.com/responses`，非思考模式、strict JSON schema、store=false。2026-10-02 官方高峰价格为每百万输入未命中 ¥2、命中 ¥0.04、输出 ¥8；示例用高峰价保守估算，实际空闲时段价格可能更低。费用按 usage 计价，与实际扣费账单分别标记。用户本轮授权按所有实验共用累计 ¥3 实施，最大 650 次、并发 4；全部实验复用 `var/deepseek-continuation-ledger`，不得通过换 ledger 重置预算。失败调用保留预占，未知 usage 不填 0。
+
+```sh
+python scripts/live_validation.py --provider-config configs/deepseek-flash.example.json --ledger var/deepseek-continuation-ledger --output evidence/live
+python -m benchmark.ablation --split test --workers 4 --provider-config configs/deepseek-flash.example.json --ledger var/deepseek-continuation-ledger --output evidence/ablation-live-test.json
+```
+
+`POST /v1/semantic/cache/invalidate` 为 operator-only，清除应用结果缓存并记录失效数量；供应商 prompt cache 与此不同。无环境凭据不默认进行付费调用。以上命令只在项目获得明确预算后运行。
+
+审计轮换配置 `AIRLOCK_AUDIT_KEY_FILE` 指向 `{"keys":{"v2":"AIRLOCK_AUDIT_KEY_V2"}}`，新环境变量需独立 32 字符以上秘密。所有旧验证密钥必须保留，不能复用 key-id 替换内容。`POST /v1/audit/keys/v2/rotate` 把轮换事件和活动 key-id 原子提交，其他进程立即按新 key-id 签名；旧记录按旧 key-id 验证。默认 legacy key 兼容历史链。
+
+`GET /v1/audit/checkpoint` 输出带数据库实例 ID、seq、链头、key-id 和签名的检查点。`scripts/audit_checkpoint.py` 将它以独占新建方式保存；操作者应把目的地放在服务端无写权限的位置。`AIRLOCK_AUDIT_ANCHOR_FILE` 指向独立保留后回送的检查点，验证器检测检查点之前的删除/插入/替换/排序/截尾。检查点之后的尾部和服务器全部密钥失陷仍存在边界。没有声称本机普通文件是 WORM。`GET /v1/audit/completeness` 另查逐状态字段与原始快照完整率，明确不适用字段；它不代替验签。
+
+可选 `AIRLOCK_OTLP_URL=https://<literal-public-IP>/v1/traces`；仅测试时允许 loopback HTTP 并设 `AIRLOCK_OTLP_ALLOW_LOOPBACK=1`。审计事务同时入有界 1000 span outbox，满时记录丢弃数。operator 调用 `POST /v1/observability/export`，每次最多 100 span，失败保留、确定性 span ID、at-least-once。SQL、参数、凭据和模型输出不写遥测；没有把动态输入作指标标签。可用外部定时执行器调度此端点，服务本身不默认联网后台导出。`container_integrations.py` 用官方 Collector 0.162.0 与 Envoy 1.39.1 真实容器复验；Envoy 仅有限布尔/比较表达式的显式变量映射，不是完整策略语义/生产授权兼容。

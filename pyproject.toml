@@ -22,7 +22,7 @@ airlock-mcp = "airlock.mcp:main"
 include = ["airlock*"]
 
 [tool.setuptools.package-data]
-airlock = ["static/*.html", "static/*.js", "static/*.css"]
+airlock = ["static/*.html", "static/*.js", "static/*.css", "console/**/*", "console/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

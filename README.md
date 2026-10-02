@@ -2,11 +2,11 @@
 
 **个人工程作品：Agent提交意图，人看清影响，服务端持有执行权。**
 
-人批准的参数、策略和数据快照，必须与服务端最终执行所依据的对象一致。当前支持有界 SQLite 合成数据和配置注册的 HTTP CAS 上游；完整范围、配置、状态机和实验工具见 [运行手册](docs/OPERATIONS.md)。126 项原始目标与结论见 [验收矩阵](docs/acceptance/COMPLETION_MATRIX.md)，部分外部验证仍受阻。
+人批准的参数、策略和数据快照，必须与服务端最终执行所依据的对象一致。当前支持有界 SQLite 合成数据和配置注册的 HTTP / MCP CAS 上游；完整范围、配置、状态机和实验工具见 [运行手册](docs/OPERATIONS.md)。126 项原始目标与结论见 [验收矩阵](docs/acceptance/COMPLETION_MATRIX.md)，部分外部验证仍受阻。
 
 ```text
 Agent（只有agent token）
-  -> HTTP / 最小stdio MCP
+  -> HTTP / stdio 与 Streamable HTTP MCP
   -> 三态策略：pass / block / need_approval
   -> 固定表克隆预演，保存数量、diff和指纹
   -> 独立reviewer：核验范围与恢复限制
@@ -24,7 +24,7 @@ Agent（只有agent token）
 
 补齐 CEL/YAML 三态策略、多人范围路由、提交后独立补偿审批、预算预占/结算、显式批量决策与 shadow 分组建议、真实 provider 的可选语义评估路径、关联 ID、阶段延迟/token/缓存看板，以及双人标注、四组消融和真人 A/B 工具。离线工具通过不代表真实模型或真人指标已达成。
 
-技术栈：Python / FastAPI / Pydantic / SQLite / cel-python，模块化原生 JavaScript / CSS，stdio MCP。没有 npm 运行依赖，不需构建。与原 FastAPI＋Next.js 目标的差异仍未关闭；框架迁移需要独立验证，过去的网络限制不构成原目标豁免。
+技术栈：Python / FastAPI / Pydantic / SQLite / cel-python，Next.js 16.3.8 / React 19.3.0 静态导出审批台。React 管理登录、导航、数据和连接生命周期，影响与审计视图沿用项目的转义渲染组件。生产由 FastAPI 同源提供静态文件；构建需要 Node.js 22 和 npm ci，浏览器脚本以 CSP 内容哈希授权。
 
 ## 本地演示
 
@@ -35,6 +35,8 @@ python -m venv .venv
 # Linux/macOS: source .venv/bin/activate
 # PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-dev.txt
+npm ci
+npm run build
 python -m airlock init
 python -m airlock serve
 ```
@@ -54,7 +56,7 @@ python scripts/demo_agent.py --scenario update
 
 MCP host 启动 `python -m airlock.mcp`，配置 AIRLOCK_URL 和仅 agent token。提供 sql_execute/action_status 及当前身份可发现的注册上游工具；pending 使用收据 ID 查询。适配器通过 HTTP 访问闸门，不持有数据库或审核凭据。
 
-官方MCP Python SDK互通测试覆盖初始化、发现工具、写入pending、独立审核和结果读回；只声明所测子集，不是完整规范认证，也不等于真实LLM已跑通。协商版本为2025-11-25/2025-06-18，无任意上游代理、OAuth或MCP Streamable HTTP服务。
+官方MCP Python SDK互通测试覆盖初始化、发现工具、写入pending、独立审核和结果读回；只声明所测子集，不是完整规范认证，也不等于真实LLM已跑通。协商版本为2025-11-25/2025-06-18，支持 `/mcp` 的无会话 Streamable HTTP JSON；注册上游可选 MCP JSON discovery/call 和固定 CAS 契约。没有任意上游代理或 OAuth。
 
 ## Docker演示与隔离检查
 
@@ -78,6 +80,8 @@ python -m benchmark.generate
 python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
 python -m playwright install chromium
 python scripts/browser_smoke.py
+python scripts/browser_edges.py
+python scripts/container_integrations.py
 ```
 
 完整命令、逐命令退出码收据、JUnit和产物门禁见 [CODEX_REVIEW.md](CODEX_REVIEW.md)。GitHub Actions会上传source.zip、原始日志、合成数据、逐例评测、原生截图、Docker报告和哈希清单。看实际提交对应的run，不只看图标。
@@ -88,7 +92,7 @@ python scripts/browser_smoke.py
 
 ## 保证边界
 
-Agent 若可直接读写数据库、拿到审核密钥或控制服务器/宿主，就超出保护前提。真实模型行为、真实日志金标和真人 A/B 尚缺外部验证。当前未实现 SSO、多租户、生产连接器、通用 MCP 上游/OAuth、外部审计锚定。补偿和模型建议均不能自动授权；技术栈差异保持未关闭。
+Agent 若可直接读写数据库、拿到审核密钥或控制服务器/宿主，就超出保护前提。真实模型行为、真实日志金标和真人 A/B 尚缺外部验证。当前未实现生产 SSO、多租户、任意第三方连接器或 OAuth。已提供轮换 key-id、签名检查点与独立保存工具；外部 WORM 仍需部署方提供。补偿和模型建议均不能自动授权。
 
 [执行方案](docs/PLAN.md) · [技术契约](docs/SPEC.md) · [威胁模型](docs/THREAT_MODEL.md) · [评测方法](docs/EVALUATION.md) · [来源核验](docs/RESEARCH.md) · [面试问答](docs/INTERVIEW.md)
 

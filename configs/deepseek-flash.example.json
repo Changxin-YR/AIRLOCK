@@ -1,0 +1,16 @@
+{
+  "authorized_project": "AIRLOCK",
+  "provider": "deepseek_responses",
+  "model": "deepseek-flash",
+  "currency": "CNY",
+  "budget_cny": 3.0,
+  "max_calls": 650,
+  "max_concurrent": 4,
+  "max_output_tokens": 400,
+  "input_cny_per_million": 2.0,
+  "cached_input_cny_per_million": 0.04,
+  "output_cny_per_million": 8.0,
+  "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+  "price_effective_date": "2026-10-02",
+  "cache_seconds": 300
+}

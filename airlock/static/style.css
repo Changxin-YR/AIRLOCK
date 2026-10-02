@@ -6,3 +6,5 @@
 #study label{display:block}#study input[type=checkbox]{width:auto}
 @media(max-width:800px){.sidebar{flex-wrap:wrap}.sidebar nav{flex-basis:100%;width:100%;margin-left:0;justify-content:space-between}.sidebar .nav{width:auto}.audit-panel .decision-buttons{flex-wrap:wrap}}
 .metrics-table th:first-child{width:auto}.metrics-table th,.metrics-table td{white-space:nowrap;overflow-wrap:normal}
+/* React owns the page; bounded evidence adapters remain inside the grid. */
+.evidence-panel { min-width: 0; }

@@ -124,11 +124,39 @@ class Policy:
 
 
 class PolicyManager:
-    def __init__(self,path: Path | None):
-        self.path,self.lock=path,RLock()
-        self.active=Policy.parse(path.read_text(encoding='utf-8') if path else 'version: builtin-v1\nrules: []\n')
+    def __init__(self,path: Path | None,store=None):
+        self.path,self.lock,self.store=path,RLock(),store
+        self.reload_hook=None
+        if store:
+            with store.transaction() as conn:
+                row=conn.execute("SELECT value FROM meta WHERE key='active_policy'").fetchone()
+                text=row[0] if row else self.read_candidate()
+                self.active=Policy.parse(text)
+                conn.execute("INSERT OR IGNORE INTO meta VALUES('active_policy',?)",(text,))
+        else:
+            self.active=Policy.parse(self.read_candidate())
+
+    def read_candidate(self):
+        return self.path.read_text(encoding='utf-8') if self.path else 'version: builtin-v1\nrules: []\n'
+
+    def synchronize(self,conn):
+        """Read under the same writer transaction used for admission/execution.
+
+        A per-process cache must never keep an old authorization policy after a
+        different worker has committed a reload. SQLite serializes this check
+        and the effect with the reload's audit+configuration transaction.
+        """
+        if self.store:
+            row=conn.execute("SELECT value FROM meta WHERE key='active_policy'").fetchone()
+            if row is None:raise ValueError('active policy unavailable')
+            if getattr(self,'_source',None)!=row[0]:
+                replacement=Policy.parse(row[0])
+                self.active,self._source=replacement,row[0]
 
     def reload(self):
+        if self.reload_hook:
+            Policy.parse(self.read_candidate())
+            return self.reload_hook()['version']
         if self.path is None: raise ValueError('no configured policy file')
         replacement=Policy.parse(self.path.read_text(encoding='utf-8'))
         with self.lock: self.active=replacement

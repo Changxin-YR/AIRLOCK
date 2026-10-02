@@ -2,6 +2,7 @@
 import asyncio
 import json
 import secrets
+import re
 import sqlite3
 import uuid
 from pathlib import Path
@@ -9,7 +10,7 @@ from urllib.parse import urlparse
 from typing import Annotated, Literal
 from fastapi import Depends, FastAPI, Header, Query, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse,Response
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from .models import BatchDecision, Decision, GateError, GovernanceChange, Invocation, Settings
@@ -17,6 +18,7 @@ from .service import Gate, agent_view
 from . import observability
 
 STATIC = Path(__file__).parent / "static"
+CONSOLE = Path(__file__).parent / "console"
 
 
 class ConsoleAssets(StaticFiles):
@@ -34,6 +36,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     gate = Gate(settings)
     app = FastAPI(title="Airlock", version="0.1.0", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.gate = gate
+    # Hashes come from the local, reviewed static build, never a request header.
+    console_hashes = json.loads((CONSOLE/'csp.json').read_text())['script_hashes'] if (CONSOLE/'csp.json').exists() else []
+    if not isinstance(console_hashes,list) or any(not isinstance(h,str) or not re.fullmatch(r"'sha256-[A-Za-z0-9+/]{43}='",h) for h in console_hashes):
+        raise ValueError('invalid console script hashes')
+    script_policy = "script-src 'self' " + ' '.join(console_hashes)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=[urlparse(settings.origin).hostname] + ([settings.internal_host] if settings.internal_host else []))
 
     @app.middleware("http")
@@ -57,7 +64,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         response.headers.update({
             "X-Request-ID": request_identifier, "X-Content-Type-Options": "nosniff",
             "Referrer-Policy": "no-referrer", "Cache-Control": "no-store",
-            "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; "
+            "Content-Security-Policy": "default-src 'self'; " + script_policy + "; style-src 'self'; "
                 "connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
         })
         return response
@@ -113,6 +120,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def reload_policy(who: Annotated[str,Depends(operator)]):
         return gate.reload_policy()
 
+    @app.post('/v1/semantic/cache/invalidate')
+    def invalidate_semantic(who: Annotated[str,Depends(operator)]):
+        with gate.store.transaction() as conn:
+            gate.store.audit(conn,'governance:cache',{'kind':'governance.changed','at':gate.clock(),
+                'state':'requested','detail':{'kind':'semantic_cache_invalidation','operator':who}})
+        return gate.semantic.invalidate_cache()
+
+    @app.post('/v1/observability/export')
+    def export_telemetry(who:Annotated[str,Depends(operator)]):
+        from .telemetry import export
+        return export(gate.store)
+
     @app.post('/v1/governance/activate')
     def activate(body: GovernanceChange,who: Annotated[str,Depends(operator)]):
         return gate.change_governance(body)
@@ -136,6 +155,26 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get('/v1/tools')
     def tools(who: Annotated[str,Depends(agent)]):
         return {'items':gate.registry.discover(who)}
+
+    @app.post('/mcp')
+    async def streamable_mcp(request: Request,who: Annotated[str,Depends(agent)]):
+        from .mcp_http import dispatch,VERSIONS
+        if request.headers.get('mcp-protocol-version','2025-11-25') not in VERSIONS:
+            return JSONResponse({'error':'unsupported_mcp_protocol_version'},status_code=400)
+        accept=request.headers.get('accept','')
+        if 'application/json' not in accept or 'text/event-stream' not in accept:
+            return JSONResponse({'error':'mcp_accept_types_required'},status_code=406)
+        if not request.headers.get('content-type','').split(';')[0].strip()=='application/json':
+            return JSONResponse({'error':'json_content_type_required'},status_code=415)
+        try:body=await request.json()
+        except ValueError:return JSONResponse({'jsonrpc':'2.0','id':None,'error':{'code':-32700,'message':'Parse error'}},status_code=400)
+        result=await asyncio.to_thread(dispatch,gate,who,body)
+        return Response(status_code=202) if result is None else JSONResponse(result)
+
+    @app.api_route('/mcp',methods=['GET','DELETE'])
+    def no_stream_session(request:Request,who:Annotated[str,Depends(agent)]):
+        if request.headers.get('origin') not in (None,settings.origin):raise GateError('origin_forbidden',403)
+        return Response(status_code=405,headers={'Allow':'POST'})
 
     @app.post('/v1/actions/{action_id}/reconcile')
     def reconcile(action_id: str,who: Annotated[str,Depends(agent)]):
@@ -184,6 +223,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if settings.reviewer_file: raise GateError('operator_audit_verification_required',403)
         return gate.store.verify_audit()
 
+    @app.get('/v1/audit/checkpoint')
+    def checkpoint(who: Annotated[str,Depends(operator)]):
+        return gate.store.checkpoint()
+
+    @app.get('/v1/audit/completeness')
+    def audit_completeness(who:Annotated[str,Depends(operator)]):
+        from .audit_schema import completeness
+        return completeness(gate.store.audit_events(limit=100000))
+
+    @app.post('/v1/audit/keys/{key_id}/rotate')
+    def rotate_key(key_id: str,who: Annotated[str,Depends(operator)]):
+        try:return gate.store.rotate_key(key_id,gate.clock())
+        except (ValueError,OSError,KeyError):raise GateError('audit_key_rotation_failed',422) from None
+
     @app.get("/v1/metrics")
     def metrics(who: Annotated[str, Depends(reviewer)]):
         return gate.metrics(who)
@@ -210,9 +263,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/")
     def index():
-        if not (STATIC / "index.html").exists():
-            return JSONResponse({"error": "console_assets_missing", "next_step": "Reinstall the package with bundled static assets."}, status_code=503)
-        return FileResponse(STATIC / "index.html")
+        if not (CONSOLE / "index.html").exists():
+            return JSONResponse({"error": "console_assets_missing", "next_step": "Run npm ci and npm run build before starting AIRLOCK."}, status_code=503)
+        return FileResponse(CONSOLE / "index.html")
 
+    app.mount("/_next", ConsoleAssets(directory=CONSOLE/'_next', check_dir=False), name="next-assets")
     app.mount("/assets", ConsoleAssets(directory=STATIC, check_dir=False), name="assets")
     return app

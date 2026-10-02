@@ -5,6 +5,19 @@ from .sql import SCHEMA,snapshot,fingerprint
 from .models import GateError
 
 
+def classification(impact,tool):
+    evidence=impact.get('recovery_evidence',{})
+    remote=tool.startswith('upstream:')
+    return {
+        'preview_rollback':'private_clone_discarded' if not remote else 'upstream_declared_no_effect_preview',
+        'before_commit_rollback':'same_database_transaction' if not remote else 'upstream_contract_dependent',
+        'technical_reversibility':evidence.get('technical_reversibility','snapshot_compensation_after_successful_commit' if not remote else 'unknown'),
+        'restore_feasibility':evidence.get('restore_feasibility','requires_saved_snapshot_and_unchanged_target' if not remote else 'unknown'),
+        'evidence':evidence or {'snapshot_hash':impact.get('before_hash'),'snapshot_saved':'on_successful_commit','is_backup':False},
+        'business_authorization':'not_inferred_from_reversibility; separate_review_required',
+        'backup_status':'unknown','automatic_approval':False}
+
+
 def apply_rows(conn,rows):
     if conn.execute("SELECT 1 FROM sqlite_master WHERE type='trigger' AND tbl_name='customers'").fetchone():
         raise ValueError('recovery does not support triggers')

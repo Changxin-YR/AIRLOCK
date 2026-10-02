@@ -23,6 +23,10 @@ class Tool(BaseModel):
     url: str=Field(max_length=256)
     credential_env: str | None=Field(default=None,pattern=r'^AIRLOCK_UPSTREAM_[A-Z0-9_]+$')
     allow_loopback: bool=False
+    transport: Literal['http','mcp_json']='http'
+    mcp_path: str=Field(default='/mcp',pattern=r'^/[a-zA-Z0-9/_-]{1,100}$')
+    mcp_tools: dict[Literal['preview','execute','receipt'],str]=Field(default_factory=dict)
+    compensates: str | None=Field(default=None,pattern=r'^upstream:[a-zA-Z0-9_-]{1,48}$')
     arguments: dict[str,Literal['string','integer','boolean']]
     principals: list[str]=Field(default_factory=lambda:['agent:demo'],max_length=16)
 
@@ -37,6 +41,9 @@ class Tool(BaseModel):
             raise ValueError('upstream HTTPS required')
         if len(self.arguments)>16 or any(not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]{0,47}',k) for k in self.arguments):
             raise ValueError('invalid argument schema')
+        if self.transport=='mcp_json' and (set(self.mcp_tools)!={'preview','execute','receipt'} or any(not re.fullmatch(r'[A-Za-z0-9_.-]{1,64}',name) for name in self.mcp_tools.values())):
+            raise ValueError('MCP writes require explicit preview/execute/receipt tool mappings')
+        if self.transport=='http' and self.mcp_tools:raise ValueError('MCP tools supplied for HTTP transport')
         return self.url.rstrip('/')
 
     def validate_arguments(self,values):
@@ -51,6 +58,7 @@ class Tool(BaseModel):
         token=os.environ.get(self.credential_env,'') if self.credential_env else None
         if self.credential_env and len(token)<32: raise GateError('upstream_credentials_unavailable',503)
         headers={'Authorization':'Bearer '+token} if token else {}
+        if self.transport=='mcp_json':return self.mcp_request(method,path,payload,headers)
         try:
             with httpx.Client(timeout=httpx.Timeout(5,connect=2),trust_env=False,follow_redirects=False) as client:
                 with client.stream(method,self.target()+path,json=payload,headers=headers) as response:
@@ -64,6 +72,43 @@ class Tool(BaseModel):
                     return result
         except (httpx.HTTPError,ValueError,TypeError):
             raise GateError('upstream_unavailable',503) from None
+
+    def mcp_request(self,method,path,payload,headers):
+        """Only registered CAS-contract tools, not model-suggested discovery names.
+
+        Discovery is checked against this allowlist. Only stateless JSON response
+        upstreams are accepted here; redirects, opaque SSE and session-required
+        servers fail closed rather than weakening receipt reconciliation.
+        """
+        phase='receipt' if method=='GET' and path.startswith('/receipts/') else {'/preview':'preview','/execute':'execute'}.get(path)
+        if phase is None:raise GateError('upstream_method_forbidden',422)
+        headers=dict(headers,Accept='application/json, text/event-stream')
+        deadline=time.monotonic()+10
+        try:
+            with httpx.Client(timeout=httpx.Timeout(5,connect=2),trust_env=False,follow_redirects=False) as client:
+                def send(message,notification=False):
+                    with client.stream('POST',self.target()+self.mcp_path,json=message,headers=headers) as response:
+                        if notification and response.status_code==202:return None
+                        if response.status_code!=200 or response.headers.get('mcp-session-id'):raise ValueError('stateless MCP contract required')
+                        if response.headers.get('content-type','').split(';')[0]!='application/json':raise ValueError('MCP JSON response required')
+                        raw=bytearray()
+                        for chunk in response.iter_bytes():
+                            raw.extend(chunk)
+                            if len(raw)>16384 or time.monotonic()>deadline:raise ValueError('MCP response budget')
+                        data=json.loads(raw)
+                        if data.get('jsonrpc')!='2.0' or data.get('id')!=message.get('id') or 'error' in data or 'result' not in data:raise ValueError('MCP response binding')
+                        return data['result']
+                initialized=send({'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-11-25','capabilities':{},'clientInfo':{'name':'airlock-controlled-proxy','version':'0.2'}}})
+                if initialized.get('protocolVersion') not in {'2025-11-25','2025-06-18'}:raise ValueError('MCP version')
+                headers['MCP-Protocol-Version']=initialized['protocolVersion']
+                send({'jsonrpc':'2.0','method':'notifications/initialized'},True)
+                discovered=send({'jsonrpc':'2.0','id':2,'method':'tools/list'})
+                if self.mcp_tools[phase] not in {t.get('name') for t in discovered.get('tools',[])}:raise ValueError('registered MCP tool absent')
+                arguments={'action_id':path.rsplit('/',1)[1]} if phase=='receipt' else payload
+                result=send({'jsonrpc':'2.0','id':3,'method':'tools/call','params':{'name':self.mcp_tools[phase],'arguments':arguments}})
+                if result.get('isError') or not isinstance(result.get('structuredContent'),dict):raise ValueError('MCP structured receipt missing')
+                return result['structuredContent']
+        except (httpx.HTTPError,ValueError,TypeError,KeyError):raise GateError('upstream_mcp_unavailable',503) from None
 
 
 class Preview(BaseModel):
@@ -87,6 +132,12 @@ class Registry:
                 tool=Tool.model_validate(item); tool.target()
                 if tool.name in self.tools: raise ValueError('duplicate upstream tool')
                 self.tools[tool.name]=tool
+            for tool in self.tools.values():
+                if tool.compensates:
+                    source=self.tools.get(tool.compensates)
+                    if not source or source.compensates or tool.arguments!={'source_action_id':'string'} or any(
+                        getattr(tool,k)!=getattr(source,k) for k in ('url','credential_env','resource')):
+                        raise ValueError('compensation must bind a registered original resource and credential')
 
     def get(self,name,principal):
         tool=self.tools.get(name)
@@ -108,6 +159,7 @@ class RemoteActions:
         if call.sql or call.parameters: raise GateError('tool_arguments_invalid',422)
         request_hash=digest({'principal':principal,'call':call.model_dump()})
         with gate.store.transaction() as conn:
+            gate.policy.synchronize(conn)
             row=conn.execute('SELECT document FROM actions WHERE principal=? AND idem=?',(principal,call.idempotency_key)).fetchone()
             if row:
                 action=json.loads(row[0])
@@ -115,6 +167,14 @@ class RemoteActions:
                 governance.duplicate_hit(conn)
                 return action
             gate.admit(conn,principal)
+            source_action=None
+            if tool.compensates:
+                source_row=conn.execute('SELECT document FROM actions WHERE id=? AND principal=?',
+                    (call.arguments['source_action_id'],principal)).fetchone()
+                if not source_row:raise GateError('compensation_source_unavailable',404)
+                source_action=json.loads(source_row[0])
+                if source_action['state']!='executed' or source_action['request']['tool']!=tool.compensates:
+                    raise GateError('compensation_source_not_executed',409)
             action={'id':uuid.uuid4().hex,'principal':principal,'request':call.model_dump(),'request_hash':request_hash,
                 'created_at':gate.clock(),'expires_at':gate.clock()+gate.settings.ttl_seconds,'version':1,
                 'policy_version':gate.policy_version,'state':'blocked','decision':'block','reason_code':'upstream_preview_failed',
@@ -128,7 +188,14 @@ class RemoteActions:
                     'generated_at':gate.clock(),'target':tool.resource,'target_version':preview.target_version,
                     'changed_rows':preview.impact_units,'matched_rows':preview.impact_units,'before_count':None,'after_count':None,
                     'operations':['remote_write'],'sample':[],'sample_truncated':False,'preview':preview.model_dump(),
-                    'backup_age_seconds':None,'recovery':'Remote compensation unavailable; reconcile the original receipt.'}
+                    'backup_age_seconds':None,'recovery':'Only a separately registered and approved compensation can restore an upstream effect.'}
+                compensators=[t.name for t in gate.registry.tools.values() if t.compensates==tool.name and principal in t.principals]
+                impact['recovery_evidence']={
+                    'technical_reversibility':'registered_cas_compensation' if compensators else 'unknown',
+                    'restore_feasibility':'requires_new_preview_and_independent_approval' if compensators else 'unknown',
+                    'business_authorization':'independent_approval_required','is_backup':False,
+                    'registered_tools':compensators,'source_action_id':source_action['id'] if source_action else None,
+                    'source_receipt_hash':digest(source_action['result']) if source_action else None}
                 policy,hits=gate.policy.active.evaluate({'tool':call.tool,'resource':tool.resource,'principal':principal,
                     'operation':'remote_write','changed_rows':preview.impact_units,'matched_rows':preview.impact_units},True)
                 action.update(impact=impact,rule_ids=hits,risk='critical' if preview.impact_units>=gate.settings.critical_rows else 'high')
@@ -152,6 +219,7 @@ class RemoteActions:
     def decide(self,action_id,decision,reviewer):
         gate=self.gate; gate.expire()
         with gate.store.transaction() as conn:
+            gate.policy.synchronize(conn)
             action=json.loads(conn.execute('SELECT document FROM actions WHERE id=?',(action_id,)).fetchone()[0])
             gate.access.require(reviewer,action)
             if reviewer==action['principal']: raise GateError('self_approval_forbidden',403)
