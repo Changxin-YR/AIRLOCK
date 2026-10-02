@@ -1,0 +1,5 @@
+{
+  "original_matrix_validation": "matrix-validation.log was generated before the documentation helper was committed. Its SHA identifies the unchanged application code, not a committed version of the new ledger helper.",
+  "committed_helper_retest": "delivery/matrix-validation.log.status.json records the rerun at d090c87f03751dd42f8ce0d6ffb27043b905c01b, which includes the validator and full ledger.",
+  "meaning": "Ledger structural validation does not prove product requirements. Original receipts were retained without rewriting their commit or exit code."
+}

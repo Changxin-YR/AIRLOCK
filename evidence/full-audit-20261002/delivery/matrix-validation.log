@@ -1,0 +1,1 @@
+{"target_records": 126, "unique_receipts_checked": 13, "counts": {"implementation": {"IMPLEMENTED": 74, "PARTIAL": 52}, "verification": {"PASS": 86, "BLOCKED_EXTERNAL": 36, "NOT_RUN": 4}}, "original_goals_all_satisfied": false, "meaning": "structure and provenance only; not functional acceptance"}

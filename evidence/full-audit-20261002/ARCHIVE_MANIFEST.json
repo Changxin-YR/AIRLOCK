@@ -130,6 +130,10 @@
       "bytes": 169,
       "sha256": "8741da6c07b297d093314f44a7e9da3b531ca6736eade4703ae1243c4076b4fe"
     },
+    "BOOKKEEPING_PROVENANCE.json": {
+      "bytes": 565,
+      "sha256": "620ae2d99da7f6f6daec6a89884ccfd20b0669903cabd9b1df8ec1f6b94a3312"
+    },
     "ci-266ad9e-artifacts.json": {
       "bytes": 843,
       "sha256": "21865c06fe75b6a7464922a2f2d77ebbfad5600dc217c88da99e4c7aa3a94ded"
@@ -157,6 +161,14 @@
     "ci-negative-control.json": {
       "bytes": 9164,
       "sha256": "a2feedfbbae2d3c63490e816eda42159476696679c87f48b7334fcc35b601208"
+    },
+    "delivery/matrix-validation.log": {
+      "bytes": 300,
+      "sha256": "59744238b3d10a207f119db8a445d735ef4c56681accad85f4e4b60a7957906f"
+    },
+    "delivery/matrix-validation.log.status.json": {
+      "bytes": 310,
+      "sha256": "6599507355857b1c7f1470213195d2cf5f9fe418c978f528169b3adc6fb462db"
     },
     "final/ablation.json": {
       "bytes": 49348,
