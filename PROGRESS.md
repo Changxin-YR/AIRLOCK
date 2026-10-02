@@ -1,49 +1,50 @@
 # AIRLOCK 执行记忆
 
-更新时间：2026-10-02。本分支是任务接续记录，不是验收证明；以 main 对应提交、代码和实际运行结果为准。禁止再次清空仓库。
+更新：2026-10-02。本分支用于接续，不是验收证明。必须读实际 main 代码、退出码和产物；禁止再次清空仓库。
 
-## 用户要求
+## 用户要求与冻结范围
 
-个人项目，用于 AI 全栈实习简历和面试；ChatGPT 实现，Codex 独立验收。另建 memory/progress 保存真实进度、问题、证据和下一步。保留 Git 历史，不 force-push。
+个人 AI 全栈简历/面试项目；ChatGPT 实现，Codex 独立验收。使用 memory/progress 保存真实进度，保留历史，不 force-push。
 
-## 远端已固定的进度
+定位为服务端 SQL 审批与受限执行实验室。固定 SQLite 合成 customers 表，初始1206行；并非通用工具透明代理或首个 HITL。前端为无需构建的原生 ES Modules，不是 Vue/Next.js。真实 LLM、真人 A/B、生产连接器、多人路由/SSO未完成，不能编造。
 
-- 旧实现清空提交：1f5d33b767d504a20473e80a154dcd424ddad1a0。其父提交 d9499abc515af9a69e47035f50f841ed05717690 仍在历史中。
-- 当前实现提交：67df890db01c73416e8e9965387b6858c5ff4650（main），tree 75715d86ec9382dd9b088b444925341d27b3a45b。
-- 已提交：Python 审批核心、FastAPI、最小 stdio MCP、中文原生 JS 审批台、脚本模拟 Agent、80 项 Python 测试、5 项 JS 测试、原生/桥接浏览器验收脚本、200 条合成策略集生成与评测、运行配置与 CI。
-- 本次环境已重置，之前容器文件不再存在；已从 GitHub 中先前写入但未提交的对象恢复代码，并正式提交 main。不要再依赖旧 /mnt/data 路径。
+## 当前 main
 
-## 校验的内容哈希
+525ea8fe2909230d41e15526bbc1e0652529c2b9
+root tree: 699cceac667b3de99fcb8a9efde9a7d746909261
 
-airlock: 89acf53f0dc918e52683248ec8178781de3f47da
-scripts: 5466725775cc0bee60241d0916f89b8e84163b2a
-tests: f8e07b06cf2e5b4629720930fa60312a3a774959
-tests-js: 134bfe38ba022af2b07ee7d0269484c098b4c5fe
-benchmark: 40d0dda64dbea8aa9c977bc88fc275aa9261b54c
+提交链：
+- 1f5d33b：清空旧当前文件，保留历史。
+- 67df890：将之前未提交的源码对象恢复并正式发布完整 MVP。
+- 0433671：增加官方 MCP SDK 互通、真实 Docker smoke、证据清单及手机时延格式。
+- 6544e63：修正 tee 管道掩盖失败；逐命令退出码收据、JUnit必需测试和产物门禁；失败前保留 Docker 日志。
+- 525ea8f：日志证明容器健康但内部网络无宿主端口发布；服务器改为 ingress + protected，Agent仍只有protected。增加拓扑/端口边界检查，提交 PLAN/SPEC/THREAT_MODEL。
 
-审批台 app.js 已按上次原文件哈希恢复：3161d9ab8acbe5924f5c9c537eea340147e506cc，并在本次执行 node --check 通过。不要用先前未挂到 main 的其他树替代这个文件。
+## 已知实际验证，不可只看 CI 图标
 
-## 测试：历史记录与当前结果分开
+1. 67df890 / run 36962081780：原始日志 Python80通过、JS5通过、原生浏览器9项通过。先前本地 loopback 受限的缺口在该runner补测。
+2. 0433671 / run 36963123248：原始日志 Python81通过（含官方SDK）、JS6通过、native9通过；但 Docker 启动检查失败、没有 docker-report。虽然GitHub标绿，原因是旧tee管道丢失退出码，不能算整体通过。
+3. 6544e63 / run 36963919651：严格门禁正确标为failure；Python84通过（官方SDK+日志器回归）、native通过；Docker日志显示服务healthy但PORTS为空，compose port返回no port。这是部署网络配置问题，不是业务进程未启动。
+4. 当前525ea8f已修正网络配置，尚未在本检查点读取新CI最终结果，不能提前写Docker通过。
 
-上次实际工具输出：Python 80 passed；JS 5 passed；桥接 DOM 与真实 HTTP 交互 9 项通过。原生 Chromium 访问 loopback 被管理员策略阻断，因此没有原生 E2E 通过结论。Docker/真实 LLM/官方 MCP host/真人 A/B 没有运行。
+证据artifacts：
+- 67df890 artifact11208306871，sha256 8fc01d4045fa8644e46260efcfb37347b288a561d4aa130e81ef94ff54539f71。
+- 0433671 artifact11208453501，sha256 e6d69a3c1bf3bd40aa3085a9aac31a834d1c8e4a5b977ce47300f66b4f13db74。
+- 6544e63 artifact11208797786，sha256 fb44378eedf2466dc4952b8ee3c2ed5941ca6d94b3375853a814f39c85c81c25。
 
-上述结果是上次会话记录，不是本次 CI 结果。当前已配置 GitHub Actions，需查询真实 run 和 conclusion；不能写 CI 绿或生产就绪，直到证据成立。
+GitHub.download_workflow_artifact 返回的文件会自动挂载本轮 /mnt/data，可解包source.zip恢复源码。不要假定旧会话容器永远存在。当前容器 /mnt/data/AIRLOCK 可用，额外ci-*目录是对应运行的只读证据副本。
 
-## 冻结设计
+## 关键实现
 
-- 协议无关核心，固定 SQLite synthetic customers 表，初始 1206 行。不是任意 SQL/任意工具透明代理。
-- pass / block / need_approval；所有支持写入包括零变化操作都需审批，预演失败阻断。
-- 独立 agent/reviewer 身份；客户端不能传 approved/risk/principal 来取得权限。
-- 参数、策略、影响快照与版本绑定；执行前在 BEGIN IMMEDIATE 中再次校验指纹/TTL；写入、终态与 HMAC 审计同库提交。不是分布式 exactly-once。
-- Agent 必须没有服务器文件、数据库、reviewer/audit 密钥及宿主管理权限，否则不可宣传不可绕过。
-- HMAC 无外部锚定，不能检测尾部截断或服务器全失陷。
-- MCP 仅 sql_execute/action_status，pending 回执不代表执行；SSE 只通知，不授权。
-- 前端为无需构建的原生 ES Modules，不是 Vue/Next.js；不得隐瞒技术栈变化。
-- benchmark 为作者构造的 200 条/40 族合成回归；dev 120/test 80 按族切分。无人类专家金标、κ 或真实用户实验，不能编造效率提升。
+三态策略；所有支持写入包括零变化都审批，预演失败阻断。SQLite编译authorizer限定表/函数/动作、资源预算，克隆预演区分命中与变化，保留样本和整表指纹。摘要绑定参数/策略/影响，执行前在BEGIN IMMEDIATE中校验TTL、版本和数据漂移；效果、终态、HMAC审计同库提交，不声称分布式exactly-once。Agent仅有agent token，不得获得服务器文件/数据库/reviewer/audit密钥/宿主管理权限。审计无外部锚点不能证明尾部完整。
 
-## 当前下一步
+MCP只sql_execute/action_status，pending不是成功；官方Python SDK已通过所测子集，不是完整规范认证或真实LLM行为证明。SSE仅通知。UI凭据只在内存，时间为不可信遥测。
 
-1. 查询 67df890 的 GitHub Actions 结果，修复实际失败并保留日志；不能把历史测试当本次验收。
-2. 补齐设计、威胁模型、面试标准问答、Codex 独立验收与证据索引。
-3. 记录新的 main SHA 和明确的 PASS/FAIL/NOT RUN/ENVIRONMENT BLOCKED；交付可下载文件须确认实际生成。
-4. 更新本分支。开始任何新会话先 fetch main + memory/progress，核对 SHA，不再次重建或清空。
+合成回归200条/40族，dev120/test80按族拆分，固定SHA256 243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7。不能用合成100%写真实危险召回或假称独立标注/κ/人类提升。
+
+## 下一步
+
+1. 查询525ea8f新CI并下载原始产物，验证run_logged退出收据、verify_evidence、Docker报告；失败继续定点修复，不降低断言。
+2. 补EVALUATION/INTERVIEW/RESEARCH、AGENTS.md、CODEX_REVIEW.md、LICENSE、最终README与验收记录。
+3. 最终提交后读取真实CI结论、下载最终源码/证据，检查桌面/移动截图及文件哈希，生成可下载交付包。
+4. 将本文件和可机读STATE.json更新为最终main SHA/证据/明确未完成项。不要把这些待办当已经完成。
