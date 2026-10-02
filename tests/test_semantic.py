@@ -39,7 +39,7 @@ def test_semantic_advice_never_autoapproves_and_cache_scoped(settings,tmp_path,m
     assert len(seen)==2
 
 
-@pytest.mark.parametrize('advice',[{'risk':'low','score':-1.0,'reason':'x'}, {'risk':'low','score':0.0,'reason':'x','approved':True}, {}, {'risk':'low','score':float('nan'),'reason':'x'}])
+@pytest.mark.parametrize('advice',[{'risk':'low','score':-1.0,'reason':'x'}, {'risk':'low','score':0.0,'reason':'x','approved':True}, {}, {'risk':'low','score':float('nan'),'reason':'x'}, {'risk':'low','score':0.1,'reason':'x'*801}])
 def test_invalid_model_data_fails_closed(settings,tmp_path,monkeypatch,advice):
     monkeypatch.setenv('AIRLOCK_LLM_API_KEY','offline-test-credential')
     gate=Gate(replace(settings,semantic_file=config(tmp_path)))
