@@ -16,10 +16,19 @@ import tempfile
 import time
 import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from botocore.exceptions import ClientError,EndpointConnectionError
+from botocore.exceptions import ClientError,BotoCoreError
 from airlock.archive import ArchiveConfig,client,archive_checkpoint,verify_archive
 from airlock.models import Settings,Invocation
 from airlock.service import Gate
+
+
+def wait_ready(s3,attempts=100,pause=.1):
+    # A newly published container port can reset connections before the S3
+    # listener is ready. Retry this read-only readiness probe, never a mutation.
+    for _ in range(attempts):
+        try:s3.list_buckets();return
+        except (BotoCoreError,ClientError):time.sleep(pause)
+    raise RuntimeError('S3 fixture did not become ready')
 
 
 def main():
@@ -27,6 +36,7 @@ def main():
     parser.add_argument('--image',help='Explicit existing test image; otherwise read the source build report')
     parser.add_argument('--image-report',type=Path,default=Path('evidence/archive-image.json'));args=parser.parse_args()
     selected_image=args.image or json.loads(args.image_report.read_text())['runtime_image_id']
+    args.output.parent.mkdir(parents=True,exist_ok=True)
     name='airlock-archive-'+uuid.uuid4().hex[:12]
     with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
     access='airlock-'+secrets.token_hex(8);secret=secrets.token_urlsafe(36)
@@ -44,10 +54,7 @@ def main():
             os.environ['AIRLOCK_ARCHIVE_ACCESS_KEY']=access;os.environ['AIRLOCK_ARCHIVE_SECRET_KEY']=secret
             config=ArchiveConfig(endpoint=f'http://127.0.0.1:{port}',bucket='airlock-evidence',retain_days=1)
             s3=client(config)
-            for _ in range(100):
-                try:s3.list_buckets();break
-                except (EndpointConnectionError,ClientError):time.sleep(.1)
-            else:raise RuntimeError('S3 fixture did not become ready')
+            wait_ready(s3)
             s3.create_bucket(Bucket=config.bucket,ObjectLockEnabledForBucket=True)
             gate=Gate(Settings(root/'target.sqlite','a'*32,'r'*32,'k'*32))
             action=gate.submit(Invocation(sql='DELETE FROM customers WHERE id=1',idempotency_key='archive-pending'))
@@ -91,7 +98,11 @@ def main():
             args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
             print(json.dumps(report))
         finally:
-            if created:subprocess.run(['docker','rm','--force',name],capture_output=True,timeout=30,check=True)
+            if created:
+                logs=subprocess.run(['docker','logs',name],capture_output=True,text=True,timeout=20)
+                redacted=(logs.stdout+logs.stderr).replace(access,'[REDACTED]').replace(secret,'[REDACTED]')
+                args.output.with_name(args.output.stem+'-container.log').write_text(redacted,encoding='utf-8')
+                subprocess.run(['docker','rm','--force',name],capture_output=True,timeout=30,check=True)
 
 
 if __name__=='__main__':main()

@@ -1,7 +1,8 @@
-"""Minimal, unlinkable-per-export audit summaries for sharing outside the console.
+"""Minimal audit summaries with randomized action aliases for external sharing.
 
 This is an allowlist, not a regex PII scrubber. Original audit events remain
-unchanged. Opaque event digests bind summaries but cannot verify omitted data.
+unchanged. Stable event digests link repeated exports of an event, but cannot
+verify omitted data. Random aliases alone are not a claim of unlinkability.
 """
 import hashlib
 import hmac

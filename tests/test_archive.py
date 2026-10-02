@@ -29,3 +29,15 @@ def test_archive_requires_version_retention_and_verifies_exact_payload(settings)
     with pytest.raises(ValueError,match='Object Lock'):archive_checkpoint(s3,config,cp)
     s3.lock=True;s3.versioning=False
     with pytest.raises(ValueError,match='versioning'):archive_checkpoint(s3,config,cp)
+def test_archive_readiness_retries_connection_reset_without_retrying_writes():
+    from scripts.archive_integration import wait_ready
+    from botocore.exceptions import ConnectionClosedError,ClientError
+    class Fixture:
+        calls=0
+        def list_buckets(self):
+            self.calls+=1
+            if self.calls==1:raise ConnectionClosedError(endpoint_url='http://127.0.0.1')
+            if self.calls==2:raise ClientError({'Error':{'Code':'ServiceUnavailable'}},'ListBuckets')
+            return {}
+    fixture=Fixture();wait_ready(fixture,attempts=3,pause=0);assert fixture.calls==3
+    with pytest.raises(RuntimeError,match='did not become ready'):wait_ready(Fixture(),attempts=1,pause=0)
