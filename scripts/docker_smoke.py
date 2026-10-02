@@ -32,6 +32,7 @@ assert not Path('/var/run/docker.sock').exists()
 assert os.statvfs('/app').f_flag & os.ST_RDONLY
 caps = next(line.split(':')[1].strip() for line in Path('/proc/self/status').read_text().splitlines() if line.startswith('CapEff:'))
 assert int(caps,16) == 0
+assert len([name for name in os.listdir('/sys/class/net') if name != 'lo']) == 1
 with httpx.Client(base_url=os.environ['AIRLOCK_URL'],headers={'Authorization':'Bearer '+os.environ['AIRLOCK_AGENT_TOKEN']},trust_env=False,timeout=10) as c:
     response=c.post('/v1/actions',json={'sql':'DELETE FROM customers','idempotency_key':'docker-isolation-001'})
     assert response.status_code==202, response.text
@@ -80,6 +81,9 @@ def main():
 
         try:
             run(['version'], timeout=20)
+            config = json.loads(run(['config', '--format', 'json'], timeout=20))
+            assert set(config['services']['agent']['networks']) == {'protected'}
+            assert set(config['services']['airlock']['networks']) == {'protected', 'ingress'}
             run(['build'], timeout=360)
             run(['up', '-d', 'airlock'], timeout=60)
             with httpx.Client(base_url=url, trust_env=False, timeout=5) as client:
@@ -96,6 +100,12 @@ def main():
                     raise RuntimeError('Compose server did not become ready')
 
                 ready()
+                server_id = run(['ps', '-q', 'airlock'], timeout=20).strip()
+                inspected = subprocess.run(['docker', 'inspect', '--format', '{{json .NetworkSettings}}', server_id],
+                    text=True, capture_output=True, check=True, timeout=20)
+                networking = json.loads(inspected.stdout)
+                assert set(networking['Networks']) == {name + '_protected', name + '_ingress'}
+                assert networking['Ports']['8000/tcp'] == [{'HostIp': '127.0.0.1', 'HostPort': str(port)}]
                 output = run(['run', '--rm', '--no-deps', '-T', '--entrypoint', 'python', 'agent', '-c', PROBE], timeout=60)
                 probe = json.loads(output.strip().splitlines()[-1])
                 before = client.get('/v1/metrics', headers=reviewer).json()['customers']
@@ -119,7 +129,8 @@ def main():
                 report = {'mode': 'real_docker_compose', 'project': name, 'probe': probe,
                     'rows_before_independent_approval': before, 'rows_after_approval_and_restart': after,
                     'additional_checks': ['pending_survives_server_restart_without_execution',
-                        'approved_effect_and_audit_persist_without_reseeding', 'compose_network_is_internal'],
+                        'approved_effect_and_audit_persist_without_reseeding', 'compose_network_is_internal',
+                        'server_dual_network_agent_internal_only', 'published_port_is_loopback_only'],
                     'limitations': ['controlled synthetic deployment, not a general container escape audit',
                         'reviewer is automated test code, not a human A/B participant']}
                 (args.output / 'docker-report.json').write_text(json.dumps(report, indent=2) + '\n')

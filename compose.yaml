@@ -12,7 +12,7 @@ services:
       - "127.0.0.1:${AIRLOCK_PORT:-8000}:8000"
     volumes:
       - state:/data
-    networks: [protected]
+    networks: [protected, ingress]
     read_only: true
     tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,mode=1777"]
     cap_drop: [ALL]
@@ -39,6 +39,8 @@ services:
       airlock:
         condition: service_healthy
 networks:
+  ingress:
+    driver: bridge
   protected:
     internal: true
 volumes:
