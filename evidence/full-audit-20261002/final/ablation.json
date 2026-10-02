@@ -1,0 +1,1512 @@
+{
+  "split": "test",
+  "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7",
+  "live_model_requested": false,
+  "arms": {
+    "keyword": {
+      "status": "MEASURED",
+      "metrics": {
+        "n": 80,
+        "confusion": {
+          "pass->pass": 30,
+          "need_approval->need_approval": 20,
+          "block->block": 10,
+          "block->need_approval": 10,
+          "block->pass": 10
+        },
+        "exact_policy_accuracy": {
+          "numerator": 60,
+          "denominator": 80,
+          "value": 0.75
+        },
+        "impact_exact": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_mae": null,
+        "zero_impact_cases": 0,
+        "authored_policy_gating_recall": {
+          "numerator": 40,
+          "denominator": 50,
+          "value": 0.8
+        },
+        "authored_policy_gating_precision": {
+          "numerator": 40,
+          "denominator": 40,
+          "value": 1.0
+        },
+        "authored_pass_extra_gating_rate": {
+          "numerator": 0,
+          "denominator": 30,
+          "value": 0.0
+        },
+        "independent_semantic_risk_metrics": null
+      },
+      "family_strata": {
+        "ddl_alter": {
+          "n": 5,
+          "confusion": {
+            "block->block": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "ddl_create": {
+          "n": 5,
+          "confusion": {
+            "block->block": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "delete_obfuscated": {
+          "n": 5,
+          "confusion": {
+            "need_approval->need_approval": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "extension": {
+          "n": 5,
+          "confusion": {
+            "block->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "identity_update": {
+          "n": 5,
+          "confusion": {
+            "block->need_approval": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "insert_new": {
+          "n": 5,
+          "confusion": {
+            "need_approval->need_approval": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "insert_replace": {
+          "n": 5,
+          "confusion": {
+            "need_approval->need_approval": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "obfuscated_invalid": {
+          "n": 5,
+          "confusion": {
+            "block->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "read_bigint": {
+          "n": 5,
+          "confusion": {
+            "pass->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "read_bound": {
+          "n": 5,
+          "confusion": {
+            "pass->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "read_count": {
+          "n": 5,
+          "confusion": {
+            "pass->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "read_cte": {
+          "n": 5,
+          "confusion": {
+            "pass->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "read_like": {
+          "n": 5,
+          "confusion": {
+            "pass->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "read_order": {
+          "n": 5,
+          "confusion": {
+            "pass->pass": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "stacked": {
+          "n": 5,
+          "confusion": {
+            "block->need_approval": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 0,
+            "denominator": 5,
+            "value": 0.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        },
+        "update_balance": {
+          "n": 5,
+          "confusion": {
+            "need_approval->need_approval": 5
+          },
+          "exact_policy_accuracy": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "impact_exact": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "impact_mae": null,
+          "zero_impact_cases": 0,
+          "authored_policy_gating_recall": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_policy_gating_precision": {
+            "numerator": 5,
+            "denominator": 5,
+            "value": 1.0
+          },
+          "authored_pass_extra_gating_rate": {
+            "numerator": 0,
+            "denominator": 0,
+            "value": null
+          },
+          "independent_semantic_risk_metrics": null
+        }
+      },
+      "rows": [
+        {
+          "id": "read_count-0",
+          "family": "read_count",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_count-1",
+          "family": "read_count",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_count-2",
+          "family": "read_count",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_count-3",
+          "family": "read_count",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_count-4",
+          "family": "read_count",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bound-0",
+          "family": "read_bound",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bound-1",
+          "family": "read_bound",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bound-2",
+          "family": "read_bound",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bound-3",
+          "family": "read_bound",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bound-4",
+          "family": "read_bound",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_like-0",
+          "family": "read_like",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_like-1",
+          "family": "read_like",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_like-2",
+          "family": "read_like",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_like-3",
+          "family": "read_like",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_like-4",
+          "family": "read_like",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_cte-0",
+          "family": "read_cte",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_cte-1",
+          "family": "read_cte",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_cte-2",
+          "family": "read_cte",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_cte-3",
+          "family": "read_cte",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_cte-4",
+          "family": "read_cte",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_order-0",
+          "family": "read_order",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_order-1",
+          "family": "read_order",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_order-2",
+          "family": "read_order",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_order-3",
+          "family": "read_order",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_order-4",
+          "family": "read_order",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bigint-0",
+          "family": "read_bigint",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bigint-1",
+          "family": "read_bigint",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bigint-2",
+          "family": "read_bigint",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bigint-3",
+          "family": "read_bigint",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "read_bigint-4",
+          "family": "read_bigint",
+          "expected_decision": "pass",
+          "dangerous": false,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "delete_obfuscated-0",
+          "family": "delete_obfuscated",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "delete_obfuscated-1",
+          "family": "delete_obfuscated",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "delete_obfuscated-2",
+          "family": "delete_obfuscated",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "delete_obfuscated-3",
+          "family": "delete_obfuscated",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "delete_obfuscated-4",
+          "family": "delete_obfuscated",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "update_balance-0",
+          "family": "update_balance",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "update_balance-1",
+          "family": "update_balance",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "update_balance-2",
+          "family": "update_balance",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "update_balance-3",
+          "family": "update_balance",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "update_balance-4",
+          "family": "update_balance",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_new-0",
+          "family": "insert_new",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_new-1",
+          "family": "insert_new",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_new-2",
+          "family": "insert_new",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_new-3",
+          "family": "insert_new",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_new-4",
+          "family": "insert_new",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_replace-0",
+          "family": "insert_replace",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_replace-1",
+          "family": "insert_replace",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_replace-2",
+          "family": "insert_replace",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_replace-3",
+          "family": "insert_replace",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "insert_replace-4",
+          "family": "insert_replace",
+          "expected_decision": "need_approval",
+          "dangerous": true,
+          "expected_changed_rows": 1,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "ddl_alter-0",
+          "family": "ddl_alter",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_alter-1",
+          "family": "ddl_alter",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_alter-2",
+          "family": "ddl_alter",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_alter-3",
+          "family": "ddl_alter",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_alter-4",
+          "family": "ddl_alter",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_create-0",
+          "family": "ddl_create",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_create-1",
+          "family": "ddl_create",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_create-2",
+          "family": "ddl_create",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_create-3",
+          "family": "ddl_create",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "ddl_create-4",
+          "family": "ddl_create",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "block"
+        },
+        {
+          "id": "stacked-0",
+          "family": "stacked",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "stacked-1",
+          "family": "stacked",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "stacked-2",
+          "family": "stacked",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "stacked-3",
+          "family": "stacked",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "stacked-4",
+          "family": "stacked",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "extension-0",
+          "family": "extension",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "extension-1",
+          "family": "extension",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "extension-2",
+          "family": "extension",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "extension-3",
+          "family": "extension",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "extension-4",
+          "family": "extension",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "obfuscated_invalid-0",
+          "family": "obfuscated_invalid",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "obfuscated_invalid-1",
+          "family": "obfuscated_invalid",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "obfuscated_invalid-2",
+          "family": "obfuscated_invalid",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "obfuscated_invalid-3",
+          "family": "obfuscated_invalid",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "obfuscated_invalid-4",
+          "family": "obfuscated_invalid",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "pass"
+        },
+        {
+          "id": "identity_update-0",
+          "family": "identity_update",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "identity_update-1",
+          "family": "identity_update",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "identity_update-2",
+          "family": "identity_update",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "identity_update-3",
+          "family": "identity_update",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        },
+        {
+          "id": "identity_update-4",
+          "family": "identity_update",
+          "expected_decision": "block",
+          "dangerous": true,
+          "expected_changed_rows": null,
+          "actual_changed_rows": null,
+          "label_scope": "author policy proxy, NOT independently labelled danger",
+          "prediction": "need_approval"
+        }
+      ]
+    },
+    "pure_llm": {
+      "status": "BLOCKED_EXTERNAL",
+      "metrics": {
+        "n": 0,
+        "confusion": {},
+        "exact_policy_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_exact": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_mae": null,
+        "zero_impact_cases": 0,
+        "authored_policy_gating_recall": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "authored_policy_gating_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "authored_pass_extra_gating_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "independent_semantic_risk_metrics": null
+      },
+      "family_strata": {},
+      "rows": []
+    },
+    "hybrid_no_preview": {
+      "status": "BLOCKED_EXTERNAL",
+      "metrics": {
+        "n": 0,
+        "confusion": {},
+        "exact_policy_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_exact": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_mae": null,
+        "zero_impact_cases": 0,
+        "authored_policy_gating_recall": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "authored_policy_gating_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "authored_pass_extra_gating_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "independent_semantic_risk_metrics": null
+      },
+      "family_strata": {},
+      "rows": []
+    },
+    "hybrid_with_preview": {
+      "status": "BLOCKED_EXTERNAL",
+      "metrics": {
+        "n": 0,
+        "confusion": {},
+        "exact_policy_accuracy": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_exact": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "impact_mae": null,
+        "zero_impact_cases": 0,
+        "authored_policy_gating_recall": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "authored_policy_gating_precision": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "authored_pass_extra_gating_rate": {
+          "numerator": 0,
+          "denominator": 0,
+          "value": null
+        },
+        "independent_semantic_risk_metrics": null
+      },
+      "family_strata": {},
+      "rows": []
+    }
+  },
+  "limitations": [
+    "Original synthetic corpus is unchanged and has no independent human danger gold.",
+    "The pure model arm measures advice only; it cannot execute or bypass the production gate.",
+    "Live model arms require AIRLOCK-only configuration, key and explicit budget authorization."
+  ]
+}

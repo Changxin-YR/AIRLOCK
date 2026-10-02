@@ -1,0 +1,9 @@
+{
+  "core_sha": "266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4",
+  "final_code_sha": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
+  "actual_changed_files": [
+    "airlock/static/governance.js",
+    "airlock/static/style.css"
+  ],
+  "method": "git diff --name-only core final; all other tracked paths byte-identical; final-ui rerun and complete Linux CI at final code SHA"
+}

@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/browser_smoke.py",
+    "--output",
+    "evidence/full-audit-20261002/final-ui"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T09:09:18.350809+00:00",
+  "duration_seconds": 9.801,
+  "tested_commit_sha": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
+  "tracked_source_dirty": false
+}

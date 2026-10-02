@@ -1,0 +1,216 @@
+{
+  "commit": "266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4",
+  "github_run_id": null,
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "packages": {
+    "fastapi": "0.142.2",
+    "starlette": "1.7.0",
+    "pydantic": "2.13.5",
+    "uvicorn": "0.48.0",
+    "httpx": "0.28.1",
+    "pytest": "9.0.2",
+    "playwright": "1.57.0",
+    "mcp": "1.26.0",
+    "anyio": "4.15.1",
+    "cel-python": "0.4.0",
+    "PyYAML": "6.0.3",
+    "pip-audit": "2.10.1"
+  },
+  "files": {
+    "ablation.json": {
+      "bytes": 49348,
+      "sha256": "b525ea4b7a4182f12b2b59d2d92f3f0b8b1adbba3585d37150038598fb591c5e"
+    },
+    "ablation.log": {
+      "bytes": 800,
+      "sha256": "bfa7071baeef72f4fcbb1d582ca432b15ebdfac06c90a9b6d222e5e1ec8c9032"
+    },
+    "ablation.log.status.json": {
+      "bytes": 449,
+      "sha256": "f47581fe18e555c110317b6e0847b9eca0481df75c3af5d7a1c3298f7f2c8ad9"
+    },
+    "benchmark-dev.json": {
+      "bytes": 41045,
+      "sha256": "3ff9d10dd3a2eb8aaeeea3f3763e75a23cab0de9b60caf5eea541d5e21d92660"
+    },
+    "benchmark-dev.log": {
+      "bytes": 1946,
+      "sha256": "5504de8f2144a18cf5e0f235320cc234e58d8d5d965e2c7dc5e36142e26fc5f2"
+    },
+    "benchmark-dev.log.status.json": {
+      "bytes": 470,
+      "sha256": "239496f67308d32f0acbec71545ceaeba85799a0465e0a596bb1b2b62ab9dbf6"
+    },
+    "benchmark-generate.log": {
+      "bytes": 234,
+      "sha256": "5666c42818093bcb2c9eb98448a54c90e7b469c8ec724f5eb3df1d35a8c6fa53"
+    },
+    "benchmark-generate.log.status.json": {
+      "bytes": 343,
+      "sha256": "c0d4fd2f1dd5b593d827465379ce8c00754cbd0c2361f065ff0c2885ff2d1714"
+    },
+    "benchmark-test.json": {
+      "bytes": 27646,
+      "sha256": "509cdea8c687277befd9435355001f70e890617615f9e7334c3c117e1a9918d8"
+    },
+    "benchmark-test.log": {
+      "bytes": 1853,
+      "sha256": "c353caa6e53af1b77cdbe60a6b47513900830ea536117af31019aa52af11a743"
+    },
+    "benchmark-test.log.status.json": {
+      "bytes": 455,
+      "sha256": "c45a6f376b589732082a457b486dd8433a0fb1cd47e845a43d5db204df72230d"
+    },
+    "browser-native.log": {
+      "bytes": 843,
+      "sha256": "db24cd63f64ffa25bee0b8f72e25d4686a0ab658efdcfed9623df6604a368f92"
+    },
+    "browser-native.log.status.json": {
+      "bytes": 400,
+      "sha256": "fc62f43019388d2299b2792b6e52acd4b0a9da202883abc3b87458273af74c8e"
+    },
+    "browser-report.json": {
+      "bytes": 843,
+      "sha256": "db24cd63f64ffa25bee0b8f72e25d4686a0ab658efdcfed9623df6604a368f92"
+    },
+    "commit.txt": {
+      "bytes": 42,
+      "sha256": "2fb9dc799f894d8023948313c1b8e6f2fbe3af2ffec0f97d5210c9c7105be665"
+    },
+    "comparison.json": {
+      "bytes": 2451,
+      "sha256": "f755e6f641140ec09938b1226fe3618582302e0c65a1ace938adc4090d4c704d"
+    },
+    "comparison.log": {
+      "bytes": 2451,
+      "sha256": "f755e6f641140ec09938b1226fe3618582302e0c65a1ace938adc4090d4c704d"
+    },
+    "comparison.log.status.json": {
+      "bytes": 419,
+      "sha256": "f1a5cf92c900fbe9d004ca3db070bcf1ffcee2f498d6e51bbc2a581a80832fd4"
+    },
+    "console-desktop.png": {
+      "bytes": 123500,
+      "sha256": "5770ba155bad5252669659680260916d6a6ae99e75bfe96f1fcc3070fa9c9ce2"
+    },
+    "console-groups.png": {
+      "bytes": 109623,
+      "sha256": "3bf1a80d7aea8dd54e4966a8c1eaf1659b4d41959e647048d8b872c6305f87fc"
+    },
+    "console-metrics.png": {
+      "bytes": 106156,
+      "sha256": "d351c9380a3157696bb8a6cfd61f1bb5fbe1290693ffb7599e8788e8af24c022"
+    },
+    "console-mobile.png": {
+      "bytes": 97793,
+      "sha256": "45688269b0f12f663718b7ffbecc0df13846df74972fd6ca4adfc4928f8e24f0"
+    },
+    "dependency-audit.json": {
+      "bytes": 1513,
+      "sha256": "547ad7b211a0beff00d66fccf13e2dab34ccb83e3057c599b36b20c30d22650b"
+    },
+    "dependency-audit.log": {
+      "bytes": 32,
+      "sha256": "4e4757ff226a44b5c448b1c4624619419c22d5272463dc19510b4754871a72f9"
+    },
+    "dependency-audit.log.status.json": {
+      "bytes": 486,
+      "sha256": "e5c030c9dd8b9f94391507a1f9703e592f57248ac72e3cdf49df486def949696"
+    },
+    "docker-build.log": {
+      "bytes": 4723,
+      "sha256": "15450a4389aa882d6bdf0ea0a23f416965657f9a8c93c4c69ff7019f9d9b368d"
+    },
+    "docker-smoke.log": {
+      "bytes": 593,
+      "sha256": "2411c5528963bf7f232c3ab05bdc9dfbc7abd0d83fb219f00bb4125ba3956ac3"
+    },
+    "docker-smoke.log.status.json": {
+      "bytes": 400,
+      "sha256": "ab9016c648d2fa69639cfb3ac63bd22aca560445d510d87742d759e638d4998b"
+    },
+    "evidence-gate.log": {
+      "bytes": 561,
+      "sha256": "8fba441529b3fe8126b72d9069b9ac2cba8f30384b2f0cc2e8fc467140fbd9ee"
+    },
+    "evidence-gate.log.status.json": {
+      "bytes": 405,
+      "sha256": "64018588f880fc56d87ac6aa5338f93059b67c24f7ef3b1c20a0b4e778fbdd02"
+    },
+    "frontend-check.log": {
+      "bytes": 278,
+      "sha256": "ebfe84c76eec7b92d5040cd481ea52f08d7c3591aa000711da74be16d4cc9c7c"
+    },
+    "frontend-check.log.status.json": {
+      "bytes": 276,
+      "sha256": "ce570e008ead8942ce78c756e12da5beaaa74f84818844883ddb04d5e197da38"
+    },
+    "frontend-tests.log": {
+      "bytes": 557,
+      "sha256": "4de65c29ac52a8fd238578e9112e2346632e48c27cb92a26fc3043402f51fd23"
+    },
+    "frontend-tests.log.status.json": {
+      "bytes": 263,
+      "sha256": "215ab948e0d90f071b59527e9a863077177aafc14f882ef512658f361905c6f1"
+    },
+    "latency.json": {
+      "bytes": 25417,
+      "sha256": "97b08f4e8a1497d3f9fa5308641203e986f5b52adeeb2fb9cae92e7240c9f6f0"
+    },
+    "latency.log": {
+      "bytes": 1942,
+      "sha256": "08f9cf06757f072bccf528b6887e14320587a51fd4eb31240a4c32687f671ca9"
+    },
+    "latency.log.status.json": {
+      "bytes": 445,
+      "sha256": "c655c8febdbab95ea20f885b9ec9344062220c467aa727645351ac3a2d221487"
+    },
+    "manifest.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pytest.log": {
+      "bytes": 747,
+      "sha256": "bc12b749a4ad7ae082af612f4c8b134feb744e7f65ae5e659711b7ce0f70ff21"
+    },
+    "pytest.log.status.json": {
+      "bytes": 430,
+      "sha256": "139c34bd8699bce61334670cd1df8a37dc179517f21920fc7d6223e9fd8489b0"
+    },
+    "pytest.xml": {
+      "bytes": 17682,
+      "sha256": "ac173573a9ec3ae3601851c3882c95ce1bc4f902f40fb64e2b119bc38b060d41"
+    },
+    "study-analysis.json": {
+      "bytes": 957,
+      "sha256": "bd69ffb2aff2ddd4058d3377b374fde5810cad348db239a8f269503d172e8cf9"
+    },
+    "study-analysis.log": {
+      "bytes": 957,
+      "sha256": "bd69ffb2aff2ddd4058d3377b374fde5810cad348db239a8f269503d172e8cf9"
+    },
+    "study-analysis.log.status.json": {
+      "bytes": 508,
+      "sha256": "4d691c89a015631934dc4823715e85eeab9bc6549381550e36f3f94d54176f42"
+    },
+    "study-automation.json": {
+      "bytes": 1139,
+      "sha256": "56f65b35ed7d8eba7acf5c894f24d7ae97021e9b90bd3fccb97e689843f4b4d3"
+    },
+    "study-example.png": {
+      "bytes": 19310,
+      "sha256": "34966ebe94bf6733998110e166636e6b2670d392a0bc167c986b8a4e94b8d743"
+    },
+    "synthetic-cases.jsonl": {
+      "bytes": 75304,
+      "sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7"
+    }
+  },
+  "not_claimed": [
+    "live LLM validation",
+    "human A/B study",
+    "production security certification"
+  ],
+  "warning": "File existence and hashes are not proof of success. Read exit codes, raw logs and GitHub job results."
+}

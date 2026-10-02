@@ -1,0 +1,10 @@
+{
+  "url": "http://127.0.0.1:61208",
+  "title": "Airlock · 知情审批台",
+  "body": "",
+  "console_errors": [
+    "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"text/plain\". Strict MIME type checking is enforced for module scripts per HTML spec.",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "js_content_type": "text/plain; charset=utf-8"
+}

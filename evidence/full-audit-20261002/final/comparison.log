@@ -1,0 +1,79 @@
+{
+  "scope": "disposable synthetic data; automated independent reviewer fixture; no live model/human",
+  "without_gate": {
+    "before": 1206,
+    "after": 0
+  },
+  "with_gate": {
+    "pending_rows": 1206,
+    "rejected_rows": 1206,
+    "denial": {
+      "id": "1ada9f38a86d49ed9b466a1a3f416ee6",
+      "state": "rejected",
+      "decision": "need_approval",
+      "reason_code": "human_rejected",
+      "result": null,
+      "expires_at": 1790931349.7821383,
+      "action_id": "1ada9f38a86d49ed9b466a1a3f416ee6",
+      "trace_id": "24000b000e3a4cccb5a0cb3512be9f5b",
+      "retryable": false,
+      "allowed_alternatives": [
+        "query_original_action",
+        "bounded_read"
+      ],
+      "execution_occurred": false,
+      "next_step": "Use a bounded SELECT or submit a narrower NEW action; do not retry rejected writes blindly."
+    },
+    "safe_alternative": {
+      "id": "d11ba5cd7830406f958f7f8a64d903d4",
+      "state": "executed",
+      "decision": "pass",
+      "reason_code": "bounded_read",
+      "result": {
+        "matched_rows": 0,
+        "rows": [
+          {
+            "remaining": 1206
+          }
+        ],
+        "truncated": false
+      },
+      "expires_at": 1790931349.8130612,
+      "action_id": "d11ba5cd7830406f958f7f8a64d903d4",
+      "trace_id": "48b9d29da96f47178da7ce141d5251b6",
+      "retryable": false,
+      "allowed_alternatives": [
+        "query_original_action"
+      ],
+      "execution_occurred": true,
+      "next_step": "Read the result."
+    },
+    "approved_rows": 0,
+    "approved_receipt": {
+      "id": "38dde88db10444d6835e72b924777e45",
+      "state": "executed",
+      "decision": "need_approval",
+      "reason_code": "human_approved",
+      "result": {
+        "matched_rows": 1206,
+        "rows": [],
+        "truncated": false
+      },
+      "expires_at": 1790931349.8221526,
+      "action_id": "38dde88db10444d6835e72b924777e45",
+      "trace_id": "518df54f370f44c8b47fe74511681478",
+      "retryable": false,
+      "allowed_alternatives": [
+        "query_original_action"
+      ],
+      "execution_occurred": true,
+      "next_step": "Read the result."
+    }
+  },
+  "audit": {
+    "valid": true,
+    "events": 5,
+    "head": "b3d7952884caafd6b3598340b1d912ed44fb10481326b29c61a4d67295260f00",
+    "limitation": "No external anchor: tail truncation and a compromised server are not detectable."
+  }
+}

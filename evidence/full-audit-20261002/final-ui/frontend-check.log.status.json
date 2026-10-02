@@ -1,0 +1,12 @@
+{
+  "command": [
+    "npm.cmd",
+    "run",
+    "check"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T09:09:16.343631+00:00",
+  "duration_seconds": 0.722,
+  "tested_commit_sha": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
+  "tracked_source_dirty": false
+}

@@ -1,0 +1,11 @@
+{
+  "command": [
+    "git",
+    "status",
+    "--short",
+    "--branch"
+  ],
+  "exit_code": 0,
+  "stdout": "## codex/full-audit-2026-10-02\n?? audit-inputs/\n?? docs/CODEX_FULL_AUDIT_BRIEF.md\n?? docs/acceptance/\n",
+  "stderr": ""
+}

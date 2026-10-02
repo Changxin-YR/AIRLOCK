@@ -1,0 +1,15 @@
+{
+  "record_type": "code_validation_and_delivery_anchor",
+  "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
+  "working_branch": "codex/full-audit-2026-10-02",
+  "tested_commit": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
+  "core_tested_commit": "266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4",
+  "code_push_confirmed": true,
+  "documentation_commit": "Resolve the commit introducing this file; memory/progress records the exact final report/evidence commit after push.",
+  "pr": {"number": 1, "url": "https://github.com/Changxin-YR/AIRLOCK/pull/1", "state": "open", "draft": true, "merged": false},
+  "ci": {"run_id": 36988565652, "job_id": 110779147895, "conclusion": "success", "tested_commit_sha": "b9de71085e9b3027b8127c4da6d7193d8f19ba88"},
+  "negative_control": {"run_id": 36986618577, "job_exit_code": 23, "conclusion": "failure", "intentional": true, "temporary_job_removed": true},
+  "original_goals_all_satisfied": false,
+  "scope": "Bounded SQLite and registered HTTP adapter, offline semantic contracts and real native UI/SDK/CI; not real-model or human-effectiveness acceptance.",
+  "latest_memory_state": "Read memory/progress STATE.json after final synchronization; do not infer its commit from the code branch."
+}

@@ -1,0 +1,197 @@
+﻿2026-10-02T08:53:31.5534063Z Current runner version: '2.337.0'
+2026-10-02T08:53:31.5570873Z ##[group]Runner Image Provisioner
+2026-10-02T08:53:31.5572132Z Hosted Compute Agent
+2026-10-02T08:53:31.5573549Z Version: 20260901.588
+2026-10-02T08:53:31.5574679Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-02T08:53:31.5575996Z Build Date: 2026-09-01T19:56:44Z
+2026-10-02T08:53:31.5577084Z Worker ID: {c8e68527-2a80-48fa-99b1-4cc29d0dc16e}
+2026-10-02T08:53:31.5578515Z Azure Region: eastus
+2026-10-02T08:53:31.5579629Z ##[endgroup]
+2026-10-02T08:53:31.5581828Z ##[group]Operating System
+2026-10-02T08:53:31.5583255Z Ubuntu
+2026-10-02T08:53:31.5584173Z 24.04.5
+2026-10-02T08:53:31.5584993Z LTS
+2026-10-02T08:53:31.5586044Z ##[endgroup]
+2026-10-02T08:53:31.5586987Z ##[group]Runner Image
+2026-10-02T08:53:31.5588098Z Image: ubuntu-24.04
+2026-10-02T08:53:31.5589056Z Version: 20260927.320.1
+2026-10-02T08:53:31.5591177Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-02T08:53:31.5594225Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-02T08:53:31.5595976Z ##[endgroup]
+2026-10-02T08:53:31.5597831Z ##[group]GITHUB_TOKEN Permissions
+2026-10-02T08:53:31.5600840Z Contents: read
+2026-10-02T08:53:31.5601780Z Metadata: read
+2026-10-02T08:53:31.5603084Z ##[endgroup]
+2026-10-02T08:53:31.5606440Z Secret source: Actions
+2026-10-02T08:53:31.5608132Z Cache mode: write
+2026-10-02T08:53:31.5609566Z Prepare workflow directory
+2026-10-02T08:53:31.6202961Z Prepare all required actions
+2026-10-02T08:53:31.6275001Z Getting action download info
+2026-10-02T08:53:31.8449780Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-02T08:53:31.9690259Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-02T08:53:32.0581292Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-02T08:53:32.2677255Z Complete job name: intentional-negative-control
+2026-10-02T08:53:32.3487277Z ##[group]Run actions/checkout@v4
+2026-10-02T08:53:32.3488196Z with:
+2026-10-02T08:53:32.3488690Z   ref: 89c32625a49f7744389efe6284e942eee5a82332
+2026-10-02T08:53:32.3489315Z   repository: Changxin-YR/AIRLOCK
+2026-10-02T08:53:32.3493395Z   token: ***
+2026-10-02T08:53:32.3493853Z   ssh-strict: true
+2026-10-02T08:53:32.3494326Z   ssh-user: git
+2026-10-02T08:53:32.3494825Z   persist-credentials: true
+2026-10-02T08:53:32.3495323Z   clean: true
+2026-10-02T08:53:32.3495784Z   sparse-checkout-cone-mode: true
+2026-10-02T08:53:32.3496334Z   fetch-depth: 1
+2026-10-02T08:53:32.3496779Z   fetch-tags: false
+2026-10-02T08:53:32.3497233Z   show-progress: true
+2026-10-02T08:53:32.3497697Z   lfs: false
+2026-10-02T08:53:32.3498157Z   submodules: false
+2026-10-02T08:53:32.3498625Z   set-safe-directory: true
+2026-10-02T08:53:32.3499147Z   allow-unsafe-pr-checkout: false
+2026-10-02T08:53:32.3499942Z ##[endgroup]
+2026-10-02T08:53:32.4513842Z Syncing repository: Changxin-YR/AIRLOCK
+2026-10-02T08:53:32.4516668Z ##[group]Getting Git version info
+2026-10-02T08:53:32.4517787Z Working directory is '/home/runner/work/AIRLOCK/AIRLOCK'
+2026-10-02T08:53:32.4519392Z [command]/usr/bin/git version
+2026-10-02T08:53:32.4596089Z git version 2.55.0
+2026-10-02T08:53:32.4632109Z ##[endgroup]
+2026-10-02T08:53:32.4641626Z Temporarily overriding HOME='/home/runner/work/_temp/64775bbc-8f78-45ec-a25d-70d8a20f1c83' before making global git config changes
+2026-10-02T08:53:32.4644486Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-02T08:53:32.4646684Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AIRLOCK/AIRLOCK
+2026-10-02T08:53:32.4700437Z Deleting the contents of '/home/runner/work/AIRLOCK/AIRLOCK'
+2026-10-02T08:53:32.4705567Z ##[group]Initializing the repository
+2026-10-02T08:53:32.4709423Z [command]/usr/bin/git init /home/runner/work/AIRLOCK/AIRLOCK
+2026-10-02T08:53:32.4819074Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-02T08:53:32.4821098Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-02T08:53:32.4823378Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-02T08:53:32.4824626Z hint: call:
+2026-10-02T08:53:32.4825291Z hint:
+2026-10-02T08:53:32.4826128Z hint: 	git config --global init.defaultBranch <name>
+2026-10-02T08:53:32.4827119Z hint:
+2026-10-02T08:53:32.4828037Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-02T08:53:32.4829577Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-02T08:53:32.4830836Z hint:
+2026-10-02T08:53:32.4831530Z hint: 	git branch -m <name>
+2026-10-02T08:53:32.4832327Z hint:
+2026-10-02T08:53:32.4833576Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-02T08:53:32.4835250Z Initialized empty Git repository in /home/runner/work/AIRLOCK/AIRLOCK/.git/
+2026-10-02T08:53:32.4848063Z [command]/usr/bin/git remote add origin https://github.com/Changxin-YR/AIRLOCK
+2026-10-02T08:53:32.4891060Z ##[endgroup]
+2026-10-02T08:53:32.4892411Z ##[group]Disabling automatic garbage collection
+2026-10-02T08:53:32.4894868Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-02T08:53:32.4929269Z ##[endgroup]
+2026-10-02T08:53:32.4930483Z ##[group]Setting up auth
+2026-10-02T08:53:32.4937102Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-02T08:53:32.4971422Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-02T08:53:32.5365319Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-02T08:53:32.5413848Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-02T08:53:32.5681750Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-02T08:53:32.5722808Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-02T08:53:32.5982059Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-02T08:53:32.6028276Z ##[endgroup]
+2026-10-02T08:53:32.6030025Z ##[group]Fetching the repository
+2026-10-02T08:53:32.6043201Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 89c32625a49f7744389efe6284e942eee5a82332
+2026-10-02T08:53:32.8577812Z From https://github.com/Changxin-YR/AIRLOCK
+2026-10-02T08:53:32.8581728Z  * branch            89c32625a49f7744389efe6284e942eee5a82332 -> FETCH_HEAD
+2026-10-02T08:53:32.8585094Z ##[endgroup]
+2026-10-02T08:53:32.8586570Z ##[group]Determining the checkout info
+2026-10-02T08:53:32.8588273Z ##[endgroup]
+2026-10-02T08:53:32.8594021Z [command]/usr/bin/git sparse-checkout disable
+2026-10-02T08:53:32.8651868Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-02T08:53:32.8751109Z ##[group]Checking out the ref
+2026-10-02T08:53:32.8753133Z [command]/usr/bin/git checkout --progress --force 89c32625a49f7744389efe6284e942eee5a82332
+2026-10-02T08:53:32.8819100Z Note: switching to '89c32625a49f7744389efe6284e942eee5a82332'.
+2026-10-02T08:53:32.8820457Z 
+2026-10-02T08:53:32.8821658Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-02T08:53:32.8824368Z changes and commit them, and you can discard any commits you make in this
+2026-10-02T08:53:32.8826650Z state without impacting any branches by switching back to a branch.
+2026-10-02T08:53:32.8833914Z 
+2026-10-02T08:53:32.8834825Z If you want to create a new branch to retain commits you create, you may
+2026-10-02T08:53:32.8836865Z do so (now or later) by using -c with the switch command. Example:
+2026-10-02T08:53:32.8838419Z 
+2026-10-02T08:53:32.8839003Z   git switch -c <new-branch-name>
+2026-10-02T08:53:32.8839808Z 
+2026-10-02T08:53:32.8840382Z Or undo this operation with:
+2026-10-02T08:53:32.8841178Z 
+2026-10-02T08:53:32.8841794Z   git switch -
+2026-10-02T08:53:32.8842944Z 
+2026-10-02T08:53:32.8843874Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-02T08:53:32.8845324Z 
+2026-10-02T08:53:32.8846349Z HEAD is now at 89c3262 test: prove CI rejects an intentional child exit 23
+2026-10-02T08:53:32.8850682Z ##[endgroup]
+2026-10-02T08:53:32.8878915Z [command]/usr/bin/git log -1 --format=%H
+2026-10-02T08:53:32.8911585Z 89c32625a49f7744389efe6284e942eee5a82332
+2026-10-02T08:53:32.9339851Z ##[group]Run actions/setup-python@v5
+2026-10-02T08:53:32.9341019Z with:
+2026-10-02T08:53:32.9341799Z   python-version: 3.13
+2026-10-02T08:53:32.9342971Z   check-latest: false
+2026-10-02T08:53:32.9353190Z   token: ***
+2026-10-02T08:53:32.9354061Z   update-environment: true
+2026-10-02T08:53:32.9355076Z   allow-prereleases: false
+2026-10-02T08:53:32.9356045Z   freethreaded: false
+2026-10-02T08:53:32.9356898Z ##[endgroup]
+2026-10-02T08:53:33.0719889Z ##[group]Installed versions
+2026-10-02T08:53:33.0817367Z (node:2310) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T08:53:33.0821328Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T08:53:33.0824459Z Successfully set up CPython (3.13.15)
+2026-10-02T08:53:33.0827375Z ##[endgroup]
+2026-10-02T08:53:33.1033277Z ##[group]Run python scripts/run_logged.py evidence/negative-control.log -- python -c "raise SystemExit(23)"
+2026-10-02T08:53:33.1036297Z [36;1mpython scripts/run_logged.py evidence/negative-control.log -- python -c "raise SystemExit(23)"[0m
+2026-10-02T08:53:33.1355448Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T08:53:33.1356833Z env:
+2026-10-02T08:53:33.1357875Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.1360053Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T08:53:33.1361793Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.1363550Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.1365121Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.1366682Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T08:53:33.1367966Z ##[endgroup]
+2026-10-02T08:53:33.2673176Z ##[error]Process completed with exit code 23.
+2026-10-02T08:53:33.2825794Z ##[group]Run actions/upload-artifact@v4
+2026-10-02T08:53:33.2826913Z with:
+2026-10-02T08:53:33.2827670Z   name: intentional-negative-control
+2026-10-02T08:53:33.2828748Z   path: evidence/negative-control.log*
+2026-10-02T08:53:33.2829779Z   retention-days: 90
+2026-10-02T08:53:33.2830605Z   if-no-files-found: warn
+2026-10-02T08:53:33.2831475Z   compression-level: 6
+2026-10-02T08:53:33.2832319Z   overwrite: false
+2026-10-02T08:53:33.2833383Z   include-hidden-files: false
+2026-10-02T08:53:33.2834272Z env:
+2026-10-02T08:53:33.2835185Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.2836781Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T08:53:33.2838389Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.2839834Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.2841286Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T08:53:33.2843078Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T08:53:33.2844330Z ##[endgroup]
+2026-10-02T08:53:33.4714135Z (node:2323) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T08:53:33.4715984Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T08:53:33.4782193Z With the provided path, there will be 2 files uploaded
+2026-10-02T08:53:33.4784859Z Artifact name is valid!
+2026-10-02T08:53:33.4785512Z Root directory input is valid!
+2026-10-02T08:53:33.6677628Z Beginning upload of artifact content to blob storage
+2026-10-02T08:53:33.6882833Z (node:2323) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T08:53:33.7296649Z Uploaded bytes 520
+2026-10-02T08:53:33.7473603Z Finished uploading artifact content to blob storage!
+2026-10-02T08:53:33.7476491Z SHA256 digest of uploaded artifact zip is 6c72bdc26ee4da7714356d753ae9a4d7045719ccd279a3ad6064342d5db16229
+2026-10-02T08:53:33.7479710Z Finalizing artifact upload
+2026-10-02T08:53:33.9732480Z Artifact intentional-negative-control.zip successfully finalized. Artifact ID 11218125469
+2026-10-02T08:53:33.9736436Z Artifact intentional-negative-control has been successfully uploaded! Final size is 520 bytes. Artifact ID is 11218125469
+2026-10-02T08:53:33.9741048Z Artifact download URL: https://github.com/Changxin-YR/AIRLOCK/actions/runs/36986618577/artifacts/11218125469
+2026-10-02T08:53:34.0031963Z Post job cleanup.
+2026-10-02T08:53:34.0928966Z [command]/usr/bin/git version
+2026-10-02T08:53:34.1005018Z git version 2.55.0
+2026-10-02T08:53:34.1050301Z Temporarily overriding HOME='/home/runner/work/_temp/dea70bdc-5277-427d-93ed-d9ab85a2718a' before making global git config changes
+2026-10-02T08:53:34.1053464Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-02T08:53:34.1055183Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AIRLOCK/AIRLOCK
+2026-10-02T08:53:34.1104542Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-02T08:53:34.1151759Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-02T08:53:34.1428597Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-02T08:53:34.1467142Z http.https://github.com/.extraheader
+2026-10-02T08:53:34.1481181Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-02T08:53:34.1530475Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-02T08:53:34.1845771Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-02T08:53:34.1888985Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-02T08:53:34.2312973Z Cleaning up orphan processes
+2026-10-02T08:53:34.2683872Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+

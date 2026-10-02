@@ -1,0 +1,9 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "audit-inputs/probe_browser.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T07:29:00.331216+00:00",
+  "duration_seconds": 4.39
+}

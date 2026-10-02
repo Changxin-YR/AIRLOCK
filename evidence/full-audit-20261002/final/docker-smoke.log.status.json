@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Users\\27363\\Desktop\\airlock\\.venv\\Scripts\\python.exe",
+    "scripts/docker_smoke.py",
+    "--output",
+    "evidence\\full-audit-20261002\\final"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-02T08:50:49.967432+00:00",
+  "duration_seconds": 26.392,
+  "tested_commit_sha": "266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4",
+  "tracked_source_dirty": false
+}

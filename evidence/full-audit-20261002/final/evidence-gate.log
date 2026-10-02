@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\verify_evidence.py", line 110, in <module>
+    verify(args.directory)
+    ~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\scripts\verify_evidence.py", line 77, in verify
+    require(status['exit_code']==0, name+': failed command')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\scripts\verify_evidence.py", line 30, in require
+    raise ValueError(message)
+ValueError: docker-smoke.log: failed command

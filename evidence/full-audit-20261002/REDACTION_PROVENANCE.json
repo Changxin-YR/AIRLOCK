@@ -1,0 +1,33 @@
+{
+  "entries": [
+    {
+      "original_local_only": "audit-inputs/original-pytest.log",
+      "original": {
+        "bytes": 4821,
+        "sha256": "6d297cf9bc8ba5f356af58980b3a090f7c684251630473500f1348dbfa51af3b"
+      },
+      "published_path": "evidence/full-audit-20261002/baseline/pytest.log",
+      "published": {
+        "bytes": 4809,
+        "sha256": "5c0854f92f5f612834501c061618f27b781d05a8e2c2ccea365e97c7d57230e1"
+      },
+      "redaction_markers": 1,
+      "reason": "temporary synthetic test credential in original traceback; no exit code/result modification"
+    },
+    {
+      "original_local_only": "audit-inputs/original-pytest.xml",
+      "original": {
+        "bytes": 16240,
+        "sha256": "0c70869808b230dc7688b430c5f39d1f3218a705d305707bb3f4948aaf0aea58"
+      },
+      "published_path": "evidence/full-audit-20261002/baseline/pytest.xml",
+      "published": {
+        "bytes": 16228,
+        "sha256": "11c354ed4c7410a0300ac34451b3589f11a0388b158f538fa820bb4d993a5cbd"
+      },
+      "redaction_markers": 1,
+      "reason": "temporary synthetic test credential in original traceback; no exit code/result modification"
+    }
+  ],
+  "original_retention": "local ignored files only, no permanent retention guarantee"
+}

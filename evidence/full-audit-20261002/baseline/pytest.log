@@ -1,0 +1,70 @@
+........................................................................ [ 81%]
+...F............                                                         [100%]
+================================== FAILURES ===================================
+________ test_real_stdio_to_real_http_and_resume_after_human_approval _________
+
+    def test_real_stdio_to_real_http_and_resume_after_human_approval():
+        with server() as (url,keys,client):
+>           rows=exchange(url,keys['AIRLOCK_AGENT_TOKEN'],init()+[
+                rpc('tools/list',2),rpc('tools/call',3,name='sql_execute',arguments={'sql':'DELETE FROM customers WHERE id=1','idempotency_key':'live-stdio-001'})])
+
+tests\test_live_transport.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+url = 'http://127.0.0.1:64372'
+token = '[REDACTED_EPHEMERAL_TEST_TOKEN]'
+messages = [{'id': 1, 'jsonrpc': '2.0', 'method': 'initialize', 'params': {'capabilities': {}, 'clientInfo': {'name': 'independen...'arguments': {'idempotency_key': 'live-stdio-001', 'sql': 'DELETE FROM customers WHERE id=1'}, 'name': 'sql_execute'}}]
+
+    def exchange(url,token,messages):
+        env={'PATH':os.environ.get('PATH',''),'PYTHONPATH':os.getcwd(),'AIRLOCK_URL':url,'AIRLOCK_AGENT_TOKEN':token}
+        result=subprocess.run([sys.executable,'-m','airlock.mcp'],input=''.join(json.dumps(m)+'\n' for m in messages),
+                              text=True,capture_output=True,env=env,timeout=15)
+>       assert result.returncode==0,result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<frozen runpy>", line 203, in _run_module_as_main
+E           File "<frozen runpy>", line 88, in _run_code
+E           File "C:\Users\27363\Desktop\airlock\airlock\mcp.py", line 120, in <module>
+E             main()
+E             ~~~~^^
+E           File "C:\Users\27363\Desktop\airlock\airlock\mcp.py", line 102, in main
+E             with httpx.Client(base_url=url, timeout=10, trust_env=False, follow_redirects=False) as client:
+E                  ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\httpx\_client.py", line 688, in __init__
+E             self._transport = self._init_transport(
+E                               ~~~~~~~~~~~~~~~~~~~~^
+E                 verify=verify,
+E                 ^^^^^^^^^^^^^^
+E             ...<5 lines>...
+E                 transport=transport,
+E                 ^^^^^^^^^^^^^^^^^^^^
+E             )
+E             ^
+E           File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\httpx\_client.py", line 731, in _init_transport
+E             return HTTPTransport(
+E                 verify=verify,
+E             ...<4 lines>...
+E                 limits=limits,
+E             )
+E           File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\httpx\_transports\default.py", line 153, in __init__
+E             ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)
+E           File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\httpx\_config.py", line 40, in create_ssl_context
+E             ctx = ssl.create_default_context(cafile=certifi.where())
+E           File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\ssl.py", line 698, in create_default_context
+E             context = SSLContext(PROTOCOL_TLS_CLIENT)
+E           File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\ssl.py", line 438, in __new__
+E             self = _SSLContext.__new__(cls, protocol)
+E         ssl.SSLError: [SSL] unknown error (_ssl.c:3138)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\Users\\27363\\Desktop\\airlock\\.venv\\Scripts\\python.exe', '-m', 'airlock.mcp'], returnc...ine 438, in __new__\n    self = _SSLContext.__new__(cls, protocol)\nssl.SSLError: [SSL] unknown error (_ssl.c:3138)\n').returncode
+
+tests\test_live_transport.py:19: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\starlette\testclient.py:45
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\starlette\testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_live_transport.py::test_real_stdio_to_real_http_and_resume_after_human_approval
+1 failed, 87 passed, 1 warning in 13.48s

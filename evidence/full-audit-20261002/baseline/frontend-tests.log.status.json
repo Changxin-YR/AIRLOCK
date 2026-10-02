@@ -1,0 +1,9 @@
+{
+  "command": [
+    "npm.cmd",
+    "test"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T07:24:43.534318+00:00",
+  "duration_seconds": 0.625
+}

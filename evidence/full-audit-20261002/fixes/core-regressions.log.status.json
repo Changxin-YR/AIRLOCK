@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_audit_regressions.py",
+    "tests/test_live_transport.py",
+    "--junitxml=evidence/full-audit-20261002/fixes/core-regressions.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T07:30:05.854152+00:00",
+  "duration_seconds": 9.667
+}
