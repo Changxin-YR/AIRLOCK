@@ -1,3 +1,17 @@
+# AIRLOCK 最新闭环状态：25d4f52已推送，最终CI待结束
+
+2026-10-02。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支 codex/full-audit-2026-10-02 已推送25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb，PR #1未合并。
+
+cc9d687完整Linux CI37024249256成功：216 Python/6 JS/23 browser、真实受保护上游网络、固定官方源码构建S3、研究/证据门禁。完整ZIP已下载校验78载荷，SHA256 e7b48439c920447e6ce121676a57191bb6272fb1cbf2c523c94f431f841329bc，存本机待提交 evidence/closure-20261002/ci/acceptance-cc9d687.zip。
+
+最终身份反例又发现SSE热映射后仍使用旧通知范围的P1（无批准/业务写越权）。25d4f52修复为当前身份必须等于连接身份；旧Git模块重放复现467字节动作通知，修复后0字节，目标均1206行。14项相关测试通过。最新全CI37026082667在跑，预计217项；不能把旧216项CI当作新修复完整证明。
+
+真实模型新增4调用全部有效，累计642、626有效/16历史无效，保守预算占用¥1.1211824/¥3，同一ledger。没有真人，保持n=0/κ=null/真实数据受阻。源码、归档、运维、研究工具与来源补核已完成；最终126矩阵草稿111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL，需在最终CI证据到位后重新生成校验并提交。
+
+工作区有尚未提交的 docs 与 evidence/closure-20261002；不得清空。需要继续：等待新CI、下载hash核验、更新最终SHA/矩阵/报告/保留期、提交推送、更新草稿PR、最后同步本memory。两次失败CI日志已保留（旧镜像不可拉取、只读启动探测ConnectionClosedError）。
+
+<details><summary>上一进度检查点</summary>
+
 # AIRLOCK 本轮闭环进展：新代码已推送，最终 CI 与矩阵复验进行中
 
 2026-10-02。实际 main 仍为 704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支 codex/full-audit-2026-10-02 已推送 c3dd6ad9de5e0be6be57eb3809300f2b2ea7c088；PR #1 未合并。
@@ -161,6 +175,8 @@ README.md；AGENTS.md；CODEX_REVIEW.md；LICENSE；docs/PLAN.md、SPEC.md、THR
 ## 接续唯一优先动作
 
 让Codex从CODEX_REVIEW.md开展独立复核，首先核对main SHA、原始命令退出码、必需JUnit和真实产物；构造新的反例，不能删测试/降断言来变绿。若发现真实P0/P1，最小复现、定点修复、增加回归、全套重跑，再更新本分支。没有新需求或证据，不再从零重建，也不把这份记忆当验收事实。
+
+</details>
 
 </details>
 
