@@ -15,6 +15,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Snapshot source
         run: |
           mkdir -p evidence
@@ -37,6 +39,11 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - run: python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py
       - run: python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
+      - run: python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements.txt --format json --output evidence/dependency-audit.json
+      - run: python scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json
+      - run: python scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json
+      - run: python scripts/run_logged.py evidence/study-analysis.log -- python -m benchmark.research --output evidence/study-analysis.json study evidence/study-automation.json
+      - run: python scripts/run_logged.py evidence/comparison.log -- python scripts/demo_comparison.py --output evidence/comparison.json
       - run: python scripts/verify_evidence.py
       - name: Inventory evidence
         if: always()
@@ -46,3 +53,4 @@ jobs:
         with:
           name: acceptance-evidence
           path: evidence/
+          retention-days: 90

@@ -33,6 +33,10 @@ def run_logged(log: Path, command: list[str]) -> int:
         finally:
             status = {'command': command, 'exit_code': exit_code, 'started_at_utc': started,
                       'duration_seconds': round(time.monotonic() - clock, 3)}
+            commit=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True)
+            status['tested_commit_sha']=commit.stdout.strip() if commit.returncode==0 else None
+            dirty=subprocess.run(['git','diff','--quiet','HEAD','--','airlock','benchmark','scripts','tests','tests-js','requirements.txt','requirements-dev.txt','pyproject.toml','package.json','.github'],capture_output=True)
+            status['tracked_source_dirty']=dirty.returncode!=0
             log.with_suffix(log.suffix + '.status.json').write_text(json.dumps(status, indent=2) + '\n')
     return exit_code
 

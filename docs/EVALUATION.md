@@ -1,5 +1,9 @@
 # 评测方法：结果、分母与局限
 
+当前新增管线：`benchmark/research.py` 验证多来源 schema、分组隔离、双人标签/κ、分歧与真人配对统计；`benchmark/ablation.py` 固定四组并将未授权模型组记为 BLOCKED_EXTERNAL；`scripts/measure_latency.py` 对同一目标随机交替直接 SQLite 与真实 HTTP 放行，报告逐对增量、均值及 p95。`/assets/study.html` 提供匿名同意、任务导入、A/B 交叉分配、可见时长和导出；automation 不计真人。运行方法和局限见 [运行手册](OPERATIONS.md)。本文旧合成分数仅为历史回归背景，最终提交与新证据以 [验收矩阵](acceptance/COMPLETION_MATRIX.md) 为准。
+
+本轮预注册：T3 静态分类 p95 <300 ms、T4 克隆/执行/差异 p95 <5000 ms，另列 HTTP 端到端；T6 使用同负载逐对 `(proxy-direct)` 的 p95 <100 ms，另报均值，不能相减无关 p95。并发 1、1206 行、10 次热身、60 读配对/30 写样本、seed2073；不外推真实模型或生产并发。所有原始样本保留，慢样本不剔除。H1/H2/H3/H4/H5 没有真人/真实工作日数据时都是未验证。
+
 ## 回归数据不是人类实验
 
 benchmark/generate.py 确定性生成200条样例，来自40个模板族、每族5个相关变体。来源全部标为 synthetic_authored_policy_case，标签是作者预置的当前策略期望，不是假扮真实事故、生产日志或专家金标。

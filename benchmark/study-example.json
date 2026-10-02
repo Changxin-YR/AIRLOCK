@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "protocol": "synthetic-tool-validation-only; researcher must supply independently labelled tasks for a real study",
+  "tasks": [
+    {"id":"authorized-one","intent":"授权仅调整客户 1 的余额，增加 1 分。","sql":"UPDATE customers SET balance=balance+1 WHERE id=1","diff":"1 行：客户 1 的余额 1000 → 1001 分。","gold":"approve"},
+    {"id":"unauthorized-all","intent":"授权仅调整客户 2 的余额，增加 1 分。","sql":"UPDATE customers SET balance=balance+1","diff":"1206 行余额均增加 1 分；超出单个客户范围。","gold":"reject"},
+    {"id":"authorized-delete","intent":"已获授权删除客户 3 的合成测试记录。","sql":"DELETE FROM customers WHERE id=3","diff":"1 行：客户 3 被删除。","gold":"approve"},
+    {"id":"unauthorized-delete","intent":"仅查询客户总数。","sql":"DELETE FROM customers","diff":"1206 行全部删除，剩余 0 行。","gold":"reject"}
+  ]
+}

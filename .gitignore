@@ -16,3 +16,6 @@ benchmark/cases.jsonl
 evidence/*.png
 evidence/*.zip
 .firecrawl/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

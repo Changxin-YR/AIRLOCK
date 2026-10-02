@@ -1,14 +1,16 @@
 import {el, number, short, date, states, countdown, ReviewClock, duration} from './lib.js';
 import {Api} from './api.js';
 import {reviewPanel} from './review.js';
+import {groupsPanel,metricsPanel} from './governance.js';
 
 const root=document.querySelector('#app');
 let api=null, eventController=null, generation=0, refreshTimer=null, observing=null;
 const state={actions:[], metrics:null, selected:null, view:'pending', filter:'', error:'', busy:false, loading:false, audit:[], auditCursor:0, verification:null, next:null,connection:'已登录'};
-const drafts=new Map(), clocks=new Map();
+const drafts=new Map(), clocks=new Map(), groupDrafts=new Map();
+state.groups=[];
 function draft(id) { if(!drafts.has(id)) drafts.set(id,{reason:'',confirmation:'',checked:false}); return drafts.get(id); }
 function clock(id) { if(!clocks.has(id)) clocks.set(id,new ReviewClock()); return clocks.get(id); }
-function setActiveClock() { for(const [id,c] of clocks) c.active(id===state.selected && state.view!=='audit' && !document.hidden); }
+function setActiveClock() { for(const [id,c] of clocks) c.active(id===state.selected && ['pending','all'].includes(state.view) && !document.hidden); }
 document.addEventListener('visibilitychange', setActiveClock);
 function selected() { return state.actions.find(a=>a.id===state.selected); }
 function select(id) { state.selected=id; setActiveClock(); render(); }
@@ -16,7 +18,7 @@ function status(text) { state.connection=text; const element=document.querySelec
 function logout() {
   generation++; eventController?.abort(); clearTimeout(refreshTimer); observing?.disconnect(); api=null;
   for(const c of clocks.values()) c.active(false);
-  clocks.clear(); drafts.clear();
+  clocks.clear(); drafts.clear(); groupDrafts.clear(); state.groups=[];
   Object.assign(state,{actions:[],metrics:null,selected:null,error:'',busy:false,loading:false,audit:[],auditCursor:0,verification:null,next:null,view:'pending',filter:'',connection:'已登录'});
   login();
 }
@@ -30,7 +32,7 @@ function login(message='') {
       const candidate=new Api(input.value.trim());
       try {
         const me=await candidate.request('/v1/me');
-        if(me.principal!=='reviewer:owner') throw new Error('此处仅接受审批人凭据，不能使用 Agent 凭据。');
+        if(me.role!=='reviewer') throw new Error('此处仅接受审批人凭据，不能使用 Agent 凭据。');
         input.value=''; api=candidate; await refresh();
         eventController=new AbortController();
         void api.events(eventController.signal,()=>{clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>void refresh(),180);},status);
@@ -49,11 +51,11 @@ async function refresh(loadMore=false) {
   try {
     let path='/v1/actions?limit=100'+(requestedView==='pending'?'&state=pending':'');
     if(loadMore && state.next) path+=`&before=${state.next.before}&before_id=${state.next.before_id}`;
-    const [list,metrics]=await Promise.all([current.request(path),current.request('/v1/metrics')]);
+    const [list,metrics,groups]=await Promise.all([current.request(path),current.request('/v1/metrics'),current.request('/v1/groups')]);
     if(current!==api || generation!==run || requestedView!==state.view) return;
     const keep=state.selected;
     const merged=loadMore ? [...state.actions,...list.items] : list.items;
-    state.actions=Array.from(new Map(merged.map(a=>[a.id,a])).values()); state.metrics=metrics; state.next=list.next_cursor;
+    state.actions=Array.from(new Map(merged.map(a=>[a.id,a])).values()); state.metrics=metrics; state.next=list.next_cursor;state.groups=groups.items;
     if(keep && !state.actions.some(a=>a.id===keep)) {
       try { const item=await current.request('/v1/actions/'+keep); if(current===api) state.actions.push(item); } catch { /* Removed or no longer accessible. */ }
     }
@@ -82,6 +84,17 @@ async function loadAudit(more=false) {
     state.audit=more?[...state.audit,...data.items]:data.items;state.auditCursor=data.next_after;state.error='';render();
   } catch(error) { if(current===api) {state.error=error.message;render();} }
 }
+async function decideGroup(group,value,draft) {
+  if(state.busy) return;
+  state.busy=true;state.error='';render(); const current=api;
+  try {
+    const result=await current.request('/v1/groups/decision',{group_id:group.id,group_digest:group.digest,
+      member_ids:group.members.map(a=>a.id),decision:value,reason:draft.reason.trim(),confirmation:draft.confirmation});
+    await refresh();
+    state.error=result.receipts.some(r=>r.state==='stale'||r.state==='conflict')?'批量处理完成，部分成员快照已失效或冲突；请逐项核对执行记录。':'';
+  } catch(error) {state.error=error.message;}
+  finally {if(current===api){state.busy=false;render();}}
+}
 function navigation(view) { state.view=view;state.next=null;setActiveClock();render();if(view==='audit') void loadAudit();else void refresh(); }
 function auditPanel() {
   return el('section',{class:'audit-panel'},el('div',{class:'section-top'},el('div',{},el('h2',{},'审批证据回放'),
@@ -109,8 +122,8 @@ function render() {
   const actions=state.actions.filter(a=>(state.view!=='pending'||a.state==='pending')&&a.request.sql.toLowerCase().includes(state.filter.toLowerCase()));
   const side=el('aside',{class:'sidebar'},el('div',{class:'brand'},el('span',{class:'logo'},'A'),el('span',{},'AIRLOCK')),
     el('p',{class:'sidebar-caption'},'服务端执行审批'),
-    el('nav',{'aria-label':'主导航'},[['pending','审批队列'],['all','执行记录'],['audit','审计回放']].map(([key,label])=>el('button',{
-      class:state.view===key?'nav active':'nav','aria-current':state.view===key?'page':false,onclick:()=>navigation(key)},label,
+    el('nav',{'aria-label':'主导航'},[['pending','审批队列'],['groups','请求归并'],['all','执行记录'],['audit','审计回放'],['metrics','运行指标']].map(([key,label])=>el('button',{
+      class:state.view===key?'nav active':'nav','aria-label':label,'aria-current':state.view===key?'page':false,onclick:()=>navigation(key)},label,
       key==='pending'&&el('span',{class:'nav-count'},counts.pending||0)))),
     el('div',{class:'sidebar-foot'},el('strong',{},'默认不放行'),el('p',{},'Agent 发起意图。\n服务端持有执行权。'),el('span',{class:'small'},'v0.1 · Personal project')));
   const header=el('header',{class:'header'},el('div',{},el('h1',{},state.view==='audit'?'审计回放':'审批工作台'),
@@ -128,14 +141,14 @@ function render() {
     el('div',{class:'queue-items'},actions.map(action=>el('button',{class:`action-row ${action.id===state.selected?'selected':''}`,
       'data-action':action.id,onclick:()=>select(action.id),'aria-pressed':action.id===state.selected},
       el('div',{class:'section-top'},el('span',{class:`tag ${action.state}`},states[action.state]),el('span',{class:'small muted'},`#${short(action.id)}`)),
-      el('code',{class:'queue-sql'},action.request.sql),el('div',{class:'section-top small'},el('span',{},action.impact?`${number(action.impact.changed_rows)} 行变更`:'无写入预演'),
+      el('code',{class:'queue-sql'},action.request.sql||action.request.tool),el('div',{class:'section-top small'},el('span',{},action.impact?`${number(action.impact.changed_rows)} 影响单位`:'无写入预演'),
         el('span',{class:'muted'},new Date(action.created_at*1000).toLocaleTimeString('zh-CN',{hour12:false})))))),
     !actions.length&&el('div',{class:'empty'},el('strong',{},state.loading?'正在加载':'当前没有匹配的记录'),el('p',{},'可清除搜索条件或刷新；数量以服务器状态为准。')),
     state.next&&el('button',{class:'button more',onclick:()=>void refresh(true)},'加载更早记录'));
   const detail=reviewPanel(selected(),draft(state.selected),state.busy,decide,clock(state.selected));
   root.replaceChildren(el('div',{class:'shell'},side,el('main',{class:'workspace'},header,
     state.error&&el('div',{class:'error',role:'alert'},state.error),stats,
-    state.view==='audit'?auditPanel():el('div',{class:'workbench'},queue,detail),
+    state.view==='audit'?auditPanel():state.view==='groups'?groupsPanel(state.groups,groupDrafts,state.busy,decideGroup):state.view==='metrics'?metricsPanel(metrics):el('div',{class:'workbench'},queue,detail),
     el('footer',{class:'footer'},'所有写入都需要独立审批；未知能力默认阻断。审批通过不代表业务决策一定正确。'))));
   if(focused){const field=document.querySelector(`[data-field="${focused}"]`);if(field){field.focus({preventScroll:true});if(position?.[0]!=null&&field.type!=='checkbox')field.setSelectionRange(...position);}}
   const summary=document.querySelector('#impact-summary');

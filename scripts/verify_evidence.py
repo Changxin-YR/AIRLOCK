@@ -8,16 +8,21 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchmark-dev.log',
-                 'benchmark-test.log','browser-native.log','docker-smoke.log']
+                 'benchmark-test.log','browser-native.log','docker-smoke.log','dependency-audit.log',
+                 'latency.log','ablation.log','study-analysis.log','comparison.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
-    'test_server_filtered_pending_queue_survives_long_read_history','test_state_filter_is_validated_and_applied'}
+    'test_server_filtered_pending_queue_survives_long_read_history','test_state_filter_is_validated_and_applied',
+    'test_remote_effect_survives_receipt_audit_failure_reconciles','test_clock_rollback_across_restart_cannot_extend_approval',
+    'test_static_unc_path_rejected_before_filesystem_resolution','test_agent_does_not_retry_rejected_writes_or_access_review_endpoint'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',
     'audit_replay_and_hmac_verification_render','logout_removes_authenticated_console',
-    'no_browser_javascript_errors','pending_queue_survives_more_than_100_newer_reads'}
+    'no_browser_javascript_errors','pending_queue_survives_more_than_100_newer_reads',
+    'metrics_use_real_samples_and_unknown_model_cost','batch_ui_lists_bound_members_and_enforces_confirmation',
+    'recovery_is_a_separate_informed_approval','study_import_counterbalance_visibility_and_export_automation_only'}
 
 
 def require(condition, message):
@@ -66,17 +71,19 @@ def verify_benchmark(report, expected_cases, expected_families, corpus_sha):
 
 
 def verify(directory):
+    commit=(directory/'commit.txt').read_text(encoding='utf-8-sig').strip()
     for name in REQUIRED_LOGS:
         status = load(directory, name+'.status.json')
         require(status['exit_code']==0, name+': failed command')
         require(bool(status.get('command')), name+': missing command')
+        require(status.get('tested_commit_sha')==commit and status.get('tracked_source_dirty') is False,name+': unbound or dirty source')
         require((directory/name).stat().st_size > 0, name+': empty raw log')
     tests = verify_junit(directory/'pytest.xml')
     browser = load(directory,'browser-report.json')
     require(browser['mode']=='native_browser_e2e' and not browser['errors'] and not browser['not_proven'],
             'native browser failed or weakened')
     require(REQUIRED_BROWSER <= set(browser['passed']), 'missing browser checks')
-    for name in ('console-desktop.png','console-mobile.png'):
+    for name in ('console-desktop.png','console-mobile.png','console-groups.png','console-metrics.png','study-example.png'):
         data = (directory/name).read_bytes()
         require(len(data)>100 and data.startswith(b'\x89PNG\r\n\x1a\n'), 'missing/invalid screenshot: '+name)
     container = load(directory,'docker-report.json')
@@ -89,6 +96,10 @@ def verify(directory):
         verify_benchmark(load(directory,'benchmark-'+split+'.json'),n,families,corpus_sha)
     corpus = (directory/'synthetic-cases.jsonl').read_bytes()
     require(hashlib.sha256(corpus).hexdigest()==corpus_sha, 'missing or changed raw corpus')
+    require(load(directory,'study-analysis.json')['human_participants']==0,'automated study counted as human')
+    require(not any(d['vulns'] for d in load(directory,'dependency-audit.json')['dependencies']),'known dependency vulnerability')
+    latency=load(directory,'latency.json')
+    require(latency['write']['static_ms']['p95']<300 and latency['write']['preview_ms']['p95']<5000 and latency['read']['added_ms']['p95']<100,'latency threshold; inspect raw samples')
     print(f'Verified all {tests} JUnit cases, exit receipts, screenshots, Docker and raw benchmark rows.')
 
 

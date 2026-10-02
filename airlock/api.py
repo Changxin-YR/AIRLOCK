@@ -12,8 +12,9 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-from .models import Decision, GateError, Invocation, Settings
+from .models import BatchDecision, Decision, GateError, GovernanceChange, Invocation, Settings
 from .service import Gate, agent_view
+from . import observability
 
 STATIC = Path(__file__).parent / "static"
 
@@ -37,6 +38,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.middleware("http")
     async def boundary(request: Request, call_next):
+        request_identifier=uuid.uuid4().hex
+        observability.request_id.set(request_identifier)
         if request.method not in ("GET", "HEAD") and request.headers.get("origin") not in (None, settings.origin):
             return JSONResponse({"error": "origin_forbidden"}, status_code=403)
         length = request.headers.get("content-length", "0")
@@ -52,7 +55,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             request._body = bytes(body)
         response = await call_next(request)
         response.headers.update({
-            "X-Request-ID": uuid.uuid4().hex, "X-Content-Type-Options": "nosniff",
+            "X-Request-ID": request_identifier, "X-Content-Type-Options": "nosniff",
             "Referrer-Policy": "no-referrer", "Cache-Control": "no-store",
             "Content-Security-Policy": "default-src 'self'; script-src 'self'; style-src 'self'; "
                 "connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
@@ -80,14 +83,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         token = (authorization or "").removeprefix("Bearer ")
         if not (authorization or "").startswith("Bearer "):
             raise GateError("authentication_required", 401)
-        if secrets.compare_digest(token.encode(), settings.reviewer_token.encode()):
-            return "reviewer:owner"
+        review_identity=gate.access.identify(token)
+        if review_identity: return review_identity
         if secrets.compare_digest(token.encode(), settings.agent_token.encode()):
             return "agent:demo"
         raise GateError("authentication_required", 401)
 
     def reviewer(who: Annotated[str, Depends(identity)]) -> str:
-        if who != "reviewer:owner":
+        if not who.startswith('reviewer:'):
             raise GateError("reviewer_required", 403)
         return who
 
@@ -96,13 +99,52 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             raise GateError("agent_credential_required", 403)
         return who
 
+    def operator(authorization: Annotated[str | None,Header()]=None):
+        token=(authorization or '').removeprefix('Bearer ')
+        if not (authorization or '').startswith('Bearer ') or not secrets.compare_digest(token.encode(),settings.reviewer_token.encode()):
+            raise GateError('operator_required',403)
+        return 'operator:owner'
+
+    @app.get('/v1/governance/suggestions')
+    def suggestions(who: Annotated[str,Depends(operator)]):
+        return {'items':gate.suggestions(),'active':gate.governance_preference()}
+
+    @app.post('/v1/policy/reload')
+    def reload_policy(who: Annotated[str,Depends(operator)]):
+        return gate.reload_policy()
+
+    @app.post('/v1/governance/activate')
+    def activate(body: GovernanceChange,who: Annotated[str,Depends(operator)]):
+        return gate.change_governance(body)
+
+    @app.post('/v1/governance/revoke')
+    def revoke(body: GovernanceChange,who: Annotated[str,Depends(operator)]):
+        return gate.change_governance(body,True)
+
     @app.get("/healthz")
     def health():
         return {"status": "ok", "version": "0.1.0"}
 
     @app.get("/v1/me")
     def me(who: Annotated[str, Depends(identity)]):
-        return {"principal": who}
+        return {"principal": who, "role": 'reviewer' if who.startswith('reviewer:') else 'agent'}
+
+    @app.get('/v1/groups')
+    def groups(who: Annotated[str,Depends(reviewer)]):
+        return {'items':gate.groups(who)}
+
+    @app.get('/v1/tools')
+    def tools(who: Annotated[str,Depends(agent)]):
+        return {'items':gate.registry.discover(who)}
+
+    @app.post('/v1/actions/{action_id}/reconcile')
+    def reconcile(action_id: str,who: Annotated[str,Depends(agent)]):
+        action=gate.get(action_id,who)
+        return agent_view(gate.remote.reconcile(action))
+
+    @app.post('/v1/groups/decision')
+    def group_decision(body: BatchDecision,who: Annotated[str,Depends(reviewer)]):
+        return gate.decide_group(body,who)
 
     @app.post("/v1/actions")
     def invoke(body: Invocation, who: Annotated[str, Depends(agent)]):
@@ -113,17 +155,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def listing(who: Annotated[str, Depends(reviewer)], limit: int = Query(100, ge=1, le=100),
                 before: float | None = Query(None, ge=0, allow_inf_nan=False),
                 before_id: str | None = Query(None, pattern=r"^[a-f0-9]{32}$"),
-                state_filter: Literal["pending", "executed", "blocked", "rejected", "expired", "stale", "failed"] | None = Query(None, alias="state")):
+                state_filter: Literal["pending", "executed", "blocked", "rejected", "expired", "stale", "failed", "executing", "unknown"] | None = Query(None, alias="state")):
         if (before is None) != (before_id is None):
             raise GateError("cursor_requires_time_and_id", 422)
-        items = gate.list_actions(limit, before, before_id, state_filter)
+        items = gate.list_actions(limit, before, before_id, state_filter, who)
         cursor = {"before": items[-1]["created_at"], "before_id": items[-1]["id"]} if len(items) == limit else None
         return {"items": items, "next_cursor": cursor}
 
     @app.get("/v1/actions/{action_id}")
     def detail(action_id: str, who: Annotated[str, Depends(identity)]):
-        item = gate.get(action_id, None if who == "reviewer:owner" else who)
-        return item if who == "reviewer:owner" else agent_view(item)
+        is_reviewer=who.startswith('reviewer:')
+        item = gate.get(action_id, None if is_reviewer else who)
+        if is_reviewer: gate.access.require(who,item)
+        return item if is_reviewer else agent_view(item)
 
     @app.post("/v1/actions/{action_id}/decision")
     def decide(action_id: str, body: Decision, who: Annotated[str, Depends(reviewer)]):
@@ -132,16 +176,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/v1/audit")
     def audit(who: Annotated[str, Depends(reviewer)], action_id: str | None = None,
               after: int = Query(0, ge=0)):
-        items = gate.store.audit_events(action_id, after)
+        items = gate.audit_events(who,action_id,after)
         return {"items": items, "next_after": items[-1]["seq"] if items else after}
 
     @app.get("/v1/audit/verify")
     def verify(who: Annotated[str, Depends(reviewer)]):
+        if settings.reviewer_file: raise GateError('operator_audit_verification_required',403)
         return gate.store.verify_audit()
 
     @app.get("/v1/metrics")
     def metrics(who: Annotated[str, Depends(reviewer)]):
-        return gate.metrics()
+        return gate.metrics(who)
 
     @app.get("/v1/events")
     async def events(request: Request, who: Annotated[str, Depends(reviewer)],
@@ -153,7 +198,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 if await request.is_disconnected():
                     return
                 await asyncio.to_thread(gate.expire)
-                items = await asyncio.to_thread(gate.store.audit_events, None, cursor, 100)
+                if not gate.access.identify((request.headers.get('authorization') or '').removeprefix('Bearer ')):
+                    return
+                items = await asyncio.to_thread(gate.audit_events, who, None, cursor, 100)
                 for item in items:
                     cursor = item["seq"]
                     yield f"id: {cursor}\nevent: action\ndata: {json.dumps({'action_id': item['action_id']})}\n\n"

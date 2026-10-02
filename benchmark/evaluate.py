@@ -73,7 +73,7 @@ def evaluate(split='test',tuning=False):
         'airlock':metrics(rows,'airlock'),'impact_exact_match_count':sum(r['expected_changed_rows']==r['actual_changed_rows'] for r in impacts),
         'impact_denominator':len(impacts),'evaluation_p95_ms':p95('evaluation_ms'),
         'static_p95_ms':p95('static_ms'),'preview_p95_ms':p95('preview_ms'),
-        'pure_llm':'not_run','hybrid_llm':'not_implemented','human_ab':'not_run','cohens_kappa':None,
+        'pure_llm':'not_run','hybrid_llm':'not_run_use_benchmark.ablation_with_authorization','human_ab':'not_run','cohens_kappa':None,
         'limitations':['synthetic authored cases only','correlated variants, only 40 families total',
                       'author saw all templates; family split is not independent external validation',
                       'gate recall includes unsupported/invalid statements, not a real-world danger recall',

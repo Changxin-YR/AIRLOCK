@@ -1,6 +1,7 @@
 """Inventory actual CI artifacts. A manifest records files; it is not a test verdict."""
 from __future__ import annotations
 import hashlib
+import argparse
 import importlib.metadata
 import json
 import os
@@ -10,10 +11,11 @@ import sqlite3
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGET = ROOT / 'evidence'
-TARGET.mkdir(exist_ok=True)
+parser=argparse.ArgumentParser();parser.add_argument('--directory',type=Path,default=ROOT/'evidence');args=parser.parse_args()
+TARGET=args.directory
+TARGET.mkdir(parents=True,exist_ok=True)
 versions = {}
-for package in ('fastapi', 'starlette', 'pydantic', 'uvicorn', 'httpx', 'pytest', 'playwright', 'mcp', 'anyio'):
+for package in ('fastapi', 'starlette', 'pydantic', 'uvicorn', 'httpx', 'pytest', 'playwright', 'mcp', 'anyio','cel-python','PyYAML','pip-audit'):
     try:
         versions[package] = importlib.metadata.version(package)
     except importlib.metadata.PackageNotFoundError:

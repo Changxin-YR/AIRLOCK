@@ -14,8 +14,20 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def stop_process_tree(process):
+    """Terminate only the fixture we spawned, including Windows venv children."""
+    if process.poll() is not None: return
+    if os.name=='nt':
+        result=subprocess.run(['taskkill','/PID',str(process.pid),'/T','/F'],capture_output=True)
+        if result.returncode and process.poll() is None: process.kill()
+    else: process.terminate()
+    try: process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        process.kill();process.wait(timeout=5)
+
+
 @contextmanager
-def server():
+def server(overrides=None):
     with tempfile.TemporaryDirectory(prefix='airlock-acceptance-') as directory:
         with socket.socket() as sock:
             sock.bind(('127.0.0.1', 0))
@@ -23,8 +35,10 @@ def server():
         url = f'http://127.0.0.1:{port}'
         keys = {name: secrets.token_urlsafe(32) for name in
                 ('AIRLOCK_AGENT_TOKEN', 'AIRLOCK_REVIEWER_TOKEN', 'AIRLOCK_AUDIT_KEY')}
-        env = os.environ | keys | {'AIRLOCK_DB': str(Path(directory) / 'demo.db'),
+        keys['AIRLOCK_DB']=str(Path(directory)/'demo.db')
+        env = {k:v for k,v in os.environ.items() if not k.startswith('AIRLOCK_')} | keys | {'AIRLOCK_DB': str(Path(directory) / 'demo.db'),
                                    'AIRLOCK_ORIGIN': url, 'PYTHONPATH': str(ROOT)}
+        env.update(overrides or {})
         with open(Path(directory) / 'server.log', 'w') as log:
             process = subprocess.Popen([sys.executable, '-m', 'uvicorn', 'airlock.api:create_app',
                 '--factory', '--host', '127.0.0.1', '--port', str(port), '--no-access-log'],
@@ -44,9 +58,4 @@ def server():
                         raise RuntimeError('Acceptance server failed to start.')
                     yield url, keys, client
             finally:
-                process.terminate()
-                try:
-                    process.wait(timeout=5)
-                except subprocess.TimeoutExpired:
-                    process.kill()
-                    process.wait(timeout=5)
+                stop_process_tree(process)

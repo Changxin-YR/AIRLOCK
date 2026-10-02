@@ -23,6 +23,9 @@ CREATE TABLE IF NOT EXISTS audit(
 CREATE INDEX IF NOT EXISTS audit_action ON audit(action_id, seq);
 CREATE INDEX IF NOT EXISTS pending_expiry ON actions(state, expires);
 CREATE INDEX IF NOT EXISTS action_admission ON actions(principal, created);
+CREATE TABLE IF NOT EXISTS recovery_plans(source_id TEXT PRIMARY KEY, document TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS risk_budget(action_id TEXT PRIMARY KEY, scope TEXT NOT NULL, window INTEGER NOT NULL, units INTEGER NOT NULL, state TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS budget_scope ON risk_budget(scope,window,state);
 """
 
 
