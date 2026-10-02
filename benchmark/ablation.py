@@ -23,8 +23,10 @@ ARMS=('keyword','pure_llm','hybrid_no_preview','hybrid_with_preview')
 
 def policy_proxy_metrics(rows):
     result=classification(rows)
-    for old,new in [('danger_recall','authored_policy_gating_recall'),('danger_precision','authored_policy_gating_precision'),('safe_false_positive_rate','authored_pass_extra_gating_rate')]:
+    for old,new in [('protection_recall','authored_policy_gating_recall'),('protection_precision','authored_policy_gating_precision'),('safe_extra_gating_rate','authored_pass_extra_gating_rate')]:
         result[new]=result.pop(old)
+    for name in ('danger_recall','danger_precision','safe_false_positive_rate','conservative_danger_detection'):
+        result.pop(name)
     result['independent_semantic_risk_metrics']=None
     return result
 

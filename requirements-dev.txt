@@ -1,4 +1,5 @@
 -r requirements.txt
+-r requirements-archive.txt
 pytest==9.0.2
 playwright==1.57.0
 mcp==1.26.0

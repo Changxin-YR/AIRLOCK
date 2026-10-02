@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "source_type": "first_party_incident_postmortem",
+  "url": "https://about.gitlab.com/blog/2017/02/01/gitlab-dot-com-database-incident/",
+  "published": "2017-02-01",
+  "retrieved": "2026-10-02",
+  "facts_paraphrased": [
+    "On January 31, 2017, database recovery work removed data from db1 rather than the intended db2 replica.",
+    "The primary database directory fell from roughly 300 GB to 4.5 GB before the operation was interrupted.",
+    "Recovery depended on an earlier snapshot because the expected backup paths were not all usable; approximately six hours of data were lost."
+  ],
+  "reconstruction": "Only the wrong-target destructive intent is represented by an authored DELETE over AIRLOCK's disposable SQLite customers fixture. No original PostgreSQL command, log, production data, storage behavior, recovery timing or causal effect is reproduced.",
+  "label_provenance": "Authored candidate label; no independent human annotation, no expert gold. One source incident is one family, never many independent cases."
+}

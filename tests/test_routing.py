@@ -26,6 +26,8 @@ def test_two_reviewers_route_view_decide_and_revocation(settings,tmp_path,monkey
         assert client.get('/v1/actions/'+large['id'],headers=auth('s'*32)).status_code==403
         assert client.post('/v1/actions/'+large['id']+'/decision',headers=auth('s'*32),json=decision(large).model_dump()).status_code==403
         assert len(client.get('/v1/audit',headers=auth('s'*32)).json()['items'])==1
+        exported=client.get('/v1/audit/export',headers=auth('s'*32)).json()
+        assert len(exported['items'])==1 and large['id'] not in json.dumps(exported)
         rows[0]['active']=False; path.write_text(json.dumps({'reviewers':rows}))
         assert client.get('/v1/me',headers=auth('s'*32)).status_code==401
         with pytest.raises(GateError,match='review_scope_forbidden'):

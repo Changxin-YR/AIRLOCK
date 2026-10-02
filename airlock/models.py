@@ -103,6 +103,7 @@ class Settings:
     internal_host: str | None = None
     policy_file: Path | None = None
     reviewer_file: Path | None = None
+    oidc_file: Path | None = None
     upstream_file: Path | None = None
     semantic_file: Path | None = None
     audit_key_file: Path | None = None
@@ -143,6 +144,7 @@ class Settings:
             internal_host=os.getenv("AIRLOCK_INTERNAL_HOST"),
             policy_file=Path(os.environ['AIRLOCK_POLICY_FILE']) if os.getenv('AIRLOCK_POLICY_FILE') else None,
             reviewer_file=Path(os.environ['AIRLOCK_REVIEWER_FILE']) if os.getenv('AIRLOCK_REVIEWER_FILE') else None,
+            oidc_file=Path(os.environ['AIRLOCK_OIDC_FILE']) if os.getenv('AIRLOCK_OIDC_FILE') else None,
             upstream_file=Path(os.environ['AIRLOCK_UPSTREAM_FILE']) if os.getenv('AIRLOCK_UPSTREAM_FILE') else None,
             semantic_file=Path(os.environ['AIRLOCK_SEMANTIC_FILE']) if os.getenv('AIRLOCK_SEMANTIC_FILE') else None,
             audit_key_file=Path(os.environ['AIRLOCK_AUDIT_KEY_FILE']) if os.getenv('AIRLOCK_AUDIT_KEY_FILE') else None,

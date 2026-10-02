@@ -11,7 +11,7 @@ from .models import GateError
 class Reviewer(BaseModel):
     model_config=ConfigDict(extra='forbid',strict=True)
     id: str=Field(pattern=r'^reviewer:[a-zA-Z0-9_-]{1,48}$')
-    credential_env: str=Field(pattern=r'^AIRLOCK_REVIEWER_[A-Z0-9_]+$')
+    credential_env: str | None=Field(default=None,pattern=r'^AIRLOCK_REVIEWER_[A-Z0-9_]+$')
     tools: list[str]=Field(min_length=1,max_length=16)
     resources: list[str]=Field(min_length=1,max_length=16)
     risks: list[Literal['low','high','critical','blocked']]=Field(min_length=1,max_length=4)
@@ -34,7 +34,9 @@ class AccessControl:
             rows=Reviewers.model_validate_json(text).reviewers
             if len({r.id for r in rows})!=len(rows) or any(r.id=='reviewer:owner' for r in rows): raise ValueError('duplicate or reserved reviewer')
             active=[r for r in rows if r.active]
-            tokens=[os.environ.get(r.credential_env,'') for r in active]
+            if any(r.credential_env is None for r in active) and not self.settings.oidc_file:
+                raise ValueError('OIDC-only reviewer requires configured issuer')
+            tokens=[os.environ.get(r.credential_env,'') for r in active if r.credential_env]
             if any(len(t)<32 or not t.isascii() for t in tokens): raise ValueError('invalid reviewer credential')
             if len(set(tokens))!=len(tokens) or any(t in {self.settings.agent_token,self.settings.audit_key,self.settings.reviewer_token} for t in tokens):
                 raise ValueError('credential separation')
@@ -44,10 +46,15 @@ class AccessControl:
 
     def identify(self,token):
         accounts=self.accounts()
+        from .oidc import identify
+        who=identify(token,self.settings.oidc_file)
+        if who:
+            if who=='agent:demo':return who
+            return who if accounts is not None and any(r.id==who for r in accounts) else None
         if accounts is None:
             return 'reviewer:owner' if secrets.compare_digest(token.encode(),self.settings.reviewer_token.encode()) else None
         for row in accounts:
-            if secrets.compare_digest(token.encode(),os.environ[row.credential_env].encode()): return row.id
+            if row.credential_env and secrets.compare_digest(token.encode(),os.environ[row.credential_env].encode()): return row.id
         return None
 
     def route(self,action):

@@ -120,6 +120,21 @@ async def run(output):
                     assert await page.locator('#credential').input_value()==''
                     assert await page.evaluate('localStorage.length===0 && sessionStorage.length===0')
                     checks.append('keyboard_login_and_logout_clear_memory_credentials')
+                    tasks=json.loads((ROOT/'benchmark/study-example.json').read_text(encoding='utf-8'))
+                    tasks['tasks']=tasks['tasks'][:2]
+                    for task in tasks['tasks']:task['check']={'question':'是否已经执行真实操作？','options':['没有','已经执行'],'answer':'没有'}
+                    taskfile=root/'comprehension.json';taskfile.write_text(json.dumps(tasks,ensure_ascii=False),encoding='utf-8')
+                    await page.goto(url+'/assets/study.html');await page.locator('#participant').fill('automated-comprehension-check')
+                    await page.locator('#source').select_option('automation');await page.locator('#consent').check();await page.locator('#tasks').set_input_files(str(taskfile))
+                    await page.locator('#start-study').click()
+                    for _ in range(2):
+                        await page.locator('#study-reject').click();assert await page.locator('#study-check-submit').is_disabled()
+                        await page.locator('#study-comprehension').select_option('没有');await page.locator('#study-check-submit').click()
+                    async with page.expect_download() as download_info:await page.locator('#export-study').click()
+                    download=await download_info.value;await download.save_as(str(output/'study-comprehension-automation.json'))
+                    exported=json.loads((output/'study-comprehension-automation.json').read_text())
+                    assert exported['source']=='automation' and all(r['comprehension_choice']=='没有' for r in exported['responses'])
+                    checks.append('study_comprehension_is_separate_required_and_exported_as_automation')
                     assert not errors and not violations,(errors,violations)
                     checks.append('next_hydration_and_strict_csp_have_no_errors')
                     await browser.close()

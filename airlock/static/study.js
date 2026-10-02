@@ -20,6 +20,7 @@ function start() {
         const ids=new Set();
         for(const t of data.tasks) {
           if(typeof t.id!=='string'||ids.has(t.id)||!['approve','reject'].includes(t.gold)||typeof t.intent!=='string'||typeof t.sql!=='string'||typeof t.diff!=='string') throw Error('任务 ID、业务意图、SQL、diff 或金标无效');
+          if(t.check && (typeof t.check.question!=='string'||!Array.isArray(t.check.options)||t.check.options.length<2||t.check.options.length>6||t.check.options.some(v=>typeof v!=='string')||new Set(t.check.options).size!==t.check.options.length||!t.check.options.includes(t.check.answer))) throw Error('理解核验题格式无效');
           ids.add(t.id);
         }
         // Stable participant counterbalancing; each task appears once for each participant.
@@ -49,8 +50,16 @@ function render() {
   if(task.arm==='B') summary.append(el('h3',{},'预计变化'),el('pre',{class:'result'},task.diff));
   summary.append(el('h3',{},'请求'),el('pre',{class:'sql'},task.sql));
   const choose=choice=>{
-    clock.active(false); session.responses.push({case_id:task.id,arm:task.arm,choice,correct:choice===task.gold,
-      visible_ms:clock.value(),at:new Date().toISOString()});position++;render();
+    clock.active(false);const response={case_id:task.id,arm:task.arm,choice,correct:choice===task.gold,
+      visible_ms:clock.value(),at:new Date().toISOString()};
+    const finish=()=>{session.responses.push(response);position++;render();};
+    if(!task.check){finish();return;}
+    observing?.disconnect();
+    const answers=el('select',{id:'study-comprehension'},el('option',{value:''},'请选择'));
+    task.check.options.forEach(value=>answers.append(el('option',{value},value)));
+    const submit=el('button',{id:'study-check-submit',class:'button primary',disabled:true,onclick:()=>{response.comprehension_choice=answers.value;finish();}},'提交理解核验');
+    answers.addEventListener('change',()=>{submit.disabled=!answers.value;});
+    root.replaceChildren(el('h2',{},'理解核验'),el('label',{for:'study-comprehension'},task.check.question),answers,submit);
   };
   root.replaceChildren(summary,el('p',{class:'muted'},'仅根据提供的业务授权判断，本页不会提交真实操作。'),
     el('button',{class:'button reject',id:'study-reject',onclick:()=>choose('reject')},'拒绝'),

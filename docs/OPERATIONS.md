@@ -135,7 +135,7 @@ python -m benchmark.research --output evidence/study.json study <匿名导出.js
 
 pending：不执行，查原动作；stale：新意图重新预演审批；clock_regression：修复系统时钟；unknown：只查询原上游收据；审计失败：本地事务不提交，远端可能已发生效果，重启对账。策略/路由文件损坏时修复受信配置，不关闭鉴权。
 
-每库上限 10000 动作和固定合成数据上限 5000 行；当前无在线清理/归档 API。恢复快照、原 SQL 和审计均为敏感服务端数据，只授予实际所需 reviewer 权限。数据库备份需保持一致性并保留全部旧验证密钥和离线校验记录；操作者触发的 key-id 轮换在同一事务记录事件并激活，无需清空审计链；当前支持独立签名检查点；没有外部 WORM，不宣称相关保证。数据库和 provider ledger 不进 Git；导出仅限合成证据。
+每库上限 10000 动作和固定合成数据上限 5000 行；当前无在线清理/归档 API。恢复快照、原 SQL 和审计均为敏感服务端数据，只授予实际所需 reviewer 权限。数据库备份需保持一致性并保留全部旧验证密钥和离线校验记录；操作者触发的 key-id 轮换在同一事务记录事件并激活，无需清空审计链；当前支持独立签名检查点与独立 S3 Object Lock 归档连接器；真实长期归档仍需部署，见 `CLOSURE_RUNBOOK.md`。数据库和 provider ledger 不进 Git；导出仅限合成证据。
 
 
 ## 本轮新增配置与复验入口
@@ -144,7 +144,7 @@ pending：不执行，查原动作；stale：新意图重新预演审批；clock
 
 策略激活内容存入 SQLite `meta.active_policy`。所有本地和远端的入队/决定在同一写事务内同步版本；文件编辑本身不会激活。跨进程重载测试使用真正独立 Python 进程；重启保留已激活内容。
 
-MCP 上游配置设置 `transport=mcp_json`、`mcp_path=/mcp`、`mcp_tools={"preview":"counter_preview","execute":"counter_execute","receipt":"counter_receipt"}`。只接受无会话 JSON、固定注册工具与明确 CAS/收据；初始化、发现、调用、协议绑定和错误全部校验。动态任意工具、SSE 上游和需要会话的上游阻断。入站 `/mcp` 每次独立鉴权，Accept 必须含 application/json 和 text/event-stream。
+MCP 上游配置设置 `transport=mcp_json`、`mcp_path=/mcp`、`mcp_tools={"preview":"counter_preview","execute":"counter_execute","receipt":"counter_receipt"}`。只接受无会话 JSON、固定注册工具与明确 CAS/收据；初始化、发现、调用、协议绑定和错误全部校验。需要会话/SSE 的已注册上游可使用 `mcp_streamable`，见 `CLOSURE_RUNBOOK.md`；动态任意工具仍阻断。入站 `/mcp` 每次独立鉴权，Accept 必须含 application/json 和 text/event-stream。
 
 远端补偿注册第二个工具，设置 `compensates=upstream:counter` 和 `arguments={"source_action_id":"string"}`，同时保持原工具的 origin、resource、专用 credential_env。原动作必须属于申请人且已确认为 executed；unknown 先对账。补偿仍经过新预演、风险预算、路由、快照绑定、独立审批和上游 CAS。合成 counter 只有当前版本仍为原执行后的版本才可恢复，后续变更不覆盖。
 
@@ -162,3 +162,5 @@ python -m benchmark.ablation --split test --workers 4 --provider-config configs/
 `GET /v1/audit/checkpoint` 输出带数据库实例 ID、seq、链头、key-id 和签名的检查点。`scripts/audit_checkpoint.py` 将它以独占新建方式保存；操作者应把目的地放在服务端无写权限的位置。`AIRLOCK_AUDIT_ANCHOR_FILE` 指向独立保留后回送的检查点，验证器检测检查点之前的删除/插入/替换/排序/截尾。检查点之后的尾部和服务器全部密钥失陷仍存在边界。没有声称本机普通文件是 WORM。`GET /v1/audit/completeness` 另查逐状态字段与原始快照完整率，明确不适用字段；它不代替验签。
 
 可选 `AIRLOCK_OTLP_URL=https://<literal-public-IP>/v1/traces`；仅测试时允许 loopback HTTP 并设 `AIRLOCK_OTLP_ALLOW_LOOPBACK=1`。审计事务同时入有界 1000 span outbox，满时记录丢弃数。operator 调用 `POST /v1/observability/export`，每次最多 100 span，失败保留、确定性 span ID、at-least-once。SQL、参数、凭据和模型输出不写遥测；没有把动态输入作指标标签。可用外部定时执行器调度此端点，服务本身不默认联网后台导出。`container_integrations.py` 用官方 Collector 0.162.0 与 Envoy 1.39.1 真实容器复验；Envoy 仅有限布尔/比较表达式的显式变量映射，不是完整策略语义/生产授权兼容。
+
+身份、域名绑定、独立归档、受保护上游网络、运维告警与研究验收完整入口见 [CLOSURE_RUNBOOK.md](CLOSURE_RUNBOOK.md)。

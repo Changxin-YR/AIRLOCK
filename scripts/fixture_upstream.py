@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument('--port',type=int,required=True); parser.add_argument('--database',required=True)
+    parser.add_argument('--host',default='127.0.0.1',choices=['127.0.0.1','0.0.0.0'])
     args=parser.parse_args()
     with sqlite3.connect(args.database) as conn:
         conn.executescript('CREATE TABLE counter(value INTEGER, version INTEGER); INSERT INTO counter VALUES(0,0); CREATE TABLE receipts(id TEXT PRIMARY KEY, body TEXT);')
@@ -92,7 +93,7 @@ def main():
                     if os.getenv('AIRLOCK_TEST_DROP_RESPONSE')=='1':
                         self.close_connection=True; return
                 self.respond(200,receipt)
-    ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()
+    ThreadingHTTPServer((args.host,args.port),Handler).serve_forever()
 
 
 if __name__=='__main__': main()

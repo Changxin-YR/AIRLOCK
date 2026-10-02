@@ -10,13 +10,14 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchmark-dev.log',
                  'benchmark-test.log','browser-native.log','docker-smoke.log','dependency-audit.log',
                  'latency.log','ablation.log','study-analysis.log','comparison.log','next-build.log','npm-audit.log',
-                 'browser-edges.log','container-integrations.log']
+                 'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-integration.log','research-pipeline.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
     'test_server_filtered_pending_queue_survives_long_read_history','test_state_filter_is_validated_and_applied',
     'test_remote_effect_survives_receipt_audit_failure_reconciles','test_clock_rollback_across_restart_cannot_extend_approval',
-    'test_static_unc_path_rejected_before_filesystem_resolution','test_agent_does_not_retry_rejected_writes_or_access_review_endpoint'}
+    'test_static_unc_path_rejected_before_filesystem_resolution','test_agent_does_not_retry_rejected_writes_or_access_review_endpoint',
+    'test_audit_export_omits_free_text_and_secrets_and_requires_reviewer','test_sse_fragmented_unicode_notifications_and_bounds'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',
@@ -91,6 +92,13 @@ def verify(directory):
     edges=load(directory,'browser-edges.json')
     require(len(edges['passed'])>=8 and not edges['errors'] and not edges['csp_violations'],'Next browser counterexamples failed')
     integrations=load(directory,'container-integrations.json')
+    remote=load(directory,'upstream-isolation.json')
+    require(remote['status']=='PASS' and remote['mode']=='real_docker_protected_upstream' and len(remote['probe']['checks'])>=6,'protected remote network isolation failed')
+    archive=load(directory,'archive-integration.json')
+    require(archive['exit_code']==0 and len(archive['checks'])>=6 and len(archive['actual_denials'])==3,'S3 retention/truncation contract failed')
+    research=load(directory/'research-pipeline','report.json')
+    require(research['status']=='PASS' and research['human_participants']==research['paired_human_labels']==0,'research provenance failed')
+    require(load(directory/'research-pipeline','evaluation.json')['acceptance_metrics'] is None,'missing human gold was promoted into acceptance')
     require(integrations['envoy']['status']==integrations['otel']['status']=='PASS','real integration tests failed')
     require(container['mode']=='real_docker_compose', 'Docker mode')
     require(container['rows_before_independent_approval']==1206 and container['rows_after_approval_and_restart']==0,

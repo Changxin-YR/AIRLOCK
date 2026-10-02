@@ -14,6 +14,7 @@ from typing import Literal
 from .models import GateError,canonical,digest
 from . import governance
 from . import observability
+from . import network
 
 
 class Tool(BaseModel):
@@ -23,7 +24,10 @@ class Tool(BaseModel):
     url: str=Field(max_length=256)
     credential_env: str | None=Field(default=None,pattern=r'^AIRLOCK_UPSTREAM_[A-Z0-9_]+$')
     allow_loopback: bool=False
-    transport: Literal['http','mcp_json']='http'
+    pinned_addresses: list[str]=Field(default_factory=list,max_length=16)
+    allow_private_network: bool=False
+    tls_ca_file: str | None=None
+    transport: Literal['http','mcp_json','mcp_streamable']='http'
     mcp_path: str=Field(default='/mcp',pattern=r'^/[a-zA-Z0-9/_-]{1,100}$')
     mcp_tools: dict[Literal['preview','execute','receipt'],str]=Field(default_factory=dict)
     compensates: str | None=Field(default=None,pattern=r'^upstream:[a-zA-Z0-9_-]{1,48}$')
@@ -31,20 +35,17 @@ class Tool(BaseModel):
     principals: list[str]=Field(default_factory=lambda:['agent:demo'],max_length=16)
 
     def target(self):
-        parsed=urlparse(self.url)
-        if parsed.username or parsed.password or parsed.query or parsed.fragment or parsed.path not in ('','/'):
-            raise ValueError('upstream URL must be an origin')
-        address=ipaddress.ip_address(parsed.hostname or '')
-        if not address.is_global and not (self.allow_loopback and address.is_loopback):
-            raise ValueError('private/link-local upstream rejected')
-        if parsed.scheme!='https' and not (parsed.scheme=='http' and self.allow_loopback and address.is_loopback):
-            raise ValueError('upstream HTTPS required')
+        network.validate_origin(self.url,self.pinned_addresses,self.allow_loopback,self.allow_private_network)
         if len(self.arguments)>16 or any(not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]{0,47}',k) for k in self.arguments):
             raise ValueError('invalid argument schema')
-        if self.transport=='mcp_json' and (set(self.mcp_tools)!={'preview','execute','receipt'} or any(not re.fullmatch(r'[A-Za-z0-9_.-]{1,64}',name) for name in self.mcp_tools.values())):
+        if self.transport!='http' and (set(self.mcp_tools)!={'preview','execute','receipt'} or any(not re.fullmatch(r'[A-Za-z0-9_.-]{1,64}',name) for name in self.mcp_tools.values())):
             raise ValueError('MCP writes require explicit preview/execute/receipt tool mappings')
         if self.transport=='http' and self.mcp_tools:raise ValueError('MCP tools supplied for HTTP transport')
         return self.url.rstrip('/')
+
+    def client(self):
+        return network.client(self.target(),pins=self.pinned_addresses,allow_loopback=self.allow_loopback,
+            allow_private=self.allow_private_network,ca_file=self.tls_ca_file,timeout=httpx.Timeout(5,connect=2))
 
     def validate_arguments(self,values):
         types={'string':str,'integer':int,'boolean':bool}
@@ -58,9 +59,9 @@ class Tool(BaseModel):
         token=os.environ.get(self.credential_env,'') if self.credential_env else None
         if self.credential_env and len(token)<32: raise GateError('upstream_credentials_unavailable',503)
         headers={'Authorization':'Bearer '+token} if token else {}
-        if self.transport=='mcp_json':return self.mcp_request(method,path,payload,headers)
+        if self.transport!='http':return self.mcp_request(method,path,payload,headers)
         try:
-            with httpx.Client(timeout=httpx.Timeout(5,connect=2),trust_env=False,follow_redirects=False) as client:
+            with self.client() as client:
                 with client.stream(method,self.target()+path,json=payload,headers=headers) as response:
                     if response.status_code>=300: raise ValueError('upstream response')
                     body=bytearray()
@@ -70,45 +71,12 @@ class Tool(BaseModel):
                         if len(body)>16384: raise ValueError('upstream output limit')
                     result=json.loads(body); canonical(result)
                     return result
-        except (httpx.HTTPError,ValueError,TypeError):
+        except (httpx.HTTPError,ValueError,TypeError,OSError):
             raise GateError('upstream_unavailable',503) from None
 
     def mcp_request(self,method,path,payload,headers):
-        """Only registered CAS-contract tools, not model-suggested discovery names.
-
-        Discovery is checked against this allowlist. Only stateless JSON response
-        upstreams are accepted here; redirects, opaque SSE and session-required
-        servers fail closed rather than weakening receipt reconciliation.
-        """
-        phase='receipt' if method=='GET' and path.startswith('/receipts/') else {'/preview':'preview','/execute':'execute'}.get(path)
-        if phase is None:raise GateError('upstream_method_forbidden',422)
-        headers=dict(headers,Accept='application/json, text/event-stream')
-        deadline=time.monotonic()+10
-        try:
-            with httpx.Client(timeout=httpx.Timeout(5,connect=2),trust_env=False,follow_redirects=False) as client:
-                def send(message,notification=False):
-                    with client.stream('POST',self.target()+self.mcp_path,json=message,headers=headers) as response:
-                        if notification and response.status_code==202:return None
-                        if response.status_code!=200 or response.headers.get('mcp-session-id'):raise ValueError('stateless MCP contract required')
-                        if response.headers.get('content-type','').split(';')[0]!='application/json':raise ValueError('MCP JSON response required')
-                        raw=bytearray()
-                        for chunk in response.iter_bytes():
-                            raw.extend(chunk)
-                            if len(raw)>16384 or time.monotonic()>deadline:raise ValueError('MCP response budget')
-                        data=json.loads(raw)
-                        if data.get('jsonrpc')!='2.0' or data.get('id')!=message.get('id') or 'error' in data or 'result' not in data:raise ValueError('MCP response binding')
-                        return data['result']
-                initialized=send({'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-11-25','capabilities':{},'clientInfo':{'name':'airlock-controlled-proxy','version':'0.2'}}})
-                if initialized.get('protocolVersion') not in {'2025-11-25','2025-06-18'}:raise ValueError('MCP version')
-                headers['MCP-Protocol-Version']=initialized['protocolVersion']
-                send({'jsonrpc':'2.0','method':'notifications/initialized'},True)
-                discovered=send({'jsonrpc':'2.0','id':2,'method':'tools/list'})
-                if self.mcp_tools[phase] not in {t.get('name') for t in discovered.get('tools',[])}:raise ValueError('registered MCP tool absent')
-                arguments={'action_id':path.rsplit('/',1)[1]} if phase=='receipt' else payload
-                result=send({'jsonrpc':'2.0','id':3,'method':'tools/call','params':{'name':self.mcp_tools[phase],'arguments':arguments}})
-                if result.get('isError') or not isinstance(result.get('structuredContent'),dict):raise ValueError('MCP structured receipt missing')
-                return result['structuredContent']
-        except (httpx.HTTPError,ValueError,TypeError,KeyError):raise GateError('upstream_mcp_unavailable',503) from None
+        from .mcp_upstream import invoke
+        return invoke(self,method,path,payload,headers)
 
 
 class Preview(BaseModel):
@@ -136,7 +104,7 @@ class Registry:
                 if tool.compensates:
                     source=self.tools.get(tool.compensates)
                     if not source or source.compensates or tool.arguments!={'source_action_id':'string'} or any(
-                        getattr(tool,k)!=getattr(source,k) for k in ('url','credential_env','resource')):
+                        getattr(tool,k)!=getattr(source,k) for k in ('url','credential_env','resource','pinned_addresses','allow_private_network','allow_loopback','tls_ca_file')):
                         raise ValueError('compensation must bind a registered original resource and credential')
 
     def get(self,name,principal):

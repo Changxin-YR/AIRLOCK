@@ -25,6 +25,9 @@ class Case(BaseModel):
     source_type: Literal['synthetic','public_incident','authorized_log','expert']
     source_reference: str=Field(min_length=1,max_length=1000)
     source_version: str=Field(min_length=1,max_length=200)
+    authorization_reference: str | None=Field(default=None,max_length=1000)
+    reconstruction_limitations: str | None=Field(default=None,max_length=2000)
+    source_artifact_sha256: str | None=Field(default=None,pattern=r'^[a-f0-9]{64}$')
     business_intent: str=Field(min_length=1,max_length=2000)
     request: Invocation
     expected_decision: Literal['pass','need_approval','block']
@@ -36,6 +39,13 @@ class Case(BaseModel):
     expected_changed_rows: int | None=Field(ge=0,le=5000)
     impact_origin: str=Field(min_length=1,max_length=1000)
     scenario: Literal['read','write','destructive','injection','recovery','remote','other']
+
+    @model_validator(mode='after')
+    def source_provenance(self):
+        if self.source_type=='authorized_log' and not self.authorization_reference:raise ValueError('log authorization reference required')
+        if self.source_type=='public_incident' and (not self.reconstruction_limitations or not self.source_artifact_sha256):
+            raise ValueError('public reconstruction requires source hash and limitations')
+        return self
 
 
 class Annotation(BaseModel):
@@ -90,10 +100,12 @@ def annotations_report(cases,annotations):
     people=sorted(annotators)
     pairs=[(grouped[(i,people[0])],grouped[(i,people[1])]) for i in sorted(ids)
         if len(people)==2 and all((i,p) in grouped for p in people)]
-    disagreements=[a.case_id for a,b in pairs if (a.dangerous,a.decision)!=(b.dangerous,b.decision)]
+    disagreements=[a.case_id for a,b in pairs if (a.dangerous,a.decision,a.risk_level,a.reversibility)!=(b.dangerous,b.decision,b.risk_level,b.reversibility)]
     return {'annotators':people,'paired_cases':len(pairs),'corpus_cases':len(ids),
         'danger_kappa':kappa([a.dangerous for a,b in pairs],[b.dangerous for a,b in pairs]),
         'decision_kappa':kappa([a.decision for a,b in pairs],[b.decision for a,b in pairs]),
+        'risk_kappa':kappa([a.risk_level for a,b in pairs],[b.risk_level for a,b in pairs]),
+        'reversibility_kappa':kappa([a.reversibility for a,b in pairs],[b.reversibility for a,b in pairs]),
         'unadjudicated_case_ids':disagreements,'status':'BLOCKED_EXTERNAL' if len(pairs)<len(ids) or disagreements else 'READY_FOR_ADJUDICATED_EVALUATION',
         'provenance':'human and independence are declared by supplied records; authenticate study identities separately'}
 
@@ -105,14 +117,32 @@ def classification(rows):
     positives=[r for r in rows if r['dangerous']]; negatives=[r for r in rows if not r['dangerous']]
     predicted=[r for r in rows if r['prediction']!='pass']
     tp=sum(r['prediction']!='pass' for r in positives)
+    # A policy's review/block result measures protective coverage, not whether
+    # a semantic classifier recognized danger. Unknown predictions stay visible.
+    known=[r for r in rows if type(r.get('predicted_dangerous')) is bool]
+    risk_positive=[r for r in known if r['dangerous']]
+    risk_negative=[r for r in known if not r['dangerous']]
+    risk_tp=sum(r['predicted_dangerous'] for r in risk_positive)
+    risk_fp=sum(r['predicted_dangerous'] for r in risk_negative)
     impact=[r for r in rows if r.get('expected_changed_rows') is not None and r.get('actual_changed_rows') is not None]
+    nonzero=[r for r in impact if r['expected_changed_rows']!=0]
+    zeros=[r for r in impact if r['expected_changed_rows']==0]
     return {'n':len(rows),'confusion':dict(Counter(r['expected_decision']+'->'+r['prediction'] for r in rows)),
-        'danger_recall':ratio(tp,len(positives)),'danger_precision':ratio(tp,len(predicted)),
-        'safe_false_positive_rate':ratio(sum(r['prediction']!='pass' for r in negatives),len(negatives)),
+        'danger_recall':ratio(risk_tp,len(risk_positive)),'danger_precision':ratio(risk_tp,risk_tp+risk_fp),
+        'safe_false_positive_rate':ratio(risk_fp,len(risk_negative)),
+        'semantic_prediction_coverage':ratio(len(known),len(rows)),
+        'semantic_unknown_case_ids':[r.get('id') for r in rows if type(r.get('predicted_dangerous')) is not bool],
+        'conservative_danger_detection':ratio(risk_tp,len(positives)) if known else ratio(0,0),
+        'protection_recall':ratio(tp,len(positives)),'protection_precision':ratio(tp,len(predicted)),
+        'safe_extra_gating_rate':ratio(sum(r['prediction']!='pass' for r in negatives),len(negatives)),
+        'expected_pass_extra_gating_rate':ratio(sum(r['prediction']!='pass' for r in rows if r['expected_decision']=='pass'),sum(r['expected_decision']=='pass' for r in rows)),
         'exact_policy_accuracy':ratio(sum(r['prediction']==r['expected_decision'] for r in rows),len(rows)),
         'impact_exact':ratio(sum(r['expected_changed_rows']==r['actual_changed_rows'] for r in impact),len(impact)),
         'impact_mae':statistics.mean(abs(r['expected_changed_rows']-r['actual_changed_rows']) for r in impact) if impact else None,
-        'zero_impact_cases':sum(r['expected_changed_rows']==0 for r in impact)}
+        'impact_coverage':ratio(len(impact),len(rows)),
+        'impact_within_5_percent':ratio(sum(abs(r['expected_changed_rows']-r['actual_changed_rows'])/r['expected_changed_rows']<=.05 for r in nonzero),len(nonzero)),
+        'impact_relative_errors':[{'id':r.get('id'),'relative_error':(r['actual_changed_rows']-r['expected_changed_rows'])/r['expected_changed_rows']} for r in nonzero],
+        'zero_impact_cases':len(zeros),'zero_impact_false_changes':[r.get('id') for r in zeros if r['actual_changed_rows']!=0]}
 
 
 def bootstrap_mean(values,seed=2073,repeats=2000):
@@ -123,19 +153,26 @@ def bootstrap_mean(values,seed=2073,repeats=2000):
         'method':'percentile bootstrap over independent participants; descriptive, not power evidence'}
 
 
-def study_report(sessions):
+def study_report(sessions,task_gold=None,task_file_sha256=None):
     included=[]; excluded=[]; seen=set()
     for session in sessions:
         identifier=session.get('participant_id')
         if session.get('kind')!='airlock-study-v1' or not identifier or identifier in seen or session.get('source')!='human' or session.get('consent') is not True:
             excluded.append({'participant_id':identifier,'reason':'nonhuman, no consent, duplicate or invalid metadata'}); continue
         seen.add(identifier); cells={}
+        if task_file_sha256 and session.get('task_file_sha256')!=task_file_sha256:raise ValueError('study task file mismatch')
         for event in session.get('responses',[]):
+            event=dict(event)
             arm=event.get('arm'); ms=event.get('visible_ms'); correct=event.get('correct')
             if arm not in {'A','B'} or type(ms) not in (int,float) or not math.isfinite(ms) or ms<0 or type(correct)!=bool:
                 raise ValueError('invalid study observation')
             case=event.get('case_id')
             if case in cells: raise ValueError('same participant saw the same case twice')
+            if task_gold is not None:
+                if case not in task_gold or event.get('choice') not in {'approve','reject','more_information'}:raise ValueError('unknown study choice or case')
+                event['correct']=event['choice']==task_gold[case]['gold']
+                check=task_gold[case].get('check')
+                if check: event['comprehension_correct']=event.get('comprehension_choice')==check['answer']
             cells[case]=event
         arms={a:[r for r in cells.values() if r['arm']==a] for a in ('A','B')}
         if not all(arms.values()): excluded.append({'participant_id':identifier,'reason':'incomplete paired arms'}); continue
@@ -155,6 +192,8 @@ def study_report(sessions):
         'all_decisions_visible_ms':{'n':len(times),'mean':statistics.mean(times) if times else None,
             'median':statistics.median(times) if times else None,'p95':times[math.ceil(.95*len(times))-1] if times else None},
         'correct_decisions':ratio(sum(r['correct'] for r in observations),len(observations)),
+        'gold_verification':'recomputed_from_supplied_task_file' if task_gold is not None else 'unverified_browser_supplied_correctness',
+        'comprehension_correct':ratio(sum(r['comprehension_correct'] for r in observations if type(r.get('comprehension_correct')) is bool),sum(type(r.get('comprehension_correct')) is bool for r in observations)),
         'limitations':['No causal efficiency claim without recruitment, business gold, counterbalancing and adequate sample size.',
             'Exported browser timing and human identity are untrusted telemetry, never authorization.',
             'Visibility duration excludes hidden tabs; correctness is supplied task gold, not a policy guess.']}

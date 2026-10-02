@@ -1,0 +1,7 @@
+{
+  "endpoint": "https://s3.example.invalid",
+  "bucket": "airlock-checkpoints",
+  "region": "us-east-1",
+  "prefix": "checkpoints",
+  "retain_days": 90
+}

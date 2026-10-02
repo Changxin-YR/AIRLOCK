@@ -126,7 +126,8 @@ def main():
                 assert client.get('/v1/audit/verify', headers=reviewer).json()['valid']
                 network = subprocess.run(['docker', 'network', 'inspect', name + '_protected'], text=True, capture_output=True, check=True, timeout=20)
                 assert json.loads(network.stdout)[0]['Internal'] is True
-                report = {'mode': 'real_docker_compose', 'project': name, 'probe': probe,
+                image_id=subprocess.run(['docker','inspect','--format','{{.Image}}',server_id],text=True,capture_output=True,check=True,timeout=20).stdout.strip()
+                report = {'mode': 'real_docker_compose', 'project': name, 'probe': probe, 'runtime_image_id':image_id,
                     'rows_before_independent_approval': before, 'rows_after_approval_and_restart': after,
                     'additional_checks': ['pending_survives_server_restart_without_execution',
                         'approved_effect_and_audit_persist_without_reseeding', 'compose_network_is_internal',

@@ -116,6 +116,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def suggestions(who: Annotated[str,Depends(operator)]):
         return {'items':gate.suggestions(),'active':gate.governance_preference()}
 
+    @app.get('/v1/operations/health')
+    def operations_health(who: Annotated[str,Depends(operator)]):
+        from .operations import health
+        return health(gate)
+
+    @app.get('/v1/operations/prometheus')
+    def operations_metrics(who: Annotated[str,Depends(operator)]):
+        from .operations import health,prometheus
+        return Response(prometheus(health(gate)),media_type='text/plain; version=0.0.4')
+
     @app.post('/v1/policy/reload')
     def reload_policy(who: Annotated[str,Depends(operator)]):
         return gate.reload_policy()
@@ -223,6 +233,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if settings.reviewer_file: raise GateError('operator_audit_verification_required',403)
         return gate.store.verify_audit()
 
+    @app.get('/v1/audit/export')
+    def export_audit(who: Annotated[str, Depends(reviewer)], after: int = Query(0, ge=0)):
+        from .export import redacted_export
+        items=gate.audit_events(who,None,after)
+        return {**redacted_export(items),'next_after':items[-1]['seq'] if items else after}
+
     @app.get('/v1/audit/checkpoint')
     def checkpoint(who: Annotated[str,Depends(operator)]):
         return gate.store.checkpoint()
@@ -251,7 +267,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 if await request.is_disconnected():
                     return
                 await asyncio.to_thread(gate.expire)
-                if not gate.access.identify((request.headers.get('authorization') or '').removeprefix('Bearer ')):
+                try:
+                    active=gate.access.identify((request.headers.get('authorization') or '').removeprefix('Bearer '))
+                except GateError:
+                    return
+                if not active:
                     return
                 items = await asyncio.to_thread(gate.audit_events, who, None, cursor, 100)
                 for item in items:

@@ -36,7 +36,7 @@ def run_logged(log: Path, command: list[str]) -> int:
                       'duration_seconds': round(time.monotonic() - clock, 3)}
             commit=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True)
             status['tested_commit_sha']=commit.stdout.strip() if commit.returncode==0 else None
-            scope=['airlock','frontend','configs','policies','benchmark','scripts','tests','tests-js','requirements.txt','requirements-dev.txt','pyproject.toml','package.json','package-lock.json','Dockerfile','compose.yaml','.github']
+            scope=['airlock','frontend','configs','policies','benchmark','scripts','tests','tests-js','requirements.txt','requirements-dev.txt','requirements-archive.txt','pyproject.toml','package.json','package-lock.json','Dockerfile','compose.yaml','.github']
             dirty=subprocess.run(['git','status','--porcelain','--untracked-files=all','--']+scope,capture_output=True,text=True)
             status['tracked_source_dirty']=dirty.returncode!=0 or bool(dirty.stdout.strip()) or start_commit!=status['tested_commit_sha']
             status['started_commit_sha']=start_commit
