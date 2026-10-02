@@ -10,6 +10,24 @@ defaults:
   run:
     shell: bash
 jobs:
+  intentional-negative-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Intentional child failure must fail this job
+        run: python scripts/run_logged.py evidence/negative-control.log -- python -c "raise SystemExit(23)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: intentional-negative-control
+          path: evidence/negative-control.log*
+          retention-days: 90
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
