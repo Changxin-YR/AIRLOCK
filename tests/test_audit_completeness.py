@@ -20,6 +20,10 @@ def test_audit_schema_all_states_with_original_snapshot_and_explicit_na(settings
         gate.decide(failed['id'],decision(failed))
         with gate.store.transaction() as conn:conn.execute('DROP TRIGGER test_failure')
         remote=gate.submit(request());gate.decide(remote['id'],decision(remote));gate.remote.reconcile(gate.get(remote['id']))
+        drifting=gate.submit(request('schema-remote-stale'));changing=gate.submit(request('schema-remote-change'))
+        gate.decide(changing['id'],decision(changing));gate.remote.reconcile(gate.get(changing['id']))
+        gate.decide(drifting['id'],decision(drifting));gate.remote.reconcile(gate.get(drifting['id']))
+        assert gate.get(drifting['id'])['state']=='stale'
         expired=gate.submit(call(key='schema-expired'));clock[0]+=301;gate.get(expired['id'])
         events=gate.store.audit_events(limit=1000);report=completeness(events)
         assert report['completeness']==1,report
@@ -28,7 +32,8 @@ def test_audit_schema_all_states_with_original_snapshot_and_explicit_na(settings
         # Independently damage replay evidence. Integrity and schema are different checks.
         damaged=copy.deepcopy(events);del damaged[0]['event']['detail']['snapshot']['policy_version']
         assert completeness(damaged)['completeness']<1
-        assert completeness(events[1:])['completeness']<1 or events[0]['event']['state']=='blocked'
+        without_claims=[e for e in events if e['event']['kind']!='action.executing']
+        assert completeness(without_claims)['completeness']<1
 
 
 def test_audit_completeness_access_and_empty(client,settings):

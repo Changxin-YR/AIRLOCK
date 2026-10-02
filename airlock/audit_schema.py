@@ -7,7 +7,7 @@ SNAPSHOT_FIELDS={'id','principal','request','request_hash','created_at','expires
 
 
 def completeness(events):
-    snapshots={};rows=[]
+    snapshots={};claims=set();rows=[]
     for record in events:
         event=record['event'];kind=event.get('kind','');missing=[];na={}
         if not kind.startswith('action.'):
@@ -34,12 +34,16 @@ def completeness(events):
             original=snapshots.get(record['action_id'])
             if not original:missing.append('preceding original snapshot')
             elif original['trace_id']!=event.get('trace_id'):missing.append('transition trace binding')
-            if event.get('state') in {'rejected','stale','failed','executing'}:
+            receipt=detail.get('receipt')
+            if receipt is not None:
+                if not isinstance(receipt,dict) or not original or receipt.get('action_id')!=record['action_id'] or receipt.get('request_hash')!=original.get('request_hash') or receipt.get('state')!=event.get('state') or record['action_id'] not in claims:
+                    missing.append('bound upstream receipt with preceding independent approval')
+                na['reviewer']='Reviewer and approval digest recorded in preceding action.executing claim.'
+            elif event.get('state') in {'rejected','stale','failed','executing','executed'}:
                 if not detail.get('reviewer') or not detail.get('reason') or not detail.get('review_digest'):missing.append('independent review evidence')
+                elif event.get('state')=='executing':claims.add(record['action_id'])
             elif event.get('state') in {'expired','unknown'}:
                 na['reviewer']='Server expiry or unresolved upstream result; consult preceding approval claim if present.'
-            elif event.get('state')=='executed' and not detail.get('reviewer') and not detail.get('receipt'):
-                missing.append('approval or bound upstream receipt')
         rows.append({'seq':record['seq'],'state':event.get('state'),'applicable':True,'missing':missing,'not_applicable':na,'complete':not missing})
     applicable=[r for r in rows if r['applicable']];complete=sum(r['complete'] for r in applicable)
     return {'schema':'airlock-replay-completeness-v1','events':len(events),'applicable_events':len(applicable),
