@@ -1,3 +1,43 @@
+# AIRLOCK 执行记忆：真实模型与功能补齐已交付，全部原目标仍部分满足
+
+更新：2026-10-02。先核对实际 main、工作分支和本分支；当前状态以本段与 STATE.json 为准，历史叙述在下方折叠保留。
+
+## 实际提交与验证
+
+- main仍为704b5035cf69f9a6c40c44eecd84c0d0741de849；未合并、未force-push。
+- 工作分支codex/full-audit-2026-10-02，代码/报告/原始证据已推送661cf9024e56df4dd88a6d789be25d46c7c8eace。
+- 应用测试SHA17ccd2c5942aa316ee94509109cc01fbca925a26；到报告提交的应用源码差异为空。
+- 草稿PR https://github.com/Changxin-YR/AIRLOCK/pull/1 已更新，待审未合并。
+- 最终应用CI36998200376成功，原包已下载核对摘要和57载荷，再独立verifier exit0；177 Python、6 JS、22原生浏览器、Next构建、真实Compose/Envoy/Collector、依赖审计通过。
+- Windows Compose基础镜像认证网络仍exit1，Linux成功不改写本机失败。Starlette TestClient/httpx warning保留。
+- 报告提交CI37000362930亦completed/success，全部步骤通过；最终元数据与Actions期限记录在STATE.json及CONTINUATION_CI_20261002.json。
+
+126原记录：97 IMPLEMENTED / 29 PARTIAL；104范围限定PASS / 21 BLOCKED_EXTERNAL / 1 NOT_RUN（C1父项聚合）。父项通过不能代替子项，完整原目标仍未满足。全部字段和实际收据见工作分支docs/acceptance/COMPLETION_MATRIX.json。
+
+## 本轮补齐和反例
+
+Streamable HTTP MCP、注册stateless MCP JSON上游、跨进程持久策略激活、可逆性/恢复分类、独立远端补偿、Next.js/React迁移、DeepSeek CNY持久预算/缓存、审计key-id轮换/签名检查点/9状态完整率、真实OTLP Collector及受限Envoy CEL映射。浏览器新增stale/expired/failed/unknown对账、长文本注入/键盘/退出/CSP路径。
+
+新增模型输出诊断并限制提示中的理由长度，严格schema不放宽。远端审计完整率绑定原持久执行声明，缺失声明仍失败。历史Windows MIME、假绿门禁、stdio环境、依赖UNC、TTL等修复和负例全部保留。已测范围无已知未修复P0/P1；不是全域安全认证。
+
+## 用户授权和真实模型结果
+
+用户授权DeepSeek V4.1 Flash、本机DEEPSEEK_API_KEY，费用“每个约3元”。实际从严实施为全部继续完善实验共用累计¥3和一个持久账本，最多650调用。本轮638次：622有效、16schema失败；保守预算占用¥1.11779816，有效usage估价¥0.84922816，均非供应商账单。不得更换ledger重置预算；当前无必要继续付费调用。
+
+四臂原v1提示、冻结200例分别跑dev120/test80，三模型臂共600真实调用。dev一致率：70/120、54/120、99/120、102/120；test：60/80、50/80、80/80、76/80。14次schema失败原样保留。dev诊断又复现2次超长理由；v2的10个dev失败样例重放全部有效，但没有全套v2消融或真实危险召回结论。真实HTTP Agent在脚本reviewer拒绝后改道只读count，1206行/余额总和1206000保持。
+
+用户确认没有真人参与者，要求保留受阻并完成工具。真实标注者0、真人n=0、κ=null；没有真实业务危险金标、授权日常日志或新独立保留集。OpenAI路径本轮仅离线契约，不冒称调用。
+
+## 余项与保留期限
+
+任意第三方透明代理仍需可信预演/CAS/收据适配；域名/OAuth/生产SSO、会话/SSE上游、通用影响估算/灾备、生产多租户/PII、生产告警和外部WORM未齐。真实数据、双人标注、真人A/B、用户日/归并质量与外部采用结果仍受阻。Next迁移和真实模型接入不再列作未实现。
+
+Git中的evidence/continuation-20261002长期随仓库历史保留（无自动到期，非WORM）。完整最终Linux ZIP为ci/acceptance-17ccd2c.zip，SHA256 a0d3854ab3a17581ae28e053cd0f34111ff2a5fe117c16d9fa6b22856df530fc；Actions原包11222458811到期2026-12-31T10:55:52Z，Git副本不随其到期。另存400024b完整ZIP。124个Git载荷已逐个重算哈希。旧首轮Actions包仅部分文本/本机证据入Git，不能冒称旧完整包均已永久归档。数据库、凭据、临时下载URL、解压副本和公共页面缓存不入Git。
+
+继续任务时保留完整任务正文和126索引，先查工作区/远端，按缺项所需外部输入推进。所有写入/补偿仍需独立批准；模型、可逆、预算、学习均不授权。禁止清空、覆盖用户改动、伪造人类/真实日志或自动合并main。
+
+<details><summary>历史进度（已被上方继续完善结果更新，保留原文供追溯）</summary>
+
 # AIRLOCK 执行记忆：全面审查与安全增量已交付，完整原目标部分实现
 
 更新：2026-10-02。先核对远端 main、工作分支与本分支；本文件不替代代码和原始证据。
@@ -109,5 +149,7 @@ README.md；AGENTS.md；CODEX_REVIEW.md；LICENSE；docs/PLAN.md、SPEC.md、THR
 ## 接续唯一优先动作
 
 让Codex从CODEX_REVIEW.md开展独立复核，首先核对main SHA、原始命令退出码、必需JUnit和真实产物；构造新的反例，不能删测试/降断言来变绿。若发现真实P0/P1，最小复现、定点修复、增加回归、全套重跑，再更新本分支。没有新需求或证据，不再从零重建，也不把这份记忆当验收事实。
+
+</details>
 
 </details>
