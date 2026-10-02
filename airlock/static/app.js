@@ -1,4 +1,4 @@
-import {el, number, short, date, states, countdown, ReviewClock} from './lib.js';
+import {el, number, short, date, states, countdown, ReviewClock, duration} from './lib.js';
 import {Api} from './api.js';
 import {reviewPanel} from './review.js';
 
@@ -120,7 +120,7 @@ function render() {
   const stats=el('section',{class:'stats','aria-label':'实际运行统计'},[
     ['待审批',number(counts.pending||0),'副作用尚未执行'],
     ['当前数据',number(metrics?.customers),'customers 表实际行数'],
-    ['评估 p95',metrics?.evaluation_p95_ms==null?'—':`${metrics.evaluation_p95_ms} ms`,'内部评估 · 不含提交/网络/人等待'],
+    ['评估 p95',duration(metrics?.evaluation_p95_ms),'内部评估 · 不含提交/网络/人等待'],
   ].map(([label,value,hint])=>el('div',{class:'stat'},el('span',{class:'muted small'},label),el('strong',{},value),el('span',{class:'muted small'},hint))));
   const queue=el('section',{class:'queue','aria-label':'动作列表'},el('div',{class:'queue-head'},el('h2',{},state.view==='pending'?'待处理队列':'动作记录'),el('span',{class:'muted small'},`${actions.length} 条已加载`)),
     el('label',{class:'sr-only',for:'search'},'搜索 SQL'),el('input',{id:'search','data-field':'search',type:'search',placeholder:'搜索 SQL…',value:state.filter,

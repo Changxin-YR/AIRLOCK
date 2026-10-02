@@ -33,6 +33,10 @@ jobs:
       - run: python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
       - run: python -m playwright install --with-deps chromium
       - run: python scripts/browser_smoke.py 2>&1 | tee evidence/browser-native.log
+      - run: python scripts/docker_smoke.py 2>&1 | tee evidence/docker-smoke.log
+      - name: Inventory evidence
+        if: always()
+        run: python scripts/evidence_manifest.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

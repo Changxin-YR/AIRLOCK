@@ -52,3 +52,9 @@ export class EventParser {
     });
   }
 }
+
+export function duration(value) {
+  if (value == null || !Number.isFinite(Number(value))) return '—';
+  const ms = Number(value);
+  return ms < 1000 ? `${ms.toFixed(1)}\u00a0ms` : `${(ms / 1000).toFixed(2)}\u00a0s`;
+}

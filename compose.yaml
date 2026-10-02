@@ -3,13 +3,13 @@ services:
     build: .
     environment:
       AIRLOCK_DB: /data/airlock.db
-      AIRLOCK_ORIGIN: http://127.0.0.1:8000
+      AIRLOCK_ORIGIN: "http://127.0.0.1:${AIRLOCK_PORT:-8000}"
       AIRLOCK_INTERNAL_HOST: airlock
       AIRLOCK_AGENT_TOKEN: ${AIRLOCK_AGENT_TOKEN:?Set a random agent token}
       AIRLOCK_REVIEWER_TOKEN: ${AIRLOCK_REVIEWER_TOKEN:?Set a different reviewer token}
       AIRLOCK_AUDIT_KEY: ${AIRLOCK_AUDIT_KEY:?Set a third random audit key}
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:${AIRLOCK_PORT:-8000}:8000"
     volumes:
       - state:/data
     networks: [protected]
