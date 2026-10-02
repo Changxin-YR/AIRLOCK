@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-c",
+    "from airlock.semantic import SemanticAdvisor; from pathlib import Path; import json; Path('var').mkdir(exist_ok=True); a=SemanticAdvisor('configs/deepseek-flash.example.json','var/deepseek-continuation-ledger'); r=a.assess({'principal':'experiment:synthetic','request':'UPDATE customers SET balance=0 WHERE id=1','note':'advice only; no execution'}); print(json.dumps(r,ensure_ascii=False)); print(json.dumps(a.ledger_summary())); raise SystemExit(0 if r['status']=='ok' else 2)"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:34:47.856560+00:00",
+  "duration_seconds": 2.325,
+  "tested_commit_sha": "378aa6715b56d284a7565ef7387900b78c36ff18",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "378aa6715b56d284a7565ef7387900b78c36ff18"
+}

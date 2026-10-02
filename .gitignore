@@ -22,3 +22,6 @@ airlock/console/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
+
+/evidence/continuation-20261002/ci/raw/
+/evidence/continuation-20261002/ci/raw-17ccd2c/

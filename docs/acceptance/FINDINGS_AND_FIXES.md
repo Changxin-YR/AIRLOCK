@@ -22,3 +22,18 @@
 CI run 36986618577 的 `intentional-negative-control` 子进程退出 23，GitHub 作业及整次 run 为 failure，正常 verify 作业 success。该临时作业在 `90bbbfb` 删除，历史日志保留。这证明实际失败传播路径，没有跳过原有检查来恢复正常状态。
 
 当前已测边界内未发现仍未修复、可复现的 P0/P1；这不是对未实现适配器、生产部署或真实模型行为的安全认证。未完成的原目标仍列为 PARTIAL/受阻，不因本结论关闭。
+
+## 继续完善阶段：真实模型与新增集成
+
+本节证据前缀为 evidence/continuation-20261002/。最终应用17ccd2c本机177项Python通过；同SHA的Linux CI run36998200376通过全部177 Python、6 JS、22原生浏览器、真实Compose/Envoy/Collector及证据门禁。新增反例仍由同一执行者完成，不虚构独立评审人员。
+
+| ID | 严重度/性质 | 发现及修复 | 原始证据与复验 |
+|---|---|---|---|
+| F008 | P1，新Next界面集成阶段 | Next内联初始化受原严格CSP阻止；静态打包生成逐内容SHA256授权，未加入unsafe-inline；长文本面板增加min-width约束 | next-login-diagnostic.png、browser-initial/保留初始观察；final和retest的native/edges原生检查、最终CI通过 |
+| F009 | P2，真实容器测试路径 | Envoy默认entrypoint尝试chown而cap-drop ALL下失败；改显式非root执行/usr/local/bin/envoy，保留cap-drop与只读根；访问日志flush设50ms以得到完整采样 | integration-initial/envoy-container.log、ci/failed-6ad-job.log；retest/container-integrations.json和最终CI12例全通过 |
+| F010 | P2，真实模型可用性及诊断 | 原消融14次schema异常fail-closed；dev诊断复现2次reason过长。新增保存原输出/schema_errors；v2要求≤300字符，严格max800不变 | final/ablation-live-*.json、final/model-diagnostics.json、retest/model-contract-recheck.json；10个dev重放全部有效，原负结果不覆盖 |
+| F011 | P2，审计完整率误报 | 合法远端CAS stale/failed收据不重复携带reviewer字段；完整率改核对先前独立持久执行声明，缺少声明仍判缺失 | tests/test_audit_completeness.py；final-17ccd2c/pytest.xml及最终CI通过 |
+
+新增功能对应的独立反例包括：跨进程策略重载与重启；MCP真实HTTP协议拒绝/非法参数/无副作用；远端补偿归属/CAS/独立批准；审计轮换和检查点插入/排序/替换/删除/截尾；9状态完整率及明确N-A；真实Collector接收、503重试且授权不变；Next真实stale/expired/failed/unknown对账、长文本/文本注入、键盘/退出/CSP。逐项源码和测试ID在126矩阵。
+
+没有新增自动批准路径。全原始目标仍受生产适配器、独立真实数据和真人研究缺口限制；上述受控复验不构成全域安全认证。

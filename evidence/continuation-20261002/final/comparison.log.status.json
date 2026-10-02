@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/demo_comparison.py",
+    "--output",
+    "evidence/continuation-20261002/final/comparison.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:43:50.078502+00:00",
+  "duration_seconds": 1.429,
+  "tested_commit_sha": "abcacfa30ef9747525a55053e3100e2b599dde48",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "abcacfa30ef9747525a55053e3100e2b599dde48"
+}

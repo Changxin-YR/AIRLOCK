@@ -14,7 +14,7 @@ def main():
     targets=REPORT['targets'];by_id={r['id']:r for r in targets}
     require(len(targets)==len(by_id)==126,'missing or duplicate IDs')
     require(set(by_id)=={r['id'] for r in INDEX['targets']},'changed target set')
-    junit={c.get('classname','')+'::'+c.get('name','') for c in ET.parse(ROOT/'evidence/full-audit-20261002/final/pytest.xml').iter('testcase')}
+    junit={c.get('classname','')+'::'+c.get('name','') for c in ET.parse(ROOT/REPORT.get('junit_evidence','evidence/full-audit-20261002/final/pytest.xml')).iter('testcase')}
     checked_receipts=set()
     for r in targets:
         id=r['id']

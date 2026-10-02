@@ -1,0 +1,19 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pip_audit",
+    "-r",
+    "requirements.txt",
+    "--format",
+    "json",
+    "--output",
+    "evidence/continuation-20261002/final/dependency-audit.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:43:11.739037+00:00",
+  "duration_seconds": 31.454,
+  "tested_commit_sha": "abcacfa30ef9747525a55053e3100e2b599dde48",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "abcacfa30ef9747525a55053e3100e2b599dde48"
+}

@@ -1,11 +1,13 @@
 # AIRLOCK 运行与扩展契约（2026-10-02）
 
-当前版本是个人研究项目：FastAPI、SQLite、原生 ES modules/CSS、真实 cel-python。支持固定合成 customers 数据和显式注册、实现 CAS/收据契约的 HTTP 上游。真实模型为可选项；不配置时可运行完整确定性审批演示。Next.js 原目标仍有技术栈偏差，未得到用户豁免。
+当前版本是个人研究项目：FastAPI、SQLite、Next.js 16.3.8 / React 19.3.0、真实 cel-python。支持固定合成 customers 数据和显式注册、实现 CAS/收据契约的 HTTP / stateless MCP JSON 上游。真实模型为可选项；不配置时可运行完整确定性审批演示。
 
 ## 启动和角色
 
 ```sh
 python -m pip install -r requirements-dev.txt
+npm ci
+npm run build
 python -m airlock init
 python -m airlock serve
 ```
@@ -102,9 +104,9 @@ HTTP 与 stdio MCP 共用 Gate。MCP 协商 2025-06-18/2025-11-25，暴露 SQL�
 
 ## 真实模型的运行前提
 
-只有本项目明确授权的 provider/model/key/预算齐备后才运行。实现使用 OpenAI Responses (`store=false`, strict JSON schema)，只读取专用 `AIRLOCK_LLM_API_KEY`。配置 `AIRLOCK_SEMANTIC_FILE` 必须包含 authorized_project=AIRLOCK、model、budget_usd、max_calls、max_concurrent、max_output_tokens、输入/缓存输入/输出单价、price_source、price_effective_date、cache_seconds。字段定义见 `airlock/semantic.py:ProviderConfig`，不在示例中编造当前商业价格。
+只有本项目明确授权的 provider/model/key/预算齐备后才运行。实现支持 OpenAI 与 DeepSeek 各自的 Responses 接口（`store=false`、strict JSON schema）。OpenAI 只读取专用 `AIRLOCK_LLM_API_KEY`；DeepSeek 只读取 `DEEPSEEK_API_KEY`，配置与本次真实实验证据见后文。配置 `AIRLOCK_SEMANTIC_FILE` 必须包含 authorized_project=AIRLOCK、model、budget_usd、max_calls、max_concurrent、max_output_tokens、输入/缓存输入/输出单价、price_source、price_effective_date、cache_seconds。字段定义见 `airlock/semantic.py:ProviderConfig`，不在示例中编造当前商业价格。
 
-无配置为确定性模式；启用后 schema/超时/限流/预算/usage 异常 fail-closed，模型只能加严建议。调用次数和并发有硬限制；美元门槛是基于操作者单价和输入字节预占的保守本地估算，不是供应商账单硬封顶，需另设供应商项目预算。失败保留预占，持久化 ledger 防止重启清零。缓存键含主体、参数、模型/提示/策略/快照，应用命中与 provider cached_tokens 分开。
+无配置为确定性模式；启用后 schema/超时/限流/预算/usage 异常 fail-closed，模型只能加严建议。调用次数和并发有硬限制；USD/CNY 门槛是基于操作者单价和输入字节预占的保守本地估算，不是供应商账单硬封顶，需另设供应商项目预算。失败保留预占，持久化 ledger 防止重启清零。缓存键含主体、参数、模型/提示/策略/快照，应用命中与 provider cached_tokens 分开。
 
 ```sh
 python -m benchmark.ablation --split dev --tuning --provider-config <已授权配置> --ledger var/research-ledger --output evidence/ablation-live.json
@@ -133,7 +135,7 @@ python -m benchmark.research --output evidence/study.json study <匿名导出.js
 
 pending：不执行，查原动作；stale：新意图重新预演审批；clock_regression：修复系统时钟；unknown：只查询原上游收据；审计失败：本地事务不提交，远端可能已发生效果，重启对账。策略/路由文件损坏时修复受信配置，不关闭鉴权。
 
-每库上限 10000 动作和固定合成数据上限 5000 行；当前无在线清理/归档 API。恢复快照、原 SQL 和审计均为敏感服务端数据，只授予实际所需 reviewer 权限。备份/轮换审计密钥须停写并保留旧密钥分段链及离线校验记录；当前支持操作者触发 key-id 原子轮换和签名检查点；没有外部 WORM，不宣称相关保证。数据库和 provider ledger 不进 Git；导出仅限合成证据。
+每库上限 10000 动作和固定合成数据上限 5000 行；当前无在线清理/归档 API。恢复快照、原 SQL 和审计均为敏感服务端数据，只授予实际所需 reviewer 权限。数据库备份需保持一致性并保留全部旧验证密钥和离线校验记录；操作者触发的 key-id 轮换在同一事务记录事件并激活，无需清空审计链；当前支持独立签名检查点；没有外部 WORM，不宣称相关保证。数据库和 provider ledger 不进 Git；导出仅限合成证据。
 
 
 ## 本轮新增配置与复验入口

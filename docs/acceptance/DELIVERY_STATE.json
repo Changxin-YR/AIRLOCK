@@ -2,14 +2,51 @@
   "record_type": "code_validation_and_delivery_anchor",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "tested_commit": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
-  "core_tested_commit": "266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4",
+  "tested_commit": "17ccd2c5942aa316ee94509109cc01fbca925a26",
   "code_push_confirmed": true,
-  "documentation_commit": "Resolve the commit introducing this file; memory/progress records the exact final report/evidence commit after push.",
-  "pr": {"number": 1, "url": "https://github.com/Changxin-YR/AIRLOCK/pull/1", "state": "open", "draft": true, "merged": false},
-  "ci": {"run_id": 36988565652, "job_id": 110779147895, "conclusion": "success", "tested_commit_sha": "b9de71085e9b3027b8127c4da6d7193d8f19ba88"},
-  "negative_control": {"run_id": 36986618577, "job_exit_code": 23, "conclusion": "failure", "intentional": true, "temporary_job_removed": true},
+  "documentation_commit": "Resolve the commit introducing this revision of FINAL_REPORT.md; memory/progress STATE.json records the exact pushed SHA.",
+  "pr": {
+    "number": 1,
+    "url": "https://github.com/Changxin-YR/AIRLOCK/pull/1",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
+  "ci": {
+    "run_id": 36998200376,
+    "job_id": 110809640795,
+    "conclusion": "success",
+    "tested_commit_sha": "17ccd2c5942aa316ee94509109cc01fbca925a26",
+    "full_zip_git_path": "evidence/continuation-20261002/ci/acceptance-17ccd2c.zip",
+    "artifact_id": 11222458811,
+    "artifact_expires_at": "2026-12-31T10:55:52Z",
+    "downloaded_sha256_verified": true,
+    "manifest_files_verified": 57
+  },
+  "target_count": 126,
+  "counts": {
+    "implementation": {
+      "IMPLEMENTED": 97,
+      "PARTIAL": 29
+    },
+    "verification": {
+      "PASS": 104,
+      "BLOCKED_EXTERNAL": 21,
+      "NOT_RUN": 1
+    }
+  },
+  "model": {
+    "provider": "DeepSeek-V4.1-Flash",
+    "calls": 638,
+    "valid": 622,
+    "error": 16,
+    "combined_budget_cny": 3,
+    "reserved_or_settled_estimate_cny": 1.11779816,
+    "known_usage_estimate_cny": 0.84922816,
+    "provider_invoice_reconciled": false
+  },
+  "human_participants": 0,
   "original_goals_all_satisfied": false,
-  "scope": "Bounded SQLite and registered HTTP adapter, offline semantic contracts and real native UI/SDK/CI; not real-model or human-effectiveness acceptance.",
-  "latest_memory_state": "Read memory/progress STATE.json after final synchronization; do not infer its commit from the code branch."
+  "scope": "Bounded SQLite, registered HTTP/stateless MCP JSON, Next.js, actual DeepSeek synthetic experiments, SDK/containers/CI; production adapters and human/independent danger-gold acceptance incomplete.",
+  "latest_memory_state": "Read memory/progress STATE.json after synchronization; code, evidence, PR and main are distinct."
 }

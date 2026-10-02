@@ -1,0 +1,17 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "benchmark.evaluate",
+    "--split",
+    "test",
+    "--output",
+    "evidence/continuation-20261002/final/benchmark-test.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:38:28.677424+00:00",
+  "duration_seconds": 4.189,
+  "tested_commit_sha": "6adcc07705d2d7316847759229594b53866ad286",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "6adcc07705d2d7316847759229594b53866ad286"
+}

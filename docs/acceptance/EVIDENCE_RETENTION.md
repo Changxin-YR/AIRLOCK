@@ -1,20 +1,25 @@
-# 证据去向与保留期限
+# 原始证据去向与保留期限
 
-基线 `704b5035cf69f9a6c40c44eecd84c0d0741de849`；核心复验 `266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4`；最后 UI 修复 `b9de71085e9b3027b8127c4da6d7193d8f19ba88`。所有时间采用证据中 UTC。
+最终应用测试SHA：`17ccd2c5942aa316ee94509109cc01fbca925a26`。报告归档提交另见memory/progress。每个原始收据保留真实SHA、UTC、dirty状态、命令和退出码，旧实验不改写为最新代码结果。
 
-| 保存位置 | 实際内容 | 期限与限制 |
+| 位置 | 内容 | 期限与限制 |
 |---|---|---|
-| 工作分支 Git：`evidence/full-audit-20261002/` | 本机原状/中间/冻结检查日志、真实退出码收据、JUnit、逐例评测、延迟原始样本、PNG、研究自动化导出；GitHub CI 原始文本日志及 API 元数据 | 随 Git 历史长期保存，没有 Actions 式自动到期；仍依赖仓库及备份保留，不是 WORM/外部不可变存证 |
-| 工作分支 Git：`docs/acceptance/` | 原始索引、原状与最终矩阵、审查报告、矩阵校验代码和证据说明 | 同上；原始完整任务正文在 `docs/CODEX_FULL_AUDIT_BRIEF.md` |
-| Actions run 36986102382：artifact 11216944737 `acceptance-evidence` | Linux 原始运行包：源码 zip、截图、命令收据、真 Docker 报告、依赖/评测/时延等 | 90 天，API 明确到期 `2026-12-31T08:48:02Z`；935541 bytes；SHA256 `d5f0e6cde83689a0b472572c31d0072366f8c888430c6dbc59fb804f6e24cbd9` |
-| Actions run 36986618577：artifact 11218125469 | 故意失败的日志及 exit23 收据 | 90 天，到期 `2026-12-31T08:53:28Z`；原始 CI 文本和元数据另已放入 Git |
-| Actions run 36988565652：artifact 11218408231 | 最后 UI 代码提交的完整 Linux 原始运行包 | 90 天，到期 `2026-12-31T09:13:44Z`；936515 bytes；服务端 digest `sha256:30e078a97b7a17c98485f540fe29b28e8c11852960808903d7eb39739392ee51` |
-| 后续正常 Actions | 以对应 run 的 metadata 为准；默认 retention-days=90 | 后续 URL 与 SHA 单列 `DELIVERY_STATE.json` 或 memory/progress，不冒用旧 run 的日期 |
-| 仅本机忽略目录 `audit-inputs/` | 基线 traceback 中两个含临时合成 token 的未脱敏原文件、执行辅助脚本 | 不入 Git，无持久保留保证；Git 只保存脱敏副本及双向 hash 对照，原退出码不改 |
-| 仅本机 `.firecrawl/` | 公开资料完整临时抓取缓存 | 不提交整篇第三方内容；保留引用、核验日期和选择性事实，缓存没有永久归档承诺 |
+| Git：evidence/continuation-20261002/ | 本机原始日志/收据、JUnit、PNG、逐例模型/离线结果、合成账本导出、失败历史、CI元数据 | Git无自动到期，依赖仓库/备份保留，不是WORM |
+| Git：ci/acceptance-17ccd2c.zip | 最终Linux完整包，含source.zip、原始日志/图片、Docker/Envoy/Collector及逐例数据 | 4523055 bytes；SHA256 `a0d3854ab3a17581ae28e053cd0f34111ff2a5fe117c16d9fa6b22856df530fc`；已核对57载荷哈希，独立verifier exit 0 |
+| Actions run36998200376 / artifact11222458811 | 上述ZIP原托管副本 | 90天，到期2026-12-31T10:55:52Z；Git副本不随其到期 |
+| Git：ci/acceptance-400024b.zip | 前一个成功应用提交完整Linux包 | 4521492 bytes；SHA256 `be3bb07644f8a056a36e59039c7f52d68b50b6c1da73c1aedfb287e5ef57fc79`；57载荷和verifier已校验 |
+| Actions run36997232536 / artifact11221817634 | 400024b原包 | 到期2026-12-31T10:45:27Z；Git副本无自动到期 |
+| Git：evidence/full-audit-20261002/ | 首轮基线/失败/修复、本机结果、旧CI文本/元数据、故意exit23负对照 | 历史保留，不回写旧模型n=0或旧功能状态 |
+| 旧Actions artifact11216944737 / 11218125469 / 11218408231 | 首轮Linux / 故意失败 / UI修复原包 | 分别到期2026-12-31T08:48:02Z / T08:53:28Z / T09:13:44Z；旧完整ZIP未入Git，旧文本不等于完整包 |
+| 本机忽略目录ci/raw/、ci/raw-17ccd2c/ | 已归档ZIP的解压副本 | 仅本机；可从Git ZIP还原 |
+| 本机忽略目录var/ | 私有ledger SQLite、临时数据库/配置、abcacfa CI ZIP缓存 | 不提交数据库或凭据；合成账本导出已入Git；本机文件无永久承诺 |
+| 本机audit-inputs/与.firecrawl/ | 执行辅助文件、首轮含临时合成token的原始失败文件、公开资料缓存 | 不入Git；脱敏副本/来源/历史哈希另存；不提交第三方全文 |
+| Git：docs/acceptance/ | 原始126索引、基线与当前矩阵、报告和校验器 | 原完整正文仍在docs/CODEX_FULL_AUDIT_BRIEF.md，随Git保留 |
 
-本轮没有下载并独立校验上述 Actions ZIP，也没有创建 Release 归档或外部永久存储。不能把 Git 中的 CI 文本当作完整 Linux artifact 的替代品；尤其 Linux 原始 Docker JSON 与 CI PNG 的完整包仍仅在 Actions。工具读取到的 job/step 成功与原始 log 支持 CI 结论，artifact metadata 的 digest 仅是服务端报告。
+`ARCHIVE_MANIFEST.json` 对本轮纳入Git的载荷逐文件保存字节数/SHA256，排除自己与忽略的解压副本。CI原manifest不改写；下载校验收据核对它覆盖的57个文件。
 
-`ARCHIVE_MANIFEST.json` 对最终纳入 Git 的证据载荷逐文件记录字节数和 SHA256。`final/manifest.json` 是原始运行时清单：生成时自己的 `manifest.log` 仍在写入，故它对该单个自引用日志的 hash 不作为最终归档 hash。最终 hash 以根归档清单为准；所有原始报告保留，不回写其 SHA 或退出码。
+preflight、final、retest、final-code、final-17ccd2c分别代表各自源状态。latest Python和完整CI绑定17ccd2c；四臂保持v1提示与6adcc07收据，v2仅重放10个开发失败样例，未冒充全套v2结果。
 
-`preview-final/` 与 `fixes/` 是中间结果，不代表最终冻结源；`final/` 绑定 266ad9e；`final-ui/` 绑定 b9de710。仅做文本脱敏的文件列在 `REDACTION_PROVENANCE.json`，其他原始业务证据未重算冒充新测试。
+模型导出仅含合成任务与响应，不含API key。初次14次无效schema只有错误类型/时间/状态；新增诊断后2次超长输出保留原文与schema_errors，不能据此证明最初14次全部同一原因。
+
+本轮没有创建Release或外部不可变存储。后续报告提交触发的新Actions有自己的保留期限；应用代码不变时，17ccd2c完整包仍是本报告已核验应用证据锚点。

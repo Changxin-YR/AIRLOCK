@@ -25,3 +25,9 @@
 本轮 GitHub API 核实 [theagentrouter/agent-router #2073](https://github.com/theagentrouter/agent-router/issues/2073)：标题 Human-in-the-Loop for MCP Tool Calls，2026-04-20 创建、2026-07-13 更新，读取时 open。作者提出网关负责决策/编排，把 UI、责任人和疲劳处理排除在其建议范围外。正文及四条回复均非维护者关联声明（author_association=NONE），不能表述为已获项目承诺/采纳。可复現讨论稿在 UPSTREAM_PROPOSAL_DRAFT.md，未发送。
 
 读取 AIRLOCK 仓库 API 时 stars=0、forks=0。没有外部集成/采用证据；贡献者集合接口受 connector 路径限制，本轮不能独立证明外部贡献数，所以不是随意填 0。仓库元数据和当前 main 可在证据 source-facts.json 核对。下载的公共网页全文仅作本地研究缓存，不承诺永久保留；Git 记录核验摘要、URL、日期与文件哈希。
+
+## 本轮真实接入的补充来源
+
+2026-10-02 读取官方 [DeepSeek 定价与模型名称](https://api-docs.deepseek.com/zh-cn/quick_start/pricing/)、[Responses API](https://api-docs.deepseek.com/guides/responses_api) 和 [思考模式](https://api-docs.deepseek.com/guides/thinking_mode)。官方 `deepseek-flash` 对应 DeepSeek-V4.1-Flash；本轮使用非思考模式、strict schema 和 `store=false`。高峰 CNY 单价用于保守预算估算，不能作为实际扣费凭证。OpenAI provider 本轮仍只有离线契约测试；638 次付费调用均为用户授权的 DeepSeek。
+
+Next.js / React 版本以 `package-lock.json` 和 CI `next-build.log` 为准。官方 Envoy 1.39.1 与 OpenTelemetry Collector 0.162.0 镜像实际运行，镜像 RepoDigests、逐例结果和容器日志在最终 CI ZIP 的 `container-integrations.json` 及相应原始日志。Envoy 实验只验证显式变量映射的有限 CEL 子集，不把访问日志过滤器称为生产授权集成。

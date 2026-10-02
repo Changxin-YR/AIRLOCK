@@ -1,0 +1,22 @@
+{
+  "replayed": 10,
+  "schema_errors": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "ledger": {
+    "calls": 638,
+    "reserved_or_settled_amount": 1.11779816,
+    "budget": 3.0,
+    "currency": "CNY",
+    "invalidations": 9
+  }
+}

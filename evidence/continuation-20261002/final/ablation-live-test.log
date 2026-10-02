@@ -1,0 +1,28 @@
+{
+  "split": "test",
+  "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7",
+  "live_model_requested": true,
+  "limitations": [
+    "Original synthetic corpus is unchanged and has no independent human danger gold.",
+    "The pure model arm measures advice only; it cannot execute or bypass the production gate.",
+    "Live model arms require AIRLOCK-only configuration, key and explicit budget authorization."
+  ],
+  "arms": {
+    "keyword": {
+      "status": "MEASURED",
+      "n": 80
+    },
+    "pure_llm": {
+      "status": "MEASURED",
+      "n": 80
+    },
+    "hybrid_no_preview": {
+      "status": "MEASURED",
+      "n": 80
+    },
+    "hybrid_with_preview": {
+      "status": "PROVIDER_ERRORS",
+      "n": 80
+    }
+  }
+}

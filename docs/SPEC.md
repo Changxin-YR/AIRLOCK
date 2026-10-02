@@ -12,6 +12,6 @@ Action 保存原请求/摘要、主体、resource、创建/有效期、策略版
 
 三态 pass/block/need_approval 与业务执行状态分开。硬拒绝和错误优先，受支持写入至少需审。pending 不是成功，批准事实保存在审核事件，本地成功为 executed，远端 executing/unknown 不能填成 execution_occurred=false。服务端 TTL/时钟高水位独立于浏览器计时。
 
-SSE 为有权限的通知，不能批准。可见计时使用 IntersectionObserver、visibilitychange 和 performance.now，仅是 untrusted 遥测。审计绑定 seq/action_id/previous_hash/完整事件；回放读取原快照，不重新执行。没有外部锚点，不保证检测合法尾部截断；无自动 key-id 轮换。
+SSE 为有权限的通知，不能批准。可见计时使用 IntersectionObserver、visibilitychange 和 performance.now，仅是 untrusted 遥测。审计绑定 seq/action_id/previous_hash/完整事件；回放读取原快照，不重新执行。支持 operator 触发的 key-id 原子轮换、独立导出签名检查点及截尾验证；部署方须把检查点放在服务端不能覆写的位置。检查点之后的截尾及全部密钥失陷仍不受保证，未部署外部 WORM。
 
 量化边界及价格/预算口径见运行手册；新 schema 和状态需相应权限、实际效果、故障和证据门禁测试。原始目标并未因支持边界受限而自动完成。

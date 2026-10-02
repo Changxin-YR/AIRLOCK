@@ -1,0 +1,20 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/diagnose_model_schema.py",
+    "--provider-config",
+    "configs/deepseek-flash.example.json",
+    "--ledger",
+    "var/deepseek-continuation-ledger",
+    "--original-dev-report",
+    "evidence/continuation-20261002/final/ablation-live-dev.json",
+    "--output",
+    "evidence/continuation-20261002/retest/model-contract-recheck.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:45:31.365833+00:00",
+  "duration_seconds": 11.745,
+  "tested_commit_sha": "400024bd59133d9e50f8fb00288b9f02693b2153",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "400024bd59133d9e50f8fb00288b9f02693b2153"
+}

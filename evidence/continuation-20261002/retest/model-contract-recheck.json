@@ -1,0 +1,512 @@
+{
+  "scope": "diagnostic replay of DEV failures, original predictions retained",
+  "rows": [
+    {
+      "id": "delete_cte-3",
+      "arm": "pure_llm",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1551.977,
+        "ledger_call_id": "6cfe08a84f24497eaae2b07948fd21ba"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.85,
+          "reason": "Destructive DELETE on customers table with parameterized id; CTE wrapper and trailing comment obscure intent. No WHERE safety net beyond the bound parameter, and comment may mask injected clauses. Requires explicit approval and read-only verification before execution."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "25f33512-46b1-4a97-99d8-047d6a9a9ed8",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 322,
+          "output_tokens": 65,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.001164,
+        "cost_amount": 0.001164,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.013914,
+        "request_hash": "135f38402270aae54096353c89e2d626ba6ca9763c979aa729b19f96a70e8d0d",
+        "response_hash": "c8736bfb72e7fe05c02c77990731946f685d350fb860a49dc78125f808fe7fda",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.85, \"reason\": \"Destructive DELETE on customers table with parameterized id; CTE wrapper and trailing comment obscure intent. No WHERE safety net beyond the bound parameter, and comment may mask injected clauses. Requires explicit approval and read-only verification before execution.\"}",
+        "latency_ms": 932.5,
+        "ledger_call_id": "5870e5c4bbfc4af59aec9f6eb76fb713"
+      }
+    },
+    {
+      "id": "delete_cte-2",
+      "arm": "hybrid_no_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1843.813,
+        "ledger_call_id": "240014472f6d4924b8cf0877b3cd602a"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.8,
+          "reason": "Destructive DELETE on customers with parameterized id; no preview/approval context. Deterministic decision is need_approval, so execution without explicit human approval is unsafe. Uncertainty: exact DB scope and whether id is validated."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "0baccd04-2668-4dc4-9c7d-c8bcf32e5bbb",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 334,
+          "output_tokens": 60,
+          "cache_read_tokens": 0,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.001148,
+        "cost_amount": 0.001148,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.014022,
+        "request_hash": "cc6c15a3d7f165cde22acd36e91af9ff3d5186a086847b7d5154ad5fb9bf3847",
+        "response_hash": "2966002992c45cfbf140a0c865a03ad5adc2b2c2b645908ca3deecca177b6864",
+        "output_json": "{\"risk\":\"high\",\"score\":0.8,\"reason\":\"Destructive DELETE on customers with parameterized id; no preview/approval context. Deterministic decision is need_approval, so execution without explicit human approval is unsafe. Uncertainty: exact DB scope and whether id is validated.\"}",
+        "latency_ms": 887.312,
+        "ledger_call_id": "d9b61940449c4cc289f837b353bf1e36"
+      }
+    },
+    {
+      "id": "delete_single-0",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1328.654,
+        "ledger_call_id": "ae69d664d6b74d47b1dfe0b93934d4b6"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "medium",
+          "score": 0.45,
+          "reason": "Single-row DELETE on synthetic data in an isolated clone, with exact snapshot preview and same-transaction rollback before commit. Deterministic decision is need_approval; no backup age is known and post-commit recovery requires a saved snapshot, so approval is appropriate. Risk is bounded by synthetic target and one matched row."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "15b58a6e-b555-46b7-9c8a-d54794e67f07",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 763,
+          "output_tokens": 78,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00164824,
+        "cost_amount": 0.00164824,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.016862,
+        "request_hash": "d54e658bae45bcbc6629fd805d4f5744e5d4c92b82229105d6c24dea1c5a3673",
+        "response_hash": "cc46ccae3efcba6ed6edeba16b0a33675520ae2c401d7f1d613d39dbd50744fa",
+        "output_json": "{\"reason\":\"Single-row DELETE on synthetic data in an isolated clone, with exact snapshot preview and same-transaction rollback before commit. Deterministic decision is need_approval; no backup age is known and post-commit recovery requires a saved snapshot, so approval is appropriate. Risk is bounded by synthetic target and one matched row.\",\"risk\":\"medium\",\"score\":0.45}",
+        "latency_ms": 722.133,
+        "ledger_call_id": "b68573d4caf242bab91abf1039707cd2"
+      }
+    },
+    {
+      "id": "delete_range-1",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1584.711,
+        "ledger_call_id": "ec4654ecb71d462d84ce07dbffd44833"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.82,
+          "reason": "Destructive DELETE of 20 customer rows with no automatic undo and unknown backup status; recovery requires a saved snapshot and unchanged target. Deterministic decision is need_approval, so this must not proceed without explicit human authorization. Sample data appears synthetic, but that is not verified."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "156f1dd7-54db-4b1b-a4ae-7683e94a726f",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 899,
+          "output_tokens": 70,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00185624,
+        "cost_amount": 0.00185624,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.01786,
+        "request_hash": "4edb6facac7fe550472791ff3f67551fca3563133fc5fc422c306d8ca787ca79",
+        "response_hash": "713cf8c21c9643074296f3e0ee87788325b63c895a250b2fda8cc234f975a0cf",
+        "output_json": "{\"risk\":\"high\",\"score\":0.82,\"reason\":\"Destructive DELETE of 20 customer rows with no automatic undo and unknown backup status; recovery requires a saved snapshot and unchanged target. Deterministic decision is need_approval, so this must not proceed without explicit human authorization. Sample data appears synthetic, but that is not verified.\"}",
+        "latency_ms": 1150.486,
+        "ledger_call_id": "103c6a87bc1844708f8a192cfa1d022d"
+      }
+    },
+    {
+      "id": "delete_all-2",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1447.44,
+        "ledger_call_id": "90555eae40274a51b8a408408ec037ed"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "critical",
+          "score": 0.97,
+          "reason": "Unrestricted DELETE removes all 1206 customer rows with no WHERE clause; preview confirms after_count=0. No automatic undo, backup status unknown, and recovery requires a saved snapshot plus unchanged target. Irreversible mass data loss; requires explicit human approval."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "bd0d5cbc-525f-4016-be49-ce8c4a965432",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 896,
+          "output_tokens": 67,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00182624,
+        "cost_amount": 0.00182624,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.017834,
+        "request_hash": "5d5ae693b139d7ef57fec22382aba61dcd2c363fcae2df10578d4938c05fd5b2",
+        "response_hash": "16a0b22d532e9470e857e6126d7633dfd181a2e71bd93182c0220bfcc5a03103",
+        "output_json": "{\"risk\":\"critical\",\"score\":0.97,\"reason\":\"Unrestricted DELETE removes all 1206 customer rows with no WHERE clause; preview confirms after_count=0. No automatic undo, backup status unknown, and recovery requires a saved snapshot plus unchanged target. Irreversible mass data loss; requires explicit human approval.\"}",
+        "latency_ms": 698.864,
+        "ledger_call_id": "8e60269034944bedb8d47b27a3efe0b4"
+      }
+    },
+    {
+      "id": "delete_all-3",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1734.213,
+        "ledger_call_id": "13663380306c417ea6f4bd1a79ef4fbb"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.85,
+          "reason": "Unbounded DELETE removing all 1206 rows with no WHERE clause; no automatic undo, backup status unknown, restore requires saved snapshot. Deterministic decision is need_approval. High impact and irreversible without external recovery."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "6b829017-f1f9-4e23-9c2d-0988c0aecb77",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 896,
+          "output_tokens": 59,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00176224,
+        "cost_amount": 0.00176224,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.017834,
+        "request_hash": "780fb6bbdf8965ae1a74848dc96e1131957a983b78867b4fb174297decb65a06",
+        "response_hash": "cba918c75ce7d5bfad309880c21500496b3fa0b55bf1695d78439c66537b9443",
+        "output_json": "{\"risk\":\"high\",\"score\":0.85,\"reason\":\"Unbounded DELETE removing all 1206 rows with no WHERE clause; no automatic undo, backup status unknown, restore requires saved snapshot. Deterministic decision is need_approval. High impact and irreversible without external recovery.\"}",
+        "latency_ms": 1208.028,
+        "ledger_call_id": "ba546b53fb9245a68f2743d0c4d29244"
+      }
+    },
+    {
+      "id": "update_all-4",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1418.962,
+        "ledger_call_id": "e3f9123462304cf28bce173d335153b5"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.82,
+          "reason": "Bulk UPDATE of all 1206 customer balances with no backup (backup_status unknown, backup_age null) and no automatic undo; recovery requires a saved snapshot and unchanged target. Deterministic decision is need_approval, so this must not proceed without explicit human authorization. Preview is exact but reversibility is only post-commit compensation."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "8418f096-fd43-4734-a706-cfdf3efbb34a",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 1015,
+          "output_tokens": 83,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00219224,
+        "cost_amount": 0.00219224,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.018694,
+        "request_hash": "515657921f4cb2531d1e85d4dd3054eb392f94f28ab6af1f4397ab7fae4d12fa",
+        "response_hash": "a4a0807f888e494056ecf351d0bc1963a70b2180909e41c7b607df80fc001742",
+        "output_json": "{\"risk\":\"high\",\"score\":0.82,\"reason\":\"Bulk UPDATE of all 1206 customer balances with no backup (backup_status unknown, backup_age null) and no automatic undo; recovery requires a saved snapshot and unchanged target. Deterministic decision is need_approval, so this must not proceed without explicit human authorization. Preview is exact but reversibility is only post-commit compensation.\"}",
+        "latency_ms": 1306.235,
+        "ledger_call_id": "5265197d2e3e480cb2340816528dfa08"
+      }
+    },
+    {
+      "id": "update_noop-0",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1677.368,
+        "ledger_call_id": "3031baac22cb44609dc8fdfdde622e69"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.72,
+          "reason": "Preview shows an UPDATE on 1206 rows with zero net change (before/after hashes identical), but backup status is unknown and recovery requires a saved snapshot with no automatic undo. Deterministic decision is need_approval; no approval evidence is present. Uncertainty about backup and business authorization supports elevated risk."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "63e7f4f8-670b-4d5f-a151-3d92b0047a55",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 725,
+          "output_tokens": 76,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00155624,
+        "cost_amount": 0.00155624,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.016628,
+        "request_hash": "92d4917e8814859b2d2e7ab64f3e5c0c85f72521625f07525e3aa9a56cc8638d",
+        "response_hash": "a4cbd1fc7eab1e52d6bdaf178cef96654839d7d3702cb2f20bdee7bfeb14d2c2",
+        "output_json": "{\"reason\":\"Preview shows an UPDATE on 1206 rows with zero net change (before/after hashes identical), but backup status is unknown and recovery requires a saved snapshot with no automatic undo. Deterministic decision is need_approval; no approval evidence is present. Uncertainty about backup and business authorization supports elevated risk.\",\"risk\":\"high\",\"score\":0.72}",
+        "latency_ms": 1033.693,
+        "ledger_call_id": "6c372f56a6264dcaa5d1c40ac7653e07"
+      }
+    },
+    {
+      "id": "update_returning-3",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1378.79,
+        "ledger_call_id": "4731da1081b044b8abda2f257ed7afca"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "medium",
+          "score": 0.45,
+          "reason": "Deterministic decision is need_approval. Preview is exact (4 rows, update only, balance +1 on synthetic data), but recovery requires a saved snapshot with unknown backup status and no automatic undo. Impact is small and reversible via compensation, yet approval is required; uncertainty about backup availability keeps risk at medium."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "67dece25-3d3e-4c09-ab2c-ac25d768a995",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 955,
+          "output_tokens": 78,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00203224,
+        "cost_amount": 0.00203224,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.018324,
+        "request_hash": "e966bcc839e5a43b809afaac6111761c7587ba693854b17b1d33ab8a665eae0f",
+        "response_hash": "920e4a311c5f375f28c394ee43060d2c0c129b80216ad71e436a2de112fdb296",
+        "output_json": "{\"risk\":\"medium\",\"score\":0.45,\"reason\":\"Deterministic decision is need_approval. Preview is exact (4 rows, update only, balance +1 on synthetic data), but recovery requires a saved snapshot with unknown backup status and no automatic undo. Impact is small and reversible via compensation, yet approval is required; uncertainty about backup availability keeps risk at medium.\"}",
+        "latency_ms": 1221.822,
+        "ledger_call_id": "29fdf20d03734dbc8113c3b466dcb555"
+      }
+    },
+    {
+      "id": "delete_cte-4",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1411.891,
+        "ledger_call_id": "dab81848502c4b01978c3caba28942d7"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.82,
+          "reason": "Destructive DELETE of a customer row with no automatic undo and unknown backup status; deterministic decision is need_approval. Preview is exact (1 row) but recovery requires a saved snapshot and unchanged target, and business authorization is not inferred. Uncertainty about backup availability keeps risk high."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "04f7cf7e-366c-46c7-ac6e-50c4ce3639a8",
+        "provider_request_id": null,
+        "prompt_version": "1a255d377d0b173a1fff1976b103eee7893ad3949a39f8843939bab1a7beae20",
+        "usage": {
+          "input_tokens": 779,
+          "output_tokens": 70,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00161624,
+        "cost_amount": 0.00161624,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.016998,
+        "request_hash": "814fdaee08781a3f51ea3eaa732422ce9d61cb666e8b2fb2896369ff6aa12c6c",
+        "response_hash": "87fb119582d5b7b2bc52f4699b00cf33623247c5c1d24d5fed4e033d7782a02b",
+        "output_json": "{\"risk\":\"high\",\"score\":0.82,\"reason\":\"Destructive DELETE of a customer row with no automatic undo and unknown backup status; deterministic decision is need_approval. Preview is exact (1 row) but recovery requires a saved snapshot and unchanged target, and business authorization is not inferred. Uncertainty about backup availability keeps risk high.\"}",
+        "latency_ms": 803.034,
+        "ledger_call_id": "ff956027f043487fa52d106a01c1d954"
+      }
+    }
+  ],
+  "ledger": {
+    "calls": 638,
+    "reserved_or_settled_amount": 1.11779816,
+    "budget": 3.0,
+    "currency": "CNY",
+    "invalidations": 9
+  }
+}
