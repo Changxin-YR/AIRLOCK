@@ -1,38 +1,49 @@
 # AIRLOCK 执行记忆
 
-更新时间：2026-10-02。此分支用于接续任务，不是已验收证明；以 main 对应提交、实际代码及原始测试输出为准。
+更新时间：2026-10-02。本分支是任务接续记录，不是验收证明；以 main 对应提交、代码和实际运行结果为准。禁止再次清空仓库。
 
-## 用户目标与范围
-- 个人原创工程项目，用于 AI 全栈实习简历和面试；由 ChatGPT 实现，Codex 独立验收。
-- 从零重建，不沿用仓库原代码；保留 Git 历史，不 force-push。
-- 定位：协议无关的服务端审批核心 + SQL 影响快照 + 知情审批界面。不得宣传“首个 HITL / 所有开源只会阻断”。
-- 写操作必须由独立 reviewer 身份审批；Agent 不持有 reviewer 密钥或目标数据库权限。
-- MVP 限定 SQLite synthetic customers 表；不支持任意 Shell、任意 SQL 数据库、自动学习后绕过审批。
+## 用户要求
 
-## 已完成并核实
-1. main 旧实现已清空（仅空 .gitkeep），提交 1f5d33b767d504a20473e80a154dcd424ddad1a0；前一提交 d9499abc515af9a69e47035f50f841ed05717690 仍在历史中。
-2. 新建 memory/progress 分支。
-3. 当前会话工作目录 /mnt/data/AIRLOCK 已编写首批新代码：models、SQLite 限制执行与克隆预演、审批状态机、FastAPI、stdio MCP 适配器，以及 58 项测试。
-4. 2026-10-02 本地执行 python -m pytest -q，实际输出：58 passed in 1.16s。
+个人项目，用于 AI 全栈实习简历和面试；ChatGPT 实现，Codex 独立验收。另建 memory/progress 保存真实进度、问题、证据和下一步。保留 Git 历史，不 force-push。
 
-注意：上述新代码此刻仍在当前会话容器，尚未提交 main；文件路径不是下个会话必定可用的永久存储。不得根据此记录谎称远端代码已完成。
+## 远端已固定的进度
 
-## 冻结的关键设计
-- pass / block / need_approval 三态；写入无自动放行。
-- 审批绑定 request_hash、impact snapshot、policy_version、review_digest；提交前重校验数据指纹，过期或变化则失效。
-- BEGIN IMMEDIATE + 本地单库事务把目标变更、审批终态及审计绑定；不声称分布式 exactly-once。
-- 独立角色 token；服务端权限判定；SSE 只通知、不能授权。
-- 精确是“当前受限数据快照内精确”，不是任意生产环境预测；无验证备份时不编造备份时间。
-- HMAC 审计链无外部锚定，不能检测尾部截断或服务器全失陷。
-- MCP 采用异步回执 + 状态查询，不伪称透明代理或依赖无限挂起。
-- benchmark 与人类 A/B 实验不伪造；未执行项目标为未执行。
+- 旧实现清空提交：1f5d33b767d504a20473e80a154dcd424ddad1a0。其父提交 d9499abc515af9a69e47035f50f841ed05717690 仍在历史中。
+- 当前实现提交：67df890db01c73416e8e9965387b6858c5ff4650（main），tree 75715d86ec9382dd9b088b444925341d27b3a45b。
+- 已提交：Python 审批核心、FastAPI、最小 stdio MCP、中文原生 JS 审批台、脚本模拟 Agent、80 项 Python 测试、5 项 JS 测试、原生/桥接浏览器验收脚本、200 条合成策略集生成与评测、运行配置与 CI。
+- 本次环境已重置，之前容器文件不再存在；已从 GitHub 中先前写入但未提交的对象恢复代码，并正式提交 main。不要再依赖旧 /mnt/data 路径。
+
+## 校验的内容哈希
+
+airlock: 89acf53f0dc918e52683248ec8178781de3f47da
+scripts: 5466725775cc0bee60241d0916f89b8e84163b2a
+tests: f8e07b06cf2e5b4629720930fa60312a3a774959
+tests-js: 134bfe38ba022af2b07ee7d0269484c098b4c5fe
+benchmark: 40d0dda64dbea8aa9c977bc88fc275aa9261b54c
+
+审批台 app.js 已按上次原文件哈希恢复：3161d9ab8acbe5924f5c9c537eea340147e506cc，并在本次执行 node --check 通过。不要用先前未挂到 main 的其他树替代这个文件。
+
+## 测试：历史记录与当前结果分开
+
+上次实际工具输出：Python 80 passed；JS 5 passed；桥接 DOM 与真实 HTTP 交互 9 项通过。原生 Chromium 访问 loopback 被管理员策略阻断，因此没有原生 E2E 通过结论。Docker/真实 LLM/官方 MCP host/真人 A/B 没有运行。
+
+上述结果是上次会话记录，不是本次 CI 结果。当前已配置 GitHub Actions，需查询真实 run 和 conclusion；不能写 CI 绿或生产就绪，直到证据成立。
+
+## 冻结设计
+
+- 协议无关核心，固定 SQLite synthetic customers 表，初始 1206 行。不是任意 SQL/任意工具透明代理。
+- pass / block / need_approval；所有支持写入包括零变化操作都需审批，预演失败阻断。
+- 独立 agent/reviewer 身份；客户端不能传 approved/risk/principal 来取得权限。
+- 参数、策略、影响快照与版本绑定；执行前在 BEGIN IMMEDIATE 中再次校验指纹/TTL；写入、终态与 HMAC 审计同库提交。不是分布式 exactly-once。
+- Agent 必须没有服务器文件、数据库、reviewer/audit 密钥及宿主管理权限，否则不可宣传不可绕过。
+- HMAC 无外部锚定，不能检测尾部截断或服务器全失陷。
+- MCP 仅 sql_execute/action_status，pending 回执不代表执行；SSE 只通知，不授权。
+- 前端为无需构建的原生 ES Modules，不是 Vue/Next.js；不得隐瞒技术栈变化。
+- benchmark 为作者构造的 200 条/40 族合成回归；dev 120/test 80 按族切分。无人类专家金标、κ 或真实用户实验，不能编造效率提升。
 
 ## 当前下一步
-1. 审查首版安全边界并补回归测试；保留原始日志。
-2. 完成可用审批台，真实调用 API，桌面/移动端浏览器测试。
-3. 添加可复现模拟 Agent、MCP 端到端验证、合成 benchmark（明确 provenance / split / 局限）。
-4. 完成运行配置、CI、README、设计说明、威胁模型、面试问答、Codex 独立验收文档。
-5. 逐步提交 main；记录确切 commit SHA、通过/失败/未运行项与证据路径。
 
-## 接续协议
-开始工作前先读本文件、main 的 AGENTS.md 和 CODEX_REVIEW.md（存在时），查询 main 的真实 SHA。不要再次清空仓库，不要把计划当完成。每个阶段结束更新本分支；未完成任务、环境限制、事实与假设必须分开。绝不提交密钥、真实用户数据或本地配置文件。
+1. 查询 67df890 的 GitHub Actions 结果，修复实际失败并保留日志；不能把历史测试当本次验收。
+2. 补齐设计、威胁模型、面试标准问答、Codex 独立验收与证据索引。
+3. 记录新的 main SHA 和明确的 PASS/FAIL/NOT RUN/ENVIRONMENT BLOCKED；交付可下载文件须确认实际生成。
+4. 更新本分支。开始任何新会话先 fetch main + memory/progress，核对 SHA，不再次重建或清空。
