@@ -1,3 +1,15 @@
+# AIRLOCK 本轮闭环进展：新代码已推送，最终 CI 与矩阵复验进行中
+
+2026-10-02。实际 main 仍为 704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支 codex/full-audit-2026-10-02 已推送 c3dd6ad9de5e0be6be57eb3809300f2b2ea7c088；PR #1 未合并。
+
+新增：RS256 access-token 受信 issuer/JWKS 校验与主体撤销、域名 DNS pin/TLS SNI、MCP 会话/SSE、有版本绑定的独立 S3 Object Lock 归档连接器、运维告警/Prometheus、按路由过滤的白名单审计导出、研究导入/双人模板/仲裁/语义指标独立计算/理解题/治理统计，以及受保护上游双内网检查。
+
+本地绑定该 SHA 的 pytest 215 项已过；真实 DeepSeek→注册 MCP 上游拒绝/批准闭环通过，新增 4 调用。共用 var/deepseek-continuation-ledger 现 642 调用，保守累计估价 ¥1.1211824 / ¥3，不是账单。S3 临时容器 6 条契约通过；不代表长期云归档。Windows Docker build 仍因 auth.docker.io 连接失败退出 1，原日志保留。
+
+CI 37022113155 正在运行，尚不能计完整通过。126 矩阵的上一版只代表下述旧交付，最终矩阵和新 CI 包将随后补入。用户无真人，保持真人/真实日志/独立金标验证受阻；不停止可执行工具工作。当前请继续完成 CI 诊断、证据归档、逐项矩阵和最终报告。
+
+<details><summary>上一轮交付记录</summary>
+
 # AIRLOCK 执行记忆：真实模型与功能补齐已交付，全部原目标仍部分满足
 
 更新：2026-10-02。先核对实际 main、工作分支和本分支；当前状态以本段与 STATE.json 为准，历史叙述在下方折叠保留。
@@ -149,6 +161,8 @@ README.md；AGENTS.md；CODEX_REVIEW.md；LICENSE；docs/PLAN.md、SPEC.md、THR
 ## 接续唯一优先动作
 
 让Codex从CODEX_REVIEW.md开展独立复核，首先核对main SHA、原始命令退出码、必需JUnit和真实产物；构造新的反例，不能删测试/降断言来变绿。若发现真实P0/P1，最小复现、定点修复、增加回归、全套重跑，再更新本分支。没有新需求或证据，不再从零重建，也不把这份记忆当验收事实。
+
+</details>
 
 </details>
 
