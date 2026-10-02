@@ -1,5 +1,0 @@
-name: personal-demo-v1
-max_changed_records: 100
-auto_tag_records: 1
-approval_ttl_seconds: 300
-# Authorization is a separate non-overridable layer. These are risk rules only.

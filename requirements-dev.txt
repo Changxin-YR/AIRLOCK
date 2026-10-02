@@ -1,2 +1,0 @@
-# Fully resolved Python 3.13/Linux CI environment. See requirements.lock.
--r requirements.lock
