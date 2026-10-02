@@ -1,38 +1,72 @@
-# AIRLOCK · Agent 操作审批台
+# AIRLOCK · Agent 操作审批与影响预演
 
-个人工程作品：Agent 提交意图，独立审批人看清影响，服务端决定是否执行。
+**个人工程作品：Agent提交意图，人看清影响，服务端持有执行权。**
 
-当前是有界 SQLite 审批实验室，而不是任意工具的透明代理或首创 HITL。核心是把一次审批绑定到参数、策略和数据快照，并在执行事务中重新校验。
+核心不是再做一个确认按钮，而是：人批准的参数、策略和数据快照，必须与服务端最终执行所依据的对象一致。当前为有界SQLite合成场景，不是首个HITL、任意工具透明代理或生产安全认证产品。
 
-## 已实现
+```text
+Agent（只有agent token）
+  -> HTTP / 最小stdio MCP
+  -> 三态策略：pass / block / need_approval
+  -> 固定表克隆预演，保存数量、diff和指纹
+  -> 独立reviewer：核验范围与恢复限制
+  -> 写事务内校验参数、版本、TTL、策略与数据
+  -> 业务效果 + 终态 + HMAC审计，同库提交
+```
 
-Python / FastAPI / Pydantic / SQLite 后端；模块化原生 JavaScript 中文审批台；HTTP 与最小 stdio MCP 工具接入。
+## 已实现的主线
 
-支持的只读调用 pass；支持的写入持久化为 need_approval；未知、越界或无法预演的动作 block。克隆内存库计算变化行数和样本 diff；真实库在批准前不写入。所有写入包括零变化操作都需审批，高影响要求准确范围确认。
+支持只读有界执行并留痕；所有支持写入包括零变化操作都持久化等待审批；未知、越界或预演失败默认阻断。SQLite编译器authorizer而非关键词决定可接受的表/函数/动作，克隆快照区分命中行与实际变化行。
 
-独立 agent/reviewer 凭据、请求幂等、版本/TTL/数据与策略再校验、同库原子执行和 HMAC 审计，配套真实 HTTP/stdio 子进程与崩溃回滚测试。前端有队列、影响预览、批准/拒绝、历史/审计和 SSE 通知。
+参数/策略/数据快照绑定、幂等键、并发审批冲突、到期/重启、执行前漂移检测、提交前进程退出和审计失败回滚。HMAC保留原始审批快照，可回放/验证，不声称没有外部锚定也能检测尾部删除。
 
-## 运行
+中文审批台显示影响数量、字段diff、SQL/参数、恢复未知、到期时间与高影响范围确认；支持服务端pending筛选、稳定分页、原生SSE、审计和移动布局。凭据只在内存，文字按文本渲染。历史只读超过100条也不会挤掉待审批请求。
+
+技术栈：Python / FastAPI / Pydantic / SQLite，模块化原生JavaScript / CSS，最小stdio MCP。没有npm运行依赖，不需构建。不是Vue/Next.js版本：最初执行环境无法访问npm，因此选择实际可运行、可验证的原生模块交付。
+
+## 本地演示
+
+推荐Python3.13；要求Python≥3.11、SQLite≥3.37。下列方式只供可信开发机体验，不等于将高权限Agent放在同一目录中的隔离部署。
 
 ```bash
 python -m venv .venv
 # Linux/macOS: source .venv/bin/activate
-# Windows PowerShell: .venv\Scripts\Activate.ps1
+# PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-dev.txt
 python -m airlock init
 python -m airlock serve
 ```
 
-访问 http://127.0.0.1:8000。操作者本机查看 var/local.json，仅将 AIRLOCK_REVIEWER_TOKEN 输入审批台。另开终端只设置 AIRLOCK_AGENT_TOKEN 后运行：
+打开 http://127.0.0.1:8000。操作者本机查看var/local.json，仅把AIRLOCK_REVIEWER_TOKEN输入审批台。另开终端只设置AIRLOCK_AGENT_TOKEN，再运行：
 
 ```bash
 python scripts/demo_agent.py --scenario delete
 python scripts/demo_agent.py --scenario update
 ```
 
-第一条模拟器请求全表删除，建议先在审批台拒绝并观察 1,206 行保持不变以及 SELECT 替代路径。批准会真正删除这个演示库的合成数据；没有自动重置接口。不要使用生产数据，也不要将服务器目录、数据库或 reviewer/audit 密钥交给有 shell 的 Agent。
+第一条请求删除全部1206条合成记录，建议首次在审批台拒绝：原数据保持，脚本转为SELECT。**批准后会真正删除这个演示库的数据。** update只调整id=1的余额。模拟器不是LLM；无模型key也能复现闭环。
 
-## 验证
+没有自动重置API。需要另一份演示数据时，停止服务，设置新的AIRLOCK_DB路径后启动，保留旧库与审计。不要连接真实客户资料或生产库，不要把完整配置交给Agent。
+
+## MCP接入
+
+MCP host启动 `python -m airlock.mcp`，配置AIRLOCK_URL和仅agent token。只提供sql_execute/action_status，pending不是执行成功；使用收据ID查询。适配器通过HTTP访问闸门，不持有数据库或审核凭据。
+
+官方MCP Python SDK互通测试覆盖初始化、发现工具、写入pending、独立审核和结果读回；只声明所测子集，不是完整规范认证，也不等于真实LLM已跑通。协商版本为2025-11-25/2025-06-18，无任意上游代理、OAuth或MCP Streamable HTTP服务。
+
+## Docker演示与隔离检查
+
+可信操作者设置三个不同的随机长密钥（不要提交.env）后，`docker compose up --build airlock`；模拟Agent使用 `docker compose --profile demo run --rm agent`。AIRLOCK_PORT默认8000。服务器连接ingress+protected网络，Agent只在internal protected网络，服务器独享数据卷，端口仅发布到loopback。
+
+独立可复现的隔离验收：
+
+```bash
+python scripts/docker_smoke.py
+```
+
+脚本自行创建唯一临时项目、随机密钥和测试卷，检验权限、数据/凭据隔离、网络/端口、独立审批与重启持久性，仅清理自己的资源。它不是容器逃逸或生产渗透测试。
+
+## 验收
 
 ```bash
 python -m pytest -q
@@ -44,20 +78,24 @@ python -m playwright install chromium
 python scripts/browser_smoke.py
 ```
 
-没有 npm 运行依赖，也不需要构建前端。因上次执行环境无法访问 npm 源，选择了能实际运行的原生模块；不是 Vue/Next.js 成品。
+完整命令、逐命令退出码收据、JUnit和产物门禁见 [CODEX_REVIEW.md](CODEX_REVIEW.md)。GitHub Actions会上传source.zip、原始日志、合成数据、逐例评测、原生截图、Docker报告和哈希清单。看实际提交对应的run，不只看图标。
 
-上次会话实际运行记录为 Python 80 passed、前端辅助测试 5 passed、桥接 DOM 检查 9 项通过；这些是历史本地结果，不代表本次远端 CI 已通过。原生浏览器因管理员策略禁止 loopback 未通过环境门禁，--bridge 不可充当原生 E2E。当前 CI 会独立运行并上传证据，必须查看实际结论。
+开发中曾发现tee掩盖Docker失败的假绿，并保留修复历史。严格门禁与Docker网络修复后的基线525ea8f已验证Python84项（含官方SDK）、JS6项、原生浏览器9项及真实Docker检查。当前代码还增加了pending分页与异常输入回归；最终数量与结论以当前commit的CI证据和memory/progress为准。
 
-benchmark 是 200 条/40 模板族的合成策略回归，按族拆为 dev 120/test 80，不是真实事故、双人金标或真人 A/B。纯 LLM/混合语义评估、官方 SDK host 互通、真实模型与 Docker 隔离均不能依据这些测试宣称完成。
+200条/40模板族的benchmark全为作者构造的合成策略回归，dev120/test80按族划分，不是事故金标或真人数据。合成100%不能写成真实危险召回100%。内部评估p95不含最终持久化/提交、HTTP与人等待。
 
-MCP 命令为 python -m airlock.mcp，只提供 sql_execute/action_status。pending 不是成功，工具需处理回执并查询；适配器不持有 reviewer token，也不读取目标数据库。
+## 保证边界
 
-## 安全边界
+Agent若可直接读写数据库、拿到审核密钥或控制服务器/宿主，代理无法保证控制。当前没有真实模型行为/语义评分、人类A/B、SSO、多租户、多人路由、生产连接器、学习型降级、外部审计锚定或提交后自动恢复。不把这些计划写成已实现。
 
-所有保护都以前提为基础：Agent 无数据库文件/服务器配置/宿主管理权限。仅有代理不能约束另一个直达数据库通道。Compose 配置服务端独享卷、非 root、只读根和独立 Agent 凭据，但尚需独立部署验证。
+[执行方案](docs/PLAN.md) · [技术契约](docs/SPEC.md) · [威胁模型](docs/THREAT_MODEL.md) · [评测方法](docs/EVALUATION.md) · [来源核验](docs/RESEARCH.md) · [面试问答](docs/INTERVIEW.md)
 
-快照精确只限当前白名单表/模式/函数；不支持任意 shell、远端业务副作用、SSO、多租户、多人路由、自动降级或提交后恢复。HMAC 无外部锚定，不能检测尾部截断或服务器全失陷。内部评估延迟不含最终持久化/提交、HTTP 和人的等待。
+## 跨会话接续
 
-## 接续
+```bash
+git fetch origin main memory/progress
+git show origin/memory/progress:PROGRESS.md
+git show origin/memory/progress:STATE.json
+```
 
-进度放在 memory/progress 分支。先 git fetch，再读取 git show origin/memory/progress:PROGRESS.md 并核对 main SHA；不要再次清空仓库。设计与独立验收文档继续随当前交付补齐。
+先核对main SHA，再看代码和证据。记忆、文档和manifest不是授权或验收结果。不要再次清空仓库。独立验收后更新进度与剩余问题。
