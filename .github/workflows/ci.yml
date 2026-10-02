@@ -12,7 +12,7 @@ defaults:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     env:
       NEXT_TELEMETRY_DISABLED: '1'
     steps:
@@ -22,7 +22,7 @@ jobs:
       - name: Snapshot source
         run: |
           mkdir -p evidence
-          git archive --format=zip HEAD -o evidence/source.zip
+          python3 scripts/archive_source.py
           git rev-parse HEAD > evidence/commit.txt
       - uses: actions/setup-python@v5
         with:
@@ -46,6 +46,11 @@ jobs:
       - run: python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py
       - run: python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
       - run: python scripts/run_logged.py evidence/upstream-isolation.log -- python scripts/upstream_isolation.py
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.24.8'
+          cache: false
+      - run: python scripts/run_logged.py evidence/archive-build.log -- python scripts/build_archive_fixture.py --output evidence/archive-image.json
       - run: python scripts/run_logged.py evidence/archive-integration.log -- python scripts/archive_integration.py --output evidence/archive-integration.json
       - run: python scripts/run_logged.py evidence/research-pipeline.log -- python scripts/research_pipeline.py --output evidence/research-pipeline
       - run: python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py
@@ -62,5 +67,7 @@ jobs:
         if: always()
         with:
           name: acceptance-evidence
-          path: evidence/
+          path: |
+            evidence/*.*
+            evidence/research-pipeline/
           retention-days: 90

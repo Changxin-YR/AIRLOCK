@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchmark-dev.log',
                  'benchmark-test.log','browser-native.log','docker-smoke.log','dependency-audit.log',
                  'latency.log','ablation.log','study-analysis.log','comparison.log','next-build.log','npm-audit.log',
-                 'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-integration.log','research-pipeline.log']
+                 'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-build.log','archive-integration.log','research-pipeline.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
@@ -95,6 +95,8 @@ def verify(directory):
     remote=load(directory,'upstream-isolation.json')
     require(remote['status']=='PASS' and remote['mode']=='real_docker_protected_upstream' and len(remote['probe']['checks'])>=6,'protected remote network isolation failed')
     archive=load(directory,'archive-integration.json')
+    archive_image=load(directory,'archive-image.json')
+    require(archive_image['source_commit']=='7aac2a2c5b7c882e68c1ce017d8256be2feea27f' and archive['runtime_image_id']==archive_image['runtime_image_id'],'archive source/image provenance')
     require(archive['exit_code']==0 and len(archive['checks'])>=6 and len(archive['actual_denials'])==3,'S3 retention/truncation contract failed')
     research=load(directory/'research-pipeline','report.json')
     require(research['status']=='PASS' and research['human_participants']==research['paired_human_labels']==0,'research provenance failed')

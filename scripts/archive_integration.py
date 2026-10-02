@@ -22,11 +22,11 @@ from airlock.models import Settings,Invocation
 from airlock.service import Gate
 
 
-IMAGE='minio/minio@sha256:420663b8685c5396f06405ad516d611db4465939a141cc7d40266342d0f2632d'
-
-
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--image',help='Explicit existing test image; otherwise read the source build report')
+    parser.add_argument('--image-report',type=Path,default=Path('evidence/archive-image.json'));args=parser.parse_args()
+    selected_image=args.image or json.loads(args.image_report.read_text())['runtime_image_id']
     name='airlock-archive-'+uuid.uuid4().hex[:12]
     with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
     access='airlock-'+secrets.token_hex(8);secret=secrets.token_urlsafe(36)
@@ -38,7 +38,7 @@ def main():
             result=subprocess.run(['docker','run','--detach','--name',name,'--user','10001:10001','--read-only','--cap-drop','ALL',
                 '--security-opt','no-new-privileges:true','--tmpfs','/data:rw,noexec,nosuid,size=64m,uid=10001,gid=10001',
                 '--tmpfs','/tmp:rw,noexec,nosuid,size=16m','--env-file',str(envfile),'-p',f'127.0.0.1:{port}:9000',
-                IMAGE,'server','/data','--address',':9000'],capture_output=True,text=True,timeout=180)
+                selected_image,'server','/data','--address',':9000'],capture_output=True,text=True,timeout=180)
             if result.returncode:raise RuntimeError('Archive fixture container could not start: '+result.stderr[:500])
             created=True
             os.environ['AIRLOCK_ARCHIVE_ACCESS_KEY']=access;os.environ['AIRLOCK_ARCHIVE_SECRET_KEY']=secret
@@ -80,8 +80,9 @@ def main():
             with anchored.store.transaction() as conn:conn.execute('DELETE FROM audit')
             assert not anchored.store.verify_audit()['valid']
             with gate.store.connection() as conn:assert conn.execute('SELECT count(*) FROM customers').fetchone()[0]==1206
-            image=json.loads(subprocess.check_output(['docker','image','inspect',IMAGE,'--format','{{json .RepoDigests}}']))
-            report={'mode':'real_docker_s3_object_lock','image_digests':image,'receipt':receipt,
+            image=json.loads(subprocess.check_output(['docker','image','inspect',selected_image,'--format','{{json .RepoDigests}}']))
+            image_id=subprocess.check_output(['docker','image','inspect',selected_image,'--format','{{.Id}}'],text=True).strip()
+            report={'mode':'real_docker_s3_object_lock','image_digests':image,'runtime_image_id':image_id,'receipt':receipt,
                 'checks':denied+['version_pinned_after_new_version','retrieved_anchor_detects_tail_deletion','unapproved_target_unchanged'],
                 'actual_denials':errors,
                 'credential_scope':'new synthetic fixture only; never read default AWS credentials',
