@@ -1,0 +1,11 @@
+version: example-v1
+rules:
+  - id: block-large-change
+    expression: 'changed_rows > 1000'
+    decision: block
+  - id: review-writes
+    expression: 'operation != "read"'
+    decision: need_approval
+  - id: allow-bounded-read
+    expression: 'operation == "read"'
+    decision: pass
