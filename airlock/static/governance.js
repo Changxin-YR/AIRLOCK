@@ -30,7 +30,7 @@ export function metricsPanel(metrics) {
   if(!metrics) return el('section',{class:'audit-panel'},'尚无数据');
   const semantic=metrics.semantic||{};
   return el('section',{class:'audit-panel'},el('h2',{},'运行指标'),el('p',{class:'muted'},metrics.scope),
-    el('h3',{},'阶段时延'),el('div',{class:'table-scroll'},el('table',{},
+    el('h3',{},'阶段时延'),el('div',{class:'table-scroll'},el('table',{class:'metrics-table'},
       el('thead',{},el('tr',{},['阶段','样本数','p50','p95','p99'].map(v=>el('th',{},v)))),
       el('tbody',{},Object.entries(metrics.stages_ms||{}).map(([key,v])=>el('tr',{},el('td',{},key),el('td',{},v.n),
         ...['p50','p95','p99'].map(q=>el('td',{},v[q]==null?'尚无数据':duration(v[q])))))))),
