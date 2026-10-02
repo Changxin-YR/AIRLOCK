@@ -43,25 +43,25 @@ function login(message='') {
     el('p',{class:'small muted'},'个人项目 · 固定 SQLite 演示数据 · 非生产安全产品'))));
 }
 async function refresh(loadMore=false) {
-  const current=api, run=generation;
+  const current=api, run=generation, requestedView=state.view;
   if(!current || state.loading) return;
   state.loading=true;
   try {
-    let path='/v1/actions?limit=100';
+    let path='/v1/actions?limit=100'+(requestedView==='pending'?'&state=pending':'');
     if(loadMore && state.next) path+=`&before=${state.next.before}&before_id=${state.next.before_id}`;
     const [list,metrics]=await Promise.all([current.request(path),current.request('/v1/metrics')]);
-    if(current!==api || generation!==run) return;
+    if(current!==api || generation!==run || requestedView!==state.view) return;
     const keep=state.selected;
     const merged=loadMore ? [...state.actions,...list.items] : list.items;
     state.actions=Array.from(new Map(merged.map(a=>[a.id,a])).values()); state.metrics=metrics; state.next=list.next_cursor;
     if(keep && !state.actions.some(a=>a.id===keep)) {
       try { const item=await current.request('/v1/actions/'+keep); if(current===api) state.actions.push(item); } catch { /* Removed or no longer accessible. */ }
     }
-    if(current!==api || generation!==run) return;
+    if(current!==api || generation!==run || requestedView!==state.view) return;
     if(!selected()) state.selected=state.actions.find(a=>a.state==='pending')?.id || state.actions[0]?.id || null;
     state.error='';
   } catch(error) { if(current===api) state.error=error.message; }
-  finally { if(current===api) {state.loading=false;setActiveClock();render();} }
+  finally { if(current===api) {state.loading=false;setActiveClock();render();if(requestedView!==state.view) void refresh();} }
 }
 async function decide(action,value,form,visibleMs) {
   if(state.busy) return;
@@ -82,7 +82,7 @@ async function loadAudit(more=false) {
     state.audit=more?[...state.audit,...data.items]:data.items;state.auditCursor=data.next_after;state.error='';render();
   } catch(error) { if(current===api) {state.error=error.message;render();} }
 }
-function navigation(view) { state.view=view;setActiveClock();render();if(view==='audit') void loadAudit(); }
+function navigation(view) { state.view=view;state.next=null;setActiveClock();render();if(view==='audit') void loadAudit();else void refresh(); }
 function auditPanel() {
   return el('section',{class:'audit-panel'},el('div',{class:'section-top'},el('div',{},el('h2',{},'审批证据回放'),
     el('p',{class:'muted'},'回放当时保存的快照，而不是事后重新计算影响。')),
@@ -123,14 +123,14 @@ function render() {
     ['评估 p95',duration(metrics?.evaluation_p95_ms),'内部评估 · 不含提交/网络/人等待'],
   ].map(([label,value,hint])=>el('div',{class:'stat'},el('span',{class:'muted small'},label),el('strong',{},value),el('span',{class:'muted small'},hint))));
   const queue=el('section',{class:'queue','aria-label':'动作列表'},el('div',{class:'queue-head'},el('h2',{},state.view==='pending'?'待处理队列':'动作记录'),el('span',{class:'muted small'},`${actions.length} 条已加载`)),
-    el('label',{class:'sr-only',for:'search'},'搜索 SQL'),el('input',{id:'search','data-field':'search',type:'search',placeholder:'搜索 SQL…',value:state.filter,
+    el('label',{class:'sr-only',for:'search'},'搜索 SQL'),el('input',{id:'search','data-field':'search',type:'search',placeholder:'搜索已加载的 SQL…',value:state.filter,
       oninput:event=>{state.filter=event.target.value;render();}}),
     el('div',{class:'queue-items'},actions.map(action=>el('button',{class:`action-row ${action.id===state.selected?'selected':''}`,
       'data-action':action.id,onclick:()=>select(action.id),'aria-pressed':action.id===state.selected},
       el('div',{class:'section-top'},el('span',{class:`tag ${action.state}`},states[action.state]),el('span',{class:'small muted'},`#${short(action.id)}`)),
       el('code',{class:'queue-sql'},action.request.sql),el('div',{class:'section-top small'},el('span',{},action.impact?`${number(action.impact.changed_rows)} 行变更`:'无写入预演'),
         el('span',{class:'muted'},new Date(action.created_at*1000).toLocaleTimeString('zh-CN',{hour12:false})))))),
-    !actions.length&&el('div',{class:'empty'},el('strong',{},'队列已清空'),el('p',{},'新请求到达后将在这里出现。')),
+    !actions.length&&el('div',{class:'empty'},el('strong',{},state.loading?'正在加载':'当前没有匹配的记录'),el('p',{},'可清除搜索条件或刷新；数量以服务器状态为准。')),
     state.next&&el('button',{class:'button more',onclick:()=>void refresh(true)},'加载更早记录'));
   const detail=reviewPanel(selected(),draft(state.selected),state.busy,decide,clock(state.selected));
   root.replaceChildren(el('div',{class:'shell'},side,el('main',{class:'workspace'},header,

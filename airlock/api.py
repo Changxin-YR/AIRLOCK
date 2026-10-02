@@ -6,8 +6,9 @@ import sqlite3
 import uuid
 from pathlib import Path
 from urllib.parse import urlparse
-from typing import Annotated
+from typing import Annotated, Literal
 from fastapi import Depends, FastAPI, Header, Query, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.trustedhost import TrustedHostMiddleware
@@ -47,6 +48,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
         })
         return response
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_input(request, exc):
+        # Do not echo raw inputs: non-finite JSON can otherwise break error serialization.
+        return JSONResponse({"error": "validation_error", "execution_occurred": False,
+                             "detail": [{"loc": list(item["loc"]), "type": item["type"]}
+                                        for item in exc.errors()]}, status_code=422)
 
     @app.exception_handler(GateError)
     async def gate_error(request, exc):
@@ -93,10 +101,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/v1/actions")
     def listing(who: Annotated[str, Depends(reviewer)], limit: int = Query(100, ge=1, le=100),
-                before: float | None = None, before_id: str | None = Query(None, pattern=r"^[a-f0-9]{32}$")):
+                before: float | None = Query(None, ge=0, allow_inf_nan=False),
+                before_id: str | None = Query(None, pattern=r"^[a-f0-9]{32}$"),
+                state_filter: Literal["pending", "executed", "blocked", "rejected", "expired", "stale", "failed"] | None = Query(None, alias="state")):
         if (before is None) != (before_id is None):
             raise GateError("cursor_requires_time_and_id", 422)
-        items = gate.list_actions(limit, before, before_id)
+        items = gate.list_actions(limit, before, before_id, state_filter)
         cursor = {"before": items[-1]["created_at"], "before_id": items[-1]["id"]} if len(items) == limit else None
         return {"items": items, "next_cursor": cursor}
 

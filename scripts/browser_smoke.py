@@ -31,6 +31,9 @@ async def run(bridge: bool, output: Path):
             return response.json()
         small = submit('UPDATE customers SET balance=balance+1 WHERE id=1', 'browser-small')
         bulk = submit('DELETE FROM customers', 'browser-bulk')
+        # Pending actions must not be crowded off-page by newer read-only history.
+        for i in range(105):
+            submit('SELECT 1', f'browser-history-{i}')
         async with async_playwright() as p:
             executable = os.getenv('CHROMIUM_PATH')
             if not executable and Path('/usr/bin/chromium').exists():
@@ -73,6 +76,8 @@ async def run(bridge: bool, output: Path):
             await page.locator('#credential').fill(keys['AIRLOCK_REVIEWER_TOKEN'])
             await page.locator('#login-button').click()
             await page.locator('#impact-summary').wait_for()
+            await page.locator(f'[data-action="{bulk["id"]}"]').wait_for()
+            checks.append('pending_queue_survives_more_than_100_newer_reads')
             assert await page.locator('#approve').is_disabled()
             checks.append('approval_disabled_without_informed_confirmation')
             await page.locator('#reason').fill('全表删除缺少业务授权，拒绝本次操作')

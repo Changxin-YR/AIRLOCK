@@ -107,11 +107,11 @@ class Gate:
             raise GateError("not_found", 404)
         return action
 
-    def list_actions(self, limit: int = 100, before: float | None = None, before_id: str | None = None) -> list[dict]:
+    def list_actions(self, limit: int = 100, before: float | None = None, before_id: str | None = None, state_filter: str | None = None) -> list[dict]:
         self.expire()
         with self.store.connection() as conn:
-            rows = conn.execute("SELECT document FROM actions WHERE (? IS NULL OR created<? OR (created=? AND id<?)) "
-                                "ORDER BY created DESC,id DESC LIMIT ?", (before, before, before, before_id, limit)).fetchall()
+            rows = conn.execute("SELECT document FROM actions WHERE (? IS NULL OR state=?) AND (? IS NULL OR created<? OR (created=? AND id<?)) "
+                                "ORDER BY created DESC,id DESC LIMIT ?", (state_filter, state_filter, before, before, before, before_id, limit)).fetchall()
         return [json.loads(row[0]) for row in rows]
 
     def decide(self, action_id: str, decision: Decision, reviewer: str = "reviewer:owner") -> dict:
