@@ -271,7 +271,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     active=gate.access.identify((request.headers.get('authorization') or '').removeprefix('Bearer '))
                 except GateError:
                     return
-                if not active:
+                if active != who:
                     return
                 items = await asyncio.to_thread(gate.audit_events, who, None, cursor, 100)
                 for item in items:

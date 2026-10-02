@@ -17,7 +17,8 @@ REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_server_filtered_pending_queue_survives_long_read_history','test_state_filter_is_validated_and_applied',
     'test_remote_effect_survives_receipt_audit_failure_reconciles','test_clock_rollback_across_restart_cannot_extend_approval',
     'test_static_unc_path_rejected_before_filesystem_resolution','test_agent_does_not_retry_rejected_writes_or_access_review_endpoint',
-    'test_audit_export_omits_free_text_and_secrets_and_requires_reviewer','test_sse_fragmented_unicode_notifications_and_bounds'}
+    'test_audit_export_omits_free_text_and_secrets_and_requires_reviewer','test_sse_fragmented_unicode_notifications_and_bounds',
+    'test_sse_lease_ends_when_authenticated_identity_changes'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',

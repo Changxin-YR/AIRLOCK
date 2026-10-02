@@ -62,3 +62,14 @@ def test_oidc_rejects_confused_or_untrusted_tokens(settings,tmp_path,bad):
     with TestClient(create_app(settings),base_url=settings.origin) as client:
         result=client.get('/v1/me',headers={'Authorization':'Bearer '+value})
         assert result.status_code==401 and value not in result.text
+def test_sse_lease_ends_when_authenticated_identity_changes(settings,monkeypatch):
+    from airlock.models import Invocation
+    app=create_app(settings)
+    app.state.gate.submit(Invocation(sql='DELETE FROM customers WHERE id=1',idempotency_key='sse-identity-rebind'))
+    # The token initially authenticates this reviewer, then a trusted mapping
+    # reload maps its subject to the Agent. An old lease must not retain scope.
+    identities=iter(['reviewer:owner','agent:demo'])
+    monkeypatch.setattr(app.state.gate.access,'identify',lambda token:next(identities))
+    with TestClient(app,base_url=settings.origin) as client:
+        response=client.get('/v1/events',headers={'Authorization':'Bearer '+settings.reviewer_token})
+    assert response.status_code==200 and response.text==''
