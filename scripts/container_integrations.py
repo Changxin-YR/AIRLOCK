@@ -66,7 +66,7 @@ def envoy(output):
     cases=[('zero',0,'delete'),('small',3,'delete'),('high',100,'delete'),('read',200,'read')];expected={
         'threshold':{'high','read'},'write_only':{'small','high'},'bounded':{'zero','small','read'}}
     rows=[]
-    with container(ENVOY,config,8080,['-c','/fixture.yaml','--disable-hot-restart','--concurrency','1','--log-level','error'],output,'envoy') as (name,port):
+    with container(ENVOY,config,8080,['-c','/fixture.yaml','--disable-hot-restart','--concurrency','1','--log-level','error','--file-flush-interval-msec','50'],output,'envoy') as (name,port):
         with httpx.Client(base_url=f'http://127.0.0.1:{port}',trust_env=False,timeout=2) as client:
             for _ in range(100):
                 try:
