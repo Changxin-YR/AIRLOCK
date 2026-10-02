@@ -1,50 +1,69 @@
-# AIRLOCK 执行记忆
+# AIRLOCK 执行记忆：个人 MVP 已交付，等待 Codex 独立验收
 
-更新：2026-10-02。本分支用于接续，不是验收证明。必须读实际 main 代码、退出码和产物；禁止再次清空仓库。
+更新：2026-10-02。本分支记录实际进度，不替代代码、测试或授权。禁止再次清空仓库；保留 Git 历史，不 force-push。开始新会话先 fetch main + memory/progress，核对本文件与 STATE.json 的提交和证据。
 
-## 用户要求与冻结范围
+## 用户目标与已冻结范围
 
-个人 AI 全栈简历/面试项目；ChatGPT 实现，Codex 独立验收。使用 memory/progress 保存真实进度，保留历史，不 force-push。
+个人 AI 全栈简历/面试工程项目，由 ChatGPT 实现，Codex 独立验收。定位是服务端 Agent 写操作审批与影响预演，不是首个 HITL，也不是任意工具透明代理。
 
-定位为服务端 SQL 审批与受限执行实验室。固定 SQLite 合成 customers 表，初始1206行；并非通用工具透明代理或首个 HITL。前端为无需构建的原生 ES Modules，不是 Vue/Next.js。真实 LLM、真人 A/B、生产连接器、多人路由/SSO未完成，不能编造。
+当前限定 SQLite synthetic customers 表，初始1206行；Python/FastAPI/Pydantic、SQLite、模块化原生 JavaScript/CSS、最小 stdio MCP。前端不是 Vue/Next.js，原先 npm 环境受限后采用无需构建且已实际运行的实现。
 
-## 当前 main
+## 最终远端代码与 CI
 
-525ea8fe2909230d41e15526bbc1e0652529c2b9
-root tree: 699cceac667b3de99fcb8a9efde9a7d746909261
+- main：704b5035cf69f9a6c40c44eecd84c0d0741de849
+- Git tree：1715976a1e43f4cb6a56d0e6af12a07c9fd620e9
+- 最终 GitHub Actions run：36965666756，completed / success
+- run：https://github.com/Changxin-YR/AIRLOCK/actions/runs/36965666756
+- artifact：11210150290，名称 acceptance-evidence，432627 bytes
+- artifact SHA256：ae2ef02b26253686386338257b0b77352492366249aefb3b149eb00954c3417a
+- GitHub artifact 保留期至2026-12-31；交付包应单独保存，不依赖临时下载URL。
 
-提交链：
-- 1f5d33b：清空旧当前文件，保留历史。
-- 67df890：将之前未提交的源码对象恢复并正式发布完整 MVP。
-- 0433671：增加官方 MCP SDK 互通、真实 Docker smoke、证据清单及手机时延格式。
-- 6544e63：修正 tee 管道掩盖失败；逐命令退出码收据、JUnit必需测试和产物门禁；失败前保留 Docker 日志。
-- 525ea8f：日志证明容器健康但内部网络无宿主端口发布；服务器改为 ingress + protected，Agent仍只有protected。增加拓扑/端口边界检查，提交 PLAN/SPEC/THREAT_MODEL。
+已下载最终artifact，核对它的SHA256和manifest中25个文件哈希；七份逐命令退出码收据均为0。解包source.zip重算Git树，与上述远端tree完全一致。Markdown相对文件链接均有效；源码包不含运行密钥、数据库或字体文件。用最终源码的verify_evidence.py再次核验最终产物，退出码0。
 
-## 已知实际验证，不可只看 CI 图标
+## 最终实际结果
 
-1. 67df890 / run 36962081780：原始日志 Python80通过、JS5通过、原生浏览器9项通过。先前本地 loopback 受限的缺口在该runner补测。
-2. 0433671 / run 36963123248：原始日志 Python81通过（含官方SDK）、JS6通过、native9通过；但 Docker 启动检查失败、没有 docker-report。虽然GitHub标绿，原因是旧tee管道丢失退出码，不能算整体通过。
-3. 6544e63 / run 36963919651：严格门禁正确标为failure；Python84通过（官方SDK+日志器回归）、native通过；Docker日志显示服务healthy但PORTS为空，compose port返回no port。这是部署网络配置问题，不是业务进程未启动。
-4. 当前525ea8f已修正网络配置，尚未在本检查点读取新CI最终结果，不能提前写Docker通过。
+- Python：88 passed，1条上游弃用warning，5.54s；官方mcp Python SDK 1.26.0互通在其中。
+- JavaScript：6项通过，语法检查通过。
+- 原生Playwright：10项检查通过，mode=native_browser_e2e，无脚本错误；包括105条新只读记录后pending仍可见。
+- Docker：real_docker_compose，进程exit_code=0；非root UID10001、能力位0、只读根、Agent无审核/审计密钥及服务器卷/配置/socket，不能伪造审批或读取控制表。
+- 数据：独立测试审批前1206行，pending重启不自执行；批准演示删除后再重启仍0行，没有自动重新播种，审计有效。
+- 网络：服务器ingress+protected双网络，Agent仅内部protected；宿主端口只发布到loopback。
+- 合成评测：总200条/40模板族，dev120/test80按族切分；test三态80/80、支持只读误报0/30、支持写入影响20/20。这不是真实世界危险召回率。
+- runner：Python3.13.15、SQLite3.45.1；完整依赖版本、原始日志、JUnit、逐样例输出和截图均在artifact。
+- warning：Starlette引用AnyIO已弃用的BlockingPortal别名；未隐藏，不是本轮功能失败。
 
-证据artifacts：
-- 67df890 artifact11208306871，sha256 8fc01d4045fa8644e46260efcfb37347b288a561d4aa130e81ef94ff54539f71。
-- 0433671 artifact11208453501，sha256 e6d69a3c1bf3bd40aa3085a9aac31a834d1c8e4a5b977ce47300f66b4f13db74。
-- 6544e63 artifact11208797786，sha256 fb44378eedf2466dc4952b8ee3c2ed5941ca6d94b3375853a814f39c85c81c25。
+最终原生截图逐张查看：桌面viewport1440×1100，PNG1440×1513；移动viewport390×844，PNG390×1844。影响数量、状态、SQL与样本diff、完整决策表单可读，移动端无横向溢出，时延单位不再单独换行。没有声称独立设计稿像素保真、WCAG或全浏览器安全认证。
 
-GitHub.download_workflow_artifact 返回的文件会自动挂载本轮 /mnt/data，可解包source.zip恢复源码。不要假定旧会话容器永远存在。当前容器 /mnt/data/AIRLOCK 可用，额外ci-*目录是对应运行的只读证据副本。
+## 实际修复历史必须保留
 
-## 关键实现
+- 1f5d33b：清空旧当前文件，历史父提交d9499abc仍保留。
+- 67df890：把先前已写入但未提交的源码对象恢复并发布MVP。
+- 0433671 / run36963123248：官方SDK和原生浏览器通过，但Docker实际失败；旧tee管道丢失退出码导致GitHub假绿。这一轮不能算整体通过。
+- 6544e63 / run36963919651：真实退出码收据、JUnit/产物门禁和日志器回归修复假绿，CI正确失败；保留的日志显示容器healthy但宿主PORTS为空。
+- 525ea8f / run36964267162：修正服务器入口网络与Agent内部网络分离，真实Docker及严格门禁通过。
+- 031489d / run36964992992：修复新只读历史挤掉pending，以及NaN/Infinity错误响应自身不可序列化；新增回归后88项Python、10项native及Docker通过。
+- 704b503 / run36965666756：完成交付文档后，最终源码再次独立全套通过，并下载逐项核验证据。
 
-三态策略；所有支持写入包括零变化都审批，预演失败阻断。SQLite编译authorizer限定表/函数/动作、资源预算，克隆预演区分命中与变化，保留样本和整表指纹。摘要绑定参数/策略/影响，执行前在BEGIN IMMEDIATE中校验TTL、版本和数据漂移；效果、终态、HMAC审计同库提交，不声称分布式exactly-once。Agent仅有agent token，不得获得服务器文件/数据库/reviewer/audit密钥/宿主管理权限。审计无外部锚点不能证明尾部完整。
+## 关键工程约束
 
-MCP只sql_execute/action_status，pending不是成功；官方Python SDK已通过所测子集，不是完整规范认证或真实LLM行为证明。SSE仅通知。UI凭据只在内存，时间为不可信遥测。
+所有支持写入，包括零变化写入都需要独立reviewer。客户端不能用approved/risk/principal取得权限。受限克隆预演失败就阻断；精确只对当前支持模式与快照成立，未验证备份不编造时间，不承诺提交后恢复。
 
-合成回归200条/40族，dev120/test80按族拆分，固定SHA256 243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7。不能用合成100%写真实危险召回或假称独立标注/κ/人类提升。
+审批绑定请求、策略、影响与版本，在BEGIN IMMEDIATE事务内检查TTL、身份、摘要与数据漂移；业务效果、终态和HMAC审计同库提交。不是分布式exactly-once。重复键同内容返回原收据，内容不同冲突；结果未知时先查旧action，不能换键盲重试。
 
-## 下一步
+Agent不得拥有服务器文件/数据库、reviewer/audit密钥、Docker socket或宿主管理权限，否则不可宣传不可绕过。HMAC没有外部锚点，无法证明尾部未删或抵御服务器与密钥一起失陷。
 
-1. 查询525ea8f新CI并下载原始产物，验证run_logged退出收据、verify_evidence、Docker报告；失败继续定点修复，不降低断言。
-2. 补EVALUATION/INTERVIEW/RESEARCH、AGENTS.md、CODEX_REVIEW.md、LICENSE、最终README与验收记录。
-3. 最终提交后读取真实CI结论、下载最终源码/证据，检查桌面/移动截图及文件哈希，生成可下载交付包。
-4. 将本文件和可机读STATE.json更新为最终main SHA/证据/明确未完成项。不要把这些待办当已经完成。
+MCP只sql_execute/action_status；pending不是成功，SSE只通知。官方SDK测试证明所测子集，不是完整规范认证或真实LLM行为证明。UI token仅内存，可见时间是untrusted遥测。队列必须先服务端筛选pending再分页。
+
+合成集冻结SHA256：243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7。作者构造的相关变体，不是真实事故/独立人工金标，不编造κ或真人效率。内部计时不含最终持久化/提交、HTTP与人工等待。
+
+## 交付文档
+
+README.md；AGENTS.md；CODEX_REVIEW.md；LICENSE；docs/PLAN.md、SPEC.md、THREAT_MODEL.md、EVALUATION.md、RESEARCH.md、INTERVIEW.md（13组问答）、UX_QA.md、API_EXAMPLES.md；evidence/ACCEPTANCE.md保留031运行基线和失败历史，最终704由本分支STATE.json锚定。
+
+## 未实现或未验证，不得改写成已完成
+
+真实LLM业务行为与语义风险评估；真人A/B（n=0）、独立人工标注与κ；生产数据库/远端副作用连接器；SSO、多租户、多人路由；学习型自动降级；外部审计锚定；提交后恢复；任意MCP透明代理。Docker与浏览器smoke也不是全面渗透或规范认证。
+
+## 接续唯一优先动作
+
+让Codex从CODEX_REVIEW.md开展独立复核，首先核对main SHA、原始命令退出码、必需JUnit和真实产物；构造新的反例，不能删测试/降断言来变绿。若发现真实P0/P1，最小复现、定点修复、增加回归、全套重跑，再更新本分支。没有新需求或证据，不再从零重建，也不把这份记忆当验收事实。
