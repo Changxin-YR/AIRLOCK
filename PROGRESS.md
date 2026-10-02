@@ -1,3 +1,45 @@
+# AIRLOCK 执行记忆：全面审查与安全增量已交付，完整原目标部分实现
+
+更新：2026-10-02。先核对远端 main、工作分支与本分支；本文件不替代代码和原始证据。
+
+## 本轮实际交付
+
+- actual main：704b5035cf69f9a6c40c44eecd84c0d0741de849，保持未合并。
+- 工作分支：codex/full-audit-2026-10-02；已推送代码/报告/证据提交：d7856a8ceaea75578083b4365ea9bca0e378265c。
+- 最终应用测试 SHA：b9de71085e9b3027b8127c4da6d7193d8f19ba88；冻结核心及延迟/合成评测 SHA：266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4。
+- 草稿 PR：https://github.com/Changxin-YR/AIRLOCK/pull/1；未合并、未 force-push。
+- 126 条原目标逐项矩阵：74 IMPLEMENTED、52 PARTIAL；86 范围限定 PASS、36 BLOCKED_EXTERNAL、4 NOT_RUN，含父项。原始全目标未通过。
+
+修复 Windows 空白页 MIME、门禁接受失败证据、stdio 环境与依赖/UNC 风险；新增受控 HTTP 上游、真实受限 CEL/YAML、独立恢复审批、可选真实模型 provider、reviewer 路由、批量/预算、仅显示的学习建议、指标及研究工具。后续反例补全 TTL 绑定、时钟回退、远端丢响应/审计失败恢复；修复移动导航和指标表列宽。所有写入仍独立审批，不因可逆/预算/模型而免审。
+
+最终交付 SHA 的完整 CI 36989289641 也已成功；其 artifact 到期时间与元数据保存在 AUDIT_CI_20261002.json / STATE.json。
+
+## 已运行的证据与失败
+
+最终代码 151 Python、6 JS、14 原生浏览器通过；Linux CI 36988565652 全部成功，包括真实 Docker 和最终证据门禁。Windows Docker 镜像认证网络超时，实际退出1，随后本机总证据门禁也退出1，保留失败。Starlette TestClient httpx 弃用 warning 保留。
+
+故意 exit23 的 run36986618577 确实 failure，正常 verify 作业 success；临时失败作业已删除。此历史用于证明失败传播，不能当现存产品故障或删掉。
+
+合成 dev120/test80、40 模板族仍是作者构造的策略一致性回归，非真实危险金标。真实真人0、真实模型调用0、独立人工标注0、κ与成本为null。60对本机只读增量均值8.095ms/p95 10.356ms，30次静态规则/预演p95 0.061/6.657ms，只适用所测规模/并发1环境。
+
+## 仍缺和受阻
+
+完整余项在工作分支 docs/acceptance/COMPLETION_MATRIX.json，不得把 PARTIAL+PASS 改成原目标完成。通用 MCP/恢复/生产身份/分布式观测/审计外部锚点、Next.js 偏差尚存；全部失败状态原生 UI、辅助技术和部分安全组合仍待验证。
+
+真实模型/四臂消融/真实Agent改道需要本项目授权key、model、价格来源和预算；多来源benchmark需要授权日志及业务意图；κ需要两名真实独立标注者；A/B需要知情参与者和真实任务。研究工具已经交付，不能把自动化参与者当真人。没有外部采用或用户面试能力的证据。
+
+## 原始证据保存
+
+工作分支 Git 的 evidence/full-audit-20261002 保存原始日志/退出码/JUnit/逐例数据/截图和 CI 文本，随仓库历史长期保存。Linux 完整运行 ZIP 仍仅 Actions 90天，最终代码 artifact11218408231 到期2026-12-31T09:13:44Z，未下载校验也未永久ZIP归档。两份原始临时testtoken traceback仅本机，Git为脱敏副本并记录前后hash。
+
+docs/acceptance/FINAL_REPORT.md 回答七项结论，EVIDENCE_RETENTION.md 逐项区分Git与Actions。本轮已测范围没有未修复且可复现P0/P1，不代表全功能、生产或真实模型验收通过。
+
+## 接续纪律
+
+从本轮矩阵和运行手册接续，保留原始附件、全部失败历史、Git历史和用户改动。先确认真实分支/SHA/工作区，再复现具体缺口。不清空、不回退用户工作、不force-push、不自动合main。当前授权不包括真实模型付费凭据或第三方发帖。修复与复验同一执行者完成，新增反例不等于独立真人评审。
+
+<details><summary>此前 MVP 交付记忆原文（历史快照，范围和结果不覆盖本轮）</summary>
+
 # AIRLOCK 执行记忆：个人 MVP 已交付，等待 Codex 独立验收
 
 更新：2026-10-02。本分支记录实际进度，不替代代码、测试或授权。禁止再次清空仓库；保留 Git 历史，不 force-push。开始新会话先 fetch main + memory/progress，核对本文件与 STATE.json 的提交和证据。
@@ -67,3 +109,5 @@ README.md；AGENTS.md；CODEX_REVIEW.md；LICENSE；docs/PLAN.md、SPEC.md、THR
 ## 接续唯一优先动作
 
 让Codex从CODEX_REVIEW.md开展独立复核，首先核对main SHA、原始命令退出码、必需JUnit和真实产物；构造新的反例，不能删测试/降断言来变绿。若发现真实P0/P1，最小复现、定点修复、增加回归、全套重跑，再更新本分支。没有新需求或证据，不再从零重建，也不把这份记忆当验收事实。
+
+</details>

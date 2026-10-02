@@ -1,56 +1,344 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_date": "2026-10-02",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "personal_mvp_delivered_pending_independent_codex_review",
-  "main_commit": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
-  "source_tree": "1715976a1e43f4cb6a56d0e6af12a07c9fd620e9",
+  "phase": "full_audit_partial_original_goal_acceptance",
+  "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
+  "working_branch": "codex/full-audit-2026-10-02",
+  "working_commit": "d7856a8ceaea75578083b4365ea9bca0e378265c",
+  "tested_commit": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
+  "core_tested_commit": "266ad9e9daedcbfd5183f0402d1d5227f4a2a0b4",
+  "remote_sync": {
+    "working_branch_pushed": true,
+    "main_merged": false,
+    "memory_update": "This commit is the progress update; verify its remote ref when reading."
+  },
+  "pr": {
+    "number": 1,
+    "url": "https://github.com/Changxin-YR/AIRLOCK/pull/1",
+    "state": "open",
+    "draft": true,
+    "merged": false
+  },
   "production_ready": false,
-  "codex_independent_acceptance": "not_run",
-  "ci": {
-    "run_id": 36965666756,
+  "original_goals_all_satisfied": false,
+  "target_count": 126,
+  "target_counts": {
+    "implementation": {
+      "IMPLEMENTED": 74,
+      "PARTIAL": 52
+    },
+    "verification": {
+      "PASS": 86,
+      "BLOCKED_EXTERNAL": 36,
+      "NOT_RUN": 4
+    }
+  },
+  "not_closed_ids": [
+    "G4",
+    "A2",
+    "A3",
+    "C1",
+    "C1.2",
+    "C1.3",
+    "C1.5",
+    "C2",
+    "C2.4",
+    "C2.5",
+    "C4",
+    "C4.1",
+    "C5",
+    "C5.1",
+    "C5.3",
+    "C5.5",
+    "C7",
+    "C7.2",
+    "C7.4",
+    "C8",
+    "C8.5",
+    "C9",
+    "C9.3",
+    "C10",
+    "C10.2",
+    "C11",
+    "C11.2",
+    "C12",
+    "C12.1",
+    "C12.2",
+    "C12.3",
+    "C12.4",
+    "L0-1",
+    "L0-6",
+    "L0-7",
+    "T1",
+    "T2",
+    "T5",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "B6",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "R1",
+    "R3",
+    "R6",
+    "E1",
+    "E4",
+    "D1",
+    "K1",
+    "K2",
+    "K3",
+    "K4",
+    "K6"
+  ],
+  "code_ci": {
+    "run_id": 36988565652,
+    "job_id": 110779147895,
+    "head_sha": "b9de71085e9b3027b8127c4da6d7193d8f19ba88",
     "conclusion": "success",
-    "artifact_id": 11210150290,
-    "artifact_name": "acceptance-evidence",
-    "artifact_size_bytes": 432627,
-    "artifact_sha256": "ae2ef02b26253686386338257b0b77352492366249aefb3b149eb00954c3417a",
-    "artifact_expires_at": "2026-12-31T04:41:44Z",
-    "download_hash_verified": true,
-    "manifest_file_hashes_verified": 25,
-    "successful_command_exit_receipts": 7,
-    "source_tree_recomputed_and_matched": true,
-    "evidence_verifier_rerun_after_download_exit_code": 0
+    "artifact_id": 11218408231,
+    "artifact_expires_at": "2026-12-31T09:13:44Z",
+    "artifact_sha256_server_reported": "30e078a97b7a17c98485f540fe29b28e8c11852960808903d7eb39739392ee51",
+    "download_hash_verified": false
+  },
+  "delivery_ci": {
+    "head_sha": "d7856a8ceaea75578083b4365ea9bca0e378265c",
+    "run_id": 36989289641,
+    "status": "completed",
+    "conclusion": "success",
+    "artifacts": [
+      {
+        "id": 11219006189,
+        "name": "acceptance-evidence",
+        "size_in_bytes": 4297671,
+        "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11219006189",
+        "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11219006189/zip",
+        "expired": false,
+        "created_at": "2026-10-02T09:23:11Z",
+        "expires_at": "2026-12-31T09:21:18Z",
+        "updated_at": "2026-10-02T09:23:11Z",
+        "digest": "sha256:8fac6eac586980a1bf1fb6263b50d72dc9a5283eee8648d70e734788e78b3ba3",
+        "workflow_run": {
+          "id": 36989289641,
+          "repository_id": 1396912712,
+          "head_repository_id": 1396912712,
+          "head_branch": "codex/full-audit-2026-10-02",
+          "head_sha": "d7856a8ceaea75578083b4365ea9bca0e378265c"
+        }
+      }
+    ],
+    "metadata_path": "AUDIT_CI_20261002.json"
   },
   "checks": {
-    "pytest": {"passed": 88, "warnings": 1, "duration_seconds": 5.54},
-    "javascript": {"passed": 6, "syntax_check": "pass"},
-    "official_mcp_python_sdk": {"version": "1.26.0", "result": "pass_for_tested_stdio_subset"},
-    "native_browser": {"result": "pass", "checks": 10, "script_errors": 0, "desktop_viewport": [1440, 1100], "mobile_viewport": [390, 844]},
-    "docker": {"result": "pass_controlled_compose_deployment", "uid": 10001, "effective_capabilities": 0, "rows_before_independent_test_approval": 1206, "rows_after_approval_and_restart": 0},
-    "benchmark": {"origin": "synthetic_authored_policy_cases_only", "total_cases": 200, "total_families": 40, "dev_cases": 120, "test_cases": 80, "test_families": 16, "test_three_state_correct": 80, "supported_read_false_positives": 0, "supported_read_denominator": 30, "impact_exact_matches": 20, "impact_denominator": 20, "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7"}
+    "pytest_passed": 151,
+    "pytest_warning": "Starlette TestClient httpx deprecation preserved",
+    "javascript_passed": 6,
+    "native_browser_checks": 14,
+    "script_errors": 0,
+    "runtime_dependency_audit_exit": 0,
+    "docker_linux_ci": "passed_real_compose",
+    "docker_windows_local": {
+      "exit": 1,
+      "reason": "auth.docker.io image auth network timeout"
+    },
+    "local_complete_evidence_gate_exit": 1,
+    "matrix_validation_exit": 0,
+    "github_negative_control": {
+      "run_id": 36986618577,
+      "exit": 23,
+      "result": "expected_failure; normal verify job success; temporary job removed"
+    }
   },
-  "environment": {"python": "3.13.15", "sqlite": "3.45.1", "pytest": "9.0.2", "playwright": "1.57.0", "mcp": "1.26.0"},
-  "known_warning": "Upstream Starlette uses deprecated AnyIO BlockingPortal alias; preserved in pytest.log.",
-  "scope": "Fixed synthetic SQLite customers table; server-owned approval and local atomic effect/state/audit; native JavaScript UI; minimal stdio MCP.",
-  "critical_precondition": "Agent has no server filesystem/database/reviewer or audit key/Docker socket/host administration access.",
-  "not_implemented_or_not_run": [
-    "live LLM business behavior and semantic risk assessment",
-    "human A/B study (n=0), independent human labels and Cohen kappa",
-    "production database or remote side-effect connectors",
-    "SSO, multi-tenant scopes and multi-reviewer routing",
-    "learned automatic approval downgrade",
-    "externally anchored immutable audit",
-    "post-commit automatic recovery",
-    "arbitrary-tool transparent MCP proxy",
-    "comprehensive security or protocol certification"
+  "code_scope": [
+    "bounded SQLite clone/diff/CEL-YAML three-state policies",
+    "registered HTTP upstream with server-owned approval, CAS and durable receipt reconciliation",
+    "independent reviewer routing and revocation",
+    "separate approved snapshot compensation",
+    "strict optional model advice provider, persistent call/concurrency/estimated budget ledger and cache",
+    "bound batch review, persistent risk budgets, display-only learning proposals",
+    "original audit snapshots, HMAC, structured denial and bounded live-agent driver",
+    "native UI, scoped metrics, research/annotation/kappa/ablation/human-study tools"
   ],
-  "failure_history_to_preserve": [
-    {"commit": "0433671cf0d71c48d5a4a2cf8108d803a6675e83", "run_id": 36963123248, "actual_issue": "Docker failed but tee swallowed the exit code; GitHub success was not overall acceptance."},
-    {"commit": "6544e632ca00eb3306aa3910336bff7b7049edeb", "run_id": 36963919651, "actual_issue": "Strict CI correctly failed: internal-only server network did not expose the host port."},
-    {"commit": "525ea8fe2909230d41e15526bbc1e0652529c2b9", "run_id": 36964267162, "result": "Strict full suite including corrected Docker topology passed."},
-    {"commit": "031489dab7405b8b0fbbb4cec98ad3fdd63dee5f", "run_id": 36964992992, "result": "Pending queue and non-finite error-response regressions added; strict suite passed."}
+  "missing_functionality": [
+    "general MCP transparent upstream and Tasks/Streamable HTTP",
+    "general business reversibility and remote recovery adapters",
+    "distributed policy reload/Envoy compatibility",
+    "production OAuth/SSO and real upstream isolation",
+    "cross-service OpenTelemetry exporter and active cache invalidation counts",
+    "automatic audit key-id rotation/external tail anchor",
+    "Next.js deviation remains unaccepted"
   ],
-  "entry_documents": ["AGENTS.md", "CODEX_REVIEW.md", "docs/PLAN.md", "docs/SPEC.md", "docs/THREAT_MODEL.md", "docs/EVALUATION.md", "docs/INTERVIEW.md", "evidence/ACCEPTANCE.md"],
-  "next_step": "Codex independently follows CODEX_REVIEW.md, verifies current SHA and raw evidence, constructs new counterexamples, and updates memory only after reproducible validation.",
-  "prohibited": ["clear repository again without a new explicit request", "rewrite history", "commit secrets/databases/fonts", "remove tests or lower assertions merely to pass", "treat synthetic scores as real-world safety", "treat plan/Markdown/manifest/CI icon alone as proof"]
+  "external_validation": {
+    "live_model_calls": 0,
+    "human_participants": 0,
+    "independent_human_labels": 0,
+    "real_cohen_kappa": null,
+    "real_danger_recall": null,
+    "real_model_cost": null,
+    "needs": [
+      "project-authorized provider/model/key/prices/budget",
+      "authorized real logs with business intent and provenance",
+      "two independent human annotators",
+      "consenting A/B participants and gold business tasks"
+    ]
+  },
+  "evidence": {
+    "git_directory": "evidence/full-audit-20261002",
+    "git_retention": "repository history; no automatic expiry, not externally immutable",
+    "actions_retention_days": 90,
+    "permanent_linux_zip_archived": false,
+    "archive_manifest": "evidence/full-audit-20261002/ARCHIVE_MANIFEST.json",
+    "redaction_record": "evidence/full-audit-20261002/REDACTION_PROVENANCE.json"
+  },
+  "reports": [
+    "docs/acceptance/FINAL_REPORT.md",
+    "docs/acceptance/COMPLETION_MATRIX.md",
+    "docs/acceptance/COMPLETION_MATRIX.json",
+    "docs/acceptance/FINDINGS_AND_FIXES.md",
+    "docs/acceptance/EVIDENCE_RETENTION.md",
+    "docs/OPERATIONS.md"
+  ],
+  "unresolved_reproduced_P0_P1_in_tested_scope": 0,
+  "critical_precondition": "Agent lacks server files/database/reviewer/audit secrets/host administration; remote adapter must actually enforce declared CAS and idempotent durable receipts.",
+  "next_step": "Continue the explicit matrix gaps with necessary real credentials/budget/data/people. Keep all original objectives and independent write approval. No main merge without authorization.",
+  "previous_delivery_historical_only": {
+    "schema_version": 1,
+    "updated_date": "2026-10-02",
+    "repository": "Changxin-YR/AIRLOCK",
+    "phase": "personal_mvp_delivered_pending_independent_codex_review",
+    "main_commit": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
+    "source_tree": "1715976a1e43f4cb6a56d0e6af12a07c9fd620e9",
+    "production_ready": false,
+    "codex_independent_acceptance": "not_run",
+    "ci": {
+      "run_id": 36965666756,
+      "conclusion": "success",
+      "artifact_id": 11210150290,
+      "artifact_name": "acceptance-evidence",
+      "artifact_size_bytes": 432627,
+      "artifact_sha256": "ae2ef02b26253686386338257b0b77352492366249aefb3b149eb00954c3417a",
+      "artifact_expires_at": "2026-12-31T04:41:44Z",
+      "download_hash_verified": true,
+      "manifest_file_hashes_verified": 25,
+      "successful_command_exit_receipts": 7,
+      "source_tree_recomputed_and_matched": true,
+      "evidence_verifier_rerun_after_download_exit_code": 0
+    },
+    "checks": {
+      "pytest": {
+        "passed": 88,
+        "warnings": 1,
+        "duration_seconds": 5.54
+      },
+      "javascript": {
+        "passed": 6,
+        "syntax_check": "pass"
+      },
+      "official_mcp_python_sdk": {
+        "version": "1.26.0",
+        "result": "pass_for_tested_stdio_subset"
+      },
+      "native_browser": {
+        "result": "pass",
+        "checks": 10,
+        "script_errors": 0,
+        "desktop_viewport": [
+          1440,
+          1100
+        ],
+        "mobile_viewport": [
+          390,
+          844
+        ]
+      },
+      "docker": {
+        "result": "pass_controlled_compose_deployment",
+        "uid": 10001,
+        "effective_capabilities": 0,
+        "rows_before_independent_test_approval": 1206,
+        "rows_after_approval_and_restart": 0
+      },
+      "benchmark": {
+        "origin": "synthetic_authored_policy_cases_only",
+        "total_cases": 200,
+        "total_families": 40,
+        "dev_cases": 120,
+        "test_cases": 80,
+        "test_families": 16,
+        "test_three_state_correct": 80,
+        "supported_read_false_positives": 0,
+        "supported_read_denominator": 30,
+        "impact_exact_matches": 20,
+        "impact_denominator": 20,
+        "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7"
+      }
+    },
+    "environment": {
+      "python": "3.13.15",
+      "sqlite": "3.45.1",
+      "pytest": "9.0.2",
+      "playwright": "1.57.0",
+      "mcp": "1.26.0"
+    },
+    "known_warning": "Upstream Starlette uses deprecated AnyIO BlockingPortal alias; preserved in pytest.log.",
+    "scope": "Fixed synthetic SQLite customers table; server-owned approval and local atomic effect/state/audit; native JavaScript UI; minimal stdio MCP.",
+    "critical_precondition": "Agent has no server filesystem/database/reviewer or audit key/Docker socket/host administration access.",
+    "not_implemented_or_not_run": [
+      "live LLM business behavior and semantic risk assessment",
+      "human A/B study (n=0), independent human labels and Cohen kappa",
+      "production database or remote side-effect connectors",
+      "SSO, multi-tenant scopes and multi-reviewer routing",
+      "learned automatic approval downgrade",
+      "externally anchored immutable audit",
+      "post-commit automatic recovery",
+      "arbitrary-tool transparent MCP proxy",
+      "comprehensive security or protocol certification"
+    ],
+    "failure_history_to_preserve": [
+      {
+        "commit": "0433671cf0d71c48d5a4a2cf8108d803a6675e83",
+        "run_id": 36963123248,
+        "actual_issue": "Docker failed but tee swallowed the exit code; GitHub success was not overall acceptance."
+      },
+      {
+        "commit": "6544e632ca00eb3306aa3910336bff7b7049edeb",
+        "run_id": 36963919651,
+        "actual_issue": "Strict CI correctly failed: internal-only server network did not expose the host port."
+      },
+      {
+        "commit": "525ea8fe2909230d41e15526bbc1e0652529c2b9",
+        "run_id": 36964267162,
+        "result": "Strict full suite including corrected Docker topology passed."
+      },
+      {
+        "commit": "031489dab7405b8b0fbbb4cec98ad3fdd63dee5f",
+        "run_id": 36964992992,
+        "result": "Pending queue and non-finite error-response regressions added; strict suite passed."
+      }
+    ],
+    "entry_documents": [
+      "AGENTS.md",
+      "CODEX_REVIEW.md",
+      "docs/PLAN.md",
+      "docs/SPEC.md",
+      "docs/THREAT_MODEL.md",
+      "docs/EVALUATION.md",
+      "docs/INTERVIEW.md",
+      "evidence/ACCEPTANCE.md"
+    ],
+    "next_step": "Codex independently follows CODEX_REVIEW.md, verifies current SHA and raw evidence, constructs new counterexamples, and updates memory only after reproducible validation.",
+    "prohibited": [
+      "clear repository again without a new explicit request",
+      "rewrite history",
+      "commit secrets/databases/fonts",
+      "remove tests or lower assertions merely to pass",
+      "treat synthetic scores as real-world safety",
+      "treat plan/Markdown/manifest/CI icon alone as proof"
+    ]
+  }
 }
