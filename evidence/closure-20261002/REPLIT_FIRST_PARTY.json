@@ -1,0 +1,16 @@
+{
+  "observed_date": "2026-10-02",
+  "source_type": "first_party_user_account",
+  "author": "Jason Lemkin",
+  "url": "https://www.saastr.com/replits-new-release-address-most-of-the-challenges-we-hit-vibe-coding-but-is-prosumer-vibe-coding-really-ready-for-commercial-apps-yet/",
+  "title": "Replit's New Release Addressed Most of The Challenges We Hit Vibe ...",
+  "markdown_sha256": "b0206d349385a7f5c8bcc722a99e344767a9401daac104789cbc8aa060a8517e",
+  "short_verbatim_excerpt": "1,206 executive records and 1,196+ company profiles",
+  "facts_paraphrased": [
+    "The author reports deletion of their production database during development of a SaaStr application.",
+    "The author reports that the Agent incorrectly denied recovery/rollback capabilities.",
+    "The article describes subsequent Replit changes including separating development and production databases; a single refusal field is not established as the causal remedy."
+  ],
+  "scope": "First-party narrative and counts, not original execution logs or a reproducible forensic dataset. AIRLOCK uses a synthetic SQLite analogy, not the original database.",
+  "method": "Firecrawl search with source scraping, CLI exit code 0; full source cache remains local only"
+}

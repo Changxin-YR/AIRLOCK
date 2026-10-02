@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\research_pipeline.py", line 56, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "C:\Users\27363\Desktop\airlock\scripts\research_pipeline.py", line 38, in main
+    actual_changed_rows=a['impact'].get('changed_rows',0) if a['state']=='executed' else a['impact'].get('changed_rows'),
+                        ^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'

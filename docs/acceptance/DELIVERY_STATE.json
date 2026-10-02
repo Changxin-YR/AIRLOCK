@@ -2,9 +2,9 @@
   "record_type": "code_validation_and_delivery_anchor",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "tested_commit": "17ccd2c5942aa316ee94509109cc01fbca925a26",
+  "tested_commit": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
   "code_push_confirmed": true,
-  "documentation_commit": "Resolve the commit introducing this revision of FINAL_REPORT.md; memory/progress STATE.json records the exact pushed SHA.",
+  "documentation_commit": "Resolve the commit introducing this FINAL_REPORT revision; exact final pushed SHA is in memory/progress STATE.json.",
   "pr": {
     "number": 1,
     "url": "https://github.com/Changxin-YR/AIRLOCK/pull/1",
@@ -13,40 +13,67 @@
     "merged": false
   },
   "ci": {
-    "run_id": 36998200376,
-    "job_id": 110809640795,
+    "run_id": 37026082667,
+    "job_id": 110900936649,
     "conclusion": "success",
-    "tested_commit_sha": "17ccd2c5942aa316ee94509109cc01fbca925a26",
-    "full_zip_git_path": "evidence/continuation-20261002/ci/acceptance-17ccd2c.zip",
-    "artifact_id": 11222458811,
-    "artifact_expires_at": "2026-12-31T10:55:52Z",
+    "tested_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
+    "full_zip_git_path": "evidence/closure-20261002/ci/acceptance-25d4f52.zip",
+    "artifact_id": 11235800383,
+    "artifact_expires_at": "2026-12-31T15:18:49Z",
     "downloaded_sha256_verified": true,
-    "manifest_files_verified": 57
+    "manifest_files_verified": 78
   },
   "target_count": 126,
   "counts": {
     "implementation": {
-      "IMPLEMENTED": 97,
-      "PARTIAL": 29
+      "IMPLEMENTED": 111,
+      "PARTIAL": 15
     },
     "verification": {
-      "PASS": 104,
-      "BLOCKED_EXTERNAL": 21,
-      "NOT_RUN": 1
+      "PASS": 105,
+      "BLOCKED_EXTERNAL": 21
     }
   },
+  "not_closed_ids": [
+    "G4",
+    "C8",
+    "C8.5",
+    "C11",
+    "C11.2",
+    "T1",
+    "T2",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5",
+    "K1",
+    "K2",
+    "K3",
+    "K4",
+    "K6"
+  ],
   "model": {
     "provider": "DeepSeek-V4.1-Flash",
-    "calls": 638,
-    "valid": 622,
-    "error": 16,
-    "combined_budget_cny": 3,
-    "reserved_or_settled_estimate_cny": 1.11779816,
-    "known_usage_estimate_cny": 0.84922816,
-    "provider_invoice_reconciled": false
+    "added_calls": 4,
+    "added_valid": 4,
+    "added_usage_estimate_cny": 0.00338424,
+    "cumulative_calls": 642,
+    "cumulative_valid": 626,
+    "cumulative_errors": 16,
+    "cumulative_reserved_or_settled_cny": 1.1211824,
+    "known_usage_estimate_cny": 0.8526124,
+    "budget_cny": 3,
+    "invoice_reconciled": false,
+    "ledger_reused": true,
+    "source": "final/live-upstream.json; previous 638 calls in evidence/continuation-20261002"
   },
   "human_participants": 0,
   "original_goals_all_satisfied": false,
-  "scope": "Bounded SQLite, registered HTTP/stateless MCP JSON, Next.js, actual DeepSeek synthetic experiments, SDK/containers/CI; production adapters and human/independent danger-gold acceptance incomplete.",
-  "latest_memory_state": "Read memory/progress STATE.json after synchronization; code, evidence, PR and main are distinct."
+  "known_unresolved_p0_p1_in_tested_scope": 0,
+  "scope": "Bounded SQLite and registered HTTP/MCP tools, pinned DNS/TLS, OIDC resource-server access tokens, controlled recovery, S3 archival connector, operations, research tooling; external research and production provisioning remain incomplete."
 }

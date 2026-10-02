@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/research_pipeline.py",
+    "--output",
+    "evidence/closure-20261002/research-retest"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T14:39:13.862341+00:00",
+  "duration_seconds": 1.306,
+  "tested_commit_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace"
+}

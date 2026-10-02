@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/verify_evidence.py",
+    "--directory",
+    "evidence/closure-20261002/ci/raw"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T15:11:14.038330+00:00",
+  "duration_seconds": 0.351,
+  "tested_commit_sha": "cc9d687c71effc77e317b12560bd23659c4bd0c0",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "cc9d687c71effc77e317b12560bd23659c4bd0c0"
+}

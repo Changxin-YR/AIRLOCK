@@ -24,6 +24,8 @@ Agent（只有agent token）
 
 补齐 CEL/YAML 三态策略、多人范围路由、提交后独立补偿审批、预算预占/结算、显式批量决策与 shadow 分组建议、真实 provider 的可选语义评估路径、关联 ID、阶段延迟/token/缓存看板，以及双人标注、四组消融和真人 A/B 工具。离线工具通过不代表真实模型或真人指标已达成。
 
+新增受控接入与验收闭环：OIDC access-token 校验、域名 DNS pin/TLS、MCP 会话/SSE、独立 S3 Object Lock 归档连接器、健康/Prometheus 告警、最小化审计导出、理解核验与研究金标导入。配置与完整命令见 [闭环运行手册](docs/CLOSURE_RUNBOOK.md)；实际验证结果见逐项矩阵。
+
 技术栈：Python / FastAPI / Pydantic / SQLite / cel-python，Next.js 16.3.8 / React 19.3.0 静态导出审批台。React 管理登录、导航、数据和连接生命周期，影响与审计视图沿用项目的转义渲染组件。生产由 FastAPI 同源提供静态文件；构建需要 Node.js 22 和 npm ci，浏览器脚本以 CSP 内容哈希授权。
 
 ## 本地演示
@@ -56,7 +58,7 @@ python scripts/demo_agent.py --scenario update
 
 MCP host 启动 `python -m airlock.mcp`，配置 AIRLOCK_URL 和仅 agent token。提供 sql_execute/action_status 及当前身份可发现的注册上游工具；pending 使用收据 ID 查询。适配器通过 HTTP 访问闸门，不持有数据库或审核凭据。
 
-官方MCP Python SDK互通测试覆盖初始化、发现工具、写入pending、独立审核和结果读回；只声明所测子集，不是完整规范认证，也不等于真实LLM已跑通。协商版本为2025-11-25/2025-06-18，支持 `/mcp` 的无会话 Streamable HTTP JSON；注册上游可选 MCP JSON discovery/call 和固定 CAS 契约。没有任意上游代理或 OAuth。
+官方MCP Python SDK互通测试覆盖初始化、发现工具、写入pending、独立审核和结果读回；只声明所测子集，不是完整规范认证，也不等于真实LLM已跑通。协商版本为2025-11-25/2025-06-18，支持 `/mcp` 的无会话 Streamable HTTP JSON；注册上游可选 MCP JSON 或会话/SSE，并须具备固定 CAS 契约。OIDC access token 验证按受信 issuer/audience 与主体路由配置；任意工具仍需适配。
 
 ## Docker演示与隔离检查
 
@@ -92,7 +94,7 @@ python scripts/container_integrations.py
 
 ## 保证边界
 
-Agent 若可直接读写数据库、拿到审核密钥或控制服务器/宿主，就超出保护前提。DeepSeek V4.1 Flash 已完成合成任务的真实调用、四组消融与拒绝后安全改道；真实日志金标和真人 A/B 仍缺外部验证。当前未实现生产 SSO、多租户、任意第三方连接器或 OAuth。已提供轮换 key-id、签名检查点与独立保存工具；外部 WORM 仍需部署方提供。补偿和模型建议均不能自动授权。
+Agent 若可直接读写数据库、拿到审核密钥或控制服务器/宿主，就超出保护前提。DeepSeek V4.1 Flash 已完成合成任务的真实调用、四组消融与拒绝后安全改道；真实日志金标和真人 A/B 仍缺外部验证。已提供 OIDC 资源服务器校验、轮换 key-id、签名检查点和独立 S3 Object Lock 连接器；生产交互式 SSO、多租户、任意第三方适配与真实长期归档仍需实际部署。补偿和模型建议均不能自动授权。
 
 [执行方案](docs/PLAN.md) · [技术契约](docs/SPEC.md) · [威胁模型](docs/THREAT_MODEL.md) · [评测方法](docs/EVALUATION.md) · [来源核验](docs/RESEARCH.md) · [面试问答](docs/INTERVIEW.md)
 

@@ -1,0 +1,64 @@
+FF......................................                                 [100%]
+================================== FAILURES ===================================
+___ test_official_stateful_sse_upstream_review_effect_and_reconcile[False] ____
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-307/test_official_stateful_sse...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-307/test_official_stateful_sse_ups0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A34DEF0E90>
+drop = False
+
+    @pytest.mark.parametrize('drop',[False,True])
+    def test_official_stateful_sse_upstream_review_effect_and_reconcile(settings,tmp_path,monkeypatch,drop):
+        with upstream(tmp_path,monkeypatch,drop=drop) as (config,target,spec):
+            with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
+            env={k:v for k,v in os.environ.items() if k in {'PATH','SYSTEMROOT','WINDIR','TEMP','TMP','AIRLOCK_UPSTREAM_TEST_TOKEN'}}
+            with (tmp_path/'mcp.log').open('wb') as log:
+                process=subprocess.Popen([sys.executable,'scripts/fixture_mcp_server.py','--port',str(port),'--counter-origin',spec['url']],env=env,stdout=log,stderr=log)
+                try:
+                    with httpx.Client(trust_env=False,timeout=1) as probe:
+                        for _ in range(150):
+                            try:
+                                if probe.get(f'http://127.0.0.1:{port}/mcp').status_code in {400,405}:break
+                            except httpx.HTTPError:pass
+                            time.sleep(.03)
+>                       else:raise RuntimeError('official MCP SDK fixture did not start')
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                       RuntimeError: official MCP SDK fixture did not start
+
+tests\test_mcp_streamable.py:31: RuntimeError
+____ test_official_stateful_sse_upstream_review_effect_and_reconcile[True] ____
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-307/test_official_stateful_sse...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-307/test_official_stateful_sse_ups1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001A34D5E8FC0>
+drop = True
+
+    @pytest.mark.parametrize('drop',[False,True])
+    def test_official_stateful_sse_upstream_review_effect_and_reconcile(settings,tmp_path,monkeypatch,drop):
+        with upstream(tmp_path,monkeypatch,drop=drop) as (config,target,spec):
+            with socket.socket() as sock:sock.bind(('127.0.0.1',0));port=sock.getsockname()[1]
+            env={k:v for k,v in os.environ.items() if k in {'PATH','SYSTEMROOT','WINDIR','TEMP','TMP','AIRLOCK_UPSTREAM_TEST_TOKEN'}}
+            with (tmp_path/'mcp.log').open('wb') as log:
+                process=subprocess.Popen([sys.executable,'scripts/fixture_mcp_server.py','--port',str(port),'--counter-origin',spec['url']],env=env,stdout=log,stderr=log)
+                try:
+                    with httpx.Client(trust_env=False,timeout=1) as probe:
+                        for _ in range(150):
+                            try:
+                                if probe.get(f'http://127.0.0.1:{port}/mcp').status_code in {400,405}:break
+                            except httpx.HTTPError:pass
+                            time.sleep(.03)
+>                       else:raise RuntimeError('official MCP SDK fixture did not start')
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                       RuntimeError: official MCP SDK fixture did not start
+
+tests\test_mcp_streamable.py:31: RuntimeError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_mcp_streamable.py::test_official_stateful_sse_upstream_review_effect_and_reconcile[False]
+FAILED tests/test_mcp_streamable.py::test_official_stateful_sse_upstream_review_effect_and_reconcile[True]
+2 failed, 38 passed, 1 warning in 29.48s

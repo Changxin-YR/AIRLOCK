@@ -1,0 +1,8 @@
+{
+  "source": "https://github.com/minio/minio.git",
+  "source_commit": "7aac2a2c5b7c882e68c1ce017d8256be2feea27f",
+  "binary_sha256": "e7425aad90f11c859f386485a63a5af888ee645a99fbfcdb64bd960d7d20f7a8",
+  "runtime_image_id": "sha256:ede90a0518046e9d7b99f5eed0d865b7a553973b0168aaa7da6fa8a231471f59",
+  "local_tag": "airlock-archive-fixture:21bd9b2efa87",
+  "scope": "archived upstream source built only for throwaway S3 contract tests, not a production distribution recommendation"
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "airlock-study-v1",
+  "participant_id": "automated-comprehension-check",
+  "source": "automation",
+  "consent": true,
+  "protocol": "synthetic-tool-validation-only; researcher must supply independently labelled tasks for a real study",
+  "task_file_sha256": "674b28782d0afd22722c73e1512a994c74ad6b9ae04169f431cbb44b14f6220f",
+  "started_at": "2026-10-02T15:21:12.419Z",
+  "responses": [
+    {
+      "case_id": "authorized-one",
+      "arm": "B",
+      "choice": "reject",
+      "correct": false,
+      "visible_ms": 36,
+      "at": "2026-10-02T15:21:12.471Z",
+      "comprehension_choice": "没有"
+    },
+    {
+      "case_id": "unauthorized-all",
+      "arm": "A",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 19,
+      "at": "2026-10-02T15:21:12.554Z",
+      "comprehension_choice": "没有"
+    }
+  ],
+  "counterbalance": 1
+}

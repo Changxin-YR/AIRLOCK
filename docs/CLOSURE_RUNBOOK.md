@@ -33,7 +33,7 @@ python scripts/archive_integration.py --output evidence/archive-integration.json
 python scripts/operational_check.py --url http://127.0.0.1:8000 --output evidence/operations.json
 ```
 
-S3 桶必须启用版本控制与 Object Lock；写入 COMPLIANCE 保留期并回读版本、hash、retention。收据绑定具体版本；新版本不替代原收据。取回检查点后以独立保留密钥与 `AIRLOCK_AUDIT_ANCHOR_FILE` 验证数据库链。测试从 MinIO 官方归档仓库固定提交 7aac2a2c5b7c882e68c1ce017d8256be2feea27f 构建一次性镜像（需 Go 1.24.8），记录源码/二进制/image hash；官方已转源码分发，旧 DockerHub 镜像不可公开拉取。，删除、缩短保留、降级锁定均必须被服务实际拒绝；它证明 API 契约，临时容器删除后不提供永久归档。真实云账户、独立保管权限、长期保留和灾难恢复仍需实际部署。重复上传相同检查点若返回条件冲突，保留原收据再执行 verify，不绕过条件写入。
+S3 桶必须启用版本控制与 Object Lock；写入 COMPLIANCE 保留期并回读版本、hash、retention。收据绑定具体版本；新版本不替代原收据。取回检查点后以独立保留密钥与 `AIRLOCK_AUDIT_ANCHOR_FILE` 验证数据库链。测试从 MinIO 官方归档仓库固定提交 7aac2a2c5b7c882e68c1ce017d8256be2feea27f 构建一次性镜像（需 Go 1.24.8），记录源码/二进制/image hash；[官方仓库](https://github.com/minio/minio)已转源码分发，旧 DockerHub 镜像不可公开拉取。，删除、缩短保留、降级锁定均必须被服务实际拒绝；它证明 API 契约，临时容器删除后不提供永久归档。真实云账户、独立保管权限、长期保留和灾难恢复仍需实际部署。重复上传相同检查点若返回条件冲突，保留原收据再执行 verify，不绕过条件写入。
 
 `GET /v1/operations/health` 和 `/v1/operations/prometheus` 仅 operator 可访问，返回审计损坏、待处理过期积压、远端长期未知、遥测队列压力/丢弃；检查为只读。CLI 有告警退出 2，正常退出 0，适合现有运维调度器接入。检查本身不重试效果或批准请求。
 

@@ -1,0 +1,427 @@
+Docker Compose version v2.38.2
+
+{
+  "name": "airlock-check-da32996bd93a",
+  "networks": {
+    "ingress": {
+      "name": "airlock-check-da32996bd93a_ingress",
+      "driver": "bridge",
+      "ipam": {}
+    },
+    "protected": {
+      "name": "airlock-check-da32996bd93a_protected",
+      "ipam": {},
+      "internal": true
+    }
+  },
+  "services": {
+    "agent": {
+      "profiles": [
+        "demo"
+      ],
+      "build": {
+        "context": "/home/runner/work/AIRLOCK/AIRLOCK",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": [
+        "--scenario",
+        "delete",
+        "--allow-internal-http"
+      ],
+      "depends_on": {
+        "airlock": {
+          "condition": "service_healthy",
+          "required": true
+        }
+      },
+      "entrypoint": [
+        "python",
+        "scripts/demo_agent.py"
+      ],
+      "environment": {
+        "AIRLOCK_AGENT_TOKEN": "[REDACTED]",
+        "AIRLOCK_URL": "http://airlock:8000"
+      },
+      "networks": {
+        "protected": null
+      },
+      "read_only": true,
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/tmp:rw,noexec,nosuid,size=16m,mode=1777"
+      ]
+    },
+    "airlock": {
+      "build": {
+        "context": "/home/runner/work/AIRLOCK/AIRLOCK",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "AIRLOCK_AGENT_TOKEN": "[REDACTED]",
+        "AIRLOCK_AUDIT_KEY": "[REDACTED]",
+        "AIRLOCK_DB": "/data/airlock.db",
+        "AIRLOCK_INTERNAL_HOST": "airlock",
+        "AIRLOCK_ORIGIN": "http://127.0.0.1:56545",
+        "AIRLOCK_REVIEWER_TOKEN": "[REDACTED]"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"
+        ],
+        "timeout": "3s",
+        "interval": "5s",
+        "retries": 10
+      },
+      "networks": {
+        "ingress": null,
+        "protected": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8000,
+          "published": "56545",
+          "protocol": "tcp"
+        }
+      ],
+      "read_only": true,
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/tmp:rw,noexec,nosuid,size=32m,mode=1777"
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "state",
+          "target": "/data",
+          "volume": {}
+        }
+      ]
+    }
+  },
+  "volumes": {
+    "state": {
+      "name": "airlock-check-da32996bd93a_state"
+    }
+  }
+}
+#1 [internal] load local bake definitions
+#1 reading from stdin 689B done
+#1 DONE 0.0s
+
+#2 [airlock internal] load build definition from Dockerfile
+#2 transferring dockerfile: 860B done
+#2 DONE 0.0s
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [auth] library/node:pull token for registry-1.docker.io
+#4 DONE 0.0s
+
+#5 [agent internal] load metadata for docker.io/library/node:22-slim
+#5 DONE 0.4s
+
+#6 [airlock internal] load metadata for docker.io/library/python:3.13-slim
+#6 DONE 0.4s
+
+#7 [agent internal] load .dockerignore
+#7 transferring context: 188B done
+#7 DONE 0.0s
+
+#8 [agent internal] load build context
+#8 transferring context: 717.70kB 0.0s done
+#8 DONE 0.0s
+
+#9 [airlock console 1/8] FROM docker.io/library/node:22-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c
+#9 resolve docker.io/library/node:22-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c done
+#9 sha256:774043ccc8ccd0d0833a9ee0792142ab7ad93df971e59dd248fbf82db16d0150 11.53MB / 28.24MB 0.1s
+#9 sha256:8ab8fd6c944526e5da2ca93b1663b2ab6f4bb8d4ea7b50a90d53c9fdcc5b0b9e 3.31kB / 3.31kB 0.1s done
+#9 sha256:61592f5b60306b96e5208206668cdf0fa62d3cda3a3baeed26efdcd1a21aaba5 1.05MB / 49.84MB 0.1s
+#9 sha256:8d9d84ee31888adba85837fbf8f0e6eca99263904b2ba04d79e7d4fc1da40056 0B / 1.71MB 0.1s
+#9 sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c 5.22kB / 5.22kB done
+#9 sha256:774043ccc8ccd0d0833a9ee0792142ab7ad93df971e59dd248fbf82db16d0150 28.24MB / 28.24MB 0.1s done
+#9 sha256:8ab8fd6c944526e5da2ca93b1663b2ab6f4bb8d4ea7b50a90d53c9fdcc5b0b9e 3.31kB / 3.31kB 0.1s done
+#9 sha256:61592f5b60306b96e5208206668cdf0fa62d3cda3a3baeed26efdcd1a21aaba5 36.70MB / 49.84MB 0.2s
+#9 sha256:8d9d84ee31888adba85837fbf8f0e6eca99263904b2ba04d79e7d4fc1da40056 1.71MB / 1.71MB 0.1s done
+#9 sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c 5.22kB / 5.22kB done
+#9 sha256:25330af3531fb5e23318554a0aa911125b6e91b1b777edf7655501d207c067a2 1.93kB / 1.93kB done
+#9 sha256:88f8ba583a884279252779bbe221bf1ff2c61cf236cc973f8ca97676ae6d07f0 6.77kB / 6.77kB done
+#9 extracting sha256:774043ccc8ccd0d0833a9ee0792142ab7ad93df971e59dd248fbf82db16d0150 0.1s
+#9 sha256:dc40c63c08b5453854c13da6d72b3182737b2e223156b786c67779e0d6f4e8e0 446B / 446B 0.2s done
+#9 sha256:61592f5b60306b96e5208206668cdf0fa62d3cda3a3baeed26efdcd1a21aaba5 49.84MB / 49.84MB 0.2s done
+#9 extracting sha256:774043ccc8ccd0d0833a9ee0792142ab7ad93df971e59dd248fbf82db16d0150 1.7s done
+#9 extracting sha256:8ab8fd6c944526e5da2ca93b1663b2ab6f4bb8d4ea7b50a90d53c9fdcc5b0b9e done
+#9 extracting sha256:61592f5b60306b96e5208206668cdf0fa62d3cda3a3baeed26efdcd1a21aaba5
+#9 ...
+
+#10 [airlock stage-1 1/7] FROM docker.io/library/python:3.13-slim@sha256:bb2988715db2cf7ace7b53f38f3cffbef7c7046a656bee66245eb0ed386e2e81
+#10 resolve docker.io/library/python:3.13-slim@sha256:bb2988715db2cf7ace7b53f38f3cffbef7c7046a656bee66245eb0ed386e2e81 0.0s done
+#10 sha256:5bf8cf1bb031eb18d0ad53aa07efe45199a2c5818f152883ad80e1c45c64362d 5.52kB / 5.52kB done
+#10 sha256:bb2988715db2cf7ace7b53f38f3cffbef7c7046a656bee66245eb0ed386e2e81 10.37kB / 10.37kB done
+#10 sha256:b92e6b9bb1ea9d826e9956fd8d30bf18bc384c130231d74fdf0ba3460c290b0b 1.75kB / 1.75kB done
+#10 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 0.3s done
+#10 sha256:49ae429f6151335a53305bc42db15361f1bd47811fb1660ea5b665ff08d17666 4.27MB / 4.27MB 0.3s done
+#10 sha256:7e7563f2ddb63441774cb88bb68bab20ca9a79267a9982ea921419c1a6910b8c 11.92MB / 11.92MB 0.4s done
+#10 sha256:b14f2539d39c701eb33cb2f8c26199e904da2850a54e1bf40eb73f915bd57896 249B / 249B 0.3s done
+#10 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 1.5s done
+#10 extracting sha256:49ae429f6151335a53305bc42db15361f1bd47811fb1660ea5b665ff08d17666 0.7s done
+#10 extracting sha256:7e7563f2ddb63441774cb88bb68bab20ca9a79267a9982ea921419c1a6910b8c 0.7s done
+#10 extracting sha256:b14f2539d39c701eb33cb2f8c26199e904da2850a54e1bf40eb73f915bd57896 done
+#10 DONE 4.2s
+
+#9 [airlock console 1/8] FROM docker.io/library/node:22-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c
+#9 ...
+
+#11 [airlock stage-1 2/7] WORKDIR /app
+#11 DONE 0.0s
+
+#12 [airlock stage-1 3/7] COPY requirements.txt requirements.txt
+#12 DONE 0.0s
+
+#9 [airlock console 1/8] FROM docker.io/library/node:22-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c
+#9 extracting sha256:61592f5b60306b96e5208206668cdf0fa62d3cda3a3baeed26efdcd1a21aaba5 1.6s done
+#9 extracting sha256:8d9d84ee31888adba85837fbf8f0e6eca99263904b2ba04d79e7d4fc1da40056 0.0s done
+#9 extracting sha256:8d9d84ee31888adba85837fbf8f0e6eca99263904b2ba04d79e7d4fc1da40056 0.0s done
+#9 extracting sha256:dc40c63c08b5453854c13da6d72b3182737b2e223156b786c67779e0d6f4e8e0 done
+#9 DONE 5.0s
+
+#13 [airlock console 2/8] WORKDIR /build
+#13 DONE 0.0s
+
+#14 [agent console 3/8] COPY package.json package-lock.json ./
+#14 DONE 0.0s
+
+#15 [airlock console 4/8] RUN npm ci
+#15 ...
+
+#16 [agent stage-1 4/7] RUN pip install --no-cache-dir -r requirements.txt && useradd --uid 10001 --create-home airlock && mkdir /data && chown 10001:10001 /data
+#16 1.897 Collecting fastapi==0.142.2 (from -r requirements.txt (line 1))
+#16 1.944   Downloading fastapi-0.142.2-py3-none-any.whl.metadata (27 kB)
+#16 1.991 Collecting starlette==1.7.0 (from -r requirements.txt (line 2))
+#16 1.999   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+#16 2.163 Collecting pydantic==2.13.5 (from -r requirements.txt (line 3))
+#16 2.171   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+#16 2.209 Collecting uvicorn==0.48.0 (from -r requirements.txt (line 4))
+#16 2.219   Downloading uvicorn-0.48.0-py3-none-any.whl.metadata (6.7 kB)
+#16 2.244 Collecting httpx==0.28.1 (from -r requirements.txt (line 5))
+#16 2.253   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#16 2.270 Collecting cel-python==0.4.0 (from -r requirements.txt (line 6))
+#16 2.279   Downloading cel_python-0.4.0-py3-none-any.whl.metadata (8.5 kB)
+#16 2.329 Collecting PyYAML==6.0.3 (from -r requirements.txt (line 7))
+#16 2.337   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#16 2.355 Collecting PyJWT==2.15.1 (from -r requirements.txt (line 8))
+#16 2.365   Downloading pyjwt-2.15.1-py3-none-any.whl.metadata (3.5 kB)
+#16 2.590 Collecting cryptography==50.0.2 (from -r requirements.txt (line 9))
+#16 2.598   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+#16 2.622 Collecting typing-extensions>=4.8.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#16 2.631   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#16 2.646 Collecting typing-inspection>=0.4.2 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#16 2.655   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#16 2.667 Collecting annotated-doc>=0.0.2 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#16 2.675   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#16 2.702 Collecting opentelemetry-api>=1.44.0 (from fastapi==0.142.2->-r requirements.txt (line 1))
+#16 2.710   Downloading opentelemetry_api-1.45.0-py3-none-any.whl.metadata (1.4 kB)
+#16 2.736 Collecting anyio<5,>=4.0.0 (from starlette==1.7.0->-r requirements.txt (line 2))
+#16 2.745   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#16 2.761 Collecting annotated-types>=0.6.0 (from pydantic==2.13.5->-r requirements.txt (line 3))
+#16 2.769   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#16 3.748 Collecting pydantic-core==2.46.5 (from pydantic==2.13.5->-r requirements.txt (line 3))
+#16 3.756   Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#16 3.782 Collecting click>=7.0 (from uvicorn==0.48.0->-r requirements.txt (line 4))
+#16 3.790   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#16 3.806 Collecting h11>=0.8 (from uvicorn==0.48.0->-r requirements.txt (line 4))
+#16 3.815   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#16 3.844 Collecting certifi (from httpx==0.28.1->-r requirements.txt (line 5))
+#16 3.852   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#16 3.873 Collecting httpcore==1.* (from httpx==0.28.1->-r requirements.txt (line 5))
+#16 3.881   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#16 3.903 Collecting idna (from httpx==0.28.1->-r requirements.txt (line 5))
+#16 3.911   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#16 3.990 Collecting google-re2>=1.1.20240702 (from cel-python==0.4.0->-r requirements.txt (line 6))
+#16 3.999   Downloading google_re2-1.1.20251105-1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#16 4.013 Collecting jmespath>=1.0.1 (from cel-python==0.4.0->-r requirements.txt (line 6))
+#16 4.022   Downloading jmespath-1.1.0-py3-none-any.whl.metadata (7.6 kB)
+#16 4.036 Collecting lark>=1.2.2 (from cel-python==0.4.0->-r requirements.txt (line 6))
+#16 4.045   Downloading lark-1.3.1-py3-none-any.whl.metadata (1.8 kB)
+#16 4.107 Collecting pendulum>=3.1.0 (from cel-python==0.4.0->-r requirements.txt (line 6))
+#16 4.117   Downloading pendulum-3.2.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+#16 4.272 Collecting cffi>=2.0.0 (from cryptography==50.0.2->-r requirements.txt (line 9))
+#16 4.282   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+#16 4.300 Collecting pycparser (from cffi>=2.0.0->cryptography==50.0.2->-r requirements.txt (line 9))
+#16 4.310   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+#16 4.333 Collecting python-dateutil>=2.6 (from pendulum>=3.1.0->cel-python==0.4.0->-r requirements.txt (line 6))
+#16 4.341   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+#16 4.371 Collecting tzdata>=2020.1 (from pendulum>=3.1.0->cel-python==0.4.0->-r requirements.txt (line 6))
+#16 4.379   Downloading tzdata-2026.4-py2.py3-none-any.whl.metadata (1.4 kB)
+#16 4.399 Collecting six>=1.5 (from python-dateutil>=2.6->pendulum>=3.1.0->cel-python==0.4.0->-r requirements.txt (line 6))
+#16 4.410   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+#16 4.425 Downloading fastapi-0.142.2-py3-none-any.whl (144 kB)
+#16 4.443 Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+#16 4.450 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+#16 4.470 Downloading uvicorn-0.48.0-py3-none-any.whl (71 kB)
+#16 4.481 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#16 4.489 Downloading cel_python-0.4.0-py3-none-any.whl (85 kB)
+#16 4.501 Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+#16 4.517    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 50.3 MB/s  0:00:00
+#16 4.527 Downloading pyjwt-2.15.1-py3-none-any.whl (33 kB)
+#16 4.536 Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+#16 4.564    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 196.2 MB/s  0:00:00
+#16 4.573 Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#16 4.580    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 540.3 MB/s  0:00:00
+#16 4.591 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#16 4.600 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#16 4.608 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#16 4.616 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#16 4.624 Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+#16 4.633 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#16 4.644 Downloading google_re2-1.1.20251105-1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (591 kB)
+#16 4.649    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 591.4/591.4 kB 377.7 MB/s  0:00:00
+#16 4.657 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#16 4.666 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#16 4.674 Downloading jmespath-1.1.0-py3-none-any.whl (20 kB)
+#16 4.681 Downloading lark-1.3.1-py3-none-any.whl (113 kB)
+#16 4.693 Downloading opentelemetry_api-1.45.0-py3-none-any.whl (60 kB)
+#16 4.702 Downloading pendulum-3.2.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (348 kB)
+#16 4.711 Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#16 4.726 Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#16 4.735 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#16 4.744 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#16 4.753 Downloading tzdata-2026.4-py2.py3-none-any.whl (347 kB)
+#16 4.761 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#16 4.770 Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+#16 5.085 Installing collected packages: tzdata, typing-extensions, six, PyYAML, PyJWT, pycparser, lark, jmespath, idna, h11, google-re2, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, python-dateutil, pydantic-core, opentelemetry-api, httpcore, cffi, anyio, starlette, pydantic, pendulum, httpx, cryptography, fastapi, cel-python
+#16 7.941 
+#16 7.946 Successfully installed PyJWT-2.15.1 PyYAML-6.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 cel-python-0.4.0 certifi-2026.7.22 cffi-2.1.1 click-8.5.0 cryptography-50.0.2 fastapi-0.142.2 google-re2-1.1.20251105 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 jmespath-1.1.0 lark-1.3.1 opentelemetry-api-1.45.0 pendulum-3.2.0 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 python-dateutil-2.9.0.post0 six-1.17.0 starlette-1.7.0 typing-extensions-4.16.0 typing-inspection-0.4.4 tzdata-2026.4 uvicorn-0.48.0
+#16 7.947 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#16 DONE 8.7s
+
+#17 [agent stage-1 5/7] COPY --chown=10001:10001 airlock airlock
+#17 DONE 0.1s
+
+#15 [airlock console 4/8] RUN npm ci
+#15 8.761 
+#15 8.761 added 24 packages, and audited 25 packages in 9s
+#15 8.762 
+#15 8.762 6 packages are looking for funding
+#15 8.762   run `npm fund` for details
+#15 8.763 
+#15 8.763 found 0 vulnerabilities
+#15 8.764 npm notice
+#15 8.764 npm notice New major version of npm available! 10.9.9 -> 12.2.0
+#15 8.764 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+#15 8.764 npm notice To update run: npm install -g npm@12.2.0
+#15 8.764 npm notice
+#15 DONE 8.9s
+
+#18 [agent console 5/8] COPY frontend frontend
+#18 DONE 0.0s
+
+#19 [agent console 6/8] COPY airlock/static airlock/static
+#19 DONE 0.0s
+
+#20 [airlock console 7/8] COPY scripts/package_console.mjs scripts/package_console.mjs
+#20 DONE 0.0s
+
+#21 [airlock console 8/8] RUN npm run build
+#21 0.222 
+#21 0.222 > airlock-review-console@0.1.0 build
+#21 0.222 > next build frontend --webpack && node scripts/package_console.mjs
+#21 0.222 
+#21 0.603 ▲ Next.js 16.3.8 (webpack)
+#21 0.618 ✓ Running next.config.mjs took 14ms
+#21 0.650 
+#21 0.673   Creating an optimized production build ...
+#21 7.473 ✓ Compiled successfully in 4.9s
+#21 7.475   Running TypeScript ...
+#21 7.476   Finished TypeScript in 1ms ...
+#21 7.478   Collecting page data using 3 workers ...
+#21 8.267   Generating static pages using 3 workers (0/3) ...
+#21 8.760 ✓ Generating static pages using 3 workers (3/3) in 493ms
+#21 9.074   Finalizing page optimization ...
+#21 9.074   Collecting build traces ...
+#21 17.05 
+#21 17.05 Route (app)
+#21 17.05 ┌ ○ /
+#21 17.05 └ ○ /_not-found
+#21 17.05 
+#21 17.05 
+#21 17.06 ○  (Static)  prerendered as static content
+#21 17.06 
+#21 17.15 {"framework":"Next.js static export","inline_script_hashes":2,"destination":"/build/airlock/console"}
+#21 DONE 17.2s
+
+#22 [agent stage-1 6/7] COPY --from=console --chown=10001:10001 /build/airlock/console airlock/console
+#22 DONE 0.0s
+
+#23 [agent stage-1 7/7] COPY --chown=10001:10001 scripts scripts
+#23 DONE 0.0s
+
+#24 [agent] exporting to image
+#24 exporting layers
+#24 exporting layers 0.9s done
+#24 writing image sha256:1e4ee6c9fee552d485b8e3d45a890422466911ed8032f10a71029c61becc6e3a done
+#24 naming to docker.io/library/airlock-check-da32996bd93a-agent done
+#24 DONE 0.9s
+
+#25 [airlock] exporting to image
+#25 exporting layers 0.9s done
+#25 writing image sha256:1e4ee6c9fee552d485b8e3d45a890422466911ed8032f10a71029c61becc6e3a done
+#25 naming to docker.io/library/airlock-check-da32996bd93a-airlock done
+#25 DONE 0.9s
+
+#26 [agent] resolving provenance for metadata file
+#26 DONE 0.0s
+
+#27 [airlock] resolving provenance for metadata file
+#27 DONE 0.0s
+ agent  Built
+ airlock  Built
+
+ Network airlock-check-da32996bd93a_protected  Creating
+ Network airlock-check-da32996bd93a_protected  Created
+ Network airlock-check-da32996bd93a_ingress  Creating
+ Network airlock-check-da32996bd93a_ingress  Created
+ Volume "airlock-check-da32996bd93a_state"  Creating
+ Volume "airlock-check-da32996bd93a_state"  Created
+ Container airlock-check-da32996bd93a-airlock-1  Creating
+ Container airlock-check-da32996bd93a-airlock-1  Created
+ Container airlock-check-da32996bd93a-airlock-1  Starting
+ Container airlock-check-da32996bd93a-airlock-1  Started
+
+4e6d1d3b9d3dfc9e5abccd34bdeb30af10ab362cfe82b3d2cd1f2c64021b0c54
+
+{"pending_id": "12e2640307634937b03ba752fa4cc7f8", "uid": 10001, "effective_capabilities": 0, "checks": ["agent_has_no_reviewer_or_audit_secret", "target_database_not_mounted_in_agent", "no_server_config_or_docker_socket", "non_root_read_only_no_capabilities", "agent_cannot_approve_or_read_audit", "SQL_cannot_read_control_tables", "write_waits_for_separate_reviewer"]}
+
+ Container airlock-check-da32996bd93a-airlock-1  Restarting
+ Container airlock-check-da32996bd93a-airlock-1  Started
+
+ Container airlock-check-da32996bd93a-airlock-1  Restarting
+ Container airlock-check-da32996bd93a-airlock-1  Started
+
+ Container airlock-check-da32996bd93a-airlock-1  Stopping
+ Container airlock-check-da32996bd93a-airlock-1  Stopped
+ Container airlock-check-da32996bd93a-airlock-1  Removing
+ Container airlock-check-da32996bd93a-airlock-1  Removed
+ Volume airlock-check-da32996bd93a_state  Removing
+ Network airlock-check-da32996bd93a_ingress  Removing
+ Network airlock-check-da32996bd93a_protected  Removing
+ Volume airlock-check-da32996bd93a_state  Removed
+ Network airlock-check-da32996bd93a_ingress  Removed
+ Network airlock-check-da32996bd93a_protected  Removed

@@ -1,0 +1,30 @@
+{
+  "run_id": 37023304336,
+  "job_id": 110891550582,
+  "tested_commit_sha": "21195dca4ff22e28b91e6a2bf2c963bdf90b7398",
+  "conclusion": "failure",
+  "failed_command_exit_code": 1,
+  "cause": "Archive fixture read-only startup probe did not catch botocore ConnectionClosedError during port readiness; official pinned source and image build passed.",
+  "artifacts": [
+    {
+      "id": 11234600390,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 1373735,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11234600390",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11234600390/zip",
+      "expired": false,
+      "created_at": "2026-10-02T15:00:49Z",
+      "expires_at": "2026-12-31T14:55:35Z",
+      "updated_at": "2026-10-02T15:00:49Z",
+      "digest": "sha256:85a07c3c291df82df3c3548f1c8285c60ae5cd8faf3799a4ae18d05e27005df2",
+      "workflow_run": {
+        "id": 37023304336,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "21195dca4ff22e28b91e6a2bf2c963bdf90b7398"
+      }
+    }
+  ],
+  "git_retained": "full job log and metadata; failed full ZIP is Actions-only"
+}

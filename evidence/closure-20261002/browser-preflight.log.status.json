@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/browser_edges.py",
+    "--output",
+    "evidence/closure-20261002/browser-preflight"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T14:42:39.065455+00:00",
+  "duration_seconds": 10.681,
+  "tested_commit_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace"
+}

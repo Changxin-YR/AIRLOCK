@@ -1,0 +1,32 @@
+{
+  "observed_date": "2026-10-02",
+  "source": "https://api.github.com/repos/Changxin-YR/AIRLOCK/contributors?anon=1&per_page=100",
+  "method": "Firecrawl scrape of public GitHub API, actual CLI exit code 0",
+  "tested_commit_sha": "cc9d687c71effc77e317b12560bd23659c4bd0c0",
+  "source_cache_sha256": "c51455979fd8d6fb39ded2ee865dcdc3c4e3a1163516a239a72af06481944711",
+  "selected_response_fields": [
+    {
+      "login": "Changxin-YR",
+      "name": null,
+      "type": "User",
+      "contributions": 17
+    },
+    {
+      "login": null,
+      "name": "AIRLOCK verification",
+      "type": "Anonymous",
+      "contributions": 1
+    },
+    {
+      "login": "github-actions[bot]",
+      "name": null,
+      "type": "Bot",
+      "contributions": 1
+    }
+  ],
+  "redaction": "Emails and unrelated profile URLs omitted; full public response retained only in ignored local cache",
+  "stars": 0,
+  "forks": 0,
+  "visible_external_human_contributors": 0,
+  "limits": "GitHub default-branch contributor attribution is not proof of absence of unrecorded external help; no independent adoption evidence found"
+}

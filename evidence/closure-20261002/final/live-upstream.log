@@ -1,0 +1,1 @@
+{"status": "PASS", "before": {"calls": 638, "reserved_or_settled_amount": 1.11779816, "budget": 3.0, "currency": "CNY", "invalidations": 9}, "after": {"calls": 642, "reserved_or_settled_amount": 1.1211824, "budget": 3.0, "currency": "CNY", "invalidations": 9}}

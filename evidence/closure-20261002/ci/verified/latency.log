@@ -1,0 +1,75 @@
+{
+  "scope": "1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target",
+  "python": "3.13.15",
+  "sqlite": "3.45.1",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "logical_cpus": 4,
+  "samples": 60,
+  "seed": 2073,
+  "warmup_calls": 10,
+  "first_native_call_ms": 42.70342000000937,
+  "read": {
+    "direct_ms": {
+      "n": 60,
+      "mean": 0.4231933500032407,
+      "p50": 0.414901999988615,
+      "p95": 0.4853120000234412,
+      "p99": 0.5291940000233808
+    },
+    "proxy_ms": {
+      "n": 60,
+      "mean": 5.896860150000786,
+      "p50": 5.804322000017237,
+      "p95": 6.516556999997647,
+      "p99": 8.163668999998208
+    },
+    "added_ms": {
+      "n": 60,
+      "mean": 5.473666799997545,
+      "p50": 5.381044999978712,
+      "p95": 6.140829000003123,
+      "p99": 7.752323999966393
+    }
+  },
+  "write": {
+    "submit_receipt_ms": {
+      "n": 30,
+      "p50": 16.775731999985055,
+      "p95": 22.503932999995868,
+      "p99": 48.30214999998361
+    },
+    "approval_request_to_effect_ms": {
+      "n": 30,
+      "p50": 22.891633000028833,
+      "p95": 24.396480999996584,
+      "p99": 36.50573599998097
+    },
+    "static_ms": {
+      "n": 30,
+      "p50": 0.081,
+      "p95": 0.12,
+      "p99": 0.128
+    },
+    "preview_ms": {
+      "n": 30,
+      "p50": 10.162,
+      "p95": 10.921,
+      "p99": 41.05
+    },
+    "evaluation_ms": {
+      "n": 30,
+      "p50": 12.308,
+      "p95": 13.053,
+      "p99": 43.229
+    }
+  },
+  "not_measured": [
+    "live LLM latency",
+    "human review latency",
+    "distributed upstream overhead",
+    "cold OS filesystem cache",
+    "production concurrency"
+  ],
+  "measurement_note": "direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows"
+}

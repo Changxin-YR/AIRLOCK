@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\archive_integration.py", line 62, in main
+    try:operation()
+        ~~~~~~~~~^^
+  File "C:\Users\27363\Desktop\airlock\scripts\archive_integration.py", line 60, in <lambda>
+    ('shorten_compliance',lambda:s3.put_object_retention(Bucket=config.bucket,Key=receipt['key'],VersionId=receipt['version_id'],Retention={'Mode':'COMPLIANCE','RetainUntilDate':dt.datetime.now(dt.timezone.utc)+dt.timedelta(seconds=10)})),
+                                 ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\botocore\client.py", line 606, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\botocore\client.py", line 1094, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (MissingContentMD5) when calling the PutObjectRetention operation: Missing required header for this request: Content-Md5.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\archive_integration.py", line 96, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "C:\Users\27363\Desktop\airlock\scripts\archive_integration.py", line 67, in main
+    assert status in {400,403} and error['Code'] in {'AccessDenied','InvalidRequest','InvalidArgument'}
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

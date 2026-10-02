@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "docs/acceptance/validate_matrix.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T15:28:43.406941+00:00",
+  "duration_seconds": 0.33,
+  "tested_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb"
+}

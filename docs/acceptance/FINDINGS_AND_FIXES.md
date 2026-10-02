@@ -37,3 +37,22 @@ CI run 36986618577 的 `intentional-negative-control` 子进程退出 23，GitHu
 新增功能对应的独立反例包括：跨进程策略重载与重启；MCP真实HTTP协议拒绝/非法参数/无副作用；远端补偿归属/CAS/独立批准；审计轮换和检查点插入/排序/替换/删除/截尾；9状态完整率及明确N-A；真实Collector接收、503重试且授权不变；Next真实stale/expired/failed/unknown对账、长文本/文本注入、键盘/退出/CSP。逐项源码和测试ID在126矩阵。
 
 没有新增自动批准路径。全原始目标仍受生产适配器、独立真实数据和真人研究缺口限制；上述受控复验不构成全域安全认证。
+
+## 闭环阶段：接入、归档和研究真实性
+
+证据前缀 `evidence/closure-20261002/`。历史失败不覆盖，本地测试和 Linux CI 逐收据绑定源提交。
+
+| ID | 性质 | 发现与修复 | 反例/证据 |
+|---|---|---|---|
+| F012 | P1，评估结论失真风险 | 将送审/阻断视为危险识别，会把合法写入送审错误计作模型命中。独立 predicted_dangerous 与授权三态拆开，未知覆盖率单列 | test_research / test_research_closure：保护率1而语义召回0；缺双人标签 acceptance_metrics=null |
+| F013 | P2，跨环境CI可复现性 | 本机缓存的旧 MinIO 官方 DockerHub 镜像已无法公开拉取；Linux run37022113155 的归档步骤真实exit1。改为从官方固定源码提交构建，保存源码/二进制/image身份 | ci/failed-c3dd6ad-job.log、failed-c3dd6ad.json；新CI build/archive原始日志 |
+| F014 | 新增接入安全加固 | DNS核验与连接使用同一已验证IP并保持TLS身份；token仅映射现有路由；SSE会话/响应绑定 | test_network真实TLS服务器与重绑定；test_oidc真实RSA签名/过期/错误audience/撤销；test_mcp_streamable会话替换/错误id/主动请求反例 |
+| F015 | 审计与研究工具补齐 | 最小化摘要导出先按路由过滤；研究correctness由任务文件重算；理解题独立采集；真实日志按相同任务质量分母比较 | test_export/test_routing/test_research_closure；原生浏览器理解题自动化导出 |
+
+真实模型新增4调用验证固定注册MCP上游。待审目标不变、拒绝后停止、独立批准一次生效；审查者为脚本。新增网络检查从Agent侧实测禁止直接访问上游；本机基础镜像拉取仍受阻，Linux结果单列。S3 API临时对象的COMPLIANCE拒删/缩短/降级不等于云账户长期保管，容器已清理。
+
+源码构建在 run37023304336 已通过；归档启动探测遇到 botocore ConnectionClosedError 而提前失败。cc9d687 增加仅针对 ListBuckets 的有界启动重试和连接重置回归，变更不重试归档写入或业务执行，并保存脱敏容器日志。第二次失败日志与元数据也保留。
+
+F016（P1，SSE身份租约绑定）：热重载把同一令牌映射到另一身份时，原连接只检查认证非空，可能继续发送原reviewer范围的动作ID通知；没有因此授予决定/执行权限。25d4f52改为每次通知前要求当前认证身份与连接主体完全相同，否则结束连接。test_sse_lease_ends_when_authenticated_identity_changes和真实SSE传输相关14项复验通过，最终CI另含该必需反例。
+
+独立旧模块重放见 evidence/closure-20261002/sse_identity_replay.py 与相邻原始log/exit收据：直接从Git载入cc9d687的API模块，在相同固定依赖和临时数据库中模拟热映射。旧模块在主体变化后仍通知动作ID（467字节），修复版立即结束（0字节）；两者目标均保持1206行。仅心跳等待被加速，未替换身份或通知实现。

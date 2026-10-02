@@ -1,0 +1,15 @@
+{
+  "provider": "DeepSeek-V4.1-Flash",
+  "added_calls": 4,
+  "added_valid": 4,
+  "added_usage_estimate_cny": 0.00338424,
+  "cumulative_calls": 642,
+  "cumulative_valid": 626,
+  "cumulative_errors": 16,
+  "cumulative_reserved_or_settled_cny": 1.1211824,
+  "known_usage_estimate_cny": 0.8526124,
+  "budget_cny": 3,
+  "invoice_reconciled": false,
+  "ledger_reused": true,
+  "source": "final/live-upstream.json; previous 638 calls in evidence/continuation-20261002"
+}

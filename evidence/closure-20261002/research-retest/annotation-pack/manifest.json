@@ -1,0 +1,14 @@
+{
+  "cases": 3,
+  "families": 3,
+  "sources": {
+    "synthetic": 2,
+    "public_incident": 1
+  },
+  "splits": {
+    "dev": 3
+  },
+  "sha256": "cab775c1a715360c08b27f074d84c7c4d396438cab870bb6ca7d33bf2c202e83",
+  "status": "AWAITING_REAL_INDEPENDENT_ANNOTATIONS",
+  "human_records_created": 0
+}

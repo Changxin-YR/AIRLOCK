@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/archive_integration.py",
+    "--output",
+    "evidence/closure-20261002/archive-retest.json"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-02T14:16:59.280821+00:00",
+  "duration_seconds": 3.134,
+  "tested_commit_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "661cf9024e56df4dd88a6d789be25d46c7c8eace"
+}
