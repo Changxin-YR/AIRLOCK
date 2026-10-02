@@ -38,8 +38,9 @@ def container(image,config,container_port,extra,output,label):
         path=Path(folder)/'config.yaml';path.write_text(yaml.safe_dump(config),encoding='utf-8');path.chmod(0o644)
         with socket.socket() as s:s.bind(('127.0.0.1',0));port=s.getsockname()[1]
         try:
+            entry=['--entrypoint','/usr/local/bin/envoy','--user','65532:65532'] if image==ENVOY else []
             docker(['run','-d','--name',name,'--read-only','--cap-drop','ALL','--security-opt','no-new-privileges',
-                '-p',f'127.0.0.1:{port}:{container_port}','-v',str(path.resolve())+':/fixture.yaml:ro',image]+extra)
+                '-p',f'127.0.0.1:{port}:{container_port}','-v',str(path.resolve())+':/fixture.yaml:ro']+entry+[image]+extra)
             yield name,port
         finally:
             logs=docker(['logs',name],False);(output/(label+'-container.log')).write_text(logs,encoding='utf-8')
