@@ -147,6 +147,9 @@ def classification(rows):
 
 def bootstrap_mean(values,seed=2073,repeats=2000):
     if not values: return {'n':0,'mean':None,'ci95':None}
+    if len(values)==1:
+        return {'n':1,'mean':statistics.mean(values),'ci95':None,
+            'method':'single participant descriptive value; a population confidence interval is not estimable'}
     rng=random.Random(seed)
     means=sorted(statistics.mean(rng.choices(values,k=len(values))) for _ in range(repeats))
     return {'n':len(values),'mean':statistics.mean(values),'ci95':[means[int(.025*repeats)],means[min(repeats-1,int(.975*repeats))]],
@@ -185,8 +188,9 @@ def study_report(sessions,task_gold=None,task_file_sha256=None):
             'delta_B_minus_A_ms':means['B']-means['A'],'accuracy_delta_B_minus_A':accuracy['B']-accuracy['A']})
     observations=[r for p in included for r in p['observations']]
     times=sorted(r['visible_ms'] for r in observations)
-    return {'status':'BLOCKED_EXTERNAL' if not included else 'OBSERVED_SELF_REPORTED_HUMANS',
+    return {'status':'BLOCKED_EXTERNAL' if not included else 'OBSERVED_SINGLE_HUMAN_PILOT' if len(included)==1 else 'OBSERVED_SELF_REPORTED_HUMANS',
         'human_participants':len(included),'excluded':excluded,'participants':included,
+        'acceptance_metrics':None,
         'paired_time_delta':bootstrap_mean([r['delta_B_minus_A_ms'] for r in included]),
         'paired_accuracy_delta':bootstrap_mean([r['accuracy_delta_B_minus_A'] for r in included]),
         'all_decisions_visible_ms':{'n':len(times),'mean':statistics.mean(times) if times else None,
@@ -195,6 +199,7 @@ def study_report(sessions,task_gold=None,task_file_sha256=None):
         'gold_verification':'recomputed_from_supplied_task_file' if task_gold is not None else 'unverified_browser_supplied_correctness',
         'comprehension_correct':ratio(sum(r['comprehension_correct'] for r in observations if type(r.get('comprehension_correct')) is bool),sum(type(r.get('comprehension_correct')) is bool for r in observations)),
         'limitations':['No causal efficiency claim without recruitment, business gold, counterbalancing and adequate sample size.',
+            'A single participant is a descriptive pilot: repeated decisions do not create independent participants or a population confidence interval.',
             'Exported browser timing and human identity are untrusted telemetry, never authorization.',
             'Visibility duration excludes hidden tabs; correctness is supplied task gold, not a policy guess.']}
 

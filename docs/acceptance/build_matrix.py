@@ -4,6 +4,7 @@ from successful tooling. This is bookkeeping, not an autonomous semantic audit.
 """
 from pathlib import Path
 import json
+import os
 import xml.etree.ElementTree as ET
 from collections import Counter
 
@@ -11,7 +12,8 @@ ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'evidence/autonomous-20261003'
 CLOSURE=ROOT/'evidence/closure-20261002'
 LEGACY=ROOT/'evidence/continuation-20261002'
-FINAL=BASE/'ci/verified'
+FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/autonomous-20261003/ci/verified')
+CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/autonomous-20261003/CI_FINAL.json')
 SHA=json.loads((FINAL/'pytest.log.status.json').read_text())['tested_commit_sha']
 LOG_PATHS={name:LEGACY/'final'/(name+'.log') for name in ('live-validation','ablation-live-dev','ablation-live-test','model-diagnostics')}
 LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':CLOSURE/'final/live-upstream.log','sse-identity-replay':CLOSURE/'sse-identity-replay.log',
@@ -206,6 +208,25 @@ for record in RECORDS.values():
     record['code_references']=[f.replace('airlock/static/app.js','frontend/app/page.jsx') for f in record['code_references']]
 
 
+if (FINAL/'pilot-browser.json').exists():
+    extend('B1',RECORDS['B1']['scope']+' 新增私密工作日志导入器，明确区分既有连接器执行轨迹与当前Issue观察快照；输入hash、授权出处和空白标注包保留。',
+        RECORDS['B1']['uncovered_scope'], 'benchmark/worklog.py','test_worklog','')
+    extend('B3',RECORDS['B3']['scope']+' 新增单人先导CSV/JSONL导入、覆盖与缺项检查；实际收到真人标注0，κ仍为null。',
+        '用户目前可安排1人，尚未收到真实完成记录；正式双人独立要求保留。',
+        'benchmark/pilot.py docs/START_WITH_ONE_PERSON.md','test_pilot','')
+    extend('C12.2',RECORDS['C12.2']['scope']+' 新增独立通知收件箱，写入/查看凭据分离，同ID同载荷去重、冲突拒绝、持久分页与浏览器退出清空。',
+        '本机自动化投递已测；长期远端TLS部署、渠道推送和真人确认送达仍未验证。',
+        'airlock/alert_inbox.py','test_alert_inbox','pilot-browser')
+    for key in ('H1','H2','H3','C11.2'):
+        extend(key,RECORDS[key]['scope']+' 单人先导页面无需审批服务，8道GitHub作者练习题；n=1不输出置信区间或正式验收指标。',
+            RECORDS[key]['uncovered_scope'],
+            'benchmark/pilot.py scripts/pilot_server.py scripts/pilot_browser.py benchmark/pilot-github-tasks.json',
+            'test_pilot test_pilot_server','pytest pilot-browser')
+    for key in ('D2','C7.6'):
+        RECORDS[key]['code_references']+=['docs/START_WITH_ONE_PERSON.md']
+    RECORDS['G4']['uncovered_scope']+=' 本轮按用户要求暂缓。'
+
+
 def build():
     targets=[]
     for original in INDEX['targets']:
@@ -253,7 +274,7 @@ def build():
                 r['exit_codes'].append({'command':'historical-latency-verifier','exit_code':1,'environment':'Ubuntu runner',
                     'historical_failure':True,'basis':'actual verify_evidence step failed at read added p95=103.883327ms'})
             if id in {'A2','C11.1','C11.3','C11.4','R1','K5','G1','C2.5','C12.1','D1'}:
-                ci=json.loads((BASE/'CI_FINAL.json').read_text())
+                ci=json.loads(CI_META.read_text())
                 r['evidence']+=ci['git_evidence']
                 r['commands'].append({'command':'GitHub Actions verify job and downloaded ZIP evidence verifier','run_url':ci['url'],'tested_commit_sha':ci['tested_commit_sha']})
                 r['exit_codes'].append({'command':'GitHub Actions verify job','exit_code':0,'environment':'Ubuntu runner','basis':'actual child receipts and downloaded artifact verifier'})

@@ -11,7 +11,7 @@ REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchma
                  'benchmark-test.log','browser-native.log','docker-smoke.log','dependency-audit.log',
                  'latency.log','ablation.log','study-analysis.log','comparison.log','next-build.log','npm-audit.log',
                  'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-build.log','archive-integration.log','research-pipeline.log',
-                 'sqlite-runtime-build.log','sqlite-runtime-linked.log']
+                 'sqlite-runtime-build.log','sqlite-runtime-linked.log','pilot-browser.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
@@ -42,7 +42,17 @@ REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_sqlite_pinned_runtime_survives_minimal_child_environment',
     'test_sqlite_builder_rejects_archive_or_official_source_hash_mismatch',
     'test_sqlite_binary_provenance_hashes_actual_mapping_and_matches_build',
-    'test_sqlite_binary_provenance_rejects_missing_or_ambiguous_mapping'}
+    'test_sqlite_binary_provenance_rejects_missing_or_ambiguous_mapping',
+    'test_pilot_server_only_serves_fixed_public_assets',
+    'test_bootstrap_single_person_has_no_population_interval_even_with_many_decisions',
+    'test_original_annotations_report_still_requires_exactly_two_independent_people',
+    'test_snapshot_is_observation_not_execution_or_approval',
+    'test_private_pack_hashes_empty_labels_and_correlated_counts',
+    'test_repeated_create_claims_do_not_multiply_observed_issue_effects',
+    'test_inbox_concurrent_replays_insert_once_and_conflicts_are_atomic',
+    'test_inbox_read_and_write_credentials_are_separate_and_never_url_auth',
+    'test_inbox_unsafe_runtime_leaves_existing_database_unopened',
+    'test_actual_local_sender_receiver_alert_recovery_and_receiver_restart'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',
@@ -134,6 +144,20 @@ def verify(directory):
     container = load(directory,'docker-report.json')
     edges=load(directory,'browser-edges.json')
     require(len(edges['passed'])>=8 and not edges['errors'] and not edges['csp_violations'],'Next browser counterexamples failed')
+    pilot=load(directory,'pilot-browser.json')
+    require(pilot['mode']=='native_browser_e2e' and pilot['status']=='PASS' and not pilot['errors'] and not pilot['csp_violations'],
+            'pilot native browser flow failed')
+    require({'pilot_public_assets_load_without_approval_service',
+             'eight_practice_decisions_exported_and_excluded_from_human_metrics',
+             'pilot_390px_no_horizontal_overflow', 'sender_alert_dedup_and_recovery_render_as_two_events',
+             'inbox_read_token_not_in_url_or_browser_storage', 'inbox_390px_no_horizontal_overflow',
+             'inbox_logout_clears_authenticated_content', 'no_browser_javascript_or_csp_errors'} <= set(pilot['passed']),
+            'missing pilot browser checks')
+    require(pilot['human_participants']==pilot['external_notifications']==pilot['business_side_effects']==0,
+            'pilot automation provenance')
+    for name in ('pilot-desktop.png','pilot-mobile.png','inbox-desktop.png','inbox-mobile.png'):
+        data=(directory/name).read_bytes()
+        require(len(data)>100 and data.startswith(b'\x89PNG\r\n\x1a\n'), 'missing pilot screenshot: '+name)
     integrations=load(directory,'container-integrations.json')
     remote=load(directory,'upstream-isolation.json')
     require(remote['status']=='PASS' and remote['mode']=='real_docker_protected_upstream' and len(remote['probe']['checks'])>=6,'protected remote network isolation failed')

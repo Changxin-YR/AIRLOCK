@@ -51,6 +51,7 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - run: python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py
       - run: python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py
+      - run: python scripts/run_logged.py evidence/pilot-browser.log -- python scripts/pilot_browser.py
       - run: python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
       - run: python scripts/run_logged.py evidence/upstream-isolation.log -- python scripts/upstream_isolation.py
       - uses: actions/setup-go@v6

@@ -6,6 +6,8 @@
 
 需要提供真人、身份平台或云资源时，按[用户操作步骤](docs/USER_ACTIONS_20261003.md)执行。真实项目任务已在 Issues #2—#5 跟踪；连接器执行记录与 AIRLOCK 受控执行分别标记，原始个人日志保存在本机。
 
+目前只有一个人、没有历史业务日志时，从[单人启动指南](docs/START_WITH_ONE_PERSON.md)开始：独立练习页、GitHub 维护日志导入和本机告警收件箱均可单独使用；正式双人标注和人群验证仍单独记账。
+
 ```text
 Agent（只有agent token）
   -> HTTP / stdio 与 Streamable HTTP MCP
