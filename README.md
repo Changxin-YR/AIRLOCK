@@ -2,6 +2,8 @@
 
 **个人工程作品：Agent提交意图，人看清影响，服务端持有执行权。**
 
+用于简历或面试时，从[简历与演示版本](docs/RESUME_PORTFOLIO.md)开始：核心功能取舍、项目条目、五分钟演示和证据入口已整理。当前工程基线已[归档](evidence/resume-archive-20261004/README.md)，原始完整目标及其受阻项继续保留。
+
 人批准的参数、策略和数据快照，必须与服务端最终执行所依据的对象一致。当前支持有界 SQLite 合成数据和配置注册的 HTTP / MCP CAS 上游；完整范围、配置、状态机和实验工具见 [运行手册](docs/OPERATIONS.md)。126 项原始目标与结论见 [验收矩阵](docs/acceptance/COMPLETION_MATRIX.md)，部分外部验证仍受阻。
 
 需要提供真人、身份平台或云资源时，按[用户操作步骤](docs/USER_ACTIONS_20261003.md)执行。真实项目任务已在 Issues #2—#5 跟踪；连接器执行记录与 AIRLOCK 受控执行分别标记，原始个人日志保存在本机。

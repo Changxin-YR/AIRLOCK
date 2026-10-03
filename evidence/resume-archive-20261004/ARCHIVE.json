@@ -1,0 +1,84 @@
+{
+  "archive_date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "purpose": "Frozen engineering baseline before resume-focused presentation; original acceptance preserved.",
+  "baseline_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
+  "tested_source_commit": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
+  "memory_sha": "a6b56d11ce93c1847d61e3199d2f4b8d5ef5ad41",
+  "branch": "codex/full-audit-2026-10-02",
+  "source_ci_run": 37117971834,
+  "delivery_ci_run": 37118762214,
+  "original_target_count": 126,
+  "counts": {
+    "implementation": {
+      "IMPLEMENTED": 111,
+      "PARTIAL": 15
+    },
+    "verification": {
+      "PASS": 105,
+      "BLOCKED_EXTERNAL": 21
+    }
+  },
+  "original_goals_all_satisfied": false,
+  "known_unresolved_p0_p1_in_tested_scope": 0,
+  "prior_verified_tests": {
+    "python": 687,
+    "javascript": 6,
+    "native_browser": 31
+  },
+  "human_completed": 0,
+  "files": {
+    "source-699adbd.zip": {
+      "bytes": 771512,
+      "sha256": "6cf5041d7d641c727c143ff960520efa513b425cc419248382c44114b9485d2f"
+    },
+    "acceptance-533726a.zip": {
+      "bytes": 1917012,
+      "sha256": "1a77398592181042eab95aa1040298a877ac1bb5b3786d8feefb3797b7f6d4f9"
+    },
+    "snapshot/docs/CODEX_FULL_AUDIT_BRIEF.md": {
+      "bytes": 49123,
+      "sha256": "175fe74707fb4dd252684a759dded904c417017c772e3179b9412c3acfc3d835"
+    },
+    "snapshot/docs/acceptance/AIRLOCK-acceptance-targets.json": {
+      "bytes": 51666,
+      "sha256": "7cb64cf9cacdbb2e52af82068c753fd04f2e05c1e1058112213edce3acc7750f"
+    },
+    "snapshot/docs/acceptance/FINAL_REPORT.md": {
+      "bytes": 7836,
+      "sha256": "5b7dccb4b068e2e20d168e38f1575830ae355ed24a54152ad18d2525ad9a71a2"
+    },
+    "snapshot/docs/acceptance/COMPLETION_MATRIX.json": {
+      "bytes": 1102336,
+      "sha256": "cd5eb394280461c75229176fce5ae93c74450d90cfff1e67bf82490ff9072f04"
+    },
+    "snapshot/docs/acceptance/DELIVERY_STATE.json": {
+      "bytes": 6665,
+      "sha256": "d3b9a17cfa86c3925ec30e48f1156b32a40a4519d4e000505a29bb658f2a595a"
+    },
+    "snapshot/docs/acceptance/EVIDENCE_RETENTION.md": {
+      "bytes": 11949,
+      "sha256": "92b8b4ca207698d325b943c816d46b7f7cca62189f7f76cc07e781d8a7e8360f"
+    },
+    "snapshot/evidence/closure2-20261003/CI_FINAL.json": {
+      "bytes": 2052,
+      "sha256": "e559898c0afceeacedecc827128f0f38cb067e36ac7d0019f544cd8eb52fa346"
+    },
+    "snapshot/evidence/closure2-20261003/ARCHIVE_MANIFEST.json": {
+      "bytes": 45553,
+      "sha256": "665d7614b2e7cd935bc08a2118b42a4a7aca88586663b6c85559acd95fadfa60"
+    }
+  },
+  "limits": [
+    "Source ZIP excludes historical evidence directory; selected full source CI ZIP included separately.",
+    "The 126-target ledger references additional historical evidence retained in Git, not all copied into this bundle.",
+    "Git history is retained without automatic expiry; this is not independent WORM custody.",
+    "No private var files, databases, real credentials or personal logs are included."
+  ],
+  "bundle": {
+    "path": "evidence/resume-archive-20261004/AIRLOCK-resume-baseline-699adbd.zip",
+    "bytes": 2835771,
+    "sha256": "1ec0d00025e4a9b059f6e80de6bb052db345b59c2486f3a80d41a47374b678f4"
+  }
+}

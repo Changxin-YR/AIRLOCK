@@ -1,0 +1,2 @@
+Failed to find real location of C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\python.exe
+{"status": "PASS", "baseline_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd", "bundle_payloads_verified": 10, "ci_payloads_verified": 94, "local_links_checked": 23, "application_diff": [], "demo": "disposable synthetic fixture; actual effect/state/audit checked", "historical_full_ci_is_not_a_new_full_test_run": true}
