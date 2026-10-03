@@ -6,6 +6,8 @@
 
 推荐Python3.13、Node22、Docker Compose；安装requirements-dev.txt。确定性审批无需真实 LLM key；Next.js 审批台需要 npm ci 与 npm run build。记录实际版本与提交。上游Starlette/AnyIO弃用警告应如实记录，不能当作测试失败或偷偷忽略所有警告。
 
+SQLite先执行 `python -m airlock.sqlite_runtime --pin-file configs/sqlite-runtime.json`，正式CI/Docker必须实际加载固定3.53.1/source ID。Linux构建与链接命令以`.github/workflows/ci.yml`为准；完整CI证据包还必须包含`sqlite-runtime-build.log`、`sqlite-runtime-linked.log`及各自JSON/真实退出收据。未确认运行时在打开持久WAL前拒绝；不得为运行旧环境删库或降级同步。
+
 ## 基础检查
 
 ```bash

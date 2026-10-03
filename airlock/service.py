@@ -74,8 +74,8 @@ class Gate:
         self._event(conn, action, "action." + state, **detail)
         return action
 
-    def expire(self) -> int:
-        with self.store.transaction() as conn:
+    def expire(self, connection=None) -> int:
+        with self.store.transaction(connection) as conn:
             now=self.clock()
             prior=conn.execute("SELECT value FROM meta WHERE key='clock_high_water'").fetchone()
             if not math.isfinite(now) or (prior and now<float(prior[0])-1):
@@ -119,8 +119,15 @@ class Gate:
     def _submit(self, call: Invocation, principal: str) -> dict:
         started = time.perf_counter()
         request_hash = digest({"principal": principal, "call": call.model_dump()})
-        self.expire()
-        with self.store.transaction() as conn:
+        # Expiration/high-water is committed before admission, even when the
+        # submission later fails. Reuse only the connection, not the transaction:
+        # this avoids an extra last-connection WAL checkpoint and reconnect.
+        with self.store.connection() as conn:
+            self.expire(conn)
+            return self._submit_on_connection(call, principal, request_hash, started, conn)
+
+    def _submit_on_connection(self, call, principal, request_hash, started, connection):
+        with self.store.transaction(connection) as conn:
             self.policy.synchronize(conn)
             existing = conn.execute("SELECT request_hash,document FROM actions WHERE principal=? AND idem=?",
                                     (principal, call.idempotency_key)).fetchone()

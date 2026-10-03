@@ -6,11 +6,12 @@ import json
 import os
 import sqlite3
 import uuid
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from .models import Settings, canonical, digest
 from .sql import SCHEMA
 from . import audit_keys
 from . import telemetry
+from .sqlite_runtime import enable_wal, require_safe_python_runtime
 
 DDL = """
 CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT NOT NULL);
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS telemetry_outbox(seq INTEGER PRIMARY KEY,payload TEXT
 
 class Store:
     def __init__(self, settings: Settings):
+        require_safe_python_runtime()
         self.settings = settings
         telemetry.endpoint(settings)
         settings.database.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
@@ -44,7 +46,7 @@ class Store:
         except FileExistsError:
             pass
         with self.connection() as conn:
-            conn.execute("PRAGMA journal_mode=WAL")
+            enable_wal(conn)
             conn.executescript(DDL)
             conn.execute("BEGIN IMMEDIATE")
             try:
@@ -87,8 +89,12 @@ class Store:
             conn.close()
 
     @contextmanager
-    def transaction(self):
-        with self.connection() as conn:
+    def transaction(self, connection=None):
+        # A caller may retain a connection across independent durable
+        # transactions. Borrowing never commits/closes an outer transaction.
+        with (self.connection() if connection is None else nullcontext(connection)) as conn:
+            if conn.in_transaction:
+                raise ValueError('nested transactions are not supported')
             conn.execute("BEGIN IMMEDIATE")
             try:
                 yield conn

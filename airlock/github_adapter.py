@@ -25,6 +25,7 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from . import network
 from .models import GateError, canonical, digest
+from .sqlite_runtime import enable_wal, require_safe_python_runtime
 
 API_ORIGIN = 'https://api.github.com'
 REPOSITORY_QUERY = '''query($id: ID!) { node(id: $id) { ... on Repository {
@@ -170,12 +171,13 @@ class GitHubAPI:
 
 class IssueAdapter:
     def __init__(self, config: AdapterConfig, database: Path):
+        require_safe_python_runtime()
         self.config = config
         self.database = Path(database)
         self.database.parent.mkdir(parents=True, exist_ok=True)
         self.api = GitHubAPI(config)
         with self.connection() as conn:
-            conn.execute('PRAGMA journal_mode=WAL')
+            enable_wal(conn)
             conn.execute('CREATE TABLE IF NOT EXISTS github_claims (action_id TEXT PRIMARY KEY, document TEXT NOT NULL)')
 
     @contextmanager

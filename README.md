@@ -32,7 +32,7 @@ Agent（只有agent token）
 
 ## 本地演示
 
-推荐Python3.13；要求Python≥3.11、SQLite≥3.37。下列方式只供可信开发机体验，不等于将高权限Agent放在同一目录中的隔离部署。
+推荐Python3.13；要求Python≥3.11和已确认修复 WAL-reset 的 SQLite。CI/Docker 固定官方3.53.1并检查实际加载的source ID；旧版本会在打开持久数据库前拒绝启动。运行 `python -m airlock.sqlite_runtime` 可检查本机，安装说明见[运行时要求](docs/OPERATIONS.md#sqlite-运行时要求)。下列方式只供可信开发机体验，不等于将高权限Agent放在同一目录中的隔离部署。
 
 ```bash
 python -m venv .venv

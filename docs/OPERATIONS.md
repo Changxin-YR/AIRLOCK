@@ -22,6 +22,19 @@ python -m airlock.mcp
 
 模拟器只提交和查询；由另一个浏览器中的 reviewer 决定。拒绝后模拟器真实执行安全 SELECT。`demo_comparison.py` 对两个一次性合成数据库比较裸删除、pending、拒绝、安全替代和明确批准，reviewer 是测试驱动，不是真人实验。
 
+## SQLite 运行时要求
+
+持久 WAL 初始化要求已确认包含 [SQLite WAL-reset 修复](https://sqlite.org/wal.html#walresetbug) 的运行时。上游3.51.3及以后、3.50.7和3.44.6回补分支符合版本门槛；未确认的发行版回补拒绝启动，不能仅根据旧版本号断言其存在漏洞。检查命令：
+
+```sh
+python -m airlock.sqlite_runtime
+python -m airlock.sqlite_runtime --pin-file configs/sqlite-runtime.json
+```
+
+第二条要求与项目正式验收固定的3.53.1版本/source ID一致。Windows目前使用Python自带的3.53.1，不修改系统DLL。Linux正式运行优先使用本项目Dockerfile：构建阶段从官方固定源码生成独立共享库，验证归档SHA256、官方amalgamation SHA3-256、编译后source ID，并在容器内注册动态链接路径。最终镜像不含编译器；CI另用最小环境子进程确认没有依赖调用者的`LD_LIBRARY_PATH`。
+
+若在专用Linux开发环境手工构建，可执行 `python scripts/build_sqlite_runtime.py --prefix /绝对路径/全新目录 --output /绝对路径/build-report.json`。输出目录必须不存在。构建依赖C编译器和网络；动态链接注册由部署拥有者限定在该环境内完成，随后再次运行上面的固定pin检查。不要在共享生产主机替换系统库，也不要通过删库、改journal模式或关闭FULL同步绕过检查。项目保持WAL与两次独立FULL提交：过期/时钟高水位先提交，随后提交申请；连接复用不合并两项事务。
+
 ## 状态与事务
 
 ```mermaid

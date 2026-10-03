@@ -34,6 +34,7 @@ def measure(n):
                 else:
                     row['proxy_ms'],action=invoke(query,f'latency-read-{i:04d}')
                     assert action['state']=='executed' and action['result']['rows']==[{'n':1206}]
+                    row['action_id']=action['id']
             row['added_ms']=row['proxy_ms']-row['direct_ms'];rows.append(row)
         writes=[]
         for i in range(min(n,30)):
@@ -48,6 +49,14 @@ def measure(n):
             writes.append({'sample':i,'submit_receipt_ms':elapsed,'approval_request_to_effect_ms':after,
                 'static_ms':detail['static_ms'],'preview_ms':detail['preview_ms'],'evaluation_ms':detail['evaluation_ms'],
                 'reviewer':'automated_fixture; no human waiting measured'})
+        # Read persisted phase timings only AFTER all timed requests. Keep every
+        # paired sample and the same admission/durability path and thresholds.
+        for row in rows:
+            response=client.get('/v1/actions/'+row['action_id'],headers=reviewer)
+            response.raise_for_status();detail=response.json()
+            row['server_static_ms']=detail['static_ms']
+            row['server_evaluation_ms']=detail['evaluation_ms']
+            row['http_minus_evaluation_ms']=row['proxy_ms']-detail['evaluation_ms']
     return {'scope':'1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target',
         'python':platform.python_version(),'sqlite':sqlite3.sqlite_version,'platform':platform.platform(),'processor':platform.processor(),
         'logical_cpus':os.cpu_count(),'samples':n,'seed':2073,'warmup_calls':10,'first_native_call_ms':first_call_ms,
@@ -55,7 +64,8 @@ def measure(n):
         'write':{k:distribution([r[k] for r in writes]) for k in ('submit_receipt_ms','approval_request_to_effect_ms','static_ms','preview_ms','evaluation_ms')},
         'raw_read_pairs':rows,'raw_writes':writes,
         'not_measured':['live LLM latency','human review latency','distributed upstream overhead','cold OS filesystem cache','production concurrency'],
-        'measurement_note':'direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows'}
+        'measurement_note':'direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows',
+        'phase_note':'server evaluation ends before final audit/commit/close; HTTP minus evaluation also includes transport, scheduling and serialization, not a pure fsync measurement. Phase data read after all timed requests.'}
 
 
 def signed_distribution(values):

@@ -27,6 +27,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Build verified SQLite runtime
+        run: |
+          python scripts/run_logged.py evidence/sqlite-runtime-build.log -- python scripts/build_sqlite_runtime.py --prefix "$RUNNER_TEMP/airlock-sqlite-runtime" --output evidence/sqlite-runtime-build.json
+          printf '%s\n' "$RUNNER_TEMP/airlock-sqlite-runtime/lib" | sudo tee /etc/ld.so.conf.d/00-airlock-sqlite.conf > /dev/null
+          sudo ldconfig
+      - name: Verify Python loads pinned SQLite
+        run: python scripts/run_logged.py evidence/sqlite-runtime-linked.log -- env -u LD_LIBRARY_PATH python -m airlock.sqlite_runtime --pin-file configs/sqlite-runtime.json --build-report evidence/sqlite-runtime-build.json --output evidence/sqlite-runtime-linked.json
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

@@ -21,9 +21,16 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 PROBE = r'''
-import errno,json,os
+import errno,json,os,sqlite3
 from pathlib import Path
 import httpx
+from airlock.sqlite_runtime import require_safe_sqlite, mapped_sqlite_libraries, verify_linked_build_report
+with sqlite3.connect(':memory:') as connection:
+    sqlite_runtime = require_safe_sqlite(connection)
+sqlite_pin = json.loads(Path('/app/configs/sqlite-runtime.json').read_text())
+assert all(sqlite_runtime[key] == sqlite_pin[key] for key in ('version', 'source_id'))
+sqlite_runtime['loaded_shared_library_files'] = mapped_sqlite_libraries()
+verify_linked_build_report(sqlite_runtime, sqlite_pin, Path('/opt/airlock-sqlite/build-report.json'))
 assert os.getuid() != 0
 assert not os.getenv('AIRLOCK_REVIEWER_TOKEN') and not os.getenv('AIRLOCK_AUDIT_KEY')
 assert not Path('/data/airlock.db').exists()
@@ -42,7 +49,7 @@ with httpx.Client(base_url=os.environ['AIRLOCK_URL'],headers={'Authorization':'B
     assert c.get('/v1/audit').status_code==403
     denied=c.post('/v1/actions',json={'sql':'SELECT * FROM actions','idempotency_key':'docker-control-read'})
     assert denied.status_code==200 and denied.json()['state']=='blocked'
-    print(json.dumps({'pending_id':action['id'],'uid':os.getuid(),'effective_capabilities':int(caps,16),'checks':['agent_has_no_reviewer_or_audit_secret','target_database_not_mounted_in_agent','no_server_config_or_docker_socket','non_root_read_only_no_capabilities','agent_cannot_approve_or_read_audit','SQL_cannot_read_control_tables','write_waits_for_separate_reviewer']}))
+    print(json.dumps({'pending_id':action['id'],'uid':os.getuid(),'effective_capabilities':int(caps,16),'sqlite_runtime':sqlite_runtime,'checks':['agent_has_no_reviewer_or_audit_secret','target_database_not_mounted_in_agent','no_server_config_or_docker_socket','non_root_read_only_no_capabilities','agent_cannot_approve_or_read_audit','SQL_cannot_read_control_tables','write_waits_for_separate_reviewer','container_loads_pinned_sqlite_runtime']}))
 '''
 
 

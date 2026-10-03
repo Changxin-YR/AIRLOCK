@@ -10,7 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchmark-dev.log',
                  'benchmark-test.log','browser-native.log','docker-smoke.log','dependency-audit.log',
                  'latency.log','ablation.log','study-analysis.log','comparison.log','next-build.log','npm-audit.log',
-                 'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-build.log','archive-integration.log','research-pipeline.log']
+                 'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-build.log','archive-integration.log','research-pipeline.log',
+                 'sqlite-runtime-build.log','sqlite-runtime-linked.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
@@ -28,7 +29,20 @@ REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_lost_response_retries_same_event_and_orders_recovery_after_alert',
     'test_private_reservation_permissions_and_exclusive_reuse',
     'test_relay_cli_does_not_call_when_private_permissions_fail',
-    'test_model_study_packet_blinds_gold_and_hides_diff_in_a'}
+    'test_model_study_packet_blinds_gold_and_hides_diff_in_a',
+    'test_submit_uses_one_connection_and_two_full_commits',
+    'test_failed_submit_keeps_expiration_and_high_water_committed',
+    'test_reused_connection_reauthorizes_prepared_sql_and_restores_limits',
+    'test_sqlite_guard_rejects_unconfirmed_runtime_before_enabling_wal',
+    'test_sqlite_runtime_rejection_never_opens_persistent_database[False-store]',
+    'test_sqlite_runtime_rejection_never_opens_persistent_database[False-github_adapter]',
+    'test_sqlite_runtime_rejection_never_opens_persistent_database[True-store]',
+    'test_sqlite_runtime_rejection_never_opens_persistent_database[True-github_adapter]',
+    'test_sqlite_confirmed_runtime_preserves_wal_and_full_sync',
+    'test_sqlite_pinned_runtime_survives_minimal_child_environment',
+    'test_sqlite_builder_rejects_archive_or_official_source_hash_mismatch',
+    'test_sqlite_binary_provenance_hashes_actual_mapping_and_matches_build',
+    'test_sqlite_binary_provenance_rejects_missing_or_ambiguous_mapping'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',
@@ -92,6 +106,24 @@ def verify(directory):
         require(status.get('tested_commit_sha')==commit and status.get('tracked_source_dirty') is False,name+': unbound or dirty source')
         require((directory/name).stat().st_size > 0, name+': empty raw log')
     tests = verify_junit(directory/'pytest.xml')
+    sqlite_pin = load(ROOT/'configs', 'sqlite-runtime.json')
+    sqlite_build = load(directory, 'sqlite-runtime-build.json')
+    sqlite_linked = load(directory, 'sqlite-runtime-linked.json')
+    require(sqlite_build['pin'] == sqlite_pin and sqlite_build['child_exit_code'] == 0,
+            'SQLite source build provenance mismatch')
+    require(sqlite_linked.get('pin_verified') is True and sqlite_linked['sqlite_threadsafety'] > 0,
+            'SQLite linked runtime unverified')
+    for field in ('version', 'source_id'):
+        require(sqlite_build['verified_python_runtime'][field] == sqlite_linked[field] == sqlite_pin[field],
+                'SQLite loaded runtime differs from source pin')
+    for field in ('archive_sha256', 'amalgamation_sha3_256'):
+        require(sqlite_linked[field] == sqlite_pin[field], 'SQLite source digest mismatch')
+    require(sqlite_linked.get('build_report_verified') is True and
+            sqlite_linked['build_report_sha256'] == hashlib.sha256((directory/'sqlite-runtime-build.json').read_bytes()).hexdigest(),
+            'SQLite linked build report digest mismatch')
+    require(len(sqlite_linked['loaded_shared_library_files']) == 1 and
+            sqlite_linked['loaded_shared_library_files'][0]['sha256'] == sqlite_build['library_sha256'],
+            'SQLite mapped binary differs from this build')
     browser = load(directory,'browser-report.json')
     require(browser['mode']=='native_browser_e2e' and not browser['errors'] and not browser['not_proven'],
             'native browser failed or weakened')
@@ -117,6 +149,10 @@ def verify(directory):
     require(container['rows_before_independent_approval']==1206 and container['rows_after_approval_and_restart']==0,
             'Docker target effect')
     require(container['probe']['uid']!=0 and container['probe']['effective_capabilities']==0, 'Docker isolation')
+    require(all(container['probe']['sqlite_runtime'][key] == sqlite_pin[key] for key in ('version', 'source_id')),
+            'Docker SQLite runtime differs from pinned source')
+    require(container['probe']['sqlite_runtime'].get('build_report_verified') is True,
+            'Docker mapped SQLite binary does not match its build report')
     corpus_sha = load(ROOT/'benchmark','manifest.json')['sha256']
     for split,n,families in [('dev',120,24),('test',80,16)]:
         verify_benchmark(load(directory,'benchmark-'+split+'.json'),n,families,corpus_sha)
