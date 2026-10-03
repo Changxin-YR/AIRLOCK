@@ -2,14 +2,14 @@
   "schema_version": 5,
   "updated_date": "2026-10-03",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "single_person_code_and_evidence_delivered",
+  "phase": "single_person_delivery_verified",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
   "working_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
   "code_and_evidence_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
   "tested_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "d3a50f1b80ac2f33e9d8f120db0f269d6bfc53ea",
+  "previous_memory_commit": "b02f531e05ad725d09c506eb9965498ec6462ae1",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -174,6 +174,94 @@
     "docs/USER_ACTIONS_20261003.md"
   ],
   "delivery_ci": {
+    "run_id": 37094728343,
+    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37094728343",
+    "job_id": 111122216784,
+    "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+    "status": "completed",
+    "conclusion": "success",
+    "artifact": {
+      "id": 11263896180,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 1853886,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11263896180",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11263896180/zip",
+      "expired": false,
+      "created_at": "2026-10-03T04:01:06Z",
+      "expires_at": "2027-01-01T03:54:11Z",
+      "updated_at": "2026-10-03T04:01:06Z",
+      "digest": "sha256:fc251c499f3801b242b277caf8f3a6665501c7d215ecfb88b782f1a935976b37",
+      "workflow_run": {
+        "id": 37094728343,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+      }
+    },
+    "downloaded_sha256_verified": true,
+    "source_zip_commit_verified": true,
+    "manifest_files_verified": 92,
+    "junit_tests": 458,
+    "javascript_tests": 6,
+    "browser_checks": 31,
+    "downloaded_functional_verifier_exit_code": 0,
+    "full_zip_in_git": false,
+    "full_zip_local_cache": "var/delivery-ci-4e512df/acceptance-4e512df.zip",
+    "full_zip_retention": "Actions original expires at artifact.expires_at; local cache has no retention guarantee. Application 0d9be52 full verified ZIP is separately preserved in working-branch Git.",
+    "full_source_archive_in_git": "evidence/single-person-20261003/ci/acceptance-0d9be52.zip",
+    "raw_job_log": "SINGLE_PERSON_DELIVERY_JOB_20261003.log",
+    "downloaded_verifier_receipt": "SINGLE_PERSON_DELIVERY_VERIFIER_20261003.log.status.json",
+    "application_diff_from_source_commit": [],
+    "source_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+    "latency_p95_ms": {
+      "read_added": 4.503494000005048,
+      "static": 0.079,
+      "preview": 10.38
+    },
+    "raw_job_log_sha256": "133b71c15f61559653427ab5ade63e781804eda1104834526db9b39f9595b535"
+  },
+  "external_tracking": {
+    "issues": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "progress_updated": true,
+    "all_remain_open": true,
+    "pr_number": 1,
+    "draft": true,
+    "merged": false
+  },
+  "single_person_pilot": {
+    "candidate_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+    "ci_run": 37093593956,
+    "ci_status": "success_verified_download",
+    "guide": "docs/START_WITH_ONE_PERSON.md",
+    "human_available": 1,
+    "human_completed": 0,
+    "new_model_calls": 0,
+    "deferred_by_user": [
+      "model_status_and_billing",
+      "interview"
+    ],
+    "code_pushed": true,
+    "new_evidence_pushed": true,
+    "git_archive_payloads_verified": 140,
+    "document_bindings_verified": 8,
+    "code_and_evidence_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+    "delivery_ci_run": 37094728343,
+    "delivery_ci_status": "success_verified_download",
+    "delivery_ci_metadata": "SINGLE_PERSON_DELIVERY_CI_20261003.json"
+  },
+  "remaining_external_conditions": [
+    "actual human completed records; second independent annotator; new holdout; representative governance logs",
+    "real IdP identity/MFA and dedicated GitHub server identity",
+    "long-term separate cloud custody and external notification channel",
+    "model status/billing and personal interview deferred by user"
+  ],
+  "previous_delivery_ci": {
     "run_id": 37090946414,
     "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37090946414",
     "job_id": 111110964112,
@@ -218,43 +306,5 @@
       "preview": 6.378
     }
   },
-  "external_tracking": {
-    "issues": [
-      2,
-      3,
-      4,
-      5
-    ],
-    "progress_updated": true,
-    "all_remain_open": true,
-    "pr_number": 1,
-    "draft": true,
-    "merged": false
-  },
-  "single_person_pilot": {
-    "candidate_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
-    "ci_run": 37093593956,
-    "ci_status": "success_verified_download",
-    "guide": "docs/START_WITH_ONE_PERSON.md",
-    "human_available": 1,
-    "human_completed": 0,
-    "new_model_calls": 0,
-    "deferred_by_user": [
-      "model_status_and_billing",
-      "interview"
-    ],
-    "code_pushed": true,
-    "new_evidence_pushed": true,
-    "git_archive_payloads_verified": 140,
-    "document_bindings_verified": 8,
-    "code_and_evidence_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
-    "delivery_ci_run": 37094728343,
-    "delivery_ci_status": "in_progress"
-  },
-  "remaining_external_conditions": [
-    "actual human completed records; second independent annotator; new holdout; representative governance logs",
-    "real IdP identity/MFA and dedicated GitHub server identity",
-    "long-term separate cloud custody and external notification channel",
-    "model status/billing and personal interview deferred by user"
-  ]
+  "latest_verified_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
 }

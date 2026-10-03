@@ -1,3 +1,11 @@
+# 单人启动交付提交完成复验（2026-10-03）
+
+工作分支 HEAD 4e512df4c65e9b94b7f210ed5483e612efb5eec1 完整 CI 37094728343 / job 111122216784 success。完整 ZIP 下载并核验 GitHub SHA256、92 个载荷、source.zip commit；独立 scripts/verify_evidence.py 核对 458 JUnit、实际子退出码、Docker、原始 benchmark 与截图，exit 0。6 JS、31 浏览器检查通过。只读新增 p95 4.503494ms、静态 0.079ms、预演 10.380ms，仍为单机合成负载。
+
+原始 job 日志、校验日志及退出码收据、元数据在本 memory 分支 SINGLE_PERSON_DELIVERY_JOB_20261003.log、SINGLE_PERSON_DELIVERY_VERIFIER_20261003.log(.status.json)、SINGLE_PERSON_DELIVERY_CI_20261003.json。重复 ZIP 仅 Actions artifact 11263896180（2027-01-01T03:54:11Z 到期）及本机 var/delivery-ci-4e512df，无永久保留承诺；完整应用 0d9be52 成功 ZIP 及 140 公开证据载荷已在工作分支 Git，Git 无自动到期而非 WORM。
+
+main 仍 704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1 draft/open/unmerged。应用 diff 0d9be52 到 4e512df 为空。126 项保持 105 限定 PASS / 21 BLOCKED_EXTERNAL；真人可安排 1 人，收到完成记录 0，模型与真人不混记。模型状态/账单和本人面试暂缓，本轮新增模型 API 实验 0。用户入口 docs/START_WITH_ONE_PERSON.md：本人单人练习/CSV、Auth0 登录、AWS 保管账户和保留期、本机通知；代码和工具已完成当前单人启动范围。
+
 # 单人启动闭环代码、报告和证据已推送（2026-10-03）
 
 远端工作分支4e512df4c65e9b94b7f210ed5483e612efb5eec1，应用源码0d9be52e58c06601341c9ebbd8f50a2686ea1ebb，两者应用diff为空。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1已更新并回读，draft/open/unmerged。原始完整任务文件和126目标保留，111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL。
