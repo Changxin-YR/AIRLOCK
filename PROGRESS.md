@@ -1,3 +1,21 @@
+# AIRLOCK 自主补齐与真实GitHub中转交付（2026-10-03）
+
+真实main仍为 `704b5035cf69f9a6c40c44eecd84c0d0741de849`，未合并。独立工作分支已推送 `31cf0e76156f0b5a408756d45068f1a318cf856c`；应用完整测试提交 `4aca4073114b5b992460903abf33c3721f4f8063`，两者应用源码diff为空。PR #1仍open/draft/unmerged。此前记忆检查点为 `15e901d8107e1a744ed2f71f99c11df91d3ddb5b`。
+
+新增受控GitHub Issues适配器（固定repository node ID、持久单次send、unknown只读对账）、Public Code+S256 PKCE客户端、显式audience白名单、私密中转文件、STS凭据、持久Webhook去重/恢复，以及严格非人类的模型角色填写与UI回放。真实Issue #6完成AIRLOCK审批→可信operator relay→GitHub完整回读→executed，6条审计验链通过，9项边界检查通过；独立审核是脚本，模型不审批，PAT直接运行时路径仍缺专用身份。Issues #2—#5此前4次connector-only任务与本次受控实连分别记账。
+
+发现并修复两个P2（中转文件权限、令牌交换慢headers/body总时限）；研究试验发现授权语义ID泄漏，旧v1结果标blinding_failure保留，v2改opaque ID并由无会话历史子模型重做。两模型在4例审批/可逆性上0/4一致，保留分歧；v2合成UI 8次决定通过、无业务副作用。真人0、κ=null，模型不计人类金标或因果A/B。
+
+首个a68b11b CI37085024673功能项通过但read p95=103.883327ms超100ms，原完整失败ZIP/hash/job保留在Git。按原始profile优化为一次请求单连接、两个独立FULL事务，失败提交仍保存expiry/clock high-water，不削弱权限和审计。SQLite运行时官方来源、构建/保护与最终版本以源码、CI runtime报告和最终报告为准，旧CI版本不回写。新完整CI [37087612206](https://github.com/Changxin-YR/AIRLOCK/actions/runs/37087612206)success，实际子退出码/JUnit/原始载荷已核验；完整ZIP `evidence/autonomous-20261003/ci/acceptance-4aca407.zip`，SHA256 `da532d08ae18b911c9bc768d38f074c8e67abf81020258d9fa181f0e884afdb4`，84载荷已逐hash核对。Actions包11260688999到期2027-01-01T01:50:22Z；Git副本无自动到期，非WORM。
+
+126条逐项矩阵：111 IMPLEMENTED/15 PARTIAL，105限定PASS/21 BLOCKED_EXTERNAL；原目标未全部满足，未删除阈值或以父项代替子项。真实人员、代表性数据、新holdout、真实IdP/MFA、服务器GitHub身份、长期独立云保管/告警与项目账单、本人面试仍需外部输入。详细可操作步骤在docs/USER_ACTIONS_20261003.md，不再要求用户写客户端或实验代码。
+
+本轮8次DeepSeek新增调用全有效；原账本650次/634有效/16历史错误，保守预留或结算估价¥1.13770512/¥3，增量¥0.01652272；余额API前后HTTP200但账户余额不等于项目账单，金额留本机。未重置ledger、未为v2再付费。原始个人上下文/模型填写/余额/数据库/配置不入Git，脱敏汇总、收据、合成UI导出在evidence/autonomous-20261003，PRIVATE_EVIDENCE_INDEX只列路径/hash；本机无永久保留承诺。
+
+下一次从本STATE和origin真实refs重新核对，再读源码和原始证据。不得回退用户工作或force-push，不合main，不把模型模拟补成真人结果。常规代码/合成测试与用户自有GitHub维护已授权；真实个人身份/MFA和参与事实不得虚构。
+
+<details><summary>上一交接检查点（原文）</summary>
+
 # AIRLOCK 用户操作交接与真实 GitHub 待办（2026-10-03）
 
 用户已授权操作其GitHub仓库，并要求其他人工环节的详细步骤。本轮仅操作Changxin-YR/AIRLOCK，实际创建并回读核对Issues #2—#5：GitHub受控适配、真实语料、真人实验、外部身份/归档/告警/账单。没有操作无关仓库，main保持704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1仍open/draft/unmerged。
@@ -66,5 +84,7 @@ Git的evidence/closure-20261002/包含原始日志、真实退出码、JUnit、P
 当前实测声明范围无已知、未修复、可复现P0/P1；不代表全域或生产认证。Agent必须无服务器文件/数据库/reviewer或audit密钥/宿主管理权限；上游实际执行CAS与持久幂等收据。所有写入和补偿保持独立批准，可逆性、预算、模型和学习建议均不产生批准权。
 
 接续入口为docs/CLOSURE_RUNBOOK.md及126条COMPLETION_MATRIX.json。外部输入可用后按各条retest_command复验；保留原始失败和历史tested_commit_sha。不清空、不覆盖用户工作、不force-push；未经用户授权不合并main。
+
+</details>
 
 </details>
