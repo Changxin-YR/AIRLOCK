@@ -12,8 +12,8 @@ ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'evidence/autonomous-20261003'
 CLOSURE=ROOT/'evidence/closure-20261002'
 LEGACY=ROOT/'evidence/continuation-20261002'
-FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/bidirectional-20261003/ci/verified')
-CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/bidirectional-20261003/CI_FINAL.json')
+FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/closure2-20261003/ci/verified')
+CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/closure2-20261003/CI_FINAL.json')
 SHA=json.loads((FINAL/'pytest.log.status.json').read_text())['tested_commit_sha']
 LOG_PATHS={name:LEGACY/'final'/(name+'.log') for name in ('live-validation','ablation-live-dev','ablation-live-test','model-diagnostics')}
 LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':CLOSURE/'final/live-upstream.log','sse-identity-replay':CLOSURE/'sse-identity-replay.log',
@@ -241,6 +241,24 @@ if (FINAL/'acceptance-matrix.log.status.json').exists():
         RECORDS[key]['test_modules']+=['test_github_adapter']
     for key in ('C11.1','C11.4'):
         RECORDS[key]['scope']=RECORDS[key]['scope'].replace('23原生浏览器','31原生浏览器').replace('23浏览器','31浏览器')
+
+
+for keys,module in [
+    (('C6.2','C10.3','R4','R6'),'test_identity_boundaries'),
+    (('C8.2','C8.3','C4.4','R4','R5'),'test_governance_integrity'),
+    (('C1.2','C1.4','C1.5','A1','R2'),'test_transport_hardening'),
+    (('C10.2','C10.4','D4'),'test_archive_integrity'),
+    (('C12.1','C12.2','C12.4','A3'),'test_telemetry_integrity')]:
+    for key in keys:
+        RECORDS[key]['test_modules']+=[module]
+        RECORDS[key]['log_names']+=['pytest']
+RECORDS['C10.3']['scope']+=' 审计游标在范围过滤后分页，不被无权查看的事件前缀阻塞。'
+RECORDS['C8.2']['scope']+=' 每个成员的事务内权限检查同时复核累计critical范围；上下文隔离并在异常后清理。'
+RECORDS['C1.5']['scope']+=' 网络总截止覆盖DNS、响应头及body；拒绝重复JSON键、非有限数、无效Unicode和过深响应。'
+RECORDS['C10.2']['scope']+=' 收据与下载checkpoint的库/序号/对象key/版本严格绑定；过期保留不作为当前不可变保管。'
+RECORDS['C12.4']['scope']+=' OTLP异常确认保留待发span，总截止约束慢头；并发成功按实际持久删除数计数。'
+for key in ('C10.3','C8.2','C1.5','C10.2','C12.4'):
+    RECORDS[key]['actual_result']=RECORDS[key]['scope']
 
 
 def build():

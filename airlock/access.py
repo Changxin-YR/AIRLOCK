@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Literal
 from pydantic import BaseModel,ConfigDict,Field
 from .models import GateError
+from . import governance
 
 
 class Reviewer(BaseModel):
@@ -58,7 +59,10 @@ class AccessControl:
         return None
 
     def route(self,action):
-        accounts=self.accounts()
+        return self._route(action,self.accounts())
+
+    @staticmethod
+    def _route(action,accounts):
         if accounts is None: return ['reviewer:owner']
         return sorted(r.id for r in accounts if action['request']['tool'] in r.tools
             and action.get('resource','customers') in r.resources and action['risk'] in r.risks)
@@ -67,4 +71,11 @@ class AccessControl:
         return who in action.get('reviewers',['reviewer:owner']) and who in self.route(action)
 
     def require(self,who,action):
-        if not self.can_review(who,action): raise GateError('review_scope_forbidden',403)
+        # Read one current account snapshot at each member's transaction boundary.
+        # A batch's cumulative critical requirement must survive this same check;
+        # individually high-risk members cannot continue after critical revocation.
+        accounts=self.accounts()
+        if who not in action.get('reviewers',['reviewer:owner']) or who not in self._route(action,accounts):
+            raise GateError('review_scope_forbidden',403)
+        if governance.batch_risk.get()=='critical' and who not in self._route(dict(action,risk='critical'),accounts):
+            raise GateError('group_risk_route_forbidden',403)

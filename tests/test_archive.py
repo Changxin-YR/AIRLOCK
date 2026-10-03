@@ -14,7 +14,7 @@ class StoreFixture:
     def get_object_retention(self,**kwargs):return {'Retention':{'Mode':self.mode,'RetainUntilDate':self.until}}
     def get_object(self,**kwargs):
         assert kwargs['VersionId']=='bound-version'
-        return {'Body':io.BytesIO(self.raw)}
+        return {'Body':io.BytesIO(self.raw),'VersionId':'bound-version'}
 
 
 def test_archive_requires_version_retention_and_verifies_exact_payload(settings):

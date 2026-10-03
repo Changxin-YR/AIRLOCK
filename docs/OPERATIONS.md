@@ -4,6 +4,10 @@
 
 ## 启动和角色
 
+批量批准在每个成员的事务内同时检查单项权限与整组累计风险权限；撤去累计 critical 权限后，剩余成员保持待审并返回冲突收据。已经完成的合法成员保留其执行结果。审计查询按当前范围过滤后分页，可穿过无权查看的事件前缀；读取不会改变审计或目标数据。
+
+OTLP 导出使用总截止时间，异常或含矛盾字段的确认不会清空待发 span。并发导出仍允许 at-least-once 传输，`exported_spans` 只计已从持久 outbox 确认移除的 span，不将重复网络确认计为新 span。
+
 ```sh
 python -m pip install -r requirements-dev.txt
 npm ci

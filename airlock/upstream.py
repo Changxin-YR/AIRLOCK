@@ -61,19 +61,14 @@ class Tool(BaseModel):
         deadline=time.monotonic()+10
         token=os.environ.get(self.credential_env,'') if self.credential_env else None
         if self.credential_env and len(token)<32: raise GateError('upstream_credentials_unavailable',503)
-        headers={'Authorization':'Bearer '+token} if token else {}
+        headers={'Accept-Encoding':'identity'}
+        if token:headers['Authorization']='Bearer '+token
         if self.transport!='http':return self.mcp_request(method,path,payload,headers)
         try:
-            with self.client() as client:
+            with network.request_deadline(deadline), self.client() as client:
                 with client.stream(method,self.target()+path,json=payload,headers=headers) as response:
                     if response.status_code>=300: raise ValueError('upstream response')
-                    body=bytearray()
-                    for chunk in response.iter_bytes():
-                        if time.monotonic()>deadline: raise ValueError('upstream total time limit')
-                        body.extend(chunk)
-                        if len(body)>16384: raise ValueError('upstream output limit')
-                    result=json.loads(body); canonical(result)
-                    return result
+                    return network.strict_json(b''.join(network.response_bytes(response,deadline)))
         except (httpx.HTTPError,ValueError,TypeError,OSError):
             raise GateError('upstream_unavailable',503) from None
 
@@ -242,6 +237,11 @@ class RemoteActions:
 
     def reconcile(self,action):
         if action['state'] not in {'executing','unknown'}: return action
-        tool=self.gate.registry.get(action['request']['tool'],action['principal'])
-        try: return self.finish(action,tool.request('GET','/receipts/'+action['id']))
+        try:
+            tool=self.gate.registry.get(action['request']['tool'],action['principal'])
+            # An old action must never query or trust a replacement target.
+            # Restoring the original registration permits read-only recovery;
+            # configuration drift cannot turn uncertainty into non-execution.
+            if action['upstream_config_digest']!=digest(tool.model_dump()):return action
+            return self.finish(action,tool.request('GET','/receipts/'+action['id']))
         except (GateError,ValueError,TypeError): return action

@@ -2,9 +2,13 @@
 import hashlib
 import ipaddress
 import json
+import time
 from urllib.parse import urlparse
 import httpx
 from .models import canonical
+from . import network
+
+EXPORT_TIMEOUT_SECONDS=3
 
 
 def endpoint(settings):
@@ -41,24 +45,29 @@ def export(store):
     if not rows:return {'status':'ok','exported':0}
     body={'resourceSpans':[{'resource':{'attributes':[{'key':'service.name','value':{'stringValue':'airlock'}}]},
         'scopeSpans':[{'scope':{'name':'airlock.audit','version':'1'},'spans':[json.loads(r['payload']) for r in rows]}]}]}
+    parsed=urlparse(url)
+    deadline=time.monotonic()+EXPORT_TIMEOUT_SECONDS
     try:
-        with httpx.Client(timeout=3,trust_env=False,follow_redirects=False) as client:
-            with client.stream('POST',url,json=body) as response:
+        with network.request_deadline(deadline), network.client(f'{parsed.scheme}://{parsed.netloc}',
+            allow_loopback=store.settings.otlp_allow_loopback,timeout=EXPORT_TIMEOUT_SECONDS) as client:
+            with client.stream('POST',url,json=body,headers={'Accept-Encoding':'identity'}) as response:
                 if response.status_code!=200:raise ValueError('collector rejected')
                 raw=bytearray()
-                for chunk in response.iter_bytes():
+                for chunk in network.response_bytes(response,deadline):
                     raw.extend(chunk)
                     if len(raw)>4096:raise ValueError('collector output bound')
-                result=json.loads(raw or b'{}')
+                result=network.strict_json(raw or b'{}')
                 if not isinstance(result,dict):raise ValueError('collector response type')
                 partial=result.get('partialSuccess',{})
                 if not isinstance(partial,dict) or str(partial.get('rejectedSpans',0))!='0':raise ValueError('collector partial rejection')
     except (ValueError,httpx.HTTPError,TypeError):
         return {'status':'retryable_error','exported':0,'retained':len(rows)}
     with store.transaction() as conn:
-        conn.executemany('DELETE FROM telemetry_outbox WHERE seq=?',[(r['seq'],) for r in rows])
-        conn.execute("INSERT INTO meta VALUES('telemetry_exported',?) ON CONFLICT(key) DO UPDATE SET value=CAST(value AS INTEGER)+excluded.value",(str(len(rows)),))
-    return {'status':'ok','exported':len(rows)}
+        # Concurrent exporters may acknowledge the same span. Count the durable
+        # transition once, while transport delivery remains explicitly at least once.
+        removed=conn.executemany('DELETE FROM telemetry_outbox WHERE seq=?',[(r['seq'],) for r in rows]).rowcount
+        conn.execute("INSERT INTO meta VALUES('telemetry_exported',?) ON CONFLICT(key) DO UPDATE SET value=CAST(value AS INTEGER)+excluded.value",(str(removed),))
+    return {'status':'ok','exported':removed}
 
 
 def metrics(store):

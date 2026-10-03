@@ -343,13 +343,21 @@ class Gate:
 
     def audit_events(self,reviewer,action_id=None,after=0,limit=200):
         # Filter on the server before limiting. Revocation takes effect on every read.
-        events=self.store.audit_events(action_id,after,self.settings.max_actions*4)
+        # Audit length is not bounded by the number of actions: operator events
+        # and upstream transitions can grow independently. Stream a single read
+        # cursor so an invisible prefix cannot starve a reviewer's next page.
         visible=[]
         with self.store.connection() as conn:
-            for event in events:
-                row=conn.execute('SELECT document FROM actions WHERE id=?',(event['action_id'],)).fetchone()
-                if (row and self.access.can_review(reviewer,json.loads(row[0]))) or (reviewer=='reviewer:owner' and event['event']['kind']=='governance.changed'):
-                    visible.append(event)
+            rows=conn.execute('SELECT audit.*,actions.document AS action_document FROM audit '
+                'LEFT JOIN actions ON actions.id=audit.action_id '
+                'WHERE audit.seq>? AND (? IS NULL OR audit.action_id=?) '
+                'AND (actions.id IS NOT NULL OR ?) ORDER BY audit.seq',
+                (after,action_id,action_id,reviewer=='reviewer:owner'))
+            for row in rows:
+                event=json.loads(row['event'])
+                if (row['action_document'] and self.access.can_review(reviewer,json.loads(row['action_document']))) or (reviewer=='reviewer:owner' and event['kind']=='governance.changed'):
+                    visible.append({'seq':row['seq'],'action_id':row['action_id'],'event':event,
+                        'previous_hash':row['previous_hash'],'signature':row['signature'],'key_id':row['key_id']})
                 if len(visible)>=limit: break
         return visible
 
@@ -401,6 +409,7 @@ class Gate:
             receipts=[]
             for member in group['members']:
                 context=governance.batch_context.set(group['digest'])
+                risk_context=governance.batch_risk.set('critical' if batch.decision=='approve' and group['cumulative_units']>=self.settings.critical_rows else None)
                 try:
                     # Each member remains a separate atomic effect/state/audit transaction.
                     item=self.decide(member['id'],Decision(decision=batch.decision,reason=batch.reason,
@@ -409,7 +418,9 @@ class Gate:
                     receipts.append({'id':item['id'],'state':item['state'],'reason_code':item['reason_code']})
                 except GateError as error:
                     receipts.append({'id':member['id'],'state':'conflict','reason_code':error.code})
-                finally: governance.batch_context.reset(context)
+                finally:
+                    governance.batch_risk.reset(risk_context)
+                    governance.batch_context.reset(context)
             return {'group_id':group['id'],'group_digest':group['digest'],'receipts':receipts,
                     'atomicity':'per_member; prior effects may make later snapshots stale'}
 

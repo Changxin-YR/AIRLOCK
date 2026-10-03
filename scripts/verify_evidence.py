@@ -65,7 +65,27 @@ REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_formal_jsonl_rejects_contradictory_source_declaration',
     'test_bound_task_gold_excludes_browser_invented_comprehension_successes',
     'test_governance_real_day_groups_tasks_and_preserves_empty_denominator',
-    'test_research_cli_round_trip_and_duplicate_source_rejection'}
+    'test_research_cli_round_trip_and_duplicate_source_rejection',
+    'test_scoped_audit_page_limit_and_action_filter_do_not_expand_scope',
+    'test_scoped_audit_pagination_crosses_invisible_governance_prefix[/v1/audit]',
+    'test_scoped_audit_pagination_crosses_invisible_governance_prefix[/v1/audit/export]',
+    'test_batch_revalidates_cumulative_risk_route_before_each_member[between_members]',
+    'test_batch_revalidates_cumulative_risk_route_before_each_member[inside_member_decision]',
+    'test_batch_context_stays_in_its_thread_and_resets_after_conflict',
+    'test_bad_mcp_preview_persists_blocked_action_instead_of_crashing',
+    'test_total_deadline_also_bounds_dripping_headers',
+    'test_reconcile_keeps_original_target_binding[origin]',
+    'test_reconcile_keeps_original_target_binding[removed]',
+    'test_dns_timeout_and_worker_saturation_never_connect',
+    'test_archive_rejects_response_from_another_version',
+    'test_archive_rejects_duplicate_checkpoint_json_fields',
+    'test_archive_expired_compliance_is_not_current_protection',
+    'test_archive_retention_boundary_is_strict_and_read_only',
+    'test_archive_cli_existing_destination_prevents_upload[file]',
+    'test_archive_cli_interruption_preserves_uncertain_output_reservation',
+    'test_concurrent_otlp_acknowledgements_count_each_persisted_span_once',
+    'test_otlp_negotiates_identity_with_compression_capable_collector',
+    'test_otlp_slow_headers_have_total_deadline_and_keep_pending_span'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',
@@ -225,6 +245,8 @@ def verify(directory):
     archive_image=load(directory,'archive-image.json')
     require(archive_image['source_commit']=='7aac2a2c5b7c882e68c1ce017d8256be2feea27f' and archive['runtime_image_id']==archive_image['runtime_image_id'],'archive source/image provenance')
     require(archive['exit_code']==0 and len(archive['checks'])>=6 and len(archive['actual_denials'])==3,'S3 retention/truncation contract failed')
+    require({'receipt_sequence_substitution_rejected','receipt_database_substitution_rejected',
+             'expired_receipt_rejected'} <= set(archive['checks']),'S3 receipt identity/expiry checks missing')
     research=load(directory/'research-pipeline','report.json')
     require(research['status']=='PASS' and research['human_participants']==research['paired_human_labels']==0,'research provenance failed')
     require(load(directory/'research-pipeline','evaluation.json')['acceptance_metrics'] is None,'missing human gold was promoted into acceptance')

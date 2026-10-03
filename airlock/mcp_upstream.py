@@ -1,38 +1,44 @@
 """Bounded Streamable HTTP sessions for explicitly mapped CAS tools."""
 import codecs
-import json
 import re
 import time
 import httpx
 from .models import GateError
+from . import network
 
 
 def response_messages(response,deadline):
     media=response.headers.get('content-type','').split(';')[0].strip()
     if media not in {'application/json','text/event-stream'}:raise ValueError('MCP response content type')
-    decoder=codecs.getincrementaldecoder('utf-8')();buffer='';size=0
-    for chunk in response.iter_bytes():
-        size+=len(chunk)
-        if size>16384 or time.monotonic()>deadline:raise ValueError('MCP response budget')
+    decoder=codecs.getincrementaldecoder('utf-8-sig' if media=='text/event-stream' else 'utf-8')();buffer=''
+    def events(final=False):
+        nonlocal buffer
+        # A trailing CR can be the first half of CRLF across byte chunks.
+        tail='\r' if not final and buffer.endswith('\r') else ''
+        content=buffer[:-1] if tail else buffer
+        buffer=content.replace('\r\n','\n').replace('\r','\n')+tail
+        while '\n\n' in buffer:
+            event,buffer=buffer.split('\n\n',1)
+            data='\n'.join(line[5:].removeprefix(' ') for line in event.split('\n') if line.startswith('data:'))
+            if data:yield network.strict_json(data)
+    for chunk in network.response_bytes(response,deadline):
         buffer+=decoder.decode(chunk)
-        if media=='text/event-stream':
-            buffer=buffer.replace('\r\n','\n')
-            while '\n\n' in buffer:
-                event,buffer=buffer.split('\n\n',1)
-                data='\n'.join(line[5:].removeprefix(' ') for line in event.split('\n') if line.startswith('data:'))
-                if data:yield json.loads(data)
+        if media=='text/event-stream':yield from events()
     buffer+=decoder.decode(b'',final=True)
-    if media=='application/json':yield json.loads(buffer)
-    elif buffer.strip() and not buffer.lstrip().startswith(':'):raise ValueError('incomplete SSE event')
+    if media=='application/json':yield network.strict_json(buffer)
+    else:
+        yield from events(final=True)
+        if buffer.strip() and not buffer.lstrip().startswith(':'):raise ValueError('incomplete SSE event')
 
 
 def invoke(tool,method,path,payload,headers):
     phase='receipt' if method=='GET' and path.startswith('/receipts/') else {'/preview':'preview','/execute':'execute'}.get(path)
     if phase is None:raise GateError('upstream_method_forbidden',422)
-    headers=dict(headers,Accept='application/json, text/event-stream');deadline=time.monotonic()+10
+    headers=dict(headers,Accept='application/json, text/event-stream')
+    headers['Accept-Encoding']='identity';deadline=time.monotonic()+10
     streaming=tool.transport=='mcp_streamable';session=None
     try:
-        with tool.client() as client:
+        with network.request_deadline(deadline), tool.client() as client:
             def send(message,notification=False):
                 nonlocal session
                 remaining=deadline-time.monotonic()

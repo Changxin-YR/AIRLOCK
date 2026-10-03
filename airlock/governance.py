@@ -5,6 +5,7 @@ from contextvars import ContextVar
 from .models import GateError,digest
 
 batch_context=ContextVar('batch_context',default=None)
+batch_risk=ContextVar('batch_risk',default=None)
 
 
 def duplicate_hit(conn):

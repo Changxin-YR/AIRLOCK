@@ -4,6 +4,8 @@
 
 ## 身份与域名
 
+传输响应的总截止时间覆盖 DNS、TLS、响应头和正文；慢速逐字节发送不能不断重置总时限。受控 HTTP/MCP 响应拒绝重复 JSON 字段、非有限数、无效 Unicode、过深嵌套和压缩正文。Streamable HTTP 的 SSE 支持 LF、CRLF、CR 及跨字节分段。未知结果仍查询原动作，不换键重发。
+
 `AIRLOCK_OIDC_FILE` 指向 `configs/oidc.example.json` 的本机副本。管理员从可信身份系统取得公开 RSA JWKS（至少 2048 位），保存到 `jwks_file`；服务不跟随令牌的 jku/x5u，也不联网动态信任新签名密钥。令牌须符合 RFC 9068 access-token profile：RS256、typ=at+jwt、精确 issuer/audience、sub/exp/iat/jti/client_id、有效期不超过配置上限。支持公共签名密钥轮换和 jti/主体撤销；每次请求重读配置。身份系统颁发令牌、交互式登录及生产部署尚需项目真实 IdP 配置。
 
 主体只映射 `agent:demo` 或已配置 reviewer。`AIRLOCK_REVIEWER_FILE` 中审核账户的 `credential_env` 可省略以只允许 OIDC；工具、资源、风险、active 路由仍由服务端指定。令牌 claims 中的 role/scope 不能扩大权限，OIDC 不映射 operator；独立 operator token 继续掌管策略、审计密钥与运维接口。浏览器现有凭据输入支持 access token，token 只留页面内存。
@@ -33,9 +35,13 @@ python scripts/archive_integration.py --output evidence/archive-integration.json
 python scripts/operational_check.py --url http://127.0.0.1:8000 --output evidence/operations.json
 ```
 
-S3 桶必须启用版本控制与 Object Lock；写入 COMPLIANCE 保留期并回读版本、hash、retention。收据绑定具体版本；新版本不替代原收据。取回检查点后以独立保留密钥与 `AIRLOCK_AUDIT_ANCHOR_FILE` 验证数据库链。测试从 MinIO 官方归档仓库固定提交 7aac2a2c5b7c882e68c1ce017d8256be2feea27f 构建一次性镜像（需 Go 1.24.8），记录源码/二进制/image hash；[官方仓库](https://github.com/minio/minio)已转源码分发，旧 DockerHub 镜像不可公开拉取。，删除、缩短保留、降级锁定均必须被服务实际拒绝；它证明 API 契约，临时容器删除后不提供永久归档。真实云账户、独立保管权限、长期保留和灾难恢复仍需实际部署。重复上传相同检查点若返回条件冲突，保留原收据再执行 verify，不绕过条件写入。
+归档CLI在联网前排他预留并同步输出文件。已有输出路径会在上传前拒绝；若中断后留下reserved/unknown_if_interrupted，应先检查远端版本并保留预留文件，不能直接重传。
 
-`GET /v1/operations/health` 和 `/v1/operations/prometheus` 仅 operator 可访问，返回审计损坏、待处理过期积压、远端长期未知、遥测队列压力/丢弃；检查为只读。CLI 有告警退出 2，正常退出 0，适合现有运维调度器接入。检查本身不重试效果或批准请求。
+归档验证同时绑定桶、精确版本、对象路径、SHA256、数据库实例和序号，并检查当前保留期仍有效。过期收据不能证明当前不可变保管：验证报错且不会自动续期、重传或修改对象。真实保管者应在到期前安排另行授权的续期或新归档，并保留历史收据；checkpoint 的 HMAC 仍须用独立保留密钥核对。
+
+S3 桶必须启用版本控制与 Object Lock；写入 COMPLIANCE 保留期并回读版本、hash、retention。收据绑定具体版本；新版本不替代原收据。取回检查点后以独立保留密钥与 `AIRLOCK_AUDIT_ANCHOR_FILE` 验证数据库链。测试从 MinIO 官方归档仓库固定提交 7aac2a2c5b7c882e68c1ce017d8256be2feea27f 构建一次性镜像（需 Go 1.24.8），记录源码/二进制/image hash；[官方仓库](https://github.com/minio/minio)已转源码分发，旧 DockerHub 镜像不可公开拉取。删除、缩短保留、降级锁定均必须被服务实际拒绝；它证明 API 契约，临时容器删除后不提供永久归档。真实云账户、独立保管权限、长期保留和灾难恢复仍需实际部署。重复上传相同检查点若返回条件冲突，保留原收据再执行 verify，不绕过条件写入。
+
+`GET /v1/operations/health` 和 `/v1/operations/prometheus` 仅 operator 可访问，返回审计损坏、待处理过期积压、远端长期未知、遥测队列压力/丢弃；检查为只读。CLI 有告警退出 2，正常退出 0，通知失败退出 3，身份/网络/响应未知退出 4；未知不发送恢复通知，适合现有运维调度器接入。检查本身不重试效果或批准请求。
 
 `GET /v1/audit/export?after=0` 先按 reviewer 路由过滤，再用固定白名单产生摘要；支持分页，不导出 SQL、样本、原始身份或自由文本。每次导出随机化 action 代号，原审计不变。序号、状态和数量仍可见；分享前需核对用途。脱敏摘要不能单独验证被省略内容的 HMAC 链，须另存原始审计与检查点。
 

@@ -61,6 +61,14 @@ def main():
             checkpoint=gate.store.checkpoint();receipt=archive_checkpoint(s3,config,checkpoint)
             result=verify_archive(s3,config,receipt)
             assert result['checkpoint']==checkpoint and action['state']=='pending'
+            receipt_checks=[]
+            for label,altered in [
+                ('receipt_sequence_substitution_rejected',dict(receipt,seq=receipt['seq']+1)),
+                ('receipt_database_substitution_rejected',dict(receipt,database_instance='0'*32)),
+                ('expired_receipt_rejected',dict(receipt,retain_until='2000-01-01T00:00:00+00:00'))]:
+                try:verify_archive(s3,config,altered)
+                except ValueError:receipt_checks.append(label)
+                else:raise AssertionError('archive receipt substitution accepted: '+label)
             denied=[];errors={}
             for label,operation in [
                 ('delete_exact_version',lambda:s3.delete_object(Bucket=config.bucket,Key=receipt['key'],VersionId=receipt['version_id'])),
@@ -90,7 +98,7 @@ def main():
             image=json.loads(subprocess.check_output(['docker','image','inspect',selected_image,'--format','{{json .RepoDigests}}']))
             image_id=subprocess.check_output(['docker','image','inspect',selected_image,'--format','{{.Id}}'],text=True).strip()
             report={'mode':'real_docker_s3_object_lock','image_digests':image,'runtime_image_id':image_id,'receipt':receipt,
-                'checks':denied+['version_pinned_after_new_version','retrieved_anchor_detects_tail_deletion','unapproved_target_unchanged'],
+                'checks':denied+['version_pinned_after_new_version','retrieved_anchor_detects_tail_deletion','unapproved_target_unchanged']+receipt_checks,
                 'actual_denials':errors,
                 'credential_scope':'new synthetic fixture only; never read default AWS credentials',
                 'retention_scope':'COMPLIANCE API semantics; temporary test container removed, not permanent production archive',

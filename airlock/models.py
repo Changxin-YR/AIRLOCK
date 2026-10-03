@@ -78,6 +78,11 @@ class BatchDecision(BaseModel):
     reason: str=Field(min_length=3,max_length=500)
     confirmation: str=Field(max_length=100)
 
+    @field_validator('reason')
+    @classmethod
+    def meaningful_reason(cls, value: str) -> str:
+        return Decision.meaningful_reason(value)
+
 
 class GovernanceChange(BaseModel):
     model_config=ConfigDict(extra='forbid',strict=True)
