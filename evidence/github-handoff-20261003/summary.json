@@ -1,0 +1,93 @@
+{
+  "kind": "public_project_task_handoff_summary",
+  "user_date": "2026-10-03",
+  "recorded_at_utc": "2026-10-03T00:21:54.963514+00:00",
+  "source_baseline_commit_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b",
+  "repository": "Changxin-YR/AIRLOCK",
+  "authorization": "Direct current-user authorization for repository operations",
+  "issues": [
+    {
+      "number": 2,
+      "url": "https://github.com/Changxin-YR/AIRLOCK/issues/2",
+      "title": "接入 GitHub Issues：服务端凭据、受控写入契约与真实任务采集",
+      "state": "open",
+      "created_at": "2026-10-03T00:12:24Z",
+      "body_and_title_readback_match": true
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/Changxin-YR/AIRLOCK/issues/3",
+      "title": "建立真实任务语料：来源授权、独立双人标注及冻结保留集",
+      "state": "open",
+      "created_at": "2026-10-03T00:12:25Z",
+      "body_and_title_readback_match": true
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/Changxin-YR/AIRLOCK/issues/4",
+      "title": "执行真人审批 A/B、理解核验与真实使用日治理评估",
+      "state": "open",
+      "created_at": "2026-10-03T00:12:26Z",
+      "body_and_title_readback_match": true
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/Changxin-YR/AIRLOCK/issues/5",
+      "title": "部署真实身份、独立审计保管与生产告警并核验账单",
+      "state": "open",
+      "created_at": "2026-10-03T00:12:27Z",
+      "body_and_title_readback_match": true
+    }
+  ],
+  "actual_created_issue_count": 4,
+  "task_families": 1,
+  "execution_path": "Codex GitHub connector",
+  "airlock_protected": false,
+  "independent_review_observed": false,
+  "benchmark_imported": false,
+  "human_gold_records": 0,
+  "human_ab_participants": 0,
+  "new_paid_deepseek_calls": 0,
+  "local_private_trace": {
+    "path": "var\\real-work\\github-20261003\\connector-trace.json",
+    "sha256": "7c63b4f92f40cc3f8a163f3168a95d1ceda5a6600a68794cf8d7a0b146f67195",
+    "committed_to_git": false,
+    "retention": "Local only, no automatic backup or retention promise"
+  },
+  "local_annotation_pack": {
+    "path": "var\\real-work\\github-20261003\\annotation-pack",
+    "files": [
+      "README.txt",
+      "case-contexts.json",
+      "annotator-a.csv",
+      "annotator-b.csv",
+      "manifest.json"
+    ],
+    "rows_per_annotator": 4,
+    "prefilled_labels": 0,
+    "human_records_created": 0,
+    "committed_to_git": false
+  },
+  "checks": {
+    "create_response_then_independent_repository_readback": true,
+    "blank_annotation_cells_verified": true,
+    "raw_trace_and_forms_git_ignored": true,
+    "cli_help_exit_codes": {
+      "benchmark.closure": 0,
+      "scripts/archive_checkpoint_s3.py": 0,
+      "scripts/audit_checkpoint.py": 0
+    },
+    "powershell_document_blocks_parsed": 5,
+    "powershell_syntax_errors": 0,
+    "git_diff_check_exit": 0,
+    "scope": "Handoff interfaces, document syntax and actual issue readback; not new functional, human or scientific acceptance"
+  },
+  "acceptance_matrix_status_changed": false,
+  "git_retention": "Public summary and manual remain in repository history without automatic expiry; not WORM",
+  "limits": [
+    "Four genuine project-maintenance operations from one family are insufficient for multi-source benchmark acceptance",
+    "No application GitHub credentials or verified AIRLOCK GitHub write adapter yet",
+    "Annotation templates are blank; no human answers generated",
+    "Private raw logs remain local and must not be published without a separate appropriate data decision"
+  ]
+}

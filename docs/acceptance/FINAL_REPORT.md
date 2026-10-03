@@ -1,5 +1,7 @@
 # AIRLOCK 闭环修复与逐项验收报告
 
+2026-10-03 接续补充：经用户授权，已创建并回读核对 GitHub Issues #2—#5，保存4条真实项目维护执行记录及两份空白独立标注表。原始执行上下文在本机 `var/real-work/github-20261003/`，不进入公开Git。这些记录通过Codex GitHub连接器执行，未经过AIRLOCK审批；尚未形成独立金标或代表性日常语料，以下126项验收状态保持不变。详细人工操作见[用户步骤](../USER_ACTIONS_20261003.md)，公开回读摘要见 `evidence/github-handoff-20261003/summary.json`。
+
 当前受控工程闭环通过；原始全部目标尚未满足。126 条原记录逐项保留，没有以父项替代子项或删除目标。完整范围、源码、命令、真实退出码、原始证据与 tested_commit_sha 见 [矩阵 JSON](COMPLETION_MATRIX.json) / [可读矩阵](COMPLETION_MATRIX.md)。
 
 ## 1. 当前实际实现的功能是否通过？
