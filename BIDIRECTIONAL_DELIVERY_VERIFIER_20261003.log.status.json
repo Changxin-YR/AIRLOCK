@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/verify_evidence.py",
+    "--directory",
+    "var/delivery-ci-758202b/verified"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T06:03:09.332760+00:00",
+  "duration_seconds": 0.596,
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+}

@@ -1,3 +1,11 @@
+# 最终双向检验交付完成复验（2026-10-03）
+
+工作分支758202b4631c5f530e48ab07aa07cd90bfbe58e0的CI37101345199/job111141319330完整success。最终ZIP下载核验GitHub SHA256、94个载荷和source.zip提交；verify_evidence复查588 JUnit、6 JS、31浏览器、真实子退出码、Docker、原始benchmark及延迟样本exit0。最终p95：read added5.363556ms/static0.122ms/preview11.196ms，仍为1206行单机合成负载。
+
+元数据与原始job/校验日志在BIDIRECTIONAL_DELIVERY_CI_20261003.json、BIDIRECTIONAL_DELIVERY_JOB_20261003.log、BIDIRECTIONAL_DELIVERY_VERIFIER_20261003.log(.status.json)；重复完整ZIP仅Actions11265862607及本机var/delivery-ci-758202b，到期2027-01-01T05:54:41Z，无永久保留承诺。源096b9bb的完整成功ZIP、273公开证据和8份文档hash绑定已在工作分支Git，无自动到期，非WORM。两个提交应用源码diff为空。
+
+main仍704b5035cf69f9a6c40c44eecd84c0d0741de849、PR #1 draft/open/unmerged；工作区干净。126目标保持105限定PASS/21 BLOCKED_EXTERNAL，当前实测范围无已知未修复可复现P0/P1。真人完成0、本轮模型调用0，模型状态/账单和本人面试仍暂缓。所有修复、反例、范围和外部条件逐项见FINAL_REPORT与COMPLETION_MATRIX；不能将工程通过解释为全部原始目标通过。
+
 # 双向检验报告与证据已提交（2026-10-03）
 
 远端工作分支758202b4631c5f530e48ab07aa07cd90bfbe58e0，实测应用096b9bbbf9c113471eda1a713f9d0c860c95a348，两者应用源码diff为空。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849；PR #1已更新并回读，draft/open/unmerged。

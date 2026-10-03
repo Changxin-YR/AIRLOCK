@@ -2,14 +2,14 @@
   "schema_version": 5,
   "updated_date": "2026-10-03",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "bidirectional_delivery_pushed_ci_pending",
+  "phase": "bidirectional_delivery_ci_verified",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
   "working_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
   "code_and_evidence_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
   "tested_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "b53b493001dbdbeaa0a08c48231dd73f7e23b530",
+  "previous_memory_commit": "b31d805a825dd4659d4db8c574df812eaf97a1bc",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -179,9 +179,50 @@
   "delivery_ci": {
     "run_id": 37101345199,
     "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37101345199",
+    "job_id": 111141319330,
     "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
-    "status": "in_progress",
-    "conclusion": null
+    "status": "completed",
+    "conclusion": "success",
+    "artifact": {
+      "id": 11265862607,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 1896345,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11265862607",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11265862607/zip",
+      "expired": false,
+      "created_at": "2026-10-03T06:01:01Z",
+      "expires_at": "2027-01-01T05:54:41Z",
+      "updated_at": "2026-10-03T06:01:01Z",
+      "digest": "sha256:372d9ff07b26dd69594b37b7edbe7cd31c96b372c4e11999e87163092d445010",
+      "workflow_run": {
+        "id": 37101345199,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+      }
+    },
+    "downloaded_sha256_verified": true,
+    "source_zip_commit_verified": true,
+    "manifest_files_verified": 94,
+    "junit_tests": 588,
+    "javascript_tests": 6,
+    "browser_checks": 31,
+    "downloaded_functional_verifier_exit_code": 0,
+    "full_zip_in_git": false,
+    "full_zip_local_cache": "var/delivery-ci-758202b/acceptance-758202b.zip",
+    "full_zip_retention": "Actions original expires at artifact.expires_at; local cache has no retention guarantee. Source 096b9bb full verified ZIP is preserved separately in working-branch Git.",
+    "full_source_archive_in_git": "evidence/bidirectional-20261003/ci/acceptance-096b9bb.zip",
+    "raw_job_log": "BIDIRECTIONAL_DELIVERY_JOB_20261003.log",
+    "downloaded_verifier_receipt": "BIDIRECTIONAL_DELIVERY_VERIFIER_20261003.log.status.json",
+    "application_diff_from_source_commit": [],
+    "source_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+    "latency_p95_ms": {
+      "read_added": 5.363556000020253,
+      "static": 0.122,
+      "preview": 11.196
+    },
+    "raw_job_log_sha256": "4af653c33bd1e4640484cee241808e4df91552d1351729afd8eb72022342a2f8"
   },
   "external_tracking": {
     "issues": [
@@ -271,7 +312,7 @@
     },
     "raw_job_log_sha256": "133b71c15f61559653427ab5ade63e781804eda1104834526db9b39f9595b535"
   },
-  "latest_verified_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "latest_verified_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
   "bidirectional": {
     "source_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
     "source_pushed": true,
@@ -285,13 +326,14 @@
     "human_completed": 0,
     "retained_blockers": 21,
     "source_evidence": "var/bidirectional-20261003",
-    "summary": "Execution, notification, research provenance and evidence validation repaired; independent counterexamples and frozen full CI pass. Delivery commit repeat CI pending.",
+    "summary": "Execution, notification, research provenance and evidence validation repaired; independent counterexamples, source CI and final delivery CI pass. Full source evidence is in Git; original external blockers remain.",
     "source_ci_run": 37100296703,
     "delivery_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
     "delivery_ci_run": 37101345199,
-    "delivery_ci_status": "pending",
+    "delivery_ci_status": "success_verified_download",
     "git_archive_payloads_verified": 273,
     "document_bindings_verified": 8,
-    "public_evidence": "evidence/bidirectional-20261003"
+    "public_evidence": "evidence/bidirectional-20261003",
+    "delivery_ci_metadata": "BIDIRECTIONAL_DELIVERY_CI_20261003.json"
   }
 }
