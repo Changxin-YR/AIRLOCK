@@ -1,3 +1,9 @@
+# 再次修复源码已推送，等待冻结CI（2026-10-03）
+
+源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c已推送codex/full-audit-2026-10-02，main仍704b5035cf69f9a6c40c44eecd84c0d0741de849。从干净758202b基线开始，修复审计分页饥饿、批量累计critical事务内撤权、空白批量理由500、HTTP/MCP严格JSON与DNS/头/body总截止、unknown对账原目标绑定、归档收据/版本/保留期与输出预留、OTLP确认/并发计数与编码协商。原失败及首版遗漏的撤权窗口、归档输出顺序和编码协商回归均保留。F035—F042有复现与定位。
+
+本机预检683项exit0，最终改动后63项定点exit0；独立交叉audit7、batch5、transport9、archive11、telemetry9均通过。源提交完整CI37117971834正在运行，尚未声称该SHA全套通过，新增公开证据尚未推送。原126矩阵仍使用上一冻结证据，待新CI核验归档后更新。真人完成0，本轮付费调用0，原外部条件仍在。
+
 # 最终双向检验交付完成复验（2026-10-03）
 
 工作分支758202b4631c5f530e48ab07aa07cd90bfbe58e0的CI37101345199/job111141319330完整success。最终ZIP下载核验GitHub SHA256、94个载荷和source.zip提交；verify_evidence复查588 JUnit、6 JS、31浏览器、真实子退出码、Docker、原始benchmark及延迟样本exit0。最终p95：read added5.363556ms/static0.122ms/preview11.196ms，仍为1206行单机合成负载。
