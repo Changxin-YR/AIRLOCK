@@ -1,3 +1,21 @@
+# AIRLOCK 用户操作交接与真实 GitHub 待办（2026-10-03）
+
+用户已授权操作其GitHub仓库，并要求其他人工环节的详细步骤。本轮仅操作Changxin-YR/AIRLOCK，实际创建并回读核对Issues #2—#5：GitHub受控适配、真实语料、真人实验、外部身份/归档/告警/账单。没有操作无关仓库，main保持704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1仍open/draft/unmerged。
+
+工作分支codex/full-audit-2026-10-02已推送5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c。只新增/更新用户手册、README、报告接续说明和公开任务摘要；应用源码与25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb无差异。217 Python/6 JS/23浏览器完整应用证据继续使用原已核验Git包，不重写原收据。本次交付CI37081776246已成功，job111083641483，原日志再次核对217 Python、6 JS和全部证据门禁通过。完整CI元数据与原job日志在HANDOFF_CI_20261003.json / HANDOFF_JOB_20261003.log。重复完整包仅Actions（artifact11259062939，SHA256 13ef02a92292b149f36d56401eddbaabcddb0f99a0d8cb9449375c62faac7d40，1,420,906字节），到期2027-01-01T00:22:11Z；原应用完整25d4f52包仍在工作分支Git中。
+
+详细步骤：docs/USER_ACTIONS_20261003.md，包括GitHub细粒度Token（仅AIRLOCK服务实连时需要）、两人CSV独立标注、约12人探索性沙箱A/B、真实活跃用户日、Auth0 RFC9068公共配置和现有单一audience限制、独立S3 Object Lock保管及保留期选择、告警送达、DeepSeek账单和本人面试。公开步骤依据GitHub/Auth0/AWS官方文档；没有新建付费云资源或代办本人MFA。
+
+本机var/real-work/github-20261003/connector-trace.json保存当前用户授权、工具输入/规范化输出及GitHub独立回读；annotation-pack/有两份4行空白CSV、共同事实、说明和manifest；TO_RETURN.md给出非密钥信息回传清单。已确认都被Git忽略。公开Git只保存evidence/github-handoff-20261003/summary.json及手册；原始个人日志和标注不提交。
+
+这4次真实项目维护创建全部同一任务族，通过Codex GitHub连接器执行，未经过AIRLOCK审批；没有独立危险金标、没有正式benchmark导入、没有新增真人或活跃用户日。不能以此将21个外部受阻目标改为通过。当前没有项目服务专用GitHubToken和已验收GitHub写适配器；桌面连接器凭据不能自动复用到服务。后续适配不能假定普通GitHub接口拥有原子CAS和幂等写语义。
+
+手册中3个CLI帮助命令退出0，5段PowerShell语法检查通过，实际创建后逐项核对标题/正文；两个CSV全部标签/人类声明字段仍空白。这只是交接工具与实际Issue核验，不冒充新的功能或人类实验验收。模型无新增调用：仍642次、626有效/16历史无效，累计预算估价¥1.1211824/¥3。126矩阵仍111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL。
+
+Git里的旧应用完整包保留期、历史失败与已修复P1见下方上一检查点及原始证据。下一步按用户手册处理真实外部输入；常规仓库操作已授权，不反复询问；账号注册/本人验证、真实人员、数据权限、费用和云保留期不能替用户编造。没有明确合并指令时不合main。
+
+<details><summary>上一完整工程验收检查点（2026-10-02）</summary>
+
 # AIRLOCK 闭环交付：受控工程通过，真实研究验证仍受阻
 
 2026-10-02。开始接续时仍应先 fetch 并核对真实分支、HEAD、工作区、main 与 memory/progress。此文件是记忆，验收事实以原始收据和源码为准。历史进度保存在本分支 Git 历史；上一检查点 eb888b0447e266c2cea76292c360625343dee641。
@@ -48,3 +66,5 @@ Git的evidence/closure-20261002/包含原始日志、真实退出码、JUnit、P
 当前实测声明范围无已知、未修复、可复现P0/P1；不代表全域或生产认证。Agent必须无服务器文件/数据库/reviewer或audit密钥/宿主管理权限；上游实际执行CAS与持久幂等收据。所有写入和补偿保持独立批准，可逆性、预算、模型和学习建议均不产生批准权。
 
 接续入口为docs/CLOSURE_RUNBOOK.md及126条COMPLETION_MATRIX.json。外部输入可用后按各条retest_command复验；保留原始失败和历史tested_commit_sha。不清空、不覆盖用户工作、不force-push；未经用户授权不合并main。
+
+</details>

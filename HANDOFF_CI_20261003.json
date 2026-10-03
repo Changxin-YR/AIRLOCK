@@ -1,0 +1,283 @@
+{
+  "run": {
+    "id": 37081776246,
+    "head_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37081776246",
+    "created_at": "2026-10-03T00:22:11Z",
+    "updated_at": "2026-10-03T00:27:28Z"
+  },
+  "jobs": [
+    {
+      "id": 111083641483,
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 37081776246,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Snapshot source",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run python -m pip install -r requirements-dev.txt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Run npm ci",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/next-build.log -- npm run build",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/frontend-check.log -- npm run check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/frontend-tests.log -- npm test",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Run python -m benchmark.generate",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        },
+        {
+          "name": "Run cp benchmark/cases.jsonl evidence/synthetic-cases.jsonl",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/benchmark-dev.log -- python -m benchmark.evaluate --split dev --tuning --output evidence/benchmark-dev.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.evaluate --split test --output evidence/benchmark-test.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16
+        },
+        {
+          "name": "Run python -m playwright install --with-deps chromium",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/upstream-isolation.log -- python scripts/upstream_isolation.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        },
+        {
+          "name": "Run actions/setup-go@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/archive-build.log -- python scripts/build_archive_fixture.py --output evidence/archive-image.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/archive-integration.log -- python scripts/archive_integration.py --output evidence/archive-integration.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/research-pipeline.log -- python scripts/research_pipeline.py --output evidence/research-pipeline",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements-archive.txt --format json --output evidence/dependency-audit.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 28
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 29
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/study-analysis.log -- python -m benchmark.research --output evidence/study-analysis.json study evidence/study-automation.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30
+        },
+        {
+          "name": "Run python scripts/run_logged.py evidence/comparison.log -- python scripts/demo_comparison.py --output evidence/comparison.json",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31
+        },
+        {
+          "name": "Run python scripts/verify_evidence.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 32
+        },
+        {
+          "name": "Inventory evidence",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 33
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 34
+        },
+        {
+          "name": "Post Run actions/setup-go@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 65
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 66
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 67
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 68
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 69
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 11259062939,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 1420906,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11259062939",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11259062939/zip",
+      "expired": false,
+      "created_at": "2026-10-03T00:27:24Z",
+      "expires_at": "2027-01-01T00:22:11Z",
+      "updated_at": "2026-10-03T00:27:24Z",
+      "digest": "sha256:13ef02a92292b149f36d56401eddbaabcddb0f99a0d8cb9449375c62faac7d40",
+      "workflow_run": {
+        "id": 37081776246,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c"
+      }
+    }
+  ],
+  "complete_zip_location": "Actions only; expiration per artifact",
+  "job_log_git_path": "HANDOFF_JOB_20261003.log",
+  "canonical_application_zip": "codex/full-audit-2026-10-02:evidence/closure-20261002/ci/acceptance-25d4f52.zip",
+  "canonical_tested_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
+  "application_diff_to_delivery": []
+}

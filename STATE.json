@@ -1,15 +1,15 @@
 {
   "schema_version": 4,
-  "updated_date": "2026-10-02",
+  "updated_date": "2026-10-03",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "bounded_engineering_closure_complete_external_research_blocked",
+  "phase": "authorized_github_tasks_and_user_handoff_complete",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "fac683600e79c2635cf8f9073b597d4c36846e4b",
+  "working_commit": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
   "code_and_evidence_commit": "68492cd04174de5c3ccd5cb3211cb34ee1fb2d7d",
   "tested_commit": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "eb888b0447e266c2cea76292c360625343dee641",
+  "previous_memory_commit": "0b9a7c80ae60b5a8326a5d605bd5033c37f50a20",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -329,36 +329,36 @@
     ]
   },
   "delivery_ci": {
-    "id": 37028190235,
-    "head_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b",
+    "id": 37081776246,
+    "head_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37028190235",
-    "created_at": "2026-10-02T15:36:38Z",
-    "updated_at": "2026-10-02T15:42:11Z",
+    "html_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37081776246",
+    "created_at": "2026-10-03T00:22:11Z",
+    "updated_at": "2026-10-03T00:27:28Z",
     "artifacts": [
       {
-        "id": 11236286987,
+        "id": 11259062939,
         "name": "acceptance-evidence",
-        "size_in_bytes": 1412685,
-        "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11236286987",
-        "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11236286987/zip",
+        "size_in_bytes": 1420906,
+        "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11259062939",
+        "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11259062939/zip",
         "expired": false,
-        "created_at": "2026-10-02T15:42:06Z",
-        "expires_at": "2026-12-31T15:36:38Z",
-        "updated_at": "2026-10-02T15:42:06Z",
-        "digest": "sha256:8cc239d81fdac081a93ea455aff667d46e5de06b281f8d5eff79dacd6d004a9f",
+        "created_at": "2026-10-03T00:27:24Z",
+        "expires_at": "2027-01-01T00:22:11Z",
+        "updated_at": "2026-10-03T00:27:24Z",
+        "digest": "sha256:13ef02a92292b149f36d56401eddbaabcddb0f99a0d8cb9449375c62faac7d40",
         "workflow_run": {
-          "id": 37028190235,
+          "id": 37081776246,
           "repository_id": 1396912712,
           "head_repository_id": 1396912712,
           "head_branch": "codex/full-audit-2026-10-02",
-          "head_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b"
+          "head_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c"
         }
       }
     ],
-    "metadata_path": "CLOSURE_CI_20261002.json",
-    "job_log_path": "CLOSURE_DELIVERY_JOB_20261002.log",
+    "metadata_path": "HANDOFF_CI_20261003.json",
+    "job_log_path": "HANDOFF_JOB_20261003.log",
     "full_zip_in_git": false,
     "application_source_unchanged_from_tested_commit": true
   },
@@ -421,13 +421,15 @@
     "real_false_positive_rate": null,
     "real_model_billed_amount": null,
     "needs": [
-      "authorized real business logs and an independent new held-out corpus",
+      "Additional diverse authorized real business logs, compatible tool adapter and an independently maintained new held-out corpus",
       "two independent annotators and adjudication",
       "consenting A/B participants and real business-task gold",
       "real IdP issuance/login and long-running cloud archive/alerts",
       "provider invoice reconciliation",
       "user live interview and independent operation"
-    ]
+    ],
+    "first_authorized_project_task_creations": 4,
+    "representative_daily_log_corpus_ready": false
   },
   "evidence": {
     "git_directory": "evidence/closure-20261002",
@@ -450,9 +452,69 @@
     "docs/acceptance/COMPLETION_MATRIX.md",
     "docs/acceptance/FINDINGS_AND_FIXES.md",
     "docs/acceptance/EVIDENCE_RETENTION.md",
-    "docs/CLOSURE_RUNBOOK.md"
+    "docs/CLOSURE_RUNBOOK.md",
+    "docs/USER_ACTIONS_20261003.md"
   ],
   "known_unresolved_reproduced_p0_p1_in_tested_scope": 0,
   "critical_precondition": "Agent has no server/database/reviewer/audit secrets/host administration; upstream enforces CAS and durable idempotent receipts.",
-  "next_step": "Use the exact 126-record matrix and closure runbook when real external inputs become available. Preserve synthetic/real distinctions, all historical failures and independent approval. No further paid runs are needed now; no main merge without user authorization."
+  "next_step": "User may supply independent annotators, consenting A/B participants, IdP public configuration, cloud custody resources and invoice export using USER_ACTIONS_20261003.md. Repository operations are authorized; runtime GitHub credentials are separate. Keep first four connector task records distinct from AIRLOCK-protected executions and human gold. No further paid models needed now. No main merge without an explicit merge instruction.",
+  "handoff_document_commit": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
+  "previous_delivery_ci": {
+    "id": 37028190235,
+    "head_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37028190235",
+    "created_at": "2026-10-02T15:36:38Z",
+    "updated_at": "2026-10-02T15:42:11Z",
+    "artifacts": [
+      {
+        "id": 11236286987,
+        "name": "acceptance-evidence",
+        "size_in_bytes": 1412685,
+        "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11236286987",
+        "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11236286987/zip",
+        "expired": false,
+        "created_at": "2026-10-02T15:42:06Z",
+        "expires_at": "2026-12-31T15:36:38Z",
+        "updated_at": "2026-10-02T15:42:06Z",
+        "digest": "sha256:8cc239d81fdac081a93ea455aff667d46e5de06b281f8d5eff79dacd6d004a9f",
+        "workflow_run": {
+          "id": 37028190235,
+          "repository_id": 1396912712,
+          "head_repository_id": 1396912712,
+          "head_branch": "codex/full-audit-2026-10-02",
+          "head_sha": "fac683600e79c2635cf8f9073b597d4c36846e4b"
+        }
+      }
+    ],
+    "metadata_path": "CLOSURE_CI_20261002.json",
+    "job_log_path": "CLOSURE_DELIVERY_JOB_20261002.log",
+    "full_zip_in_git": false,
+    "application_source_unchanged_from_tested_commit": true
+  },
+  "github_handoff": {
+    "authorized_repository_operations": true,
+    "repository_used": "Changxin-YR/AIRLOCK",
+    "created_and_readback_verified_issues": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "execution_path": "Codex GitHub connector",
+    "application_github_adapter_implemented": false,
+    "airlock_protection_tested": false,
+    "application_github_credentials_configured": false,
+    "real_project_maintenance_operations": 4,
+    "families": 1,
+    "human_gold_records": 0,
+    "imported_benchmark_cases": 0,
+    "local_private_trace": "var/real-work/github-20261003/connector-trace.json",
+    "local_annotation_pack": "var/real-work/github-20261003/annotation-pack",
+    "raw_logs_and_forms_committed": false,
+    "public_summary": "evidence/github-handoff-20261003/summary.json",
+    "user_manual": "docs/USER_ACTIONS_20261003.md",
+    "local_return_checklist": "var/real-work/github-20261003/TO_RETURN.md"
+  }
 }
