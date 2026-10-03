@@ -9,7 +9,7 @@
   "code_and_evidence_commit": "31cf0e76156f0b5a408756d45068f1a318cf856c",
   "tested_commit": "4aca4073114b5b992460903abf33c3721f4f8063",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "15e901d8107e1a744ed2f71f99c11df91d3ddb5b",
+  "previous_memory_commit": "22b59e0e7f1c362ec57b3d8672bd42363b4bc9b0",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -184,5 +184,63 @@
     "docs/acceptance/FINAL_REPORT.md",
     "docs/acceptance/COMPLETION_MATRIX.json",
     "docs/USER_ACTIONS_20261003.md"
-  ]
+  ],
+  "delivery_ci": {
+    "run_id": 37090946414,
+    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37090946414",
+    "job_id": 111110964112,
+    "tested_commit_sha": "31cf0e76156f0b5a408756d45068f1a318cf856c",
+    "status": "completed",
+    "conclusion": "success",
+    "artifact": {
+      "id": 11261944628,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 1538202,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11261944628",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11261944628/zip",
+      "expired": false,
+      "created_at": "2026-10-03T02:52:03Z",
+      "expires_at": "2027-01-01T02:46:10Z",
+      "updated_at": "2026-10-03T02:52:03Z",
+      "digest": "sha256:d6afb811334144763e58b807e7e044db736ca124faabaa3c8432da2a22f920e3",
+      "workflow_run": {
+        "id": 37090946414,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "31cf0e76156f0b5a408756d45068f1a318cf856c"
+      }
+    },
+    "downloaded_sha256_verified": true,
+    "source_zip_commit_verified": true,
+    "manifest_files_verified": 84,
+    "junit_tests": 348,
+    "downloaded_functional_verifier_exit_code": 0,
+    "full_zip_in_git": false,
+    "full_zip_local_cache": "var/delivery-ci-31cf0e7/acceptance-31cf0e7.zip",
+    "full_zip_retention": "Actions original expires at artifact.expires_at; local cache has no retention guarantee. Source 4aca407 complete verified archive is separately preserved in working-branch Git.",
+    "full_source_archive_in_git": "evidence/autonomous-20261003/ci/acceptance-4aca407.zip",
+    "raw_job_log": "AUTONOMOUS_DELIVERY_JOB_20261003.log",
+    "downloaded_verifier_receipt": "AUTONOMOUS_DELIVERY_VERIFIER_20261003.log.status.json",
+    "application_diff_from_source_commit": [],
+    "source_commit": "4aca4073114b5b992460903abf33c3721f4f8063",
+    "latency_p95_ms": {
+      "read_added": 3.066337000063868,
+      "static": 0.063,
+      "preview": 6.378
+    }
+  },
+  "external_tracking": {
+    "issues": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "progress_updated": true,
+    "all_remain_open": true,
+    "pr_number": 1,
+    "draft": true,
+    "merged": false
+  }
 }
