@@ -2,14 +2,14 @@
   "schema_version": 5,
   "updated_date": "2026-10-03",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "single_person_delivery_verified",
+  "phase": "bidirectional_source_pushed_ci_pending",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "working_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
   "code_and_evidence_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
   "tested_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "b02f531e05ad725d09c506eb9965498ec6462ae1",
+  "previous_memory_commit": "0245d89c620b1ee6f50aa38d43b6db5107c63676",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -306,5 +306,20 @@
       "preview": 6.378
     }
   },
-  "latest_verified_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+  "latest_verified_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "bidirectional": {
+    "source_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+    "source_pushed": true,
+    "evidence_pushed": false,
+    "local_preflight_tests": 588,
+    "local_preflight_exit": 0,
+    "frozen_gate_tests": 45,
+    "frozen_gate_exit": 0,
+    "ci_status": "pending",
+    "new_model_calls": 0,
+    "human_completed": 0,
+    "retained_blockers": 21,
+    "source_evidence": "var/bidirectional-20261003",
+    "summary": "Execution, notification, research provenance and evidence validation fixed; second-direction counterexamples reverified. Full frozen CI pending."
+  }
 }
