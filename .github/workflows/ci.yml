@@ -42,6 +42,7 @@ jobs:
       - run: python scripts/run_logged.py evidence/next-build.log -- npm run build
       - run: python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev
       - run: python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml
+      - run: python scripts/run_logged.py evidence/acceptance-matrix.log -- python docs/acceptance/validate_matrix.py
       - run: python scripts/run_logged.py evidence/frontend-check.log -- npm run check
       - run: python scripts/run_logged.py evidence/frontend-tests.log -- npm test
       - run: python -m benchmark.generate

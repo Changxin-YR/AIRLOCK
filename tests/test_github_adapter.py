@@ -10,6 +10,7 @@ import subprocess
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
+from threading import Event
 
 import httpx
 import pytest
@@ -133,6 +134,58 @@ def test_github_unknown_direct_result_requires_bound_independent_readback(tmp_pa
     assert adapter.execute(call) == receipt and len(claimed) == 1
     with pytest.raises(GateError, match='observation_mismatch'):
         adapter.reconcile_direct(call.action_id, 'I_other')
+
+
+@pytest.mark.parametrize('first', ['response', 'readback'])
+@pytest.mark.parametrize('conflicting_issue', [False, True])
+def test_github_direct_response_readback_race_preserves_first_receipt(tmp_path, monkeypatch, first, conflicting_issue):
+    adapter = IssueAdapter(config('direct'), tmp_path / 'adapter.db')
+    call = request(adapter)
+    mutation_done, allow_response, read_started, allow_readback = (Event() for _ in range(4))
+    effects = []
+
+    def create(row):
+        effects.append(observed(row))
+        mutation_done.set()
+        assert allow_response.wait(5)
+        return effects[0]
+
+    def read_issue(_):
+        read_started.set()
+        assert allow_readback.wait(5)
+        return effects[0].model_copy(update={'issue_node_id': 'I_other'}) if conflicting_issue else effects[0]
+
+    monkeypatch.setattr(adapter.api, 'create', create)
+    monkeypatch.setattr(adapter.api, 'read_issue', read_issue)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        execution = pool.submit(adapter.execute, call)
+        try:
+            assert mutation_done.wait(5)
+            readback = pool.submit(adapter.reconcile_direct, call.action_id, 'I_other' if conflicting_issue else 'I_test123')
+            assert read_started.wait(5)
+            first_future, second_future = (execution, readback) if first == 'response' else (readback, execution)
+            first_signal, second_signal = (allow_response, allow_readback) if first == 'response' else (allow_readback, allow_response)
+            first_signal.set()
+            receipt = first_future.result(timeout=5)
+            assert receipt['state'] == 'executed'
+            assert receipt['result']['receipt_verification'] == 'github_' + first
+            with adapter.connection() as conn:
+                original_document = conn.execute('SELECT document FROM github_claims').fetchone()[0]
+            second_signal.set()
+            if conflicting_issue:
+                with pytest.raises(GateError, match='receipt_conflict'):
+                    second_future.result(timeout=5)
+            else:
+                assert second_future.result(timeout=5) == receipt
+        finally:
+            allow_response.set()
+            allow_readback.set()
+    assert len(effects) == 1
+    with adapter.connection() as conn:
+        assert conn.execute('SELECT document FROM github_claims').fetchone()[0] == original_document
+    restart = IssueAdapter(config('direct'), adapter.database)
+    monkeypatch.setattr(restart.api, 'create', lambda _: pytest.fail('must not resend a completed mutation'))
+    assert restart.execute(call) == receipt
 
 
 def test_github_plan_configuration_drift_and_capacity_fail_closed(tmp_path):

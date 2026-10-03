@@ -16,6 +16,7 @@ npm ci
 python scripts/run_logged.py evidence/next-build.log -- npm run build
 python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev
 python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml
+python scripts/run_logged.py evidence/acceptance-matrix.log -- python docs/acceptance/validate_matrix.py
 python scripts/run_logged.py evidence/frontend-check.log -- npm run check
 python scripts/run_logged.py evidence/frontend-tests.log -- npm test
 python -m benchmark.generate
@@ -24,6 +25,7 @@ python scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.
 python -m playwright install chromium
 python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py
 python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py
+python scripts/run_logged.py evidence/pilot-browser.log -- python scripts/pilot_browser.py
 python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
 python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py
 python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements.txt --format json --output evidence/dependency-audit.json

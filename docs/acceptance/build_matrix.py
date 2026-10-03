@@ -12,8 +12,8 @@ ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'evidence/autonomous-20261003'
 CLOSURE=ROOT/'evidence/closure-20261002'
 LEGACY=ROOT/'evidence/continuation-20261002'
-FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/single-person-20261003/ci/verified')
-CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/single-person-20261003/CI_FINAL.json')
+FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/bidirectional-20261003/ci/verified')
+CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/bidirectional-20261003/CI_FINAL.json')
 SHA=json.loads((FINAL/'pytest.log.status.json').read_text())['tested_commit_sha']
 LOG_PATHS={name:LEGACY/'final'/(name+'.log') for name in ('live-validation','ablation-live-dev','ablation-live-test','model-diagnostics')}
 LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':CLOSURE/'final/live-upstream.log','sse-identity-replay':CLOSURE/'sse-identity-replay.log',
@@ -225,6 +225,22 @@ if (FINAL/'pilot-browser.json').exists():
     for key in ('D2','C7.6'):
         RECORDS[key]['code_references']+=['docs/START_WITH_ONE_PERSON.md']
     RECORDS['G4']['uncovered_scope']+=' 本轮按用户要求暂缓。'
+
+
+if (FINAL/'acceptance-matrix.log.status.json').exists():
+    for key in ('C11.3','C11.4','D4'):
+        RECORDS[key]['scope']+=' 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。'
+        RECORDS[key]['code_references']+=['docs/acceptance/validate_matrix.py','scripts/verify_evidence.py']
+        RECORDS[key]['test_modules']+=['test_acceptance_matrix','test_evidence_gate','test_gate_cross_review']
+        RECORDS[key]['log_names']+=['pytest','acceptance-matrix']
+    for key in ('B2','B3','B7','H1','H2','H3','H4','H5'):
+        RECORDS[key]['test_modules']+=['test_research_integrity']
+    RECORDS['C12.2']['scope']+=' 通知outbox拒绝其他数据库，持久时间高水位防止乱序假恢复；健康来源未知用exit4且不发送恢复。'
+    RECORDS['C12.2']['test_modules']+=['test_alert_delivery']
+    for key in ('C6.4','C6.5'):
+        RECORDS[key]['test_modules']+=['test_github_adapter']
+    for key in ('C11.1','C11.4'):
+        RECORDS[key]['scope']=RECORDS[key]['scope'].replace('23原生浏览器','31原生浏览器').replace('23浏览器','31浏览器')
 
 
 def build():

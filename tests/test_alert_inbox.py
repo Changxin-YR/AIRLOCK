@@ -284,3 +284,20 @@ def test_actual_local_sender_receiver_alert_recovery_and_receiver_restart(tmp_pa
     restarted = create_app(tmp_path / 'live.inbox.sqlite3', write_token=WRITE, read_token=READ)
     with TestClient(restarted, base_url=BASE) as client:
         assert len(client.get('/api/events', headers=auth(READ)).json()['events']) == 2
+
+
+def test_receiver_restart_rotates_both_identities_without_losing_receipts(tmp_path):
+    database = tmp_path / 'rotated.inbox.sqlite3'
+    payload = event()
+    with TestClient(create_app(database, write_token=WRITE, read_token=READ), base_url=BASE) as client:
+        assert send(client, payload).status_code == 201
+    rotated_write, rotated_read = WRITE + '-next', READ + '-next'
+    with TestClient(create_app(database, write_token=rotated_write, read_token=rotated_read), base_url=BASE) as client:
+        assert send(client, payload).status_code == 401
+        assert client.get('/api/events', headers=auth(READ)).status_code == 401
+        assert send(client, payload, token=rotated_write).json()['duplicate'] is True
+        rows = client.get('/api/events', headers=auth(rotated_read)).json()['events']
+        assert len(rows) == 1 and rows[0]['event_id'] == payload['event_id']
+        assert send(client, event(kind='recovery', status='ok', alert_codes=[], resolved_codes=[]),
+                    token=rotated_write).status_code == 400
+        assert len(client.get('/api/events', headers=auth(rotated_read)).json()['events']) == 1

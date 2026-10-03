@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -11,7 +12,7 @@ REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchma
                  'benchmark-test.log','browser-native.log','docker-smoke.log','dependency-audit.log',
                  'latency.log','ablation.log','study-analysis.log','comparison.log','next-build.log','npm-audit.log',
                  'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-build.log','archive-integration.log','research-pipeline.log',
-                 'sqlite-runtime-build.log','sqlite-runtime-linked.log','pilot-browser.log']
+                 'sqlite-runtime-build.log','sqlite-runtime-linked.log','pilot-browser.log','acceptance-matrix.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
@@ -52,7 +53,19 @@ REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
     'test_inbox_concurrent_replays_insert_once_and_conflicts_are_atomic',
     'test_inbox_read_and_write_credentials_are_separate_and_never_url_auth',
     'test_inbox_unsafe_runtime_leaves_existing_database_unopened',
-    'test_actual_local_sender_receiver_alert_recovery_and_receiver_restart'}
+    'test_actual_local_sender_receiver_alert_recovery_and_receiver_restart',
+    'test_acceptance_ledger_positive_control_keeps_external_blockers',
+    'test_acceptance_rejects_changed_archived_log',
+    'test_acceptance_unarchived_receipt_cannot_establish_frozen_pass',
+    'test_latency_gate_recomputes_preserved_real_samples',
+    'test_latency_gate_keeps_negative_paired_differences',
+    'test_outbox_rejects_foreign_database_before_mutation_or_delivery',
+    'test_old_schema_with_different_sql_formatting_retains_semantics',
+    'test_out_of_order_observations_cannot_create_false_recovery_or_realert',
+    'test_formal_jsonl_rejects_contradictory_source_declaration',
+    'test_bound_task_gold_excludes_browser_invented_comprehension_successes',
+    'test_governance_real_day_groups_tasks_and_preserves_empty_denominator',
+    'test_research_cli_round_trip_and_duplicate_source_rejection'}
 REQUIRED_BROWSER = {'agent_credential_rejected_by_reviewer_console','approval_disabled_without_informed_confirmation',
     'browser_rejection_preserves_all_1206_rows','browser_approval_executes_real_update_once',
     'critical_action_requires_exact_1206_scope_phrase','390px_mobile_has_no_horizontal_overflow',
@@ -105,6 +118,53 @@ def verify_benchmark(report, expected_cases, expected_families, corpus_sha):
             'benchmark summary disagrees with raw rows')
     require(report['impact_denominator']==len(impacts) and report['impact_exact_match_count']==matches,
             'impact summary disagrees with raw rows')
+
+
+def verify_latency(report, expected_samples=60):
+    """Recompute paired differences and summaries independently from raw rows."""
+    def number(value, label, signed=False):
+        require(type(value) in (int, float) and math.isfinite(value) and
+                (signed or value >= 0), 'latency invalid sample: ' + label)
+        return value
+
+    def equal(actual, expected, label):
+        number(actual, label, signed=True)
+        require(math.isclose(actual, expected, rel_tol=1e-12, abs_tol=1e-9),
+                'latency raw/summary mismatch: ' + label)
+
+    def distribution(summary, values, label, with_mean=False):
+        ordered = sorted(values)
+        require(type(summary['n']) is int and summary['n'] == len(values),
+                'latency summary count: ' + label)
+        for percentile in (50, 95, 99):
+            equal(summary['p' + str(percentile)], ordered[math.ceil(len(values) * percentile / 100) - 1], label)
+        if with_mean:
+            equal(summary['mean'], sum(values) / len(values), label + '.mean')
+
+    require(type(report['samples']) is int and report['samples'] == expected_samples,
+            'latency configured sample count')
+    reads, writes = report['raw_read_pairs'], report['raw_writes']
+    require(len(reads) == expected_samples and len(writes) == min(expected_samples, 30),
+            'latency raw sample count')
+    require([row['pair'] for row in reads] == list(range(expected_samples)), 'latency pair identity')
+    require([row['sample'] for row in writes] == list(range(len(writes))), 'latency write identity')
+    require(len({row['action_id'] for row in reads}) == len(reads), 'latency duplicate action')
+    for row in reads:
+        require(row['order'] in (['direct', 'proxy'], ['proxy', 'direct']), 'latency arm order')
+        direct = number(row['direct_ms'], 'direct_ms')
+        proxy = number(row['proxy_ms'], 'proxy_ms')
+        equal(row['added_ms'], proxy - direct, 'paired added_ms')
+    for field in ('direct_ms', 'proxy_ms', 'added_ms'):
+        distribution(report['read'][field], [row[field] for row in reads], field, with_mean=True)
+    for field in ('submit_receipt_ms', 'approval_request_to_effect_ms', 'static_ms', 'preview_ms', 'evaluation_ms'):
+        values = [number(row[field], field) for row in writes]
+        distribution(report['write'][field], values, field)
+    def p95(values):
+        return sorted(values)[math.ceil(len(values) * .95) - 1]
+    require(p95([row['static_ms'] for row in writes]) < 300 and
+            p95([row['preview_ms'] for row in writes]) < 5000 and
+            p95([row['proxy_ms'] - row['direct_ms'] for row in reads]) < 100,
+            'latency threshold; inspect raw samples')
 
 
 def verify(directory):
@@ -185,7 +245,7 @@ def verify(directory):
     require(load(directory,'study-analysis.json')['human_participants']==0,'automated study counted as human')
     require(not any(d['vulns'] for d in load(directory,'dependency-audit.json')['dependencies']),'known dependency vulnerability')
     latency=load(directory,'latency.json')
-    require(latency['write']['static_ms']['p95']<300 and latency['write']['preview_ms']['p95']<5000 and latency['read']['added_ms']['p95']<100,'latency threshold; inspect raw samples')
+    verify_latency(latency)
     print(f'Verified all {tests} JUnit cases, exit receipts, screenshots, Docker and raw benchmark rows.')
 
 

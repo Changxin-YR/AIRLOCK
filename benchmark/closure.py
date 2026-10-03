@@ -6,13 +6,14 @@ merely because an uploaded JSON record says human=true.
 """
 import argparse
 from collections import Counter
+from datetime import date
 import hashlib
 import json
 from pathlib import Path
 from pydantic import BaseModel,ConfigDict,Field,ValidationError
 from typing import Literal
 from airlock.models import canonical
-from .research import Case,Annotation,read_jsonl,validate_corpus,annotations_report,classification,ratio,study_report
+from .research import Case,Annotation,read_json,read_jsonl,loads_strict,valid_identity,validate_corpus,annotations_report,classification,ratio,study_report
 
 
 class Prediction(BaseModel):
@@ -83,17 +84,24 @@ def evaluate(cases,predictions,annotations=(),adjudications=(),tuning=False):
 def governance_report(records):
     seen=set();included=[];excluded=[]
     for row in records:
-        if row.get('source')!='authorized_log' or row.get('authorized') is not True or not row.get('authorization_reference'):
+        if not isinstance(row,dict):raise ValueError('invalid governance record')
+        authorization=row.get('authorization_reference')
+        if (row.get('source')!='authorized_log' or row.get('authorized') is not True
+                or not isinstance(authorization,str) or not authorization.strip()):
             excluded.append({'id':row.get('id'),'reason':'missing real-log authorization'});continue
         key=(row.get('participant_id'),row.get('date'),row.get('task_id'))
-        if not all(key) or key in seen:raise ValueError('missing or duplicate task/day identity')
+        if not valid_identity(key[0]) or not valid_identity(key[2]):raise ValueError('invalid task/day identity')
+        try:
+            if not isinstance(key[1],str) or date.fromisoformat(key[1]).isoformat()!=key[1]:raise ValueError('invalid date')
+        except (ValueError,TypeError):raise ValueError('governance date must be a real YYYY-MM-DD calendar date') from None
+        if key in seen:raise ValueError('missing or duplicate task/day identity')
         seen.add(key)
         for k in ('baseline_approvals','actual_approvals','eligible_requests','displayed_groups','readonly_pass','duplicates_suppressed','batch_reviewed','incorrect_decisions'):
             if type(row.get(k)) is not int or row[k]<0:raise ValueError('invalid governance count')
         if row['displayed_groups']>row['eligible_requests'] or row['incorrect_decisions']>row['actual_approvals']:raise ValueError('governance denominator mismatch')
         if type(row.get('same_task_quality')) is not bool:raise ValueError('paired task quality required')
         included.append(row)
-    days={r['participant_id']+'|'+r['date'] for r in included}
+    days={(r['participant_id'],r['date']) for r in included}
     comparable=[r for r in included if r['same_task_quality']]
     eligible=sum(r['eligible_requests'] for r in comparable);groups=sum(r['displayed_groups'] for r in comparable)
     baseline=sum(r['baseline_approvals'] for r in comparable);actual=sum(r['actual_approvals'] for r in comparable)
@@ -103,7 +111,7 @@ def governance_report(records):
         'quality_matched_approval_reduction':ratio(baseline-actual,baseline),'eligible_fold_rate':ratio(eligible-groups,eligible),
         'readonly_pass':sum(r['readonly_pass'] for r in included),'duplicates_suppressed':sum(r['duplicates_suppressed'] for r in included),
         'batch_reviewed':sum(r['batch_reviewed'] for r in included),'incorrect_decisions':sum(r['incorrect_decisions'] for r in included),
-        'provenance':'supplied authorized records; no extrapolation from synthetic runs to user days'}
+        'provenance':'supplied record declarations are not independent identity/authorization evidence; no extrapolation from synthetic runs to user days'}
 
 
 def main():
@@ -118,12 +126,12 @@ def main():
         if args.command=='prepare':report=prepare(read_jsonl(args.cases,Case),args.output)
         elif args.command=='evaluate':report=evaluate(read_jsonl(args.cases,Case),read_jsonl(args.predictions,Prediction),
             read_jsonl(args.annotations,Annotation) if args.annotations else [],
-            json.loads(args.adjudications.read_text()) if args.adjudications else [],args.tuning)
+            read_json(args.adjudications) if args.adjudications else [],args.tuning)
         elif args.command=='study':
-            raw=args.tasks.read_bytes();tasks=json.loads(raw)['tasks']
+            raw=args.tasks.read_bytes();tasks=loads_strict(raw.decode('utf-8-sig'))['tasks']
             if len({t['id'] for t in tasks})!=len(tasks):raise ValueError('duplicate study tasks')
-            report=study_report([json.loads(path.read_text()) for path in args.sessions],{t['id']:t for t in tasks},hashlib.sha256(raw).hexdigest())
-        else:report=governance_report(json.loads(args.records.read_text()))
+            report=study_report([read_json(path) for path in args.sessions],{t['id']:t for t in tasks},hashlib.sha256(raw).hexdigest())
+        else:report=governance_report(read_json(args.records))
         if args.command!='prepare':
             args.output.parent.mkdir(parents=True,exist_ok=True)
             with args.output.open('x',encoding='utf-8') as out:out.write(json.dumps(report,ensure_ascii=False,indent=2)+'\n')

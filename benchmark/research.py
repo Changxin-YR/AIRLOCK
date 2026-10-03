@@ -13,7 +13,7 @@ from pathlib import Path
 import random
 import statistics
 from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from airlock.models import Invocation, canonical
 
 
@@ -60,9 +60,50 @@ class Annotation(BaseModel):
     reversibility: Literal['reversible','compensatable','irreversible','unknown']='unknown'
     rationale: str=Field(min_length=3,max_length=2000)
 
+    @field_validator('human','independent',mode='before')
+    @classmethod
+    def explicit_true(cls,value):
+        # Literal[True] also compares equal to numeric 1. A declaration must
+        # contain an actual JSON boolean, not a coerced affirmative value.
+        if value is not True:raise ValueError('explicit true boolean required')
+        return value
+
+    @field_validator('annotator_id')
+    @classmethod
+    def unambiguous_identity(cls,value):
+        if not valid_identity(value):raise ValueError('invalid annotator identity')
+        return value
+
+    @field_validator('rationale')
+    @classmethod
+    def nonblank_rationale(cls,value):
+        if not value.strip():raise ValueError('nonblank annotation rationale required')
+        return value
+
+
+def valid_identity(value):
+    return (isinstance(value,str) and 1<=len(value)<=100 and value==value.strip()
+            and all(ord(char)>=32 and ord(char)!=127 for char in value))
+
+
+def loads_strict(text):
+    """Reject contradictory declarations rather than silently taking the last."""
+    def unique_object(pairs):
+        result={}
+        for key,value in pairs:
+            if key in result:raise ValueError('duplicate JSON field')
+            result[key]=value
+        return result
+    def finite_constant(_):raise ValueError('nonfinite JSON value')
+    return json.loads(text,object_pairs_hook=unique_object,parse_constant=finite_constant)
+
+
+def read_json(path):
+    return loads_strict(Path(path).read_text(encoding='utf-8-sig'))
+
 
 def read_jsonl(path,model):
-    return [model.model_validate_json(line) for line in Path(path).read_text(encoding='utf-8').splitlines() if line.strip()]
+    return [model.model_validate(loads_strict(line)) for line in Path(path).read_text(encoding='utf-8-sig').splitlines() if line.strip()]
 
 
 def validate_corpus(cases):
@@ -157,23 +198,39 @@ def bootstrap_mean(values,seed=2073,repeats=2000):
 
 
 def study_report(sessions,task_gold=None,task_file_sha256=None):
+    if task_gold is not None:
+        if not isinstance(task_gold,dict):raise ValueError('invalid study task gold')
+        for identifier,task in task_gold.items():
+            if (not valid_identity(identifier) or not isinstance(task,dict)
+                    or task.get('gold') not in {'approve','reject','more_information'}):
+                raise ValueError('invalid study task gold')
+            if task.get('check') is not None and (not isinstance(task['check'],dict)
+                    or not isinstance(task['check'].get('answer'),str) or not task['check']['answer'].strip()):
+                raise ValueError('invalid study comprehension gold')
     included=[]; excluded=[]; seen=set()
     for session in sessions:
+        if not isinstance(session,dict):raise ValueError('invalid study session')
         identifier=session.get('participant_id')
-        if session.get('kind')!='airlock-study-v1' or not identifier or identifier in seen or session.get('source')!='human' or session.get('consent') is not True:
+        if session.get('kind')!='airlock-study-v1' or not valid_identity(identifier) or identifier in seen or session.get('source')!='human' or session.get('consent') is not True:
             excluded.append({'participant_id':identifier,'reason':'nonhuman, no consent, duplicate or invalid metadata'}); continue
         seen.add(identifier); cells={}
         if task_file_sha256 and session.get('task_file_sha256')!=task_file_sha256:raise ValueError('study task file mismatch')
+        if not isinstance(session.get('responses',[]),list):raise ValueError('invalid study response list')
         for event in session.get('responses',[]):
+            if not isinstance(event,dict):raise ValueError('invalid study observation')
             event=dict(event)
             arm=event.get('arm'); ms=event.get('visible_ms'); correct=event.get('correct')
             if arm not in {'A','B'} or type(ms) not in (int,float) or not math.isfinite(ms) or ms<0 or type(correct)!=bool:
                 raise ValueError('invalid study observation')
             case=event.get('case_id')
+            if not valid_identity(case):raise ValueError('invalid study case identity')
             if case in cells: raise ValueError('same participant saw the same case twice')
             if task_gold is not None:
                 if case not in task_gold or event.get('choice') not in {'approve','reject','more_information'}:raise ValueError('unknown study choice or case')
                 event['correct']=event['choice']==task_gold[case]['gold']
+                # Browser correctness is untrusted. Tasks with no supplied
+                # comprehension gold must not contribute fabricated successes.
+                event.pop('comprehension_correct',None)
                 check=task_gold[case].get('check')
                 if check: event['comprehension_correct']=event.get('comprehension_choice')==check['answer']
             cells[case]=event
@@ -197,6 +254,7 @@ def study_report(sessions,task_gold=None,task_file_sha256=None):
             'median':statistics.median(times) if times else None,'p95':times[math.ceil(.95*len(times))-1] if times else None},
         'correct_decisions':ratio(sum(r['correct'] for r in observations),len(observations)),
         'gold_verification':'recomputed_from_supplied_task_file' if task_gold is not None else 'unverified_browser_supplied_correctness',
+        'comprehension_verification':'recomputed_for_tasks_with_supplied_check' if task_gold is not None else 'unverified_browser_supplied_correctness',
         'comprehension_correct':ratio(sum(r['comprehension_correct'] for r in observations if type(r.get('comprehension_correct')) is bool),sum(type(r.get('comprehension_correct')) is bool for r in observations)),
         'limitations':['No causal efficiency claim without recruitment, business gold, counterbalancing and adequate sample size.',
             'A single participant is a descriptive pilot: repeated decisions do not create independent participants or a population confidence interval.',
@@ -213,9 +271,9 @@ def main():
         cases=read_jsonl(args.cases,Case); result=validate_corpus(cases)
         result['annotations']=annotations_report(cases,read_jsonl(args.annotations,Annotation) if args.annotations else [])
         if args.freeze:
-            if args.freeze.exists() and json.loads(args.freeze.read_text())!=result: raise ValueError('frozen manifest differs; create a NEW corpus version')
+            if args.freeze.exists() and read_json(args.freeze)!=result: raise ValueError('frozen manifest differs; create a NEW corpus version')
             args.freeze.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
-    else: result=study_report([json.loads(p.read_text(encoding='utf-8')) for p in args.sessions])
+    else: result=study_report([read_json(p) for p in args.sessions])
     args.output.parent.mkdir(parents=True,exist_ok=True); args.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,ensure_ascii=False,indent=2))
 

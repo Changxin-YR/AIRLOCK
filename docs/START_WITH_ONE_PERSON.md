@@ -105,7 +105,7 @@ try {
 .\.venv\Scripts\python.exe scripts/operational_check.py --url http://127.0.0.1:8000 --output var/ops/status.json --alert-config var/ops/inbox-webhook.json --alert-state var/ops/notifications.sqlite3
 ```
 
-该检查只在真实健康状态变化时投递；初次健康保持安静。需要先运行已配置的 AIRLOCK 服务；操作者凭据不交给 Agent。运维检查的健康/告警/投递失败退出码分别为 0/2/3。收件箱页面点击“刷新”查看，退出会清空浏览器内存中的口令和事件。
+该检查只在真实健康状态变化时投递；初次健康保持安静。需要先运行已配置的 AIRLOCK 服务；操作者凭据不交给 Agent。运维检查的健康/告警/投递失败退出码分别为 0/2/3；退出码 4 表示身份、网络或健康报告未确认，此时结果为 unknown，不发送恢复通知。过时健康状态不能覆盖较新的告警。收件箱页面点击“刷新”查看，退出会清空浏览器内存中的口令和事件。
 
 远程使用还需部署 HTTPS 和实际接收渠道；本轮没有创建付费资源或向外部收件人发消息。只有用户实际确认收到的通知，才记为真人送达验证。
 

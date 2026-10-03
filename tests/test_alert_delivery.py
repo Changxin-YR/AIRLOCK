@@ -26,7 +26,7 @@ def report(*codes):
             'alerts': [{'code': code, 'severity': 'warning', 'count': 42} for code in codes],
             'recommended_exit_code': 2 if codes else 0,
             'sql': 'DELETE FROM secret_customer_data', 'principal': 'private-user@example.invalid',
-            'token': REVIEWER, 'checked_at': 123456789}
+            'token': REVIEWER, 'checked_at': time.time()}
 
 
 @contextmanager
@@ -60,8 +60,8 @@ def receiver():
 
         def do_GET(self):
             state['gets'].append((self.path, self.headers.get('Authorization')))
-            body = json.dumps(state['report']).encode()
-            self.send_response(200)
+            body = state.get('raw_report', json.dumps(state['report']).encode())
+            self.send_response(state.get('health_status', 200))
             self.send_header('Content-Type', 'application/json')
             self.send_header('Content-Length', str(len(body)))
             self.end_headers()
@@ -363,3 +363,198 @@ def test_operator_cli_cannot_overwrite_outbox_with_report(webhook, tmp_path):
     assert result.returncode == 2 and 'must be separate files' in result.stderr
     assert webhook['gets'] == [] and webhook['received'] == []
     assert not (tmp_path / 'report.json').exists()
+
+
+def test_outbox_rejects_foreign_database_before_mutation_or_delivery(webhook, tmp_path):
+    from contextlib import closing
+    state = tmp_path / 'business.sqlite3'
+    with closing(sqlite3.connect(state)) as conn:
+        conn.execute('CREATE TABLE protected (value TEXT)')
+        conn.execute("INSERT INTO protected VALUES ('untouched')")
+        conn.commit()
+    before = state.read_bytes()
+    result = deliver_alerts(config(webhook), report(CODE), state)
+    assert result['status'] == 'blocked'
+    assert result['error_code'] == 'notification_state_unavailable'
+    assert state.read_bytes() == before and webhook['received'] == []
+
+
+def test_outbox_runtime_guard_precedes_persistent_file_access(webhook, tmp_path, monkeypatch):
+    import airlock.alert_delivery as module
+    def refuse():
+        raise RuntimeError('unconfirmed runtime')
+    def unexpected(*args, **kwargs):
+        pytest.fail('persistent connection attempted before runtime preflight')
+    monkeypatch.setattr(module, 'require_safe_python_runtime', refuse)
+    monkeypatch.setattr(module.sqlite3, 'connect', unexpected)
+    state = tmp_path / 'not-created' / 'outbox.sqlite3'
+    assert deliver_alerts(config(webhook), report(CODE), state)['status'] == 'blocked'
+    assert not state.parent.exists() and webhook['received'] == []
+
+
+def test_legacy_outbox_migration_preserves_pending_id_and_rejects_extra_tables(webhook, tmp_path):
+    from contextlib import closing
+    from airlock.alert_delivery import APPLICATION_ID
+    state = tmp_path / 'outbox.sqlite3'
+    webhook['status'] = 503
+    first = deliver_alerts(config(webhook), report(CODE), state)
+    with closing(sqlite3.connect(state)) as conn:
+        conn.execute('PRAGMA application_id=0')  # The previous release's schema.
+    webhook['status'] = 204
+    retried = deliver_alerts(config(webhook), report(CODE), state)
+    assert retried['event_ids'] == [first['event_id']]
+    with closing(sqlite3.connect(state)) as conn:
+        assert conn.execute('PRAGMA application_id').fetchone()[0] == APPLICATION_ID
+        conn.execute('CREATE TABLE unexpected_business (value TEXT)')
+    before, received = state.read_bytes(), len(webhook['received'])
+    assert deliver_alerts(config(webhook), report(), state)['status'] == 'blocked'
+    assert state.read_bytes() == before and len(webhook['received']) == received
+
+
+def test_out_of_order_observations_cannot_create_false_recovery_or_realert(webhook, tmp_path):
+    state = tmp_path / 'outbox.sqlite3'
+    first = deliver_alerts(config(webhook), dict(report(CODE), checked_at=200.0), state)
+    for timestamp in (100.0, 200.0):
+        stale = deliver_alerts(config(webhook), dict(report(), checked_at=timestamp), state)
+        assert stale['status'] == 'blocked' and stale['error_code'] == 'health_observation_stale_or_unordered'
+    assert [row['body']['kind'] for row in webhook['received']] == ['alert']
+    recovered = deliver_alerts(config(webhook), dict(report(), checked_at=300.0), state)
+    assert recovered['status'] == 'delivered' and recovered['event_ids'] != first['event_ids']
+    assert deliver_alerts(config(webhook), dict(report(CODE), checked_at=250.0), state)['status'] == 'blocked'
+    untimed = report(CODE)
+    del untimed['checked_at']
+    assert deliver_alerts(config(webhook), untimed, state)['status'] == 'blocked'
+    assert [row['body']['kind'] for row in webhook['received']] == ['alert', 'recovery']
+    assert all(row[1] == 'delivered' for row in events(state))
+
+
+def test_older_identical_observation_retries_without_lowering_high_water(webhook, tmp_path):
+    state = tmp_path / 'outbox.sqlite3'
+    webhook['status'] = 503
+    failed = deliver_alerts(config(webhook), dict(report(CODE), checked_at=300.0), state)
+    webhook['status'] = 204
+    retried = deliver_alerts(config(webhook), dict(report(CODE), checked_at=100.0), state)
+    assert retried['event_ids'] == [failed['event_id']]
+    assert deliver_alerts(config(webhook), dict(report(), checked_at=250.0), state)['status'] == 'blocked'
+    assert {row['body']['kind'] for row in webhook['received']} == {'alert'}
+
+
+@pytest.mark.parametrize('timestamp', [None, True, '200', float('nan'), float('inf'), -1, 10 ** 500])
+def test_invalid_observation_time_fails_before_outbox_or_delivery(webhook, tmp_path, timestamp):
+    state = tmp_path / 'outbox.sqlite3'
+    assert deliver_alerts(config(webhook), dict(report(CODE), checked_at=timestamp), state)['status'] == 'blocked'
+    assert not state.exists() and webhook['received'] == []
+
+
+@pytest.mark.parametrize('codes,recommendation,expected', [((CODE,), 0, 2), ((), 2, 0), ((CODE,), '0', 2)])
+def test_cli_derives_exit_from_validated_health_not_recommendation(webhook, tmp_path, codes, recommendation, expected):
+    webhook['report'] = dict(report(*codes), recommended_exit_code=recommendation)
+    checked = run_check(webhook, tmp_path)
+    assert checked.returncode == expected, checked.stderr
+    assert json.loads((tmp_path / 'report.json').read_text())['recommended_exit_code'] == expected
+
+
+@pytest.mark.parametrize('status', [401, 403, 500, 302])
+def test_cli_identity_or_http_failure_is_unknown_and_cannot_emit_recovery(webhook, tmp_path, status):
+    cfg = tmp_path / 'alert.json'
+    cfg.write_text(config(webhook).model_dump_json())
+    state = tmp_path / 'outbox.sqlite3'
+    flags = ('--alert-config', str(cfg), '--alert-state', str(state))
+    assert run_check(webhook, tmp_path, *flags).returncode == 2
+    before = state.read_bytes()
+    webhook['health_status'], webhook['report'] = status, report()
+    failed = run_check(webhook, tmp_path, *flags)
+    assert failed.returncode == 4 and not failed.stderr
+    saved = json.loads((tmp_path / 'report.json').read_text())
+    assert saved['status'] == 'unknown' and saved['notification']['status'] == 'not_attempted'
+    assert state.read_bytes() == before and len(webhook['received']) == 1
+    assert REVIEWER not in failed.stdout and TOKEN not in failed.stdout
+    webhook['health_status'] = 200
+    assert run_check(webhook, tmp_path, *flags).returncode == 0
+    assert [row['body']['kind'] for row in webhook['received']] == ['alert', 'recovery']
+
+
+@pytest.mark.parametrize('raw', [b'{}', b'[]', b'{"status":"ok","alerts":[],"checked_at":1,"status":"alert"}',
+                               b'{"status":"ok","alerts":[{"code":"pending_expiry_backlog"}],"checked_at":1}',
+                               b'x' * 65537], ids=['empty', 'array', 'duplicate', 'inconsistent', 'oversized'])
+def test_cli_invalid_reports_are_current_unknown_receipts(webhook, tmp_path, raw):
+    webhook['raw_report'] = raw
+    result = run_check(webhook, tmp_path)
+    assert result.returncode == 4 and not result.stderr
+    saved = json.loads((tmp_path / 'report.json').read_text())
+    assert saved['status'] == 'unknown' and saved['error_code'] == 'health_report_invalid'
+    assert webhook['received'] == []
+
+
+@pytest.mark.parametrize('part,old,new', [
+    (0, 'key TEXT PRIMARY KEY', 'key TEXT'),
+    (1, 'target_id TEXT PRIMARY KEY', 'target_id TEXT'),
+    (2, 'event_id TEXT NOT NULL UNIQUE', 'event_id TEXT NOT NULL'),
+    (2, 'payload TEXT NOT NULL', 'payload TEXT'),
+    (2, "DEFAULT 'pending'", "DEFAULT NULL"),
+    (2, 'attempts INTEGER NOT NULL DEFAULT 0', 'attempts INTEGER NOT NULL'),
+    (2, 'seq INTEGER PRIMARY KEY AUTOINCREMENT', 'seq INTEGER PRIMARY KEY /* AUTOINCREMENT */'),
+    (2, 'payload TEXT NOT NULL', 'payload TEXT NOT NULL CHECK(length(payload)<20)'),
+    (2, 'event_id TEXT NOT NULL UNIQUE', 'event_id TEXT NOT NULL UNIQUE ON CONFLICT REPLACE'),
+    (0, 'key TEXT PRIMARY KEY', 'key TEXT COLLATE NOCASE PRIMARY KEY'),
+], ids=['meta-pk', 'target-pk', 'event-unique', 'payload-notnull', 'state-default',
+        'attempt-default', 'autoincrement-comment', 'extra-check', 'conflict-replace', 'key-collation'])
+@pytest.mark.parametrize('marker', [0, 0x414F5554])
+def test_schema_lookalikes_cannot_swallow_alerts_or_modify_database(webhook, tmp_path, part, old, new, marker):
+    from contextlib import closing
+    state = tmp_path / 'lookalike.sqlite3'
+    statements = [
+        'CREATE TABLE notification_meta (key TEXT PRIMARY KEY, value TEXT NOT NULL)',
+        'CREATE TABLE notification_targets (target_id TEXT PRIMARY KEY, status TEXT NOT NULL, codes TEXT NOT NULL)',
+        """CREATE TABLE notification_events (seq INTEGER PRIMARY KEY AUTOINCREMENT,
+           event_id TEXT NOT NULL UNIQUE, target_id TEXT NOT NULL, payload TEXT NOT NULL,
+           delivery_state TEXT NOT NULL DEFAULT 'pending', attempts INTEGER NOT NULL DEFAULT 0,
+           response_status INTEGER, failure_code TEXT)""",
+    ]
+    assert old in statements[part]
+    statements[part] = statements[part].replace(old, new)
+    with closing(sqlite3.connect(state)) as conn:
+        # Leave sqlite_sequence present even for the non-AUTOINCREMENT variant,
+        # so checking only table/column names cannot distinguish this impostor.
+        conn.execute('CREATE TABLE temporary_sequence (id INTEGER PRIMARY KEY AUTOINCREMENT)')
+        conn.execute('DROP TABLE temporary_sequence')
+        for statement in statements:
+            conn.execute(statement)
+        conn.execute(f'PRAGMA application_id={marker}')
+    before = state.read_bytes()
+    result = deliver_alerts(config(webhook), report(CODE), state)
+    assert result['status'] == 'blocked' and result['error_code'] == 'notification_state_unavailable'
+    assert result['event_ids'] == [] and result['pending_count'] is None
+    assert state.read_bytes() == before and webhook['received'] == []
+
+
+def test_old_schema_with_different_sql_formatting_retains_semantics(webhook, tmp_path):
+    from contextlib import closing
+    state = tmp_path / 'legacy.sqlite3'
+    with closing(sqlite3.connect(state)) as conn:
+        conn.execute('''create table notification_meta(
+            key text primary key, value text not null)''')
+        conn.execute('create table notification_targets(target_id text primary key,status text not null,codes text not null)')
+        conn.execute('''create table notification_events(
+            seq integer primary key autoincrement, -- legacy formatting
+            event_id text not null unique,target_id text not null,payload text not null,
+            delivery_state text not null default 'pending',attempts integer not null default 0,
+            response_status integer,failure_code text)''')
+    result = deliver_alerts(config(webhook), report(CODE), state)
+    assert result['status'] == 'delivered' and len(webhook['received']) == 1
+    assert events(state)[0][1:3] == ('delivered', 1)
+
+
+@pytest.mark.parametrize('stored', ['null', 'true', '"200"', '[]', '{}', 'NaN', 'Infinity', '-1', '253402300800'])
+def test_invalid_stored_high_water_is_blocked_without_sending_or_advancing(webhook, tmp_path, stored):
+    from contextlib import closing
+    state = tmp_path / 'outbox.sqlite3'
+    assert deliver_alerts(config(webhook), dict(report(CODE), checked_at=200), state)['status'] == 'delivered'
+    with closing(sqlite3.connect(state)) as conn:
+        conn.execute("UPDATE notification_meta SET value=? WHERE key LIKE 'checked_at:%'", (stored,))
+        conn.commit()
+    before = state.read_bytes()
+    received = list(webhook['received'])
+    result = deliver_alerts(config(webhook), dict(report(), checked_at=300), state)
+    assert result['status'] == 'blocked' and result['error_code'] == 'notification_state_unavailable'
+    assert state.read_bytes() == before and webhook['received'] == received

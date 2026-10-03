@@ -319,6 +319,15 @@ class IssueAdapter:
                 result['observation_reference'] = completion.observation_reference
             receipt = {'action_id': action_id, 'request_hash': row['request_hash'], 'state': 'executed', 'result': result}
             if row['state'] == 'executed':
+                # The create response and an independent readback can finish in
+                # either order. Preserve the first durable receipt when both
+                # prove the same effect; their observation methods may differ.
+                # Every target/content field must still match, and relay
+                # attestations retain their exact-reference binding.
+                direct_methods = {'github_response', 'github_readback'}
+                stored_method = row['receipt']['result']['receipt_verification']
+                if self.config.mode == 'direct' and verification in direct_methods and stored_method in direct_methods:
+                    result['receipt_verification'] = stored_method
                 if row['receipt'] != receipt:
                     raise GateError('github_receipt_conflict')
                 return row['receipt']
