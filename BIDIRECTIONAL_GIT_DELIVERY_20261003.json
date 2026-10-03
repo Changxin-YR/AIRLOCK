@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "delivery_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "source_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "git_payloads_verified": 273,
+  "document_bindings_verified": 8,
+  "application_diff": []
+}

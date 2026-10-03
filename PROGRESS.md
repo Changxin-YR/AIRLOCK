@@ -1,3 +1,15 @@
+# 双向检验报告与证据已提交（2026-10-03）
+
+远端工作分支758202b4631c5f530e48ab07aa07cd90bfbe58e0，实测应用096b9bbbf9c113471eda1a713f9d0c860c95a348，两者应用源码diff为空。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849；PR #1已更新并回读，draft/open/unmerged。
+
+应用完整CI37100296703/job111138333764成功：588 Python、6 JS、31原生浏览器、官方MCP、冻结benchmark、隔离Docker/上游网络、S3 Object Lock、Envoy/OTel、依赖和证据门禁。完整ZIP下载核验94载荷、source.zip SHA和实际子退出码，verify_evidence exit0；原始p95重算4.291406/.080/8.374ms。独立末轮核对24必需CI收据、126目标与30唯一收据exit0。本机预检588、冻结45定点和14独立反例均exit0，旧失败与dirty来源保留。
+
+代码、报告和273公开证据载荷已进入工作分支Git，并逐Git blob核验，8文档hash一致。ZIP路径evidence/bidirectional-20261003/ci/acceptance-096b9bb.zip，1875653字节，SHA256 68335fca51e8c0cc61b959f32aeb94018557983b1af1fc332a123d3099e5406a。Actions11266455225到期2027-01-01T05:35:11Z；Git无自动到期，非WORM。两份早期环境错误仅本机，IMPORT_INDEX列hash/原因，无永久保留保证。
+
+修复同效果GitHub收据竞态、通知库结构/时间高水位/未知健康状态、研究来源/gold/日期、矩阵父子/收据/hash和原始性能阈值；第二方向发现的四类漏洞补修后沿用原反例通过。当前实测范围无已知未修复可复现P0/P1。126记录111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL；真人0，本轮付费调用0；模型状态/账单与面试暂缓。最小人工步骤docs/START_WITH_ONE_PERSON.md。
+
+最终交付758202b的CI37101345199正在运行，尚未声称此SHA完整复验通过；源096b9bb的完整成功包已经归档。
+
 # 双向复验修复已推送，冻结CI待完成（2026-10-03）
 
 工作分支源码096b9bbbf9c113471eda1a713f9d0c860c95a348已推送，main仍704b5035cf69f9a6c40c44eecd84c0d0741de849、PR #1草稿未合并。本轮修复同效果GitHub收据竞争、通知专用库/结构与时间高水位/unknown退出码、研究严格来源与理解题gold/真实日期、矩阵父子/收据/hash和原始性能重算门禁。交叉复验再次发现的schema漏检、高水位损坏、浮点边界和异目录伪造收据已补修并独立复验。
