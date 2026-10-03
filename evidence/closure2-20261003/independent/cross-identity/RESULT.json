@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "reviewer": "recovery_governance_audit (independent second author)",
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "working_tree_dirty": true,
+  "scope": "Read-only independent audit pagination/filter/row integrity review, isolated synthetic databases only.",
+  "baseline": {
+    "original_method_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+    "substitution": "Only Gate.audit_events replaced from baseline-service.py; remaining dependencies use working tree.",
+    "passed": 5,
+    "failed": 2,
+    "exit_code": 1,
+    "receipt": "baseline.log.status.json"
+  },
+  "repaired": {
+    "passed": 7,
+    "failed": 0,
+    "exit_code": 0,
+    "receipt": "repaired.log.status.json"
+  },
+  "checks": [
+    "Linked but invisible action events exceeding old max_actions*4 prefix",
+    "Exact seq/action/signature/previous_hash preservation and cursor traversal",
+    "One SQLite read snapshot while another connection appends signed event",
+    "Live route revocation during scan prevents later event visibility",
+    "Owner governance visibility across old window and orphan action exclusion",
+    "Action filter binds parameter, including SQL metacharacters",
+    "No business/state mutation or audit rewrite; audit chain remains valid"
+  ],
+  "unresolved_findings": [],
+  "limitations": [
+    "Synthetic local SQLite/API-independent method probes; no human or production identity validation."
+  ]
+}

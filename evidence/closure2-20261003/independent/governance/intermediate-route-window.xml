@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="0.534" timestamp="2026-10-03T18:42:19.987738+08:00" hostname="WHHHH"><testcase classname="tests.test_governance_integrity" name="test_batch_revalidates_cumulative_risk_route_before_each_member[between_members]" time="0.164" /><testcase classname="tests.test_governance_integrity" name="test_batch_revalidates_cumulative_risk_route_before_each_member[inside_member_decision]" time="0.102"><failure message="AssertionError: assert {'id': '9d174...': 'executed'} == {'id': '9d174...': 'conflict'}&#10;  &#10;  Omitting 1 identical items, use -vv to show&#10;  Differing items:&#10;  {'reason_code': 'human_approved'} != {'reason_code': 'group_risk_route_forbidden'}&#10;  {'state': 'executed'} != {'state': 'conflict'}&#10;  Use -v to get more diff">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-427/test_batch_revalidates_cum...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-427/test_batch_revalidates_cumulat1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000024369365A70&gt;
+revocation_point = 'inside_member_decision'
+
+    @pytest.mark.parametrize('revocation_point', ['between_members', 'inside_member_decision'])
+    def test_batch_revalidates_cumulative_risk_route_before_each_member(settings, tmp_path, monkeypatch, revocation_point):
+        path = tmp_path / 'reviewers.json'
+        config = {'reviewers': [{'id': 'reviewer:batch', 'credential_env': 'AIRLOCK_REVIEWER_BATCH',
+            'tools': ['sql'], 'resources': ['customers'], 'risks': ['high', 'critical']}]}
+        path.write_text(json.dumps(config), encoding='utf-8')
+        monkeypatch.setenv('AIRLOCK_REVIEWER_BATCH', 'synthetic-batch-reviewer-' + 'x' * 32)
+        gate = Gate(replace(settings, reviewer_file=path, critical_rows=2), clock=lambda: 1000.0)
+        # The target remains unchanged, so snapshot drift cannot hide the route defect.
+        for number in range(2):
+            action = gate.submit(call('UPDATE customers SET balance=balance WHERE id=1', f'batch-route-{number}'))
+            assert action['risk'] == 'high' and action['impact']['matched_rows'] == 1
+        group = gate.groups('reviewer:batch')[0]
+        assert group['cumulative_units'] == 2
+        decide = gate._decide
+        calls = [0]
+    
+        def revoke():
+            config['reviewers'][0]['risks'] = ['high']
+            path.write_text(json.dumps(config), encoding='utf-8')
+    
+        def revoke_critical_after_first_member(*args, **kwargs):
+            if revocation_point == 'inside_member_decision' and calls[0] == 1:
+                revoke()
+            result = decide(*args, **kwargs)
+            calls[0] += 1
+            if revocation_point == 'between_members':
+                revoke()
+            return result
+    
+        monkeypatch.setattr(gate, '_decide', revoke_critical_after_first_member)
+        result = gate.decide_group(batch(group), 'reviewer:batch')
+        assert result['receipts'][0]['state'] == 'executed'
+&gt;       assert result['receipts'][1] == {'id': group['members'][1]['id'], 'state': 'conflict',
+            'reason_code': 'group_risk_route_forbidden'}
+E       AssertionError: assert {'id': '9d174...': 'executed'} == {'id': '9d174...': 'conflict'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'reason_code': 'human_approved'} != {'reason_code': 'group_risk_route_forbidden'}
+E         {'state': 'executed'} != {'state': 'conflict'}
+E         Use -v to get more diff
+
+tests\test_governance_integrity.py:46: AssertionError</failure></testcase></testsuite></testsuites>

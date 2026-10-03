@@ -1,0 +1,17 @@
+....F                                                                    [100%]
+================================== FAILURES ===================================
+____________ test_remote_batch_revocation_prevents_any_http_effect ____________
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-443/test_remote_batch_revocation_p0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000287E6C71040>
+
+    def test_remote_batch_revocation_prevents_any_http_effect(tmp_path, monkeypatch):
+        # Reuse only the existing isolated loopback process launcher, not its assertions.
+        sys.path.insert(0, str(Path(__file__).resolve().parents[4] / 'tests'))
+>       from test_upstream import upstream
+E       ModuleNotFoundError: No module named 'test_upstream'
+
+var\closure2-20261003\identity\test_governance_crosscheck.py:82: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED var/closure2-20261003/identity/test_governance_crosscheck.py::test_remote_batch_revocation_prevents_any_http_effect
+1 failed, 4 passed in 1.34s

@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "reviewer": "recovery_governance_audit (independent second author)",
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "scope": "Only isolated MockTransport, mocked DNS and synthetic SQLite; no live third-party network or paid model calls.",
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "exit_code": 0,
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "var/closure2-20261003/cross-transport/test_transport_countercheck.py",
+      "--junitxml=var/closure2-20261003/cross-transport/repaired.xml"
+    ],
+    "junit": "repaired.xml"
+  },
+  "baseline_replay": {
+    "source_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+    "substitution": "Only original response_messages function loaded from baseline-mcp-upstream.py; all other code is working tree.",
+    "selected_test": "mixed-newline SSE with BOM and UTF-8 fragmentation",
+    "failed": 1,
+    "exit_code": 1,
+    "receipt": "baseline-sse.log.status.json"
+  },
+  "checks": [
+    "Nested deadline cannot expand parent; exceptions restore prior deadline; thread context stays isolated",
+    "SSE mixed CR/CRLF/LF with BOM, multi-line data and Chinese text passes every two-chunk split plus one-byte streaming",
+    "UTF-8 response byte boundary accepted at 16382 and rejected at 16385 bytes",
+    "gzip/br/multiple encodings refused before stream iteration or decompression",
+    "DNS timeout returns before late worker completion; late worker never sends; a new request succeeds independently",
+    "Malformed execution receipt yields unknown with reserved risk budget; idempotent retry does not execute again; only valid read-only reconciliation settles budget"
+  ],
+  "unresolved_findings": [],
+  "limits": [
+    "No production network, formal MCP conformance certification or real DNS resolver reliability claim.",
+    "Original DNS operating-system lookup may finish in bounded daemon slots after caller timeout; test verifies it cannot resume sending."
+  ],
+  "sources": {
+    "airlock/network.py": {
+      "bytes": 10059,
+      "sha256": "3a03e72fd4b66ec65b46837780ee70f9de25c228c670b782168a41444e3c7cfd"
+    },
+    "airlock/upstream.py": {
+      "bytes": 16808,
+      "sha256": "304a4bf3ab39784ed0d3e2d031c31bd60aa7aee3b2e3a10b390893180bf2b6d0"
+    },
+    "airlock/mcp_upstream.py": {
+      "bytes": 5596,
+      "sha256": "4e395304d55e2f643c1e2e4ce721be98f9fbf946b46aab0827387e248d684854"
+    }
+  }
+}

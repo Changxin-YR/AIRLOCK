@@ -1,0 +1,11 @@
+{
+  "source_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "note": "Application modules unmodified; new regression probe. Concurrent other module work may mark global receipt dirty.",
+  "files": {
+    "mcp_http.py": "033768f7614e4a2c6658b8f9aa3f34ec42d7c0639d32996bc4be211074fd9c20",
+    "mcp_upstream.py": "d12b48e947d04f3b8011eaf60eee69f5ebd2c288af14f8db92096efdd35d17e8",
+    "network.py": "142112a068b352f346afc1a03a2dad230892dc07569084c7210d4272681c90da",
+    "test_transport_hardening.py": "07463212db97468f73c7dfc728ef8425d46c9f9c4ce735c2c0697734378434da",
+    "upstream.py": "1e9d1739e6d53254a87939a38843f5ae8d767fcda294c0560263e52474c6b3a2"
+  }
+}

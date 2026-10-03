@@ -1,0 +1,663 @@
+FF..FFFFFFF.FFFFF.FF..F                                                  [100%]
+================================== FAILURES ===================================
+_ test_untrusted_json_is_strict_bounded_and_redacted[http-{"state":"failed","state":"executed"}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBD462C0>
+wire = b'{"state":"failed","state":"executed"}', transport = 'http'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[http-{"outer":{"same":1,"same":2}}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBD468B0>
+wire = b'{"outer":{"same":1,"same":2}}', transport = 'http'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[http-{"text":"\ud800"}] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBC0F790>
+wire = b'{"text":"\\ud800"}', transport = 'http'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[http-[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBC76250>
+wire = b'[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[...]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]'
+transport = 'http'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"state":"failed","state":"executed"}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBC75650>
+wire = b'{"state":"failed","state":"executed"}', transport = 'mcp_json'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"outer":{"same":1,"same":2}}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBCC97C0>
+wire = b'{"outer":{"same":1,"same":2}}', transport = 'mcp_json'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"number":NaN}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBCCA8A0>
+wire = b'{"number":NaN}', transport = 'mcp_json'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"number":1e999}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBD9D0F0>
+wire = b'{"number":1e999}', transport = 'mcp_json'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"text":"\ud800"}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBD9F070>
+wire = b'{"text":"\\ud800"}', transport = 'mcp_json'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"state":"failed","state":"executed"}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBDD0710>
+wire = b'{"state":"failed","state":"executed"}', transport = 'mcp_streamable'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"outer":{"same":1,"same":2}}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBDD01D0>
+wire = b'{"outer":{"same":1,"same":2}}', transport = 'mcp_streamable'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"number":NaN}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBDA1860>
+wire = b'{"number":NaN}', transport = 'mcp_streamable'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"number":1e999}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBDA1B20>
+wire = b'{"number":1e999}', transport = 'mcp_streamable'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+_ test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"text":"\ud800"}] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBD8AAD0>
+wire = b'{"text":"\\ud800"}', transport = 'mcp_streamable'
+
+    @pytest.mark.parametrize('wire', [
+        b'{"state":"failed","state":"executed"}',
+        b'{"outer":{"same":1,"same":2}}',
+        b'{"number":NaN}', b'{"number":1e999}',
+        b'{"text":"\\ud800"}', b'[' * 1200 + b'0' + b']' * 1200,
+    ])
+    @pytest.mark.parametrize('transport', ['http', 'mcp_json', 'mcp_streamable'])
+    def test_untrusted_json_is_strict_bounded_and_redacted(monkeypatch, wire, transport):
+        def respond(request):
+            if transport == 'http':
+                return httpx.Response(200, content=wire)
+            message = json.loads(request.content)
+            if message['method'] == 'initialize':
+                result = {'protocolVersion':'2025-11-25'}
+            elif message['method'] == 'notifications/initialized':
+                return httpx.Response(202)
+            elif message['method'] == 'tools/list':
+                result = {'tools':[{'name':'preview'}]}
+            else:
+                encoded = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":' + wire + b'}}'
+                return httpx.Response(200, content=encoded, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':result})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport=transport, mcp_tools={} if transport == 'http' else
+                         {'preview':'preview','execute':'execute','receipt':'receipt'})
+>       with pytest.raises(GateError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.models.GateError'>
+
+tests\test_transport_hardening.py:50: Failed
+______ test_bad_mcp_preview_persists_blocked_action_instead_of_crashing _______
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-428/test_bad_mcp_preview_persi...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-428/test_bad_mcp_preview_persists_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C5EBDF45F0>
+
+    def test_bad_mcp_preview_persists_blocked_action_instead_of_crashing(settings, tmp_path, monkeypatch):
+        def respond(request):
+            message = json.loads(request.content)
+            if message['method'] == 'notifications/initialized':return httpx.Response(202)
+            results = {'initialize': {'protocolVersion':'2025-11-25'},
+                       'tools/list': {'tools':[{'name':'preview'}]}}
+            if message['method'] == 'tools/call':
+                body = b'{"jsonrpc":"2.0","id":3,"result":{"structuredContent":{"target_version":"v1","impact_units":1,"summary":"synthetic","before":{"value":NaN},"after":{"value":1}}}}'
+                return httpx.Response(200, content=body, headers={'content-type':'application/json'})
+            return httpx.Response(200, json={'jsonrpc':'2.0','id':message['id'],'result':results[message['method']]})
+        monkeypatch.setattr(Tool, 'client', lambda self: httpx.Client(transport=httpx.MockTransport(respond)))
+        tool = make_tool(transport='mcp_json', mcp_tools={'preview':'preview','execute':'execute','receipt':'receipt'})
+        config = tmp_path / 'tools.json'
+        config.write_text(json.dumps({'tools':[tool.model_dump()]}))
+        gate = Gate(replace(settings, upstream_file=config))
+>       action = gate.submit(Invocation(tool=tool.name, arguments={}, idempotency_key='invalid-wire-preview'))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_transport_hardening.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\service.py:115: in submit
+    if call.tool.startswith('upstream:'): return self.remote.submit(call,principal)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+airlock\upstream.py:192: in submit
+    else: action['review_digest']=gate.review_digest(action)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+airlock\service.py:237: in review_digest
+    return digest({'id':action['id'],'expires_at':action['expires_at'],'version':action['version'],
+airlock\models.py:19: in digest
+    return hashlib.sha256(canonical(value).encode()).hexdigest()
+                          ^^^^^^^^^^^^^^^^
+airlock\models.py:15: in canonical
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\json\__init__.py:242: in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\json\encoder.py:202: in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.encoder.JSONEncoder object at 0x000001C5EBE568D0>
+o = {'expires_at': 1791024444.1777613, 'id': '7d0446efadc64ac6b65ccc360fc8d5fb', 'impact': {'after_count': None, 'backup_a...y': 'upstream_declared_exact', ...}, 'policy': '28925018c9ccaa26d4f4cbb3ba8cc6652d13bfe41bed1bc99b3f823956d3edb1', ...}
+_one_shot = True
+
+    def iterencode(self, o, _one_shot=False):
+        """Encode the given object and yield each string
+        representation as available.
+    
+        For example::
+    
+            for chunk in JSONEncoder().iterencode(bigobject):
+                mysocket.write(chunk)
+    
+        """
+        if self.check_circular:
+            markers = {}
+        else:
+            markers = None
+        if self.ensure_ascii:
+            _encoder = encode_basestring_ascii
+        else:
+            _encoder = encode_basestring
+    
+        def floatstr(o, allow_nan=self.allow_nan,
+                _repr=float.__repr__, _inf=INFINITY, _neginf=-INFINITY):
+            # Check for specials.  Note that this type of test is processor
+            # and/or platform-specific, so do tests which don't depend on the
+            # internals.
+    
+            if o != o:
+                text = 'NaN'
+            elif o == _inf:
+                text = 'Infinity'
+            elif o == _neginf:
+                text = '-Infinity'
+            else:
+                return _repr(o)
+    
+            if not allow_nan:
+                raise ValueError(
+                    "Out of range float values are not JSON compliant: " +
+                    repr(o))
+    
+            return text
+    
+    
+        if self.indent is None or isinstance(self.indent, str):
+            indent = self.indent
+        else:
+            indent = ' ' * self.indent
+        if _one_shot and c_make_encoder is not None:
+            _iterencode = c_make_encoder(
+                markers, self.default, _encoder, indent,
+                self.key_separator, self.item_separator, self.sort_keys,
+                self.skipkeys, self.allow_nan)
+        else:
+            _iterencode = _make_iterencode(
+                markers, self.default, _encoder, indent, floatstr,
+                self.key_separator, self.item_separator, self.sort_keys,
+                self.skipkeys, _one_shot)
+>       return _iterencode(o, 0)
+               ^^^^^^^^^^^^^^^^^
+E       ValueError: Out of range float values are not JSON compliant: nan
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\json\encoder.py:263: ValueError
+_______ test_sse_accepts_each_standard_newline_even_when_fragmented[\r] _______
+
+newline = '\r'
+
+    @pytest.mark.parametrize('newline', ['\r', '\r\n', '\n'])
+    def test_sse_accepts_each_standard_newline_even_when_fragmented(newline):
+        wire = (': keepalive' + newline + newline + 'data: {"jsonrpc":"2.0","id":1,"result":{"text":"中文"}}' + newline + newline).encode()
+        class Bytes(httpx.SyncByteStream):
+            def __iter__(self):
+                for byte in wire:yield bytes([byte])
+        response = httpx.Response(200, headers={'content-type':'text/event-stream'}, stream=Bytes())
+>       assert list(response_messages(response, time.monotonic()+5)) == [{'jsonrpc':'2.0','id':1,'result':{'text':'中文'}}]
+E       AssertionError: assert [] == [{'id': 1, 'j...text': '中文'}}]
+E         
+E         Right contains one more item: {'id': 1, 'jsonrpc': '2.0', 'result': {'text': '中文'}}
+E         Use -v to get more diff
+
+tests\test_transport_hardening.py:83: AssertionError
+______________ test_total_deadline_also_bounds_dripping_headers _______________
+
+    def test_total_deadline_also_bounds_dripping_headers():
+        with slow_headers(11.5) as origin:
+            tool = make_tool().model_copy(update={'url':origin})
+            started = time.monotonic()
+            with pytest.raises(GateError, match='upstream_unavailable'):
+                tool.request('POST', '/preview', {})
+            elapsed = time.monotonic()-started
+>           assert elapsed < 11, f'10s total budget only checked after headers: {elapsed:.3f}s'
+E           AssertionError: 10s total budget only checked after headers: 11.583s
+E           assert 11.58329470000001 < 11
+
+tests\test_transport_hardening.py:114: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[http-{"state":"failed","state":"executed"}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[http-{"outer":{"same":1,"same":2}}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[http-{"text":"\ud800"}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[http-[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"state":"failed","state":"executed"}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"outer":{"same":1,"same":2}}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"number":NaN}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"number":1e999}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_json-{"text":"\ud800"}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"state":"failed","state":"executed"}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"outer":{"same":1,"same":2}}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"number":NaN}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"number":1e999}]
+FAILED tests/test_transport_hardening.py::test_untrusted_json_is_strict_bounded_and_redacted[mcp_streamable-{"text":"\ud800"}]
+FAILED tests/test_transport_hardening.py::test_bad_mcp_preview_persists_blocked_action_instead_of_crashing
+FAILED tests/test_transport_hardening.py::test_sse_accepts_each_standard_newline_even_when_fragmented[\r]
+FAILED tests/test_transport_hardening.py::test_total_deadline_also_bounds_dripping_headers
+17 failed, 6 passed, 1 warning in 12.23s

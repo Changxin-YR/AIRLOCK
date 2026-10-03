@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="10" time="0.842" timestamp="2026-10-03T18:50:00.114378+08:00" hostname="WHHHH"><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_current_extended_retention_is_exact_version_read_only" time="0.001" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_well_formed_rekeyed_receipt_cannot_relabel_body[seq-20]" time="0.001" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_well_formed_rekeyed_receipt_cannot_relabel_body[database_instance-ffffffffffffffffffffffffffffffff]" time="0.000" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_current_receipt_rejects_changed_storage[response_version]" time="0.000" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_current_receipt_rejects_changed_storage[content]" time="0.000" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_current_receipt_rejects_changed_storage[governance]" time="0.000" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_current_receipt_rejects_changed_storage[shorter]" time="0.000" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_expired_receipt_rejected_without_storage_reads" time="0.000" /><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_cli_unwritable_receipt_destination_prevents_irreversible_upload[file]" time="0.017"><failure message="AssertionError: must validate receipt output before a COMPLIANCE upload&#10;assert not True&#10; +  where True = any(&lt;generator object test_cli_unwritable_receipt_destination_prevents_irreversible_upload.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001D942A9BB90&gt;)">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-449/test_cli_unwritable_receipt_de0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001D942A216E0&gt;
+existing = 'file'
+
+    @pytest.mark.parametrize('existing', ['file', 'directory'])
+    def test_cli_unwritable_receipt_destination_prevents_irreversible_upload(tmp_path, monkeypatch, existing):
+        config, cp, _, s3 = setup()
+        config_path = tmp_path / 'configuration.json'
+        cp_path = tmp_path / 'checkpoint.json'
+        output = tmp_path / 'receipt.json'
+        config_path.write_text(config.model_dump_json())
+        cp_path.write_text(json.dumps(cp))
+        if existing == 'file':
+            output.write_text('preserve-existing-receipt')
+        else:
+            output.mkdir()
+        monkeypatch.setattr(cli, 'client', lambda _: s3)
+        monkeypatch.setattr(sys, 'argv', ['archive', '--config', str(config_path), '--checkpoint', str(cp_path), '--output', str(output)])
+        with pytest.raises(OSError):
+            cli.main()
+&gt;       assert not any(method == 'put' for method, _ in s3.calls), 'must validate receipt output before a COMPLIANCE upload'
+E       AssertionError: must validate receipt output before a COMPLIANCE upload
+E       assert not True
+E        +  where True = any(&lt;generator object test_cli_unwritable_receipt_destination_prevents_irreversible_upload.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001D942A9BB90&gt;)
+
+var\closure2-20261003\cross-archive\test_archive_countercheck.py:129: AssertionError</failure></testcase><testcase classname="var.closure2-20261003.cross-archive.test_archive_countercheck" name="test_cli_unwritable_receipt_destination_prevents_irreversible_upload[directory]" time="0.006"><failure message="AssertionError: must validate receipt output before a COMPLIANCE upload&#10;assert not True&#10; +  where True = any(&lt;generator object test_cli_unwritable_receipt_destination_prevents_irreversible_upload.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001D942B84BA0&gt;)">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-449/test_cli_unwritable_receipt_de1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001D942A85CD0&gt;
+existing = 'directory'
+
+    @pytest.mark.parametrize('existing', ['file', 'directory'])
+    def test_cli_unwritable_receipt_destination_prevents_irreversible_upload(tmp_path, monkeypatch, existing):
+        config, cp, _, s3 = setup()
+        config_path = tmp_path / 'configuration.json'
+        cp_path = tmp_path / 'checkpoint.json'
+        output = tmp_path / 'receipt.json'
+        config_path.write_text(config.model_dump_json())
+        cp_path.write_text(json.dumps(cp))
+        if existing == 'file':
+            output.write_text('preserve-existing-receipt')
+        else:
+            output.mkdir()
+        monkeypatch.setattr(cli, 'client', lambda _: s3)
+        monkeypatch.setattr(sys, 'argv', ['archive', '--config', str(config_path), '--checkpoint', str(cp_path), '--output', str(output)])
+        with pytest.raises(OSError):
+            cli.main()
+&gt;       assert not any(method == 'put' for method, _ in s3.calls), 'must validate receipt output before a COMPLIANCE upload'
+E       AssertionError: must validate receipt output before a COMPLIANCE upload
+E       assert not True
+E        +  where True = any(&lt;generator object test_cli_unwritable_receipt_destination_prevents_irreversible_upload.&lt;locals&gt;.&lt;genexpr&gt; at 0x000001D942B84BA0&gt;)
+
+var\closure2-20261003\cross-archive\test_archive_countercheck.py:129: AssertionError</failure></testcase></testsuite></testsuites>

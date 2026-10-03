@@ -88,3 +88,12 @@ preflight、final、retest、final-code、final-17ccd2c分别代表各自源状�
 - 公开目录保留未修改基线、修复前反例失败、作者修复测试及第二方向复验。IMPORT_INDEX逐原文件映射，ARCHIVE_MANIFEST逐最终载荷hash；precommit dirty与冻结收据不混用。
 - var/bidirectional-20261003/operations/targeted-tests.log和targeted-tests.xml的早期Windows错误可能含环境片段，仅本机保留；公开索引记录hash/字节/原因，原文无永久保留承诺。隔离临时数据库不归档。此前个人真实日志仍仅本机，未转为公开Git。
 - 本轮真人完成0、付费模型调用0；未创建云资源、长期服务、Release或WORM归档。原失败CI历史不覆盖。
+
+## 再次修复与双重复验交付（2026-10-03）
+
+- 源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c；完整CI37117971834/job111188360694。94个清单载荷、source.zip commit、687条JUnit及真实退出码独立核验，verify_evidence exit0。
+- 完整成功包进入工作分支Git：evidence/closure2-20261003/ci/acceptance-533726a.zip，1,917,012字节，SHA256 1a77398592181042eab95aa1040298a877ac1bb5b3786d8feefb3797b7f6d4f9；无自动到期，依赖仓库历史/备份，不是WORM。
+- Actions原副本11272472106到期2027-01-01T10:55:17Z。此期限仅适用该Actions副本；最终文档交付触发的重复CI有独立编号和期限，由memory/progress保存元数据、原始job日志和验证收据，重复ZIP仅Actions及本机var临时副本，无额外永久保留承诺。
+- independent/保留171份作者/另一作者的原始失败、成功、源码和收据，以及最终只读审查报告；IMPORT_INDEX映射原路径，DOCUMENT_BINDINGS绑定文档，ARCHIVE_MANIFEST记录最终公开载荷hash。中间dirty测试不冒充冻结CI。
+- 本轮S3 Object Lock只验证临时隔离服务的真实API语义，测试容器随后清理，不构成长期云归档。完整ZIP与结果在Git，生产WORM尚未部署。
+- 本机var临时文件/数据库不归档，历史个人原始日志与凭据仍不入Git；本轮新增真人记录0、付费模型调用0。此前失败CI与原保留说明继续有效。

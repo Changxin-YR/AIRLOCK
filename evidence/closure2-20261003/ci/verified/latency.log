@@ -1,0 +1,76 @@
+{
+  "scope": "1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target",
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "logical_cpus": 4,
+  "samples": 60,
+  "seed": 2073,
+  "warmup_calls": 10,
+  "first_native_call_ms": 50.487612000097215,
+  "read": {
+    "direct_ms": {
+      "n": 60,
+      "mean": 0.4394156833332848,
+      "p50": 0.4013950000398836,
+      "p95": 0.5922390000705491,
+      "p99": 0.7252359999938562
+    },
+    "proxy_ms": {
+      "n": 60,
+      "mean": 4.759537083333498,
+      "p50": 4.5837390000542655,
+      "p95": 5.472029000088696,
+      "p99": 6.75032200001624
+    },
+    "added_ms": {
+      "n": 60,
+      "mean": 4.320121400000214,
+      "p50": 4.192782000131956,
+      "p95": 4.884989000174755,
+      "p99": 6.38739800001531
+    }
+  },
+  "write": {
+    "submit_receipt_ms": {
+      "n": 30,
+      "p50": 14.79452700004913,
+      "p95": 16.453866999995626,
+      "p99": 39.24154300000282
+    },
+    "approval_request_to_effect_ms": {
+      "n": 30,
+      "p50": 21.789052000031006,
+      "p95": 24.34903400001076,
+      "p99": 25.154520000000957
+    },
+    "static_ms": {
+      "n": 30,
+      "p50": 0.07,
+      "p95": 0.097,
+      "p99": 0.1
+    },
+    "preview_ms": {
+      "n": 30,
+      "p50": 9.692,
+      "p95": 10.444,
+      "p99": 33.631
+    },
+    "evaluation_ms": {
+      "n": 30,
+      "p50": 11.132,
+      "p95": 12.831,
+      "p99": 35.181
+    }
+  },
+  "not_measured": [
+    "live LLM latency",
+    "human review latency",
+    "distributed upstream overhead",
+    "cold OS filesystem cache",
+    "production concurrency"
+  ],
+  "measurement_note": "direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows",
+  "phase_note": "server evaluation ends before final audit/commit/close; HTTP minus evaluation also includes transport, scheduling and serialization, not a pure fsync measurement. Phase data read after all timed requests."
+}

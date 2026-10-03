@@ -1,0 +1,122 @@
+{
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "working_tree_dirty": true,
+  "files": {
+    "baseline-batch-input.log": {
+      "bytes": 3626,
+      "sha256": "2bd4e3b89562c0377f1a224212984d2497b3ceab926cb7508c019b8f3d93c638"
+    },
+    "baseline-batch-input.log.status.json": {
+      "bytes": 526,
+      "sha256": "1aba06a6163243cfce360d602a8544c898567d512b4843462d12a9fbec99c782"
+    },
+    "baseline-batch-input.xml": {
+      "bytes": 3430,
+      "sha256": "4e9f27483c6253be1165cc5871a64f856c64424129450e691c5278e8f5fe9891"
+    },
+    "baseline-batch-route.log": {
+      "bytes": 3517,
+      "sha256": "599e5bf3383e09aea3f3258b8957a8fac056c7f2465697ad77d93530c2e5c850"
+    },
+    "baseline-batch-route.log.status.json": {
+      "bytes": 492,
+      "sha256": "c5d8b5beab9934a27a0125b9ea150675cd4a7d12c7f48df76eb13655db7e279d"
+    },
+    "baseline-batch-route.xml": {
+      "bytes": 3348,
+      "sha256": "ff2290b9c056aa22149ecd350bd596cc8635d31c92acca349b36a75e77e94c04"
+    },
+    "baseline-source/access.py": {
+      "bytes": 3398,
+      "sha256": "67c75e62d6088266e30c42c87101daf56eb717530cd2169e90c3858ef6f8249d"
+    },
+    "baseline-source/governance.py": {
+      "bytes": 2643,
+      "sha256": "a7c3af10108ee7e4c58ba363319b875333726e02c25171c75daa22a020ad8a6a"
+    },
+    "baseline-source/models.py": {
+      "bytes": 7680,
+      "sha256": "bb3f31bfec35cdc104f27bab7e419081f5ef781fb730da0ea8141bca0e9887b6"
+    },
+    "baseline-source/recovery.py": {
+      "bytes": 3766,
+      "sha256": "7ddda2fba7948bf9f9dc8a89aa601417463317f7b69a92095ce63beba8846b4d"
+    },
+    "baseline-source/service.py": {
+      "bytes": 28816,
+      "sha256": "f99c935110b6141c756528f3a305481d068cdef48dbad0163325d5f9f57ed07d"
+    },
+    "baseline-source/store.py": {
+      "bytes": 11070,
+      "sha256": "6611ddfe807232d5cb025529f2e2103e284869510b9a16024f9a93aa00b76f45"
+    },
+    "BASELINE.json": {
+      "bytes": 1572,
+      "sha256": "023539a1b4f0d6917659814d060e3d7cfa28f1c23b874e9a50d9d66ead8118fe"
+    },
+    "final-targeted.log": {
+      "bytes": 583,
+      "sha256": "b20ea2acdd576a85384cd2f472e2c4076d422558057c039c53358096599ee0fe"
+    },
+    "final-targeted.log.status.json": {
+      "bytes": 728,
+      "sha256": "d69a70107b61c30eaf60ca0b1984ac874c5f0ae51c6b6feb5afd334b38d62a95"
+    },
+    "final-targeted.xml": {
+      "bytes": 5982,
+      "sha256": "0da5ec64eba32f410691d53644e56ae5ed4fa3a7966866f6024fd2fcf8d3e9dd"
+    },
+    "intermediate-route-window.log": {
+      "bytes": 4001,
+      "sha256": "917c9bf45c7577835703296a4a2cb6566ef30bf0f67879691d5096296665e521"
+    },
+    "intermediate-route-window.log.status.json": {
+      "bytes": 528,
+      "sha256": "29f58286348fc458d84fa4a369a35b1c2b34114b764b22fd15d2653513195dff"
+    },
+    "intermediate-route-window.xml": {
+      "bytes": 3953,
+      "sha256": "68a473de36defc1b33a3d4ed93cae01cc1e75c4fc221043da4eaba1a6930931b"
+    },
+    "repaired-batch-input.log": {
+      "bytes": 596,
+      "sha256": "d12eee3c9b5520ce68ede4fa7c4b666be97de226e1d4b14bf5d6ebc567d1d777"
+    },
+    "repaired-batch-input.log.status.json": {
+      "bytes": 526,
+      "sha256": "638d216ba1643e3562c3782e49fcf0e925463d5a0b30b8ce692929de4f1f0a79"
+    },
+    "repaired-batch-input.xml": {
+      "bytes": 683,
+      "sha256": "f23cc1c5d0d43691938a2ccf61845efff43599d0c13ff43f6568c1630a3bfd6e"
+    },
+    "repaired-batch-route.log": {
+      "bytes": 582,
+      "sha256": "13bee5cecdac57a5f8605ca08fdb1cd0c443d06c59c8884b334be6a78b129247"
+    },
+    "repaired-batch-route.log.status.json": {
+      "bytes": 492,
+      "sha256": "d51e744166d17c7c729596528d9d8249535b74fdd9741782b06916d10c5900f2"
+    },
+    "repaired-batch-route.xml": {
+      "bytes": 381,
+      "sha256": "0db74e8a632d78eb3115aedfed677b51905acac0c07e31d0920f6f9de35a9fdd"
+    },
+    "repaired-route-window.log": {
+      "bytes": 582,
+      "sha256": "65a294bc63a3c4d3d219df311b45a15d93495652876e8fa538a3aca9c915ff39"
+    },
+    "repaired-route-window.log.status.json": {
+      "bytes": 493,
+      "sha256": "d73fa5cf714fbffa978c68374f57b5c37b513d44efff0a58466e8a5a35c606d7"
+    },
+    "repaired-route-window.xml": {
+      "bytes": 1419,
+      "sha256": "d9a959b14acc4ea07613c6265b141034f27c098762614f130d662b88a7e2ec8f"
+    },
+    "RESULT.json": {
+      "bytes": 4160,
+      "sha256": "1b360eeb5d2d089146197d2f3367864ed643807a788b585c0f39b9d1394bda60"
+    }
+  }
+}

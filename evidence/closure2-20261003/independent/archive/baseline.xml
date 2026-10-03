@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="19" skipped="0" tests="21" time="0.807" timestamp="2026-10-03T18:40:54.988688+08:00" hostname="WHHHH"><testcase classname="tests.test_archive_integrity" name="test_archive_receipt_normal_read_pins_exact_version" time="0.001" /><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes0]" time="0.001"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'seq': 8}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes1]" time="0.001"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'seq': True}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes2]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'database_instance': 'dddddddddddddddddddddddddddddddd'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes3]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'mode': 'GOVERNANCE'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes4]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'version_id': 23}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes5]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'version_id': 'null'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes6]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'retain_until': '2000-01-01T00:00:00+00:00'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes7]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'key': 'checkpoints/unrelated.json'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_receipt_claim_substitution[changes8]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">changes = {'unexpected': 'unverified field'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:61: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_response_from_another_version" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">def test_archive_rejects_response_from_another_version():
+        _, s3, config, receipt = archived()
+        s3.version = 'different-version'
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:68: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[version-True]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">field = 'version', value = True
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:78: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[version-1.0]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">field = 'version', value = 1.0
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:78: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[database_instance-None]" time="0.001"><failure message="TypeError: expected string or bytes-like object, got 'NoneType'">field = 'database_instance', value = None
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+        with pytest.raises(ValueError):
+&gt;           checkpoint_bytes(dict(cp, **{field: value}))
+
+tests\test_archive_integrity.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\archive.py:64: in checkpoint_bytes
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pattern = '[a-f0-9]{32}', string = None, flags = 0
+
+    def fullmatch(pattern, string, flags=0):
+        """Try to apply the pattern to all of the string, returning
+        a Match object, or None if no match was found."""
+&gt;       return _compile(pattern, flags).fullmatch(string)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: expected string or bytes-like object, got 'NoneType'
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\re\__init__.py:172: TypeError</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[head-3]" time="0.001"><failure message="TypeError: expected string or bytes-like object, got 'int'">field = 'head', value = 3
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+        with pytest.raises(ValueError):
+&gt;           checkpoint_bytes(dict(cp, **{field: value}))
+
+tests\test_archive_integrity.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\archive.py:64: in checkpoint_bytes
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+airlock\archive.py:64: in &lt;genexpr&gt;
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pattern = '[a-f0-9]{64}', string = 3, flags = 0
+
+    def fullmatch(pattern, string, flags=0):
+        """Try to apply the pattern to all of the string, returning
+        a Match object, or None if no match was found."""
+&gt;       return _compile(pattern, flags).fullmatch(string)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: expected string or bytes-like object, got 'int'
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\re\__init__.py:172: TypeError</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[signature-value4]" time="0.001"><failure message="TypeError: expected string or bytes-like object, got 'list'">field = 'signature', value = []
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+        with pytest.raises(ValueError):
+&gt;           checkpoint_bytes(dict(cp, **{field: value}))
+
+tests\test_archive_integrity.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\archive.py:64: in checkpoint_bytes
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+airlock\archive.py:64: in &lt;genexpr&gt;
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pattern = '[a-f0-9]{64}', string = [], flags = 0
+
+    def fullmatch(pattern, string, flags=0):
+        """Try to apply the pattern to all of the string, returning
+        a Match object, or None if no match was found."""
+&gt;       return _compile(pattern, flags).fullmatch(string)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: expected string or bytes-like object, got 'list'
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\re\__init__.py:172: TypeError</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[key_id-]" time="0.001"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">field = 'key_id', value = ''
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:78: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_checkpoint_invalid_types_are_controlled_errors[key_id-bad\nkey]" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">field = 'key_id', value = 'bad\nkey'
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:78: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_rejects_duplicate_checkpoint_json_fields" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">def test_archive_rejects_duplicate_checkpoint_json_fields():
+        _, s3, config, receipt = archived()
+        s3.raw = b'{"seq":99,' + s3.raw[1:]
+        sha = hashlib.sha256(s3.raw).hexdigest()
+        receipt['sha256'] = sha
+        receipt['key'] = f"checkpoints/{receipt['database_instance']}/{receipt['seq']:012d}-{sha}.json"
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:88: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_expired_compliance_is_not_current_protection" time="0.000"><failure message="Failed: DID NOT RAISE &lt;class 'ValueError'&gt;">def test_archive_expired_compliance_is_not_current_protection():
+        _, s3, config, receipt = archived()
+        s3.until = dt.datetime(2000, 1, 1, tzinfo=dt.timezone.utc)
+        receipt['retain_until'] = s3.until.isoformat()
+&gt;       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'ValueError'&gt;
+
+tests\test_archive_integrity.py:96: Failed</failure></testcase><testcase classname="tests.test_archive_integrity" name="test_archive_retention_shortening_still_rejected" time="0.000" /></testsuite></testsuites>

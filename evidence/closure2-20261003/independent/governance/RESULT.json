@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "working_tree_dirty": true,
+  "scope": "Synthetic SQLite governance/recovery fixtures and existing local upstream fixtures; no production operations or model/human experiment.",
+  "findings": [
+    {
+      "id": "GOV-BATCH-ROUTE",
+      "priority": "P1",
+      "description": "A reviewer retaining high but losing critical authority could continue later members of a cumulative critical batch.",
+      "baseline": {
+        "receipt": "baseline-batch-route.log.status.json",
+        "exit_code": 1
+      },
+      "intermediate_fail_retained": {
+        "receipt": "intermediate-route-window.log.status.json",
+        "exit_code": 1,
+        "description": "An outer loop check still missed revocation before the member transaction."
+      },
+      "repair": "Context-local aggregate critical requirement is revalidated together with individual action route using one current account snapshot inside AccessControl.require, used by both SQL and remote decisions; context resets in finally."
+    },
+    {
+      "id": "GOV-BATCH-REASON",
+      "priority": "P2",
+      "description": "Whitespace-only batch reason passed request validation then raised internal Decision validation and returned HTTP 500.",
+      "baseline": {
+        "receipt": "baseline-batch-input.log.status.json",
+        "exit_code": 1,
+        "failures": 2,
+        "passing_existing_boundary": 1
+      },
+      "repair": "BatchDecision reuses Decision meaningful_reason validator, so invalid requests receive structured 422 before decisions."
+    }
+  ],
+  "tests": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_governance_integrity.py",
+      "tests/test_governance.py",
+      "tests/test_recovery.py",
+      "tests/test_routing.py",
+      "tests/test_observability.py",
+      "tests/test_new_boundaries.py",
+      "tests/test_connection_lifecycle.py",
+      "tests/test_upstream.py",
+      "--junitxml=var/closure2-20261003/governance/final-targeted.xml"
+    ],
+    "exit_code": 0,
+    "passed": 44,
+    "new_regressions": 10,
+    "junit": "final-targeted.xml"
+  },
+  "positive_negative_controls": [
+    "Cumulative route revoked between members and inside member decision",
+    "Same batch context stays in worker thread; independently reviewed high action still executes",
+    "Context restored after unexpected member exception",
+    "Whitespace and lone-surrogate batch reasons rejected before effect",
+    "Principal budgets persist over restart and expire without autoauthorization",
+    "Compensation of compensation requires a third independent approval",
+    "Trigger introduced after recovery preview blocks execution and releases reservation"
+  ],
+  "limits": [
+    "No linearizability claim against external reviewer-file modifications after the current member authorization snapshot; no distributed exactly-once claim.",
+    "No new functionality or outcome is claimed for human participants, representative business logs, real IdP or paid model calls."
+  ],
+  "changed_functions": [
+    "airlock/service.py:Gate.decide_group",
+    "airlock/access.py:AccessControl.route/_route/require",
+    "airlock/governance.py:batch_risk",
+    "airlock/models.py:BatchDecision.meaningful_reason"
+  ],
+  "sources": {
+    "airlock/service.py": {
+      "sha256": "07622a19555dffa1998ccf312987f2c047a95f7d41aa8faccf811ac236ddfbc2",
+      "bytes": 29727
+    },
+    "airlock/access.py": {
+      "sha256": "0b34d84870292de4d1f8e0c962280e0674648d4afecdd64bf56dd956f79999c9",
+      "bytes": 4032
+    },
+    "airlock/governance.py": {
+      "sha256": "e6e10489ae1a2fcbd0f8d5360ec5240538c89f6b12c984bbd495fd2c12c9de32",
+      "bytes": 2692
+    },
+    "airlock/models.py": {
+      "sha256": "fd95a0427748d7937daa5c1f90876d87d0aacff14cf19467508d219406a084a6",
+      "bytes": 7829
+    },
+    "tests/test_governance_integrity.py": {
+      "sha256": "86c7e750e5313a3124127832b1c6ddadc30581d2483df0eca4f3091ff2a0f6bd",
+      "bytes": 10178
+    }
+  }
+}

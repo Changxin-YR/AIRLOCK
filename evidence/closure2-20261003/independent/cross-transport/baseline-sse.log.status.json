@@ -1,0 +1,18 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "var/closure2-20261003/cross-transport/test_transport_countercheck.py",
+    "-k",
+    "sse",
+    "--junitxml=var/closure2-20261003/cross-transport/baseline-sse.xml"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-03T10:49:56.155400+00:00",
+  "duration_seconds": 2.588,
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+}

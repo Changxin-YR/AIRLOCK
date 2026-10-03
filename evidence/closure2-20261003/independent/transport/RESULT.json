@@ -1,0 +1,189 @@
+{
+  "status": "PASS",
+  "scope": "Bounded HTTP/MCP adapter; isolated synthetic SQLite, local HTTP/TLS fixtures and MockTransport only.",
+  "source_commit_at_review": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tracked_source_dirty": true,
+  "application_files": {
+    "airlock/network.py": {
+      "bytes": 10059,
+      "sha256": "3a03e72fd4b66ec65b46837780ee70f9de25c228c670b782168a41444e3c7cfd"
+    },
+    "airlock/upstream.py": {
+      "bytes": 16808,
+      "sha256": "304a4bf3ab39784ed0d3e2d031c31bd60aa7aee3b2e3a10b390893180bf2b6d0"
+    },
+    "airlock/mcp_upstream.py": {
+      "bytes": 5596,
+      "sha256": "4e395304d55e2f643c1e2e4ce721be98f9fbf946b46aab0827387e248d684854"
+    },
+    "airlock/mcp_http.py": {
+      "bytes": 1898,
+      "sha256": "033768f7614e4a2c6658b8f9aa3f34ec42d7c0639d32996bc4be211074fd9c20"
+    }
+  },
+  "changed_files": [
+    "airlock/network.py",
+    "airlock/upstream.py",
+    "airlock/mcp_upstream.py",
+    "tests/test_transport_hardening.py"
+  ],
+  "runs": {
+    "baseline": {
+      "receipt": "baseline.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_transport_hardening.py",
+        "-q",
+        "--junitxml=var/closure2-20261003/transport/baseline.xml"
+      ],
+      "exit_code": 1,
+      "tests": 23,
+      "failed": 17,
+      "skipped": 0,
+      "passed": 6,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    "repaired-original-probes": {
+      "receipt": "repaired-original-probes.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_transport_hardening.py",
+        "-q",
+        "--junitxml=var/closure2-20261003/transport/repaired-original-probes.xml"
+      ],
+      "exit_code": 0,
+      "tests": 23,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 23,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    "reconcile-baseline": {
+      "receipt": "reconcile-baseline.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_transport_hardening.py",
+        "-q",
+        "-k",
+        "reconcile",
+        "--junitxml=var/closure2-20261003/transport/reconcile-baseline.xml"
+      ],
+      "exit_code": 1,
+      "tests": 4,
+      "failed": 4,
+      "skipped": 0,
+      "passed": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    "reconcile-repaired": {
+      "receipt": "reconcile-repaired.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_transport_hardening.py",
+        "-q",
+        "-k",
+        "reconcile",
+        "--junitxml=var/closure2-20261003/transport/reconcile-repaired.xml"
+      ],
+      "exit_code": 0,
+      "tests": 4,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 4,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    "hardening": {
+      "receipt": "hardening.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_transport_hardening.py",
+        "tests/test_network.py",
+        "tests/test_upstream.py",
+        "tests/test_mcp.py",
+        "tests/test_mcp_http.py",
+        "tests/test_mcp_streamable.py",
+        "tests/test_new_boundaries.py",
+        "-q",
+        "--junitxml=var/closure2-20261003/transport/hardening.xml"
+      ],
+      "exit_code": 0,
+      "tests": 81,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 81,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    "shared-client-compatibility": {
+      "receipt": "shared-client-compatibility.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tests/test_github_adapter.py",
+        "tests/test_oidc_login.py",
+        "tests/test_alert_delivery.py",
+        "tests/test_alert_inbox.py",
+        "tests/test_telemetry.py",
+        "tests/test_telemetry_integrity.py",
+        "-q",
+        "--junitxml=var/closure2-20261003/transport/shared-client-compatibility.xml"
+      ],
+      "exit_code": 0,
+      "tests": 179,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 179,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    }
+  },
+  "findings": [
+    {
+      "id": "T1",
+      "severity": "P1",
+      "issue": "MCP preview accepted non-finite JSON and crashed during review digest, leaving no durable blocked action; ambiguous keys and invalid Unicode also crossed response parsing.",
+      "repair": "Strict UTF-8, unique keys, finite numbers and at most 32 nested levels before state construction; canonical errors become generic upstream errors; corrupted preview persists blocked with valid audit."
+    },
+    {
+      "id": "T2",
+      "severity": "P1",
+      "issue": "A peer dripping response headers bypassed the ten-second total request budget; baseline returned only after 11.583 seconds.",
+      "repair": "One context-local deadline clamps each socket read/write/TLS step across the HTTP or multi-step MCP exchange. DNS waits at most two seconds within that deadline using at most four daemon lookup slots; timed-out workers cannot send."
+    },
+    {
+      "id": "T3",
+      "severity": "P2",
+      "issue": "Valid CR-only SSE events were dropped, and response decompression ran before application byte limits.",
+      "repair": "Incremental CR/CRLF/LF and BOM handling, strict per-event JSON, identity encoding negotiation and rejection of compressed responses before decoding."
+    },
+    {
+      "id": "T4",
+      "severity": "P1",
+      "issue": "Unknown remote actions queried replacement target registrations; removed/revoked registrations escaped as authorization errors despite an already possible effect.",
+      "repair": "Reconcile checks the original upstream config digest and keeps unknown without sending on config drift or revocation. Restoring the same registration permits GET-only recovery; no execution resend."
+    }
+  ],
+  "independent_second_direction": "../cross-transport/RESULT.json: 9 independent checks passed after original SSE replay failed; independent reviewer recovery_governance_audit.",
+  "limits": [
+    "No production resolver/network reliability or formal MCP conformance claim.",
+    "A timed-out OS DNS lookup may finish later in one of four daemon slots; the worker has no HTTP send path.",
+    "Upstream effect+receipt is not a local distributed exactly-once guarantee; unknown must retain uncertainty.",
+    "No real credentials, model calls, human participants or business logs were used."
+  ],
+  "unresolved_reproducible_findings": []
+}

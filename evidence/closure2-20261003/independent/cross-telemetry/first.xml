@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="9" time="6.650" timestamp="2026-10-03T18:52:33.374195+08:00" hostname="WHHHH"><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_normal_collector_negotiates_identity_so_ack_is_not_rejected" time="0.644"><failure message="AssertionError: assert {'exported': ...ryable_error'} == {'exported': ...status': 'ok'}&#10;  &#10;  Differing items:&#10;  {'status': 'retryable_error'} != {'status': 'ok'}&#10;  {'exported': 0} != {'exported': 1}&#10;  Left contains 1 more item:&#10;  {'retained': 1}&#10;  Use -v to get more diff">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-454/test_normal_collector_negotiat0')
+
+    def test_normal_collector_negotiates_identity_so_ack_is_not_rejected(tmp_path):
+        encodings=[]
+        def handle(http,body):
+            encoding=http.headers.get('Accept-Encoding','');encodings.append(encoding)
+            compressed='gzip' in encoding
+            send(http,gzip.compress(b'{}') if compressed else b'{}',headers={'Content-Encoding':'gzip' if compressed else 'identity'})
+        with collector(handle) as url:
+            gate=make_gate(tmp_path,url);action=submit(gate)
+&gt;           assert telemetry.export(gate.store)=={'status':'ok','exported':1}
+E           AssertionError: assert {'exported': ...ryable_error'} == {'exported': ...status': 'ok'}
+E             
+E             Differing items:
+E             {'status': 'retryable_error'} != {'status': 'ok'}
+E             {'exported': 0} != {'exported': 1}
+E             Left contains 1 more item:
+E             {'retained': 1}
+E             Use -v to get more diff
+
+var\closure2-20261003\cross-telemetry\test_independent.py:60: AssertionError</failure></testcase><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_wire_counterexamples_keep_original_span[[]]" time="0.549" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_wire_counterexamples_keep_original_span[null]" time="0.552" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_wire_counterexamples_keep_original_span[{&quot;partialSuccess&quot;:null}]" time="0.542" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_wire_counterexamples_keep_original_span[{&quot;partialSuccess&quot;:{&quot;rejectedSpans&quot;:true}}]" time="0.537" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_wire_counterexamples_keep_original_span[{&quot;nested&quot;:{&quot;x&quot;:0,&quot;x&quot;:1}}]" time="0.539" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_redirect_does_not_contact_replacement_collector" time="1.014" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_new_event_while_export_waits_is_not_deleted" time="0.716" /><testcase classname="var.closure2-20261003.cross-telemetry.test_independent" name="test_dripping_body_then_retry_preserves_span_identity" time="0.712" /></testsuite></testsuites>

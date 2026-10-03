@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="6" time="1.074" timestamp="2026-10-03T18:40:29.798579+08:00" hostname="WHHHH"><testcase classname="tests.test_identity_boundaries" name="test_nonfinite_numeric_date_is_structured_authentication_failure[exp]" time="0.192" /><testcase classname="tests.test_identity_boundaries" name="test_nonfinite_numeric_date_is_structured_authentication_failure[iat]" time="0.066" /><testcase classname="tests.test_identity_boundaries" name="test_nonfinite_numeric_date_is_structured_authentication_failure[nbf]" time="0.054" /><testcase classname="tests.test_identity_boundaries" name="test_unsigned_deep_jwt_header_is_structured_authentication_failure" time="0.080" /><testcase classname="tests.test_identity_boundaries" name="test_scoped_audit_pagination_crosses_invisible_governance_prefix[/v1/audit]" time="0.117"><failure message="assert 0 == 1&#10; +  where 0 = len([])">identity_scope = (Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-422/test_scoped_audit_paginat...C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-422/test_scoped_audit_pagination_c0/boundary-reviewers.json'))
+endpoint = '/v1/audit'
+
+    @pytest.mark.parametrize('endpoint', ['/v1/audit', '/v1/audit/export'])
+    def test_scoped_audit_pagination_crosses_invisible_governance_prefix(identity_scope, endpoint):
+        settings, token, _ = identity_scope
+        with TestClient(create_app(settings), base_url=settings.origin) as client:
+            gate = client.app.state.gate
+            operator = {'Authorization': 'Bearer ' + settings.reviewer_token}
+            # No action count is consumed by valid operator cache invalidations.
+            # Exceed the former max_actions*4 raw scan window with invisible events.
+            for _ in range(settings.max_actions * 4 + 1):
+                assert client.post('/v1/semantic/cache/invalidate', headers=operator).status_code == 200
+            action = gate.submit(call(key='visible-after-hidden-events'))
+            auth = {'Authorization': 'Bearer ' + token()}
+            first = client.get(endpoint, headers=auth)
+            assert first.status_code == 200
+            report = first.json()
+&gt;           assert len(report['items']) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests\test_identity_boundaries.py:85: AssertionError</failure></testcase><testcase classname="tests.test_identity_boundaries" name="test_scoped_audit_pagination_crosses_invisible_governance_prefix[/v1/audit/export]" time="0.141"><failure message="assert 0 == 1&#10; +  where 0 = len([])">identity_scope = (Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-422/test_scoped_audit_paginat...C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-422/test_scoped_audit_pagination_c1/boundary-reviewers.json'))
+endpoint = '/v1/audit/export'
+
+    @pytest.mark.parametrize('endpoint', ['/v1/audit', '/v1/audit/export'])
+    def test_scoped_audit_pagination_crosses_invisible_governance_prefix(identity_scope, endpoint):
+        settings, token, _ = identity_scope
+        with TestClient(create_app(settings), base_url=settings.origin) as client:
+            gate = client.app.state.gate
+            operator = {'Authorization': 'Bearer ' + settings.reviewer_token}
+            # No action count is consumed by valid operator cache invalidations.
+            # Exceed the former max_actions*4 raw scan window with invisible events.
+            for _ in range(settings.max_actions * 4 + 1):
+                assert client.post('/v1/semantic/cache/invalidate', headers=operator).status_code == 200
+            action = gate.submit(call(key='visible-after-hidden-events'))
+            auth = {'Authorization': 'Bearer ' + token()}
+            first = client.get(endpoint, headers=auth)
+            assert first.status_code == 200
+            report = first.json()
+&gt;           assert len(report['items']) == 1
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests\test_identity_boundaries.py:85: AssertionError</failure></testcase></testsuite></testsuites>

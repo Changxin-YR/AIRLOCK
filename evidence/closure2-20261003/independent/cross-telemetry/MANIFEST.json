@@ -1,0 +1,38 @@
+{
+  "source_commit_at_review": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "note": "Working tree source hashes identify pre-commit validation; not a frozen full-CI claim.",
+  "files": {
+    "first.log": {
+      "bytes": 1652,
+      "sha256": "7b4f43d6226211aa8a53c8456cc894c59c548919f3e535855c946a70e252ce6b"
+    },
+    "first.log.status.json": {
+      "bytes": 503,
+      "sha256": "a153e8408d2e5eda31ebd15311c3ec6d1a99fe9412737fc06589bb5dd49fe9bc"
+    },
+    "first.xml": {
+      "bytes": 3246,
+      "sha256": "1fe9d337211bebad5c9354ca605f86a02ac8f7687819093cd89ce7304158e661"
+    },
+    "repaired.log": {
+      "bytes": 100,
+      "sha256": "65f8e9fcc359170ffd4b00f892a97953d4c6968940837a3b984fcfc629fdb2b2"
+    },
+    "repaired.log.status.json": {
+      "bytes": 508,
+      "sha256": "a3d494a838feb2e10286313b4d196b0c25b97be592dd8ce4df41d96785fb924b"
+    },
+    "repaired.xml": {
+      "bytes": 1742,
+      "sha256": "f6c9a32ed263f645b089c4933fefe6fc958e726df6d03769c1ce532790043d97"
+    },
+    "RESULT.json": {
+      "bytes": 2669,
+      "sha256": "35cab5127795e0bf202a1d04c28136562bd73641263370bf79113a8f14e6cc55"
+    },
+    "test_independent.py": {
+      "bytes": 5771,
+      "sha256": "041cb315266fa82ff107564ff5d487d1855937961ad7f901be7a89e9c2365363"
+    }
+  }
+}

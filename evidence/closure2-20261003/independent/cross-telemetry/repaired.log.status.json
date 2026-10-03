@@ -1,0 +1,16 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "var/closure2-20261003/cross-telemetry/test_independent.py",
+    "-q",
+    "--junitxml=var/closure2-20261003/cross-telemetry/repaired.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T10:53:36.837649+00:00",
+  "duration_seconds": 7.739,
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+}

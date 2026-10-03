@@ -1,0 +1,79 @@
+FFF.                                                                     [100%]
+================================== FAILURES ===================================
+___ test_first_member_authority_snapshot_enforces_live_revocation[critical] ___
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-439/test_first_member_authority_sn0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023C622890F0>
+revocation = 'critical'
+
+    @pytest.mark.parametrize('revocation', ['critical', 'resource', 'account'])
+    def test_first_member_authority_snapshot_enforces_live_revocation(tmp_path, monkeypatch, revocation):
+        path = tmp_path / 'accounts.json'
+        document = {'reviewers': [{'id': 'reviewer:cross', 'credential_env': 'AIRLOCK_REVIEWER_CROSS',
+            'tools': ['sql'], 'resources': ['customers'], 'risks': ['high', 'critical']}]}
+        path.write_text(json.dumps(document))
+        monkeypatch.setenv('AIRLOCK_REVIEWER_CROSS', 'cross-' + 's' * 32)
+        settings = Settings(tmp_path / 'cross.db', 'agent-' + 'a' * 32, 'owner-' + 'o' * 32, 'audit-' + 'h' * 32)
+        gate = Gate(replace(settings, reviewer_file=path, critical_rows=2), clock=lambda: 1000.0)
+        for index in range(2):
+>           gate.submit(Invocation(sql='UPDATE customers SET balance=balance WHERE id=1', idempotency_key=f'cross-{index}'))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           pydantic_core._pydantic_core.ValidationError: 1 validation error for Invocation
+E           idempotency_key
+E             String should have at least 8 characters [type=string_too_short, input_value='cross-0', input_type=str]
+E               For further information visit https://errors.pydantic.dev/2.13/v/string_too_short
+
+var\closure2-20261003\identity\test_governance_crosscheck.py:22: ValidationError
+___ test_first_member_authority_snapshot_enforces_live_revocation[resource] ___
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-439/test_first_member_authority_sn1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023C62289220>
+revocation = 'resource'
+
+    @pytest.mark.parametrize('revocation', ['critical', 'resource', 'account'])
+    def test_first_member_authority_snapshot_enforces_live_revocation(tmp_path, monkeypatch, revocation):
+        path = tmp_path / 'accounts.json'
+        document = {'reviewers': [{'id': 'reviewer:cross', 'credential_env': 'AIRLOCK_REVIEWER_CROSS',
+            'tools': ['sql'], 'resources': ['customers'], 'risks': ['high', 'critical']}]}
+        path.write_text(json.dumps(document))
+        monkeypatch.setenv('AIRLOCK_REVIEWER_CROSS', 'cross-' + 's' * 32)
+        settings = Settings(tmp_path / 'cross.db', 'agent-' + 'a' * 32, 'owner-' + 'o' * 32, 'audit-' + 'h' * 32)
+        gate = Gate(replace(settings, reviewer_file=path, critical_rows=2), clock=lambda: 1000.0)
+        for index in range(2):
+>           gate.submit(Invocation(sql='UPDATE customers SET balance=balance WHERE id=1', idempotency_key=f'cross-{index}'))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           pydantic_core._pydantic_core.ValidationError: 1 validation error for Invocation
+E           idempotency_key
+E             String should have at least 8 characters [type=string_too_short, input_value='cross-0', input_type=str]
+E               For further information visit https://errors.pydantic.dev/2.13/v/string_too_short
+
+var\closure2-20261003\identity\test_governance_crosscheck.py:22: ValidationError
+___ test_first_member_authority_snapshot_enforces_live_revocation[account] ____
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-439/test_first_member_authority_sn2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023C6407F9B0>
+revocation = 'account'
+
+    @pytest.mark.parametrize('revocation', ['critical', 'resource', 'account'])
+    def test_first_member_authority_snapshot_enforces_live_revocation(tmp_path, monkeypatch, revocation):
+        path = tmp_path / 'accounts.json'
+        document = {'reviewers': [{'id': 'reviewer:cross', 'credential_env': 'AIRLOCK_REVIEWER_CROSS',
+            'tools': ['sql'], 'resources': ['customers'], 'risks': ['high', 'critical']}]}
+        path.write_text(json.dumps(document))
+        monkeypatch.setenv('AIRLOCK_REVIEWER_CROSS', 'cross-' + 's' * 32)
+        settings = Settings(tmp_path / 'cross.db', 'agent-' + 'a' * 32, 'owner-' + 'o' * 32, 'audit-' + 'h' * 32)
+        gate = Gate(replace(settings, reviewer_file=path, critical_rows=2), clock=lambda: 1000.0)
+        for index in range(2):
+>           gate.submit(Invocation(sql='UPDATE customers SET balance=balance WHERE id=1', idempotency_key=f'cross-{index}'))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           pydantic_core._pydantic_core.ValidationError: 1 validation error for Invocation
+E           idempotency_key
+E             String should have at least 8 characters [type=string_too_short, input_value='cross-0', input_type=str]
+E               For further information visit https://errors.pydantic.dev/2.13/v/string_too_short
+
+var\closure2-20261003\identity\test_governance_crosscheck.py:22: ValidationError
+=========================== short test summary info ===========================
+FAILED var/closure2-20261003/identity/test_governance_crosscheck.py::test_first_member_authority_snapshot_enforces_live_revocation[critical]
+FAILED var/closure2-20261003/identity/test_governance_crosscheck.py::test_first_member_authority_snapshot_enforces_live_revocation[resource]
+FAILED var/closure2-20261003/identity/test_governance_crosscheck.py::test_first_member_authority_snapshot_enforces_live_revocation[account]
+3 failed, 1 passed in 1.14s

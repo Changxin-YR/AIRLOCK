@@ -1,0 +1,62 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+_ test_batch_revalidates_cumulative_risk_route_before_each_member[inside_member_decision] _
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-427/test_batch_revalidates_cum...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-427/test_batch_revalidates_cumulat1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024369365A70>
+revocation_point = 'inside_member_decision'
+
+    @pytest.mark.parametrize('revocation_point', ['between_members', 'inside_member_decision'])
+    def test_batch_revalidates_cumulative_risk_route_before_each_member(settings, tmp_path, monkeypatch, revocation_point):
+        path = tmp_path / 'reviewers.json'
+        config = {'reviewers': [{'id': 'reviewer:batch', 'credential_env': 'AIRLOCK_REVIEWER_BATCH',
+            'tools': ['sql'], 'resources': ['customers'], 'risks': ['high', 'critical']}]}
+        path.write_text(json.dumps(config), encoding='utf-8')
+        monkeypatch.setenv('AIRLOCK_REVIEWER_BATCH', 'synthetic-batch-reviewer-' + 'x' * 32)
+        gate = Gate(replace(settings, reviewer_file=path, critical_rows=2), clock=lambda: 1000.0)
+        # The target remains unchanged, so snapshot drift cannot hide the route defect.
+        for number in range(2):
+            action = gate.submit(call('UPDATE customers SET balance=balance WHERE id=1', f'batch-route-{number}'))
+            assert action['risk'] == 'high' and action['impact']['matched_rows'] == 1
+        group = gate.groups('reviewer:batch')[0]
+        assert group['cumulative_units'] == 2
+        decide = gate._decide
+        calls = [0]
+    
+        def revoke():
+            config['reviewers'][0]['risks'] = ['high']
+            path.write_text(json.dumps(config), encoding='utf-8')
+    
+        def revoke_critical_after_first_member(*args, **kwargs):
+            if revocation_point == 'inside_member_decision' and calls[0] == 1:
+                revoke()
+            result = decide(*args, **kwargs)
+            calls[0] += 1
+            if revocation_point == 'between_members':
+                revoke()
+            return result
+    
+        monkeypatch.setattr(gate, '_decide', revoke_critical_after_first_member)
+        result = gate.decide_group(batch(group), 'reviewer:batch')
+        assert result['receipts'][0]['state'] == 'executed'
+>       assert result['receipts'][1] == {'id': group['members'][1]['id'], 'state': 'conflict',
+            'reason_code': 'group_risk_route_forbidden'}
+E       AssertionError: assert {'id': '9d174...': 'executed'} == {'id': '9d174...': 'conflict'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'reason_code': 'human_approved'} != {'reason_code': 'group_risk_route_forbidden'}
+E         {'state': 'executed'} != {'state': 'conflict'}
+E         Use -v to get more diff
+
+tests\test_governance_integrity.py:46: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_governance_integrity.py::test_batch_revalidates_cumulative_risk_route_before_each_member[inside_member_decision]
+1 failed, 1 passed, 3 deselected, 1 warning in 0.61s

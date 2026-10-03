@@ -1,0 +1,372 @@
+.FFFFFFFFFFFFFFFFFFF.                                                    [100%]
+================================== FAILURES ===================================
+__________ test_archive_rejects_receipt_claim_substitution[changes0] __________
+
+changes = {'seq': 8}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes1] __________
+
+changes = {'seq': True}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes2] __________
+
+changes = {'database_instance': 'dddddddddddddddddddddddddddddddd'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes3] __________
+
+changes = {'mode': 'GOVERNANCE'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes4] __________
+
+changes = {'version_id': 23}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes5] __________
+
+changes = {'version_id': 'null'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes6] __________
+
+changes = {'retain_until': '2000-01-01T00:00:00+00:00'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes7] __________
+
+changes = {'key': 'checkpoints/unrelated.json'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+__________ test_archive_rejects_receipt_claim_substitution[changes8] __________
+
+changes = {'unexpected': 'unverified field'}
+
+    @pytest.mark.parametrize('changes', [
+        {'seq': 8}, {'seq': True}, {'database_instance': 'd' * 32},
+        {'mode': 'GOVERNANCE'}, {'version_id': 23}, {'version_id': 'null'},
+        {'retain_until': '2000-01-01T00:00:00+00:00'},
+        {'key': 'checkpoints/unrelated.json'}, {'unexpected': 'unverified field'},
+    ])
+    def test_archive_rejects_receipt_claim_substitution(changes):
+        _, s3, config, receipt = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:61: Failed
+_____________ test_archive_rejects_response_from_another_version ______________
+
+    def test_archive_rejects_response_from_another_version():
+        _, s3, config, receipt = archived()
+        s3.version = 'different-version'
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:68: Failed
+______ test_checkpoint_invalid_types_are_controlled_errors[version-True] ______
+
+field = 'version', value = True
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:78: Failed
+______ test_checkpoint_invalid_types_are_controlled_errors[version-1.0] _______
+
+field = 'version', value = 1.0
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:78: Failed
+_ test_checkpoint_invalid_types_are_controlled_errors[database_instance-None] _
+
+field = 'database_instance', value = None
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+        with pytest.raises(ValueError):
+>           checkpoint_bytes(dict(cp, **{field: value}))
+
+tests\test_archive_integrity.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\archive.py:64: in checkpoint_bytes
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pattern = '[a-f0-9]{32}', string = None, flags = 0
+
+    def fullmatch(pattern, string, flags=0):
+        """Try to apply the pattern to all of the string, returning
+        a Match object, or None if no match was found."""
+>       return _compile(pattern, flags).fullmatch(string)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: expected string or bytes-like object, got 'NoneType'
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\re\__init__.py:172: TypeError
+_________ test_checkpoint_invalid_types_are_controlled_errors[head-3] _________
+
+field = 'head', value = 3
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+        with pytest.raises(ValueError):
+>           checkpoint_bytes(dict(cp, **{field: value}))
+
+tests\test_archive_integrity.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\archive.py:64: in checkpoint_bytes
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+airlock\archive.py:64: in <genexpr>
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pattern = '[a-f0-9]{64}', string = 3, flags = 0
+
+    def fullmatch(pattern, string, flags=0):
+        """Try to apply the pattern to all of the string, returning
+        a Match object, or None if no match was found."""
+>       return _compile(pattern, flags).fullmatch(string)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: expected string or bytes-like object, got 'int'
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\re\__init__.py:172: TypeError
+____ test_checkpoint_invalid_types_are_controlled_errors[signature-value4] ____
+
+field = 'signature', value = []
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+        with pytest.raises(ValueError):
+>           checkpoint_bytes(dict(cp, **{field: value}))
+
+tests\test_archive_integrity.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\archive.py:64: in checkpoint_bytes
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+airlock\archive.py:64: in <genexpr>
+    if not re.fullmatch(r'[a-f0-9]{32}',checkpoint['database_instance']) or not all(re.fullmatch(r'[a-f0-9]{64}',checkpoint[k]) for k in ('head','signature')):
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pattern = '[a-f0-9]{64}', string = [], flags = 0
+
+    def fullmatch(pattern, string, flags=0):
+        """Try to apply the pattern to all of the string, returning
+        a Match object, or None if no match was found."""
+>       return _compile(pattern, flags).fullmatch(string)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: expected string or bytes-like object, got 'list'
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\re\__init__.py:172: TypeError
+________ test_checkpoint_invalid_types_are_controlled_errors[key_id-] _________
+
+field = 'key_id', value = ''
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:78: Failed
+____ test_checkpoint_invalid_types_are_controlled_errors[key_id-bad\nkey] _____
+
+field = 'key_id', value = 'bad\nkey'
+
+    @pytest.mark.parametrize('field,value', [
+        ('version', True), ('version', 1.0), ('database_instance', None),
+        ('head', 3), ('signature', []), ('key_id', ''), ('key_id', 'bad\nkey'),
+    ])
+    def test_checkpoint_invalid_types_are_controlled_errors(field, value):
+        cp, _, _, _ = archived()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:78: Failed
+____________ test_archive_rejects_duplicate_checkpoint_json_fields ____________
+
+    def test_archive_rejects_duplicate_checkpoint_json_fields():
+        _, s3, config, receipt = archived()
+        s3.raw = b'{"seq":99,' + s3.raw[1:]
+        sha = hashlib.sha256(s3.raw).hexdigest()
+        receipt['sha256'] = sha
+        receipt['key'] = f"checkpoints/{receipt['database_instance']}/{receipt['seq']:012d}-{sha}.json"
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:88: Failed
+__________ test_archive_expired_compliance_is_not_current_protection __________
+
+    def test_archive_expired_compliance_is_not_current_protection():
+        _, s3, config, receipt = archived()
+        s3.until = dt.datetime(2000, 1, 1, tzinfo=dt.timezone.utc)
+        receipt['retain_until'] = s3.until.isoformat()
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_archive_integrity.py:96: Failed
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes0]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes1]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes2]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes3]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes4]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes5]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes6]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes7]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_receipt_claim_substitution[changes8]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_response_from_another_version
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[version-True]
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[version-1.0]
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[database_instance-None]
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[head-3]
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[signature-value4]
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[key_id-]
+FAILED tests/test_archive_integrity.py::test_checkpoint_invalid_types_are_controlled_errors[key_id-bad\nkey]
+FAILED tests/test_archive_integrity.py::test_archive_rejects_duplicate_checkpoint_json_fields
+FAILED tests/test_archive_integrity.py::test_archive_expired_compliance_is_not_current_protection
+19 failed, 2 passed, 1 warning in 0.89s

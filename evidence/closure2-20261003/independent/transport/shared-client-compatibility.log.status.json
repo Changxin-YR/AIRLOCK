@@ -1,0 +1,21 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_github_adapter.py",
+    "tests/test_oidc_login.py",
+    "tests/test_alert_delivery.py",
+    "tests/test_alert_inbox.py",
+    "tests/test_telemetry.py",
+    "tests/test_telemetry_integrity.py",
+    "-q",
+    "--junitxml=var/closure2-20261003/transport/shared-client-compatibility.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T10:50:54.149456+00:00",
+  "duration_seconds": 118.499,
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+}

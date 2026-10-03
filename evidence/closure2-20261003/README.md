@@ -1,0 +1,11 @@
+# 再次修复与双重复验证据
+
+基线758202b4631c5f530e48ab07aa07cd90bfbe58e0，修复源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c。全部新输入均为本地或隔离容器合成测试；新增真人记录和付费模型调用均为0。
+
+`independent/`下archive/identity/governance/transport/telemetry保存修改前反例、修改后结果和源码快照。cross-*与identity/governance-cross*为另一作者的交叉反例；中间失败包括真实缺陷与明确标记的夹具编写错误，按相邻RESULT说明区分，不覆盖失败。每个报告只覆盖自己的源hash；最终冻结CI另外保存。
+
+`independent/local/`包含683项全量预检（提交前）和最后修复后63项定点；冻结533726a的99项新增边界再次通过。最终全量数量以CI的JUnit为准，不能将中间测试数量相加。独立交叉为audit7、batch5、transport9、archive11、telemetry9。
+
+`IMPORT_INDEX.json`绑定本机原路径与公开副本。原始命令若引用忽略的var路径，可在新隔离checkout将公开副本按该索引恢复到var/closure2-20261003，再重放相邻真实命令；勿覆盖现有证据。常规回归直接运行pytest和CODEX_REVIEW中的命令。较早源码模块或方法回放是专用探针，不是清空/切回用户工作区。
+
+完整成功CI ZIP、JUnit、真实子退出码、截图和hash清单保存于ci/。Git副本无自动到期，依赖历史/备份，不是独立云WORM；Actions及本机临时副本的保留规则以CI_FINAL.json和EVIDENCE_RETENTION.md为准。源归档ZIP不递归包含历史证据，历史证据单独在Git。

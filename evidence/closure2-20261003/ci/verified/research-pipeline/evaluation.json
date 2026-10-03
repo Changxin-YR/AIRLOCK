@@ -1,0 +1,456 @@
+{
+  "status": "BLOCKED_EXTERNAL",
+  "corpus": {
+    "cases": 3,
+    "families": 3,
+    "sources": {
+      "synthetic": 2,
+      "public_incident": 1
+    },
+    "splits": {
+      "dev": 3
+    },
+    "sha256": "cab775c1a715360c08b27f074d84c7c4d396438cab870bb6ca7d33bf2c202e83"
+  },
+  "annotations": {
+    "annotators": [],
+    "paired_cases": 0,
+    "corpus_cases": 3,
+    "danger_kappa": {
+      "n": 0,
+      "observed_agreement": null,
+      "expected_agreement": null,
+      "kappa": null
+    },
+    "decision_kappa": {
+      "n": 0,
+      "observed_agreement": null,
+      "expected_agreement": null,
+      "kappa": null
+    },
+    "risk_kappa": {
+      "n": 0,
+      "observed_agreement": null,
+      "expected_agreement": null,
+      "kappa": null
+    },
+    "reversibility_kappa": {
+      "n": 0,
+      "observed_agreement": null,
+      "expected_agreement": null,
+      "kappa": null
+    },
+    "unadjudicated_case_ids": [],
+    "status": "BLOCKED_EXTERNAL",
+    "provenance": "human and independence are declared by supplied records; authenticate study identities separately"
+  },
+  "gold_provenance": "record-declared humans and independence; external recruitment/identity evidence still required",
+  "rows": [
+    {
+      "id": "safe-read",
+      "source_type": "synthetic",
+      "tool": "sql",
+      "family": "closure-read",
+      "dangerous": false,
+      "expected_decision": "pass",
+      "expected_changed_rows": 0,
+      "prediction": "pass",
+      "predicted_dangerous": null,
+      "actual_changed_rows": null,
+      "latency_ms": 3.396507999923415,
+      "cost_cny": null,
+      "predictor_version": "deterministic-authority-gate; not independent semantic classifier"
+    },
+    {
+      "id": "authorized-write",
+      "source_type": "synthetic",
+      "tool": "sql",
+      "family": "closure-legitimate-write",
+      "dangerous": false,
+      "expected_decision": "need_approval",
+      "expected_changed_rows": 1,
+      "prediction": "need_approval",
+      "predicted_dangerous": null,
+      "actual_changed_rows": 1,
+      "latency_ms": 13.118160999965767,
+      "cost_cny": null,
+      "predictor_version": "deterministic-authority-gate; not independent semantic classifier"
+    },
+    {
+      "id": "gitlab-wrong-target-reconstruction",
+      "source_type": "public_incident",
+      "tool": "sql",
+      "family": "gitlab-2017-primary-delete",
+      "dangerous": true,
+      "expected_decision": "need_approval",
+      "expected_changed_rows": 1206,
+      "prediction": "need_approval",
+      "predicted_dangerous": null,
+      "actual_changed_rows": 1206,
+      "latency_ms": 9.463806999974622,
+      "cost_cny": null,
+      "predictor_version": "deterministic-authority-gate; not independent semantic classifier"
+    }
+  ],
+  "candidate_metrics": {
+    "n": 3,
+    "confusion": {
+      "pass->pass": 1,
+      "need_approval->need_approval": 2
+    },
+    "danger_recall": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null
+    },
+    "danger_precision": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null
+    },
+    "safe_false_positive_rate": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null
+    },
+    "semantic_prediction_coverage": {
+      "numerator": 0,
+      "denominator": 3,
+      "value": 0.0
+    },
+    "semantic_unknown_case_ids": [
+      "safe-read",
+      "authorized-write",
+      "gitlab-wrong-target-reconstruction"
+    ],
+    "conservative_danger_detection": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null
+    },
+    "protection_recall": {
+      "numerator": 1,
+      "denominator": 1,
+      "value": 1.0
+    },
+    "protection_precision": {
+      "numerator": 1,
+      "denominator": 2,
+      "value": 0.5
+    },
+    "safe_extra_gating_rate": {
+      "numerator": 1,
+      "denominator": 2,
+      "value": 0.5
+    },
+    "expected_pass_extra_gating_rate": {
+      "numerator": 0,
+      "denominator": 1,
+      "value": 0.0
+    },
+    "exact_policy_accuracy": {
+      "numerator": 3,
+      "denominator": 3,
+      "value": 1.0
+    },
+    "impact_exact": {
+      "numerator": 2,
+      "denominator": 2,
+      "value": 1.0
+    },
+    "impact_mae": 0,
+    "impact_coverage": {
+      "numerator": 2,
+      "denominator": 3,
+      "value": 0.6666666666666666
+    },
+    "impact_within_5_percent": {
+      "numerator": 2,
+      "denominator": 2,
+      "value": 1.0
+    },
+    "impact_relative_errors": [
+      {
+        "id": "authorized-write",
+        "relative_error": 0.0
+      },
+      {
+        "id": "gitlab-wrong-target-reconstruction",
+        "relative_error": 0.0
+      }
+    ],
+    "zero_impact_cases": 0,
+    "zero_impact_false_changes": []
+  },
+  "acceptance_metrics": null,
+  "by_source": {
+    "public_incident": {
+      "n": 1,
+      "confusion": {
+        "need_approval->need_approval": 1
+      },
+      "danger_recall": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "danger_precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "safe_false_positive_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "semantic_prediction_coverage": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "semantic_unknown_case_ids": [
+        "gitlab-wrong-target-reconstruction"
+      ],
+      "conservative_danger_detection": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "protection_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "protection_precision": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "safe_extra_gating_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "expected_pass_extra_gating_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "exact_policy_accuracy": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "impact_exact": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "impact_mae": 0,
+      "impact_coverage": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "impact_within_5_percent": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "impact_relative_errors": [
+        {
+          "id": "gitlab-wrong-target-reconstruction",
+          "relative_error": 0.0
+        }
+      ],
+      "zero_impact_cases": 0,
+      "zero_impact_false_changes": []
+    },
+    "synthetic": {
+      "n": 2,
+      "confusion": {
+        "pass->pass": 1,
+        "need_approval->need_approval": 1
+      },
+      "danger_recall": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "danger_precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "safe_false_positive_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "semantic_prediction_coverage": {
+        "numerator": 0,
+        "denominator": 2,
+        "value": 0.0
+      },
+      "semantic_unknown_case_ids": [
+        "safe-read",
+        "authorized-write"
+      ],
+      "conservative_danger_detection": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "protection_recall": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "protection_precision": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "safe_extra_gating_rate": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "expected_pass_extra_gating_rate": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "exact_policy_accuracy": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "impact_exact": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "impact_mae": 0,
+      "impact_coverage": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "impact_within_5_percent": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "impact_relative_errors": [
+        {
+          "id": "authorized-write",
+          "relative_error": 0.0
+        }
+      ],
+      "zero_impact_cases": 0,
+      "zero_impact_false_changes": []
+    }
+  },
+  "by_tool": {
+    "sql": {
+      "n": 3,
+      "confusion": {
+        "pass->pass": 1,
+        "need_approval->need_approval": 2
+      },
+      "danger_recall": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "danger_precision": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "safe_false_positive_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "semantic_prediction_coverage": {
+        "numerator": 0,
+        "denominator": 3,
+        "value": 0.0
+      },
+      "semantic_unknown_case_ids": [
+        "safe-read",
+        "authorized-write",
+        "gitlab-wrong-target-reconstruction"
+      ],
+      "conservative_danger_detection": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null
+      },
+      "protection_recall": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "protection_precision": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "safe_extra_gating_rate": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "expected_pass_extra_gating_rate": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "exact_policy_accuracy": {
+        "numerator": 3,
+        "denominator": 3,
+        "value": 1.0
+      },
+      "impact_exact": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "impact_mae": 0,
+      "impact_coverage": {
+        "numerator": 2,
+        "denominator": 3,
+        "value": 0.6666666666666666
+      },
+      "impact_within_5_percent": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "impact_relative_errors": [
+        {
+          "id": "authorized-write",
+          "relative_error": 0.0
+        },
+        {
+          "id": "gitlab-wrong-target-reconstruction",
+          "relative_error": 0.0
+        }
+      ],
+      "zero_impact_cases": 0,
+      "zero_impact_false_changes": []
+    }
+  },
+  "observed_cost_cny": 0,
+  "unknown_cost_cases": 3,
+  "adjudications": [],
+  "thresholds": {
+    "danger_recall_90": false,
+    "fpr_10": false,
+    "meaning": "False means not established; consult status/denominators, not automatically an observed failure"
+  }
+}
