@@ -8,12 +8,14 @@ import xml.etree.ElementTree as ET
 from collections import Counter
 
 ROOT=Path(__file__).resolve().parents[2]
-BASE=ROOT/'evidence/closure-20261002'
+BASE=ROOT/'evidence/autonomous-20261003'
+CLOSURE=ROOT/'evidence/closure-20261002'
 LEGACY=ROOT/'evidence/continuation-20261002'
 FINAL=BASE/'ci/verified'
 SHA=json.loads((FINAL/'pytest.log.status.json').read_text())['tested_commit_sha']
 LOG_PATHS={name:LEGACY/'final'/(name+'.log') for name in ('live-validation','ablation-live-dev','ablation-live-test','model-diagnostics')}
-LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':BASE/'final/live-upstream.log','sse-identity-replay':BASE/'sse-identity-replay.log'})
+LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':CLOSURE/'final/live-upstream.log','sse-identity-replay':CLOSURE/'sse-identity-replay.log',
+    'github-relay':BASE/'local/live-relay.log','model-ui-v2':BASE/'local/browser-model-v2.log','model-roles':BASE/'local/deepseek-roleplay.log'})
 def log_path(name):return LOG_PATHS.get(name,FINAL/(name+'.log'))
 INDEX=json.loads((ROOT/'docs/acceptance/AIRLOCK-acceptance-targets.json').read_text(encoding='utf-8'))
 JUNIT=list(ET.parse(FINAL/'pytest.xml').iter('testcase'))
@@ -140,6 +142,65 @@ row('D1',I,PASS,'FastAPI＋Next.js 16.3.8/React19.3.0已实现；静态导出/CS
 row('R3',I,PASS,'真实模型 SQL/伪角色/输出欺骗与工具说明/资源/拒绝文本攻击记录；模型无审批权，未授权效果0；UI长文本注入反例。','样本有限，不声称所有提示攻击成功率为0。','scripts/live_validation.py airlock/semantic.py scripts/browser_edges.py','test_semantic','pytest live-validation browser-edges')
 row('A3',I,PASS,'原始审计/trace与阶段token费用、真实OTLP Collector、只读operator健康和Prometheus告警已实现。','生产跨服务内部span、告警接收器和账单仍需实际部署数据。','airlock/telemetry.py airlock/operations.py scripts/operational_check.py','test_operations test_telemetry','pytest container-integrations')
 row('C9.3',I,PASS,'真实 DeepSeek Agent 使用固定工具经真实 HTTP 提交/查询，独立拒绝后安全只读；模型无 reviewer 权限。','独立审批方为自动化fixture；真人交互效果仍受阻。','scripts/live_agent.py scripts/live_validation.py','test_live_agent_contract','pytest live-validation')
+# Autonomous 2026-10-03 additions retain every original criterion and its status.
+def extend(id, scope, missing, files, tests, logs):
+    r=RECORDS[id]
+    r['scope']=scope
+    r['actual_result']=scope
+    r['uncovered_scope']=missing
+    r['code_references']+=files.split()
+    r['test_modules']+=tests.split()
+    r['log_names']+=logs.split()
+
+extend('C1.3','HTTP/MCP受控接入与真实模型counter路径保留；新增固定GitHub仓库Issue适配器，真实#6完成批准→单次relay创建→完整回读→unknown对账→6事件验链。',
+    'GitHub relay收据是operator_attested；专用PAT direct路径只有离线契约，GitHub无目标CAS，通知/披露不能撤回；非任意工具透明代理。',
+    'airlock/github_adapter.py scripts/github_adapter.py scripts/github_live_relay.py','test_github_adapter test_private_files','github-relay')
+extend('C3.3','本地 exact 预演与受信CAS声明分开；GitHub create plan显式标记is_estimate/no_target_cas、1个Issue、通知数量未知及不完全可逆。',
+    'GitHub预览是计划，不是隔离执行或真实通知数量；实际权限/可见性变化没有目标CAS。',
+    'airlock/github_adapter.py','test_github_adapter','github-relay')
+extend('C3.4','本地锁内复核与CAS工具保持原契约；GitHub绑定请求/配置/计划摘要并持久单次send，unknown不重发。',
+    'append_only_create不声称目标状态CAS，实际创建前后的仓库外部变化窗口仍存在。',
+    'airlock/github_adapter.py','test_github_adapter','github-relay')
+extend('C6.2','独立审核路由和OIDC资源验证；新增Public Code+S256 PKCE、一次性callback、state/nonce与ID/access token绑定、私密导出和全交换超时子进程。',
+    '真实IdP账号/配置及本人登录、IdP强制MFA仍受阻；本地模拟issuer不代表真实身份验收，没有两人quorum。',
+    'airlock/oidc_login.py configs/oidc-login.example.json','test_oidc_login','')
+extend('C6.5','本地原子回滚、CAS工具收据对账；GitHub并发/崩溃/丢响应仅单次send，未知结果按完整绑定只读回查或operator relay收据收敛。',
+    '持久journal丢失/外部操作者额外写入不在保证内；GitHub无分布式exactly-once。',
+    'airlock/github_adapter.py','test_github_adapter','github-relay')
+extend('C10.2','审计链/检查点及独立S3 COMPLIANCE版本回读；新增专用可选STS session token，拒绝空token及全局AWS身份混入。',
+    '实际长期云桶、独立保管权限与真实STS身份仍未提供；临时容器不是永久WORM。',
+    'airlock/archive.py','test_archive','')
+extend('C12.2','真实运维健康/看板与operator-only检查；新增固定HTTPS/pins、独立webhook凭据、持久同ID重试/去重/恢复/目标变化及真实loopback接收器验证。',
+    '生产接收端和长期调度未部署；2xx只证明接收端接纳，lost response可同ID重试，接收端仍需去重。',
+    'airlock/alert_delivery.py configs/alert-webhook.example.json','test_alert_delivery','')
+extend('B1','200例40族合成回归、1个公开事故重构族、4条已授权GitHub维护轨迹及新增1条AIRLOCK relay实连轨迹；原始个人上下文留本机。',
+    '5条GitHub记录仍为单一任务族，缺代表性多来源日常危险语料和独立真实标签。',
+    'docs/USER_ACTIONS_20261003.md scripts/github_live_relay.py','test_github_adapter','github-relay')
+extend('B3','真实双人模板/仲裁前κ工具保留；两模型完成4例成对标注，审批与可逆性0/4一致，模型schema禁止冒充真人。',
+    '真人标注者0，human κ=null；模型标注不能替代独立人类gold或统计独立性。',
+    'benchmark/model_roles.py scripts/model_roleplay.py','test_model_roles','model-roles model-ui-v2')
+extend('C11.2','200例冻结与真实四臂历史实验保留；新增8次DeepSeek角色调用、模型成对标注和2模型8次原生UI模拟。发现并修复子模型ID泄露，旧结果标blinding_failure，fresh actor v2重验。',
+    '真实独立双人gold、新保留集、真人A/B和代表性业务日数据仍缺；模型试验不进入human acceptance。',
+    'benchmark/model_roles.py scripts/model_roleplay.py scripts/model_study_browser.py','test_model_roles','model-roles model-ui-v2')
+for key in ('C11.1','C11.4'):
+    RECORDS[key]['scope']=RECORDS[key]['scope'].replace('217 Python',str(len(JUNIT))+' Python')
+for key in ('H1','H2','H3'):
+    RECORDS[key]['scope']+=' 两模型8次v2原生UI模拟已完成并从真人统计排除。'
+    RECORDS[key]['uncovered_scope']='真人参与者0；模型的正确率/时长不能替代真人体验阈值。真实业务独立gold缺失。'
+    RECORDS[key]['code_references']+=['scripts/model_study_browser.py','benchmark/model_roles.py']
+    RECORDS[key]['log_names']+=['model-ui-v2']
+
+extend('T6','保留60对随机交替原始样本和100ms阈值；旧CI出现103.883ms失败后，提交路径复用一个连接并保持两次独立FULL提交；最终CI重新实测。',
+    '本地SQLite/HTTP、并发1；不把Windows诊断视为Linux性能证明，也不外推生产尾延迟。',
+    'airlock/service.py airlock/store.py tests/test_connection_lifecycle.py','test_connection_lifecycle','pytest')
+for key in ('C6.5','C11.4','R1'):
+    RECORDS[key]['scope']+=' SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。'
+    RECORDS[key]['code_references']+=['airlock/sqlite_runtime.py','scripts/build_sqlite_runtime.py','configs/sqlite-runtime.json','tests/test_sqlite_runtime.py']
+    RECORDS[key]['test_modules']+=['test_sqlite_runtime']
+    RECORDS[key]['log_names']+=['sqlite-runtime-build','sqlite-runtime-linked']
+for key in ('C11.1','C11.4','C6.5','R1','H1','H2','H3'):
+    RECORDS[key]['actual_result']=RECORDS[key]['scope']
+
 # Keep source references current without discarding individual original criteria.
 for record in RECORDS.values():
     record['code_references']=[f.replace('airlock/static/app.js','frontend/app/page.jsx') for f in record['code_references']]
@@ -155,7 +216,10 @@ def build():
             r.update(id=id,parent_id=original.get('parent_id'),criterion=original.get('criterion') or original.get('title'),
                 requirement_origin='docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed',
                 tested_commit_sha=SHA,test_ids=[c.get('classname','')+'::'+c.get('name','') for c in JUNIT if any(c.get('classname','').endswith(m) for m in modules)],
-                commands=[{'command':s['command'],'tested_commit_sha':s['tested_commit_sha'],'receipt':str(log_path(name).with_suffix('.log.status.json').relative_to(ROOT)).replace('\\','/')} for name,s in receipts],
+                commands=[{'command':s['command'],'tested_commit_sha':s['tested_commit_sha'],
+                    'tracked_source_dirty':s['tracked_source_dirty'],
+                    'evidence_role':'supporting_precommit_experiment' if s['tracked_source_dirty'] else 'frozen_source_validation',
+                    'receipt':str(log_path(name).with_suffix('.log.status.json').relative_to(ROOT)).replace('\\','/')} for name,s in receipts],
                 exit_codes=[{'command':name,'exit_code':s['exit_code'],'environment':'Ubuntu runner' if log_path(name).is_relative_to(FINAL) else 'Windows local'} for name,s in receipts],
                 evidence=[str(log_path(name).relative_to(ROOT)).replace('\\','/') for name,s in receipts],
                 fixes=['See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence'],
@@ -179,6 +243,15 @@ def build():
                 r['evidence']+=['evidence/full-audit-20261002/ci-negative-control-job.log','evidence/full-audit-20261002/ci-negative-control.json']
                 r['commands'].append({'command':['python','scripts/run_logged.py','evidence/negative-control.log','--','python','-c','raise SystemExit(23)'],'tested_commit_sha':'89c32625a49f7744389efe6284e942eee5a82332','run_url':'https://github.com/Changxin-YR/AIRLOCK/actions/runs/36986618577'})
                 r['exit_codes'].append({'command':'intentional-negative-control','exit_code':23,'environment':'Ubuntu runner','expected_failure':True})
+            if id in {'T6','C11.3','C11.4'}:
+                r['evidence']+=['evidence/autonomous-20261003/ci/failed-a68b11b-job.log',
+                    'evidence/autonomous-20261003/ci/failed-a68b11b.json',
+                    'evidence/autonomous-20261003/ci/failed-latency.json']
+                r['commands'].append({'command':'Historical failed latency acceptance gate; all 60 pairs preserved',
+                    'tested_commit_sha':'a68b11b39c2c2ed41e18d9001b90b66dcb652ba4',
+                    'run_url':'https://github.com/Changxin-YR/AIRLOCK/actions/runs/37085024673'})
+                r['exit_codes'].append({'command':'historical-latency-verifier','exit_code':1,'environment':'Ubuntu runner',
+                    'historical_failure':True,'basis':'actual verify_evidence step failed at read added p95=103.883327ms'})
             if id in {'A2','C11.1','C11.3','C11.4','R1','K5','G1','C2.5','C12.1','D1'}:
                 ci=json.loads((BASE/'CI_FINAL.json').read_text())
                 r['evidence']+=ci['git_evidence']
@@ -207,7 +280,7 @@ def build():
     required=set(INDEX['required_result_fields'])
     for r in targets:assert required<=r.keys(),(r['id'],required-r.keys())
     result={'schema_version':2,'phase':'controlled_closure_and_external_research_blockers','baseline_commit':INDEX['historical_base_commit'],
-        'tested_commit_sha':SHA,'junit_evidence':'evidence/closure-20261002/ci/verified/pytest.xml','target_count':126,'original_goals_all_satisfied':False,
+        'tested_commit_sha':SHA,'junit_evidence':str((FINAL/'pytest.xml').relative_to(ROOT)).replace('\\','/'),'target_count':126,'original_goals_all_satisfied':False,
         'status_semantics':'PASS only covers scope; PARTIAL with PASS is not a completed original goal. Parent PASS requires all children implemented/pass.',
         'counts':{'implementation':dict(Counter(r['implementation_status'] for r in targets)),'verification':dict(Counter(r['verification_status'] for r in targets))},'targets':targets}
     path=ROOT/'docs/acceptance/COMPLETION_MATRIX.json';path.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')

@@ -8,7 +8,7 @@
 
 | 待办 | 地址 | 下一步 |
 |---|---|---|
-| GitHub 适配与任务采集 | [#2](https://github.com/Changxin-YR/AIRLOCK/issues/2) | Codex 实现特定操作契约，服务实连时配置专用身份 |
+| GitHub 适配与任务采集 | [#2](https://github.com/Changxin-YR/AIRLOCK/issues/2) | 适配及真实 relay 已完成；长期服务直连时配置专用身份 |
 | 真实语料、标注和保留集 | [#3](https://github.com/Changxin-YR/AIRLOCK/issues/3) | 持续积累真实任务，安排两人独立标注 |
 | 真人 A/B 与日常治理 | [#4](https://github.com/Changxin-YR/AIRLOCK/issues/4) | 安排参与者和实际使用时间 |
 | 身份、云归档、告警与账单 | [#5](https://github.com/Changxin-YR/AIRLOCK/issues/5) | 按本手册提供外部环境 |
@@ -30,16 +30,18 @@
 3. **Resource owner** 选择 `Changxin-YR`；**Repository access** 选择 **Only select repositories**，只选本次接入仓库。广泛的会话操作授权不要求把所有仓库权限复制给服务器。
 4. 在仓库权限中先只授予 **Issues: Read and write**；Metadata 按平台必需权限保留。不要因为界面方便而额外授予管理、工作流或代码写权限。
 5. 完成本人的 GitHub 密码、MFA 或组织审批，生成后保存在自己的凭据管理器中。
-6. 只在部署拥有者的独立服务终端临时注入。下面是预留配置名，当前代码不会仅因为设置它就自动支持 GitHub：
+6. 只在部署拥有者的独立服务终端临时注入。适配器已经支持固定仓库的 Issue 创建，使用以下专用配置名：
 
 ```powershell
 $githubTokenSecure = Read-Host '粘贴 AIRLOCK 专用 GitHub Token' -AsSecureString
-$env:AIRLOCK_UPSTREAM_GITHUB_TOKEN = [System.Net.NetworkCredential]::new('', $githubTokenSecure).Password
+$env:AIRLOCK_GITHUB_API_TOKEN = [System.Net.NetworkCredential]::new('', $githubTokenSecure).Password
 Remove-Variable githubTokenSecure
 ```
 
 7. 告诉 Codex：选定仓库、环境变量名称、权限和到期时间。不要发送 Token 本文，也不要设置到所有进程继承的 Windows 全局环境变量中。服务凭据不下发给 Agent。
-8. Codex 完成适配器和反例验证后，再执行真实写入路径。普通 GitHub 接口不自动拥有 AIRLOCK 所要求的原子 CAS/幂等收据；未完成契约前不能仅把 API URL 填进现有注册表。
+8. Codex 按 `configs/github-adapter.example.json` 固定仓库 node ID、名称、可见性及 API IP pins；direct 模式还配置独立 gate、operator 服务凭据。注册工具显式使用 `execution_model=append_only_create`。适配器预览、审批、持久单次发送、未知结果只读回查均已实现；它不提供 GitHub 目标 CAS 或分布式原子提交。关闭 Issue 无法撤销通知和已公开内容。
+
+桌面连接器可作为可信 operator relay，适配器只导出已批准的精确请求，创建一次后回读完整内容再收敛。[真实 Issue #6](https://github.com/Changxin-YR/AIRLOCK/issues/6)已经完成这条流程；审核者为独立凭据测试脚本，真人为0。收据标记 `operator_attested`；这条路径不需要导出桌面凭据，也不等于服务器 PAT 直连。实际运行结果见 `docs/acceptance/AUTONOMOUS_CLOSURE_20261003.md`。
 
 GitHub 控制台步骤依据：[官方 Token 管理文档](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)。
 
@@ -136,17 +138,17 @@ Set-Location C:\Users\27363\Desktop\airlock
 4. 保留完整观察期和失败，不挑最好的一天。需要收集多长时间由真实工作量和预注册方案决定，不能承诺记录几天就能通过。
 5. Codex 负责导出/校验记录并计算用户日、审批次数和归并效果。你负责按正常工作使用并确认业务任务是否真正完成。
 
-## 5. 真实身份与 MFA：先提供公共配置，再由我接客户端
+## 5. 真实身份与 MFA：配置已经实现的 PKCE 客户端
 
-已有 OIDC 资源服务器校验；网页登录/回调客户端尚待接入。你不需要自行写 OAuth 代码。以下用支持 RFC9068 的 Auth0 作具体示例；已有公司 IdP 时先提供其公共配置，不必另买服务。
+已有 OIDC 资源服务器与 Authorization Code + S256 PKCE 登录客户端。你不需要自行写 OAuth 代码。以下用支持 RFC9068 的 Auth0 作具体示例；已有公司 IdP 时先提供其公共配置，不必另买服务。
 
 1. 登录你控制的身份平台并建立 AIRLOCK 测试租户。账户注册、本人MFA、账单或套餐选择由你操作；本步骤不要求购买套餐。
 2. 在 Auth0 **Applications → APIs** 建立 AIRLOCK API，记录 **Identifier/audience**，选 RS256。
 3. 打开该 API 的 **Access Token Settings → JSON Web Token (JWT) Profile**，选择 **RFC 9068** 并保存；把 token 最大有效期设为不超过本地配置上限（现示例3600秒）。[配置步骤](https://auth0.com/docs/get-started/apis/configure-access-token-profile)
 4. 提供租户 issuer、API audience、公开 JWKS 地址/文件，以及用于审核的测试账号公开 subject。JWKS 只含公钥；不提供私钥或完整 access token。默认 Auth0 profile 和 RFC9068 profile 的字段不同，不能混用。[官方字段说明](https://auth0.com/docs/secure/tokens/access-tokens/access-token-profiles)
-5. Codex 据此准备 `var/identity/oidc.json`、固定公钥与服务端reviewer路由。当前代码严格要求单一 audience；Auth0 常见交互令牌可能包含 API 与 userinfo 两个 audience，需先检查兼容性并完成客户端/验证方案，不能只改宽泛信任条件让它通过。
-6. 我给出真实实现的 callback URL 后，你再在身份平台登记该 URL、创建客户端并启用适用MFA。当前没有可直接填写为“已上线”的 AIRLOCK 登录回调。
-7. 你本人完成一次登录/MFA；随后由我验证主体、过期、撤销、非授权账号与审批路由。仅拿到token或身份平台控制台截图不代表完整登录验收通过。
+5. Codex 据此准备 `var/identity/oidc.json`、固定公钥与服务端reviewer路由。默认单 audience；若发行端还包含 userinfo，必须在 `additional_audiences` 显式列出准确地址。未知或重复 audience 仍拒绝。
+6. 建立 Native/Public OAuth 客户端，启用 Authorization Code + S256 PKCE，在身份平台登记准确回调 `http://127.0.0.1:8765/oidc/callback`。不配置客户端密钥或 `offline_access`，按你的测试政策启用 MFA。复制 `configs/oidc-login.example.json` 到本机 `var/identity/login.json`，由 Codex 固定 issuer、端点、IP pins、公开 client ID、JWKS 和主体映射。
+7. 在本机运行 `.venv/Scripts/python.exe -m airlock.oidc_login --config var/identity/login.json`，本人在打开的浏览器完成登录/MFA。成功时仅打印新建私密 token 文件的路径，不在终端打印 token。客户端验证 state、nonce、PKCE、ID/access token 主体及 client 绑定。随后由我验证非授权账号、过期、撤销和审批路由。隔离模拟 issuer 已测试，真实账号流程仍需此步骤。
 
 交给我的内容：平台名称、issuer、audience、JWKS公钥位置、客户端公开ID、测试主体ID和你已完成的登录步骤。密钥留在部署端。
 
@@ -161,7 +163,7 @@ Set-Location C:\Users\27363\Desktop\airlock
 3. **Bucket Versioning** 选择 **Enabled**；**Advanced settings → Object Lock → Enable**，确认该桶可启用对象锁定。开启后不能关闭 Object Lock 或暂停版本控制。[官方操作步骤](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-configure.html)
 4. 决定归档保留天数。项目示例是90天，不代表已经替你批准90天的云保留策略；COMPLIANCE对象在到期前不能按普通删除方式清理。
 5. 给独立保管者配置限定该桶/前缀的身份。Agent和AIRLOCK服务不取得归档凭据。我负责核对所需读取配置、写对象、指定版本读取及保留信息权限。
-6. 把 endpoint、region、bucket、prefix、retain_days 和凭据提供方式告诉我。若使用带 session token 的临时身份，当前归档CLI尚需相应适配；不要省略session token凑成可运行配置。
+6. 把 endpoint、region、bucket、prefix、retain_days 和凭据提供方式告诉我。归档CLI已支持临时身份：除专用 access/secret 外设置 `AIRLOCK_ARCHIVE_SESSION_TOKEN`，必须保留真实 session token。它不读取环境中的其他 AWS 身份或实例元数据。
 
 ### 两个角色分别操作
 
@@ -185,7 +187,7 @@ python scripts/archive_checkpoint_s3.py --config custody/archive.json --verify-r
 ### 告警
 
 1. 你选择实际能接收通知的渠道，提供测试接收端，例如你管理的Webhook或监控平台；接收人知晓这是测试。
-2. 我接入现有只读运维检查并配置调度，实际验证通知送达、恢复和去重。现CLI正常退出0、告警退出2。
+2. 复制 `configs/alert-webhook.example.json` 到本机配置，填写固定 HTTPS 接收地址和 IP pins，在独立运维环境设置 `AIRLOCK_ALERT_WEBHOOK_TOKEN`。接收端按 `Idempotency-Key/event_id` 去重。我运行 `scripts/operational_check.py --url http://127.0.0.1:8000 --output var/ops/status.json --alert-config var/ops/webhook.json --alert-state var/ops/notifications.db` 验证投递、恢复和重试；默认不带两个告警参数时不发通知。CLI 健康退出0、健康告警退出2、启用的投递失败/未知退出3。通知不包含 SQL、人员或凭据。
 3. 你确认在所选渠道收到测试通知。我保存状态与脱敏回执，不在公开仓库提交Webhook密钥。
 
 ## 7. 核对 DeepSeek 实际账单
@@ -196,7 +198,9 @@ python scripts/archive_checkpoint_s3.py --config custody/archive.json --verify-r
 4. 保存到本机 `var/billing/`，告诉我路径。无需在聊天中粘贴密钥。
 5. 我与项目本机ledger及已保存usage逐笔/分组核对，解释缓存计费、未知usage、历史无效响应和其他调用混入。
 
-当前已知值：642次调用、626有效/16历史无效；保守预留/结算估价¥1.1211824，共用预算上限¥3。这些是本机估价，账单核验前不写作实际扣费。本次GitHub与手册工作没有新增DeepSeek付费调用。
+当前已知值：650次调用、634有效/16历史无效；保守预留/结算估价¥1.13770512，共用预算上限¥3。本轮模型角色填写新增8次有效调用，增量估价¥0.01652272。已在调用前后成功读取官方余额 API；余额属于整个账户，不能替代本项目发票或逐笔账单。这些是本机估价，账单核验前不写作实际扣费。
+
+模型填写和真实浏览器回放已经完成，原始结果位于 `var/real-work/github-20261003/model-annotations/`。两位模型在审批与可逆性上意见不同，分歧完整保留。模型来源被校验器隔离，真人 CSV 继续空白，真人 κ 与 A/B 指标仍为 null。
 
 ## 8. 面试验收与最终交账
 

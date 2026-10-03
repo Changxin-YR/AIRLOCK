@@ -1,3 +1,20 @@
+# 2026-10-03 新证据与保留期限
+
+应用SHA `4aca4073114b5b992460903abf33c3721f4f8063`。来源收据保留原始SHA、dirty状态及退出码。
+
+| 去向 | 原始证据 | 保留期限 |
+|---|---|---|
+| Git：`evidence/autonomous-20261003/` | 本机348项收据、真实GitHub脱敏回执、模型v1盲化失败标记、v2合成UI原始导出/截图、CI日志及全ZIP | 无自动到期；依赖仓库/备份，非WORM |
+| Git：`evidence/autonomous-20261003/ci/acceptance-4aca407.zip` | 完整成功CI ZIP，含source.zip，84载荷已逐hash验证；SHA256 `da532d08ae18b911c9bc768d38f074c8e67abf81020258d9fa181f0e884afdb4` | 同Git历史保留 |
+| Actions：run 37087612206 / artifact 11260688999 | 同一ZIP的托管原副本 | 90天，到期 `2027-01-01T01:50:22Z` |
+| Git：`ci/acceptance-a68b11b-failed.zip` | 未过延迟门禁的完整失败包，SHA256 `a509b48f43f31481e3f3022568d45f809a432db6347c81edec628a2835a2c778` | Git无自动到期；对应Actions artifact11260098507到期2027-01-01T01:09:49Z |
+| 本机 `var/real-work/github-20261003/` | 原始个人任务/模型答案、账户余额、专用配置、私有账本 | 忽略，不入Git；无永久保留承诺。只公开路径/hash |
+| 临时IdP/Webhook/S3/Gate进程与数据库 | 隔离验证目标 | 测试结束清理各自临时资源；不算长期独立云存证 |
+
+本轮8次付费调用和GitHub实连在`5ca6fcf + dirty`阶段完成，后续代码冻结及全量CI绑定`4aca4073114b5b992460903abf33c3721f4f8063`；v2浏览器绑定`a68b11b39c2c2ed41e18d9001b90b66dcb652ba4`，此后只修改连接复用、SQLite运行时及其验收代码。未将历史收据改写到新SHA。Git永久副本一词仅指无自动到期，不代表不可删除或外部WORM。
+
+<details><summary>此前归档、失败记录及Actions期限（原文保留）</summary>
+
 # 本轮证据去向与保留期限
 
 应用测试SHA `25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb`；代码、最终报告提交、工作分支、PR、main与memory/progress分别记录。完整原始收据不改写旧tested SHA或dirty状态。
@@ -48,5 +65,7 @@ preflight、final、retest、final-code、final-17ccd2c分别代表各自源状�
 模型导出仅含合成任务与响应，不含API key。初次14次无效schema只有错误类型/时间/状态；新增诊断后2次超长输出保留原文与schema_errors，不能据此证明最初14次全部同一原因。
 
 本轮没有创建Release或外部不可变存储。后续报告提交触发的新Actions有自己的保留期限；应用代码不变时，17ccd2c完整包仍是本报告已核验应用证据锚点。
+
+</details>
 
 </details>

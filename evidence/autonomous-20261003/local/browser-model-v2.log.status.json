@@ -1,0 +1,22 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/model_study_browser.py",
+    "--tasks",
+    "benchmark/study-example.json",
+    "--deepseek",
+    "var/real-work/github-20261003/model-annotations/deepseek-run/deepseek-roleplay.json",
+    "--submodel-annotations",
+    "var/real-work/github-20261003/model-annotations/codex-subagent.json",
+    "--submodel-study",
+    "var/real-work/github-20261003/model-annotations/codex-study-v2-raw.json",
+    "--output",
+    "var/real-work/github-20261003/model-annotations/browser-run-v2"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T01:10:09.439895+00:00",
+  "duration_seconds": 7.987,
+  "tested_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4"
+}

@@ -1,65 +1,64 @@
-# AIRLOCK 闭环修复与逐项验收报告
+# AIRLOCK 全面修复与逐项验收报告（2026-10-03）
 
-2026-10-03 接续补充：经用户授权，已创建并回读核对 GitHub Issues #2—#5，保存4条真实项目维护执行记录及两份空白独立标注表。原始执行上下文在本机 `var/real-work/github-20261003/`，不进入公开Git。这些记录通过Codex GitHub连接器执行，未经过AIRLOCK审批；尚未形成独立金标或代表性日常语料，以下126项验收状态保持不变。详细人工操作见[用户步骤](../USER_ACTIONS_20261003.md)，公开回读摘要见 `evidence/github-handoff-20261003/summary.json`。
-
-当前受控工程闭环通过；原始全部目标尚未满足。126 条原记录逐项保留，没有以父项替代子项或删除目标。完整范围、源码、命令、真实退出码、原始证据与 tested_commit_sha 见 [矩阵 JSON](COMPLETION_MATRIX.json) / [可读矩阵](COMPLETION_MATRIX.md)。
+本轮已完成可在现有权限和环境内实施的代码、模型模拟与真实 GitHub 中转闭环。原始全部目标仍未满足。126项逐条记录保留在[矩阵 JSON](COMPLETION_MATRIX.json)和[可读矩阵](COMPLETION_MATRIX.md)，父项不能替代子项证据。具体人工步骤见[操作手册](../USER_ACTIONS_20261003.md)。
 
 ## 1. 当前实际实现的功能是否通过？
 
-通过声明范围的完整复验。最终应用测试提交 **25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb**，[Linux CI 37026082667](https://github.com/Changxin-YR/AIRLOCK/actions/runs/37026082667)全部通过：**217 Python、6 JavaScript、23 原生浏览器检查**，Next 构建、官方 MCP SDK、冻结 benchmark、真实 Docker Compose、受保护上游双内网、S3 Object Lock、Envoy/Collector、依赖审计及原始证据门禁。
+**PASS，限已声明和实测范围。** 应用提交 `4aca4073114b5b992460903abf33c3721f4f8063` 已推送；[Linux CI 37087612206](https://github.com/Changxin-YR/AIRLOCK/actions/runs/37087612206)通过 **348 Python、6 JavaScript、23原生浏览器检查**，含官方MCP SDK、Next构建、冻结benchmark、隔离Docker、上游网络、S3 Object Lock、Envoy/OTel、依赖审计与证据门禁。Windows本机同提交复验348项，exit0；v2模型浏览器回放在`a68b11b`通过，后续没有改模型或UI代码。现有Starlette弃用warning保留。
 
-真实 DeepSeek→AIRLOCK→注册 MCP counter 已验证：待审目标不变，拒绝后模型停止，独立批准后目标值 0→3、版本只加 1，原收据和审计有效。reviewer 是独立测试脚本，不计真人。该真实模型收据绑定 c3dd6ad；此后另修复了 SSE 身份租约并完整复验，模型调用收据保持原 SHA，不改写为新版本付费结果。
+最终Linux只读额外开销p95为 **4.662ms**（阈值100ms），静态分类p95 **0.079ms**（300ms），隔离预演p95 **11.638ms**（5000ms）。全部60对读样本和30写样本保留；并发1的合成基准不代表生产容量。
 
-Windows 本地 Python 215 项、6 JS、23 浏览器和 S3 临时容器通过；新增启动探测与 SSE 身份反例另通过，Linux 全套为217。Windows Compose 拉基础镜像仍网络失败（exit1），不改写成本机通过。Starlette TestClient 弃用 warning 保留。
+真实[Issue #6](https://github.com/Changxin-YR/AIRLOCK/issues/6)通过AIRLOCK审批→单次可信operator relay→GitHub完整回读→unknown对账→executed；6条审计验链有效。9项检查包括Agent审批拒绝、pending/rejected不可领取、重复claim拒绝、同键重查不重复创建。审核者是独立凭据的测试脚本，真人0。relay收据为`operator_attested`，不是专用PAT直接验证。真实写入收据保持原`5ca6fcf + dirty`来源；随后冻结的适配器实现由全量CI复验，未改写旧SHA。
 
 ## 2. 最初规划的全部目标是否满足？
 
-**否。** 当前矩阵为 **111 IMPLEMENTED / 15 PARTIAL；105 限定范围 PASS / 21 BLOCKED_EXTERNAL**，没有 NOT_RUN。记录含父项，数字不是独立实验数或完成率。
+**否。** 111 IMPLEMENTED / 15 PARTIAL；105限定范围PASS / 21 BLOCKED_EXTERNAL。记录含父项，不是完成率或126个独立实验。
 
-仍未关闭：G4、C8/C8.5、C11/C11.2、T1/T2、B1—B4、H1—H5、K1—K4、K6。涉及现场面试能力、独立真实数据/标签、真人实验、真实治理效果及依赖这些数据的失败判据。危险召回≥90%、真实FPR≤10%、双人κ≥0.75及原体验指标没有被工具通过替代。L0—L4、四条架构原则、技术指标、消融、失败判据和技术栈要求均在原矩阵逐条保留。
+未关闭：G4、C8/C8.5、C11/C11.2、T1/T2、B1—B4、H1—H5、K1—K4、K6。独立危险召回≥90%、真实FPR≤10%、双人κ≥0.75及原真人体验/治理指标仍无合格真实数据。四条原则、L0—L4、四臂消融、失败判据和技术栈要求均逐项保留。
 
 ## 3. 已经修复什么，证据是什么？
 
-| 增量/修正 | 主要源码与实测证据 |
+| 本轮完成项 | 代码与证据 |
 |---|---|
-| OIDC access-token 身份校验 | oidc.py/access.py；真实RSA签名、issuer/audience、过期、jti/主体撤销、角色伪造反例 |
-| SSE身份租约P1修复 | api.py；热映射主体变化立即断开；Git旧模块独立重放仍通知467字节、修复后0字节，目标均未变 |
-| 域名与连接绑定 | network.py；真实TLS/SNI、错误CA、混合metadata/DNS重绑定和公网HTTP拒绝 |
-| MCP会话/SSE上游 | mcp_upstream.py；官方SDK真实初始化/发现/调用/丢响应对账；会话替换、错误id和主动请求阻断 |
-| 受保护上游网络 | upstream_isolation.py；Agent侧实测无上游DNS/IP直连，独立批准/补偿和审计闭环 |
-| 独立审计归档 | archive.py；从固定官方源码构建S3测试服务，实际拒绝删版本/缩短保留/降级，回读锚点检测截尾 |
-| 运维与脱敏 | operations.py/export.py；operator-only健康/Prometheus告警，按审核路由过滤后白名单导出 |
-| 研究统计修正 | research.py/closure.py；危险语义预测与授权保护率拆分，缺标签不验收，四类分歧仲裁、影响误差/零分母 |
-| 真人工具闭环 | study.js及原生浏览器；任务hash、决定后独立理解题、正确率重算、自动化排除、同质量治理统计 |
-| 来源与真实模型 | 第一方事故数字核验、公开贡献者接口、新增4次真实MCP上游模型轨迹；不是外部采用或真人结果 |
+| GitHub Issue适配 | `github_adapter.py`固定仓库node ID/正文绑定，持久单次send、丢响应保unknown、只读回查；`test_github_adapter.py`及真实#6收据 |
+| PKCE登录客户端 | `oidc_login.py`的state/nonce/S256、ID/access token绑定、私密导出、显式audience白名单；真实TLS模拟issuer与错主体/重放反例 |
+| 登录慢响应P2 | 全令牌交换使用隔离子进程15秒预算，超时kill/wait；实际TLS慢headers/body反例 |
+| 中转文件权限P2 | `private_files.py`在请求前建立Windows私密ACL/POSIX0700+0600；失败reservation阻止再次领取；实际ACL测试 |
+| STS归档身份 | `archive.py`专用可选session token，空值拒绝、不会混入全局AWS凭据 |
+| 告警投递 | `alert_delivery.py`固定HTTPS/pins、专用凭据、脱敏、持久event ID、丢响应与本地提交失败重试、恢复和目标变化；真实loopback接收器 |
+| 模型角色填写 | 两模型各标注4条真实任务；DeepSeek另完成4条合成UI决定。模型schema及研究统计排除真人冒充 |
+| 盲化缺陷 | 旧子模型包的授权语义ID泄漏被发现；原试验标blinding_failure保留，改opaque ID并用无历史新子模型重验；v2两模型8次UI决定通过 |
+| CI尾延迟失败 | a68b11b原CI的只读开销p95=103.883327ms超过100ms。诊断发现每次申请两次连接/末连接checkpoint；改为一次连接保留两次独立FULL提交，新增失败/时钟/授权回归。阈值与样本没有更改 |
+| SQLite运行时 | 官方WAL-reset修复来源、源码归档SHA256和amalgamation SHA3校验；CI/Docker固定3.53.1，实际source ID及加载库摘要绑定；不受确认版本在打开持久WAL前拒绝 |
+| 拒绝启动顺序P2 | 最小反例显示先打开旧WAL后拒绝会在关闭时checkpoint；改内存检查先行，拒绝路径无持久连接，原始WAL字节保持不变。模拟旧版本，不宣称复现数据库损坏 |
 
-发现与修复详情见 [FINDINGS_AND_FIXES.md](FINDINGS_AND_FIXES.md)。新增 CI 曾因旧官方镜像不可拉取、启动探测未处理连接重置分别失败；原日志保留，修复为固定源码构建及只读就绪重试。没有绕过失败门禁，也没有重试写副作用。旧 P1 修复及失败记录仍保留。
+完整原始退出收据在`evidence/autonomous-20261003/local/`；新增测试与旧P0/P1回归全部纳入CI。独立24并发反例只有1次send，错回读不能收敛。两模型对审批要求、可逆性均0/4一致，分歧原样保留；模型不能据此放宽服务端权限。
+
+失败[CI 37085024673](https://github.com/Changxin-YR/AIRLOCK/actions/runs/37085024673)的完整ZIP与原始exit1/job日志在Git保留。旧Linux SQLite版本仅记录3.45.1，不能由此确定发行版是否回补；此次采用可核验的固定上游构建消除运行时不确定性。依据：[官方WAL-reset说明](https://sqlite.org/wal.html#walresetbug)、[3.53.1发布摘要](https://sqlite.org/releaselog/3_53_1.html)。Windows系统DLL未修改。
 
 ## 4. 哪些仍缺功能？
 
-本轮已知且可安全实施的受控功能清单已补齐。通用第三方工具仍要按实际目标实现 preview/CAS/收据/补偿契约；未实现任意工具零适配代理、任意Shell沙箱、通用生产数据库灾备或多租户列级权限。
+现有目标中可安全补齐的具体工具与实验入口已实现。任意第三方工具零适配代理、任意Shell执行沙箱、任意生产数据库灾备、多租户列级授权没有通用实现；未知工具仍fail-closed。新增GitHub仅创建Issue，不支持修改既有Issue/PR，也没有GitHub目标CAS或完全撤销通知的能力。
 
-OIDC资源服务器校验已经实现，交互式SSO/MFA仍需真实IdP客户端配置与接入。归档连接器和告警出口已经实现，真实独立云桶/保管权限、生产告警接收器与长期运行尚未部署。没有目标系统配置、权限与环境时，不擅自连接用户生产数据。以上范围限制与剩余真实验证分别标注，不用文档改写原目标。
+真实部署配置仍缺：服务器专用GitHub身份、真实IdP及账号策略、独立长期云桶/保管身份、实际告警接收端和部署侧调度。不能把本机模拟或一次中转当成这些环境已经部署。
 
-## 5. 哪些代码完成，但缺真实模型、真人或外部数据验证？
+## 5. 哪些代码完成，但缺真人或外部验证？
 
-- 真实 DeepSeek 凭据和预算障碍已解除；已有合成四臂模型结果与实际Agent闭环。独立真实危险金标仍缺，OpenAI备用provider仅离线契约。
-- 多来源导入、冻结/分组、预测覆盖、双人模板、仲裁前κ、影响误差及分层成本工具已完成；缺授权日常Agent日志、两名独立标注者及全新保留集。新增事故重构只是公开来源的受限类比。
-- 真人A/B、理解题、配对统计、可见时长、任务金标重算、质量匹配治理工具已完成；用户确认无人可安排，真人n=0、κ=null、活跃用户日与实际疲劳改善未知。
-- 真实IdP发证/登录、长期云归档、生产目标适配、真实账单及用户现场讲解仍需相应外部环境或人员。
+- 两名真实独立标注者、真实参与者与实际使用日：当前真人0、human κ=null、human A/B=null。模型填写及正确率不能替代。
+- 代表性多来源授权任务和全新独立保留集：已有5条GitHub维护轨迹，只有一条经过AIRLOCK relay，仍是单一任务族。
+- 真实IdP登录/MFA、专用PAT直连、长期云归档/真实STS、生产告警送达与恢复取回；代码和隔离反例已完成。
+- 供应商项目账单及用户本人现场讲解。已成功读取官方余额API，但账户余额不是本项目发票。
+
+真实DeepSeek障碍已解除；本轮8次新增调用全有效，累计650次（634有效、16历史错误），共用原账本保守预留/结算估价 **¥1.13770512 / ¥3**，增量¥0.01652272。有效usage估价累计¥0.86913512；不是实际账单。未重置ledger，未为v2盲包重试新增付费调用。
 
 ## 6. 代码和证据实际提交到了哪里？
 
-独立工作分支 **codex/full-audit-2026-10-02** 已推送应用测试提交 25d4f52；[草稿PR #1](https://github.com/Changxin-YR/AIRLOCK/pull/1)更新但未合并。**main仍为704b5035cf69f9a6c40c44eecd84c0d0741de849**。最终报告/证据提交SHA由 memory/progress 的 STATE.json 精确记录，应用SHA与交付SHA分别列明。
+应用提交`4aca4073114b5b992460903abf33c3721f4f8063`在远端`codex/full-audit-2026-10-02`；[草稿PR #1](https://github.com/Changxin-YR/AIRLOCK/pull/1)未合并。main仍为`704b5035cf69f9a6c40c44eecd84c0d0741de849`。本报告/矩阵/归档的后续交付提交与memory提交分别记录在`memory/progress:STATE.json`。
 
-本轮原始证据在 **evidence/closure-20261002/**。完整成功CI ZIP为 ci/acceptance-25d4f52.zip，1,397,386字节，SHA256 **cdb3092b25ec8867d62c3943a0f9adedb7e0b7b63273be198e3934ba480d087c**。已核对服务端digest、**78个manifest载荷**并独立执行verify_evidence（exit0）；原始命令收据与最终217例JUnit逐项核查。来源ZIP在完整包内，选择性展开的可审阅载荷也随Git保留。
+完整CI包`evidence/autonomous-20261003/ci/acceptance-4aca407.zip`，1,504,050字节，SHA256 `da532d08ae18b911c9bc768d38f074c8e67abf81020258d9fa181f0e884afdb4`，已核对GitHub digest、84个manifest载荷、全部JUnit与真实退出收据，独立verifier exit0。Actions artifact 11260688999到期`2027-01-01T01:50:22Z`；Git副本无自动到期，依赖仓库历史/备份，非外部WORM。详见[保留表](EVIDENCE_RETENTION.md)。
 
-Actions artifact11235800383原副本到期 **2026-12-31T15:18:49Z**；Git副本无自动到期，依赖仓库和备份保留，非WORM。两个失败CI的完整ZIP仍仅在Actions，Git保存其原始job日志/元数据；期限逐包列在 [EVIDENCE_RETENTION.md](EVIDENCE_RETENTION.md)。临时S3测试容器已删除，不算永久云归档。数据库、密钥、私有ledger与临时下载URL不提交。
+个人任务原始上下文、原始模型填写、账户余额、私有ledger及配置只留本机var，不入公开Git；路径/hash在`PRIVATE_EVIDENCE_INDEX.json`，不宣称永久归档。公开Git仅保存脱敏汇总、真实命令收据及合成UI原始导出。旧失败证据保留。
 
-真实模型累计 **642次，626有效/16历史无效**；同一账本保守占用 **¥1.1211824 / ¥3**，有效usage估价¥0.8526124。本次4调用增量¥0.00338424；均为价格表估算，不是供应商账单。旧600次四臂v1负结果保持原样，v2只完成既有开发样例修复复验，未伪称全量v2重跑。
+## 7. 是否仍有阻止验收的P0/P1？
 
-## 7. 是否仍有阻止验收通过的P0/P1？
-
-**当前声明且实测范围内，没有已知、未修复、可复现的P0/P1。** 217例、真实容器与模型轨迹只支持相应边界，不是全域安全认证。
-
-全部原目标仍不能宣布验收通过，阻碍为上述21条外部验证记录。所有支持写入、恢复和批量决定均保持独立审批；可逆性、剩余预算、模型建议与学习建议均不产生自动批准权。
+**当前已实现并实测范围内，没有已知未修复、可复现的P0/P1。** 这不是全域安全认证。全部原目标仍因上述21条真实验证记录受阻，不能宣告全目标验收通过。写入、补偿、批量决定继续需要独立审批；模型、可逆性、预算与学习建议都不授予权限。

@@ -38,7 +38,15 @@ def main():
             path=ROOT/c['receipt'];status=json.loads(path.read_text(encoding='utf-8'))
             require(status['command']==c['command'],id+': command mismatch')
             require(status['tested_commit_sha']==c['tested_commit_sha'],id+': SHA mismatch')
-            require(status['tracked_source_dirty'] is False,id+': dirty executable source')
+            require(c.get('tracked_source_dirty',False)==status['tracked_source_dirty'],id+': concealed source status')
+            if status['tracked_source_dirty']:
+                require(c.get('evidence_role')=='supporting_precommit_experiment',id+': dirty experiment mislabeled as frozen validation')
+                # Preserve real precommit/model/write receipts without making
+                # them the sole basis for functional acceptance. Every such
+                # row must also carry successful, clean executable validation.
+                clean=[other for other in r['commands'] if other.get('receipt') and other.get('tracked_source_dirty') is False
+                       and other.get('tested_commit_sha')==REPORT['tested_commit_sha']]
+                require(any(json.loads((ROOT/other['receipt']).read_text(encoding='utf-8')).get('exit_code')==0 for other in clean),id+': no frozen validation alongside experiment')
             require(any(x['exit_code']==status['exit_code'] for x in r['exit_codes']),id+': discarded failure')
             checked_receipts.add(c['receipt'])
     corpus=ROOT/'evidence/full-audit-20261002/final/synthetic-cases.jsonl'

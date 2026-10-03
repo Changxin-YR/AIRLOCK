@@ -1,0 +1,105 @@
+{
+  "scope": "Guard ordering only. Actual SQLite is safe 3.53.1; sqlite_version is overridden to exercise rejection. No data-corruption claim.",
+  "results": [
+    {
+      "kind": "store",
+      "existing_wal": true,
+      "runtime_rejected": true,
+      "connected_targets": [
+        ":memory:"
+      ],
+      "persistent_paths_unchanged": true,
+      "fresh_parent_directory_created": false,
+      "before": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "637c4726ac59232226a063893aee9e03dd21522e4eec2e14bd0bad5f10b5317c"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "88e0aabdea91e4b5e885b4d0d6e956ae4e913a9065c7498e42240ee522f55a7e"
+        }
+      },
+      "after": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "637c4726ac59232226a063893aee9e03dd21522e4eec2e14bd0bad5f10b5317c"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "88e0aabdea91e4b5e885b4d0d6e956ae4e913a9065c7498e42240ee522f55a7e"
+        }
+      }
+    },
+    {
+      "kind": "store",
+      "existing_wal": false,
+      "runtime_rejected": true,
+      "connected_targets": [
+        ":memory:"
+      ],
+      "persistent_paths_unchanged": true,
+      "fresh_parent_directory_created": false,
+      "before": {},
+      "after": {}
+    },
+    {
+      "kind": "github_adapter",
+      "existing_wal": true,
+      "runtime_rejected": true,
+      "connected_targets": [
+        ":memory:"
+      ],
+      "persistent_paths_unchanged": true,
+      "fresh_parent_directory_created": false,
+      "before": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "45398d7f3b861796a13137c45d1b3e3d1c7e4743e81e090d11bf108b7c8443f8"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "9a9c58850152794ff9f5c2d4036b017b31d3e9d8df99f3ba723cc5e5fe0fe9b6"
+        }
+      },
+      "after": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "45398d7f3b861796a13137c45d1b3e3d1c7e4743e81e090d11bf108b7c8443f8"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "9a9c58850152794ff9f5c2d4036b017b31d3e9d8df99f3ba723cc5e5fe0fe9b6"
+        }
+      }
+    },
+    {
+      "kind": "github_adapter",
+      "existing_wal": false,
+      "runtime_rejected": true,
+      "connected_targets": [
+        ":memory:"
+      ],
+      "persistent_paths_unchanged": true,
+      "fresh_parent_directory_created": false,
+      "before": {},
+      "after": {}
+    }
+  ]
+}

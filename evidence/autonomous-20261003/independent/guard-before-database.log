@@ -1,0 +1,27 @@
+{
+  "scope": "Guard ordering only. Actual SQLite is safe 3.53.1; sqlite_version is overridden to exercise rejection. No data-corruption claim.",
+  "runtime_rejected": true,
+  "target_wal_existed_before": true,
+  "target_wal_exists_after": false,
+  "database_changed_despite_rejection": true,
+  "before": {
+    "synthetic.db": {
+      "bytes": 4096,
+      "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+    },
+    "synthetic.db-shm": {
+      "bytes": 32768,
+      "sha256": "98352899db8cac2d98a2d4f2100a1debf8058e0be02e41155eb33036d6a2c6f4"
+    },
+    "synthetic.db-wal": {
+      "bytes": 12392,
+      "sha256": "3d9acd9b6954aad48bafc6f8f65ab7eed36b42d6e2cc3ab75a699c976d22e171"
+    }
+  },
+  "after": {
+    "synthetic.db": {
+      "bytes": 8192,
+      "sha256": "de584343cba6886eee59aef44362fe372cc6f8df2e8815b07f162d6ae6950a9b"
+    }
+  }
+}

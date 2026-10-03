@@ -1,0 +1,20 @@
+{
+  "tested_commit_sha": "4aca4073114b5b992460903abf33c3721f4f8063",
+  "scope": "Documentation gate counterexamples only; no mutation of source evidence or claims about functional acceptance",
+  "documentation_edits_uncommitted_at_test": true,
+  "gate_file_hashes": {
+    "docs\\acceptance\\validate_matrix.py": "9d5f09f76b3e0bd9637a888675de1135b63e93d22c05f18dfe30162ba5ce2a7d",
+    "var\\finalize_autonomous_docs.py": "21e72246408ccb79c50c317cb0c20555fa38ac7d453b26e7fd50843e0e32dedf"
+  },
+  "old_clean_receipt_only_rejected": true,
+  "old_matrix_new_ci_rejected": true,
+  "reports_unmodified": true,
+  "unchanged_report_hashes": {
+    "docs\\acceptance\\COMPLETION_MATRIX.json": "d494254af5fffa860800016975f70d652a49304b7af9ef92c20068f9bd9d4d48",
+    "docs\\acceptance\\COMPLETION_MATRIX.md": "f8570117783fe4aed9d46a2eb8f5ef9ff859fcf4f386ffa43a7326e6e336b40f",
+    "docs\\acceptance\\FINAL_REPORT.md": "dc2dde85fb8ca3738b6d53a5e4adc0c116ea0d0a30b830612271eabc4a0385b6",
+    "docs\\acceptance\\DELIVERY_STATE.json": "c5f781741c6e6a8412a69f04a1f2e057ab3ce54c501d373d20cd4788f1e8c666",
+    "docs\\acceptance\\EVIDENCE_RETENTION.md": "41ff462c9f54e8f5d0652886f8a653183857cb87777603b97fc22d96b82a760f",
+    "docs\\acceptance\\FINDINGS_AND_FIXES.md": "60186ccb9f5c195ec6b3f241ea44bb87c9878e1753eef5a746b007f49d2b66ae"
+  }
+}

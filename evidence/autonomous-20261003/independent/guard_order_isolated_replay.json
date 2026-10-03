@@ -1,0 +1,71 @@
+{
+  "scope": "Replay the old connection order beside the fixed Store, without git resets.\n\nThe old arm embeds only the formerly executed connection/PRAGMA/guard/close\nsequence. The initial actual-Store counterexample remains separately archived.\nActual SQLite is safe; an overridden version function simulates rejection.\nThis proves guard ordering, not the upstream database-corruption bug.\n",
+  "actual_runtime": "3.53.1",
+  "simulated_reported_version": "3.45.1",
+  "results": [
+    {
+      "arm": "old_connection_order",
+      "runtime_rejected": true,
+      "connected_targets": [
+        "C:\\Users\\27363\\Desktop\\airlock\\var\\security-review-20261003\\guard-replay-56aa0f93f2d04441a43aa110c4e32b5e\\old_connection_order\\synthetic.db"
+      ],
+      "persistent_files_changed": true,
+      "before": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "4449675c43f87fddec06e2c3f580a2274449907ce385d3c4798996d847556312"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "a2cb7f69212dbf3449acba09e359777fa9f30ab1afefb27802f1d51bd7e3dca0"
+        }
+      },
+      "after": {
+        "synthetic.db": {
+          "bytes": 8192,
+          "sha256": "fa93edcfd450f7dc056667061b6e1c63f911a63688d906a1f560c9c9f3ed4f24"
+        }
+      }
+    },
+    {
+      "arm": "fixed_store_constructor",
+      "runtime_rejected": true,
+      "connected_targets": [
+        ":memory:"
+      ],
+      "persistent_files_changed": false,
+      "before": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "e0a3f8e05b16a265f69ffb868eb33ab9b7874076e3e07d22ab3990dfa16f6b3b"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "6c12ed99450954cac20f6f2bfcd2a47ea6d7986b4474e7ca2b27e3e8b1a79ed6"
+        }
+      },
+      "after": {
+        "synthetic.db": {
+          "bytes": 4096,
+          "sha256": "0ab48b25cba617ed3a4acca0161813b314c095ef63544bb4af60769eb1012977"
+        },
+        "synthetic.db-shm": {
+          "bytes": 32768,
+          "sha256": "e0a3f8e05b16a265f69ffb868eb33ab9b7874076e3e07d22ab3990dfa16f6b3b"
+        },
+        "synthetic.db-wal": {
+          "bytes": 12392,
+          "sha256": "6c12ed99450954cac20f6f2bfcd2a47ea6d7986b4474e7ca2b27e3e8b1a79ed6"
+        }
+      }
+    }
+  ]
+}

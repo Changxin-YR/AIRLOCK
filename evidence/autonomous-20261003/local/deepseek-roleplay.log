@@ -1,0 +1,1 @@
+{"status": "MODEL_PILOT_COMPLETE", "model_annotations": 4, "model_decisions": 4, "human_participants": 0, "before": {"calls": 642, "reserved_or_settled_amount": 1.1211824, "budget": 3.0, "currency": "CNY", "invalidations": 9}, "after": {"calls": 650, "reserved_or_settled_amount": 1.13770512, "budget": 3.0, "currency": "CNY", "invalidations": 9}}

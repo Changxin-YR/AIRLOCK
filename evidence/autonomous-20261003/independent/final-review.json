@@ -1,0 +1,143 @@
+{
+  "reviewed_at_utc": "2026-10-03T01:50:04Z",
+  "reviewed_commit_sha": "4aca4073114b5b992460903abf33c3721f4f8063",
+  "reviewer": "github_adapter sub-agent",
+  "authorship_disclosure": "This reviewer implemented request-local connection reuse and its lifecycle tests. SQLite runtime/build/guard-order fixes were implemented by another worker; evidence verification and Docker probe integration were implemented by the parent. The old/fixed guard probes are separate reproductions.",
+  "scope": [
+    "Local Gate.submit borrowed connection with independent expiry and submission transactions",
+    "SQLite source archive and amalgamation hash pinning; exact runtime version/source ID/compile-options binding",
+    "Linux mapped-library binary SHA256 versus the explicit build report",
+    "CI and Docker link verification without LD_LIBRARY_PATH, plus minimal-environment subprocess test",
+    "Guard rejection ordering before any persistent Store or GitHub adapter database access"
+  ],
+  "summary": "No unresolved P0/P1 found in the reviewed boundary. Two P2 issues found during this review were fixed and their counterexamples/evidence retained. This is not a proof against privileged runtime/library tampering or a reproduction of SQLite corruption.",
+  "unresolved_p0_p1": [],
+  "findings": [
+    {
+      "id": "sqlite-guard-before-persistent-open",
+      "severity": "P2",
+      "status": "FIXED",
+      "problem": "The original guard ran after opening an existing WAL database; refusal followed by close still checkpointed the WAL.",
+      "old_observation": {
+        "main_database_bytes_before": 4096,
+        "main_database_bytes_after": 8192,
+        "wal_bytes_before": 12392,
+        "wal_exists_after": false,
+        "logical_corruption_reproduced": false
+      },
+      "fix": "Store and IssueAdapter call require_safe_python_runtime against a deterministically closed :memory: connection before creating directories or opening target files. Target enable_wal checks remain.",
+      "validation": "Four fixed probes (Store/GitHub adapter x existing WAL/fresh path) connected only to :memory: and preserved all persistent file bytes/existence. An isolated old-order/fixed replay remains runnable without resetting the repository.",
+      "evidence": [
+        "var/security-review-20261003/guard_before_database_probe.py",
+        "var/security-review-20261003/guard_before_database_probe.json",
+        "var/security-review-20261003/guard-before-database.log",
+        "var/security-review-20261003/guard-before-database.log.status.json",
+        "var/security-review-20261003/guard_before_database_fixed_probe.py",
+        "var/security-review-20261003/guard_before_database_fixed_probe.json",
+        "var/security-review-20261003/guard-before-database-fixed.log",
+        "var/security-review-20261003/guard-before-database-fixed.log.status.json",
+        "var/security-review-20261003/guard_order_isolated_replay.py",
+        "var/security-review-20261003/guard_order_isolated_replay.json",
+        "var/security-review-20261003/guard-order-isolated-replay.log",
+        "var/security-review-20261003/guard-order-isolated-replay.log.status.json"
+      ]
+    },
+    {
+      "id": "sqlite-built-to-mapped-binary-binding",
+      "severity": "P2",
+      "status": "FIXED",
+      "problem": "Version/source ID alone did not bind the loaded shared library to the binary emitted by the recorded build.",
+      "fix": "mapped_sqlite_libraries hashes the actually mapped Linux library path; verify_linked_build_report requires a single library matching build.library_sha256 and version/source ID/compile options. CI and Docker pass --build-report. Docker runtime probe repeats the binding. Evidence gate compares the build report hash and mapped library hash.",
+      "validation": "Final code and negative hash/missing/ambiguous mapping tests reviewed. Actual Linux build/load and Docker execution remain subject to the new frozen-commit CI run; this review does not claim those remote results.",
+      "evidence": [
+        "airlock/sqlite_runtime.py",
+        "tests/test_sqlite_runtime.py",
+        ".github/workflows/ci.yml",
+        "Dockerfile",
+        "scripts/docker_smoke.py",
+        "scripts/verify_evidence.py"
+      ]
+    }
+  ],
+  "connection_lifecycle_review": {
+    "single_connection_per_local_submit": true,
+    "independent_durable_commits": 2,
+    "expiry_commit_precedes_submission_admission": true,
+    "failure_preserves_clock_high_water_and_expired_state": true,
+    "action_effect_audit_atomicity_preserved": true,
+    "nested_transaction_rejected": true,
+    "statement_cache": 0,
+    "synchronous_not_lowered": true,
+    "upstream_submission_path_not_optimized": true,
+    "targeted_receipt": "var/security-review-20261003/connection-lifecycle.log.status.json",
+    "profiling_evidence": "var/security-review-20261003/profile_read_connections.json",
+    "profiling_limit": "Windows in-process diagnostic, not Linux HTTP acceptance; retained all 60 samples per arm. Does not prove the cause of all four CI outliers."
+  },
+  "independently_observed_exit_codes": {
+    "connection-lifecycle.log.status.json": 0,
+    "guard-before-database.log.status.json": 0,
+    "guard-before-database-fixed.log.status.json": 0,
+    "guard-order-isolated-replay.log.status.json": 0
+  },
+  "evidence_sha_note": "Each command receipt retains its actual tested/start commit and dirty-worktree flag. The reviewed commit above is not substituted into historical receipts.",
+  "runtime_limits": [
+    "Old version strings with possible vendor backports are treated as unconfirmed, not automatically asserted vulnerable.",
+    "The guard counterexamples run a safe actual SQLite 3.53.1 with a simulated sqlite_version result; no corruption was reproduced.",
+    "Linux shared-library build/load and container evidence must be read from the actual new CI artifacts before claiming final runtime acceptance.",
+    "Trusted operator configuration, source pin, compiler/toolchain, and runtime filesystem remain within the declared trust boundary."
+  ],
+  "official_sources": [
+    "https://sqlite.org/wal.html",
+    "https://sqlite.org/releaselog/3_53_1.html"
+  ],
+  "reviewed_source_files": [
+    {
+      "path": "airlock/service.py",
+      "sha256": "f99c935110b6141c756528f3a305481d068cdef48dbad0163325d5f9f57ed07d"
+    },
+    {
+      "path": "airlock/store.py",
+      "sha256": "6611ddfe807232d5cb025529f2e2103e284869510b9a16024f9a93aa00b76f45"
+    },
+    {
+      "path": "airlock/sqlite_runtime.py",
+      "sha256": "1fa1fe47c530313e5d2d5bffe3b4aefa324ee9722a836507d004f2d8d7d92bd0"
+    },
+    {
+      "path": "airlock/github_adapter.py",
+      "sha256": "911bccc5068288901ef8601c522e66023fed8c9b1f3b8d7c41dec1d7abbca663"
+    },
+    {
+      "path": "scripts/build_sqlite_runtime.py",
+      "sha256": "50b3152fab7a993d086e4c709d3bf425a48a03e3353cacec2a8facd99ddb40a8"
+    },
+    {
+      "path": "scripts/docker_smoke.py",
+      "sha256": "947a441d481f5e431f43966056a28d98e524886b6b48f30d9ff9e699862d1970"
+    },
+    {
+      "path": "scripts/verify_evidence.py",
+      "sha256": "8f86d0a0f4bf0ab6e8b35fe0e2981c28e4ef39526ba097edfda02e2aedf4b075"
+    },
+    {
+      "path": "tests/test_connection_lifecycle.py",
+      "sha256": "d1bf7870cae11b267c59dca7cb9fa46d5e7976350677a1c734e2a089acd9f547"
+    },
+    {
+      "path": "tests/test_sqlite_runtime.py",
+      "sha256": "c11241460a6319a206d8652de2241c63cf16eb45822b92d3016c5cfbb9d6a0d0"
+    },
+    {
+      "path": "configs/sqlite-runtime.json",
+      "sha256": "6503b616cc68bcb0e58d917b0dd536850a71bc5b56ad73f14b5370d090a8da53"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "8dc71c476a9f59ebe8b466e0d9435e4fb0618ed37a3ba6c53b44317fcdb437a1"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "b4e47049c655161c7be042e02e436bcfe05a8f0368eb95b2b45a57a06509d81e"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "mode": "real_docker_compose",
+  "project": "airlock-check-b3c4710d8621",
+  "probe": {
+    "pending_id": "9feaf2a4b45c4150998f3c4b26872c50",
+    "uid": 10001,
+    "effective_capabilities": 0,
+    "checks": [
+      "agent_has_no_reviewer_or_audit_secret",
+      "target_database_not_mounted_in_agent",
+      "no_server_config_or_docker_socket",
+      "non_root_read_only_no_capabilities",
+      "agent_cannot_approve_or_read_audit",
+      "SQL_cannot_read_control_tables",
+      "write_waits_for_separate_reviewer"
+    ]
+  },
+  "runtime_image_id": "sha256:d8e99f489aaaa872e7a7dac7d0c3a819109931c6c04a563c6b085334a6637eff",
+  "rows_before_independent_approval": 1206,
+  "rows_after_approval_and_restart": 0,
+  "additional_checks": [
+    "pending_survives_server_restart_without_execution",
+    "approved_effect_and_audit_persist_without_reseeding",
+    "compose_network_is_internal",
+    "server_dual_network_agent_internal_only",
+    "published_port_is_loopback_only"
+  ],
+  "limitations": [
+    "controlled synthetic deployment, not a general container escape audit",
+    "reviewer is automated test code, not a human A/B participant"
+  ]
+}

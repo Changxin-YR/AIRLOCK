@@ -1,0 +1,31 @@
+2026-10-03T01:15:16.930Z	info	otelconftelemetry/tracer.go:47	Internal trace telemetry disabled	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}}
+2026-10-03T01:15:16.931Z	info	service@v0.162.0/service.go:233	Starting otelcol...	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}, "Version": "0.162.0", "NumCPU": 4}
+2026-10-03T01:15:16.931Z	info	extensions/extensions.go:43	Starting extensions...	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}}
+2026-10-03T01:15:16.931Z	info	otlpreceiver@v0.162.0/otlp.go:175	Starting HTTP server	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}, "otelcol.component.id": "otlp", "otelcol.component.kind": "receiver", "endpoint": "[::]:4318"}
+2026-10-03T01:15:16.931Z	info	service@v0.162.0/service.go:256	Everything is ready. Begin running and processing data.	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}}
+2026-10-03T01:15:16.947Z	info	Traces	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces", "resource spans": 1, "spans": 1}
+2026-10-03T01:15:16.947Z	info	ResourceSpans #0
+Resource SchemaURL: 
+Resource attributes:
+     -> service.name: Str(airlock)
+ScopeSpans #0
+ScopeSpans SchemaURL: 
+InstrumentationScope airlock.audit 1
+Span #0
+    Trace ID       : 09602dc74dcf40a7ae38e389e478b377
+    Parent ID      : 
+    ID             : 44b511943cabddb5
+    Name           : action.evaluated
+    Kind           : Internal
+    Start time     : 2026-10-03 01:15:16.920982168 +0000 UTC
+    End time       : 2026-10-03 01:15:16.932391168 +0000 UTC
+    Status code    : Unset
+    Status message : 
+    DroppedAttributesCount: 0
+    DroppedEventsCount: 0
+    DroppedLinksCount: 0
+Attributes:
+     -> airlock.action_id: Str(560e968012c9440b96a41f8664f464a0)
+     -> airlock.state: Str(pending)
+     -> airlock.request_id: Str(a1d9e0e8abea41b08f65c30fddde6a1a)
+	{"resource": {"service.instance.id": "3d45fec5-75da-4a97-a325-ae35959054d2", "service.name": "otelcol", "service.version": "0.162.0"}, "otelcol.component.id": "debug", "otelcol.component.kind": "exporter", "otelcol.signal": "traces"}

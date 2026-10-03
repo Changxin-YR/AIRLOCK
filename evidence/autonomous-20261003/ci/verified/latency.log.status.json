@@ -1,0 +1,16 @@
+{
+  "command": [
+    "python",
+    "scripts/measure_latency.py",
+    "--samples",
+    "60",
+    "--output",
+    "evidence/latency.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T01:56:48.980678+00:00",
+  "duration_seconds": 3.014,
+  "tested_commit_sha": "4aca4073114b5b992460903abf33c3721f4f8063",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "4aca4073114b5b992460903abf33c3721f4f8063"
+}

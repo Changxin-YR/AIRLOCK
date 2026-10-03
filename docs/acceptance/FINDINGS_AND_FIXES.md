@@ -56,3 +56,18 @@ CI run 36986618577 的 `intentional-negative-control` 子进程退出 23，GitHu
 F016（P1，SSE身份租约绑定）：热重载把同一令牌映射到另一身份时，原连接只检查认证非空，可能继续发送原reviewer范围的动作ID通知；没有因此授予决定/执行权限。25d4f52改为每次通知前要求当前认证身份与连接主体完全相同，否则结束连接。test_sse_lease_ends_when_authenticated_identity_changes和真实SSE传输相关14项复验通过，最终CI另含该必需反例。
 
 独立旧模块重放见 evidence/closure-20261002/sse_identity_replay.py 与相邻原始log/exit收据：直接从Git载入cc9d687的API模块，在相同固定依赖和临时数据库中模拟热映射。旧模块在主体变化后仍通知动作ID（467字节），修复版立即结束（0字节）；两者目标均保持1206行。仅心跳等待被加速，未替换身份或通知实现。
+
+
+## 自主补齐阶段（2026-10-03）
+
+最终源码`4aca4073114b5b992460903abf33c3721f4f8063`，CI 37087612206 的348项Python与全部其他门禁通过。以下为子模型独立代码审查、隔离反例及主执行者复验，未宣称真人独立评审。证据前缀`evidence/autonomous-20261003/`。
+
+| ID | 严重度/性质 | 发现与修复 | 原始证据与复验 |
+|---|---|---|---|
+| F017 | P2，中转凭据落盘 | 导出领取收据需要在发请求前保证权限；新增私密独占目录/文件reservation，Windows ACL及POSIX权限失败时不发claim | `local/private-output-tests*.log`、`tests/test_private_files.py`；旧工具/ACL解码失败日志保留 |
+| F018 | P2，登录总时限 | 单个socket超时不能约束慢headers/body总耗时；整个token exchange置于15秒限时子进程，stdin管道不把授权码放argv | `tests/test_oidc_login.py`真实TLS慢响应、callback超时及私密导出；最终CI |
+| F019 | 研究盲化缺陷 | 子模型v1任务ID含授权语义；改opaque ID，新无历史actor重做 | `models/v1-blinding-failure.json`、原v1报告、`models/v2/`；模型结果仍不进入human metrics |
+| F020 | P1，性能验收 | CI 37085024673 read added p95=103.883327ms超过100ms。申请路径改为单连接、两个独立FULL事务；保留先提交过期/高水位和失败回滚 | 完整失败ZIP/exit1、`independent/profile_read_connections.*`；最终Linuxp95=4.662ms。阈值/60对样本不变，不宣称已定位所有尾延迟来源 |
+| F021 | 运行时安全加固 | 历史SQLite3.45.1缺少准确vendor回补记录；采用官方固定3.53.1及源码双摘要验证。现存WAL关闭会checkpoint，故内存版本检查提前到任何持久open前 | `sqlite/research.json`、`independent/guard*`；模拟旧版本而非复现损坏。`tests/test_sqlite_runtime.py`四种拒绝路径字节不变，CI/Docker实际加载source ID及.so hash与构建报告绑定 |
+
+真实GitHub #6取得operator_attested收据、6条有效审计和9项边界检查；独立24并发只有一次发送，错误回读不收敛。GitHub无目标CAS，不能完全撤销通知，未知状态不重试mutation。模型语义建议、预算和恢复能力均未取得审批权限。
