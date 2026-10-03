@@ -38,8 +38,13 @@ def client(config):
     # credentials from another project.
     key=os.environ['AIRLOCK_ARCHIVE_ACCESS_KEY'];secret=os.environ['AIRLOCK_ARCHIVE_SECRET_KEY']
     if len(key)<8 or len(secret)<32:raise ValueError('dedicated archive credentials required')
+    # Omission permits long-lived project credentials. A present but empty or
+    # malformed STS token is a configuration error, never a downgrade to them.
+    token=os.environ.get('AIRLOCK_ARCHIVE_SESSION_TOKEN')
+    if token is not None and (not token or any(not 33<=ord(c)<=126 for c in token)):
+        raise ValueError('dedicated archive session token invalid')
     s3=boto3.client('s3',endpoint_url=config.endpoint,region_name=config.region,
-        aws_access_key_id=key,aws_secret_access_key=secret,verify=config.ca_file or True,
+        aws_access_key_id=key,aws_secret_access_key=secret,aws_session_token=token,verify=config.ca_file or True,
         config=Config(signature_version='s3v4',connect_timeout=3,read_timeout=5,
                       retries={'max_attempts':0},s3={'addressing_style':'path'},proxies={}))
     # Some S3-compatible retention APIs still require Content-MD5, even when

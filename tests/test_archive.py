@@ -41,3 +41,48 @@ def test_archive_readiness_retries_connection_reset_without_retrying_writes():
             return {}
     fixture=Fixture();wait_ready(fixture,attempts=3,pause=0);assert fixture.calls==3
     with pytest.raises(RuntimeError,match='did not become ready'):wait_ready(Fixture(),attempts=1,pause=0)
+
+
+@pytest.mark.parametrize('session_token',[None,'synthetic-sts-session-token+/='])
+def test_archive_only_signs_with_dedicated_credentials(monkeypatch,session_token):
+    from urllib.parse import parse_qs,urlparse
+    from airlock.archive import client
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_ACCESS_KEY','dedicated-test-access-key')
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_SECRET_KEY','dedicated-test-secret-'+'x'*32)
+    monkeypatch.setenv('AWS_ACCESS_KEY_ID','unrelated-global-access-key')
+    monkeypatch.setenv('AWS_SECRET_ACCESS_KEY','unrelated-global-secret-'+'y'*32)
+    monkeypatch.setenv('AWS_SESSION_TOKEN','unrelated-global-session-token')
+    if session_token is None:monkeypatch.delenv('AIRLOCK_ARCHIVE_SESSION_TOKEN',raising=False)
+    else:monkeypatch.setenv('AIRLOCK_ARCHIVE_SESSION_TOKEN',session_token)
+    s3=client(ArchiveConfig(endpoint='https://archive.example',bucket='evidence'))
+    try:
+        query=parse_qs(urlparse(s3.generate_presigned_url('get_object',Params={'Bucket':'evidence','Key':'fixture'},ExpiresIn=60)).query)
+        assert query['X-Amz-Credential'][0].startswith('dedicated-test-access-key/')
+        assert query.get('X-Amz-Security-Token')==([session_token] if session_token else None)
+    finally:s3.close()
+
+
+@pytest.mark.parametrize('session_token',['',' ','\t','\n','token\r\ninjected','token unicode \u4e2d'])
+def test_archive_present_invalid_session_token_never_downgrades(monkeypatch,session_token):
+    import airlock.archive as archive
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_ACCESS_KEY','dedicated-test-access-key')
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_SECRET_KEY','dedicated-test-secret-'+'x'*32)
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_SESSION_TOKEN',session_token)
+    def forbidden(*args,**kwargs):raise AssertionError('must reject before creating an SDK client')
+    monkeypatch.setattr(archive.boto3,'client',forbidden)
+    with pytest.raises(ValueError,match='session token invalid'):
+        archive.client(ArchiveConfig(endpoint='https://archive.example',bucket='evidence'))
+
+
+@pytest.mark.parametrize('missing',['AIRLOCK_ARCHIVE_ACCESS_KEY','AIRLOCK_ARCHIVE_SECRET_KEY'])
+def test_archive_missing_dedicated_identity_never_uses_global_aws(monkeypatch,missing):
+    import airlock.archive as archive
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_ACCESS_KEY','dedicated-test-access-key')
+    monkeypatch.setenv('AIRLOCK_ARCHIVE_SECRET_KEY','dedicated-test-secret-'+'x'*32)
+    monkeypatch.delenv(missing)
+    monkeypatch.setenv('AWS_ACCESS_KEY_ID','unrelated-global-access-key')
+    monkeypatch.setenv('AWS_SECRET_ACCESS_KEY','unrelated-global-secret-'+'y'*32)
+    def forbidden(*args,**kwargs):raise AssertionError('must not enter the SDK credential provider chain')
+    monkeypatch.setattr(archive.boto3,'client',forbidden)
+    with pytest.raises(KeyError,match=missing):
+        archive.client(ArchiveConfig(endpoint='https://archive.example',bucket='evidence'))

@@ -28,6 +28,7 @@ class Tool(BaseModel):
     allow_private_network: bool=False
     tls_ca_file: str | None=None
     transport: Literal['http','mcp_json','mcp_streamable']='http'
+    execution_model: Literal['cas','append_only_create']='cas'
     mcp_path: str=Field(default='/mcp',pattern=r'^/[a-zA-Z0-9/_-]{1,100}$')
     mcp_tools: dict[Literal['preview','execute','receipt'],str]=Field(default_factory=dict)
     compensates: str | None=Field(default=None,pattern=r'^upstream:[a-zA-Z0-9_-]{1,48}$')
@@ -36,6 +37,8 @@ class Tool(BaseModel):
 
     def target(self):
         network.validate_origin(self.url,self.pinned_addresses,self.allow_loopback,self.allow_private_network)
+        if self.execution_model=='append_only_create' and self.compensates:
+            raise ValueError('append-only creation cannot claim CAS compensation')
         if len(self.arguments)>16 or any(not re.fullmatch(r'[a-zA-Z_][a-zA-Z0-9_]{0,47}',k) for k in self.arguments):
             raise ValueError('invalid argument schema')
         if self.transport!='http' and (set(self.mcp_tools)!={'preview','execute','receipt'} or any(not re.fullmatch(r'[A-Za-z0-9_.-]{1,64}',name) for name in self.mcp_tools.values())):
@@ -103,7 +106,7 @@ class Registry:
             for tool in self.tools.values():
                 if tool.compensates:
                     source=self.tools.get(tool.compensates)
-                    if not source or source.compensates or tool.arguments!={'source_action_id':'string'} or any(
+                    if not source or source.compensates or source.execution_model!='cas' or tool.arguments!={'source_action_id':'string'} or any(
                         getattr(tool,k)!=getattr(source,k) for k in ('url','credential_env','resource','pinned_addresses','allow_private_network','allow_loopback','tls_ca_file')):
                         raise ValueError('compensation must bind a registered original resource and credential')
 
@@ -164,6 +167,14 @@ class RemoteActions:
                     'business_authorization':'independent_approval_required','is_backup':False,
                     'registered_tools':compensators,'source_action_id':source_action['id'] if source_action else None,
                     'source_receipt_hash':digest(source_action['result']) if source_action else None}
+                if tool.execution_model=='append_only_create':
+                    impact.update(certainty='planned_create_count',is_estimate=True,
+                        source='upstream_create_plan_without_target_cas',
+                        target_version_semantics='prepared_request_digest',concurrency_control='no_target_cas',
+                        operations=['remote_create'],
+                        recovery='Creation may publish content and trigger notifications. Closing an issue cannot retract copies or notifications; no automatic compensation is available.')
+                    impact['recovery_evidence'].update(technical_reversibility='not_fully_reversible',
+                        restore_feasibility='notification_and_disclosure_cannot_be_retracted',registered_tools=[])
                 policy,hits=gate.policy.active.evaluate({'tool':call.tool,'resource':tool.resource,'principal':principal,
                     'operation':'remote_write','changed_rows':preview.impact_units,'matched_rows':preview.impact_units},True)
                 action.update(impact=impact,rule_ids=hits,risk='critical' if preview.impact_units>=gate.settings.critical_rows else 'high')

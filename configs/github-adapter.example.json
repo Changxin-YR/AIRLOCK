@@ -1,0 +1,12 @@
+{
+  "repository_node_id": "REPLACE_WITH_VERIFIED_REPOSITORY_NODE_ID",
+  "repository_full_name": "Changxin-YR/AIRLOCK",
+  "public_repository": true,
+  "mode": "relay",
+  "gate_credential_env": "AIRLOCK_UPSTREAM_GITHUB_GATE_TOKEN",
+  "github_credential_env": "AIRLOCK_GITHUB_API_TOKEN",
+  "relay_credential_env": "AIRLOCK_GITHUB_RELAY_TOKEN",
+  "api_pinned_addresses": [],
+  "relay_claim_ttl_seconds": 300,
+  "max_claims": 10000
+}

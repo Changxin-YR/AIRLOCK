@@ -1,0 +1,11 @@
+{
+  "identity_file": "oidc.example.json",
+  "client_id": "airlock-native-public-client",
+  "authorization_endpoint": "https://identity.example.invalid/realms/airlock/protocol/openid-connect/auth",
+  "token_endpoint": "https://identity.example.invalid/realms/airlock/protocol/openid-connect/token",
+  "address_pins": ["93.184.215.14"],
+  "scopes": ["openid"],
+  "callback_port": 8765,
+  "timeout_seconds": 180,
+  "allow_loopback_issuer": false
+}
