@@ -1,3 +1,15 @@
+# AIRLOCK 修复与双重验证交付完成（2026-10-03）
+
+实际main为704b5035cf69f9a6c40c44eecd84c0d0741de849，未合并。远端工作分支codex/full-audit-2026-10-02及本地HEAD为699adbd7c421f0c80fd0339ff69f892929cb28bd；源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c，应用及可执行验收代码diff为空。PR #1仍draft/open/unmerged。
+
+两次完整CI均通过：源码37117971834/job111188360694、最终交付37118762214/job111190583964；各687 Python、6 JS、31原生浏览器，以及官方MCP SDK、Next、冻结benchmark/消融、隔离Docker/网络、S3 Object Lock、Envoy/OTel、依赖和证据门禁。两个完整ZIP均下载核对GitHub digest、94载荷、source.zip commit及真实退出码，verify_evidence均exit0。
+
+最终交付CI artifact11272980709：1,937,591字节，SHA256 ebd5d43d6530f00262cd3efbb082193a8509bdff729192c80edf37ff3ab2aedc，到期2027-01-01T11:09:37Z；完整重复ZIP仅Actions及var/delivery-ci-699adbd本机缓存。此memory提交永久记录其元数据、原始job日志、下载校验和真实verifier收据；Git无自动到期，非WORM。本轮源码完整ZIP另已在工作分支Git的evidence/closure2-20261003/ci/acceptance-533726a.zip，无自动到期；其Actions原副本到期2027-01-01T10:55:17Z。
+
+作者回归与另一作者正反例均通过，F035—F042无已知未修复可复现P0/P1。交付后从Git对象重读281公开载荷/10文档hash，CLOSURE2_GIT_ARCHIVE_20261003.log及收据exit0。VERIFY_CLOSURE2_ARCHIVE.py可在应用checkout重放。126原目标矩阵30唯一收据exit0，111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL；原始全部目标仍未满足。真人完成0、付费模型新增0，真实身份/独立云保管/通知与代表性研究数据仍受阻；模型状态/账单及本人面试按用户要求暂缓。
+
+最终报告docs/acceptance/FINAL_REPORT.md，逐项矩阵docs/acceptance/COMPLETION_MATRIX.json，人工步骤docs/START_WITH_ONE_PERSON.md。Git公开证据保留全部本轮失败/成功来源和dirty标记；不将模型或合成测试当作真人业务验证。历史失败CI与原证据不覆盖。
+
 # AIRLOCK 修复交付已推送，交付提交CI待复验（2026-10-03）
 
 实际main仍704b5035cf69f9a6c40c44eecd84c0d0741de849。源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c与交付699adbd7c421f0c80fd0339ff69f892929cb28bd均已推送codex/full-audit-2026-10-02，应用diff为空；PR #1 draft/open/unmerged。

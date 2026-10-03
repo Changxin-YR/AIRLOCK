@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "C:/Users/27363/Desktop/airlock-memory-progress/VERIFY_CLOSURE2_ARCHIVE.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T11:11:52.136067+00:00",
+  "duration_seconds": 10.209,
+  "tested_commit_sha": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "699adbd7c421f0c80fd0339ff69f892929cb28bd"
+}
