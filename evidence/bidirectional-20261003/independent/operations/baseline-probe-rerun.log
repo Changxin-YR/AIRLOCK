@@ -1,0 +1,33 @@
+{
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "source_hashes": {
+    "airlock\\alert_delivery.py": "2f9ae32692e2c0e01e1c7a78068788c7e06b574ed40e61251067b8488ba97ca8",
+    "scripts\\operational_check.py": "a834128d9e84ff74594feab98f16fd7312801c55bf54af81b6d9102f6fb31822"
+  },
+  "probes": {
+    "foreign_database": {
+      "delivery_status": "delivered",
+      "database_modified": true,
+      "tables": [
+        "protected",
+        "notification_meta",
+        "notification_targets",
+        "notification_events",
+        "sqlite_sequence"
+      ],
+      "sent_count": 1
+    },
+    "stale_recovery": {
+      "status": "delivered",
+      "kinds": [
+        "alert",
+        "recovery"
+      ]
+    },
+    "false_success_exit": {
+      "exit_code": 0,
+      "stdout": "{\"status\": \"alert\", \"alert_codes\": [\"pending_expiry_backlog\"]}"
+    }
+  },
+  "reproduced": true
+}

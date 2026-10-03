@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": [
+    "archived_automation_study_metrics_identical_excluding_new_provenance_field",
+    "archived_frozen_corpus_predictions_evaluation_identical"
+  ],
+  "study_provenance_added": "unverified_browser_supplied_correctness",
+  "human_participants": 0,
+  "formal_acceptance_metrics": null,
+  "source_files": {
+    "evidence\\single-person-20261003\\ci\\verified\\study-automation.json": "217411b0750fd81ddeb816f1dacf5585e2859a329313ffe7db3aedefc2e4aec1",
+    "evidence\\single-person-20261003\\ci\\verified\\study-analysis.json": "5a278f87c4932f3a267559307acf5e5c0f9136a677ec64db8d05ff18c7e72802",
+    "evidence\\single-person-20261003\\ci\\verified\\research-pipeline\\cases.jsonl": "cab775c1a715360c08b27f074d84c7c4d396438cab870bb6ca7d33bf2c202e83",
+    "evidence\\single-person-20261003\\ci\\verified\\research-pipeline\\predictions.jsonl": "cea5f05f83860e818083501251dc7427a08c2d8fd6249aaee87fddd677b422ed",
+    "evidence\\single-person-20261003\\ci\\verified\\research-pipeline\\evaluation.json": "505ecf53e3c79b46eb193828d6460692069e4f78f1e5bb55fb3f9693fc8154bb"
+  },
+  "history_rewritten": false
+}

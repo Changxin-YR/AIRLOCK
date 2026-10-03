@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\var\bidirectional-20261003\cross-review\operations_cross_review.py", line 80, in <module>
+    assert summary['acceptance_metrics'] is None and summary['kappa'] is None
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: tuple indices must be integers or slices, not str

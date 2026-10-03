@@ -1,0 +1,50 @@
+
+> airlock-review-console@0.1.0 test
+> node --test tests-js/*.test.js
+
+TAP version 13
+# Subtest: visibility timing excludes background and unselected periods
+ok 1 - visibility timing excludes background and unselected periods
+  ---
+  duration_ms: 0.626271
+  type: 'test'
+  ...
+# Subtest: approval requires exact scope phrase and reason
+ok 2 - approval requires exact scope phrase and reason
+  ---
+  duration_ms: 0.191778
+  type: 'test'
+  ...
+# Subtest: SSE framing survives partial chunks, CRLF and heartbeats
+ok 3 - SSE framing survives partial chunks, CRLF and heartbeats
+  ---
+  duration_ms: 0.753182
+  type: 'test'
+  ...
+# Subtest: oversized event rejected
+ok 4 - oversized event rejected
+  ---
+  duration_ms: 0.951152
+  type: 'test'
+  ...
+# Subtest: countdown clamps expired actions
+ok 5 - countdown clamps expired actions
+  ---
+  duration_ms: 0.20051
+  type: 'test'
+  ...
+# Subtest: latency formatting keeps number and unit together on mobile
+ok 6 - latency formatting keeps number and unit together on mobile
+  ---
+  duration_ms: 0.117534
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 51.018291

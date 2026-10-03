@@ -1,0 +1,18 @@
+
+> airlock-review-console@0.1.0 test
+> node --test tests-js/*.test.js
+
+✔ visibility timing excludes background and unselected periods (0.7395ms)
+✔ approval requires exact scope phrase and reason (0.3106ms)
+✔ SSE framing survives partial chunks, CRLF and heartbeats (0.8752ms)
+✔ oversized event rejected (0.8534ms)
+✔ countdown clamps expired actions (0.2043ms)
+✔ latency formatting keeps number and unit together on mobile (0.1181ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.9984

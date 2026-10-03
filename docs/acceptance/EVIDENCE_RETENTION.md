@@ -79,3 +79,12 @@ preflight、final、retest、final-code、final-17ccd2c分别代表各自源状�
 - 新本机冻结定点收据、原生浏览器截图、独立边界反例、历史单人区间重放、矩阵校验收据和脱敏导入汇总均在evidence/single-person-20261003。ARCHIVE_MANIFEST.json逐文件记录公开载荷hash。
 - var/single-person-20261003下的真实原始输入、标注表、当前快照及Issues #3—#5更新轨迹不进Git，无永久保留承诺。Git仅存对应路径/hash和数量，不含实际人员填写。
 - 未新增外部云资源、付费模型调用或真人记录；原模型/失败CI等历史证据及各自保留期限继续有效。
+
+## 双向复验交付（2026-10-03）
+
+- 源码096b9bbbf9c113471eda1a713f9d0c860c95a348；完整CI37100296703/job111138333764。94个清单载荷、source.zip commit、588条JUnit及真实退出码独立核验，verify_evidence exit0。
+- 完整成功包进入工作分支Git：evidence/bidirectional-20261003/ci/acceptance-096b9bb.zip，1,875,653字节，SHA256 68335fca51e8c0cc61b959f32aeb94018557983b1af1fc332a123d3099e5406a；无自动到期，依赖仓库历史/备份，不是WORM。
+- Actions原副本11266455225到期2027-01-01T05:35:11Z。Git和Actions分别记账；后续文档交付CI使用自己的元数据和期限。
+- 公开目录保留未修改基线、修复前反例失败、作者修复测试及第二方向复验。IMPORT_INDEX逐原文件映射，ARCHIVE_MANIFEST逐最终载荷hash；precommit dirty与冻结收据不混用。
+- var/bidirectional-20261003/operations/targeted-tests.log和targeted-tests.xml的早期Windows错误可能含环境片段，仅本机保留；公开索引记录hash/字节/原因，原文无永久保留承诺。隔离临时数据库不归档。此前个人真实日志仍仅本机，未转为公开Git。
+- 本轮真人完成0、付费模型调用0；未创建云资源、长期服务、Release或WORM归档。原失败CI历史不覆盖。

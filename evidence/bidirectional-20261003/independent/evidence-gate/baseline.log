@@ -1,0 +1,31 @@
+{
+  "baseline_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "validator_sha256": "9d5f09f76b3e0bd9637a888675de1135b63e93d22c05f18dfe30162ba5ce2a7d",
+  "probes": [
+    {
+      "probe": "unchanged_positive_control",
+      "accepted": true
+    },
+    {
+      "probe": "inflated_PASS_total",
+      "accepted": true
+    },
+    {
+      "probe": "all_goals_claim_without_closure",
+      "accepted": true
+    },
+    {
+      "probe": "row_SHA_replaced",
+      "accepted": true
+    },
+    {
+      "probe": "PASS_without_process_receipt",
+      "accepted": true
+    },
+    {
+      "probe": "parent_children_evidence_removed",
+      "accepted": true
+    }
+  ],
+  "meaning": "accepted invalid variants expose ledger validation gaps; not application side effects"
+}

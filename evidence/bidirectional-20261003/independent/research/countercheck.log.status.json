@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "-m",
+    "var.bidirectional-20261003.research.countercheck"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T05:19:32.600408+00:00",
+  "duration_seconds": 1.025,
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+}

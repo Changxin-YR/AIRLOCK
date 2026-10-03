@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "alerts": [],
+  "checked_at": 400,
+  "recommended_exit_code": 0,
+  "notification": {
+    "status": "delivered",
+    "event_ids": [
+      "1fa0716b-0500-4b30-899c-cc106eba51e6"
+    ],
+    "pending_count": 0
+  }
+}

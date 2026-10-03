@@ -1,0 +1,15 @@
+{
+  "baseline_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "validator_sha256": "79a16ff483c77ca61cf40e20c6a0fc6c88f728800c3a7f8ca857338d7db71ecf",
+  "probes": [
+    {
+      "probe": "original_positive_control",
+      "accepted": true
+    },
+    {
+      "probe": "over_threshold_raw_samples_with_unchanged_summary",
+      "accepted": true
+    }
+  ],
+  "meaning": "Hypothetical edited summaries, no actual performance regression or changed original evidence"
+}

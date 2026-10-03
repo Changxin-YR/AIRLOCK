@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "pip_audit",
+    "-r",
+    "requirements-archive.txt",
+    "--format",
+    "json",
+    "--output",
+    "evidence/dependency-audit.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T05:42:04.137053+00:00",
+  "duration_seconds": 5.909,
+  "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348"
+}

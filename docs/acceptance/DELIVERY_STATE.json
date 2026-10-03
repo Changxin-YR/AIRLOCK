@@ -2,7 +2,7 @@
   "record_type": "code_validation_and_delivery_anchor",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "tested_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tested_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
   "code_push_confirmed": true,
   "documentation_commit": "Exact final pushed delivery SHA is recorded on memory/progress STATE.json.",
   "pr": {
@@ -13,49 +13,51 @@
     "merged": false
   },
   "ci": {
-    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37093593956",
-    "run_id": 37093593956,
-    "job_id": 111118885655,
-    "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37100296703",
+    "run_id": 37100296703,
+    "job_id": 111138333764,
+    "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
     "status": "completed",
     "conclusion": "success",
     "artifact": {
-      "id": 11263493490,
+      "id": 11266455225,
       "name": "acceptance-evidence",
-      "size_in_bytes": 1837526,
-      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11263493490",
-      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11263493490/zip",
+      "size_in_bytes": 1875653,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11266455225",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11266455225/zip",
       "expired": false,
-      "created_at": "2026-10-03T03:38:53Z",
-      "expires_at": "2027-01-01T03:33:25Z",
-      "updated_at": "2026-10-03T03:38:53Z",
-      "digest": "sha256:83ded2be04f9e4e8e334144693a073f534acbd8292d647de44f993913108aecb",
+      "created_at": "2026-10-03T05:42:14Z",
+      "expires_at": "2027-01-01T05:35:11Z",
+      "updated_at": "2026-10-03T05:42:14Z",
+      "digest": "sha256:68335fca51e8c0cc61b959f32aeb94018557983b1af1fc332a123d3099e5406a",
       "workflow_run": {
-        "id": 37093593956,
+        "id": 37100296703,
         "repository_id": 1396912712,
         "head_repository_id": 1396912712,
         "head_branch": "codex/full-audit-2026-10-02",
-        "head_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+        "head_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348"
       }
     },
     "git_evidence": [
-      "evidence/single-person-20261003/ci/acceptance-0d9be52.zip",
-      "evidence/single-person-20261003/ci/acceptance-0d9be52-verification.json",
-      "evidence/single-person-20261003/ci/verified-job.log",
-      "evidence/single-person-20261003/ci/downloaded-verifier.log",
-      "evidence/single-person-20261003/ci/downloaded-verifier.log.status.json"
+      "evidence/bidirectional-20261003/ci/acceptance-096b9bb.zip",
+      "evidence/bidirectional-20261003/ci/acceptance-096b9bb-verification.json",
+      "evidence/bidirectional-20261003/ci/verified-job.log",
+      "evidence/bidirectional-20261003/ci/downloaded-verifier.log",
+      "evidence/bidirectional-20261003/ci/downloaded-verifier.log.status.json"
     ],
-    "zip_git_path": "evidence/single-person-20261003/ci/acceptance-0d9be52.zip",
-    "zip_sha256": "83ded2be04f9e4e8e334144693a073f534acbd8292d647de44f993913108aecb",
+    "zip_git_path": "evidence/bidirectional-20261003/ci/acceptance-096b9bb.zip",
+    "zip_sha256": "68335fca51e8c0cc61b959f32aeb94018557983b1af1fc332a123d3099e5406a",
     "downloaded_sha256_verified": true,
-    "manifest_files_verified": 92,
-    "junit_tests": 458,
+    "manifest_files_verified": 94,
+    "junit_tests": 588,
+    "javascript_tests": 6,
+    "native_browser_checks": 31,
     "downloaded_functional_verifier_exit_code": 0,
     "source_archive_commit_verified": true,
     "retention": {
-      "actions_expires_at": "2027-01-01T03:33:25Z",
+      "actions_expires_at": "2027-01-01T05:35:11Z",
       "git": "No automatic expiry; repository history/backups; not WORM",
-      "private": "Raw personal records local-only; no retention guarantee"
+      "private": "Two environment-containing initial logs local-only; no permanent retention guarantee"
     }
   },
   "target_count": 126,
@@ -128,7 +130,8 @@
     "estimates_are_supplier_invoice": false,
     "human_participants": 0,
     "human_gold_records": 0,
-    "human_kappa": null
+    "human_kappa": null,
+    "record_scope": "Historical autonomous phase; current bidirectional turn has no provider API calls."
   },
   "human_participants": 0,
   "original_goals_all_satisfied": false,
@@ -149,5 +152,22 @@
       "model_status_and_billing",
       "interview"
     ]
+  },
+  "single_person_validation_anchor": {
+    "tested_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+    "ci": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37093593956",
+    "report": "REPORT_0d9be52.md"
+  },
+  "bidirectional": {
+    "source_commit": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+    "new_model_calls": 0,
+    "human_completed": 0,
+    "frozen_gate_tests": 45,
+    "frozen_independent_gate_checks": 14,
+    "local_preflight_tests": 588,
+    "ci_tests": 588,
+    "second_direction_counterexamples_fixed": true,
+    "matrix_receipts_checked": 30,
+    "evidence_directory": "evidence/bidirectional-20261003"
   }
 }

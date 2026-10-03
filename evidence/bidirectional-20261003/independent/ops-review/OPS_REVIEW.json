@@ -1,0 +1,42 @@
+{
+  "status": "FAIL_COUNTEREXAMPLES_FOUND",
+  "scope": "cross-author read-only operations closure review",
+  "synthetic_only": true,
+  "source_binding": "independent.json",
+  "functional_http_checks": 4,
+  "functional_http_checks_passed": 4,
+  "regression_tests": 89,
+  "regression_exit_code": 0,
+  "regression_receipt": "tests.log.status.json",
+  "findings": [
+    {
+      "id": "OPS-REVIEW-01",
+      "severity": "P2",
+      "status": "REPORTED_TO_AUTHOR",
+      "description": "Legacy schema check accepts same named columns without PK/UNIQUE/default/NOT NULL constraints, mutates application_id, then can silently omit an alert because NULL delivery_state is not pending",
+      "evidence": [
+        "independent.json",
+        "schema-effect.log",
+        "schema-effect.log.status.json"
+      ]
+    },
+    {
+      "id": "OPS-REVIEW-02",
+      "severity": "P2",
+      "status": "REPORTED_TO_AUTHOR",
+      "description": "Outbox high-water containing JSON null causes uncaught TypeError rather than controlled notification_state_unavailable",
+      "evidence": [
+        "independent.json",
+        "probe.log",
+        "probe.log.status.json"
+      ]
+    }
+  ],
+  "research_history_replay": {
+    "status": "PASS",
+    "evidence": "../research/historical-replay.json",
+    "exit_code": 0,
+    "meaning": "Archived study metrics unchanged except added provenance field; frozen corpus evaluation identical; historical files unchanged"
+  },
+  "production_files_edited": []
+}

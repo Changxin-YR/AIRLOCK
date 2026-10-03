@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "var/bidirectional-20261003/execution/direct_receipt_race.py"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-03T05:13:59.900483+00:00",
+  "duration_seconds": 3.133,
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+}

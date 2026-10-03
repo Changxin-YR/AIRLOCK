@@ -1,0 +1,39 @@
+C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{
+  "head": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "dirty": [
+    " M airlock/alert_delivery.py",
+    " M airlock/github_adapter.py",
+    " M benchmark/closure.py",
+    " M benchmark/research.py",
+    " M scripts/operational_check.py",
+    " M tests/test_alert_delivery.py",
+    " M tests/test_github_adapter.py"
+  ],
+  "source_sha256": "f07997fd71c421123ef06fc760c082d9563b5f4bf455307052376af06751c64b",
+  "network_calls": 0,
+  "results": [
+    {
+      "probe": "before_send",
+      "child_exit_code": 73,
+      "target_effects": 0,
+      "final_state": "unknown",
+      "automatic_resends": 0
+    },
+    {
+      "probe": "after_send",
+      "child_exit_code": 74,
+      "target_effects": 1,
+      "final_state": "executed",
+      "automatic_resends": 0
+    },
+    {
+      "probe": "unauthorized_and_role_confusion",
+      "credential_rejections": 7,
+      "binding_conflicts": 1,
+      "unauthorized_effects": 0,
+      "claim_preserved": true
+    }
+  ]
+}

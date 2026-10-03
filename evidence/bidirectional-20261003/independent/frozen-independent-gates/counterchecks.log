@@ -1,0 +1,113 @@
+{
+  "head": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "dirty": [
+    "?? evidence/bidirectional-20261003/"
+  ],
+  "source_sha256": {
+    "docs/acceptance/validate_matrix.py": "48b05970c450b7ad28c32acc0552f89271bcdec8b9edebd77ecec445c274ca02",
+    "scripts/verify_evidence.py": "7d764466723b614b2c247ee335c35fcf67dc97a0bee836f7955460ea9cb222a7",
+    "tests/test_acceptance_matrix.py": "5c909517a2d32aca7adb7d9433d8ed4eb890c30d59047b25e3386de7f195eba9",
+    "tests/test_evidence_gate.py": "57f4158904b92abd19522c5b031b30b833d6cb98ef665beb260abe5f4d9b389a"
+  },
+  "cases": [
+    {
+      "case": "original_matrix",
+      "should_reject": false,
+      "rejected": false,
+      "pass": true,
+      "reason": null
+    },
+    {
+      "case": "original_latency",
+      "should_reject": false,
+      "rejected": false,
+      "pass": true,
+      "reason": null
+    },
+    {
+      "case": "missing_raw",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "'raw_read_pairs'"
+    },
+    {
+      "case": "missing_summary",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "'p99'"
+    },
+    {
+      "case": "changed_raw",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency raw/summary mismatch: paired added_ms"
+    },
+    {
+      "case": "nan_raw",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency invalid sample: evaluation_ms"
+    },
+    {
+      "case": "slow_honest",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency threshold; inspect raw samples"
+    },
+    {
+      "case": "boundary_read",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency threshold; inspect raw samples"
+    },
+    {
+      "case": "boundary_static",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency threshold; inspect raw samples"
+    },
+    {
+      "case": "boundary_preview",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency threshold; inspect raw samples"
+    },
+    {
+      "case": "matrix_missing_log",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "G1: raw log absent from evidence"
+    },
+    {
+      "case": "matrix_command_mismatch",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "G1: command mismatch"
+    },
+    {
+      "case": "matrix_missing_receipt",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "missing or unsafe file: var/bidirectional-20261003/gate-review/not-found.log.status.json"
+    },
+    {
+      "case": "matrix_unarchived_forged_frozen_receipt",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "G1: no successful frozen receipt or applicable source review"
+    }
+  ],
+  "scope": "structure, provenance and numeric consistency only; no functional or human acceptance"
+}

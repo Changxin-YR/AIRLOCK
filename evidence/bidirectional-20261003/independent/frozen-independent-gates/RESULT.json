@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "probe_count": 14,
+  "positive_controls": 2,
+  "negative_counterexamples": 12,
+  "exit_code": 0,
+  "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "tracked_source_dirty": false,
+  "workspace_note": "Only untracked evidence/bidirectional-20261003 present; source clean.",
+  "probe_unchanged": true,
+  "source_binding": {
+    "validator_unchanged_sha256": "48b05970c450b7ad28c32acc0552f89271bcdec8b9edebd77ecec445c274ca02",
+    "current_verifier_sha256": "7d764466723b614b2c247ee335c35fcf67dc97a0bee836f7955460ea9cb222a7",
+    "reconstructed_previous_verifier_sha256": "e01c034b4e50786cd4f88799ed9f97b090c5002948491d549e4660f55164e4be",
+    "previous_reviewed_sha256": "e01c034b4e50786cd4f88799ed9f97b090c5002948491d549e4660f55164e4be",
+    "exact_match": true,
+    "method": "Retain REQUIRED_TESTS through actual_local_sender_receiver_alert_recovery_and_receiver_restart, remove subsequently added mandatory test suffix and acceptance-matrix.log inventory item.",
+    "earlier_attempts": "SOURCE_BINDING and SOURCE_BINDING_V2 used the wrong last mandatory-test boundary; retained as failed reconstruction attempts, not source defects."
+  },
+  "scope": "Structural/provenance/numeric gate checks, not functional or human acceptance."
+}

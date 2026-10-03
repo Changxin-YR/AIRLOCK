@@ -1,0 +1,7 @@
+{
+  "current_verifier_sha256": "7d764466723b614b2c247ee335c35fcf67dc97a0bee836f7955460ea9cb222a7",
+  "reconstructed_pre_required_tests_sha256": "39b37db6233e20ea6a95a517d31b4ff319b29a1fe075ec14440a95e070b8fc7e",
+  "prior_reviewed_verifier_sha256": "e01c034b4e50786cd4f88799ed9f97b090c5002948491d549e4660f55164e4be",
+  "explanation": "First reconstruction also removed acceptance-matrix.log, which was already present during original review; retained inventory log here.",
+  "only_new_required_tests_changed": false
+}

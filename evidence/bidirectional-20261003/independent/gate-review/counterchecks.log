@@ -1,0 +1,125 @@
+{
+  "head": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "dirty": [
+    " M airlock/alert_delivery.py",
+    " M airlock/github_adapter.py",
+    " M benchmark/closure.py",
+    " M benchmark/research.py",
+    " M docs/acceptance/validate_matrix.py",
+    " M scripts/operational_check.py",
+    " M scripts/verify_evidence.py",
+    " M tests/test_alert_delivery.py",
+    " M tests/test_alert_inbox.py",
+    " M tests/test_evidence_gate.py",
+    " M tests/test_github_adapter.py",
+    "?? tests/test_acceptance_matrix.py",
+    "?? tests/test_research_integrity.py"
+  ],
+  "source_sha256": {
+    "docs/acceptance/validate_matrix.py": "ab96429001dff5e313588e9e92a0d10eacd09ed70b3a9653aa3d29f65de55652",
+    "scripts/verify_evidence.py": "b94f7ecc15fa8b39ddf795deb7e0e55b349e1084fb4ab97c1ae914b6265bd266",
+    "tests/test_acceptance_matrix.py": "5c909517a2d32aca7adb7d9433d8ed4eb890c30d59047b25e3386de7f195eba9",
+    "tests/test_evidence_gate.py": "57f4158904b92abd19522c5b031b30b833d6cb98ef665beb260abe5f4d9b389a"
+  },
+  "cases": [
+    {
+      "case": "original_matrix",
+      "should_reject": false,
+      "rejected": false,
+      "pass": true,
+      "reason": null
+    },
+    {
+      "case": "original_latency",
+      "should_reject": false,
+      "rejected": false,
+      "pass": true,
+      "reason": null
+    },
+    {
+      "case": "missing_raw",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "'raw_read_pairs'"
+    },
+    {
+      "case": "missing_summary",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "'p99'"
+    },
+    {
+      "case": "changed_raw",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency raw/summary mismatch: paired added_ms"
+    },
+    {
+      "case": "nan_raw",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency invalid sample: evaluation_ms"
+    },
+    {
+      "case": "slow_honest",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "latency threshold; inspect raw samples"
+    },
+    {
+      "case": "boundary_read",
+      "should_reject": true,
+      "rejected": false,
+      "pass": false,
+      "reason": null
+    },
+    {
+      "case": "boundary_static",
+      "should_reject": true,
+      "rejected": false,
+      "pass": false,
+      "reason": null
+    },
+    {
+      "case": "boundary_preview",
+      "should_reject": true,
+      "rejected": false,
+      "pass": false,
+      "reason": null
+    },
+    {
+      "case": "matrix_missing_log",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "G1: raw log absent from evidence"
+    },
+    {
+      "case": "matrix_command_mismatch",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "G1: command mismatch"
+    },
+    {
+      "case": "matrix_missing_receipt",
+      "should_reject": true,
+      "rejected": true,
+      "pass": true,
+      "reason": "missing or unsafe file: var/bidirectional-20261003/gate-review/not-found.log.status.json"
+    },
+    {
+      "case": "matrix_unarchived_forged_frozen_receipt",
+      "should_reject": true,
+      "rejected": false,
+      "pass": false,
+      "reason": null
+    }
+  ],
+  "scope": "structure, provenance and numeric consistency only; no functional or human acceptance"
+}

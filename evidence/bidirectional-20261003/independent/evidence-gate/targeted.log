@@ -1,0 +1,104 @@
+..........F.........................                                     [100%]
+================================== FAILURES ===================================
+_ test_acceptance_rejects_false_closure_mutations[absolute_path-inside repository] _
+
+ledger = ({'baseline_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', 'counts': {'implementation': {'IMPLEMENTED': 111, 'PA...EXTERNAL'], 'generated_date': '2026-10-02', 'historical_base_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', ...})
+mutation = 'absolute_path', expected = 'inside repository'
+
+    @pytest.mark.parametrize('mutation,expected', [
+        ('count', 'summary counts'), ('all_goals', 'all-goals'), ('row_sha', 'row SHA'),
+        ('unrecorded', 'missing process receipt'), ('ci_only', 'no successful frozen receipt'),
+        ('parent_commands', 'parent command'), ('parent_exits', 'parent exit'),
+        ('parent_flag', 'parent aggregation'), ('criterion', 'criterion changed'),
+        ('absolute_path', 'inside repository'), ('traversal', 'inside repository'),
+        ('manual_function', 'invalid manual evidence'),
+    ])
+    def test_acceptance_rejects_false_closure_mutations(ledger, mutation, expected):
+        report, index = ledger
+        row = report['targets'][0]
+        parent = next(item for item in report['targets'] if item['id'] == 'C1')
+        if mutation == 'count': report['counts']['verification']['PASS'] = 126
+        elif mutation == 'all_goals': report['original_goals_all_satisfied'] = True
+        elif mutation == 'row_sha': row['tested_commit_sha'] = '0' * 40
+        elif mutation == 'unrecorded': row['commands'] = [{'command': ['never', 'executed']}]
+        elif mutation == 'ci_only':
+            row['commands'] = [{'command': 'CI green', 'tested_commit_sha': report['tested_commit_sha'],
+                                'run_url': 'https://github.com/Changxin-YR/AIRLOCK/actions/runs/123'}]
+        elif mutation == 'parent_commands': parent['commands'] = [{'child_id': 'C1.1', 'commands': []}]
+        elif mutation == 'parent_exits': parent['exit_codes'] = []
+        elif mutation == 'parent_flag': parent['derived_parent'] = False
+        elif mutation == 'criterion': row['criterion'] = 'Only require the tool to exit zero.'
+        elif mutation == 'absolute_path': row['evidence'] = [str(ROOT / 'README.md')]
+        elif mutation == 'traversal': row['evidence'] = ['../airlock/README.md']
+        elif mutation == 'manual_function':
+            row['commands'] = [{'command': 'manual says safe', 'process_exit_code_applicable': False,
+                                'receipt': row['evidence'][0]}]
+        with pytest.raises(ValueError, match=expected):
+>           validate(report, index)
+
+tests\test_acceptance_matrix.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+docs\acceptance\validate_matrix.py:104: in validate
+    file(name)
+docs\acceptance\validate_matrix.py:35: in file
+    require(isinstance(name, str) and name and chr(92) not in name, 'invalid evidence path')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'invalid evidence path'
+
+    def require(condition, message):
+        if not condition:
+>           raise ValueError(message)
+E           ValueError: invalid evidence path
+
+docs\acceptance\validate_matrix.py:18: ValueError
+
+During handling of the above exception, another exception occurred:
+
+ledger = ({'baseline_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', 'counts': {'implementation': {'IMPLEMENTED': 111, 'PA...EXTERNAL'], 'generated_date': '2026-10-02', 'historical_base_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', ...})
+mutation = 'absolute_path', expected = 'inside repository'
+
+    @pytest.mark.parametrize('mutation,expected', [
+        ('count', 'summary counts'), ('all_goals', 'all-goals'), ('row_sha', 'row SHA'),
+        ('unrecorded', 'missing process receipt'), ('ci_only', 'no successful frozen receipt'),
+        ('parent_commands', 'parent command'), ('parent_exits', 'parent exit'),
+        ('parent_flag', 'parent aggregation'), ('criterion', 'criterion changed'),
+        ('absolute_path', 'inside repository'), ('traversal', 'inside repository'),
+        ('manual_function', 'invalid manual evidence'),
+    ])
+    def test_acceptance_rejects_false_closure_mutations(ledger, mutation, expected):
+        report, index = ledger
+        row = report['targets'][0]
+        parent = next(item for item in report['targets'] if item['id'] == 'C1')
+        if mutation == 'count': report['counts']['verification']['PASS'] = 126
+        elif mutation == 'all_goals': report['original_goals_all_satisfied'] = True
+        elif mutation == 'row_sha': row['tested_commit_sha'] = '0' * 40
+        elif mutation == 'unrecorded': row['commands'] = [{'command': ['never', 'executed']}]
+        elif mutation == 'ci_only':
+            row['commands'] = [{'command': 'CI green', 'tested_commit_sha': report['tested_commit_sha'],
+                                'run_url': 'https://github.com/Changxin-YR/AIRLOCK/actions/runs/123'}]
+        elif mutation == 'parent_commands': parent['commands'] = [{'child_id': 'C1.1', 'commands': []}]
+        elif mutation == 'parent_exits': parent['exit_codes'] = []
+        elif mutation == 'parent_flag': parent['derived_parent'] = False
+        elif mutation == 'criterion': row['criterion'] = 'Only require the tool to exit zero.'
+        elif mutation == 'absolute_path': row['evidence'] = [str(ROOT / 'README.md')]
+        elif mutation == 'traversal': row['evidence'] = ['../airlock/README.md']
+        elif mutation == 'manual_function':
+            row['commands'] = [{'command': 'manual says safe', 'process_exit_code_applicable': False,
+                                'receipt': row['evidence'][0]}]
+>       with pytest.raises(ValueError, match=expected):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'inside repository'
+E         Actual message: 'invalid evidence path'
+
+tests\test_acceptance_matrix.py:52: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_acceptance_matrix.py::test_acceptance_rejects_false_closure_mutations[absolute_path-inside repository]
+1 failed, 35 passed, 1 warning in 1.49s

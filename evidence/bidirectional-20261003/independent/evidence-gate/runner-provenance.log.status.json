@@ -1,0 +1,16 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_logged_runner.py",
+    "--junitxml=var/bidirectional-20261003/evidence-gate/runner-provenance.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T05:29:53.245978+00:00",
+  "duration_seconds": 6.262,
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+}

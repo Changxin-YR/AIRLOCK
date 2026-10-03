@@ -1,0 +1,69 @@
+{
+  "files": {
+    "author-tests-repaired.log": {
+      "sha256": "571ec1f0b1f47e60f8a84216f45700dcb55af35a93525c365fd764b6196b83d8",
+      "bytes": 583
+    },
+    "author-tests-repaired.log.status.json": {
+      "sha256": "f6fe93ee1ff6c91a30e1b28951cfa232a57c6a084ec3f56042711255deadfeba",
+      "bytes": 537
+    },
+    "author-tests-repaired.xml": {
+      "sha256": "663fd1377b0b622ff80fa442ad94981dae80a3d237a7c16ab3ed575ff9620fc2",
+      "bytes": 5029
+    },
+    "author-tests.log": {
+      "sha256": "793ca1308e8f9679263f5e03b67f420648a0981df79f4e97e1ac4a18729ba8f9",
+      "bytes": 583
+    },
+    "author-tests.log.status.json": {
+      "sha256": "457be296898aa10d82d7a5c3aaf341e00faa07fd0b5276b338cf26c70250043e",
+      "bytes": 528
+    },
+    "author-tests.xml": {
+      "sha256": "658d8cd19d3811381c31632f817a4fb8d15ade073139acab0e557f89500173fa",
+      "bytes": 5029
+    },
+    "counterchecks-repaired.log": {
+      "sha256": "0f27ed65ac230fa2abb107a97f0c3447eebdcc9cef4965e8d1bcad5031c9299d",
+      "bytes": 3700
+    },
+    "counterchecks-repaired.log.status.json": {
+      "sha256": "19ba69730105261db15950dbf101da655eaa658ef49035812e2691485b56bf68",
+      "bytes": 404
+    },
+    "counterchecks.log": {
+      "sha256": "cfcff426a670ecd6fffad00067a57d27d9c44cfcaba4920f450b0e2bca5aef3d",
+      "bytes": 3515
+    },
+    "counterchecks.log.status.json": {
+      "sha256": "f41d7eebe9044c7fe57e41a83ccb7a1c1899cf5a92d30380a9a6522947f530c0",
+      "bytes": 404
+    },
+    "counterchecks.py": {
+      "sha256": "9937e3ec67f500da19d17f7bfd9ee90bd779db091e91819c37f7a8c9d707dea4",
+      "bytes": 5361
+    },
+    "draft-tests.log": {
+      "sha256": "9c59e497271d608c060428b358b09d66d98a3b7b66df69262b5b5fa5e6d14eb1",
+      "bytes": 100
+    },
+    "draft-tests.log.status.json": {
+      "sha256": "b0b53d9fa3a721b123d571f7c827576eb2143c4db0ec8e144488fd55f1616fbc",
+      "bytes": 529
+    },
+    "draft-tests.xml": {
+      "sha256": "74df60c75248919bcb7d2f4678c0e43e03a2dc3587cdd69145480389363e4f2c",
+      "bytes": 975
+    },
+    "REVIEW.md": {
+      "sha256": "f68c5e68ceb0089e1fa7999d058fd5c1c7ab0092648fcc44f009bbd5d996bc8f",
+      "bytes": 3081
+    },
+    "test_gate_regressions_draft.py": {
+      "sha256": "b53cdba9761a034f699b453bb2ae5eaa6ce574e80de2264653a682f9c988bcb0",
+      "bytes": 3108
+    }
+  },
+  "scope": "cross-author structural/provenance/numeric checks; not functional or human acceptance"
+}
