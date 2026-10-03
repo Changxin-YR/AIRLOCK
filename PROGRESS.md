@@ -1,3 +1,11 @@
+# 单人先导功能已推送，完整 CI 复验中（2026-10-03）
+
+实际 main 仍 704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支已推送 0d9be52e58c06601341c9ebbd8f50a2686ea1ebb，新增私密单人CSV/JSONL研究、n=1空置信区间、来源明确的GitHub工作日志、独立练习页及本机告警收件箱。无新付费模型调用；用户暂缓模型状态/账单与本人面试。只有1人可安排，实际收到真人完成记录0；正式两人/人群/真实业务指标不改为通过。
+
+本机452项全量预检exit0（提交前）；冻结提交115项定点和8项原生浏览器exit0。既有4条trace导入与4个当前快照导入exit0，快照操作数0。实际更新Issues #3—#5并精确回读，原始trace只在本机；属于connector维护而非AIRLOCK防护或人类审批。单人空表位于var/single-person-20261003/annotation-pack，操作入口docs/START_WITH_ONE_PERSON.md；练习页8766，通知收件箱8767，未留永久运行服务。
+
+CI 37093593956/job111118885655 正在进行：已见Python/JS/3组浏览器及Docker步骤成功，尚未读取完整ZIP，不宣称完整验收通过。原126项矩阵暂保留上一来源；最终CI成功并核验原始收据后更新。完整新证据尚未提交，仅源码已远端。PR #1仍draft/unmerged。
+
 # 最终交付提交复验完成（2026-10-03）
 
 远端工作分支31cf0e76156f0b5a408756d45068f1a318cf856c完整CI 37090946414 success，job 111110964112。完整ZIP下载并核验GitHub SHA256、84个载荷及source.zip commit，独立verify_evidence exit0：348 Python、6 JS、23浏览器和真实Docker等门禁通过。实际报告与收据见AUTONOMOUS_DELIVERY_CI_20261003.json、AUTONOMOUS_DELIVERY_JOB_20261003.log和AUTONOMOUS_DELIVERY_VERIFIER_20261003.log(.status.json)。

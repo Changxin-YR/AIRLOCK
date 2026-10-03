@@ -2,10 +2,10 @@
   "schema_version": 5,
   "updated_date": "2026-10-03",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "autonomous_code_model_roles_and_real_github_relay_delivered",
+  "phase": "single_person_tools_pushed_ci_in_progress",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "31cf0e76156f0b5a408756d45068f1a318cf856c",
+  "working_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
   "code_and_evidence_commit": "31cf0e76156f0b5a408756d45068f1a318cf856c",
   "tested_commit": "4aca4073114b5b992460903abf33c3721f4f8063",
   "application_diff_tested_to_delivery": [],
@@ -242,5 +242,20 @@
     "pr_number": 1,
     "draft": true,
     "merged": false
+  },
+  "single_person_pilot": {
+    "candidate_commit": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+    "ci_run": 37093593956,
+    "ci_status": "in_progress",
+    "guide": "docs/START_WITH_ONE_PERSON.md",
+    "human_available": 1,
+    "human_completed": 0,
+    "new_model_calls": 0,
+    "deferred_by_user": [
+      "model_status_and_billing",
+      "interview"
+    ],
+    "code_pushed": true,
+    "new_evidence_pushed": false
   }
 }
