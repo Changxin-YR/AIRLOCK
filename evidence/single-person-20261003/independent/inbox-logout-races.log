@@ -1,0 +1,1 @@
+{"status":"PASS","independent_synthetic_races":2,"checks":["logout-before-headers","logout-during-json-body"],"business_effects":0}

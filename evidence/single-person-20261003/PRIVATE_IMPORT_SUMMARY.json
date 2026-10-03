@@ -1,0 +1,58 @@
+{
+  "kind": "actual_private_import_summary",
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "new_business_operations_from_import": 0,
+  "new_paid_model_calls": 0,
+  "human_participants": 0,
+  "human_gold_records": 0,
+  "human_kappa": null,
+  "retention": "raw private local-only; no retention guarantee",
+  "connector": {
+    "cases": 4,
+    "operation_records": 4,
+    "snapshot_observations": 0,
+    "observed_created_issues": 4,
+    "creation_claim_records": 4,
+    "family_count": 1,
+    "human_gold_records": 0,
+    "human_participants": 0,
+    "human_cohen_kappa": null,
+    "acceptance_metrics": null,
+    "source_artifact_sha256": [
+      "7c63b4f92f40cc3f8a163f3168a95d1ceda5a6600a68794cf8d7a0b146f67195"
+    ],
+    "private_manifest_path": "var/single-person-20261003/frozen-connector.json.private/frozen-connector.json",
+    "manifest_sha256": "1bbe0ab8217729feaa5b0380b05588997976a6c205cd6d8c3a7cbf6e5c323cce"
+  },
+  "snapshots": {
+    "cases": 4,
+    "operation_records": 0,
+    "snapshot_observations": 4,
+    "observed_created_issues": 0,
+    "creation_claim_records": 0,
+    "family_count": 1,
+    "human_gold_records": 0,
+    "human_participants": 0,
+    "human_cohen_kappa": null,
+    "acceptance_metrics": null,
+    "source_artifact_sha256": [
+      "17ac39bfea9bfea024a931de5edb9af40c46406737bf4628fa66358b5e0643a4"
+    ],
+    "private_manifest_path": "var/single-person-20261003/frozen-snapshots.json.private/frozen-snapshots.json",
+    "manifest_sha256": "c4743a976a9a41c6bc9c093662c5e7eb42fab8f0c15b9c75b34217203e314841"
+  },
+  "actual_maintenance_updates": {
+    "count": 3,
+    "issue_numbers": [
+      3,
+      4,
+      5
+    ],
+    "trace_sha256": "52df893ae86738153dbf8716ee4499b643ddca8482114d6e1e17a61cca145c74",
+    "private_trace_path": "var/single-person-20261003/github-snapshots/maintenance-updates.json",
+    "airlock_protected": false,
+    "human_approval": "not_observed",
+    "benchmark_accepted": false,
+    "meaning": "real connector updates of existing project tasks; not counted as controlled AIRLOCK execution or formal corpus"
+  }
+}

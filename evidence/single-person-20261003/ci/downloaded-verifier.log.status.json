@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/verify_evidence.py",
+    "--directory",
+    "evidence/single-person-20261003/ci/verified"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:42:06.136321+00:00",
+  "duration_seconds": 1.034,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+}

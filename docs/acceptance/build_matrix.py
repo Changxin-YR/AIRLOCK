@@ -12,8 +12,8 @@ ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'evidence/autonomous-20261003'
 CLOSURE=ROOT/'evidence/closure-20261002'
 LEGACY=ROOT/'evidence/continuation-20261002'
-FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/autonomous-20261003/ci/verified')
-CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/autonomous-20261003/CI_FINAL.json')
+FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/single-person-20261003/ci/verified')
+CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/single-person-20261003/CI_FINAL.json')
 SHA=json.loads((FINAL/'pytest.log.status.json').read_text())['tested_commit_sha']
 LOG_PATHS={name:LEGACY/'final'/(name+'.log') for name in ('live-validation','ablation-live-dev','ablation-live-test','model-diagnostics')}
 LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':CLOSURE/'final/live-upstream.log','sse-identity-replay':CLOSURE/'sse-identity-replay.log',
@@ -87,7 +87,7 @@ row('B4',P,EXT,'旧集按族6:4冻结，tuning拒读test；新导入拒跨split�
 row('B7',I,PASS,'公式手算、空集/零分母、退化 κ、重复标注/泄漏、固定seed；原计数期望为手工构造。','工具可复现不代表来源独立性已验证。','tests/test_research.py tests/test_benchmark.py benchmark/generate.py','test_research test_benchmark','pytest latency')
 row('B8',I,PASS,'保存关键词弱项、合成限制、未运行模型、人为失败与本机Docker失败；不推断普适结果。','','docs/EVALUATION.md docs/acceptance/FINDINGS_AND_FIXES.md',logs='benchmark-dev benchmark-test ablation')
 for id,text in [('H1','≤5秒均值、3秒理解、p95/CI'),('H2','≥90%真实业务决策正确率'),('H3','<1秒快速批准代理指标<5%与理解核验'),('H4','eligible只读归并≥80%且相同任务质量'),('H5','活跃用户日均审批<20次')]:
-    row(id,P,EXT,'研究导入/可见计时/手动导出/配对分析工具可运行；'+text+'的真人/真实工作负载结果未产生。','真实参与者0，无授权真实日志和活跃用户日；自动化导出已排除。','airlock/static/study.js benchmark/research.py benchmark/study-example.json','test_research','pytest browser-native study-analysis')
+    row(id,P,EXT,'研究导入/可见计时/手动导出/配对分析工具可运行；'+text+'的真人/真实工作负载结果未产生。','真人完成记录0；缺含实际人工审批、相同任务质量分母和活跃用户日的授权治理日志；自动化导出已排除。','airlock/static/study.js benchmark/research.py benchmark/study-example.json','test_research','pytest browser-native study-analysis')
 row('R1',I,PASS,'真实Linux部署非root/只读根/零cap，无目标卷、配置/凭据/socket；Agent与上游分别内网，DNS和直接IP绕过均失败。','仅受控部署，宿主管理员/容器逃逸不在测试范围；Windows基础镜像拉取受阻。','compose.yaml scripts/docker_smoke.py scripts/upstream_isolation.py','test_api','pytest docker-smoke upstream-isolation')
 row('R2',I,PASS,'方言编译授权、堆叠/注释/CTE/RETURNING/DDL/系统表/非有限/大整数/二进制/资源耗尽反例。','','airlock/sql.py airlock/models.py tests/test_gate.py','test_gate test_api test_audit_regressions')
 row('R4',I,PASS,'独立角色、请求/摘要/TTL替换、并发、路由撤销、SSE只通知、跨主体/恢复授权。','','airlock/access.py airlock/service.py','test_api test_gate test_routing test_new_boundaries test_recovery')

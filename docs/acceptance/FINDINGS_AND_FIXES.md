@@ -71,3 +71,16 @@ F016（P1，SSE身份租约绑定）：热重载把同一令牌映射到另一�
 | F021 | 运行时安全加固 | 历史SQLite3.45.1缺少准确vendor回补记录；采用官方固定3.53.1及源码双摘要验证。现存WAL关闭会checkpoint，故内存版本检查提前到任何持久open前 | `sqlite/research.json`、`independent/guard*`；模拟旧版本而非复现损坏。`tests/test_sqlite_runtime.py`四种拒绝路径字节不变，CI/Docker实际加载source ID及.so hash与构建报告绑定 |
 
 真实GitHub #6取得operator_attested收据、6条有效审计和9项边界检查；独立24并发只有一次发送，错误回读不收敛。GitHub无目标CAS，不能完全撤销通知，未知状态不重试mutation。模型语义建议、预算和恢复能力均未取得审批权限。
+
+## 单人启动阶段（2026-10-03）
+
+源码 `0d9be52e58c06601341c9ebbd8f50a2686ea1ebb`；CI 37093593956的458项Python、31项原生浏览器及其余门禁通过，独立校验92个载荷。证据前缀 `evidence/single-person-20261003/`。
+
+| ID | 性质 | 修复与复验 |
+|---|---|---|
+| F022 | P2，研究统计 | 历史31cf0e7原函数重放：单人区间[1250,1250]改为null，均值保留；independent/single-participant-baseline.log保留前后值及exit0 |
+| F023 | P2，新增导入工具边界 | 提交前审查发现case_id可成为CSV公式；输出前严格校验并拒绝，不静默改写ID。6个参数化反例及17项独立先导探针通过 |
+| F024 | P2，新增日志工具计数 | 提交前独立审查发现重复来源会虚增已创建对象数；保留creation_claim_records，按correlation_key计算独立对象。反例2条记录/1个对象通过 |
+| F025 | P2，新增收件箱请求边界 | 非ASCII幂等头可使str compare_digest抛异常；改UTF-8字节比较，错误头返回400，深嵌套JSON/慢体受限。pytest与独立5秒慢体反例通过 |
+
+3项独立HTTP反例、2项退出竞态与115项冻结定点测试保留实际收据；这些测试没有增加真人、模型或外部渠道数量。历史失败证据继续保留。

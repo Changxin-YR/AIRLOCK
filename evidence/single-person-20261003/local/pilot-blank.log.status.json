@@ -1,0 +1,22 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "benchmark.pilot",
+    "import",
+    "--cases",
+    "var/single-person-20261003/annotation-pack/case-source.original.json",
+    "--annotations",
+    "var/single-person-20261003/annotation-pack/single-person.template.csv",
+    "--source-reference",
+    "Blank template preflight; no human participation",
+    "--output",
+    "var/single-person-20261003/frozen-blank-result"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:34:24.082024+00:00",
+  "duration_seconds": 0.941,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+}

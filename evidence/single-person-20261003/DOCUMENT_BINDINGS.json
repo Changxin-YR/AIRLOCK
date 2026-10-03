@@ -1,0 +1,18 @@
+{
+  "tested_application_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "matrix_validator_receipt": "evidence/single-person-20261003/matrix-validator-default.log.status.json",
+  "documents": {
+    "docs/START_WITH_ONE_PERSON.md": "84c1d9b74e72a444f844ab2841aceaf3e27e88e50e7194a732978a46666ff5ed",
+    "docs/acceptance/FINAL_REPORT.md": "3b1de0d0c5a8169d6234485678bb678e96c7cb2e0a69364d71841c7cb070ff13",
+    "docs/acceptance/COMPLETION_MATRIX.json": "4f265f1b3beba5620f83770a47f0ca1e476650a0906f70e966993dd29b4131c6",
+    "docs/acceptance/COMPLETION_MATRIX.md": "dc969608a129c0ea0559d35eda45225bc259d39c456ec2bbe3e6f581061909fc",
+    "docs/acceptance/DELIVERY_STATE.json": "2d6571a0bd09e020b0d2350d44697ba89a6e005246c5d44f846f2c526a3342bb",
+    "docs/acceptance/EVIDENCE_RETENTION.md": "9d1c4265fe15d7bcd44860ad440144891f3f011d33540d6a02a02fa2428c4caf",
+    "docs/acceptance/FINDINGS_AND_FIXES.md": "4128131cee4ea91b21fc7980da939a0b9e9114baa4297686525419686a66221d",
+    "docs/acceptance/build_matrix.py": "2b3f65e5ba47fe0ed3cadf97353f9f4db83145decdba18ab6caa984d8a0df83c"
+  },
+  "rebuild_matrix_environment": {
+    "AIRLOCK_ACCEPTANCE_FINAL": "evidence/single-person-20261003/ci/verified",
+    "AIRLOCK_ACCEPTANCE_CI": "evidence/single-person-20261003/CI_FINAL.json"
+  }
+}

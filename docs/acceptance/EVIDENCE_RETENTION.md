@@ -69,3 +69,13 @@ preflight、final、retest、final-code、final-17ccd2c分别代表各自源状�
 </details>
 
 </details>
+
+
+## 单人启动交付（2026-10-03）
+
+- 应用源码0d9be52e58c06601341c9ebbd8f50a2686ea1ebb，CI37093593956/job111118885655。92个载荷hash、source.zip SHA及458条JUnit/真实子退出码独立核验，verify_evidence exit0。
+- 完整成功包纳入Git：evidence/single-person-20261003/ci/acceptance-0d9be52.zip，1,837,526字节，SHA256 83ded2be04f9e4e8e334144693a073f534acbd8292d647de44f993913108aecb。Git无自动到期，依赖历史和备份，不是WORM。
+- Actions副本11263493490，到期2027-01-01T03:33:25Z；与Git副本分别记账。
+- 新本机冻结定点收据、原生浏览器截图、独立边界反例、历史单人区间重放、矩阵校验收据和脱敏导入汇总均在evidence/single-person-20261003。ARCHIVE_MANIFEST.json逐文件记录公开载荷hash。
+- var/single-person-20261003下的真实原始输入、标注表、当前快照及Issues #3—#5更新轨迹不进Git，无永久保留承诺。Git仅存对应路径/hash和数量，不含实际人员填写。
+- 未新增外部云资源、付费模型调用或真人记录；原模型/失败CI等历史证据及各自保留期限继续有效。

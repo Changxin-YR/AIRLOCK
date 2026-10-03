@@ -1,0 +1,15 @@
+{
+  "command": [
+    "node",
+    "var/security-review-20261003/inbox_logout_race_review.cjs"
+  ],
+  "exit_code": 0,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "working_tree_dirty": true,
+  "recorded_at": "2026-10-03T03:35:42.392787+00:00",
+  "source_sha256": {
+    "airlock/alert_inbox.py": "754cc2e091ba7b413a04b8f69a2e121a16129ba18a4d593c39d481644978e2a7",
+    "airlock/static/alert-inbox.js": "c267bead71cfa2f68e0d93f078fb49ec3cacdd119957d43dafeef3a572feedb4",
+    "scripts/pilot_server.py": "de04401213ec6854776c4a031ccb0e15dc9f3151928a404e34b4dc80dc09bca8"
+  }
+}
