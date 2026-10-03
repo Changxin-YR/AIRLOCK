@@ -1,3 +1,17 @@
+# 单人启动闭环代码、报告和证据已推送（2026-10-03）
+
+远端工作分支4e512df4c65e9b94b7f210ed5483e612efb5eec1，应用源码0d9be52e58c06601341c9ebbd8f50a2686ea1ebb，两者应用diff为空。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1已更新并回读，draft/open/unmerged。原始完整任务文件和126目标保留，111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL。
+
+用户可安排1人但无完成记录；新增独立8766练习页、8道GitHub合成题、私密单人CSV/JSONL导入，source/human不代填、κ及正式指标null、n=1不报区间。新增worklog整理既有4条create轨迹及4个当前snapshot（snapshot操作0），真实更新Issues #3—#5的私密trace另存，未计AIRLOCK防护或正式gold。通知收件箱8767实现独立读写身份、持久去重/冲突、慢体限制及退出清空；无新永久服务/云资源/外部消息。模型API实验调用0；模型状态/账单与面试按用户要求暂缓。操作手册docs/START_WITH_ONE_PERSON.md，本人单表var/single-person-20261003/annotation-pack。
+
+CI37093593956/job111118885655完整成功：458 Python、6 JS、31浏览器（旧23+新8）、官方MCP、冻结benchmark、隔离Docker、受保护网络、S3 ObjectLock、Envoy/OTel、依赖与门禁。完整ZIP下载后核验92载荷、source.zip SHA、JUnit及实际子退出码，verify_evidence exit0。本机冻结115项定点+8浏览器exit0；提交前452项另保留来源。矩阵126条/29收据校验exit0。
+
+修复单人退化置信区间（历史31cf0e7原函数重放）、CSV公式ID、重复create来源虚增对象数、非ASCII幂等头异常；独立3个HTTP/2个退出竞态及17个来源探针通过，scope内无已知未修复P0/P1。来源差异与working_tree_dirty原标记保留，不宣称真人评审。
+
+成功完整包evidence/single-person-20261003/ci/acceptance-0d9be52.zip，1,837,526字节，SHA256 83ded2be04f9e4e8e334144693a073f534acbd8292d647de44f993913108aecb；Git无自动到期但非WORM。Actions11263493490到期2027-01-01T03:33:25Z。最终140公开载荷逐Git blob/hash核验、8份文档hash匹配；个人日志/标注仍仅本机，无永久保留承诺。Git保留此前失败CI原始ZIP/exit1。
+
+交付提交4e512df的自动CI37094728343仍在运行，尚未声称其完成；应用0d9be52完整通过证据已永久写入工作分支Git。接续先核对真实refs、STATE及原始收据，不能把模型当真人、快照当执行、已推工作分支当main合并。
+
 # 单人先导功能已推送，完整 CI 复验中（2026-10-03）
 
 实际 main 仍 704b5035cf69f9a6c40c44eecd84c0d0741de849。工作分支已推送 0d9be52e58c06601341c9ebbd8f50a2686ea1ebb，新增私密单人CSV/JSONL研究、n=1空置信区间、来源明确的GitHub工作日志、独立练习页及本机告警收件箱。无新付费模型调用；用户暂缓模型状态/账单与本人面试。只有1人可安排，实际收到真人完成记录0；正式两人/人群/真实业务指标不改为通过。
