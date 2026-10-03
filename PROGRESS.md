@@ -1,3 +1,11 @@
+# AIRLOCK 修复交付已推送，交付提交CI待复验（2026-10-03）
+
+实际main仍704b5035cf69f9a6c40c44eecd84c0d0741de849。源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c与交付699adbd7c421f0c80fd0339ff69f892929cb28bd均已推送codex/full-audit-2026-10-02，应用diff为空；PR #1 draft/open/unmerged。
+
+源码CI37117971834/job111188360694成功，687 Python / 6 JS / 31 browser及全部隔离集成门禁通过。artifact11272472106完整ZIP与94个载荷、source.zip commit、真实退出码已下载校验，verify_evidence exit0；完整ZIP和原始失败/成功证据在evidence/closure2-20261003的Git历史内。Actions副本到期2027-01-01T10:55:17Z；Git副本无自动到期但非WORM。
+
+本轮F035—F042修复并经不同作者正反例复验；171原始载荷+只读最终审查已归档；281公开载荷与10文档绑定核验。126目标矩阵30唯一收据exit0，111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL不变。新增真人0、付费模型0。最终交付699adbd的完整CI正在运行，尚未把重复CI记为已通过。
+
 # 再次修复源码已推送，等待冻结CI（2026-10-03）
 
 源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c已推送codex/full-audit-2026-10-02，main仍704b5035cf69f9a6c40c44eecd84c0d0741de849。从干净758202b基线开始，修复审计分页饥饿、批量累计critical事务内撤权、空白批量理由500、HTTP/MCP严格JSON与DNS/头/body总截止、unknown对账原目标绑定、归档收据/版本/保留期与输出预留、OTLP确认/并发计数与编码协商。原失败及首版遗漏的撤权窗口、归档输出顺序和编码协商回归均保留。F035—F042有复现与定位。
