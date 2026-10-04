@@ -1,0 +1,107 @@
+{
+  "scope": "Synthetic launcher baseline, author regression and separate real child-process checks. Initial fixture errors retained.",
+  "files": [
+    {
+      "source": "var/startup-review-20261004/launcher-final.log",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-final.log",
+      "bytes": 583,
+      "sha256": "eb41616f1b81ac0da118914d5701a0f57505dcdec8882e1f2a4a97739a2494c1"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-final.log.status.json",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-final.log.status.json",
+      "bytes": 469,
+      "sha256": "310d1423ebf337f0b4dfdefc66ef9d6061e5f18faf5392ca0c478c9464f91497"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-final.xml",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-final.xml",
+      "bytes": 2705,
+      "sha256": "3211daa2670117c6274100531465a821ba9ff5499cb6e98b978dcc4b03d830b4"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-fixed-final.log",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-fixed-final.log",
+      "bytes": 583,
+      "sha256": "6a8f49282d9db043929b22db478ee0ca3b9c50521f38d5a8f4154482c2eac5f1"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-fixed-final.log.status.json",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-fixed-final.log.status.json",
+      "bytes": 475,
+      "sha256": "c3127785feeaa2efee01afe8a7d855838f4bb6c6014387c71756841a363d54b1"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-fixed-final.xml",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-fixed-final.xml",
+      "bytes": 2705,
+      "sha256": "5e329e62aaaff826be62af1a06c05dd7267dd0d7588ee32889d4f2a55706f5bf"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-fixed-tests.log",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-fixed-tests.log",
+      "bytes": 24501,
+      "sha256": "6554cdc4bf6a32db7beb29995f0e18c1b09099576ddf0d0b4070f8656e10cdf6"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-fixed-tests.log.status.json",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-fixed-tests.log.status.json",
+      "bytes": 475,
+      "sha256": "20a6944f7011f12e77ea6eea680b39bf698f30809aa5f54236893cf26d1a64f4"
+    },
+    {
+      "source": "var/startup-review-20261004/launcher-fixed-tests.xml",
+      "public": "evidence/project-maintenance-20261004/launcher/launcher-fixed-tests.xml",
+      "bytes": 27451,
+      "sha256": "a6d67e2b67f52de3e472ee7c6b9da4b5e21a3b5dfd033529456fd6a29476e612"
+    },
+    {
+      "source": "var/startup-review-20261004/missing-config.log",
+      "public": "evidence/project-maintenance-20261004/launcher/missing-config.log",
+      "bytes": 379,
+      "sha256": "e9777fc0fe2e792674c02c69879c1a368df798773d00f2fd8c6754e7487ba188"
+    },
+    {
+      "source": "var/startup-review-20261004/missing-config.log.status.json",
+      "public": "evidence/project-maintenance-20261004/launcher/missing-config.log.status.json",
+      "bytes": 2015,
+      "sha256": "b3608ecc6ae5a2c7920d5f3f8665a0b9abb5b0bacc585642d22754ac4ec4e1b7"
+    },
+    {
+      "source": "var/project-maintenance-20261004/launcher-countercheck.log",
+      "public": "evidence/project-maintenance-20261004/independent/launcher-countercheck.log",
+      "bytes": 744,
+      "sha256": "2345e1b2dcdf851cf613d106b8f3eb3663a2f0211cff94c4a56fbce34a443af7"
+    },
+    {
+      "source": "var/project-maintenance-20261004/launcher-countercheck.log.status.json",
+      "public": "evidence/project-maintenance-20261004/independent/launcher-countercheck.log.status.json",
+      "bytes": 401,
+      "sha256": "9624a798145747b5ec1b8b1d100fe3cc8bd2642fa5dbbc8037d410d56c1ffd70"
+    },
+    {
+      "source": "var/project-maintenance-20261004/launcher_countercheck.py",
+      "public": "evidence/project-maintenance-20261004/independent/launcher_countercheck.py",
+      "bytes": 1853,
+      "sha256": "1a8ebcd7ac2f837803ef1e32c806e929a0ba7ff162c9d054866a51c46efc8a9c"
+    },
+    {
+      "source": "var/project-maintenance-20261004/targeted.log",
+      "public": "evidence/project-maintenance-20261004/independent/targeted.log",
+      "bytes": 583,
+      "sha256": "06d062569fc6b7fa782306ef7554907a73e7713c0dccf0b78201894c3870d80d"
+    },
+    {
+      "source": "var/project-maintenance-20261004/targeted.log.status.json",
+      "public": "evidence/project-maintenance-20261004/independent/targeted.log.status.json",
+      "bytes": 544,
+      "sha256": "dfc6a73694087282edd4c4be17322aeca022a9fa3a71dfd9bdbb3457827fcaf3"
+    },
+    {
+      "source": "var/project-maintenance-20261004/targeted.xml",
+      "public": "evidence/project-maintenance-20261004/independent/targeted.xml",
+      "bytes": 7492,
+      "sha256": "59730428dc4fb6dd74581baa23f1e4613d0e6c7f0fced40096216a7b3c7b31d6"
+    }
+  ]
+}

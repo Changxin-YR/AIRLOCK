@@ -1,42 +1,36 @@
-# AIRLOCK · Agent 操作审批与影响预演
+# AIRLOCK · Agent 工具调用审批与影响预演
 
-**个人工程作品：Agent提交意图，人看清影响，服务端持有执行权。**
+AIRLOCK 在 Agent 的操作生效前计算影响、请求独立审批，并在执行时重新检查授权与数据状态。它适用于需要人工确认的受控工具调用：查看具体变化、批准或拒绝、查询执行结果，并核对完整审计链路。
 
-用于简历或面试时，从[简历与演示版本](docs/RESUME_PORTFOLIO.md)开始：核心功能取舍、项目条目、五分钟演示和证据入口已整理。当前工程基线已[归档](evidence/resume-archive-20261004/README.md)，原始完整目标及其受阻项继续保留。
+服务端持有执行权。Agent 只有调用身份，不能用模型建议、预算或可逆性声明替代审核权限。当前支持有界 SQLite 合成环境、注册的 HTTP/MCP CAS 上游，以及固定仓库的 GitHub Issue 创建适配器。
 
-人批准的参数、策略和数据快照，必须与服务端最终执行所依据的对象一致。当前支持有界 SQLite 合成数据和配置注册的 HTTP / MCP CAS 上游；完整范围、配置、状态机和实验工具见 [运行手册](docs/OPERATIONS.md)。126 项原始目标与结论见 [验收矩阵](docs/acceptance/COMPLETION_MATRIX.md)，部分外部验证仍受阻。
-
-需要提供真人、身份平台或云资源时，按[用户操作步骤](docs/USER_ACTIONS_20261003.md)执行。真实项目任务已在 Issues #2—#5 跟踪；连接器执行记录与 AIRLOCK 受控执行分别标记，原始个人日志保存在本机。
-
-目前只有一个人、没有历史业务日志时，从[单人启动指南](docs/START_WITH_ONE_PERSON.md)开始：独立练习页、GitHub 维护日志导入和本机告警收件箱均可单独使用；正式双人标注和人群验证仍单独记账。
+## 工作流程
 
 ```text
-Agent（只有agent token）
-  -> HTTP / stdio 与 Streamable HTTP MCP
-  -> 三态策略：pass / block / need_approval
-  -> 固定表克隆预演，保存数量、diff和指纹
-  -> 独立reviewer：核验范围与恢复限制
-  -> 写事务内校验参数、版本、TTL、策略与数据
-  -> 业务效果 + 终态 + HMAC审计，同库提交
+Agent 提交操作
+  → HTTP / stdio MCP / Streamable HTTP MCP
+  → CEL/YAML 三态策略：pass / block / need_approval
+  → 影响预演：数量、字段 diff、数据指纹和恢复依据
+  → 独立 reviewer 查看原始快照并批准或拒绝
+  → 服务端复核范围、参数、版本、TTL、策略与数据
+  → 执行结果、动作状态和审计收据
 ```
 
-## 已实现的主线
+本地写入的业务效果、终态与审计在同一数据库事务提交。远端操作使用适配器的 CAS/幂等契约；发送后结果不确定时保留 `unknown`，通过原 action 与原收据对账。
 
-支持只读有界执行并留痕；所有支持写入包括零变化操作都持久化等待审批；未知、越界或预演失败默认阻断。SQLite编译器authorizer而非关键词决定可接受的表/函数/动作，克隆快照区分命中行与实际变化行。
+## 核心能力
 
-参数/策略/数据快照绑定、幂等键、并发审批冲突、到期/重启、执行前漂移检测、提交前进程退出和审计失败回滚。HMAC保留原始审批快照，可回放/验证，不声称没有外部锚定也能检测尾部删除。
+- **受控接入：** HTTP 与官方 MCP SDK 互通；注册工具限制操作、资源和目标地址，域名 DNS pin 与 TLS 校验约束上游连接。
+- **影响与审批：** SQLite 克隆预演区分命中行与变化行；审批台呈现字段 diff、恢复限制和到期时间，服务端按审核范围过滤待办和审计。
+- **一致性与故障处理：** 请求/策略/快照绑定、幂等冲突、并发决定、TTL、重启恢复、执行前漂移检查；本地独立补偿审批及远端未知结果对账。
+- **治理：** 明确成员的批量决策、累计风险权限复核、预算预占与结算、由操作者管理的 shadow 分组建议。所有支持写入仍需独立批准。
+- **审计与观测：** 原始审批快照、HMAC 审计、签名检查点、可选 S3 Object Lock 连接器，以及 trace、阶段延迟、token、缓存和健康指标。
 
-中文审批台显示影响数量、字段diff、SQL/参数、恢复未知、到期时间与高影响范围确认；支持服务端pending筛选、稳定分页、原生SSE、审计和移动布局。凭据只在内存，文字按文本渲染。历史只读超过100条也不会挤掉待审批请求。
+技术栈：Python、FastAPI、Pydantic、SQLite、cel-python；Next.js / React 静态导出审批台，由 FastAPI 同源提供。依赖版本见 `requirements*.txt`、`package-lock.json`，构建要求 Node.js 22。
 
-补齐 CEL/YAML 三态策略、多人范围路由、提交后独立补偿审批、预算预占/结算、显式批量决策与 shadow 分组建议、真实 provider 的可选语义评估路径、关联 ID、阶段延迟/token/缓存看板，以及双人标注、四组消融和真人 A/B 工具。离线工具通过不代表真实模型或真人指标已达成。
+## 本地运行
 
-新增受控接入与验收闭环：OIDC access-token 校验、域名 DNS pin/TLS、MCP 会话/SSE、独立 S3 Object Lock 归档连接器、健康/Prometheus 告警、最小化审计导出、理解核验与研究金标导入。配置与完整命令见 [闭环运行手册](docs/CLOSURE_RUNBOOK.md)；实际验证结果见逐项矩阵。
-
-技术栈：Python / FastAPI / Pydantic / SQLite / cel-python，Next.js 16.3.8 / React 19.3.0 静态导出审批台。React 管理登录、导航、数据和连接生命周期，影响与审计视图沿用项目的转义渲染组件。生产由 FastAPI 同源提供静态文件；构建需要 Node.js 22 和 npm ci，浏览器脚本以 CSP 内容哈希授权。
-
-## 本地演示
-
-推荐Python3.13；要求Python≥3.11和已确认修复 WAL-reset 的 SQLite。CI/Docker 固定官方3.53.1并检查实际加载的source ID；旧版本会在打开持久数据库前拒绝启动。运行 `python -m airlock.sqlite_runtime` 可检查本机，安装说明见[运行时要求](docs/OPERATIONS.md#sqlite-运行时要求)。下列方式只供可信开发机体验，不等于将高权限Agent放在同一目录中的隔离部署。
+推荐 Python 3.13，要求 Python ≥3.11 和经确认修复 WAL-reset 的 SQLite。CI/Docker 固定 SQLite 3.53.1 并校验实际加载的 source ID；不满足要求时会在打开持久库前拒绝。参见[运行时要求](docs/OPERATIONS.md#sqlite-运行时要求)。
 
 ```bash
 python -m venv .venv
@@ -49,36 +43,40 @@ python -m airlock init
 python -m airlock serve
 ```
 
-打开 http://127.0.0.1:8000。操作者本机查看var/local.json，仅把AIRLOCK_REVIEWER_TOKEN输入审批台。另开终端只设置AIRLOCK_AGENT_TOKEN，再运行：
+`serve --config path/to/config.json` 显式选择的文件必须存在、可读且为 UTF-8 JSON 对象，否则在启动服务前退出 2。省略 `--config` 时读取默认 `var/local.json`（如存在），也支持纯环境配置；已设置的环境变量保持优先。
+
+打开 `http://127.0.0.1:8000`。操作者本人在本机查看 `var/local.json`，将 reviewer token 输入审批台。Agent 进程只配置 agent token；数据库、审核凭据和审计密钥留在服务端。
+
+用现有确定性客户端提交一个合成操作：
 
 ```bash
-python scripts/demo_agent.py --scenario delete
 python scripts/demo_agent.py --scenario update
 ```
 
-第一条请求删除全部1206条合成记录，建议首次在审批台拒绝：原数据保持，脚本转为SELECT。**批准后会真正删除这个演示库的数据。** update只调整id=1的余额。模拟器不是LLM；无模型key也能复现闭环。
+该请求调整合成表中 `id=1` 的余额，首先返回 `pending`；在审批台核对影响并明确批准后才生效。客户端同时支持 `read`、`delete` 和 `blocked` 场景。**批准 `delete` 会删除当前合成库的 1206 条记录。** 拒绝后客户端可改用只读查询；它是确定性模拟器，无需模型密钥。
 
-没有自动重置API。需要另一份演示数据时，停止服务，设置新的AIRLOCK_DB路径后启动，保留旧库与审计。不要连接真实客户资料或生产库，不要把完整配置交给Agent。
+本地运行适合可信开发机检查功能；Agent 与服务端处于同一高权限目录时不构成部署隔离。每次需要新数据时，使用新的 `AIRLOCK_DB` 路径，保留旧库与审计，不自动重置现有数据。完整配置见[运行手册](docs/OPERATIONS.md)。
 
-## MCP接入
+## MCP 与工具接入
 
-MCP host 启动 `python -m airlock.mcp`，配置 AIRLOCK_URL 和仅 agent token。提供 sql_execute/action_status 及当前身份可发现的注册上游工具；pending 使用收据 ID 查询。适配器通过 HTTP 访问闸门，不持有数据库或审核凭据。
+MCP host 启动 `python -m airlock.mcp`，配置 `AIRLOCK_URL` 和仅 agent token。工具包括 `sql_execute`、`action_status` 及当前身份可发现的注册上游工具。收到 pending 后使用 action ID 查询；超时或未知结果时查询原动作或复用原幂等键，不直接创建另一笔写入。
 
-官方MCP Python SDK互通测试覆盖初始化、发现工具、写入pending、独立审核和结果读回；只声明所测子集，不是完整规范认证，也不等于真实LLM已跑通。协商版本为2025-11-25/2025-06-18，支持 `/mcp` 的无会话 Streamable HTTP JSON；注册上游可选 MCP JSON 或会话/SSE，并须具备固定 CAS 契约。OIDC access token 验证按受信 issuer/audience 与主体路由配置；任意工具仍需适配。
+服务端 `/mcp` 提供所测的无会话 Streamable HTTP JSON 子集；注册上游可使用 JSON 或会话/SSE。上游工具需要明确的影响、CAS、幂等和收据契约。OIDC access token 验证 issuer、audience、签名、有效期和主体路由，不从 token 中接受任意扩权角色。
 
-## Docker演示与隔离检查
+GitHub 适配器固定仓库和 Issue 创建动作，通过受控中转或配置的服务身份执行。接入与故障处理见[闭环运行手册](docs/CLOSURE_RUNBOOK.md)和[技术契约](docs/SPEC.md)。
 
-可信操作者设置三个不同的随机长密钥（不要提交.env）后，`docker compose up --build airlock`；模拟Agent使用 `docker compose --profile demo run --rm agent`。AIRLOCK_PORT默认8000。服务器连接ingress+protected网络，Agent只在internal protected网络，服务器独享数据卷，端口仅发布到loopback。
+## 隔离部署
 
-独立可复现的隔离验收：
+可信操作者配置三个独立随机密钥后运行 `docker compose up --build airlock`。服务端独享数据卷、连接入口及内部网络；Agent 仅在内部网络，发布端口限 loopback。凭据不提交 Git。
 
 ```bash
 python scripts/docker_smoke.py
+python scripts/upstream_isolation.py
 ```
 
-脚本自行创建唯一临时项目、随机密钥和测试卷，检验权限、数据/凭据隔离、网络/端口、独立审批与重启持久性，仅清理自己的资源。它不是容器逃逸或生产渗透测试。
+这些检查自行创建唯一临时项目和合成测试资源，验证权限、网络、服务端卷/凭据隔离、重启及审批效果，仅清理自己的资源。生产身份平台、长期独立保管和通知渠道仍需对应环境验证。
 
-## 验收
+## 测试与证据
 
 ```bash
 python -m pytest -q
@@ -89,27 +87,29 @@ python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
 python -m playwright install chromium
 python scripts/browser_smoke.py
 python scripts/browser_edges.py
-python scripts/container_integrations.py
 ```
 
-完整命令、逐命令退出码收据、JUnit和产物门禁见 [CODEX_REVIEW.md](CODEX_REVIEW.md)。GitHub Actions会上传source.zip、原始日志、合成数据、逐例评测、原生截图、Docker报告和哈希清单。看实际提交对应的run，不只看图标。
+完整命令、官方 MCP SDK、容器集成、故障注入与产物门禁见 [CODEX_REVIEW.md](CODEX_REVIEW.md)。CI 保存真实子进程退出码、JUnit、源码 ZIP、逐例结果、截图和哈希清单。曾出现的 tee 掩盖 Docker 失败记录继续保留；每个结果都以对应源码和原始收据为依据。
 
-开发中曾发现tee掩盖Docker失败的假绿，并保留修复历史。严格门禁与Docker网络修复后的基线525ea8f已验证Python84项（含官方SDK）、JS6项、原生浏览器9项及真实Docker检查。当前代码还增加了pending分页与异常输入回归；最终数量与结论以当前commit的CI证据和memory/progress为准。
+已核验源码 `533726a` 及交付 `699adbd` 的完整流水线各通过 687 项 Python、6 项 JavaScript、31 项原生浏览器检查。当前范围、原始目标和未完成验证见[验收报告](docs/acceptance/FINAL_REPORT.md)及[逐项矩阵](docs/acceptance/COMPLETION_MATRIX.md)。工程快照见[项目归档](evidence/project-checkpoint-20261004/README.md)。
 
-200条/40模板族的benchmark全为作者构造的合成策略回归，dev120/test80按族划分，不是事故金标或真人数据。合成100%不能写成真实危险召回100%。内部评估p95不含最终持久化/提交、HTTP与人等待。
+200 条 / 40 模板族的 benchmark 为作者构造的合成策略回归，按族划分 dev/test。真实模型合成实验、协议互通、部署隔离和真人业务效果分别记账；合成一致率不代表真实危险召回率。
 
-## 保证边界
+## 使用边界
 
-Agent 若可直接读写数据库、拿到审核密钥或控制服务器/宿主，就超出保护前提。DeepSeek V4.1 Flash 已完成合成任务的真实调用、四组消融与拒绝后安全改道；真实日志金标和真人 A/B 仍缺外部验证。已提供 OIDC 资源服务器校验、轮换 key-id、签名检查点和独立 S3 Object Lock 连接器；生产交互式 SSO、多租户、任意第三方适配与真实长期归档仍需实际部署。补偿和模型建议均不能自动授权。
+当前 SQLite 适配器限制 schema、表、函数和操作，未知或无法预演的操作阻断。任意第三方工具、多租户列权限、通用生产灾备和任意 GitHub 修改操作尚未提供。
 
-[执行方案](docs/PLAN.md) · [技术契约](docs/SPEC.md) · [威胁模型](docs/THREAT_MODEL.md) · [评测方法](docs/EVALUATION.md) · [来源核验](docs/RESEARCH.md) · [面试问答](docs/INTERVIEW.md)
+如果 Agent 可直接读写目标、取得审核凭据或控制服务端/宿主，就超出保护前提。HMAC 与检查点只能在声明的密钥和外部锚定前提下验证审计；检查点之后的尾部与所有密钥失陷有明确限制。模型、恢复与治理建议始终不能自动授权写入。
 
-## 跨会话接续
+## 项目文档
 
-```bash
-git fetch origin main memory/progress
-git show origin/memory/progress:PROGRESS.md
-git show origin/memory/progress:STATE.json
-```
+| 文档 | 内容 |
+|---|---|
+| [开发计划](docs/PLAN.md) | 场景、架构和交付顺序 |
+| [运行手册](docs/OPERATIONS.md) | 配置、启动、API、测试和故障处理 |
+| [技术契约](docs/SPEC.md) | 状态、权限、请求与执行语义 |
+| [威胁模型](docs/THREAT_MODEL.md) | 信任边界、攻击面和防护前提 |
+| [评测方法](docs/EVALUATION.md) | 指标、数据来源、实验与限制 |
+| [接入与运维](docs/CLOSURE_RUNBOOK.md) | 身份、工具、归档、通知和追踪 |
 
-先核对main SHA，再看代码和证据。记忆、文档和manifest不是授权或验收结果。不要再次清空仓库。独立验收后更新进度与剩余问题。
+维护者接续时先核对真实分支、HEAD、工作区和 `origin/memory/progress`，再检查源码与原始证据。保留用户改动及历史验证，不重写历史。

@@ -1,7 +1,7 @@
 {
   "archive_date": "2026-10-04",
   "timezone": "Asia/Shanghai",
-  "purpose": "Frozen engineering baseline before resume-focused presentation; original acceptance preserved.",
+  "purpose": "Frozen engineering source, acceptance evidence and target ledger.",
   "baseline_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
   "tested_source_commit": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
   "main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
@@ -77,8 +77,8 @@
     "No private var files, databases, real credentials or personal logs are included."
   ],
   "bundle": {
-    "path": "evidence/resume-archive-20261004/AIRLOCK-resume-baseline-699adbd.zip",
-    "bytes": 2835771,
-    "sha256": "1ec0d00025e4a9b059f6e80de6bb052db345b59c2486f3a80d41a47374b678f4"
+    "path": "evidence/project-checkpoint-20261004/AIRLOCK-project-baseline-699adbd.zip",
+    "bytes": 2835750,
+    "sha256": "60bd67a5db7aa28c86f6b8743ce052b6a8986821bf0cf371257645ef5f87717e"
   }
 }

@@ -14,6 +14,10 @@ REQUIRED_LOGS = ['pytest.log','frontend-check.log','frontend-tests.log','benchma
                  'browser-edges.log','container-integrations.log','upstream-isolation.log','archive-build.log','archive-integration.log','research-pipeline.log',
                  'sqlite-runtime-build.log','sqlite-runtime-linked.log','pilot-browser.log','acceptance-matrix.log']
 REQUIRED_TESTS = {'test_official_mcp_sdk_pending_approval_and_result',
+    'test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[missing]',
+    'test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[directory]',
+    'test_launcher_default_missing_config_keeps_environment_only_compatibility',
+    'test_launcher_unreadable_configuration_does_not_echo_filesystem_error',
     'test_process_death_inside_gate_decision_is_atomic','test_concurrent_approvals_execute_once',
     'test_real_sse_reconnect_cursor_only_delivers_newer_events','test_http_complete_flow',
     'test_server_filtered_pending_queue_survives_long_read_history','test_state_filter_is_validated_and_applied',

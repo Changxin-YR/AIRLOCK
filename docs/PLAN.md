@@ -1,30 +1,45 @@
-# AIRLOCK：全面审查后的设计与执行范围
+# AIRLOCK 开发计划
 
-个人项目的完整原目标保存在 CODEX_FULL_AUDIT_BRIEF.md 和 acceptance/AIRLOCK-acceptance-targets.json，共 126 条，包含父子项；初始 BASELINE_MATRIX.json 保持改动前状态，COMPLETION_MATRIX 单独记录逐项结果。旧 MVP 边界没有删除原目标。
+AIRLOCK 为 Agent 工具调用提供服务端审批边界。当前主场景是受控数据修改与仓库维护：操作提交后先计算影响，由独立审核者确认，再执行绑定的请求并保留结果与审计。
 
-## 架构
+## 架构与现状
 
 ```mermaid
 flowchart LR
-  Agent[Agent 仅调用凭据] --> HTTP[HTTP / stdio MCP]
-  HTTP --> Gate[Gate 服务端权限与三态决策]
-  Gate --> CEL[有界 CEL/YAML]
-  Gate --> Preview[本地克隆 / 上游 CAS 预演]
-  Gate --> Model[可选结构化模型建议]
-  Gate --> Pending[持久化 pending 与预算预占]
-  Reviewer[独立 reviewer 与范围路由] --> UI[diff-first 审批台]
+  Agent[Agent 调用身份] --> HTTP[HTTP / MCP 接入]
+  HTTP --> Gate[服务端权限与三态决策]
+  Gate --> CEL[CEL/YAML 规则]
+  Gate --> Preview[SQLite 克隆 / 上游 CAS 预演]
+  Gate --> Model[可选模型风险建议]
+  Gate --> Pending[持久审批与预算预占]
+  Reviewer[独立审核者] --> UI[Next.js 审批台]
   UI --> Pending
-  Pending --> Validate[绑定 / TTL / 策略 / 当前范围复核]
-  Validate --> Local[同库效果、恢复计划、终态、审计]
-  Validate --> Remote[远端执行租约 / 收据 / unknown 对账]
+  Pending --> Validate[范围 / 绑定 / TTL / 策略复核]
+  Validate --> Local[同库效果、终态与审计]
+  Validate --> Remote[远端执行租约 / 原收据对账]
 ```
 
-C1 支持一个明确契约的注册 HTTP 上游，MCP 客户端需适配异步回执。C2 使用真实 cel-python 的受限类型子集。C3 本地精确预演和上游声明值分开。C4 本地补偿为新审批。C5 实现真实 provider 可选路径，live 验证需本项目授权。C6 持久化、reviewer 路由、TTL/时钟回退、并发与远端未知。C7 原生界面与 A/B 工具。C8 分组、成员摘要、预算、shadow 建议。C9 结构化回执与有界模拟/真实 Agent 驱动。C10 原始快照 HMAC，不含外部锚定。C11 原始退出码、反例与 CI 产物门禁。C12 固定标签关联指标、阶段时延和真实 usage 字段，缺值为 null。
+本地效果、动作状态与审计使用同一 SQLite 事务。受控 HTTP/MCP 工具依赖注册的 CAS、幂等与结果查询契约；GitHub 适配器限定固定仓库的 Issue 创建。远端 `unknown` 通过原动作对账，不盲目重发。补偿是新的独立审批。
 
-## 执行纪律和未关闭边界
+前端使用 Next.js / React 静态导出，由 FastAPI 同源提供；影响和审计组件保留转义渲染。OIDC 主体映射已有路由，签名检查点可连接 S3 Object Lock；长期身份、云保管和外部通知尚需实际环境验证。
 
-先保留改动前失败与完整目标，再修 P1，增量补功能，独立反例复验，代码冻结后记录 tested_commit_sha，最后提交报告/证据并更新 memory/progress。任何未授权效果视为架构失败；不能为了满足数字放开硬拒绝、预演或审核要求。
+## 交付顺序
 
-四条原则：fail-closed；服务端持有执行权；代理行为可关联和核查；未知影响/恢复不伪装成精确事实。真实模型、人类、真实日志、独立金标与生产第三方适配缺失单列。技术栈保持 FastAPI＋原生 JS，与原 Next.js 要求的偏差未关闭；迁移不混入安全修复。
+| 顺序 | 工作 | 完成依据 |
+|---|---|---|
+| 1 | 安装、启动与配置可诊断 | 新环境能按文档启动；错误配置在启动前受控失败；已有配置和数据保持完整 |
+| 2 | 一条工具调用形成完整业务闭环 | 只读、pending、拒绝、批准、过期、重复与 unknown 分别有实际效果和审计证据 |
+| 3 | 提升维护和使用体验 | 待办与审计可定位、失败可恢复、诊断不泄露凭据；原生浏览器和服务端回归通过 |
+| 4 | 按具体任务扩展适配器 | 先定义影响、授权、幂等、收据和恢复契约，再加入隔离测试；没有契约时阻断 |
+| 5 | 验证外部部署与研究指标 | 使用获授权的身份、保管、通知、真实任务和独立参与者；数据或环境缺失单列受阻 |
 
-详细接口、配置、安全限制、测试/研究运行方法见 [OPERATIONS.md](OPERATIONS.md)。最终结论只由 [126 项矩阵](acceptance/COMPLETION_MATRIX.md) 及绑定提交的证据支持；父项通过不能代替子项。
+优先修复影响使用和安全的可复现问题。每次功能改动需要正向流程、错误边界及与风险相称的测试；复验记录命令、真实退出码、源码 SHA 和证据位置。文档和工程快照分别保存，不以清单长度衡量功能价值。
+
+## 持续约束
+
+- 服务端持有执行权；Agent 不获得目标数据库、审核凭据、宿主控制权或任意 Shell 入口。
+- 请求、策略、影响快照和有效期必须绑定到最终执行；所有支持写入保持独立批准下限。
+- 预演、模型、授权、收据或恢复依据未知时，保持阻断或明确的 unknown；预算与建议不赋予权限。
+- 保留原始审批快照、失败证据和历史变更，不覆盖未提交工作，不重写仓库历史。
+
+完整原目标位于 [CODEX_FULL_AUDIT_BRIEF.md](CODEX_FULL_AUDIT_BRIEF.md) 和 [126 项索引](acceptance/AIRLOCK-acceptance-targets.json)。[逐项矩阵](acceptance/COMPLETION_MATRIX.md)继续保存全部目标、父子记录、原阈值和未完成项；交付优先级不改变这些验收标准。

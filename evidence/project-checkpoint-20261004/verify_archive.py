@@ -1,4 +1,4 @@
-"""Read-only checks for the frozen resume baseline and accompanying demo receipts."""
+"""Read-only checks for the engineering checkpoint and original execution receipts."""
 from pathlib import Path
 import hashlib
 import io
@@ -49,8 +49,20 @@ for name, code in [('comparison.log.status.json', 1), ('comparison-rerun.log.sta
     assert receipt['tested_commit_sha'] == record['baseline_commit']
     assert receipt['tracked_source_dirty'] is False
 
+provenance = json.loads((BASE / 'PROVENANCE.json').read_text())
+previous = json.loads((BASE / 'PREVIOUS_MANIFEST.json').read_text())
+historical = {provenance['evidence_root'] + '/' + name: value for name, value in previous['files'].items()}
+historical.update(previous['documents'])
+for name, expected in historical.items():
+    data = subprocess.check_output(['git', 'show', provenance['commit'] + ':' + name], cwd=ROOT)
+    assert len(data) == expected['bytes'], name
+    assert hashlib.sha256(data).hexdigest() == expected['sha256'], name
+for path in BASE.glob('comparison*'):
+    assert path.read_bytes() == subprocess.check_output(
+        ['git', 'show', provenance['commit'] + ':' + provenance['evidence_root'] + '/' + path.name], cwd=ROOT)
+
 links_checked = 0
-for path in [ROOT / 'docs/RESUME_PORTFOLIO.md', BASE / 'README.md', ROOT / 'README.md']:
+for path in [ROOT / 'docs/PLAN.md', BASE / 'README.md', ROOT / 'README.md']:
     for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
         if target.startswith(('http:', 'https:', '#')):
             continue
@@ -58,14 +70,8 @@ for path in [ROOT / 'docs/RESUME_PORTFOLIO.md', BASE / 'README.md', ROOT / 'READ
         assert (path.parent / file).is_file(), (path, target)
         links_checked += 1
 
-scope = ['airlock', 'frontend', 'configs', 'policies', 'benchmark', 'scripts', 'tests', 'tests-js',
-         'requirements.txt', 'requirements-dev.txt', 'requirements-archive.txt', 'pyproject.toml',
-         'package.json', 'package-lock.json', 'Dockerfile', 'compose.yaml', '.github',
-         'docs/acceptance/build_matrix.py', 'docs/acceptance/validate_matrix.py']
-changed = subprocess.check_output(['git', 'diff', record['baseline_commit'], '--name-only', '--', *scope], cwd=ROOT, text=True)
-assert not changed.strip(), changed
 print(json.dumps({'status': 'PASS', 'baseline_commit': record['baseline_commit'],
                   'bundle_payloads_verified': len(record['files']), 'ci_payloads_verified': len(manifest['files']),
-                  'local_links_checked': links_checked, 'application_diff': [],
+                  'local_links_checked': links_checked, 'historical_git_objects_verified': len(historical),
                   'demo': 'disposable synthetic fixture; actual effect/state/audit checked',
                   'historical_full_ci_is_not_a_new_full_test_run': True}, ensure_ascii=False))

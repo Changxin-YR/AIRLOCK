@@ -1,0 +1,10 @@
+{
+  "commit": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
+  "evidence_root": "evidence/resume-archive-20261004",
+  "bundle": {
+    "path": "evidence/resume-archive-20261004/AIRLOCK-resume-baseline-699adbd.zip",
+    "bytes": 2835771,
+    "sha256": "1ec0d00025e4a9b059f6e80de6bb052db345b59c2486f3a80d41a47374b678f4"
+  },
+  "scope": "Previously published byte identity. Original logs, receipts and snapshot history remain unchanged in Git."
+}

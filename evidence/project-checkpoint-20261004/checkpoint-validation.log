@@ -1,0 +1,1 @@
+{"status": "PASS", "baseline_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd", "bundle_payloads_verified": 10, "ci_payloads_verified": 94, "local_links_checked": 22, "historical_git_objects_verified": 14, "demo": "disposable synthetic fixture; actual effect/state/audit checked", "historical_full_ci_is_not_a_new_full_test_run": true}
