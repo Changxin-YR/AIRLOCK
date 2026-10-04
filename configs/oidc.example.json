@@ -1,0 +1,9 @@
+{
+  "issuer": "https://identity.example.invalid/realms/airlock",
+  "audience": "airlock-api",
+  "additional_audiences": [],
+  "jwks_file": "trusted-public-jwks.json",
+  "subjects": {"project-agent-subject": "agent:demo", "project-reviewer-subject": "reviewer:team"},
+  "revoked_jti": [],
+  "max_token_seconds": 3600
+}

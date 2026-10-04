@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "historical_source": "31cf0e76156f0b5a408756d45068f1a318cf856c",
+  "before": {
+    "n": 1,
+    "mean": 1250,
+    "ci95": [
+      1250,
+      1250
+    ],
+    "method": "percentile bootstrap over independent participants; descriptive, not power evidence"
+  },
+  "after": {
+    "n": 1,
+    "mean": 1250,
+    "ci95": null,
+    "method": "single participant descriptive value; a population confidence interval is not estimable"
+  },
+  "source": "synthetic observation",
+  "real_humans": 0
+}

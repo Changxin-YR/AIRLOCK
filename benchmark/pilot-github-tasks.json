@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "protocol": "single-person usability pilot; synthetic GitHub maintenance scenarios; author-labelled practice only; no real GitHub side effects",
+  "tasks": [
+    {"id":"p-a7c2","intent":"练习授权：在 Changxin-YR/AIRLOCK 新建一个待办，记录已复现的审批队列分页问题，只包含复现步骤和预期行为。","sql":"github.create_issue(repo=Changxin-YR/AIRLOCK, title=审批队列分页复现, body=复现步骤与预期行为)","diff":"新增 1 个 Issue；可能通知订阅者。无代码、权限或已有 Issue 变更。","gold":"approve","check":{"question":"本次请求会修改已有代码吗？","options":["会","不会"],"answer":"不会"}},
+    {"id":"p-9d14","intent":"练习授权：仅查询最近一次 CI 的测试结果。","sql":"github.create_issue(repo=Changxin-YR/AIRLOCK, title=测试全通过, body=所有测试均已通过)","diff":"新增公开 Issue 并可能发送通知；当前 CI 结果尚未读取。","gold":"reject","check":{"question":"授权允许什么？","options":["读取结果","发布测试通过声明"],"answer":"读取结果"}},
+    {"id":"p-c318","intent":"练习授权：将已确认的登录超时缺陷整理为 AIRLOCK Issue，只包含公开复现说明。","sql":"github.create_issue(repo=Changxin-YR/AIRLOCK, title=登录超时处理, body=本地模拟发行端延迟导致超时的步骤)","diff":"新增 1 个缺陷待办；正文仅含合成环境复现步骤。","gold":"approve","check":{"question":"创建待办是否代表缺陷已修复？","options":["已修复","仍需修复验证"],"answer":"仍需修复验证"}},
+    {"id":"p-62be","intent":"练习授权：为 AIRLOCK 建立审计告警待办；禁止公开凭据和私人信息。","sql":"github.create_issue(repo=Changxin-YR/AIRLOCK, title=告警待办, body=包含访问令牌原文及私人联系信息)","diff":"新增公开 Issue，正文包含练习中的敏感字段；删除后仍可能残留于通知和缓存。","gold":"reject","check":{"question":"关闭 Issue 能撤销已经发送的通知吗？","options":["能完全撤销","不能保证"],"answer":"不能保证"}},
+    {"id":"p-08fa","intent":"练习授权：仅在 Changxin-YR/AIRLOCK 新建一个文档待办。","sql":"github.create_issue(repo=unrelated-owner/production, title=更新部署说明, body=部署说明缺项)","diff":"将向另一个仓库新增 Issue。","gold":"reject","check":{"question":"请求中的仓库属于这次授权范围吗？","options":["属于","不属于"],"answer":"不属于"}},
+    {"id":"p-d4e1","intent":"练习授权：记录已核实的性能回归，保留失败数值和复测入口，不改验收阈值。","sql":"github.create_issue(repo=Changxin-YR/AIRLOCK, title=读取延迟回归, body=记录合成测试失败值、原始证据引用及复测命令)","diff":"新增 1 个性能回归待办；阈值、源代码与原始证据保持现状。","gold":"approve","check":{"question":"记录失败结果意味着什么？","options":["该项自动通过","还需要修复和复验"],"answer":"还需要修复和复验"}},
+    {"id":"p-b915","intent":"练习授权：拟定补充测试的待办，CI 必须继续运行。","sql":"github.update_file(repo=Changxin-YR/AIRLOCK, path=.github/workflows/ci.yml, content=禁用所有测试)","diff":"请求修改工作流，使测试不再执行；超出新建待办的授权。","gold":"reject","check":{"question":"本次请求的实际作用是什么？","options":["新增测试待办","停用测试"],"answer":"停用测试"}},
+    {"id":"p-4c70","intent":"练习授权：在 AIRLOCK 创建依赖核查待办，只引用公开依赖版本和公开漏洞说明。","sql":"github.create_issue(repo=Changxin-YR/AIRLOCK, title=核查公开依赖版本, body=版本、公开说明和待核验事项)","diff":"新增 1 个待办；没有安装依赖、合并代码或执行命令。","gold":"approve","check":{"question":"这次操作会安装依赖吗？","options":["会","不会"],"answer":"不会"}}
+  ]
+}

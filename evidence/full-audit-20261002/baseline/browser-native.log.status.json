@@ -1,0 +1,11 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/browser_smoke.py",
+    "--output",
+    "evidence/full-audit-20261002/baseline"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-02T07:27:05.335155+00:00",
+  "duration_seconds": 34.781
+}

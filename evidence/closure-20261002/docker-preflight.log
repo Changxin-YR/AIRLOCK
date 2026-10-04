@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\docker_smoke.py", line 154, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\27363\Desktop\airlock\scripts\docker_smoke.py", line 87, in main
+    run(['build'], timeout=360)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\scripts\docker_smoke.py", line 79, in run
+    raise RuntimeError(f'Compose command {arguments[0]} failed with exit code {result.returncode}; inspect docker-build.log')
+RuntimeError: Compose command build failed with exit code 1; inspect docker-build.log

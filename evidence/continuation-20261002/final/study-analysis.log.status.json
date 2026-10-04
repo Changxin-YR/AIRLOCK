@@ -1,0 +1,17 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "benchmark.research",
+    "--output",
+    "evidence/continuation-20261002/final/study-analysis.json",
+    "study",
+    "evidence/continuation-20261002/final/study-automation.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:43:48.905959+00:00",
+  "duration_seconds": 0.8,
+  "tested_commit_sha": "abcacfa30ef9747525a55053e3100e2b599dde48",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "abcacfa30ef9747525a55053e3100e2b599dde48"
+}

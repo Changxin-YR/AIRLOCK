@@ -1,0 +1,31 @@
+{
+  "run_id": 37022113155,
+  "job_id": 110887508276,
+  "tested_commit_sha": "c3dd6ad9de5e0be6be57eb3809300f2b2ea7c088",
+  "conclusion": "failure",
+  "failed_command_exit_code": 1,
+  "cause": "DockerHub official legacy MinIO image no longer publicly retrievable; upstream now distributes archived source only.",
+  "upstream_network_check": "passed before archive fixture image pull failed",
+  "artifacts": [
+    {
+      "id": 11233268064,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 25998927,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11233268064",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11233268064/zip",
+      "expired": false,
+      "created_at": "2026-10-02T14:50:52Z",
+      "expires_at": "2026-12-31T14:45:36Z",
+      "updated_at": "2026-10-02T14:50:52Z",
+      "digest": "sha256:987fdca173c9b14770eca24ca08275a4a1f220f8ba6683f48960e6a2e745f011",
+      "workflow_run": {
+        "id": 37022113155,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "c3dd6ad9de5e0be6be57eb3809300f2b2ea7c088"
+      }
+    }
+  ],
+  "git_retained": "full job log and metadata; failed full ZIP is Actions-only"
+}

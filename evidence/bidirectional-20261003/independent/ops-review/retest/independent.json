@@ -1,0 +1,68 @@
+{
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "source_hashes": {
+    "airlock/alert_delivery.py": "56bd69e8aaec33e9a8052bf3b767ea2f43c40befacc374a5d87bcc3c2411888f",
+    "scripts/operational_check.py": "8c57fcec54f2b6a75e9ccfb5e85b7569c470c60e6143fd018d5f986bec6c13a6"
+  },
+  "synthetic_only": true,
+  "real_http_chain": [
+    {
+      "check": "alert_delivery",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "status": "alert",
+      "posts": 1,
+      "passed": true
+    },
+    {
+      "check": "identity_failure_no_recovery",
+      "exit_code": 4,
+      "expected_exit_code": 4,
+      "status": "unknown",
+      "posts": 1,
+      "passed": true
+    },
+    {
+      "check": "stale_recovery_rejected",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "status": "ok",
+      "posts": 1,
+      "passed": true
+    },
+    {
+      "check": "fresh_recovery",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "ok",
+      "posts": 2,
+      "passed": true
+    },
+    {
+      "check": "legitimate_legacy_migration",
+      "passed": true
+    },
+    {
+      "check": "schema_lookalike_no_mutation_no_send_no_false_unchanged",
+      "passed": true
+    },
+    {
+      "check": "corrupt_high_water_controlled_without_writes_or_send",
+      "passed": true
+    }
+  ],
+  "schema_lookalike": {
+    "result": "REJECTED",
+    "file_changed": false
+  },
+  "invalid_high_water": {
+    "result": {
+      "status": "blocked",
+      "event_ids": [],
+      "pending_count": null,
+      "event_id": null,
+      "error_code": "notification_state_unavailable"
+    }
+  },
+  "source_dirty": true
+}

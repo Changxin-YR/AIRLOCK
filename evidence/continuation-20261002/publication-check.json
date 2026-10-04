@@ -1,0 +1,13 @@
+{
+  "named_authorized_credential_exact_value_absent": true,
+  "scanned_payload_files": 123,
+  "nested_zip_payloads_scanned": true,
+  "original_instruction_hashes_unchanged": {
+    "docs/CODEX_FULL_AUDIT_BRIEF.md": "175fe74707fb4dd252684a759dded904c417017c772e3179b9412c3acfc3d835",
+    "docs/acceptance/AIRLOCK-acceptance-targets.json": "7cb64cf9cacdbb2e52af82068c753fd04f2e05c1e1058112213edce3acc7750f"
+  },
+  "ledger_calls": 638,
+  "ledger_reserved_or_settled_cny": 1.11779816,
+  "budget_cny": 3,
+  "scope": "exact known credential check and integrity checks; not comprehensive secret discovery"
+}

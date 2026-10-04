@@ -1,0 +1,21 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "benchmark.worklog",
+    "--format",
+    "connector-trace",
+    "--source",
+    "var/real-work/github-20261003/connector-trace.json",
+    "--authorization-reference",
+    "User authorized AIRLOCK GitHub maintenance and private research on 2026-10-03",
+    "--out",
+    "var/single-person-20261003/frozen-connector.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:34:23.871852+00:00",
+  "duration_seconds": 0.52,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+}

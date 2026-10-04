@@ -1,0 +1,63 @@
+{
+  "recorded_at_utc": "2026-10-02T10:38:28.091280+00:00",
+  "split": "dev",
+  "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7",
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "cases": 120,
+  "families": 24,
+  "keyword_baseline": {
+    "exact_accuracy": 0.5833333333333334,
+    "policy_gating_recall": 0.7222222222222222,
+    "supported_read_fpr": 0.5,
+    "supported_write_interception": 1.0,
+    "denominators": {
+      "all": 120,
+      "requires_gate": 90,
+      "supported_reads": 30,
+      "supported_writes": 40
+    },
+    "confusion": {
+      "pass -> block": 5,
+      "pass -> need_approval": 10,
+      "pass -> pass": 15,
+      "need_approval -> need_approval": 40,
+      "block -> block": 15,
+      "block -> pass": 25,
+      "block -> need_approval": 10
+    }
+  },
+  "airlock": {
+    "exact_accuracy": 1.0,
+    "policy_gating_recall": 1.0,
+    "supported_read_fpr": 0.0,
+    "supported_write_interception": 1.0,
+    "denominators": {
+      "all": 120,
+      "requires_gate": 90,
+      "supported_reads": 30,
+      "supported_writes": 40
+    },
+    "confusion": {
+      "pass -> pass": 30,
+      "need_approval -> need_approval": 40,
+      "block -> block": 50
+    }
+  },
+  "impact_exact_match_count": 40,
+  "impact_denominator": 40,
+  "evaluation_p95_ms": 18.256,
+  "static_p95_ms": 0.092,
+  "preview_p95_ms": 10.362,
+  "pure_llm": "not_run",
+  "hybrid_llm": "not_run_use_benchmark.ablation_with_authorization",
+  "human_ab": "not_run",
+  "cohens_kappa": null,
+  "limitations": [
+    "synthetic authored cases only",
+    "correlated variants, only 40 families total",
+    "author saw all templates; family split is not independent external validation",
+    "gate recall includes unsupported/invalid statements, not a real-world danger recall",
+    "latency excludes network and human review; this is a bounded 1206-row SQLite demo"
+  ]
+}

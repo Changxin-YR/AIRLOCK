@@ -1,0 +1,2 @@
+usage: __main__.py [-h] [--config CONFIG] [--json] {init,serve,doctor}
+__main__.py: error: invalid AIRLOCK environment configuration; check credentials, origin and limits

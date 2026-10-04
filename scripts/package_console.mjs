@@ -1,0 +1,10 @@
+import {cp,readFile,writeFile,mkdir} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+const root=resolve(import.meta.dirname,'..'),source=resolve(root,'frontend/out'),destination=resolve(root,'airlock/console');
+await mkdir(destination,{recursive:true});
+await cp(source,destination,{recursive:true});
+const html=await readFile(resolve(destination,'index.html'),'utf8');
+const hashes=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)].filter(m=>m[1]).map(m=>`'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
+await writeFile(resolve(destination,'csp.json'),JSON.stringify({script_hashes:[...new Set(hashes)]},null,2)+'\n');
+console.log(JSON.stringify({framework:'Next.js static export',inline_script_hashes:hashes.length,destination}));

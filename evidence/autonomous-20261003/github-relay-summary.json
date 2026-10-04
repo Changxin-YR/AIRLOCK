@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "mode": "real_github_operator_relay",
+  "tested_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
+  "scope": "one user-authorized real issue, ephemeral separately credentialed scripted review",
+  "human_reviewers": 0,
+  "model_approvals": 0,
+  "direct_runtime_github_token": false,
+  "business_side_effects": 1,
+  "issue_url": "https://github.com/Changxin-YR/AIRLOCK/issues/6",
+  "action_id": "81b40294318b47858eff8809b9781be2",
+  "request_hash": "e0d5c9d980317cc3165f20829a21ff072aaa15fa8f1f4dced0b4f5cb99c9aeda",
+  "receipt": {
+    "action_id": "81b40294318b47858eff8809b9781be2",
+    "request_hash": "e0d5c9d980317cc3165f20829a21ff072aaa15fa8f1f4dced0b4f5cb99c9aeda",
+    "state": "executed",
+    "result": {
+      "repository_node_id": "R_kgDOU0MySA",
+      "repository_full_name": "Changxin-YR/AIRLOCK",
+      "issue_node_id": "I_kwDOU0MySM8AAAABUt9ngA",
+      "number": 6,
+      "url": "https://github.com/Changxin-YR/AIRLOCK/issues/6",
+      "title_sha256": "0e48af3e08b4711664bdd0cb83162bb3f79b995be63bf94efa210899992e5d0d",
+      "body_sha256": "a80f09eab1351f493b6b3d0196f642cbf8745c52d18360b5507b118ca95dc553",
+      "receipt_verification": "operator_attested",
+      "target_cas": false,
+      "fully_reversible": false,
+      "observation_reference": "connector GitHub REST readback / observed.json"
+    }
+  },
+  "audit_verification": {
+    "valid": true,
+    "events": 6,
+    "head": "c1d08d8ef18baff6711d769fd2343436054c5d13870f35ceea7bde8e42915b2c",
+    "anchor_status": "not_configured",
+    "limitation": "Tail truncation after the last independently retained checkpoint remains undetectable. A server with all keys can forge new history; keep checkpoints outside its write authority."
+  },
+  "checks": [
+    "agent_approval_denied",
+    "pending_not_claimable",
+    "rejected_not_claimable",
+    "approved_queued_unknown",
+    "claim_once",
+    "exact_readback",
+    "reconcile_executed",
+    "same_key_no_duplicate",
+    "audit_chain_valid"
+  ],
+  "observed_sha256": "a7e02b4e4aa5868099b49f5bb06456b6d13503d88f5d8be9072c21a0fc72cbf6"
+}

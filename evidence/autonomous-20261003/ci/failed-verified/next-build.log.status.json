@@ -1,0 +1,13 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T01:10:23.819395+00:00",
+  "duration_seconds": 12.146,
+  "tested_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4"
+}

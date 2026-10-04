@@ -1,0 +1,19 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_sqlite_runtime.py",
+    "tests/test_github_adapter.py",
+    "tests/test_gate.py",
+    "tests/test_shared_policy.py",
+    "--junitxml=var/sqlite-review/final-targeted.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T01:48:49.698686+00:00",
+  "duration_seconds": 12.881,
+  "tested_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4"
+}

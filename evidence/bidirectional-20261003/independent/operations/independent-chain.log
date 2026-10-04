@@ -1,0 +1,144 @@
+C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient as TestClient  # noqa
+{
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "working_tree_dirty": true,
+  "source_hashes": {
+    "airlock/alert_delivery.py": "3915b0fc8d4c1c8b76a99ff857618d3b8fd7be26dc6c81991897d3a77c0d11c7",
+    "airlock/alert_inbox.py": "754cc2e091ba7b413a04b8f69a2e121a16129ba18a4d593c39d481644978e2a7",
+    "airlock/operations.py": "87eba3d1a1263eb1a1a6903b4c2eb0c03614eda2b38a394d12743569d22da01a",
+    "scripts/operational_check.py": "8c57fcec54f2b6a75e9ccfb5e85b7569c470c60e6143fd018d5f986bec6c13a6"
+  },
+  "status": "PASS",
+  "scope": "isolated synthetic localhost HTTP; no real operator/person/cloud identity",
+  "checks": [
+    {
+      "name": "fresh_alert_persists_and_is_readable",
+      "exit_code": 2,
+      "result": {
+        "status": "alert",
+        "alert_codes": [
+          "pending_expiry_backlog"
+        ],
+        "notification": {
+          "status": "delivered",
+          "event_ids": [
+            "5d656eb3-be2c-4ef1-a5e1-d0f67e7cd21d"
+          ],
+          "pending_count": 0
+        }
+      },
+      "receiver_kinds": [
+        "alert"
+      ]
+    },
+    {
+      "name": "invalid_identity_cannot_recover",
+      "exit_code": 4,
+      "result": {
+        "status": "unknown",
+        "error_code": "health_identity_rejected"
+      },
+      "receiver_kinds": [
+        "alert"
+      ]
+    },
+    {
+      "name": "stale_healthy_cannot_recover",
+      "exit_code": 3,
+      "result": {
+        "status": "ok",
+        "alert_codes": [],
+        "notification": {
+          "status": "blocked",
+          "event_ids": [],
+          "pending_count": null,
+          "error_code": "health_observation_stale_or_unordered"
+        }
+      },
+      "receiver_kinds": [
+        "alert"
+      ]
+    },
+    {
+      "name": "confirmed_new_health_recovers_after_restarts",
+      "exit_code": 0,
+      "result": {
+        "status": "ok",
+        "alert_codes": [],
+        "notification": {
+          "status": "delivered",
+          "event_ids": [
+            "14e373d8-47ca-4564-b132-4076825613a2"
+          ],
+          "pending_count": 0
+        }
+      },
+      "receiver_kinds": [
+        "recovery",
+        "alert"
+      ]
+    },
+    {
+      "name": "repeat_is_persistent_noop",
+      "exit_code": 0,
+      "result": {
+        "status": "ok",
+        "alert_codes": [],
+        "notification": {
+          "status": "unchanged",
+          "event_ids": [],
+          "pending_count": 0
+        }
+      },
+      "receiver_kinds": [
+        "recovery",
+        "alert"
+      ]
+    },
+    {
+      "name": "forged_success_hint_still_exits_alert",
+      "exit_code": 2,
+      "result": {
+        "status": "alert",
+        "alert_codes": [
+          "pending_expiry_backlog"
+        ],
+        "notification": {
+          "status": "delivered",
+          "event_ids": [
+            "d581cecf-32ab-4cad-99c6-0e5230c4a994"
+          ],
+          "pending_count": 0
+        }
+      },
+      "receiver_kinds": [
+        "alert",
+        "recovery",
+        "alert"
+      ]
+    },
+    {
+      "name": "exact_replay_deduplicated_reader_cannot_forge",
+      "replay_http": 200,
+      "reader_write_http": 401,
+      "event_count": 3
+    },
+    {
+      "name": "receiver_restart_identity_rotation_retains_history",
+      "old_read_http": 401,
+      "event_count": 3
+    },
+    {
+      "name": "foreign_database_untouched",
+      "result": {
+        "status": "blocked",
+        "event_ids": [],
+        "pending_count": null,
+        "event_id": null,
+        "error_code": "notification_state_unavailable"
+      },
+      "hash_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "git",
+    "remote",
+    "-v"
+  ],
+  "exit_code": 0,
+  "stdout": "origin\thttps://github.com/Changxin-YR/AIRLOCK.git (fetch)\norigin\thttps://github.com/Changxin-YR/AIRLOCK.git (push)\n",
+  "stderr": ""
+}

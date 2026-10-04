@@ -1,0 +1,28 @@
+{
+  "status": "BLOCKED_EXTERNAL",
+  "excluded": [],
+  "active_user_days": 0,
+  "tasks": 0,
+  "quality_matched_tasks": 0,
+  "quality_mismatch_tasks": 0,
+  "daily_approvals": {
+    "numerator": 0,
+    "denominator": 0,
+    "value": null
+  },
+  "quality_matched_approval_reduction": {
+    "numerator": 0,
+    "denominator": 0,
+    "value": null
+  },
+  "eligible_fold_rate": {
+    "numerator": 0,
+    "denominator": 0,
+    "value": null
+  },
+  "readonly_pass": 0,
+  "duplicates_suppressed": 0,
+  "batch_reviewed": 0,
+  "incorrect_decisions": 0,
+  "provenance": "supplied record declarations are not independent identity/authorization evidence; no extrapolation from synthetic runs to user days"
+}

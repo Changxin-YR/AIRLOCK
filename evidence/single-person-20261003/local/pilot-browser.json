@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "mode": "native_browser_e2e",
+  "browser_plugin": "not available; project Playwright",
+  "passed": [
+    "pilot_public_assets_load_without_approval_service",
+    "eight_practice_decisions_exported_and_excluded_from_human_metrics",
+    "pilot_390px_no_horizontal_overflow",
+    "sender_alert_dedup_and_recovery_render_as_two_events",
+    "inbox_read_token_not_in_url_or_browser_storage",
+    "inbox_390px_no_horizontal_overflow",
+    "inbox_logout_clears_authenticated_content",
+    "no_browser_javascript_or_csp_errors"
+  ],
+  "errors": [],
+  "csp_violations": [],
+  "human_participants": 0,
+  "external_notifications": 0,
+  "business_side_effects": 0
+}

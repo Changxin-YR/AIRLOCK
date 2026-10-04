@@ -9,3 +9,7 @@ evidence
 *.db-wal
 *.db-shm
 node_modules
+frontend/.next
+frontend/out
+airlock/console
+.firecrawl

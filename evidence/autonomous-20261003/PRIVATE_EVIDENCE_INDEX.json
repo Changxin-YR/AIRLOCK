@@ -1,0 +1,72 @@
+{
+  "status": "local_only_not_permanently_archived",
+  "retention": "No automatic deletion configured; no guaranteed retention or external backup.",
+  "reason": "Personal task context, raw model records and account balances remain outside public Git.",
+  "files": [
+    {
+      "local_relative_path": "var/real-work/github-20261003/live-relay/connector-trace.json",
+      "sha256": "9f89359ea8b5e7f1c711dbaebc651ce374d24773f5d06aa7bfbd6ec08ccabd36",
+      "bytes": 15872
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/live-relay/review-snapshot.json",
+      "sha256": "71ae9019bf429fdc442a278b799d559ae23c3f97f1a70f10493bcd9b13726a19",
+      "bytes": 6137
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/live-relay/audit.json",
+      "sha256": "7533515e92845b994caecea2bce8beb9877a567e93512c9d110bb5b0a61b704b",
+      "bytes": 19865
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/live-relay/observed.json",
+      "sha256": "a7e02b4e4aa5868099b49f5bb06456b6d13503d88f5d8be9072c21a0fc72cbf6",
+      "bytes": 1144
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/deepseek-run/deepseek-roleplay.json",
+      "sha256": "589b705654dcf9a7229416dceec6a1da42b54121f415d2b02bfb9497300b2fb9",
+      "bytes": 20155
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/codex-subagent.json",
+      "sha256": "1e75bd9ab1fb97b5a6090a7e5b984e80003f382fa890a3f859fa5306ebe1f114",
+      "bytes": 5095
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/codex-study.json",
+      "sha256": "dabd12212547c0c999af426ea92c61cc42090d9cc4bfbec7ebac9cde53f8bf9d",
+      "bytes": 1297
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/codex-study-v2-raw.json",
+      "sha256": "dcfd2367ea78dacb0569587c729789d0a4e6fc50a147babb7872f9aee4eee44e",
+      "bytes": 1002
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/blind-study-packet.json",
+      "sha256": "14453b0c2d6818e2c0d77d724834541da5134941f1e2ac6433ef80592c361582",
+      "bytes": 1205
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/blind-study-packet-v2.json",
+      "sha256": "6e404e52cd00f986f258dd2ee13232d1499fccd261324334496579c76a8b3bd1",
+      "bytes": 1144
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/balance-before.json",
+      "sha256": "ebb00380aa41cf77584bc5c38711287eca27356426eafffe80c0f181bcdd2012",
+      "bytes": 513
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/balance-after.json",
+      "sha256": "77547ade687276b37cb0ae328fe32c4ffdc54cc83aabaf37f6d5b2bd687a34e9",
+      "bytes": 517
+    },
+    {
+      "local_relative_path": "var/real-work/github-20261003/model-annotations/balance-comparison.json",
+      "sha256": "b0623fcad2fe2ea867a418c3d875afcf16561b15a39c97d4d35e1e304fbaec8c",
+      "bytes": 525
+    }
+  ]
+}

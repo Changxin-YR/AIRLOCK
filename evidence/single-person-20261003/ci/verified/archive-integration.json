@@ -1,0 +1,43 @@
+{
+  "mode": "real_docker_s3_object_lock",
+  "image_digests": [],
+  "runtime_image_id": "sha256:1c9e2557ecec01ad58b75fe066b35fbe2cd843d0b1f4af8e7e530772e5635baf",
+  "receipt": {
+    "bucket": "airlock-evidence",
+    "key": "checkpoints/97f43d473d3544499590f92d1246fa53/000000000001-48e836868fcea6155086f01efc64736a3326d4f6238f40d5d170e46eee64f0e0.json",
+    "version_id": "53b83548-5ecb-460a-b6c7-5c9d8734e441",
+    "sha256": "48e836868fcea6155086f01efc64736a3326d4f6238f40d5d170e46eee64f0e0",
+    "retain_until": "2026-10-04T03:38:38+00:00",
+    "mode": "COMPLIANCE",
+    "database_instance": "97f43d473d3544499590f92d1246fa53",
+    "seq": 1
+  },
+  "checks": [
+    "delete_exact_version",
+    "shorten_compliance",
+    "downgrade_to_governance",
+    "version_pinned_after_new_version",
+    "retrieved_anchor_detects_tail_deletion",
+    "unapproved_target_unchanged"
+  ],
+  "actual_denials": {
+    "delete_exact_version": {
+      "http_status": 400,
+      "code": "InvalidRequest",
+      "message": "Object is WORM protected and cannot be overwritten"
+    },
+    "shorten_compliance": {
+      "http_status": 400,
+      "code": "InvalidRequest",
+      "message": "Object is WORM protected and cannot be overwritten"
+    },
+    "downgrade_to_governance": {
+      "http_status": 400,
+      "code": "InvalidRequest",
+      "message": "Object is WORM protected and cannot be overwritten"
+    }
+  },
+  "credential_scope": "new synthetic fixture only; never read default AWS credentials",
+  "retention_scope": "COMPLIANCE API semantics; temporary test container removed, not permanent production archive",
+  "exit_code": 0
+}

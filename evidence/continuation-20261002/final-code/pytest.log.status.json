@@ -1,0 +1,15 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "--junitxml=evidence/continuation-20261002/final-code/pytest.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:45:38.896195+00:00",
+  "duration_seconds": 44.267,
+  "tested_commit_sha": "400024bd59133d9e50f8fb00288b9f02693b2153",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "400024bd59133d9e50f8fb00288b9f02693b2153"
+}

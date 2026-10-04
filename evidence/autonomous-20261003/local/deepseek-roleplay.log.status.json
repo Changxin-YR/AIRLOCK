@@ -1,0 +1,22 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/model_roleplay.py",
+    "--cases",
+    "var/real-work/github-20261003/annotation-pack/case-contexts.json",
+    "--tasks",
+    "benchmark/study-example.json",
+    "--provider-config",
+    "var/real-work/github-20261003/model-annotations/provider.json",
+    "--ledger",
+    "var/deepseek-continuation-ledger",
+    "--output-dir",
+    "var/real-work/github-20261003/model-annotations/deepseek-run"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T00:48:46.720137+00:00",
+  "duration_seconds": 7.683,
+  "tested_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c"
+}

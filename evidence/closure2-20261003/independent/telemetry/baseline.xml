@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="0" tests="5" time="4.223" timestamp="2026-10-03T18:45:36.368404+08:00" hostname="WHHHH"><testcase classname="tests.test_telemetry_integrity" name="test_ambiguous_otlp_acknowledgement_retains_unsent_span[{&quot;partialSuccess&quot;:{&quot;rejectedSpans&quot;:1},&quot;partialSuccess&quot;:{}}]" time="0.693"><failure message="AssertionError: assert 'ok' == 'retryable_error'&#10;  &#10;  - retryable_error&#10;  + ok">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-434/test_ambiguous_otlp_acknow...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+body = b'{"partialSuccess":{"rejectedSpans":1},"partialSuccess":{}}'
+
+    @pytest.mark.parametrize('body', [
+        b'{"partialSuccess":{"rejectedSpans":1},"partialSuccess":{}}',
+        b'{"unexpected":NaN}', b'{"unexpected":"\\ud800"}',
+    ])
+    def test_ambiguous_otlp_acknowledgement_retains_unsent_span(settings, body):
+        with collector(body) as url:
+            gate = Gate(replace(settings, otlp_url=url, otlp_allow_loopback=True))
+            action = gate.submit(call())
+&gt;           assert telemetry.export(gate.store)['status'] == 'retryable_error'
+E           AssertionError: assert 'ok' == 'retryable_error'
+E             
+E             - retryable_error
+E             + ok
+
+tests\test_telemetry_integrity.py:59: AssertionError</failure></testcase><testcase classname="tests.test_telemetry_integrity" name="test_ambiguous_otlp_acknowledgement_retains_unsent_span[{&quot;unexpected&quot;:NaN}]" time="0.544"><failure message="AssertionError: assert 'ok' == 'retryable_error'&#10;  &#10;  - retryable_error&#10;  + ok">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-434/test_ambiguous_otlp_acknow...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+body = b'{"unexpected":NaN}'
+
+    @pytest.mark.parametrize('body', [
+        b'{"partialSuccess":{"rejectedSpans":1},"partialSuccess":{}}',
+        b'{"unexpected":NaN}', b'{"unexpected":"\\ud800"}',
+    ])
+    def test_ambiguous_otlp_acknowledgement_retains_unsent_span(settings, body):
+        with collector(body) as url:
+            gate = Gate(replace(settings, otlp_url=url, otlp_allow_loopback=True))
+            action = gate.submit(call())
+&gt;           assert telemetry.export(gate.store)['status'] == 'retryable_error'
+E           AssertionError: assert 'ok' == 'retryable_error'
+E             
+E             - retryable_error
+E             + ok
+
+tests\test_telemetry_integrity.py:59: AssertionError</failure></testcase><testcase classname="tests.test_telemetry_integrity" name="test_ambiguous_otlp_acknowledgement_retains_unsent_span[{&quot;unexpected&quot;:&quot;\ud800&quot;}]" time="0.534"><failure message="AssertionError: assert 'ok' == 'retryable_error'&#10;  &#10;  - retryable_error&#10;  + ok">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-434/test_ambiguous_otlp_acknow...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+body = b'{"unexpected":"\\ud800"}'
+
+    @pytest.mark.parametrize('body', [
+        b'{"partialSuccess":{"rejectedSpans":1},"partialSuccess":{}}',
+        b'{"unexpected":NaN}', b'{"unexpected":"\\ud800"}',
+    ])
+    def test_ambiguous_otlp_acknowledgement_retains_unsent_span(settings, body):
+        with collector(body) as url:
+            gate = Gate(replace(settings, otlp_url=url, otlp_allow_loopback=True))
+            action = gate.submit(call())
+&gt;           assert telemetry.export(gate.store)['status'] == 'retryable_error'
+E           AssertionError: assert 'ok' == 'retryable_error'
+E             
+E             - retryable_error
+E             + ok
+
+tests\test_telemetry_integrity.py:59: AssertionError</failure></testcase><testcase classname="tests.test_telemetry_integrity" name="test_concurrent_otlp_acknowledgements_count_each_persisted_span_once" time="0.559"><failure message="assert 2 == 1&#10; +  where 2 = sum(&lt;generator object test_concurrent_otlp_acknowledgements_count_each_persisted_span_once.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000020D5927D700&gt;)">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-434/test_concurrent_otlp_ackno...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+
+    def test_concurrent_otlp_acknowledgements_count_each_persisted_span_once(settings):
+        with collector(barrier=threading.Barrier(2)) as url:
+            gate = Gate(replace(settings, otlp_url=url, otlp_allow_loopback=True))
+            action = gate.submit(call())
+            with ThreadPoolExecutor(max_workers=2) as pool:
+                futures = [pool.submit(telemetry.export, gate.store) for _ in range(2)]
+                receipts = [future.result(timeout=5) for future in futures]
+            assert all(receipt['status'] == 'ok' for receipt in receipts)
+&gt;           assert sum(receipt['exported'] for receipt in receipts) == 1
+E           assert 2 == 1
+E            +  where 2 = sum(&lt;generator object test_concurrent_otlp_acknowledgements_count_each_persisted_span_once.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000020D5927D700&gt;)
+
+tests\test_telemetry_integrity.py:74: AssertionError</failure></testcase><testcase classname="tests.test_telemetry_integrity" name="test_otlp_slow_headers_have_total_deadline_and_keep_pending_span" time="1.560"><failure message="assert 1.020899399999962 &lt; 0.7">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-434/test_otlp_slow_headers_hav...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x0000020D5936B950&gt;
+
+    def test_otlp_slow_headers_have_total_deadline_and_keep_pending_span(settings, monkeypatch):
+        monkeypatch.setattr(telemetry, 'EXPORT_TIMEOUT_SECONDS', .2, raising=False)
+        with collector(slow_headers=True) as url:
+            gate = Gate(replace(settings, otlp_url=url, otlp_allow_loopback=True))
+            gate.submit(call())
+            start = time.monotonic()
+            report = telemetry.export(gate.store)
+            elapsed = time.monotonic() - start
+&gt;           assert elapsed &lt; .7
+E           assert 1.020899399999962 &lt; 0.7
+
+tests\test_telemetry_integrity.py:89: AssertionError</failure></testcase></testsuite></testsuites>

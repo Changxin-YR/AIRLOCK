@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "evidence/closure-20261002/sse_identity_replay.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T15:21:19.742468+00:00",
+  "duration_seconds": 1.944,
+  "tested_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb"
+}

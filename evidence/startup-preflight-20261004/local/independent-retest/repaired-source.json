@@ -1,0 +1,417 @@
+{
+  "commit": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "dirty_status": " M airlock/__main__.py\n M airlock/api.py\n M airlock/models.py\n M tests/test_launcher.py\n?? airlock/diagnostics.py\n?? tests/test_diagnostics.py\n?? tests/test_startup_preflight.py\n",
+  "snapshot_sha256": "83bb76bb50f19430c8bd731582355c407c6a2dae0bc1617bc544818ad577f874",
+  "files": [
+    {
+      "path": "airlock/__init__.py",
+      "sha256": "5268016472fda0430dbadee0ce13c61c1e49e43aa31e56d87bbcfb24c68ae58d",
+      "bytes": 92
+    },
+    {
+      "path": "airlock/__main__.py",
+      "sha256": "8769a11868dfa0f80f942ee658bcce6aafc02b6ee077f358c78dc1a010199588",
+      "bytes": 4993
+    },
+    {
+      "path": "airlock/access.py",
+      "sha256": "0b34d84870292de4d1f8e0c962280e0674648d4afecdd64bf56dd956f79999c9",
+      "bytes": 4032
+    },
+    {
+      "path": "airlock/alert_delivery.py",
+      "sha256": "56bd69e8aaec33e9a8052bf3b767ea2f43c40befacc374a5d87bcc3c2411888f",
+      "bytes": 15455
+    },
+    {
+      "path": "airlock/alert_inbox.py",
+      "sha256": "754cc2e091ba7b413a04b8f69a2e121a16129ba18a4d593c39d481644978e2a7",
+      "bytes": 12928
+    },
+    {
+      "path": "airlock/api.py",
+      "sha256": "326712542449aabd015c6798bbcee13da5ab23f8705a2586fab968d41c5eb9a7",
+      "bytes": 15090
+    },
+    {
+      "path": "airlock/archive.py",
+      "sha256": "e38bff853ebf20f06414cb03bdb9d5ca24dd2a1ed3497ab8f6f030900e8c5654",
+      "bytes": 8494
+    },
+    {
+      "path": "airlock/audit_keys.py",
+      "sha256": "9a7ee1ddfefc21d05cc9ab9ebef07fd85f65be5f91855e2a0c251f1e22aa1aa0",
+      "bytes": 1861
+    },
+    {
+      "path": "airlock/audit_schema.py",
+      "sha256": "742f9cd05414b7058140aa00539bbc91796c028fb4dec28aa63ae5a7735c6da5",
+      "bytes": 4385
+    },
+    {
+      "path": "airlock/console/404.html",
+      "sha256": "cafb4e44cc1cd0cac6ecfc243884ae24c7a68f0ced6604b2a24cf0d834f5461e",
+      "bytes": 5865
+    },
+    {
+      "path": "airlock/console/_next/static/--r-FX75SyXwDw8XMOSzs/_buildManifest.js",
+      "sha256": "735100de5b4d0775a309ea72b2859f679aa4da5efee09ef54bddcf7e928aaa1c",
+      "bytes": 440
+    },
+    {
+      "path": "airlock/console/_next/static/--r-FX75SyXwDw8XMOSzs/_ssgManifest.js",
+      "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+      "bytes": 80
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/158-fe8b982a23eb632e.js",
+      "sha256": "136209eacc36c62525dcd934d851af48cd9a3a47aec096c33b8b7c0121b8f351",
+      "bytes": 241454
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/310.0c9c83b66d160991.js",
+      "sha256": "82416df84586b861ad4e4bc73ca94faf18b58d74fa185ae53e0e019c3fdb0fcf",
+      "bytes": 753
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/555.15900422dbd6c07d.js",
+      "sha256": "d1248602a0957f70b46acc7477bf94eb2aad89a7dbb9f9e7320ec8a5d6297bd9",
+      "bytes": 4753
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/app/_global-error/page-b656bfa1d65ad738.js",
+      "sha256": "87701a78fb818579f446f525aee980b82b20ac611add35ca1399539a3f547fea",
+      "bytes": 147
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/app/_not-found/page-dd2b835b97483df1.js",
+      "sha256": "eebaa7b6ab9c77b4028ccf97ff4edb38df8321d8cdeaac5c392023ffadc64a02",
+      "bytes": 2667
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/app/layout-26b6b42499b8be92.js",
+      "sha256": "a2997ea422be2ad06dd30bd6caf94b9f50a9db332ab53a9ceb6e05b83c4f22a4",
+      "bytes": 195
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/app/page-38ef052ac781a0f9.js",
+      "sha256": "ed55c350fec68af32db15f0d4d3f83e59a3ae1f9206fa3f6cd3a51f7b903e2eb",
+      "bytes": 25777
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/app/page-3b88bb1adee2337a.js",
+      "sha256": "e3aa315121ed867a2f19c77a16620ff1c5aad5aed17df55323609ad27c4cfce3",
+      "bytes": 25023
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/c7879cf7-33323d49ba6da96a.js",
+      "sha256": "7684120bd04ed1d3d1ffd4fdd799237fcaaf87ca943a0e1f09897f6901600a15",
+      "bytes": 201053
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/framework-daae672d050d1c9a.js",
+      "sha256": "8dbe64d7d82f58a213aeb665e075c1475f3e5b94094bf4b64b94ee8f92d6c9ef",
+      "bytes": 218906
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/main-app-75ac1d6777440ec2.js",
+      "sha256": "f509cb2cd4dfa4481aac65ce00e3e5b97bf0a075e5a6c97b90c8809809a220bc",
+      "bytes": 512
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/main-efa6d49a7945936c.js",
+      "sha256": "22e1090880c664a680464e997789a5fd612f850e968508ec9afb5c45a65a569a",
+      "bytes": 133790
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/next/dist/client/components/builtin/app-error-b656bfa1d65ad738.js",
+      "sha256": "87701a78fb818579f446f525aee980b82b20ac611add35ca1399539a3f547fea",
+      "bytes": 147
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/next/dist/client/components/builtin/forbidden-b656bfa1d65ad738.js",
+      "sha256": "87701a78fb818579f446f525aee980b82b20ac611add35ca1399539a3f547fea",
+      "bytes": 147
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/next/dist/client/components/builtin/global-error-05b0362361853991.js",
+      "sha256": "22169baba179b19b68bb77a14f2060407e7a2d288962deed78fa3c9770b79b6e",
+      "bytes": 179
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/next/dist/client/components/builtin/not-found-b656bfa1d65ad738.js",
+      "sha256": "87701a78fb818579f446f525aee980b82b20ac611add35ca1399539a3f547fea",
+      "bytes": 147
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/next/dist/client/components/builtin/unauthorized-b656bfa1d65ad738.js",
+      "sha256": "87701a78fb818579f446f525aee980b82b20ac611add35ca1399539a3f547fea",
+      "bytes": 147
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/polyfills-42372ed130431b0a.js",
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "bytes": 112594
+    },
+    {
+      "path": "airlock/console/_next/static/chunks/webpack-b111626fcc51bb04.js",
+      "sha256": "7513458da6c1cea63001ca74765bd7b03addcd7248a5a67d392d4a34519392cc",
+      "bytes": 3332
+    },
+    {
+      "path": "airlock/console/_next/static/css/6277f9838ff7470d.css",
+      "sha256": "0bceedb4dd68e717df8cc32338f502b0f2cd64877c390f9453137c0b968d227e",
+      "bytes": 12356
+    },
+    {
+      "path": "airlock/console/_next/static/nROePgfCMs3b-EhHIcZZZ/_buildManifest.js",
+      "sha256": "735100de5b4d0775a309ea72b2859f679aa4da5efee09ef54bddcf7e928aaa1c",
+      "bytes": 440
+    },
+    {
+      "path": "airlock/console/_next/static/nROePgfCMs3b-EhHIcZZZ/_ssgManifest.js",
+      "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+      "bytes": 80
+    },
+    {
+      "path": "airlock/console/_next/static/XYfobpDJNlUMGK2DXF2X6/_buildManifest.js",
+      "sha256": "735100de5b4d0775a309ea72b2859f679aa4da5efee09ef54bddcf7e928aaa1c",
+      "bytes": 440
+    },
+    {
+      "path": "airlock/console/_next/static/XYfobpDJNlUMGK2DXF2X6/_ssgManifest.js",
+      "sha256": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+      "bytes": 80
+    },
+    {
+      "path": "airlock/console/_not-found.html",
+      "sha256": "cafb4e44cc1cd0cac6ecfc243884ae24c7a68f0ced6604b2a24cf0d834f5461e",
+      "bytes": 5865
+    },
+    {
+      "path": "airlock/console/csp.json",
+      "sha256": "677dd0288ec681cbd27bce7899a61af95a08f0af1506b7ca0611320878b4d7b1",
+      "bytes": 150
+    },
+    {
+      "path": "airlock/console/index.html",
+      "sha256": "5dc36440bdd23923155618ee187c2f3be0882bdb1fa947456956209898433861",
+      "bytes": 5543
+    },
+    {
+      "path": "airlock/diagnostics.py",
+      "sha256": "8b3b78e309f6b170b6cff767f7604508d4dcb07b4ffb8513a0b62afc06f15847",
+      "bytes": 10027
+    },
+    {
+      "path": "airlock/export.py",
+      "sha256": "c29f4378a0c6abecfe4c967da331f177bb8dbd298b6e1bba0451350e0dc2c25e",
+      "bytes": 1792
+    },
+    {
+      "path": "airlock/github_adapter.py",
+      "sha256": "f07997fd71c421123ef06fc760c082d9563b5f4bf455307052376af06751c64b",
+      "bytes": 22020
+    },
+    {
+      "path": "airlock/governance.py",
+      "sha256": "e6e10489ae1a2fcbd0f8d5360ec5240538c89f6b12c984bbd495fd2c12c9de32",
+      "bytes": 2692
+    },
+    {
+      "path": "airlock/mcp.py",
+      "sha256": "03d070eac2f4fdbfde3b8c805821bbb8cf56c2521de1b13c08a2bcffb3b7d490",
+      "bytes": 7906
+    },
+    {
+      "path": "airlock/mcp_http.py",
+      "sha256": "033768f7614e4a2c6658b8f9aa3f34ec42d7c0639d32996bc4be211074fd9c20",
+      "bytes": 1898
+    },
+    {
+      "path": "airlock/mcp_upstream.py",
+      "sha256": "4e395304d55e2f643c1e2e4ce721be98f9fbf946b46aab0827387e248d684854",
+      "bytes": 5596
+    },
+    {
+      "path": "airlock/models.py",
+      "sha256": "8b8277d6ba56d4a3a7858e0fdee556a0a24750a5c9d87a4c2ea110674dd4d654",
+      "bytes": 8418
+    },
+    {
+      "path": "airlock/network.py",
+      "sha256": "3a03e72fd4b66ec65b46837780ee70f9de25c228c670b782168a41444e3c7cfd",
+      "bytes": 10059
+    },
+    {
+      "path": "airlock/observability.py",
+      "sha256": "a3c381061acc3434bff7c7df64d0c879f1e76a5f9a12b7bba24a79cf903c64e0",
+      "bytes": 3315
+    },
+    {
+      "path": "airlock/oidc.py",
+      "sha256": "8941ee2b0087dda7ce33a3b05cd7b664dae06282dfa01ea061620488590cd58f",
+      "bytes": 5664
+    },
+    {
+      "path": "airlock/oidc_login.py",
+      "sha256": "5e9a3775b7fd9b915980a4d8c3362415bccbb4aa10e24aa3349a6db63f187f55",
+      "bytes": 16415
+    },
+    {
+      "path": "airlock/operations.py",
+      "sha256": "87eba3d1a1263eb1a1a6903b4c2eb0c03614eda2b38a394d12743569d22da01a",
+      "bytes": 2161
+    },
+    {
+      "path": "airlock/policy.py",
+      "sha256": "58613f661d8e5cd2992ed6851e7467149135ae97999ab6c93b82fb7ea0c48ac5",
+      "bytes": 7370
+    },
+    {
+      "path": "airlock/private_files.py",
+      "sha256": "d95f3c1752bfdb844aa9817f0bedd4c20e2cf071fc2dd57138f752ececaf6b0b",
+      "bytes": 2085
+    },
+    {
+      "path": "airlock/recovery.py",
+      "sha256": "7ddda2fba7948bf9f9dc8a89aa601417463317f7b69a92095ce63beba8846b4d",
+      "bytes": 3766
+    },
+    {
+      "path": "airlock/semantic.py",
+      "sha256": "8db8cbc94de59a5b592614541af6e45029e03a3e1a2737da6587f7f6aa8ae8cc",
+      "bytes": 12740
+    },
+    {
+      "path": "airlock/service.py",
+      "sha256": "07622a19555dffa1998ccf312987f2c047a95f7d41aa8faccf811ac236ddfbc2",
+      "bytes": 29727
+    },
+    {
+      "path": "airlock/sql.py",
+      "sha256": "f23d47699df6c47b3fb07c57f3febcc8da23210275aabde6612a6c3709e4b8ee",
+      "bytes": 5957
+    },
+    {
+      "path": "airlock/sqlite_runtime.py",
+      "sha256": "1fa1fe47c530313e5d2d5bffe3b4aefa324ee9722a836507d004f2d8d7d92bd0",
+      "bytes": 5516
+    },
+    {
+      "path": "airlock/static/alert-inbox.css",
+      "sha256": "7b6d6b30ea7c448e3b5e6659afa3b21129aac872cdb3633777e2723aa237c233",
+      "bytes": 2450
+    },
+    {
+      "path": "airlock/static/alert-inbox.html",
+      "sha256": "6b49efaea4eecc72c5efcc384ccacd94db3325b878405535e0d462bc317f7c24",
+      "bytes": 1645
+    },
+    {
+      "path": "airlock/static/alert-inbox.js",
+      "sha256": "c267bead71cfa2f68e0d93f078fb49ec3cacdd119957d43dafeef3a572feedb4",
+      "bytes": 4003
+    },
+    {
+      "path": "airlock/static/api.js",
+      "sha256": "9ddbc3d5c5d297791ba19f13f5eb4a400301317333814927a8c864a2935447ef",
+      "bytes": 2437
+    },
+    {
+      "path": "airlock/static/app.js",
+      "sha256": "b66d0cfe8b5a2e14e6892790370d12ed3faba975c74ed5194454a5c4298e8b4d",
+      "bytes": 13893
+    },
+    {
+      "path": "airlock/static/governance.js",
+      "sha256": "5c4da32febeba554adcd23434c2a74449096db08e02c41db25348474be33174c",
+      "bytes": 4771
+    },
+    {
+      "path": "airlock/static/index.html",
+      "sha256": "ba2410b9ad5cec2e45d79b8fb70979998df2d4ff28d33c2721cd62724eed9588",
+      "bytes": 487
+    },
+    {
+      "path": "airlock/static/lib.js",
+      "sha256": "b204f5fa3e582cbc59026fec92e0f23ae2e45508c1d59f321b21147cc1d91fd9",
+      "bytes": 3182
+    },
+    {
+      "path": "airlock/static/review.js",
+      "sha256": "9de153878fd8c752c9f31c17004d19f8bf0511ace70d32a4f530b9fa4299a54c",
+      "bytes": 7353
+    },
+    {
+      "path": "airlock/static/study.html",
+      "sha256": "2d9ef0fea0dcaaaee933671fad8ff0b92e99609337888570c8ce09fbb0fa47be",
+      "bytes": 335
+    },
+    {
+      "path": "airlock/static/study.js",
+      "sha256": "46ed2a78fcf70d7eeeb8214cba275c62a2d4a748d88d5f68aed9a79c6060fc2d",
+      "bytes": 5683
+    },
+    {
+      "path": "airlock/static/style.css",
+      "sha256": "028b68b2e4f940883a675c94d5e34435f8c89abcf0a00dee94cb485130cd2ddd",
+      "bytes": 12479
+    },
+    {
+      "path": "airlock/store.py",
+      "sha256": "6611ddfe807232d5cb025529f2e2103e284869510b9a16024f9a93aa00b76f45",
+      "bytes": 11070
+    },
+    {
+      "path": "airlock/telemetry.py",
+      "sha256": "464b17ed62fc82d6fb89dd30dafa7ca9b22bacb93c218658c06a1543c3916fe4",
+      "bytes": 4843
+    },
+    {
+      "path": "airlock/upstream.py",
+      "sha256": "304a4bf3ab39784ed0d3e2d031c31bd60aa7aee3b2e3a10b390893180bf2b6d0",
+      "bytes": 16808
+    },
+    {
+      "path": "configs/alert-webhook.example.json",
+      "sha256": "cad076641bf0f0bfd64998d501bbee2b7e1f228c8da79cb542ce99f900c07f47",
+      "bytes": 157
+    },
+    {
+      "path": "configs/archive.example.json",
+      "sha256": "6a8353c045dfb306f8d94db5417e5c1359c2a02d37f84e51e84774da97a3e750",
+      "bytes": 155
+    },
+    {
+      "path": "configs/deepseek-flash.example.json",
+      "sha256": "4d1d39f733a8e9a3549732ed78d976a2a26a196474f2d11fb07ac1dbf5efc0cb",
+      "bytes": 519
+    },
+    {
+      "path": "configs/github-adapter.example.json",
+      "sha256": "7a9d088725884ab2aa47fdc01423bc9aaf351a3d116e0a8c60d5a23ea81d778a",
+      "bytes": 429
+    },
+    {
+      "path": "configs/oidc-login.example.json",
+      "sha256": "bec33503a8cd0b77889529effda23ea25e8e053973a1ae35d4f4cdd5d80fd0c6",
+      "bytes": 445
+    },
+    {
+      "path": "configs/oidc.example.json",
+      "sha256": "f316774f01bbfe33a2e645c03a4fc67ce16f1809bae1eef633d6a8a746a73e97",
+      "bytes": 318
+    },
+    {
+      "path": "configs/sqlite-runtime.json",
+      "sha256": "6503b616cc68bcb0e58d917b0dd536850a71bc5b56ad73f14b5370d090a8da53",
+      "bytes": 577
+    },
+    {
+      "path": "policies/example.yaml",
+      "sha256": "c0019ea51ea2e80a5e9f4eb87ed20523bdd223eb8d860bfa350f69198f2da1cf",
+      "bytes": 284
+    }
+  ]
+}

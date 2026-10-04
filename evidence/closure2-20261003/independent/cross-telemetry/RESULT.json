@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "reviewer": "transport_adapter_audit; independent author from telemetry implementation",
+  "source_commit_at_review": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tracked_source_dirty": true,
+  "source_files": {
+    "airlock/telemetry.py": {
+      "bytes": 4843,
+      "sha256": "464b17ed62fc82d6fb89dd30dafa7ca9b22bacb93c218658c06a1543c3916fe4"
+    },
+    "airlock/network.py": {
+      "bytes": 10059,
+      "sha256": "3a03e72fd4b66ec65b46837780ee70f9de25c228c670b782168a41444e3c7cfd"
+    }
+  },
+  "runs": {
+    "first": {
+      "receipt": "first.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "var/closure2-20261003/cross-telemetry/test_independent.py",
+        "-q",
+        "--junitxml=var/closure2-20261003/cross-telemetry/first.xml"
+      ],
+      "exit_code": 1,
+      "tests": 9,
+      "failed": 1,
+      "skipped": 0,
+      "passed": 8,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    "repaired": {
+      "receipt": "repaired.log.status.json",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "var/closure2-20261003/cross-telemetry/test_independent.py",
+        "-q",
+        "--junitxml=var/closure2-20261003/cross-telemetry/repaired.xml"
+      ],
+      "exit_code": 0,
+      "tests": 9,
+      "failed": 0,
+      "skipped": 0,
+      "passed": 9,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    }
+  },
+  "finding": {
+    "severity": "P1",
+    "issue": "Exporter advertised gzip but rejected the normal collector gzip response, causing repeated export failure.",
+    "fix_by_implementation_author": "Send Accept-Encoding: identity; rerun the same nine independent probes."
+  },
+  "checks": [
+    "Valid content encoding negotiation succeeds without changing pending approvals.",
+    "Array/null/malformed partial-success/duplicate nested-key acknowledgements retain the original span.",
+    "Redirect cannot contact another loopback collector.",
+    "A concurrent newly enqueued span is not deleted by an in-flight prior batch acknowledgement.",
+    "A dripping body expires; retry sends the identical deterministic span and counts one durable acknowledgement."
+  ],
+  "unresolved_findings": [],
+  "limits": [
+    "Synthetic local collector only; production delivery remains at least once, not exactly once.",
+    "No human, external service, model API, private credential or representative business log was used."
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "envoy": {
+    "image": "envoyproxy/envoy:v1.39.1",
+    "repo_digests": "[\"envoyproxy/envoy@sha256:57e14a549d7bd43c8d3f6d03e8cfa653e037d4b38e133acd9b54f38c524401b4\"]",
+    "rows": [
+      {
+        "case": "zero",
+        "rule": "threshold",
+        "airlock_expression": "changed_rows >= 100",
+        "envoy_expression": "int(request.headers['x-rows']) >= 100",
+        "airlock_hit": false,
+        "expected": false,
+        "envoy_hit": false
+      },
+      {
+        "case": "zero",
+        "rule": "write_only",
+        "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+        "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+        "airlock_hit": false,
+        "expected": false,
+        "envoy_hit": false
+      },
+      {
+        "case": "zero",
+        "rule": "bounded",
+        "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+        "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      },
+      {
+        "case": "small",
+        "rule": "threshold",
+        "airlock_expression": "changed_rows >= 100",
+        "envoy_expression": "int(request.headers['x-rows']) >= 100",
+        "airlock_hit": false,
+        "expected": false,
+        "envoy_hit": false
+      },
+      {
+        "case": "small",
+        "rule": "write_only",
+        "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+        "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      },
+      {
+        "case": "small",
+        "rule": "bounded",
+        "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+        "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      },
+      {
+        "case": "high",
+        "rule": "threshold",
+        "airlock_expression": "changed_rows >= 100",
+        "envoy_expression": "int(request.headers['x-rows']) >= 100",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      },
+      {
+        "case": "high",
+        "rule": "write_only",
+        "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+        "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      },
+      {
+        "case": "high",
+        "rule": "bounded",
+        "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+        "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+        "airlock_hit": false,
+        "expected": false,
+        "envoy_hit": false
+      },
+      {
+        "case": "read",
+        "rule": "threshold",
+        "airlock_expression": "changed_rows >= 100",
+        "envoy_expression": "int(request.headers['x-rows']) >= 100",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      },
+      {
+        "case": "read",
+        "rule": "write_only",
+        "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+        "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+        "airlock_hit": false,
+        "expected": false,
+        "envoy_hit": false
+      },
+      {
+        "case": "read",
+        "rule": "bounded",
+        "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+        "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+        "airlock_hit": true,
+        "expected": true,
+        "envoy_hit": true
+      }
+    ],
+    "status": "PASS",
+    "scope": "Boolean/equality/ordering subset with explicit header-to-variable mapping; access-log filter, not Envoy authorization deployment.",
+    "error_difference": "Missing/invalid Envoy attributes suppress its log. AIRLOCK rejects invalid typed activation and blocks authorization."
+  },
+  "otel": {
+    "status": "PASS",
+    "image": "otel/opentelemetry-collector:0.162.0",
+    "repo_digests": "[\"otel/opentelemetry-collector@sha256:310a800ad69ee430e7c541796852a242c9c7db97aaad4daa5ccf843c525fbdb2\"]",
+    "trace_id": "e1dd6ed6d3584146a02d46bfefc2da72",
+    "result": {
+      "status": "ok",
+      "exported": 1
+    },
+    "scope": "Official Collector accepts OTLP JSON and debug exporter records the actual trace; no production backend claim."
+  }
+}

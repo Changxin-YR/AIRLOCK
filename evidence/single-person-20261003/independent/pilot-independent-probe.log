@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "mode": "synthetic_independent_boundary_probe",
+  "real_humans": 0,
+  "checks": [
+    "source_override_{'source': 'model'}",
+    "source_override_{'human': False}",
+    "source_override_{'human': 1}",
+    "source_override_{'source': 'automation'}",
+    "unknown_id",
+    "duplicate_annotation",
+    "unknown_field",
+    "formal_schema_refuses_pilot",
+    "single_person_never_formal_metrics",
+    "exclusive_private_template_no_claims",
+    "formula_id_0",
+    "formula_id_1",
+    "formula_id_2",
+    "formula_id_3",
+    "formula_id_4",
+    "formula_id_5",
+    "original_input_hash_preserved"
+  ]
+}

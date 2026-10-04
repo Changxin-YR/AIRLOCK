@@ -15,3 +15,9 @@
 7. 凭据与动态内容：截图无token；文本按文本节点显示，不使用SQL/名称作为HTML。客户端可见时间不作为授权证据。
 
 检查是当前实现与实际流程的记录，不是对独立用户批准设计稿的像素保真认证，也不是WCAG、所有浏览器或CSP绕过审计。人的理解和决策效率仍需要独立实验。
+
+## 2026-10-02 Next.js 复验
+
+当前应用测试提交 `17ccd2c5942aa316ee94509109cc01fbca925a26`。Windows 原生浏览器和 Linux CI 分别实际运行，早期 loopback 限制不再作为本轮借口。14 条常规检查与 8 条边界检查覆盖拒绝、批准、批量、恢复、指标、审计、stale/expired/failed/unknown 对账、长文本、文本注入、键盘登录和退出清内存。Next.js hydration 与 hash CSP 无浏览器错误；390px 页面无横向溢出。
+
+本机 PNG 位于 `evidence/continuation-20261002/final/` 与 `retest/`；完整 Linux PNG 随 `ci/acceptance-17ccd2c.zip` 在 Git 保存。截图已检查。自动化点击不计真人理解、正确率或 A/B 样本；全浏览器/辅助技术认证仍未进行。

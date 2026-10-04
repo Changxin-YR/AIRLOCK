@@ -1,0 +1,19 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_acceptance_matrix.py",
+    "tests/test_evidence_gate.py",
+    "tests/test_gate_cross_review.py",
+    "tests/test_logged_runner.py",
+    "--junitxml=var/bidirectional-20261003/local/frozen-gates.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T05:35:07.139413+00:00",
+  "duration_seconds": 7.919,
+  "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348"
+}

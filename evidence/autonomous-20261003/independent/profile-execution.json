@@ -1,0 +1,11 @@
+{
+  "command": [".venv/Scripts/python.exe", "var/security-review-20261003/profile_read_connections.py"],
+  "exit_code": 0,
+  "receipt_kind": "subagent_exec_command_result",
+  "tested_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4",
+  "experiment_source": "profile_read_connections.py",
+  "experiment_scope": "In-process synthetic comparison using a temporary instrumentation/connection-reuse wrapper; application source was unchanged at execution.",
+  "claims_linux_ci_failure_cause_proven": false,
+  "claims_production_performance_pass": false,
+  "known_source_change_after_experiment": "The actual application optimization is implemented and verified separately after this experiment."
+}

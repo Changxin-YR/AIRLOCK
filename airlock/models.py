@@ -6,9 +6,9 @@ import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Mapping
 from urllib.parse import urlparse
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator, model_validator
 
 
 def canonical(value: object) -> str:
@@ -25,9 +25,19 @@ Scalar = StrictStr | StrictInt | StrictFloat | None
 class Invocation(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True, allow_inf_nan=False)
     tool: str = Field(default="sql", min_length=1, max_length=64)
-    sql: str = Field(min_length=1, max_length=4000)
+    sql: str = Field(default='', max_length=4000)
+    arguments: dict[str, Scalar | StrictBool] = Field(default_factory=dict,max_length=16)
     parameters: list[Scalar] = Field(default_factory=list, max_length=50)
     idempotency_key: str = Field(min_length=8, max_length=128, pattern=r"^[A-Za-z0-9_.:-]+$")
+
+    @model_validator(mode='after')
+    def valid_request(self):
+        canonical(self.model_dump()).encode('utf-8')
+        if not self.tool.startswith('upstream:') and not self.sql.strip():
+            raise ValueError('SQL or source action ID required')
+        if any(len(k)>100 or (isinstance(v,str) and len(v)>1000) for k,v in self.arguments.items()):
+            raise ValueError('upstream argument too long')
+        return self
 
     @field_validator("parameters")
     @classmethod
@@ -59,6 +69,29 @@ class Decision(BaseModel):
         return value
 
 
+class BatchDecision(BaseModel):
+    model_config=ConfigDict(extra='forbid',strict=True)
+    group_id: str=Field(pattern=r'^[a-f0-9]{64}$')
+    group_digest: str=Field(pattern=r'^[a-f0-9]{64}$')
+    member_ids: list[str]=Field(min_length=1,max_length=100)
+    decision: Literal['approve','reject']
+    reason: str=Field(min_length=3,max_length=500)
+    confirmation: str=Field(max_length=100)
+
+    @field_validator('reason')
+    @classmethod
+    def meaningful_reason(cls, value: str) -> str:
+        return Decision.meaningful_reason(value)
+
+
+class GovernanceChange(BaseModel):
+    model_config=ConfigDict(extra='forbid',strict=True)
+    candidate_digest: str=Field(pattern=r'^[a-f0-9]{64}$')
+    expected_version: int=Field(ge=0)
+    expires_at: float
+    reason: str=Field(min_length=3,max_length=500)
+
+
 @dataclass(frozen=True)
 class Settings:
     database: Path
@@ -73,6 +106,17 @@ class Settings:
     calls_per_minute: int = 120
     max_actions: int = 10000
     internal_host: str | None = None
+    policy_file: Path | None = None
+    reviewer_file: Path | None = None
+    oidc_file: Path | None = None
+    upstream_file: Path | None = None
+    semantic_file: Path | None = None
+    audit_key_file: Path | None = None
+    audit_anchor_file: Path | None = None
+    otlp_url: str | None = None
+    otlp_allow_loopback: bool = False
+    budget_units: int = 10000
+    budget_window_seconds: int = 86400
 
     def __post_init__(self) -> None:
         if self.internal_host and not re.fullmatch(r"[A-Za-z0-9.-]{1,253}", self.internal_host):
@@ -90,23 +134,45 @@ class Settings:
             raise ValueError("invalid TTL or pending limit")
         if not 1 <= self.critical_rows <= 10000 or not 1 <= self.seed_rows <= 5000:
             raise ValueError("invalid demonstration bounds")
+        if not 1 <= self.budget_units <= 1000000 or not 60 <= self.budget_window_seconds <= 86400:
+            raise ValueError('invalid risk budget')
 
     @classmethod
-    def from_env(cls) -> Settings:
-        return cls(
-            database=Path(os.getenv("AIRLOCK_DB", "var/airlock.db")),
-            agent_token=os.environ["AIRLOCK_AGENT_TOKEN"],
-            reviewer_token=os.environ["AIRLOCK_REVIEWER_TOKEN"],
-            audit_key=os.environ["AIRLOCK_AUDIT_KEY"],
-            origin=os.getenv("AIRLOCK_ORIGIN", "http://127.0.0.1:8000"),
-            ttl_seconds=int(os.getenv("AIRLOCK_TTL", "300")),
-            internal_host=os.getenv("AIRLOCK_INTERNAL_HOST"),
-        )
+    def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
+        # An explicit mapping permits offline validation without changing the
+        # process environment or constructing a Gate/Store.
+        env = os.environ if environ is None else environ
+        try:
+            return cls(
+                database=Path(env.get("AIRLOCK_DB", "var/airlock.db")),
+                agent_token=env["AIRLOCK_AGENT_TOKEN"],
+                reviewer_token=env["AIRLOCK_REVIEWER_TOKEN"],
+                audit_key=env["AIRLOCK_AUDIT_KEY"],
+                origin=env.get("AIRLOCK_ORIGIN", "http://127.0.0.1:8000"),
+                ttl_seconds=int(env.get("AIRLOCK_TTL", "300")),
+                internal_host=env.get("AIRLOCK_INTERNAL_HOST"),
+                policy_file=Path(env['AIRLOCK_POLICY_FILE']) if env.get('AIRLOCK_POLICY_FILE') else None,
+                reviewer_file=Path(env['AIRLOCK_REVIEWER_FILE']) if env.get('AIRLOCK_REVIEWER_FILE') else None,
+                oidc_file=Path(env['AIRLOCK_OIDC_FILE']) if env.get('AIRLOCK_OIDC_FILE') else None,
+                upstream_file=Path(env['AIRLOCK_UPSTREAM_FILE']) if env.get('AIRLOCK_UPSTREAM_FILE') else None,
+                semantic_file=Path(env['AIRLOCK_SEMANTIC_FILE']) if env.get('AIRLOCK_SEMANTIC_FILE') else None,
+                audit_key_file=Path(env['AIRLOCK_AUDIT_KEY_FILE']) if env.get('AIRLOCK_AUDIT_KEY_FILE') else None,
+                audit_anchor_file=Path(env['AIRLOCK_AUDIT_ANCHOR_FILE']) if env.get('AIRLOCK_AUDIT_ANCHOR_FILE') else None,
+                otlp_url=env.get('AIRLOCK_OTLP_URL'),
+                otlp_allow_loopback=env.get('AIRLOCK_OTLP_ALLOW_LOOPBACK')=='1',
+                budget_units=int(env.get('AIRLOCK_BUDGET_UNITS','10000')),
+                budget_window_seconds=int(env.get('AIRLOCK_BUDGET_WINDOW','86400')),
+            )
+        except (KeyError, ValueError, TypeError, AttributeError, OverflowError):
+            # int()/urlparse() errors can contain the original environment
+            # value. This path also serves direct ASGI factory startup.
+            raise ValueError('invalid AIRLOCK environment configuration; check credentials, origin and limits') from None
 
     @property
     def policy_version(self) -> str:
         return digest({"version": "bounded-sql-v1", "critical_rows": self.critical_rows,
-                       "max_pending": self.max_pending, "ttl": self.ttl_seconds})
+                       "max_pending": self.max_pending, "ttl": self.ttl_seconds,
+                       "budget_units":self.budget_units,"budget_window":self.budget_window_seconds})
 
 
 class GateError(Exception):

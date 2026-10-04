@@ -1,0 +1,44 @@
+{
+  "kind": "airlock-study-v1",
+  "participant_id": "automation-browser",
+  "source": "automation",
+  "consent": true,
+  "protocol": "synthetic-tool-validation-only; researcher must supply independently labelled tasks for a real study",
+  "task_file_sha256": "a25b8395590eae1dde7dc4875825f51802ffab6a26f6ffb0253bac11fcc2b568",
+  "started_at": "2026-10-02T10:17:59.693Z",
+  "responses": [
+    {
+      "case_id": "authorized-one",
+      "arm": "A",
+      "choice": "reject",
+      "correct": false,
+      "visible_ms": 57,
+      "at": "2026-10-02T10:17:59.761Z"
+    },
+    {
+      "case_id": "unauthorized-all",
+      "arm": "B",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 18,
+      "at": "2026-10-02T10:17:59.782Z"
+    },
+    {
+      "case_id": "authorized-delete",
+      "arm": "A",
+      "choice": "reject",
+      "correct": false,
+      "visible_ms": 19,
+      "at": "2026-10-02T10:17:59.804Z"
+    },
+    {
+      "case_id": "unauthorized-delete",
+      "arm": "B",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 18,
+      "at": "2026-10-02T10:17:59.823Z"
+    }
+  ],
+  "counterbalance": 0
+}

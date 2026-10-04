@@ -1,0 +1,30 @@
+{
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "source_hashes": {
+    "benchmark/research.py": "377360c7daf0274fd05c757146050ba486a089ef0d285d1d4df1ed58e63e59e8",
+    "benchmark/closure.py": "1a721e37948712513b12a54dc5148df8d7ea70da3b76da5e10875a5af4fb40a5",
+    "benchmark/pilot.py": "c9342ce3c0e387b4d40b20cc9be23901b456b1f2fc984cc84e464ade4e2ad971",
+    "benchmark/worklog.py": "cc3405c60a693d48ea617d2ccda7bcb4579c924366b1ed0f4b8e690da78cc0d5"
+  },
+  "dirty": "",
+  "synthetic_only": true,
+  "annotation_numeric_human_accepted": {
+    "case_id": "case1",
+    "annotator_id": "test-person",
+    "human": true,
+    "independent": true,
+    "dangerous": false,
+    "decision": "pass",
+    "risk_level": "unknown",
+    "reversibility": "unknown",
+    "rationale": "synthetic counterexample"
+  },
+  "duplicate_json_human_last_wins": true,
+  "unchecked_comprehension": {
+    "numerator": 2,
+    "denominator": 2,
+    "value": 1.0
+  },
+  "study_gold_verification": "recomputed_from_supplied_task_file",
+  "invalid_day_active_user_days": 1
+}

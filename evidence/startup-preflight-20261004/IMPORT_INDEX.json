@@ -1,0 +1,727 @@
+{
+  "baseline_commit": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "frozen_source_commit": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
+  "scope": "Synthetic local reproductions, unchanged author and independent logs, dirty source snapshots and frozen targeted test receipts. No host credentials or existing databases.",
+  "files": [
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/final.log",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/final.log",
+      "bytes": 583,
+      "sha256": "8804d57c0e7c486d1ba29cb1667c7dc1083a563c3ba7b0f9ecd5d4d0d841caea"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/final.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/final.log.status.json",
+      "bytes": 485,
+      "sha256": "638faca689b21862277e5a7508d41625c8e70131813ebaed62e3bcc460362ba4"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/final.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/final.xml",
+      "bytes": 8889,
+      "sha256": "fc008be472685dbf32fa764ceb01fb2b308faff58e79f60355dcafe4651c46c6"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/final2.log",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/final2.log",
+      "bytes": 583,
+      "sha256": "ba427cc3da121d178fcee5c24003621abb9b69a7d8764aa975f647fd773bc578"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/final2.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/final2.log.status.json",
+      "bytes": 486,
+      "sha256": "951d2a60e8bb4ed5e728b37301e18b1571f09d08380e4258bdb8f08e64d98f81"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/final2.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/final2.xml",
+      "bytes": 9333,
+      "sha256": "89603522ff8d01e3bc4926d091f895e5833a414d41264f2b65171c4d253e8bba"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/initial.log",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/initial.log",
+      "bytes": 583,
+      "sha256": "6a5c13575644f82b1569d1fe4b3c8c0198118a002e0ba2a67a4ff3efe6674f50"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/initial.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/initial.log.status.json",
+      "bytes": 487,
+      "sha256": "e46c9791ef2b5f789b2377af54333cb377ac67f8bb0adb98b0526097e5f32dc4"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/initial.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/initial.xml",
+      "bytes": 8889,
+      "sha256": "bfa38fb4fd881a7500316a01fc98b6694104c543101f961e04bdcdca1b0a4929"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/packaged-console.log",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/packaged-console.log",
+      "bytes": 161,
+      "sha256": "78cf56a24f3133614b94b76386de2132d3dd22254bc27fb51b092799ce9a9fa7"
+    },
+    {
+      "source": "var/startup-preflight-20261004/author-diagnostics/packaged-console.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/author-diagnostics/packaged-console.log.status.json",
+      "bytes": 689,
+      "sha256": "49d2cd7cceafb5422879479c51f322bf7b3a78e0347781ffbe03fa371dce98ac"
+    },
+    {
+      "source": "var/startup-preflight-20261004/continuation/frozen-targeted.log",
+      "git_path": "evidence/startup-preflight-20261004/local/continuation/frozen-targeted.log",
+      "bytes": 757,
+      "sha256": "04a26623ebf1b12102ad5ada298bbfc795281b539f4b4e529570264a8546b5f5"
+    },
+    {
+      "source": "var/startup-preflight-20261004/continuation/frozen-targeted.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/continuation/frozen-targeted.log.status.json",
+      "bytes": 637,
+      "sha256": "1bff115e04bc9b089ed56a538dfef0cc7c6889af03e569496ead98ae2748cadc"
+    },
+    {
+      "source": "var/startup-preflight-20261004/continuation/frozen-targeted.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/continuation/frozen-targeted.xml",
+      "bytes": 41215,
+      "sha256": "75558b06b498083b7e9ab4ebb27e0d2abc71e85d22c287aa91a6f60224013813"
+    },
+    {
+      "source": "var/startup-preflight-20261004/final-targeted.log",
+      "git_path": "evidence/startup-preflight-20261004/local/final-targeted.log",
+      "bytes": 757,
+      "sha256": "34c6f3a6b18e6f4b25a52008e2b7ddc1dca9d7587e462b42eeeee8de7dc3aacf"
+    },
+    {
+      "source": "var/startup-preflight-20261004/final-targeted.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/final-targeted.log.status.json",
+      "bytes": 622,
+      "sha256": "21b3472ed11295450e01f10298206aaa19a0511f71a0c15543368d506fea1317"
+    },
+    {
+      "source": "var/startup-preflight-20261004/final-targeted.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/final-targeted.xml",
+      "bytes": 41215,
+      "sha256": "a359a5ef9f0ff997066c89afde27153c2e725794ab0f797e504f9c97c1c5bbe9"
+    },
+    {
+      "source": "var/startup-preflight-20261004/full-preflight.log",
+      "git_path": "evidence/startup-preflight-20261004/local/full-preflight.log",
+      "bytes": 1487,
+      "sha256": "61d20a5d687709177adf03ee3fd078f138166d10cb82ac4a449e8a86530e4a35"
+    },
+    {
+      "source": "var/startup-preflight-20261004/full-preflight.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/full-preflight.log.status.json",
+      "bytes": 443,
+      "sha256": "23ef7a820f3c923c2b89ea9e8204562560caff877b13d51b4e1d437cd1551975"
+    },
+    {
+      "source": "var/startup-preflight-20261004/full-preflight.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/full-preflight.xml",
+      "bytes": 127438,
+      "sha256": "de5f58c64402bd5d176901e30f7164c040b620723cb9b0bb37b9f8a5a802152a"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/baseline-source.tar",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/baseline-source.tar",
+      "bytes": 358400,
+      "sha256": "da903ab0b5b9c8025c43608659148ca67d0ccb894ab6473efab6f309037ae067"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/baseline.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/baseline.log",
+      "bytes": 3698,
+      "sha256": "0c7b381fbdfa81900063e53928505de12b5d5b023ce7ac23da5fef23e81fa3e1"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/baseline.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/baseline.log.status.json",
+      "bytes": 400,
+      "sha256": "7d3397388e65e5e275774f0fe102c1414d36665ebeb9c5582be787dc5e789dc2"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/console_countercheck_child.py",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/console_countercheck_child.py",
+      "bytes": 1508,
+      "sha256": "222b864d7136b2ef66163b4689c0298210eeb48c1c736785cbbe951e6aa75985"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/invalid_csp.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/invalid_csp.stderr.log",
+      "bytes": 262,
+      "sha256": "ce0810f5dfb3d09c053f0494e7ed4971c92d3724ddda15cf020581506fb7929f"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/invalid_csp.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/invalid_csp.stdout.log",
+      "bytes": 154,
+      "sha256": "93f69fb560a18d41f23b8355e6a4ec59b168caf1f12728514383b26e58530331"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/MANIFEST.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/MANIFEST.json",
+      "bytes": 2459,
+      "sha256": "008ae9d3addfc1d520d74cea8bbc8fd5eeb045f02c09350c99a1cca416ff410e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/missing_console.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/missing_console.stderr.log",
+      "bytes": 262,
+      "sha256": "ce0810f5dfb3d09c053f0494e7ed4971c92d3724ddda15cf020581506fb7929f"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/missing_console.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/missing_console.stdout.log",
+      "bytes": 329,
+      "sha256": "3a4298938500c5e44a556938e5c3722a792828596a30366dfd6ae37f372ad322"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/numeric_environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/numeric_environment.stderr.log",
+      "bytes": 2584,
+      "sha256": "24748202b6b64530563b286c9ac01f241d49c68d5f0238f21269b7cf932d69a8"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/numeric_environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/numeric_environment.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/origin_port_environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/origin_port_environment.stderr.log",
+      "bytes": 3150,
+      "sha256": "2b0ffe069a4130ac042953b02c243afe5f49b4a320291d658f38de48d01c0582"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/origin_port_environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/origin_port_environment.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/reproduce.py",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/reproduce.py",
+      "bytes": 7356,
+      "sha256": "2d076abf8ccd798cc1436cafeef7575dbe6ea28fe460a637b7971a7d332d9d97"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent/RESULT.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent/RESULT.json",
+      "bytes": 3698,
+      "sha256": "0c7b381fbdfa81900063e53928505de12b5d5b023ce7ac23da5fef23e81fa3e1"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/child-status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/child-status.json",
+      "bytes": 742,
+      "sha256": "02b811631e0dce19dcbdd915bfb06fe689dc1ebaa8aba8c02085504004b78626"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-bad_config.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-bad_config.status.json",
+      "bytes": 476,
+      "sha256": "6cd48fbb7812a2794448aee2803ee202b0aa254c8ce8a969d5b85e8141cb0467"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-bad_config.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-bad_config.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-bad_config.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-bad_config.stdout.log",
+      "bytes": 288,
+      "sha256": "c757b052aa76ec4295cd896a4a7643648d5505872629c3f6e8a9603ced33d685"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-bad_environment.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-bad_environment.status.json",
+      "bytes": 299,
+      "sha256": "94ee642b083e5c1ffb92ecf2bdaa4bf2c17aa545c9f0c7aa6016b6cee3b08b58"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-bad_environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-bad_environment.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-bad_environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-bad_environment.stdout.log",
+      "bytes": 514,
+      "sha256": "3d49b714c4ff6cf9aae5b9319399cd62c821b3c7aeb11265cd8b682ea9deb81e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-config.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-config.status.json",
+      "bytes": 476,
+      "sha256": "69c6219638983382646070500783de945b81ebc619d7512b115f465850567d5f"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-config.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-config.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-config.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-config.stdout.log",
+      "bytes": 512,
+      "sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-environment.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-environment.status.json",
+      "bytes": 299,
+      "sha256": "85f028319396e0b707debe690d9b0b65cfb4311cd12aedc7d54dd71995c5a1a1"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-environment.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/doctor-environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/doctor-environment.stdout.log",
+      "bytes": 512,
+      "sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/pytest.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/pytest.xml",
+      "bytes": 12612,
+      "sha256": "e9192a388d86d03fa2420aff1f6c8060c493d5105d898bc7249681cf6e7e65f5"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/serve-AIRLOCK_ORIGIN.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/serve-AIRLOCK_ORIGIN.status.json",
+      "bytes": 283,
+      "sha256": "e27d394e1935ef3e7eaf8a836f3b5526bf88d7cef8f4eaa6fe241813d350cc1b"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/serve-AIRLOCK_ORIGIN.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/serve-AIRLOCK_ORIGIN.stderr.log",
+      "bytes": 173,
+      "sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/serve-AIRLOCK_ORIGIN.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/serve-AIRLOCK_ORIGIN.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/serve-AIRLOCK_TTL.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/serve-AIRLOCK_TTL.status.json",
+      "bytes": 283,
+      "sha256": "e27d394e1935ef3e7eaf8a836f3b5526bf88d7cef8f4eaa6fe241813d350cc1b"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/serve-AIRLOCK_TTL.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/serve-AIRLOCK_TTL.stderr.log",
+      "bytes": 173,
+      "sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/serve-AIRLOCK_TTL.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/serve-AIRLOCK_TTL.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first/stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first/stdout.log",
+      "bytes": 12914,
+      "sha256": "3f7cf17b5d2bc33d64a0e85b1e3841670b573359df46db3b1a17066ad6f14cad"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/browser-crlf.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/browser-crlf.json",
+      "bytes": 838,
+      "sha256": "fbb1c8e3d849ae0d1f8663cdd08c67d4d4caa55bf9ee5097a9c5203c40f9f772"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/child-status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/child-status.json",
+      "bytes": 752,
+      "sha256": "15d522cde7f50e158350907b962608293a00ae57c377fe43fe9ab05720af286d"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-bad_config.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-bad_config.status.json",
+      "bytes": 476,
+      "sha256": "3ac5a2d8109acadc67044d55b3c6283101cd43f2a068c2d959373ab655b40218"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-bad_config.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-bad_config.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-bad_config.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-bad_config.stdout.log",
+      "bytes": 288,
+      "sha256": "c757b052aa76ec4295cd896a4a7643648d5505872629c3f6e8a9603ced33d685"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-bad_environment.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-bad_environment.status.json",
+      "bytes": 299,
+      "sha256": "94ee642b083e5c1ffb92ecf2bdaa4bf2c17aa545c9f0c7aa6016b6cee3b08b58"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-bad_environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-bad_environment.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-bad_environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-bad_environment.stdout.log",
+      "bytes": 514,
+      "sha256": "3d49b714c4ff6cf9aae5b9319399cd62c821b3c7aeb11265cd8b682ea9deb81e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-config.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-config.status.json",
+      "bytes": 476,
+      "sha256": "fea303ea30dc2908e3674d8121cf411088ece6f71b02904f455fd5b7f94f773f"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-config.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-config.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-config.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-config.stdout.log",
+      "bytes": 512,
+      "sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-environment.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-environment.status.json",
+      "bytes": 299,
+      "sha256": "85f028319396e0b707debe690d9b0b65cfb4311cd12aedc7d54dd71995c5a1a1"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-environment.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/doctor-environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/doctor-environment.stdout.log",
+      "bytes": 512,
+      "sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/pytest.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/pytest.xml",
+      "bytes": 8126,
+      "sha256": "a370d2cc1e4934c12022e25adb206ac2837201b1e3f1ed3dda51a11ae85e90fe"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/serve-AIRLOCK_ORIGIN.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/serve-AIRLOCK_ORIGIN.status.json",
+      "bytes": 283,
+      "sha256": "e27d394e1935ef3e7eaf8a836f3b5526bf88d7cef8f4eaa6fe241813d350cc1b"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/serve-AIRLOCK_ORIGIN.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/serve-AIRLOCK_ORIGIN.stderr.log",
+      "bytes": 173,
+      "sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/serve-AIRLOCK_ORIGIN.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/serve-AIRLOCK_ORIGIN.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/serve-AIRLOCK_TTL.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/serve-AIRLOCK_TTL.status.json",
+      "bytes": 283,
+      "sha256": "e27d394e1935ef3e7eaf8a836f3b5526bf88d7cef8f4eaa6fe241813d350cc1b"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/serve-AIRLOCK_TTL.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/serve-AIRLOCK_TTL.stderr.log",
+      "bytes": 173,
+      "sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/serve-AIRLOCK_TTL.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/serve-AIRLOCK_TTL.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected/stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected/stdout.log",
+      "bytes": 7393,
+      "sha256": "24262b10a6b2a967bc77306d829c137fb689734acb7c483ba1a76d1416082a6e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected.log",
+      "bytes": 7393,
+      "sha256": "24262b10a6b2a967bc77306d829c137fb689734acb7c483ba1a76d1416082a6e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-corrected.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-corrected.log.status.json",
+      "bytes": 452,
+      "sha256": "863a419fe63e7d35d579bc28235857a510de1545ac14d0f4b1a9ac3bb3f98153"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-source.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-source.json",
+      "bytes": 14993,
+      "sha256": "517e210310aca0d017f9e7a56170cce1a3a516ba9a8ec906be55ee87e924593e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first-source.zip",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first-source.zip",
+      "bytes": 437971,
+      "sha256": "a50ca1640b0d72b1c3034c3d54b479a62d09013157192242eccf3aa3372bfb5c"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first.log",
+      "bytes": 12914,
+      "sha256": "3f7cf17b5d2bc33d64a0e85b1e3841670b573359df46db3b1a17066ad6f14cad"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/first.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/first.log.status.json",
+      "bytes": 428,
+      "sha256": "d22232e01857844acbbcb6f372ea0a7c1e5e56f5a6d91aefb5b242b9e0113bf2"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/browser-crlf.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/browser-crlf.json",
+      "bytes": 838,
+      "sha256": "fbb1c8e3d849ae0d1f8663cdd08c67d4d4caa55bf9ee5097a9c5203c40f9f772"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/child-status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/child-status.json",
+      "bytes": 748,
+      "sha256": "f59d17921502014ed926194d0ee4ebf4c82c6977c4978c6e2e930e4b945f0872"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-bad_config.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-bad_config.status.json",
+      "bytes": 476,
+      "sha256": "2622bbb0d6bf0eddba34d76034edbcd41f486fc1aa687affcb090a146934e3b0"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-bad_config.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-bad_config.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-bad_config.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-bad_config.stdout.log",
+      "bytes": 288,
+      "sha256": "c757b052aa76ec4295cd896a4a7643648d5505872629c3f6e8a9603ced33d685"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-bad_environment.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-bad_environment.status.json",
+      "bytes": 299,
+      "sha256": "94ee642b083e5c1ffb92ecf2bdaa4bf2c17aa545c9f0c7aa6016b6cee3b08b58"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-bad_environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-bad_environment.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-bad_environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-bad_environment.stdout.log",
+      "bytes": 514,
+      "sha256": "3d49b714c4ff6cf9aae5b9319399cd62c821b3c7aeb11265cd8b682ea9deb81e"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-config.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-config.status.json",
+      "bytes": 476,
+      "sha256": "09df456ee97033f348745356aa3ef09fac64561efc48a0e001150ebc138f4f20"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-config.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-config.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-config.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-config.stdout.log",
+      "bytes": 512,
+      "sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-environment.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-environment.status.json",
+      "bytes": 299,
+      "sha256": "85f028319396e0b707debe690d9b0b65cfb4311cd12aedc7d54dd71995c5a1a1"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-environment.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-environment.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/doctor-environment.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/doctor-environment.stdout.log",
+      "bytes": 512,
+      "sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/pytest.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/pytest.xml",
+      "bytes": 3494,
+      "sha256": "06305c5e3052191bc039cee0b6cad9b1fbd365c06217c695c81c770091aa924c"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/serve-AIRLOCK_ORIGIN.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/serve-AIRLOCK_ORIGIN.status.json",
+      "bytes": 283,
+      "sha256": "e27d394e1935ef3e7eaf8a836f3b5526bf88d7cef8f4eaa6fe241813d350cc1b"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/serve-AIRLOCK_ORIGIN.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/serve-AIRLOCK_ORIGIN.stderr.log",
+      "bytes": 173,
+      "sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/serve-AIRLOCK_ORIGIN.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/serve-AIRLOCK_ORIGIN.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/serve-AIRLOCK_TTL.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/serve-AIRLOCK_TTL.status.json",
+      "bytes": 283,
+      "sha256": "e27d394e1935ef3e7eaf8a836f3b5526bf88d7cef8f4eaa6fe241813d350cc1b"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/serve-AIRLOCK_TTL.stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/serve-AIRLOCK_TTL.stderr.log",
+      "bytes": 173,
+      "sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/serve-AIRLOCK_TTL.stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/serve-AIRLOCK_TTL.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/stderr.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired/stdout.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired/stdout.log",
+      "bytes": 2820,
+      "sha256": "8ea21f62c6d851dd16873c9e8e37afc973040116f44f82644b0631f91074bc93"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired-source.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired-source.json",
+      "bytes": 14994,
+      "sha256": "b1d8357a03245f8dc5f1122108b7fd693cbb23449ce3797a1c5953ac4bf70bb2"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired-source.zip",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired-source.zip",
+      "bytes": 438098,
+      "sha256": "83bb76bb50f19430c8bd731582355c407c6a2dae0bc1617bc544818ad577f874"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired.log",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired.log",
+      "bytes": 2820,
+      "sha256": "8ea21f62c6d851dd16873c9e8e37afc973040116f44f82644b0631f91074bc93"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/repaired.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/repaired.log.status.json",
+      "bytes": 430,
+      "sha256": "99ba0b7c90221200fa55e651e4a27842143a8869667d70fa56ffd0631e5124d5"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/run_countercheck.initial.py",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/run_countercheck.initial.py",
+      "bytes": 1829,
+      "sha256": "dc0f955289db64b84e720737eed92915b280b78f59fbcdfa6354cdc7fbc01df9"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/run_countercheck.py",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/run_countercheck.py",
+      "bytes": 1886,
+      "sha256": "c925ef70fd27c402142ca42e53c0a2d61cc68fa9996f5c9b48c48fc71af51196"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/test_countercheck.initial.py",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/test_countercheck.initial.py",
+      "bytes": 12823,
+      "sha256": "fb252a4866c2dbf7172b5c86ecb4a0cbd9cc385d847289bca1862ee5e5426775"
+    },
+    {
+      "source": "var/startup-preflight-20261004/independent-retest/test_countercheck.py",
+      "git_path": "evidence/startup-preflight-20261004/local/independent-retest/test_countercheck.py",
+      "bytes": 14165,
+      "sha256": "98c6d062c037651765cf3bacbcb76c4590216b5868f751ef5731ae36e9595216"
+    },
+    {
+      "source": "var/startup-preflight-20261004/launcher-api-targeted.log",
+      "git_path": "evidence/startup-preflight-20261004/local/launcher-api-targeted.log",
+      "bytes": 583,
+      "sha256": "0af10ee66f6759962f57b957fc75fdfcdf975fc9b1bd01c75d5ba0ccc4859daa"
+    },
+    {
+      "source": "var/startup-preflight-20261004/launcher-api-targeted.log.status.json",
+      "git_path": "evidence/startup-preflight-20261004/local/launcher-api-targeted.log.status.json",
+      "bytes": 545,
+      "sha256": "0b7c6c2f699b5b670b6f6d8f12df181ae26b275f2b3664f12a36991e63af4ff4"
+    },
+    {
+      "source": "var/startup-preflight-20261004/launcher-api-targeted.xml",
+      "git_path": "evidence/startup-preflight-20261004/local/launcher-api-targeted.xml",
+      "bytes": 27550,
+      "sha256": "ed3db4c8354b3f563de76d49774d737289c36d2b74ac60cc18f1f13657a6730a"
+    }
+  ]
+}

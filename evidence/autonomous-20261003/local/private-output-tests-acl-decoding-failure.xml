@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="14" time="2.899" timestamp="2026-10-03T09:07:05.143322+08:00" hostname="WHHHH"><testcase classname="tests.test_private_files" name="test_private_reservation_permissions_and_exclusive_reuse" time="0.065"><failure message="UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-353/test_private_reservation_permi0')
+
+    def test_private_reservation_permissions_and_exclusive_reuse(tmp_path):
+        requested = tmp_path/'claim.json'
+        with private_files.reserve_private_output(requested) as (actual, output):
+            assert actual == tmp_path/'claim.json.private'/'claim.json'
+            output.write('synthetic-one-use-credential')
+        assert actual.read_text() == 'synthetic-one-use-credential' and not requested.exists()
+        if os.name == 'nt':
+            # Inspect the real DACL rather than relying on chmod on Windows.
+            system = Path(os.environ['SYSTEMROOT'])/'System32'
+            account = subprocess.run([str(system/'whoami.exe'), '/user', '/fo', 'csv', '/nh'],
+                                     capture_output=True, text=True, check=True).stdout
+            owner_sid = re.search(r'S-1-\d+(?:-\d+)+', account).group()
+            for index, target in enumerate((actual.parent, actual)):
+                acl_file = tmp_path/f'acl-{index}.txt'
+                subprocess.run([str(system/'icacls.exe'), str(target), '/save', str(acl_file), '/q'],
+                               capture_output=True, check=True)
+&gt;               descriptor = next(line for line in acl_file.read_text(encoding='utf-16').splitlines() if line.startswith('D:'))
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_private_files.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pathlib\_abc.py:633: in read_text
+    return f.read()
+           ^^^^^^^^
+&lt;frozen codecs&gt;:325: in decode
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;encodings.utf_16.IncrementalDecoder object at 0x0000020FFAC11E80&gt;
+input = b'c\x00l\x00a\x00i\x00m\x00.\x00j\x00s\x00o\x00n\x00.\x00p\x00r\x00i\x00v\x00a\x00t\x00e\x00\r\x00\n\x00D\x00:\x00P\x0...0;\x00;\x00B\x00A\x00)\x00(\x00A\x00;\x00O\x00I\x00C\x00I\x00;\x00F\x00A\x00;\x00;\x00;\x00O\x00W\x00)\x00\r\x00\n\x00'
+errors = 'strict', final = True
+
+    def _buffer_decode(self, input, errors, final):
+        if self.decoder is None:
+            (output, consumed, byteorder) = \
+                codecs.utf_16_ex_decode(input, errors, 0, final)
+            if byteorder == -1:
+                self.decoder = codecs.utf_16_le_decode
+            elif byteorder == 1:
+                self.decoder = codecs.utf_16_be_decode
+            elif consumed &gt;= 2:
+&gt;               raise UnicodeDecodeError("utf-16", input, 0, 2, "Stream does not start with BOM")
+E               UnicodeDecodeError: 'utf-16' codec can't decode bytes in position 0-1: Stream does not start with BOM
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\encodings\utf_16.py:67: UnicodeDecodeError</failure></testcase><testcase classname="tests.test_private_files" name="test_private_reservation_preserves_existing_output_and_failure" time="0.027" /><testcase classname="tests.test_private_files" name="test_relay_cli_private_output_and_no_repeat_send" time="0.038" /><testcase classname="tests.test_private_files" name="test_relay_cli_does_not_call_when_private_permissions_fail" time="0.007" /><testcase classname="tests.test_github_adapter" name="test_github_append_only_plan_has_no_cas_or_rollback_claim" time="0.007" /><testcase classname="tests.test_github_adapter" name="test_github_direct_durable_send_once_concurrent_and_restart" time="0.060" /><testcase classname="tests.test_github_adapter" name="test_github_unknown_timeout_and_crash_never_resend" time="0.020" /><testcase classname="tests.test_github_adapter" name="test_github_unknown_direct_result_requires_bound_independent_readback" time="0.022" /><testcase classname="tests.test_github_adapter" name="test_github_plan_configuration_drift_and_capacity_fail_closed" time="0.017" /><testcase classname="tests.test_github_adapter" name="test_github_relay_requires_unique_claim_and_exact_readback" time="0.034" /><testcase classname="tests.test_github_adapter" name="test_github_no_claim_before_approval_stale_or_expired" time="0.016" /><testcase classname="tests.test_github_adapter" name="test_github_adapter_credentials_and_body_boundaries" time="0.039" /><testcase classname="tests.test_github_adapter" name="test_github_graphql_fixed_origin_node_id_and_response_binding" time="0.019" /><testcase classname="tests.test_github_adapter" name="test_github_real_http_gate_review_relay_receipt_and_audit" time="2.115" /></testsuite></testsuites>

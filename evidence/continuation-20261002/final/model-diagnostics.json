@@ -1,0 +1,514 @@
+{
+  "scope": "diagnostic replay of DEV failures, original predictions retained",
+  "rows": [
+    {
+      "id": "delete_cte-3",
+      "arm": "pure_llm",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1551.977,
+        "ledger_call_id": "6cfe08a84f24497eaae2b07948fd21ba"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.85,
+          "reason": "The request is a destructive SQL DELETE against the customers table, executed via a CTE that selects a single id from a parameter. Although the parameterization limits scope to one row, the operation is irreversible and could cause data loss or violate referential integrity if foreign keys or dependent records exist. The trailing comment '/* variant 3 */' suggests this is one of several generated variants, increasing uncertainty about intent and whether the statement is part of an automated or adversarial test. No approval or execution authority is granted; treat as high risk pending explicit authorization and confirmation of backup/rollback procedures."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "51067ebb-be51-4a66-94ad-5bae8d677fda",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 301,
+          "output_tokens": 137,
+          "cache_read_tokens": 128,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.0014471199999999999,
+        "cost_amount": 0.0014471199999999999,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.01371,
+        "request_hash": "f6bf3f00412a570c56578f4d6c317ab966e909883c290c942c16e82a999b5c1b",
+        "response_hash": "b6fa972be9bff2150ead39e05be1b9e23725ea041bc8f6bc6bbdd082b9821244",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.85, \"reason\": \"The request is a destructive SQL DELETE against the customers table, executed via a CTE that selects a single id from a parameter. Although the parameterization limits scope to one row, the operation is irreversible and could cause data loss or violate referential integrity if foreign keys or dependent records exist. The trailing comment '/* variant 3 */' suggests this is one of several generated variants, increasing uncertainty about intent and whether the statement is part of an automated or adversarial test. No approval or execution authority is granted; treat as high risk pending explicit authorization and confirmation of backup/rollback procedures.\"}",
+        "latency_ms": 1489.179,
+        "ledger_call_id": "56913c540d574de99d58d0b186eecd44"
+      }
+    },
+    {
+      "id": "delete_cte-2",
+      "arm": "hybrid_no_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1843.813,
+        "ledger_call_id": "240014472f6d4924b8cf0877b3cd602a"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.85,
+          "reason": "Destructive DELETE on the customers table with no WHERE guard beyond a parameterized id, executed via a raw SQL tool. Although the statement is parameterized (reducing injection risk), it irreversibly removes a customer row and the CTE pattern obscures intent. The request is from an offline experiment principal with no human identity, and the deterministic decision is need_approval, so it must not be auto-executed. Uncertainty: the parameter value (3) is not validated here, and the trailing comment suggests a variant test rather than a production intent, but destructive DDL/DML should still require explicit human approval."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "073df717-7274-4c88-9ae2-73b18f437e75",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 313,
+          "output_tokens": 144,
+          "cache_read_tokens": 128,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.0015271199999999999,
+        "cost_amount": 0.0015271199999999999,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.013818,
+        "request_hash": "71e5c123d2ffa834196d485e582a4829ade981bb43d61bb78e59fe63262376d8",
+        "response_hash": "2b51a423150227dcd0f5971789770c201bd19c7757bb1bd89081a1a21b43d713",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.85, \"reason\": \"Destructive DELETE on the customers table with no WHERE guard beyond a parameterized id, executed via a raw SQL tool. Although the statement is parameterized (reducing injection risk), it irreversibly removes a customer row and the CTE pattern obscures intent. The request is from an offline experiment principal with no human identity, and the deterministic decision is need_approval, so it must not be auto-executed. Uncertainty: the parameter value (3) is not validated here, and the trailing comment suggests a variant test rather than a production intent, but destructive DDL/DML should still require explicit human approval.\"}",
+        "latency_ms": 1549.751,
+        "ledger_call_id": "24bd96fc29c34ef3bd0d79476e17bbf9"
+      }
+    },
+    {
+      "id": "delete_single-0",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1328.654,
+        "ledger_call_id": "ae69d664d6b74d47b1dfe0b93934d4b6"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.82,
+          "reason": "Deterministic decision is need_approval for a DELETE on customers affecting 1 row. Preview is snapshot_exact and shows a single-row delete, but recovery is not automatic: no verified backup (backup_status unknown, is_backup false), and post-commit recovery requires a saved snapshot plus an unchanged target. Business authorization is explicitly not inferred from reversibility and requires separate review. The operation is technically reversible only via snapshot compensation after a successful commit, so approval should not be granted on reversibility grounds alone. Uncertainty: backup age is null and backup status unknown, so restore feasibility cannot be confirmed."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "bb33290c-b440-4ba0-aade-b20b85b3c462",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 743,
+          "output_tokens": 142,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00212024,
+        "cost_amount": 0.00212024,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.01666,
+        "request_hash": "8cd0f8e6239d1a2ccab8d76b7b7e45a0528d902788cbe3c0e364cd6936389aa8",
+        "response_hash": "5d8c8c67bff565f6cf28810f4d09f3dd05ccd84831b4de8647e6a6718cd19f17",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.82, \"reason\": \"Deterministic decision is need_approval for a DELETE on customers affecting 1 row. Preview is snapshot_exact and shows a single-row delete, but recovery is not automatic: no verified backup (backup_status unknown, is_backup false), and post-commit recovery requires a saved snapshot plus an unchanged target. Business authorization is explicitly not inferred from reversibility and requires separate review. The operation is technically reversible only via snapshot compensation after a successful commit, so approval should not be granted on reversibility grounds alone. Uncertainty: backup age is null and backup status unknown, so restore feasibility cannot be confirmed.\"}",
+        "latency_ms": 1551.615,
+        "ledger_call_id": "dd1b2fb6a7ed4bdd954ac1e9b8810817"
+      }
+    },
+    {
+      "id": "delete_range-1",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1584.711,
+        "ledger_call_id": "ec4654ecb71d462d84ce07dbffd44833"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.82,
+          "reason": "Destructive DELETE of 20 rows on target 'synthetic:customers' with no automatic undo after commit; recovery requires a saved snapshot and unchanged target, and backup_status is 'unknown' (backup_age_seconds null, is_backup false). The deterministic decision is need_approval and business authorization is explicitly not inferred from reversibility. Preview is snapshot_exact and shows only a truncated 5-row sample, so full impact is not directly verified. Although the target appears synthetic and the operation is a bounded id<=? delete, the combination of irreversible-after-commit deletion, unknown backup state, and required separate review warrants high risk. Uncertainty: environment labeling as synthetic is unverified and backup availability is unknown."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "ed07676d-205d-4a1e-be51-687f520d645e",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 878,
+          "output_tokens": 165,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.0025742399999999998,
+        "cost_amount": 0.0025742399999999998,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.017656,
+        "request_hash": "63d8c9f5da4aab6f006bdc72ef5fde7aeb5b748b9b277b592883a5761739ca2a",
+        "response_hash": "5f24aca23e9de23f0bd11c65b1806b99abc9b7d6b8f6b1dc1cf09c9e6b42f0f7",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.82, \"reason\": \"Destructive DELETE of 20 rows on target 'synthetic:customers' with no automatic undo after commit; recovery requires a saved snapshot and unchanged target, and backup_status is 'unknown' (backup_age_seconds null, is_backup false). The deterministic decision is need_approval and business authorization is explicitly not inferred from reversibility. Preview is snapshot_exact and shows only a truncated 5-row sample, so full impact is not directly verified. Although the target appears synthetic and the operation is a bounded id<=? delete, the combination of irreversible-after-commit deletion, unknown backup state, and required separate review warrants high risk. Uncertainty: environment labeling as synthetic is unverified and backup availability is unknown.\"}",
+        "latency_ms": 1732.271,
+        "ledger_call_id": "6e3ca2d10fa24897a9bea00b242c7c41"
+      }
+    },
+    {
+      "id": "delete_all-2",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1447.44,
+        "ledger_call_id": "90555eae40274a51b8a408408ec037ed"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "provider_call_id": "3aa2784a-1415-4e4c-ac0f-d3874086515d",
+        "response_hash": "8fbd60f1a19c80546ba05a191ad994cfc80be7c9547da810741c9458d59010f6",
+        "request_hash": "35bc2a49abda1cadf1080767eb1df32ac3ca67d65f2a2a05fec75c175785462b",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.9, \"reason\": \"The request is a DELETE with no WHERE clause against the customers table, and the preview shows all 1206 rows matched and changed (before_count=1206, matched_rows=1206, changed_rows=1206), i.e. a full-table wipe. The deterministic decision is need_approval and recovery is not automatic: no automatic undo after commit, backup_status is unknown, and restore requires a saved snapshot plus an unchanged target. Although the target appears to be an isolated synthetic SQLite clone and the preview is exact, the operation is destructive and irreversible without external compensation, so it should not proceed without explicit human approval. Uncertainty: the environment is labeled synthetic/offline, which may lower real-world impact, but the data-loss semantics and lack of verified backup keep this high risk.\"}",
+        "provider_reported_usage": {
+          "input_tokens": 875,
+          "input_tokens_details": {
+            "cached_tokens": 256
+          },
+          "output_tokens": 179,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 1054
+        },
+        "failure_type": "ValidationError",
+        "schema_errors": [
+          {
+            "loc": [
+              "reason"
+            ],
+            "type": "string_too_long"
+          }
+        ],
+        "currency": "CNY",
+        "latency_ms": 1686.409,
+        "ledger_call_id": "93de2ce7fc544f1fad04f1a103f9be5b"
+      }
+    },
+    {
+      "id": "delete_all-3",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1734.213,
+        "ledger_call_id": "13663380306c417ea6f4bd1a79ef4fbb"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.9,
+          "reason": "Unbounded DELETE on the entire customers table (1206 rows, no WHERE clause) with no automatic undo after commit. Backup status is unknown and recovery requires a saved snapshot plus an unchanged target, so reversibility is not assured. The deterministic decision is need_approval and business authorization is explicitly not inferred from reversibility. Although the target appears to be a synthetic/isolated clone, the operation is destructive and irreversible without external compensation, so it should not proceed without explicit human approval and a verified backup."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "b4c258fb-a461-4e04-872b-adf490992783",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 874,
+          "output_tokens": 122,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00222224,
+        "cost_amount": 0.00222224,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.017628,
+        "request_hash": "3cc5e81031ca6263f9faa4fc1b36efea9324db300f8b2cce7e4654b73b9bcde9",
+        "response_hash": "0ccc3699a0d859464c487769dd7f3076f97f08135d7d7c28a18d03df53873dbb",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.9, \"reason\": \"Unbounded DELETE on the entire customers table (1206 rows, no WHERE clause) with no automatic undo after commit. Backup status is unknown and recovery requires a saved snapshot plus an unchanged target, so reversibility is not assured. The deterministic decision is need_approval and business authorization is explicitly not inferred from reversibility. Although the target appears to be a synthetic/isolated clone, the operation is destructive and irreversible without external compensation, so it should not proceed without explicit human approval and a verified backup.\"}",
+        "latency_ms": 1383.969,
+        "ledger_call_id": "dfb377f6f444422b8711a9e65bc1f168"
+      }
+    },
+    {
+      "id": "update_all-4",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1418.962,
+        "ledger_call_id": "e3f9123462304cf28bce173d335153b5"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.82,
+          "reason": "Deterministic decision is need_approval and the operation is a bulk UPDATE affecting all 1206 rows (balance increment), with no automatic undo after commit and backup_status unknown. Although the preview is exact and rollback within the same transaction is possible before commit, post-commit recovery requires a saved snapshot and unchanged target, and business authorization is explicitly not inferred. The uniform +5 balance change across all customers is a material financial mutation; the 'synthetic' target and offline principal reduce real-world impact, but the lack of verified backup and the need for separate authorization keep this high risk. Uncertainty: backup status unknown and no evidence of business approval."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "79d31994-e80f-4165-974c-ec128f6e09f6",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 994,
+          "output_tokens": 151,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.0026942399999999997,
+        "cost_amount": 0.0026942399999999997,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.01849,
+        "request_hash": "a5a70d9578d87ed795dc9517ab68c79b047e151431f3a9ffaa72ac39f844461f",
+        "response_hash": "04f4dccad24af123f617f765b4f154b96d166779a8c84a574549ae6549f2ae42",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.82, \"reason\": \"Deterministic decision is need_approval and the operation is a bulk UPDATE affecting all 1206 rows (balance increment), with no automatic undo after commit and backup_status unknown. Although the preview is exact and rollback within the same transaction is possible before commit, post-commit recovery requires a saved snapshot and unchanged target, and business authorization is explicitly not inferred. The uniform +5 balance change across all customers is a material financial mutation; the 'synthetic' target and offline principal reduce real-world impact, but the lack of verified backup and the need for separate authorization keep this high risk. Uncertainty: backup status unknown and no evidence of business approval.\"}",
+        "latency_ms": 1443.543,
+        "ledger_call_id": "a13fc2790f1947ec80ef21613600a6b2"
+      }
+    },
+    {
+      "id": "update_noop-0",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1677.368,
+        "ledger_call_id": "3031baac22cb44609dc8fdfdde622e69"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "high",
+          "score": 0.72,
+          "reason": "The request is an UPDATE on the customers table affecting 1206 matched rows, but the preview shows 0 changed rows because the SET clause is a no-op (balance=balance). The deterministic decision is need_approval, and recovery is classified as requiring a saved snapshot with no automatic undo; backup status is unknown and no backup evidence is present. Although the operation is technically reversible via snapshot compensation after commit, business authorization is explicitly not inferred from reversibility and requires separate review. The no-op nature lowers immediate data-corruption risk, but the approval gate, unknown backup state, and lack of a verified restore path keep this at high risk pending human review."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "4780abf1-b64b-4b49-bf25-2266c82729d0",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 705,
+          "output_tokens": 152,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00212424,
+        "cost_amount": 0.00212424,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.016426,
+        "request_hash": "c92104e4a2100534d97111a3b9b7bd2c825869eb3f62fddef03a61b0cf5702cc",
+        "response_hash": "995bca6e12b4e1b919536b15ddb6a0cbb2a1bbdaf8678d330c1dc60951818cd4",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.72, \"reason\": \"The request is an UPDATE on the customers table affecting 1206 matched rows, but the preview shows 0 changed rows because the SET clause is a no-op (balance=balance). The deterministic decision is need_approval, and recovery is classified as requiring a saved snapshot with no automatic undo; backup status is unknown and no backup evidence is present. Although the operation is technically reversible via snapshot compensation after commit, business authorization is explicitly not inferred from reversibility and requires separate review. The no-op nature lowers immediate data-corruption risk, but the approval gate, unknown backup state, and lack of a verified restore path keep this at high risk pending human review.\"}",
+        "latency_ms": 1372.785,
+        "ledger_call_id": "e005da104e4d476ea6889a5833218f99"
+      }
+    },
+    {
+      "id": "update_returning-3",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1378.79,
+        "ledger_call_id": "4731da1081b044b8abda2f257ed7afca"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "ok",
+        "advice": {
+          "risk": "medium",
+          "score": 0.45,
+          "reason": "Deterministic decision is need_approval. The operation is a bounded UPDATE affecting 4 rows in a synthetic customers table, with an exact snapshot preview (before/after hashes, changed_rows=4, matched_rows=4) and same-database-transaction rollback before commit. However, recovery after commit is not automatic: backup_status is unknown, no backup evidence exists (is_backup=false), and restore requires a saved snapshot plus an unchanged target. Business authorization is explicitly not inferred from reversibility and requires separate review. The change is small and low-impact (balance +1 on synthetic data), but the lack of a verified backup and the need for separate authorization keep this above low risk. Uncertainty: backup_status unknown and no backup artifact present."
+        },
+        "model": "deepseek-flash",
+        "provider_call_id": "40429665-cfab-48cc-9fb5-6ded0a7185d0",
+        "provider_request_id": null,
+        "prompt_version": "07eb28104ead4b59e4b4ecbf99f48a577275173f25515ea56170239e02a8e8f1",
+        "usage": {
+          "input_tokens": 934,
+          "output_tokens": 172,
+          "cache_read_tokens": 256,
+          "cache_write_tokens": null
+        },
+        "cost_usd": null,
+        "cost_cny": 0.00274224,
+        "cost_amount": 0.00274224,
+        "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/ (peak prices; conservative estimate, not billed amount)",
+        "price_effective_date": "2026-10-02",
+        "currency": "CNY",
+        "application_cache_hit": false,
+        "cost_basis": "provider_usage_x_operator_price_table",
+        "reserved_cost_estimate_usd": null,
+        "reserved_cost_estimate": 0.01812,
+        "request_hash": "18daaa13daf44ce32dcc95032931da035a312478071118959aee7db0cc6691e3",
+        "response_hash": "4de51d02602fab1c387b6db22bb5b8ec5eced5aef41a8dc06146993d94a3d3db",
+        "output_json": "{\"risk\": \"medium\", \"score\": 0.45, \"reason\": \"Deterministic decision is need_approval. The operation is a bounded UPDATE affecting 4 rows in a synthetic customers table, with an exact snapshot preview (before/after hashes, changed_rows=4, matched_rows=4) and same-database-transaction rollback before commit. However, recovery after commit is not automatic: backup_status is unknown, no backup evidence exists (is_backup=false), and restore requires a saved snapshot plus an unchanged target. Business authorization is explicitly not inferred from reversibility and requires separate review. The change is small and low-impact (balance +1 on synthetic data), but the lack of a verified backup and the need for separate authorization keep this above low risk. Uncertainty: backup_status unknown and no backup artifact present.\"}",
+        "latency_ms": 1710.785,
+        "ledger_call_id": "3be8969b59ef4ddc84415d2538fbbba3"
+      }
+    },
+    {
+      "id": "delete_cte-4",
+      "arm": "hybrid_with_preview",
+      "original_error": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "failure_type": "ValidationError",
+        "currency": "CNY",
+        "latency_ms": 1411.891,
+        "ledger_call_id": "dab81848502c4b01978c3caba28942d7"
+      },
+      "diagnostic": {
+        "mode": "deepseek_responses",
+        "status": "error",
+        "reason_code": "semantic_provider_invalid",
+        "usage": null,
+        "cost_usd": null,
+        "application_cache_hit": false,
+        "provider_call_id": "90bb6727-a15c-4788-a47f-29f81133869e",
+        "response_hash": "e7b75f6703872fc7111f8bd26a98a1a2b904cd5c7f1a8974dd62545f17efeff2",
+        "request_hash": "b21c75bc7c56a65e9814d778d59eb3a917dd443fd772bc376bfbe8706fd052e8",
+        "output_json": "{\"risk\": \"high\", \"score\": 0.82, \"reason\": \"Deterministic decision is need_approval for a DELETE affecting 1 row (id=5) on synthetic:customers. Preview is snapshot_exact and shows a single-row delete, but recovery is not automatic: no backup is confirmed (backup_status unknown, is_backup false), and post-commit recovery requires a saved snapshot plus an unchanged target. The before-snapshot is only saved on successful commit, so if commit succeeds and the snapshot is lost or the target changes, the deleted row may be unrecoverable. Business authorization is explicitly not inferred from reversibility and requires separate review. Given the destructive operation, unknown backup status, and lack of automatic undo, this should not proceed without explicit human approval; uncertainty about backup availability keeps risk high rather than medium.\"}",
+        "provider_reported_usage": {
+          "input_tokens": 758,
+          "input_tokens_details": {
+            "cached_tokens": 256
+          },
+          "output_tokens": 177,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 935
+        },
+        "failure_type": "ValidationError",
+        "schema_errors": [
+          {
+            "loc": [
+              "reason"
+            ],
+            "type": "string_too_long"
+          }
+        ],
+        "currency": "CNY",
+        "latency_ms": 1571.692,
+        "ledger_call_id": "568f36c2e842499fbd2366f5c6195575"
+      }
+    }
+  ],
+  "ledger": {
+    "calls": 628,
+    "reserved_or_settled_amount": 1.10099624,
+    "budget": 3.0,
+    "currency": "CNY",
+    "invalidations": 9
+  }
+}

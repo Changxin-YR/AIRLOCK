@@ -1,0 +1,1 @@
+{"scope": "local_startup_preflight", "status": "FAIL", "checks": [{"id": "configuration", "status": "FAIL", "code": "configuration_file_invalid"}], "not_checked": ["sqlite_runtime", "console", "persistent_database", "remote_services", "optional_integrations"], "service_started": false}

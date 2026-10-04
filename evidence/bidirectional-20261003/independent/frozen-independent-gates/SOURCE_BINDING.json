@@ -1,0 +1,9 @@
+{
+  "sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "verifier_sha256": "7d764466723b614b2c247ee335c35fcf67dc97a0bee836f7955460ea9cb222a7",
+  "verifier_without_new_required_tests_and_log_sha256": "65c42720203b9134ade9cd471e558afb6e16a7c2e1e308ff5c57434310ab4926",
+  "prior_reviewed_verifier_sha256": "e01c034b4e50786cd4f88799ed9f97b090c5002948491d549e4660f55164e4be",
+  "only_required_inventory_changed": false,
+  "validator_unchanged": true,
+  "probe_identical": true
+}

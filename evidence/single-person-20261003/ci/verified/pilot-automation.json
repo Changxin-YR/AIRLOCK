@@ -1,0 +1,84 @@
+{
+  "kind": "airlock-study-v1",
+  "participant_id": "automation-pilot-check",
+  "source": "automation",
+  "consent": true,
+  "protocol": "single-person usability pilot; synthetic GitHub maintenance scenarios; author-labelled practice only; no real GitHub side effects",
+  "task_file_sha256": "27735543224fb9ddfe01dabf5bff3f09296926b14c0c0845ee277d753284638e",
+  "started_at": "2026-10-03T03:36:21.202Z",
+  "responses": [
+    {
+      "case_id": "p-4c70",
+      "arm": "A",
+      "choice": "approve",
+      "correct": true,
+      "visible_ms": 19,
+      "at": "2026-10-03T03:36:21.236Z",
+      "comprehension_choice": "不会"
+    },
+    {
+      "case_id": "p-b915",
+      "arm": "B",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 19,
+      "at": "2026-10-03T03:36:21.302Z",
+      "comprehension_choice": "停用测试"
+    },
+    {
+      "case_id": "p-d4e1",
+      "arm": "A",
+      "choice": "approve",
+      "correct": true,
+      "visible_ms": 19,
+      "at": "2026-10-03T03:36:21.369Z",
+      "comprehension_choice": "还需要修复和复验"
+    },
+    {
+      "case_id": "p-08fa",
+      "arm": "B",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 19,
+      "at": "2026-10-03T03:36:21.435Z",
+      "comprehension_choice": "不属于"
+    },
+    {
+      "case_id": "p-62be",
+      "arm": "A",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 18,
+      "at": "2026-10-03T03:36:21.502Z",
+      "comprehension_choice": "不能保证"
+    },
+    {
+      "case_id": "p-c318",
+      "arm": "B",
+      "choice": "approve",
+      "correct": true,
+      "visible_ms": 18,
+      "at": "2026-10-03T03:36:21.568Z",
+      "comprehension_choice": "仍需修复验证"
+    },
+    {
+      "case_id": "p-9d14",
+      "arm": "A",
+      "choice": "reject",
+      "correct": true,
+      "visible_ms": 18,
+      "at": "2026-10-03T03:36:21.635Z",
+      "comprehension_choice": "读取结果"
+    },
+    {
+      "case_id": "p-a7c2",
+      "arm": "B",
+      "choice": "approve",
+      "correct": true,
+      "visible_ms": 18,
+      "at": "2026-10-03T03:36:21.702Z",
+      "comprehension_choice": "不会"
+    }
+  ],
+  "counterbalance": 1
+}

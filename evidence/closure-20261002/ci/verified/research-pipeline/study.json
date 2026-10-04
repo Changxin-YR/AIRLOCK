@@ -1,0 +1,38 @@
+{
+  "status": "BLOCKED_EXTERNAL",
+  "human_participants": 0,
+  "excluded": [],
+  "participants": [],
+  "paired_time_delta": {
+    "n": 0,
+    "mean": null,
+    "ci95": null
+  },
+  "paired_accuracy_delta": {
+    "n": 0,
+    "mean": null,
+    "ci95": null
+  },
+  "all_decisions_visible_ms": {
+    "n": 0,
+    "mean": null,
+    "median": null,
+    "p95": null
+  },
+  "correct_decisions": {
+    "numerator": 0,
+    "denominator": 0,
+    "value": null
+  },
+  "gold_verification": "recomputed_from_supplied_task_file",
+  "comprehension_correct": {
+    "numerator": 0,
+    "denominator": 0,
+    "value": null
+  },
+  "limitations": [
+    "No causal efficiency claim without recruitment, business gold, counterbalancing and adequate sample size.",
+    "Exported browser timing and human identity are untrusted telemetry, never authorization.",
+    "Visibility duration excludes hidden tabs; correctness is supplied task gold, not a policy guess."
+  ]
+}

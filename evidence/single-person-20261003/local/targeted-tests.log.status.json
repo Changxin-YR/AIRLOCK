@@ -1,0 +1,20 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_pilot.py",
+    "tests/test_worklog.py",
+    "tests/test_alert_inbox.py",
+    "tests/test_pilot_server.py",
+    "tests/test_evidence_gate.py",
+    "-q",
+    "--junitxml=evidence/single-person-20261003/local/targeted-tests.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:34:26.374399+00:00",
+  "duration_seconds": 13.245,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+}

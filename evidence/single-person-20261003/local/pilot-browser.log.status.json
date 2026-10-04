@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/pilot_browser.py",
+    "--output",
+    "evidence/single-person-20261003/local"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:33:42.609032+00:00",
+  "duration_seconds": 6.301,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+}

@@ -1,6 +1,7 @@
 """Inventory actual CI artifacts. A manifest records files; it is not a test verdict."""
 from __future__ import annotations
 import hashlib
+import argparse
 import importlib.metadata
 import json
 import os
@@ -10,20 +11,21 @@ import sqlite3
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGET = ROOT / 'evidence'
-TARGET.mkdir(exist_ok=True)
+parser=argparse.ArgumentParser();parser.add_argument('--directory',type=Path,default=ROOT/'evidence');args=parser.parse_args()
+TARGET=args.directory
+TARGET.mkdir(parents=True,exist_ok=True)
 versions = {}
-for package in ('fastapi', 'starlette', 'pydantic', 'uvicorn', 'httpx', 'pytest', 'playwright', 'mcp', 'anyio'):
+for package in ('fastapi', 'starlette', 'pydantic', 'uvicorn', 'httpx', 'pytest', 'playwright', 'mcp', 'anyio','cel-python','PyYAML','PyJWT','cryptography','boto3','botocore','pip-audit'):
     try:
         versions[package] = importlib.metadata.version(package)
     except importlib.metadata.PackageNotFoundError:
         versions[package] = None
 result = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True)
 files = {}
-for path in sorted(TARGET.iterdir()):
+for path in sorted(list(TARGET.iterdir())+list((TARGET/'research-pipeline').rglob('*'))):
     if path.is_file() and path.name != 'manifest.json' and path.suffix in {'.json', '.jsonl', '.log', '.txt', '.png', '.zip', '.xml'}:
         data = path.read_bytes()
-        files[path.name] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+        files[path.relative_to(TARGET).as_posix()] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
 report = {'commit': result.stdout.strip() if result.returncode == 0 else None,
           'github_run_id': os.getenv('GITHUB_RUN_ID'), 'python': platform.python_version(),
           'sqlite': sqlite3.sqlite_version, 'packages': versions, 'files': files,

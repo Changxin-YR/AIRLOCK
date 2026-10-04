@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-c",
+    "import json\nfrom pathlib import Path\nimport tempfile\nfrom types import SimpleNamespace\nfrom unittest.mock import patch\nimport sys\nfrom airlock import __main__ as launcher\nfrom airlock.models import Settings\n\nwith tempfile.TemporaryDirectory(prefix=\"startup-review-\", dir=\"var\") as temporary:\n    root = Path(temporary).resolve()\n    requested = root / \"operator-config-misspelled.json\"\n    database = root / \"never-opened.sqlite3\"\n    synthetic_environment = {\n        \"AIRLOCK_AGENT_TOKEN\": \"synthetic-agent-\" + \"a\" * 32,\n        \"AIRLOCK_REVIEWER_TOKEN\": \"synthetic-reviewer-\" + \"r\" * 32,\n        \"AIRLOCK_AUDIT_KEY\": \"synthetic-audit-\" + \"k\" * 32,\n        \"AIRLOCK_DB\": str(database),\n    }\n    calls = []\n    def spy(target, **kwargs):\n        settings = Settings.from_env()\n        calls.append({\"target\": target, \"host\": kwargs[\"host\"], \"port\": kwargs[\"port\"],\n                      \"environment_only_settings_valid\": settings.database == database})\n    with patch.object(launcher.os, \"environ\", synthetic_environment), patch.object(sys, \"argv\", [\"airlock\", \"serve\", \"--config\", str(requested)]), patch.dict(sys.modules, {\"uvicorn\": SimpleNamespace(run=spy)}):\n        launcher.main()\n    assert not requested.exists() and not database.exists()\n    assert len(calls) == 1 and calls[0][\"environment_only_settings_valid\"]\n    print(json.dumps({\"finding\": \"explicit_missing_config_is_silently_ignored\", \"status\": \"REPRODUCED\", \"requested_config_exists\": False, \"database_opened\": False, \"real_environment_read\": False, \"uvicorn_spy_calls\": calls}, indent=2))"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T00:13:44.838298+00:00",
+  "duration_seconds": 1.738,
+  "tested_commit_sha": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94"
+}

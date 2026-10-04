@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "scripts/pilot_browser.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T00:28:32.834302+00:00",
+  "duration_seconds": 2.259,
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
+}

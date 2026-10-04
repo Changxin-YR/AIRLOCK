@@ -1,0 +1,1622 @@
+﻿2026-10-02T10:45:31.3401540Z Current runner version: '2.337.0'
+2026-10-02T10:45:31.3423321Z ##[group]Runner Image Provisioner
+2026-10-02T10:45:31.3424025Z Hosted Compute Agent
+2026-10-02T10:45:31.3424557Z Version: 20260901.588
+2026-10-02T10:45:31.3425083Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-02T10:45:31.3425859Z Build Date: 2026-09-01T19:56:44Z
+2026-10-02T10:45:31.3426478Z Worker ID: {019b3073-5e8a-44eb-91db-5f659b22c20c}
+2026-10-02T10:45:31.3427061Z Azure Region: westus3
+2026-10-02T10:45:31.3427512Z ##[endgroup]
+2026-10-02T10:45:31.3428704Z ##[group]Operating System
+2026-10-02T10:45:31.3429211Z Ubuntu
+2026-10-02T10:45:31.3429738Z 24.04.5
+2026-10-02T10:45:31.3430166Z LTS
+2026-10-02T10:45:31.3430573Z ##[endgroup]
+2026-10-02T10:45:31.3431076Z ##[group]Runner Image
+2026-10-02T10:45:31.3431569Z Image: ubuntu-24.04
+2026-10-02T10:45:31.3432064Z Version: 20260927.320.1
+2026-10-02T10:45:31.3433172Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-02T10:45:31.3434457Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-02T10:45:31.3435388Z ##[endgroup]
+2026-10-02T10:45:31.3436373Z ##[group]GITHUB_TOKEN Permissions
+2026-10-02T10:45:31.3437917Z Contents: read
+2026-10-02T10:45:31.3438475Z Metadata: read
+2026-10-02T10:45:31.3438956Z ##[endgroup]
+2026-10-02T10:45:31.3440731Z Secret source: Actions
+2026-10-02T10:45:31.3441583Z Cache mode: write
+2026-10-02T10:45:31.3442154Z Prepare workflow directory
+2026-10-02T10:45:31.3826812Z Prepare all required actions
+2026-10-02T10:45:31.3866534Z Getting action download info
+2026-10-02T10:45:31.6849365Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-02T10:45:31.7703211Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-02T10:45:31.9197261Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+2026-10-02T10:45:32.0435174Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-02T10:45:32.3083614Z Complete job name: verify
+2026-10-02T10:45:32.4045503Z ##[group]Run actions/checkout@v4
+2026-10-02T10:45:32.4046555Z with:
+2026-10-02T10:45:32.4047214Z   ref: 400024bd59133d9e50f8fb00288b9f02693b2153
+2026-10-02T10:45:32.4048084Z   repository: Changxin-YR/AIRLOCK
+2026-10-02T10:45:32.4054082Z   token: ***
+2026-10-02T10:45:32.4054704Z   ssh-strict: true
+2026-10-02T10:45:32.4055452Z   ssh-user: git
+2026-10-02T10:45:32.4056090Z   persist-credentials: true
+2026-10-02T10:45:32.4056783Z   clean: true
+2026-10-02T10:45:32.4057413Z   sparse-checkout-cone-mode: true
+2026-10-02T10:45:32.4058152Z   fetch-depth: 1
+2026-10-02T10:45:32.4058751Z   fetch-tags: false
+2026-10-02T10:45:32.4059376Z   show-progress: true
+2026-10-02T10:45:32.4060010Z   lfs: false
+2026-10-02T10:45:32.4060605Z   submodules: false
+2026-10-02T10:45:32.4061235Z   set-safe-directory: true
+2026-10-02T10:45:32.4061949Z   allow-unsafe-pr-checkout: false
+2026-10-02T10:45:32.4062888Z env:
+2026-10-02T10:45:32.4063472Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:32.4064221Z ##[endgroup]
+2026-10-02T10:45:32.4967347Z Syncing repository: Changxin-YR/AIRLOCK
+2026-10-02T10:45:32.4969828Z ##[group]Getting Git version info
+2026-10-02T10:45:32.4970885Z Working directory is '/home/runner/work/AIRLOCK/AIRLOCK'
+2026-10-02T10:45:32.4972474Z [command]/usr/bin/git version
+2026-10-02T10:45:32.5046831Z git version 2.55.0
+2026-10-02T10:45:32.5068899Z ##[endgroup]
+2026-10-02T10:45:32.5081516Z Temporarily overriding HOME='/home/runner/work/_temp/cbe9c2a9-96fd-4253-9621-b24cc26e7f5d' before making global git config changes
+2026-10-02T10:45:32.5085142Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-02T10:45:32.5087936Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AIRLOCK/AIRLOCK
+2026-10-02T10:45:32.5133020Z Deleting the contents of '/home/runner/work/AIRLOCK/AIRLOCK'
+2026-10-02T10:45:32.5140431Z ##[group]Initializing the repository
+2026-10-02T10:45:32.5142010Z [command]/usr/bin/git init /home/runner/work/AIRLOCK/AIRLOCK
+2026-10-02T10:45:32.5383666Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-02T10:45:32.5386828Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-02T10:45:32.5389367Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-02T10:45:32.5391573Z hint: call:
+2026-10-02T10:45:32.5392774Z hint:
+2026-10-02T10:45:32.5394172Z hint: 	git config --global init.defaultBranch <name>
+2026-10-02T10:45:32.5395963Z hint:
+2026-10-02T10:45:32.5397487Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-02T10:45:32.5399662Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-02T10:45:32.5401626Z hint:
+2026-10-02T10:45:32.5402837Z hint: 	git branch -m <name>
+2026-10-02T10:45:32.5404224Z hint:
+2026-10-02T10:45:32.5406040Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-02T10:45:32.5408673Z Initialized empty Git repository in /home/runner/work/AIRLOCK/AIRLOCK/.git/
+2026-10-02T10:45:32.5412714Z [command]/usr/bin/git remote add origin https://github.com/Changxin-YR/AIRLOCK
+2026-10-02T10:45:32.5466395Z ##[endgroup]
+2026-10-02T10:45:32.5468077Z ##[group]Disabling automatic garbage collection
+2026-10-02T10:45:32.5469486Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-02T10:45:32.5507931Z ##[endgroup]
+2026-10-02T10:45:32.5509545Z ##[group]Setting up auth
+2026-10-02T10:45:32.5519548Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-02T10:45:32.5558341Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-02T10:45:32.5861824Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-02T10:45:32.5896265Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-02T10:45:32.6102997Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-02T10:45:32.6137251Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-02T10:45:32.6347797Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-02T10:45:32.6389135Z ##[endgroup]
+2026-10-02T10:45:32.6390316Z ##[group]Fetching the repository
+2026-10-02T10:45:32.6397536Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 400024bd59133d9e50f8fb00288b9f02693b2153
+2026-10-02T10:45:33.6283821Z From https://github.com/Changxin-YR/AIRLOCK
+2026-10-02T10:45:33.6284981Z  * branch            400024bd59133d9e50f8fb00288b9f02693b2153 -> FETCH_HEAD
+2026-10-02T10:45:33.6287874Z ##[endgroup]
+2026-10-02T10:45:33.6296291Z ##[group]Determining the checkout info
+2026-10-02T10:45:33.6297259Z ##[endgroup]
+2026-10-02T10:45:33.6302754Z [command]/usr/bin/git sparse-checkout disable
+2026-10-02T10:45:33.6386902Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-02T10:45:33.6423178Z ##[group]Checking out the ref
+2026-10-02T10:45:33.6427097Z [command]/usr/bin/git checkout --progress --force 400024bd59133d9e50f8fb00288b9f02693b2153
+2026-10-02T10:45:33.6671823Z Note: switching to '400024bd59133d9e50f8fb00288b9f02693b2153'.
+2026-10-02T10:45:33.6672276Z 
+2026-10-02T10:45:33.6672571Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-02T10:45:33.6673217Z changes and commit them, and you can discard any commits you make in this
+2026-10-02T10:45:33.6673855Z state without impacting any branches by switching back to a branch.
+2026-10-02T10:45:33.6674602Z 
+2026-10-02T10:45:33.6674890Z If you want to create a new branch to retain commits you create, you may
+2026-10-02T10:45:33.6675734Z do so (now or later) by using -c with the switch command. Example:
+2026-10-02T10:45:33.6676060Z 
+2026-10-02T10:45:33.6676264Z   git switch -c <new-branch-name>
+2026-10-02T10:45:33.6676553Z 
+2026-10-02T10:45:33.6676747Z Or undo this operation with:
+2026-10-02T10:45:33.6676995Z 
+2026-10-02T10:45:33.6677166Z   git switch -
+2026-10-02T10:45:33.6677449Z 
+2026-10-02T10:45:33.6677836Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-02T10:45:33.6678390Z 
+2026-10-02T10:45:33.6678888Z HEAD is now at 400024b fix: bound advisory rationale instructions after real provider schema failures
+2026-10-02T10:45:33.6682751Z ##[endgroup]
+2026-10-02T10:45:33.6723600Z [command]/usr/bin/git log -1 --format=%H
+2026-10-02T10:45:33.6749240Z 400024bd59133d9e50f8fb00288b9f02693b2153
+2026-10-02T10:45:33.6955054Z ##[group]Run mkdir -p evidence
+2026-10-02T10:45:33.6955738Z [36;1mmkdir -p evidence[0m
+2026-10-02T10:45:33.6956198Z [36;1mgit archive --format=zip HEAD -o evidence/source.zip[0m
+2026-10-02T10:45:33.6956719Z [36;1mgit rev-parse HEAD > evidence/commit.txt[0m
+2026-10-02T10:45:33.7650515Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:45:33.7651057Z env:
+2026-10-02T10:45:33.7651407Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:33.7651766Z ##[endgroup]
+2026-10-02T10:45:33.8774772Z ##[group]Run actions/setup-python@v5
+2026-10-02T10:45:33.8775179Z with:
+2026-10-02T10:45:33.8775609Z   python-version: 3.13
+2026-10-02T10:45:33.8775935Z   check-latest: false
+2026-10-02T10:45:33.8778081Z   token: ***
+2026-10-02T10:45:33.8778402Z   update-environment: true
+2026-10-02T10:45:33.8778750Z   allow-prereleases: false
+2026-10-02T10:45:33.8779085Z   freethreaded: false
+2026-10-02T10:45:33.8779435Z env:
+2026-10-02T10:45:33.8779769Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:33.8780130Z ##[endgroup]
+2026-10-02T10:45:33.9936678Z ##[group]Installed versions
+2026-10-02T10:45:34.0257235Z (node:2674) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T10:45:34.0258514Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:45:34.0276263Z Successfully set up CPython (3.13.15)
+2026-10-02T10:45:34.0277712Z ##[endgroup]
+2026-10-02T10:45:34.0443041Z ##[group]Run actions/setup-node@v4
+2026-10-02T10:45:34.0443464Z with:
+2026-10-02T10:45:34.0443796Z   node-version: 22
+2026-10-02T10:45:34.0444143Z   always-auth: false
+2026-10-02T10:45:34.0444494Z   check-latest: false
+2026-10-02T10:45:34.0446844Z   token: ***
+2026-10-02T10:45:34.0447172Z env:
+2026-10-02T10:45:34.0447505Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:34.0447945Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.0448509Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:45:34.0449043Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.0449554Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.0450061Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.0450554Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:45:34.0450999Z ##[endgroup]
+2026-10-02T10:45:34.2332764Z Found in cache @ /opt/hostedtoolcache/node/22.23.3/x64
+2026-10-02T10:45:34.2335645Z (node:2682) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T10:45:34.2336828Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:45:34.2338762Z ##[group]Environment details
+2026-10-02T10:45:34.5534499Z node: v22.23.3
+2026-10-02T10:45:34.5535508Z npm: 10.9.9
+2026-10-02T10:45:34.5536063Z yarn: 1.22.22
+2026-10-02T10:45:34.5536867Z ##[endgroup]
+2026-10-02T10:45:34.5667030Z ##[group]Run python -m pip install -r requirements-dev.txt
+2026-10-02T10:45:34.5667837Z [36;1mpython -m pip install -r requirements-dev.txt[0m
+2026-10-02T10:45:34.5807106Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:45:34.5807467Z env:
+2026-10-02T10:45:34.5807703Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:34.5808008Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.5808400Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:45:34.5808780Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.5809147Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.5809486Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:34.5809842Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:45:34.5810171Z ##[endgroup]
+2026-10-02T10:45:37.4169454Z Collecting fastapi==0.142.2 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 1))
+2026-10-02T10:45:37.4787818Z   Downloading fastapi-0.142.2-py3-none-any.whl.metadata (27 kB)
+2026-10-02T10:45:37.5072285Z Collecting starlette==1.7.0 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 2))
+2026-10-02T10:45:37.5182556Z   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+2026-10-02T10:45:37.5949539Z Collecting pydantic==2.13.5 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 3))
+2026-10-02T10:45:37.6053503Z   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+2026-10-02T10:45:37.6532165Z Collecting uvicorn==0.48.0 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 4))
+2026-10-02T10:45:37.6641298Z   Downloading uvicorn-0.48.0-py3-none-any.whl.metadata (6.7 kB)
+2026-10-02T10:45:37.6791023Z Collecting httpx==0.28.1 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 5))
+2026-10-02T10:45:37.6892724Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-10-02T10:45:37.7006383Z Collecting cel-python==0.4.0 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:37.7116630Z   Downloading cel_python-0.4.0-py3-none-any.whl.metadata (8.5 kB)
+2026-10-02T10:45:37.7389566Z Collecting PyYAML==6.0.3 (from -r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 7))
+2026-10-02T10:45:37.7491904Z   Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-02T10:45:37.7680214Z Collecting pytest==9.0.2 (from -r requirements-dev.txt (line 2))
+2026-10-02T10:45:37.7784245Z   Downloading pytest-9.0.2-py3-none-any.whl.metadata (7.6 kB)
+2026-10-02T10:45:37.8064360Z Collecting playwright==1.57.0 (from -r requirements-dev.txt (line 3))
+2026-10-02T10:45:37.8166144Z   Downloading playwright-1.57.0-py3-none-manylinux1_x86_64.whl.metadata (3.5 kB)
+2026-10-02T10:45:37.8483145Z Collecting mcp==1.26.0 (from -r requirements-dev.txt (line 4))
+2026-10-02T10:45:37.8588823Z   Downloading mcp-1.26.0-py3-none-any.whl.metadata (89 kB)
+2026-10-02T10:45:37.8767218Z Collecting pip-audit==2.10.1 (from -r requirements-dev.txt (line 5))
+2026-10-02T10:45:37.8871039Z   Downloading pip_audit-2.10.1-py3-none-any.whl.metadata (28 kB)
+2026-10-02T10:45:37.9040523Z Collecting typing-extensions>=4.8.0 (from fastapi==0.142.2->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 1))
+2026-10-02T10:45:37.9147585Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-02T10:45:37.9260191Z Collecting typing-inspection>=0.4.2 (from fastapi==0.142.2->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 1))
+2026-10-02T10:45:37.9361173Z   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+2026-10-02T10:45:37.9459531Z Collecting annotated-doc>=0.0.2 (from fastapi==0.142.2->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 1))
+2026-10-02T10:45:37.9560398Z   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+2026-10-02T10:45:37.9703080Z Collecting opentelemetry-api>=1.44.0 (from fastapi==0.142.2->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 1))
+2026-10-02T10:45:37.9805676Z   Downloading opentelemetry_api-1.45.0-py3-none-any.whl.metadata (1.4 kB)
+2026-10-02T10:45:37.9989287Z Collecting anyio<5,>=4.0.0 (from starlette==1.7.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 2))
+2026-10-02T10:45:38.0095463Z   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+2026-10-02T10:45:38.0212213Z Collecting annotated-types>=0.6.0 (from pydantic==2.13.5->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 3))
+2026-10-02T10:45:38.0315426Z   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+2026-10-02T10:45:38.4975720Z Collecting pydantic-core==2.46.5 (from pydantic==2.13.5->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 3))
+2026-10-02T10:45:38.5080767Z   Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+2026-10-02T10:45:38.5217785Z Collecting click>=7.0 (from uvicorn==0.48.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 4))
+2026-10-02T10:45:38.5318959Z   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+2026-10-02T10:45:38.6122010Z Collecting h11>=0.8 (from uvicorn==0.48.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 4))
+2026-10-02T10:45:38.6224681Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-10-02T10:45:38.6374158Z Collecting certifi (from httpx==0.28.1->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 5))
+2026-10-02T10:45:38.6477372Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-10-02T10:45:38.7300794Z Collecting httpcore==1.* (from httpx==0.28.1->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 5))
+2026-10-02T10:45:38.7401777Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-10-02T10:45:38.7524216Z Collecting idna (from httpx==0.28.1->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 5))
+2026-10-02T10:45:38.7625834Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+2026-10-02T10:45:38.8036627Z Collecting google-re2>=1.1.20240702 (from cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:38.8143488Z   Downloading google_re2-1.1.20251105-1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-02T10:45:38.8285899Z Collecting jmespath>=1.0.1 (from cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:38.8386654Z   Downloading jmespath-1.1.0-py3-none-any.whl.metadata (7.6 kB)
+2026-10-02T10:45:38.8486281Z Collecting lark>=1.2.2 (from cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:38.8586059Z   Downloading lark-1.3.1-py3-none-any.whl.metadata (1.8 kB)
+2026-10-02T10:45:38.8926296Z Collecting pendulum>=3.1.0 (from cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:38.9031783Z   Downloading pendulum-3.2.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2026-10-02T10:45:38.9646766Z Collecting iniconfig>=1.0.1 (from pytest==9.0.2->-r requirements-dev.txt (line 2))
+2026-10-02T10:45:38.9749214Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+2026-10-02T10:45:38.9865004Z Collecting packaging>=22 (from pytest==9.0.2->-r requirements-dev.txt (line 2))
+2026-10-02T10:45:38.9966578Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-10-02T10:45:39.0604085Z Collecting pluggy<2,>=1.5 (from pytest==9.0.2->-r requirements-dev.txt (line 2))
+2026-10-02T10:45:39.0708058Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2026-10-02T10:45:39.0849233Z Collecting pygments>=2.7.2 (from pytest==9.0.2->-r requirements-dev.txt (line 2))
+2026-10-02T10:45:39.0949979Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-10-02T10:45:39.1710353Z Collecting pyee<14,>=13 (from playwright==1.57.0->-r requirements-dev.txt (line 3))
+2026-10-02T10:45:39.1812257Z   Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+2026-10-02T10:45:39.2853564Z Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.57.0->-r requirements-dev.txt (line 3))
+2026-10-02T10:45:39.2957396Z   Downloading greenlet-3.5.6-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+2026-10-02T10:45:39.3068318Z Collecting httpx-sse>=0.4 (from mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:39.3167998Z   Downloading httpx_sse-0.4.3-py3-none-any.whl.metadata (9.7 kB)
+2026-10-02T10:45:39.3325990Z Collecting jsonschema>=4.20.0 (from mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:39.3427273Z   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+2026-10-02T10:45:39.3556997Z Collecting pydantic-settings>=2.5.2 (from mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:39.3657674Z   Downloading pydantic_settings-2.15.0-py3-none-any.whl.metadata (3.9 kB)
+2026-10-02T10:45:39.3876779Z Collecting pyjwt>=2.10.1 (from pyjwt[crypto]>=2.10.1->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:39.3976873Z   Downloading pyjwt-2.15.1-py3-none-any.whl.metadata (3.5 kB)
+2026-10-02T10:45:39.4276599Z Collecting python-multipart>=0.0.9 (from mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:39.4379105Z   Downloading python_multipart-0.0.32-py3-none-any.whl.metadata (2.1 kB)
+2026-10-02T10:45:39.6118480Z Collecting sse-starlette>=1.6.1 (from mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:39.6223501Z   Downloading sse_starlette-3.5.0-py3-none-any.whl.metadata (15 kB)
+2026-10-02T10:45:39.6383830Z Collecting CacheControl>=0.13.0 (from CacheControl[filecache]>=0.13.0->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.6486273Z   Downloading cachecontrol-0.14.4-py3-none-any.whl.metadata (3.1 kB)
+2026-10-02T10:45:39.6720745Z Collecting cyclonedx-python-lib<12,>=5 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.6823594Z   Downloading cyclonedx_python_lib-11.12.0-py3-none-any.whl.metadata (6.9 kB)
+2026-10-02T10:45:39.7317672Z Collecting pip-api>=0.0.28 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.7420362Z   Downloading pip_api-0.0.35-py3-none-any.whl.metadata (17 kB)
+2026-10-02T10:45:39.7535628Z Collecting pip-requirements-parser>=32.0.0 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.7635565Z   Downloading pip_requirements_parser-32.0.1-py3-none-any.whl.metadata (9.3 kB)
+2026-10-02T10:45:39.8147126Z Collecting requests>=2.31.0 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.8253718Z   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+2026-10-02T10:45:39.8481821Z Collecting rich>=12.4 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.8584151Z   Downloading rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+2026-10-02T10:45:39.8761133Z Collecting tomli>=2.2.1 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.8864038Z   Downloading tomli-2.4.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (10 kB)
+2026-10-02T10:45:39.8955688Z Collecting tomli-w>=1.2.0 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.9055924Z   Downloading tomli_w-1.2.0-py3-none-any.whl.metadata (5.7 kB)
+2026-10-02T10:45:39.9209560Z Collecting platformdirs>=4.2.0 (from pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.9316705Z   Downloading platformdirs-4.12.2-py3-none-any.whl.metadata (5.5 kB)
+2026-10-02T10:45:39.9561461Z Collecting license-expression<31,>=30 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.9663520Z   Downloading license_expression-30.4.4-py3-none-any.whl.metadata (11 kB)
+2026-10-02T10:45:39.9804970Z Collecting packageurl-python<2,>=0.11 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:39.9907042Z   Downloading packageurl_python-0.17.6-py3-none-any.whl.metadata (5.1 kB)
+2026-10-02T10:45:40.0324333Z Collecting py-serializable<3.0.0,>=2.1.0 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.0437588Z   Downloading py_serializable-2.1.0-py3-none-any.whl.metadata (4.3 kB)
+2026-10-02T10:45:40.0541291Z Collecting sortedcontainers<3.0.0,>=2.4.0 (from cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.0641867Z   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+2026-10-02T10:45:40.0851123Z Collecting boolean.py>=4.0 (from license-expression<31,>=30->cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.0955572Z   Downloading boolean_py-5.0-py3-none-any.whl.metadata (2.3 kB)
+2026-10-02T10:45:40.1078897Z Collecting defusedxml<0.8.0,>=0.7.1 (from py-serializable<3.0.0,>=2.1.0->cyclonedx-python-lib<12,>=5->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.1181160Z   Downloading defusedxml-0.7.1-py2.py3-none-any.whl.metadata (32 kB)
+2026-10-02T10:45:40.1833337Z Collecting msgpack<2.0.0,>=0.5.2 (from CacheControl>=0.13.0->CacheControl[filecache]>=0.13.0->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.1947394Z   Downloading msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+2026-10-02T10:45:40.2580984Z Collecting filelock>=3.8.0 (from CacheControl[filecache]>=0.13.0->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.2684707Z   Downloading filelock-4.0.9-py3-none-any.whl.metadata (2.0 kB)
+2026-10-02T10:45:40.3104303Z Collecting attrs>=22.2.0 (from jsonschema>=4.20.0->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:40.3205663Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-02T10:45:40.4063109Z Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=4.20.0->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:40.4163532Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+2026-10-02T10:45:40.4529819Z Collecting referencing>=0.28.4 (from jsonschema>=4.20.0->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:40.4633576Z   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+2026-10-02T10:45:40.6601919Z Collecting rpds-py>=0.25.0 (from jsonschema>=4.20.0->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:40.6705661Z   Downloading rpds_py-2026.6.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+2026-10-02T10:45:40.6995596Z Collecting python-dateutil>=2.6 (from pendulum>=3.1.0->cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:40.7096078Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+2026-10-02T10:45:40.7217237Z Collecting tzdata>=2020.1 (from pendulum>=3.1.0->cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:40.7319206Z   Downloading tzdata-2026.4-py2.py3-none-any.whl.metadata (1.4 kB)
+2026-10-02T10:45:40.7357769Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages (from pip-api>=0.0.28->pip-audit==2.10.1->-r requirements-dev.txt (line 5)) (26.2.1)
+2026-10-02T10:45:40.7519891Z Collecting pyparsing (from pip-requirements-parser>=32.0.0->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:40.7621701Z   Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+2026-10-02T10:45:40.8651658Z Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.5.2->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:40.8755517Z   Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+2026-10-02T10:45:41.5006584Z Collecting cryptography>=3.4.0 (from pyjwt[crypto]>=2.10.1->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:41.5109822Z   Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+2026-10-02T10:45:41.5835613Z Collecting cffi>=2.0.0 (from cryptography>=3.4.0->pyjwt[crypto]>=2.10.1->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:41.5936508Z   Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+2026-10-02T10:45:41.6033642Z Collecting pycparser (from cffi>=2.0.0->cryptography>=3.4.0->pyjwt[crypto]>=2.10.1->mcp==1.26.0->-r requirements-dev.txt (line 4))
+2026-10-02T10:45:41.6135898Z   Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+2026-10-02T10:45:41.6259899Z Collecting six>=1.5 (from python-dateutil>=2.6->pendulum>=3.1.0->cel-python==0.4.0->-r /home/runner/work/AIRLOCK/AIRLOCK/requirements.txt (line 6))
+2026-10-02T10:45:41.6359966Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2026-10-02T10:45:41.7307588Z Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:41.7411020Z   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+2026-10-02T10:45:41.7595786Z Collecting urllib3<3,>=1.26 (from requests>=2.31.0->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:41.7697614Z   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+2026-10-02T10:45:41.8019298Z Collecting markdown-it-py>=2.2.0 (from rich>=12.4->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:41.8123456Z   Downloading markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+2026-10-02T10:45:41.8239969Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=12.4->pip-audit==2.10.1->-r requirements-dev.txt (line 5))
+2026-10-02T10:45:41.8338833Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2026-10-02T10:45:41.8618123Z Downloading fastapi-0.142.2-py3-none-any.whl (144 kB)
+2026-10-02T10:45:41.8778217Z Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+2026-10-02T10:45:41.8902360Z Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+2026-10-02T10:45:41.9139683Z Downloading uvicorn-0.48.0-py3-none-any.whl (71 kB)
+2026-10-02T10:45:41.9261121Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-10-02T10:45:41.9386607Z Downloading cel_python-0.4.0-py3-none-any.whl (85 kB)
+2026-10-02T10:45:41.9508612Z Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+2026-10-02T10:45:41.9668940Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 40.6 MB/s  0:00:00
+2026-10-02T10:45:41.9771126Z Downloading pytest-9.0.2-py3-none-any.whl (374 kB)
+2026-10-02T10:45:42.0085579Z Downloading playwright-1.57.0-py3-none-manylinux1_x86_64.whl (46.0 MB)
+2026-10-02T10:45:42.4687606Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 46.0/46.0 MB 99.9 MB/s  0:00:00
+2026-10-02T10:45:42.5300163Z Downloading mcp-1.26.0-py3-none-any.whl (233 kB)
+2026-10-02T10:45:42.5477891Z Downloading pip_audit-2.10.1-py3-none-any.whl (62 kB)
+2026-10-02T10:45:42.5605432Z Downloading pydantic_core-2.46.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+2026-10-02T10:45:42.5748198Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 152.3 MB/s  0:00:00
+2026-10-02T10:45:42.5852880Z Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+2026-10-02T10:45:42.5974555Z Downloading cyclonedx_python_lib-11.12.0-py3-none-any.whl (529 kB)
+2026-10-02T10:45:42.6023646Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 529.5/529.5 kB 89.2 MB/s  0:00:00
+2026-10-02T10:45:42.6126607Z Downloading greenlet-3.5.6-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (623 kB)
+2026-10-02T10:45:42.6184308Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 623.8/623.8 kB 91.2 MB/s  0:00:00
+2026-10-02T10:45:42.6284944Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-10-02T10:45:42.6407717Z Downloading license_expression-30.4.4-py3-none-any.whl (120 kB)
+2026-10-02T10:45:42.6529209Z Downloading packageurl_python-0.17.6-py3-none-any.whl (36 kB)
+2026-10-02T10:45:42.6645699Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+2026-10-02T10:45:42.6763197Z Downloading py_serializable-2.1.0-py3-none-any.whl (23 kB)
+2026-10-02T10:45:42.6880245Z Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+2026-10-02T10:45:42.7096088Z Downloading pyee-13.0.1-py3-none-any.whl (15 kB)
+2026-10-02T10:45:42.7218205Z Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+2026-10-02T10:45:42.7435083Z Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+2026-10-02T10:45:42.7556167Z Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+2026-10-02T10:45:42.7675546Z Downloading boolean_py-5.0-py3-none-any.whl (26 kB)
+2026-10-02T10:45:42.7795109Z Downloading cachecontrol-0.14.4-py3-none-any.whl (22 kB)
+2026-10-02T10:45:42.7917802Z Downloading msgpack-1.2.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (466 kB)
+2026-10-02T10:45:42.8064434Z Downloading click-8.5.0-py3-none-any.whl (125 kB)
+2026-10-02T10:45:42.8191835Z Downloading filelock-4.0.9-py3-none-any.whl (110 kB)
+2026-10-02T10:45:42.8347659Z Downloading google_re2-1.1.20251105-1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (591 kB)
+2026-10-02T10:45:42.8426293Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 591.4/591.4 kB 62.4 MB/s  0:00:00
+2026-10-02T10:45:42.8529375Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2026-10-02T10:45:42.8650811Z Downloading httpx_sse-0.4.3-py3-none-any.whl (9.0 kB)
+2026-10-02T10:45:42.8772471Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+2026-10-02T10:45:42.8890009Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+2026-10-02T10:45:42.9003880Z Downloading jmespath-1.1.0-py3-none-any.whl (20 kB)
+2026-10-02T10:45:42.9122635Z Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+2026-10-02T10:45:42.9530382Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-02T10:45:42.9653604Z Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+2026-10-02T10:45:42.9772446Z Downloading lark-1.3.1-py3-none-any.whl (113 kB)
+2026-10-02T10:45:42.9892468Z Downloading opentelemetry_api-1.45.0-py3-none-any.whl (60 kB)
+2026-10-02T10:45:43.0017758Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-10-02T10:45:43.0138882Z Downloading pendulum-3.2.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (348 kB)
+2026-10-02T10:45:43.0278966Z Downloading pip_api-0.0.35-py3-none-any.whl (123 kB)
+2026-10-02T10:45:43.0400097Z Downloading pip_requirements_parser-32.0.1-py3-none-any.whl (35 kB)
+2026-10-02T10:45:43.0519537Z Downloading platformdirs-4.12.2-py3-none-any.whl (32 kB)
+2026-10-02T10:45:43.0638521Z Downloading pydantic_settings-2.15.0-py3-none-any.whl (69 kB)
+2026-10-02T10:45:43.0758956Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-10-02T10:45:43.0847785Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 146.9 MB/s  0:00:00
+2026-10-02T10:45:43.0949544Z Downloading pyjwt-2.15.1-py3-none-any.whl (33 kB)
+2026-10-02T10:45:43.1071620Z Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+2026-10-02T10:45:43.1594797Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 89.4 MB/s  0:00:00
+2026-10-02T10:45:43.1695506Z Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+2026-10-02T10:45:43.1819751Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+2026-10-02T10:45:43.1942110Z Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+2026-10-02T10:45:43.2058665Z Downloading python_multipart-0.0.32-py3-none-any.whl (30 kB)
+2026-10-02T10:45:43.2178091Z Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+2026-10-02T10:45:43.2296515Z Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+2026-10-02T10:45:43.2417848Z Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+2026-10-02T10:45:43.2547527Z Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+2026-10-02T10:45:43.2671050Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-02T10:45:43.2795083Z Downloading rich-15.0.0-py3-none-any.whl (310 kB)
+2026-10-02T10:45:43.2956347Z Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+2026-10-02T10:45:43.3078436Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2026-10-02T10:45:43.3201223Z Downloading rpds_py-2026.6.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (365 kB)
+2026-10-02T10:45:43.3336513Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+2026-10-02T10:45:43.3459133Z Downloading sse_starlette-3.5.0-py3-none-any.whl (17 kB)
+2026-10-02T10:45:43.3752142Z Downloading tomli-2.4.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (251 kB)
+2026-10-02T10:45:43.3879124Z Downloading tomli_w-1.2.0-py3-none-any.whl (6.7 kB)
+2026-10-02T10:45:43.4000195Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-02T10:45:43.4121746Z Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+2026-10-02T10:45:43.4243431Z Downloading tzdata-2026.4-py2.py3-none-any.whl (347 kB)
+2026-10-02T10:45:43.4376692Z Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+2026-10-02T10:45:43.4496112Z Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+2026-10-02T10:45:43.9041080Z Installing collected packages: sortedcontainers, boolean.py, urllib3, tzdata, typing-extensions, tomli-w, tomli, six, rpds-py, PyYAML, python-multipart, python-dotenv, pyparsing, pyjwt, pygments, pycparser, pluggy, platformdirs, pip-api, packaging, packageurl-python, msgpack, mdurl, license-expression, lark, jmespath, iniconfig, idna, httpx-sse, h11, greenlet, google-re2, filelock, defusedxml, click, charset_normalizer, certifi, attrs, annotated-types, annotated-doc, uvicorn, typing-inspection, requests, referencing, python-dateutil, pytest, pyee, pydantic-core, py-serializable, pip-requirements-parser, opentelemetry-api, markdown-it-py, httpcore, cffi, anyio, starlette, rich, pydantic, playwright, pendulum, jsonschema-specifications, httpx, cyclonedx-python-lib, cryptography, CacheControl, sse-starlette, pydantic-settings, jsonschema, fastapi, cel-python, pip-audit, mcp
+2026-10-02T10:45:48.9834114Z 
+2026-10-02T10:45:48.9887577Z Successfully installed CacheControl-0.14.4 PyYAML-6.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 attrs-26.1.0 boolean.py-5.0 cel-python-0.4.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.2 click-8.5.0 cryptography-50.0.2 cyclonedx-python-lib-11.12.0 defusedxml-0.7.1 fastapi-0.142.2 filelock-4.0.9 google-re2-1.1.20251105 greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 httpx-sse-0.4.3 idna-3.20 iniconfig-2.3.0 jmespath-1.1.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 lark-1.3.1 license-expression-30.4.4 markdown-it-py-4.2.0 mcp-1.26.0 mdurl-0.1.2 msgpack-1.2.3 opentelemetry-api-1.45.0 packageurl-python-0.17.6 packaging-26.3 pendulum-3.2.0 pip-api-0.0.35 pip-audit-2.10.1 pip-requirements-parser-32.0.1 platformdirs-4.12.2 playwright-1.57.0 pluggy-1.6.0 py-serializable-2.1.0 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pydantic-settings-2.15.0 pyee-13.0.1 pygments-2.21.0 pyjwt-2.15.1 pyparsing-3.3.3 pytest-9.0.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.4 python-multipart-0.0.32 referencing-0.37.0 requests-2.34.2 rich-15.0.0 rpds-py-2026.6.3 six-1.17.0 sortedcontainers-2.4.0 sse-starlette-3.5.0 starlette-1.7.0 tomli-2.4.1 tomli-w-1.2.0 typing-extensions-4.16.0 typing-inspection-0.4.4 tzdata-2026.4 urllib3-2.8.0 uvicorn-0.48.0
+2026-10-02T10:45:49.3104181Z ##[group]Run npm ci
+2026-10-02T10:45:49.3104406Z [36;1mnpm ci[0m
+2026-10-02T10:45:49.3162113Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:45:49.3162409Z env:
+2026-10-02T10:45:49.3162586Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:49.3162847Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:49.3163206Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:45:49.3163536Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:49.3163830Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:49.3164128Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:49.3164427Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:45:49.3164875Z ##[endgroup]
+2026-10-02T10:45:54.8399084Z 
+2026-10-02T10:45:54.8399975Z added 24 packages, and audited 25 packages in 5s
+2026-10-02T10:45:54.8400550Z 
+2026-10-02T10:45:54.8400773Z 6 packages are looking for funding
+2026-10-02T10:45:54.8401076Z   run `npm fund` for details
+2026-10-02T10:45:54.8406883Z 
+2026-10-02T10:45:54.8407103Z found 0 vulnerabilities
+2026-10-02T10:45:54.8839532Z ##[group]Run python scripts/run_logged.py evidence/next-build.log -- npm run build
+2026-10-02T10:45:54.8840026Z [36;1mpython scripts/run_logged.py evidence/next-build.log -- npm run build[0m
+2026-10-02T10:45:54.8897219Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:45:54.8897506Z env:
+2026-10-02T10:45:54.8897683Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:45:54.8897936Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:54.8898277Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:45:54.8898620Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:54.8898923Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:54.8899239Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:45:54.8899530Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:45:54.8899786Z ##[endgroup]
+2026-10-02T10:46:08.6911921Z 
+2026-10-02T10:46:08.6912645Z > airlock-review-console@0.1.0 build
+2026-10-02T10:46:08.6921376Z > next build frontend --webpack && node scripts/package_console.mjs
+2026-10-02T10:46:08.6921984Z 
+2026-10-02T10:46:08.6922688Z ▲ Next.js 16.3.8 (webpack)
+2026-10-02T10:46:08.6923132Z ✓ Running next.config.mjs took 21ms
+2026-10-02T10:46:08.6924131Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-10-02T10:46:08.6924718Z 
+2026-10-02T10:46:08.6924915Z   Creating an optimized production build ...
+2026-10-02T10:46:08.6926523Z ✓ Compiled successfully in 4.2s
+2026-10-02T10:46:08.6926853Z   Running TypeScript ...
+2026-10-02T10:46:08.6927200Z   Finished TypeScript in 1ms ...
+2026-10-02T10:46:08.6927554Z   Collecting page data using 3 workers ...
+2026-10-02T10:46:08.6927975Z   Generating static pages using 3 workers (0/3) ...
+2026-10-02T10:46:08.6928586Z ✓ Generating static pages using 3 workers (3/3) in 385ms
+2026-10-02T10:46:08.6929037Z   Finalizing page optimization ...
+2026-10-02T10:46:08.6929363Z   Collecting build traces ...
+2026-10-02T10:46:08.6929555Z 
+2026-10-02T10:46:08.6929659Z Route (app)
+2026-10-02T10:46:08.6929921Z ┌ ○ /
+2026-10-02T10:46:08.6930182Z └ ○ /_not-found
+2026-10-02T10:46:08.6930338Z 
+2026-10-02T10:46:08.6930346Z 
+2026-10-02T10:46:08.6930603Z ○  (Static)  prerendered as static content
+2026-10-02T10:46:08.6930832Z 
+2026-10-02T10:46:08.6931486Z {"framework":"Next.js static export","inline_script_hashes":2,"destination":"/home/runner/work/AIRLOCK/AIRLOCK/airlock/console"}
+2026-10-02T10:46:08.7216727Z ##[group]Run python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev
+2026-10-02T10:46:08.7217544Z [36;1mpython scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev[0m
+2026-10-02T10:46:08.7276592Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:08.7276893Z env:
+2026-10-02T10:46:08.7277072Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:08.7277342Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:08.7277684Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:08.7278011Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:08.7278307Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:08.7278603Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:08.7278900Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:08.7279158Z ##[endgroup]
+2026-10-02T10:46:09.1274444Z found 0 vulnerabilities
+2026-10-02T10:46:09.1448608Z ##[group]Run python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml
+2026-10-02T10:46:09.1449659Z [36;1mpython scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml[0m
+2026-10-02T10:46:09.1514586Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:09.1514871Z env:
+2026-10-02T10:46:09.1515051Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:09.1515446Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:09.1515792Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:09.1516135Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:09.1516441Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:09.1516736Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:09.1517043Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:09.1517499Z ##[endgroup]
+2026-10-02T10:46:29.7481806Z ........................................................................ [ 40%]
+2026-10-02T10:46:29.7482455Z ........................................................................ [ 81%]
+2026-10-02T10:46:29.7482999Z .................................                                        [100%]
+2026-10-02T10:46:29.7483522Z =============================== warnings summary ===============================
+2026-10-02T10:46:29.7484116Z ../../../../../opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/fastapi/testclient.py:1
+2026-10-02T10:46:29.7485015Z   /opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+2026-10-02T10:46:29.7485966Z     from starlette.testclient import TestClient as TestClient  # noqa
+2026-10-02T10:46:29.7486276Z 
+2026-10-02T10:46:29.7486653Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-02T10:46:29.7487145Z 177 passed, 1 warning in 18.07s
+2026-10-02T10:46:29.7603446Z ##[group]Run python scripts/run_logged.py evidence/frontend-check.log -- npm run check
+2026-10-02T10:46:29.7603947Z [36;1mpython scripts/run_logged.py evidence/frontend-check.log -- npm run check[0m
+2026-10-02T10:46:29.7660124Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:29.7660397Z env:
+2026-10-02T10:46:29.7660567Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:29.7660816Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:29.7661160Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:29.7661487Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:29.7661792Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:29.7662082Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:29.7662376Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:29.7662647Z ##[endgroup]
+2026-10-02T10:46:30.0143050Z 
+2026-10-02T10:46:30.0143658Z > airlock-review-console@0.1.0 check
+2026-10-02T10:46:30.0144965Z > node --check airlock/static/app.js && node --check airlock/static/review.js && node --check airlock/static/api.js && node --check airlock/static/lib.js && node --check airlock/static/governance.js && node --check airlock/static/study.js
+2026-10-02T10:46:30.0146021Z 
+2026-10-02T10:46:30.0272256Z ##[group]Run python scripts/run_logged.py evidence/frontend-tests.log -- npm test
+2026-10-02T10:46:30.0272790Z [36;1mpython scripts/run_logged.py evidence/frontend-tests.log -- npm test[0m
+2026-10-02T10:46:30.0327999Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:30.0328283Z env:
+2026-10-02T10:46:30.0328459Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:30.0328711Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.0329041Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:30.0329644Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.0329943Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.0330234Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.0330541Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:30.0330800Z ##[endgroup]
+2026-10-02T10:46:30.2423332Z 
+2026-10-02T10:46:30.2424006Z > airlock-review-console@0.1.0 test
+2026-10-02T10:46:30.2424471Z > node --test tests-js/*.test.js
+2026-10-02T10:46:30.2424675Z 
+2026-10-02T10:46:30.2424779Z TAP version 13
+2026-10-02T10:46:30.2425464Z # Subtest: visibility timing excludes background and unselected periods
+2026-10-02T10:46:30.2426108Z ok 1 - visibility timing excludes background and unselected periods
+2026-10-02T10:46:30.2426410Z   ---
+2026-10-02T10:46:30.2426583Z   duration_ms: 0.667706
+2026-10-02T10:46:30.2426775Z   type: 'test'
+2026-10-02T10:46:30.2426963Z   ...
+2026-10-02T10:46:30.2427228Z # Subtest: approval requires exact scope phrase and reason
+2026-10-02T10:46:30.2427577Z ok 2 - approval requires exact scope phrase and reason
+2026-10-02T10:46:30.2427815Z   ---
+2026-10-02T10:46:30.2427974Z   duration_ms: 0.212911
+2026-10-02T10:46:30.2428152Z   type: 'test'
+2026-10-02T10:46:30.2428317Z   ...
+2026-10-02T10:46:30.2428744Z # Subtest: SSE framing survives partial chunks, CRLF and heartbeats
+2026-10-02T10:46:30.2429304Z ok 3 - SSE framing survives partial chunks, CRLF and heartbeats
+2026-10-02T10:46:30.2429593Z   ---
+2026-10-02T10:46:30.2429776Z   duration_ms: 0.779304
+2026-10-02T10:46:30.2429960Z   type: 'test'
+2026-10-02T10:46:30.2430121Z   ...
+2026-10-02T10:46:30.2430319Z # Subtest: oversized event rejected
+2026-10-02T10:46:30.2430570Z ok 4 - oversized event rejected
+2026-10-02T10:46:30.2430760Z   ---
+2026-10-02T10:46:30.2430918Z   duration_ms: 0.953346
+2026-10-02T10:46:30.2431093Z   type: 'test'
+2026-10-02T10:46:30.2431253Z   ...
+2026-10-02T10:46:30.2431465Z # Subtest: countdown clamps expired actions
+2026-10-02T10:46:30.2431737Z ok 5 - countdown clamps expired actions
+2026-10-02T10:46:30.2431953Z   ---
+2026-10-02T10:46:30.2432115Z   duration_ms: 0.201934
+2026-10-02T10:46:30.2432292Z   type: 'test'
+2026-10-02T10:46:30.2432454Z   ...
+2026-10-02T10:46:30.2432753Z # Subtest: latency formatting keeps number and unit together on mobile
+2026-10-02T10:46:30.2433163Z ok 6 - latency formatting keeps number and unit together on mobile
+2026-10-02T10:46:30.2433425Z   ---
+2026-10-02T10:46:30.2433577Z   duration_ms: 0.134473
+2026-10-02T10:46:30.2433749Z   type: 'test'
+2026-10-02T10:46:30.2433906Z   ...
+2026-10-02T10:46:30.2434048Z 1..6
+2026-10-02T10:46:30.2434191Z # tests 6
+2026-10-02T10:46:30.2434340Z # suites 0
+2026-10-02T10:46:30.2434493Z # pass 6
+2026-10-02T10:46:30.2434640Z # fail 0
+2026-10-02T10:46:30.2434788Z # cancelled 0
+2026-10-02T10:46:30.2434946Z # skipped 0
+2026-10-02T10:46:30.2435096Z # todo 0
+2026-10-02T10:46:30.2435431Z # duration_ms 50.879191
+2026-10-02T10:46:30.2544520Z ##[group]Run python -m benchmark.generate
+2026-10-02T10:46:30.2544818Z [36;1mpython -m benchmark.generate[0m
+2026-10-02T10:46:30.2600792Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:30.2601068Z env:
+2026-10-02T10:46:30.2601240Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:30.2601492Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.2601827Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:30.2602154Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.2602461Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.2602750Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.2603042Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:30.2603296Z ##[endgroup]
+2026-10-02T10:46:30.2961302Z {"sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7", "cases": 200, "families": 40, "dev_cases": 120, "test_cases": 80, "source": "synthetic only", "independent_annotators": 0, "human_experiment": "not_run"}
+2026-10-02T10:46:30.3040877Z ##[group]Run cp benchmark/cases.jsonl evidence/synthetic-cases.jsonl
+2026-10-02T10:46:30.3041296Z [36;1mcp benchmark/cases.jsonl evidence/synthetic-cases.jsonl[0m
+2026-10-02T10:46:30.3097517Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:30.3097794Z env:
+2026-10-02T10:46:30.3098087Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:30.3098372Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3098718Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:30.3099046Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3099343Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3099633Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3099938Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:30.3100216Z ##[endgroup]
+2026-10-02T10:46:30.3217268Z ##[group]Run python scripts/run_logged.py evidence/benchmark-dev.log -- python -m benchmark.evaluate --split dev --tuning --output evidence/benchmark-dev.json
+2026-10-02T10:46:30.3218111Z [36;1mpython scripts/run_logged.py evidence/benchmark-dev.log -- python -m benchmark.evaluate --split dev --tuning --output evidence/benchmark-dev.json[0m
+2026-10-02T10:46:30.3274110Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:30.3274386Z env:
+2026-10-02T10:46:30.3274557Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:30.3274810Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3275145Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:30.3275663Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3275957Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3276263Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:30.3276594Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:30.3276846Z ##[endgroup]
+2026-10-02T10:46:32.9459930Z {
+2026-10-02T10:46:32.9460371Z   "recorded_at_utc": "2026-10-02T10:46:32.892543+00:00",
+2026-10-02T10:46:32.9460738Z   "split": "dev",
+2026-10-02T10:46:32.9461234Z   "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7",
+2026-10-02T10:46:32.9461746Z   "python": "3.13.15",
+2026-10-02T10:46:32.9461998Z   "sqlite": "3.45.1",
+2026-10-02T10:46:32.9462263Z   "cases": 120,
+2026-10-02T10:46:32.9462504Z   "families": 24,
+2026-10-02T10:46:32.9462758Z   "keyword_baseline": {
+2026-10-02T10:46:32.9463073Z     "exact_accuracy": 0.5833333333333334,
+2026-10-02T10:46:32.9463454Z     "policy_gating_recall": 0.7222222222222222,
+2026-10-02T10:46:32.9463784Z     "supported_read_fpr": 0.5,
+2026-10-02T10:46:32.9464078Z     "supported_write_interception": 1.0,
+2026-10-02T10:46:32.9464416Z     "denominators": {
+2026-10-02T10:46:32.9464647Z       "all": 120,
+2026-10-02T10:46:32.9464910Z       "requires_gate": 90,
+2026-10-02T10:46:32.9465452Z       "supported_reads": 30,
+2026-10-02T10:46:32.9465765Z       "supported_writes": 40
+2026-10-02T10:46:32.9466037Z     },
+2026-10-02T10:46:32.9466358Z     "confusion": {
+2026-10-02T10:46:32.9466632Z       "pass -> block": 5,
+2026-10-02T10:46:32.9466948Z       "pass -> need_approval": 10,
+2026-10-02T10:46:32.9467254Z       "pass -> pass": 15,
+2026-10-02T10:46:32.9467590Z       "need_approval -> need_approval": 40,
+2026-10-02T10:46:32.9467925Z       "block -> block": 15,
+2026-10-02T10:46:32.9468208Z       "block -> pass": 25,
+2026-10-02T10:46:32.9468518Z       "block -> need_approval": 10
+2026-10-02T10:46:32.9468806Z     }
+2026-10-02T10:46:32.9469026Z   },
+2026-10-02T10:46:32.9469245Z   "airlock": {
+2026-10-02T10:46:32.9469495Z     "exact_accuracy": 1.0,
+2026-10-02T10:46:32.9469810Z     "policy_gating_recall": 1.0,
+2026-10-02T10:46:32.9470452Z     "supported_read_fpr": 0.0,
+2026-10-02T10:46:32.9470776Z     "supported_write_interception": 1.0,
+2026-10-02T10:46:32.9471080Z     "denominators": {
+2026-10-02T10:46:32.9471334Z       "all": 120,
+2026-10-02T10:46:32.9471583Z       "requires_gate": 90,
+2026-10-02T10:46:32.9471856Z       "supported_reads": 30,
+2026-10-02T10:46:32.9472136Z       "supported_writes": 40
+2026-10-02T10:46:32.9472399Z     },
+2026-10-02T10:46:32.9472627Z     "confusion": {
+2026-10-02T10:46:32.9472884Z       "pass -> pass": 30,
+2026-10-02T10:46:32.9473209Z       "need_approval -> need_approval": 40,
+2026-10-02T10:46:32.9473538Z       "block -> block": 50
+2026-10-02T10:46:32.9473801Z     }
+2026-10-02T10:46:32.9474013Z   },
+2026-10-02T10:46:32.9474269Z   "impact_exact_match_count": 40,
+2026-10-02T10:46:32.9474588Z   "impact_denominator": 40,
+2026-10-02T10:46:32.9474890Z   "evaluation_p95_ms": 10.062,
+2026-10-02T10:46:32.9475170Z   "static_p95_ms": 0.098,
+2026-10-02T10:46:32.9475636Z   "preview_p95_ms": 8.026,
+2026-10-02T10:46:32.9475935Z   "pure_llm": "not_run",
+2026-10-02T10:46:32.9476603Z   "hybrid_llm": "not_run_use_benchmark.ablation_with_authorization",
+2026-10-02T10:46:32.9477028Z   "human_ab": "not_run",
+2026-10-02T10:46:32.9477297Z   "cohens_kappa": null,
+2026-10-02T10:46:32.9477572Z   "limitations": [
+2026-10-02T10:46:32.9477883Z     "synthetic authored cases only",
+2026-10-02T10:46:32.9478285Z     "correlated variants, only 40 families total",
+2026-10-02T10:46:32.9478896Z     "author saw all templates; family split is not independent external validation",
+2026-10-02T10:46:32.9479657Z     "gate recall includes unsupported/invalid statements, not a real-world danger recall",
+2026-10-02T10:46:32.9480160Z     "latency excludes network and human review; this is a bounded 1206-row SQLite demo"
+2026-10-02T10:46:32.9480477Z   ]
+2026-10-02T10:46:32.9480627Z }
+2026-10-02T10:46:32.9585375Z ##[group]Run python scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
+2026-10-02T10:46:32.9586465Z [36;1mpython scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.evaluate --split test --output evidence/benchmark-test.json[0m
+2026-10-02T10:46:32.9643437Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:32.9643880Z env:
+2026-10-02T10:46:32.9644158Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:32.9644558Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:32.9644996Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:32.9645658Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:32.9646115Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:32.9646515Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:32.9647075Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:32.9647446Z ##[endgroup]
+2026-10-02T10:46:34.7087698Z {
+2026-10-02T10:46:34.7088362Z   "recorded_at_utc": "2026-10-02T10:46:34.653021+00:00",
+2026-10-02T10:46:34.7089164Z   "split": "test",
+2026-10-02T10:46:34.7089792Z   "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7",
+2026-10-02T10:46:34.7090310Z   "python": "3.13.15",
+2026-10-02T10:46:34.7090598Z   "sqlite": "3.45.1",
+2026-10-02T10:46:34.7090883Z   "cases": 80,
+2026-10-02T10:46:34.7091242Z   "families": 16,
+2026-10-02T10:46:34.7091518Z   "keyword_baseline": {
+2026-10-02T10:46:34.7092047Z     "exact_accuracy": 0.75,
+2026-10-02T10:46:34.7092502Z     "policy_gating_recall": 0.8,
+2026-10-02T10:46:34.7092944Z     "supported_read_fpr": 0.0,
+2026-10-02T10:46:34.7093392Z     "supported_write_interception": 1.0,
+2026-10-02T10:46:34.7093714Z     "denominators": {
+2026-10-02T10:46:34.7094028Z       "all": 80,
+2026-10-02T10:46:34.7094353Z       "requires_gate": 50,
+2026-10-02T10:46:34.7094636Z       "supported_reads": 30,
+2026-10-02T10:46:34.7094987Z       "supported_writes": 20
+2026-10-02T10:46:34.7095525Z     },
+2026-10-02T10:46:34.7096078Z     "confusion": {
+2026-10-02T10:46:34.7096387Z       "pass -> pass": 30,
+2026-10-02T10:46:34.7096703Z       "need_approval -> need_approval": 20,
+2026-10-02T10:46:34.7097100Z       "block -> block": 10,
+2026-10-02T10:46:34.7097415Z       "block -> need_approval": 10,
+2026-10-02T10:46:34.7097804Z       "block -> pass": 10
+2026-10-02T10:46:34.7098111Z     }
+2026-10-02T10:46:34.7098343Z   },
+2026-10-02T10:46:34.7098645Z   "airlock": {
+2026-10-02T10:46:34.7098912Z     "exact_accuracy": 1.0,
+2026-10-02T10:46:34.7099287Z     "policy_gating_recall": 1.0,
+2026-10-02T10:46:34.7099630Z     "supported_read_fpr": 0.0,
+2026-10-02T10:46:34.7099934Z     "supported_write_interception": 1.0,
+2026-10-02T10:46:34.7100306Z     "denominators": {
+2026-10-02T10:46:34.7100581Z       "all": 80,
+2026-10-02T10:46:34.7100876Z       "requires_gate": 50,
+2026-10-02T10:46:34.7101243Z       "supported_reads": 30,
+2026-10-02T10:46:34.7101513Z       "supported_writes": 20
+2026-10-02T10:46:34.7101911Z     },
+2026-10-02T10:46:34.7102230Z     "confusion": {
+2026-10-02T10:46:34.7102532Z       "pass -> pass": 30,
+2026-10-02T10:46:34.7102890Z       "need_approval -> need_approval": 20,
+2026-10-02T10:46:34.7103297Z       "block -> block": 30
+2026-10-02T10:46:34.7103744Z     }
+2026-10-02T10:46:34.7104078Z   },
+2026-10-02T10:46:34.7104515Z   "impact_exact_match_count": 20,
+2026-10-02T10:46:34.7105031Z   "impact_denominator": 20,
+2026-10-02T10:46:34.7105683Z   "evaluation_p95_ms": 9.92,
+2026-10-02T10:46:34.7106057Z   "static_p95_ms": 0.092,
+2026-10-02T10:46:34.7106344Z   "preview_p95_ms": 8.01,
+2026-10-02T10:46:34.7106681Z   "pure_llm": "not_run",
+2026-10-02T10:46:34.7107089Z   "hybrid_llm": "not_run_use_benchmark.ablation_with_authorization",
+2026-10-02T10:46:34.7107686Z   "human_ab": "not_run",
+2026-10-02T10:46:34.7108101Z   "cohens_kappa": null,
+2026-10-02T10:46:34.7108612Z   "limitations": [
+2026-10-02T10:46:34.7108970Z     "synthetic authored cases only",
+2026-10-02T10:46:34.7109347Z     "correlated variants, only 40 families total",
+2026-10-02T10:46:34.7109827Z     "author saw all templates; family split is not independent external validation",
+2026-10-02T10:46:34.7110482Z     "gate recall includes unsupported/invalid statements, not a real-world danger recall",
+2026-10-02T10:46:34.7111048Z     "latency excludes network and human review; this is a bounded 1206-row SQLite demo"
+2026-10-02T10:46:34.7111510Z   ]
+2026-10-02T10:46:34.7111781Z }
+2026-10-02T10:46:34.7216061Z ##[group]Run python -m playwright install --with-deps chromium
+2026-10-02T10:46:34.7216439Z [36;1mpython -m playwright install --with-deps chromium[0m
+2026-10-02T10:46:34.7272673Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:34.7272944Z env:
+2026-10-02T10:46:34.7273110Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:34.7273361Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:34.7273697Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:34.7274032Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:34.7274343Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:34.7274630Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:34.7274920Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:34.7275165Z ##[endgroup]
+2026-10-02T10:46:34.9960701Z Installing dependencies...
+2026-10-02T10:46:35.0022653Z Switching to root user to install dependencies...
+2026-10-02T10:46:35.0754284Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-02T10:46:35.1116735Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+2026-10-02T10:46:35.1130969Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+2026-10-02T10:46:35.1136857Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+2026-10-02T10:46:35.1178850Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+2026-10-02T10:46:35.1209416Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+2026-10-02T10:46:35.2238376Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main armhf Packages [12.6 kB]
+2026-10-02T10:46:35.2337707Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [510 kB]
+2026-10-02T10:46:35.2418341Z Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [458 kB]
+2026-10-02T10:46:35.2683504Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1364 kB]
+2026-10-02T10:46:35.2789391Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [304 kB]
+2026-10-02T10:46:35.2847912Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+2026-10-02T10:46:35.2873580Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1699 kB]
+2026-10-02T10:46:35.2944201Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [341 kB]
+2026-10-02T10:46:35.2976808Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+2026-10-02T10:46:35.2990725Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1720 kB]
+2026-10-02T10:46:35.3080455Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [394 kB]
+2026-10-02T10:46:35.3107093Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+2026-10-02T10:46:35.3216249Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5764 B]
+2026-10-02T10:46:35.3677030Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+2026-10-02T10:46:35.3713592Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1069 kB]
+2026-10-02T10:46:35.3761480Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [221 kB]
+2026-10-02T10:46:35.3777609Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+2026-10-02T10:46:35.3789028Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1216 kB]
+2026-10-02T10:46:35.3846958Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [244 kB]
+2026-10-02T10:46:35.3877554Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+2026-10-02T10:46:35.3907516Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1566 kB]
+2026-10-02T10:46:35.3974306Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [361 kB]
+2026-10-02T10:46:43.7992211Z Fetched 12.6 MB in 1s (10.9 MB/s)
+2026-10-02T10:46:44.5821941Z Reading package lists...
+2026-10-02T10:46:44.6040681Z Reading package lists...
+2026-10-02T10:46:44.8507188Z Building dependency tree...
+2026-10-02T10:46:44.8514394Z Reading state information...
+2026-10-02T10:46:45.1061865Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+2026-10-02T10:46:45.1062495Z libasound2t64 set to manually installed.
+2026-10-02T10:46:45.1063036Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-02T10:46:45.1063585Z libatk-bridge2.0-0t64 set to manually installed.
+2026-10-02T10:46:45.1064111Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-02T10:46:45.1064609Z libatk1.0-0t64 set to manually installed.
+2026-10-02T10:46:45.1065090Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+2026-10-02T10:46:45.1065782Z libatspi2.0-0t64 set to manually installed.
+2026-10-02T10:46:45.1066244Z libcairo2 is already the newest version (1.18.0-3build1).
+2026-10-02T10:46:45.1066684Z libcairo2 set to manually installed.
+2026-10-02T10:46:45.1067162Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+2026-10-02T10:46:45.1067629Z libcups2t64 set to manually installed.
+2026-10-02T10:46:45.1068093Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+2026-10-02T10:46:45.1069077Z libdbus-1-3 set to manually installed.
+2026-10-02T10:46:45.1069581Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+2026-10-02T10:46:45.1070058Z libdrm2 set to manually installed.
+2026-10-02T10:46:45.1070531Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.9).
+2026-10-02T10:46:45.1071047Z libglib2.0-0t64 set to manually installed.
+2026-10-02T10:46:45.1071564Z libnspr4 is already the newest version (2:4.35-1.1build1).
+2026-10-02T10:46:45.1072063Z libnspr4 set to manually installed.
+2026-10-02T10:46:45.1072530Z libnss3 is already the newest version (2:3.98-1ubuntu0.2).
+2026-10-02T10:46:45.1072964Z libnss3 set to manually installed.
+2026-10-02T10:46:45.1073451Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+2026-10-02T10:46:45.1073931Z libpango-1.0-0 set to manually installed.
+2026-10-02T10:46:45.1074392Z libx11-6 is already the newest version (2:1.8.7-1build1).
+2026-10-02T10:46:45.1074797Z libx11-6 set to manually installed.
+2026-10-02T10:46:45.1075360Z libxcb1 is already the newest version (1.15-1ubuntu2).
+2026-10-02T10:46:45.1075774Z libxcb1 set to manually installed.
+2026-10-02T10:46:45.1076217Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+2026-10-02T10:46:45.1076660Z libxcomposite1 set to manually installed.
+2026-10-02T10:46:45.1077105Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+2026-10-02T10:46:45.1077462Z libxdamage1 set to manually installed.
+2026-10-02T10:46:45.1077757Z libxext6 is already the newest version (2:1.3.4-1build2).
+2026-10-02T10:46:45.1078038Z libxext6 set to manually installed.
+2026-10-02T10:46:45.1078340Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+2026-10-02T10:46:45.1078645Z libxfixes3 set to manually installed.
+2026-10-02T10:46:45.1079107Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+2026-10-02T10:46:45.1079432Z libxkbcommon0 set to manually installed.
+2026-10-02T10:46:45.1079744Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+2026-10-02T10:46:45.1080078Z libxrandr2 set to manually installed.
+2026-10-02T10:46:45.1080395Z xvfb is already the newest version (2:21.1.12-1ubuntu1.8).
+2026-10-02T10:46:45.1080831Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+2026-10-02T10:46:45.1081374Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+2026-10-02T10:46:45.1081924Z libfontconfig1 set to manually installed.
+2026-10-02T10:46:45.1082282Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.1).
+2026-10-02T10:46:45.1082617Z libfreetype6 set to manually installed.
+2026-10-02T10:46:45.1082959Z fonts-liberation is already the newest version (1:2.1.5-3).
+2026-10-02T10:46:45.1083436Z fonts-liberation set to manually installed.
+2026-10-02T10:46:45.1083872Z The following additional packages will be installed:
+2026-10-02T10:46:45.1084377Z   libgl1-mesa-dri libglx-mesa0 libwayland-server0 mesa-libgallium
+2026-10-02T10:46:45.1084835Z   xfonts-encodings xfonts-utils
+2026-10-02T10:46:45.1085145Z Recommended packages:
+2026-10-02T10:46:45.1085953Z   fonts-ipafont-mincho fonts-tlwg-loma
+2026-10-02T10:46:45.1305112Z The following NEW packages will be installed:
+2026-10-02T10:46:45.1306028Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+2026-10-02T10:46:45.1317215Z   fonts-wqy-zenhei libwayland-server0 xfonts-cyrillic xfonts-encodings
+2026-10-02T10:46:45.1317750Z   xfonts-scalable xfonts-utils
+2026-10-02T10:46:45.1324702Z The following packages will be upgraded:
+2026-10-02T10:46:45.1332225Z   libgbm1 libgl1-mesa-dri libglx-mesa0 mesa-libgallium
+2026-10-02T10:46:45.1513359Z 4 upgraded, 10 newly installed, 0 to remove and 21 not upgraded.
+2026-10-02T10:46:45.1513752Z Need to get 32.1 MB of archives.
+2026-10-02T10:46:45.1514106Z After this operation, 79.7 MB of additional disk space will be used.
+2026-10-02T10:46:45.1514497Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+2026-10-02T10:46:45.2326871Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+2026-10-02T10:46:45.3842217Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+2026-10-02T10:46:45.6142683Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+2026-10-02T10:46:45.6812595Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+2026-10-02T10:46:45.8187139Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+2026-10-02T10:46:46.1606113Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgl1-mesa-dri amd64 25.2.8-0ubuntu0.24.04.3 [37.9 kB]
+2026-10-02T10:46:46.2277061Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libwayland-server0 amd64 1.22.0-2.1build1 [33.9 kB]
+2026-10-02T10:46:46.2921313Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglx-mesa0 amd64 25.2.8-0ubuntu0.24.04.3 [110 kB]
+2026-10-02T10:46:46.3575343Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libgbm1 amd64 25.2.8-0ubuntu0.24.04.3 [34.3 kB]
+2026-10-02T10:46:46.4237817Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 mesa-libgallium amd64 25.2.8-0ubuntu0.24.04.3 [10.8 MB]
+2026-10-02T10:46:46.7476915Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+2026-10-02T10:46:46.8220353Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+2026-10-02T10:46:46.8967202Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+2026-10-02T10:46:46.9711378Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+2026-10-02T10:46:47.2192875Z Fetched 32.1 MB in 2s (17.4 MB/s)
+2026-10-02T10:46:47.2387878Z Selecting previously unselected package fonts-ipafont-gothic.
+2026-10-02T10:46:47.2571000Z (Reading database ... 
+2026-10-02T10:46:47.2571489Z (Reading database ... 5%
+2026-10-02T10:46:47.2571763Z (Reading database ... 10%
+2026-10-02T10:46:47.2572030Z (Reading database ... 15%
+2026-10-02T10:46:47.2572781Z (Reading database ... 20%
+2026-10-02T10:46:47.2573036Z (Reading database ... 25%
+2026-10-02T10:46:47.2573260Z (Reading database ... 30%
+2026-10-02T10:46:47.2573769Z (Reading database ... 35%
+2026-10-02T10:46:47.2574067Z (Reading database ... 40%
+2026-10-02T10:46:47.2574367Z (Reading database ... 45%
+2026-10-02T10:46:47.2574654Z (Reading database ... 50%
+2026-10-02T10:46:47.2605632Z (Reading database ... 55%
+2026-10-02T10:46:47.3596736Z (Reading database ... 60%
+2026-10-02T10:46:47.5654415Z (Reading database ... 65%
+2026-10-02T10:46:47.7553447Z (Reading database ... 70%
+2026-10-02T10:46:47.9618646Z (Reading database ... 75%
+2026-10-02T10:46:48.0635827Z (Reading database ... 80%
+2026-10-02T10:46:48.2215966Z (Reading database ... 85%
+2026-10-02T10:46:48.3650663Z (Reading database ... 90%
+2026-10-02T10:46:48.5233828Z (Reading database ... 95%
+2026-10-02T10:46:48.5234212Z (Reading database ... 100%
+2026-10-02T10:46:48.5234579Z (Reading database ... 202296 files and directories currently installed.)
+2026-10-02T10:46:48.5277775Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+2026-10-02T10:46:48.5393904Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-02T10:46:48.7750175Z Selecting previously unselected package fonts-freefont-ttf.
+2026-10-02T10:46:48.7864115Z Preparing to unpack .../01-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+2026-10-02T10:46:48.7869972Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-02T10:46:48.9039059Z Selecting previously unselected package fonts-tlwg-loma-otf.
+2026-10-02T10:46:48.9150551Z Preparing to unpack .../02-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+2026-10-02T10:46:48.9156012Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-02T10:46:48.9332332Z Selecting previously unselected package fonts-unifont.
+2026-10-02T10:46:48.9445347Z Preparing to unpack .../03-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+2026-10-02T10:46:48.9450772Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+2026-10-02T10:46:49.1563741Z Selecting previously unselected package fonts-wqy-zenhei.
+2026-10-02T10:46:49.1677629Z Preparing to unpack .../04-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+2026-10-02T10:46:49.1765784Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-02T10:46:49.6424740Z Preparing to unpack .../05-libgl1-mesa-dri_25.2.8-0ubuntu0.24.04.3_amd64.deb ...
+2026-10-02T10:46:49.6708568Z Unpacking libgl1-mesa-dri:amd64 (25.2.8-0ubuntu0.24.04.3) over (25.2.8-0ubuntu0.24.04.2) ...
+2026-10-02T10:46:49.7033247Z Selecting previously unselected package libwayland-server0:amd64.
+2026-10-02T10:46:49.7151640Z Preparing to unpack .../06-libwayland-server0_1.22.0-2.1build1_amd64.deb ...
+2026-10-02T10:46:49.7165389Z Unpacking libwayland-server0:amd64 (1.22.0-2.1build1) ...
+2026-10-02T10:46:49.7473540Z Preparing to unpack .../07-libglx-mesa0_25.2.8-0ubuntu0.24.04.3_amd64.deb ...
+2026-10-02T10:46:49.7491349Z Unpacking libglx-mesa0:amd64 (25.2.8-0ubuntu0.24.04.3) over (25.2.8-0ubuntu0.24.04.2) ...
+2026-10-02T10:46:49.7830193Z Preparing to unpack .../08-libgbm1_25.2.8-0ubuntu0.24.04.3_amd64.deb ...
+2026-10-02T10:46:49.7847013Z Unpacking libgbm1:amd64 (25.2.8-0ubuntu0.24.04.3) over (25.2.8-0ubuntu0.24.04.2) ...
+2026-10-02T10:46:49.8191570Z Preparing to unpack .../09-mesa-libgallium_25.2.8-0ubuntu0.24.04.3_amd64.deb ...
+2026-10-02T10:46:49.8209170Z Unpacking mesa-libgallium:amd64 (25.2.8-0ubuntu0.24.04.3) over (25.2.8-0ubuntu0.24.04.2) ...
+2026-10-02T10:46:50.1854936Z Selecting previously unselected package xfonts-encodings.
+2026-10-02T10:46:50.1968332Z Preparing to unpack .../10-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+2026-10-02T10:46:50.1974462Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-02T10:46:50.2239531Z Selecting previously unselected package xfonts-utils.
+2026-10-02T10:46:50.2352670Z Preparing to unpack .../11-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+2026-10-02T10:46:50.2359155Z Unpacking xfonts-utils (1:7.7+6build3) ...
+2026-10-02T10:46:50.2601996Z Selecting previously unselected package xfonts-cyrillic.
+2026-10-02T10:46:50.2715758Z Preparing to unpack .../12-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+2026-10-02T10:46:50.2764751Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-02T10:46:50.3045470Z Selecting previously unselected package xfonts-scalable.
+2026-10-02T10:46:50.3160733Z Preparing to unpack .../13-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+2026-10-02T10:46:50.3166462Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-02T10:46:50.3619004Z Setting up libwayland-server0:amd64 (1.22.0-2.1build1) ...
+2026-10-02T10:46:50.3723518Z Setting up mesa-libgallium:amd64 (25.2.8-0ubuntu0.24.04.3) ...
+2026-10-02T10:46:50.3735886Z Setting up libgbm1:amd64 (25.2.8-0ubuntu0.24.04.3) ...
+2026-10-02T10:46:50.3747764Z Setting up libgl1-mesa-dri:amd64 (25.2.8-0ubuntu0.24.04.3) ...
+2026-10-02T10:46:50.3813105Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+2026-10-02T10:46:50.3918066Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+2026-10-02T10:46:50.3930275Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+2026-10-02T10:46:50.3943857Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+2026-10-02T10:46:50.3957169Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+2026-10-02T10:46:50.4011849Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+2026-10-02T10:46:50.4023516Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+2026-10-02T10:46:50.4038142Z Setting up libglx-mesa0:amd64 (25.2.8-0ubuntu0.24.04.3) ...
+2026-10-02T10:46:50.4051329Z Setting up xfonts-utils (1:7.7+6build3) ...
+2026-10-02T10:46:50.4083929Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+2026-10-02T10:46:50.4333808Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+2026-10-02T10:46:50.4564007Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+2026-10-02T10:46:50.6114153Z Processing triggers for man-db (2.12.0-4build2) ...
+2026-10-02T10:46:50.6130528Z Not building database; man-db/auto-update is not 'true'.
+2026-10-02T10:46:50.6140720Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+2026-10-02T10:46:51.1963467Z 
+2026-10-02T10:46:51.1964103Z Running kernel seems to be up-to-date.
+2026-10-02T10:46:51.1964403Z 
+2026-10-02T10:46:51.1964538Z No services need to be restarted.
+2026-10-02T10:46:51.1964688Z 
+2026-10-02T10:46:51.1964803Z No containers need to be restarted.
+2026-10-02T10:46:51.1964955Z 
+2026-10-02T10:46:51.1965094Z No user sessions are running outdated binaries.
+2026-10-02T10:46:51.1965431Z 
+2026-10-02T10:46:51.1965653Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+2026-10-02T10:46:52.3324501Z Downloading Chromium 143.0.7499.4 (playwright build v1200) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1200/chromium-linux.zip
+2026-10-02T10:46:52.4139341Z (node:3953) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T10:46:52.4140282Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:46:52.7336588Z |                                                                                |   0% of 164.7 MiB
+2026-10-02T10:46:52.8908197Z |■■■■■■■■                                                                        |  10% of 164.7 MiB
+2026-10-02T10:46:52.9449571Z |■■■■■■■■■■■■■■■■                                                                |  20% of 164.7 MiB
+2026-10-02T10:46:53.0042355Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 164.7 MiB
+2026-10-02T10:46:53.0443211Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 164.7 MiB
+2026-10-02T10:46:53.0920610Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 164.7 MiB
+2026-10-02T10:46:53.1411118Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 164.7 MiB
+2026-10-02T10:46:53.1863121Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 164.7 MiB
+2026-10-02T10:46:53.2320504Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 164.7 MiB
+2026-10-02T10:46:53.2856322Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 164.7 MiB
+2026-10-02T10:46:53.3334170Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 164.7 MiB
+2026-10-02T10:46:55.2549450Z Chromium 143.0.7499.4 (playwright build v1200) downloaded to /home/runner/.cache/ms-playwright/chromium-1200
+2026-10-02T10:46:55.2554030Z Downloading FFMPEG playwright build v1011 from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+2026-10-02T10:46:55.3385524Z (node:3964) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T10:46:55.3386896Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:46:55.3936300Z |                                                                                |   0% of 2.3 MiB
+2026-10-02T10:46:55.3966732Z |■■■■■■■■                                                                        |  10% of 2.3 MiB
+2026-10-02T10:46:55.3996161Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+2026-10-02T10:46:55.4012155Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+2026-10-02T10:46:55.4035871Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+2026-10-02T10:46:55.4054400Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+2026-10-02T10:46:55.4064613Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+2026-10-02T10:46:55.4075042Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+2026-10-02T10:46:55.4089038Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+2026-10-02T10:46:55.4102768Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+2026-10-02T10:46:55.4111113Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+2026-10-02T10:46:55.4536422Z FFMPEG playwright build v1011 downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+2026-10-02T10:46:55.4539493Z Downloading Chromium Headless Shell 143.0.7499.4 (playwright build v1200) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1200/chromium-headless-shell-linux.zip
+2026-10-02T10:46:55.5317190Z (node:3975) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T10:46:55.5318916Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:46:55.6340603Z |                                                                                |   0% of 109.7 MiB
+2026-10-02T10:46:55.7753935Z |■■■■■■■■                                                                        |  10% of 109.7 MiB
+2026-10-02T10:46:55.8228498Z |■■■■■■■■■■■■■■■■                                                                |  20% of 109.7 MiB
+2026-10-02T10:46:55.8686999Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 109.7 MiB
+2026-10-02T10:46:55.9141578Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 109.7 MiB
+2026-10-02T10:46:55.9500862Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 109.7 MiB
+2026-10-02T10:46:55.9929046Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 109.7 MiB
+2026-10-02T10:46:56.0376291Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 109.7 MiB
+2026-10-02T10:46:56.0824834Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 109.7 MiB
+2026-10-02T10:46:56.1228787Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 109.7 MiB
+2026-10-02T10:46:56.1736996Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 109.7 MiB
+2026-10-02T10:46:57.5815737Z Chromium Headless Shell 143.0.7499.4 (playwright build v1200) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1200
+2026-10-02T10:46:57.6018302Z ##[group]Run python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py
+2026-10-02T10:46:57.6019234Z [36;1mpython scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py[0m
+2026-10-02T10:46:57.6085065Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:46:57.6085500Z env:
+2026-10-02T10:46:57.6085678Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:46:57.6085936Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:57.6086295Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:46:57.6086635Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:57.6086933Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:57.6087224Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:46:57.6087516Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:46:57.6087822Z ##[endgroup]
+2026-10-02T10:47:20.5596846Z {
+2026-10-02T10:47:20.5598455Z   "mode": "native_browser_e2e",
+2026-10-02T10:47:20.5598805Z   "passed": [
+2026-10-02T10:47:20.5599168Z     "agent_credential_rejected_by_reviewer_console",
+2026-10-02T10:47:20.5599595Z     "pending_queue_survives_more_than_100_newer_reads",
+2026-10-02T10:47:20.5599912Z     "approval_disabled_without_informed_confirmation",
+2026-10-02T10:47:20.5600200Z     "browser_rejection_preserves_all_1206_rows",
+2026-10-02T10:47:20.5600472Z     "browser_approval_executes_real_update_once",
+2026-10-02T10:47:20.5600761Z     "critical_action_requires_exact_1206_scope_phrase",
+2026-10-02T10:47:20.5601046Z     "390px_mobile_has_no_horizontal_overflow",
+2026-10-02T10:47:20.5601317Z     "audit_replay_and_hmac_verification_render",
+2026-10-02T10:47:20.5601608Z     "metrics_use_real_samples_and_unknown_model_cost",
+2026-10-02T10:47:20.5601926Z     "batch_ui_lists_bound_members_and_enforces_confirmation",
+2026-10-02T10:47:20.5602265Z     "recovery_is_a_separate_informed_approval",
+2026-10-02T10:47:20.5602845Z     "study_import_counterbalance_visibility_and_export_automation_only",
+2026-10-02T10:47:20.5603169Z     "logout_removes_authenticated_console",
+2026-10-02T10:47:20.5603422Z     "no_browser_javascript_errors"
+2026-10-02T10:47:20.5603628Z   ],
+2026-10-02T10:47:20.5603785Z   "errors": [],
+2026-10-02T10:47:20.5603957Z   "not_proven": []
+2026-10-02T10:47:20.5604132Z }
+2026-10-02T10:47:20.5721626Z ##[group]Run python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py
+2026-10-02T10:47:20.5722344Z [36;1mpython scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py[0m
+2026-10-02T10:47:20.5779148Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:47:20.5779424Z env:
+2026-10-02T10:47:20.5779600Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:47:20.5779854Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:20.5780190Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:47:20.5780535Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:20.5780839Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:20.5781123Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:20.5781412Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:47:20.5781708Z ##[endgroup]
+2026-10-02T10:47:27.0353039Z {
+2026-10-02T10:47:27.0353465Z   "mode": "native_next_browser_real_http",
+2026-10-02T10:47:27.0353807Z   "passed": [
+2026-10-02T10:47:27.0354103Z     "stale_cas_never_overwrites_new_data",
+2026-10-02T10:47:27.0354516Z     "execution_failure_rolls_back_and_renders",
+2026-10-02T10:47:27.0354926Z     "unknown_requires_original_receipt_reconciliation",
+2026-10-02T10:47:27.0355559Z     "untrusted_long_text_is_escaped_and_mobile_bounded",
+2026-10-02T10:47:27.0355869Z     "expired_action_has_no_decision_controls",
+2026-10-02T10:47:27.0356131Z     "hard_block_has_no_override_controls",
+2026-10-02T10:47:27.0356447Z     "keyboard_login_and_logout_clear_memory_credentials",
+2026-10-02T10:47:27.0356759Z     "next_hydration_and_strict_csp_have_no_errors"
+2026-10-02T10:47:27.0356985Z   ],
+2026-10-02T10:47:27.0357138Z   "errors": [],
+2026-10-02T10:47:27.0357315Z   "csp_violations": [],
+2026-10-02T10:47:27.0357510Z   "human_participants": 0
+2026-10-02T10:47:27.0357765Z }
+2026-10-02T10:47:27.0479599Z ##[group]Run python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
+2026-10-02T10:47:27.0480155Z [36;1mpython scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py[0m
+2026-10-02T10:47:27.0536860Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:47:27.0537139Z env:
+2026-10-02T10:47:27.0537305Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:47:27.0537550Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:27.0537886Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:47:27.0538231Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:27.0538533Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:27.0538820Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:47:27.0539116Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:47:27.0539415Z ##[endgroup]
+2026-10-02T10:48:04.2453250Z {
+2026-10-02T10:48:04.2453580Z   "mode": "real_docker_compose",
+2026-10-02T10:48:04.2455743Z   "project": "airlock-check-715f60b96462",
+2026-10-02T10:48:04.2456704Z   "probe": {
+2026-10-02T10:48:04.2457061Z     "pending_id": "48eb60aa199c450fa0eb02a22531ed53",
+2026-10-02T10:48:04.2457432Z     "uid": 10001,
+2026-10-02T10:48:04.2457637Z     "effective_capabilities": 0,
+2026-10-02T10:48:04.2457892Z     "checks": [
+2026-10-02T10:48:04.2458190Z       "agent_has_no_reviewer_or_audit_secret",
+2026-10-02T10:48:04.2458578Z       "target_database_not_mounted_in_agent",
+2026-10-02T10:48:04.2459168Z       "no_server_config_or_docker_socket",
+2026-10-02T10:48:04.2459426Z       "non_root_read_only_no_capabilities",
+2026-10-02T10:48:04.2459691Z       "agent_cannot_approve_or_read_audit",
+2026-10-02T10:48:04.2459935Z       "SQL_cannot_read_control_tables",
+2026-10-02T10:48:04.2460177Z       "write_waits_for_separate_reviewer"
+2026-10-02T10:48:04.2460389Z     ]
+2026-10-02T10:48:04.2460564Z   },
+2026-10-02T10:48:04.2460758Z   "rows_before_independent_approval": 1206,
+2026-10-02T10:48:04.2461010Z   "rows_after_approval_and_restart": 0,
+2026-10-02T10:48:04.2461230Z   "additional_checks": [
+2026-10-02T10:48:04.2461479Z     "pending_survives_server_restart_without_execution",
+2026-10-02T10:48:04.2461796Z     "approved_effect_and_audit_persist_without_reseeding",
+2026-10-02T10:48:04.2462078Z     "compose_network_is_internal",
+2026-10-02T10:48:04.2462333Z     "server_dual_network_agent_internal_only",
+2026-10-02T10:48:04.2462592Z     "published_port_is_loopback_only"
+2026-10-02T10:48:04.2462791Z   ],
+2026-10-02T10:48:04.2462955Z   "limitations": [
+2026-10-02T10:48:04.2463250Z     "controlled synthetic deployment, not a general container escape audit",
+2026-10-02T10:48:04.2463636Z     "reviewer is automated test code, not a human A/B participant"
+2026-10-02T10:48:04.2463905Z   ]
+2026-10-02T10:48:04.2464050Z }
+2026-10-02T10:48:04.2578605Z ##[group]Run python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py
+2026-10-02T10:48:04.2579280Z [36;1mpython scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py[0m
+2026-10-02T10:48:04.2636283Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:04.2636566Z env:
+2026-10-02T10:48:04.2636741Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:04.2636992Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:04.2637329Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:04.2637660Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:04.2637973Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:04.2638256Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:04.2638586Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:04.2638841Z ##[endgroup]
+2026-10-02T10:48:12.3024321Z {
+2026-10-02T10:48:12.3024659Z   "envoy": {
+2026-10-02T10:48:12.3024994Z     "image": "envoyproxy/envoy:v1.39.1",
+2026-10-02T10:48:12.3026909Z     "repo_digests": "[\"envoyproxy/envoy@sha256:57e14a549d7bd43c8d3f6d03e8cfa653e037d4b38e133acd9b54f38c524401b4\"]",
+2026-10-02T10:48:12.3027503Z     "rows": [
+2026-10-02T10:48:12.3027709Z       {
+2026-10-02T10:48:12.3027925Z         "case": "zero",
+2026-10-02T10:48:12.3028180Z         "rule": "threshold",
+2026-10-02T10:48:12.3028522Z         "airlock_expression": "changed_rows >= 100",
+2026-10-02T10:48:12.3028987Z         "envoy_expression": "int(request.headers['x-rows']) >= 100",
+2026-10-02T10:48:12.3029410Z         "airlock_hit": false,
+2026-10-02T10:48:12.3029679Z         "expected": false,
+2026-10-02T10:48:12.3029929Z         "envoy_hit": false
+2026-10-02T10:48:12.3030160Z       },
+2026-10-02T10:48:12.3030353Z       {
+2026-10-02T10:48:12.3030558Z         "case": "zero",
+2026-10-02T10:48:12.3030827Z         "rule": "write_only",
+2026-10-02T10:48:12.3031265Z         "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+2026-10-02T10:48:12.3031998Z         "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+2026-10-02T10:48:12.3032686Z         "airlock_hit": false,
+2026-10-02T10:48:12.3032951Z         "expected": false,
+2026-10-02T10:48:12.3033204Z         "envoy_hit": false
+2026-10-02T10:48:12.3033432Z       },
+2026-10-02T10:48:12.3033623Z       {
+2026-10-02T10:48:12.3033820Z         "case": "zero",
+2026-10-02T10:48:12.3034055Z         "rule": "bounded",
+2026-10-02T10:48:12.3034464Z         "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+2026-10-02T10:48:12.3035566Z         "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+2026-10-02T10:48:12.3036073Z         "airlock_hit": true,
+2026-10-02T10:48:12.3036323Z         "expected": true,
+2026-10-02T10:48:12.3036580Z         "envoy_hit": true
+2026-10-02T10:48:12.3036810Z       },
+2026-10-02T10:48:12.3036998Z       {
+2026-10-02T10:48:12.3037198Z         "case": "small",
+2026-10-02T10:48:12.3037441Z         "rule": "threshold",
+2026-10-02T10:48:12.3037763Z         "airlock_expression": "changed_rows >= 100",
+2026-10-02T10:48:12.3038198Z         "envoy_expression": "int(request.headers['x-rows']) >= 100",
+2026-10-02T10:48:12.3038566Z         "airlock_hit": false,
+2026-10-02T10:48:12.3038830Z         "expected": false,
+2026-10-02T10:48:12.3039077Z         "envoy_hit": false
+2026-10-02T10:48:12.3039304Z       },
+2026-10-02T10:48:12.3039491Z       {
+2026-10-02T10:48:12.3039682Z         "case": "small",
+2026-10-02T10:48:12.3039932Z         "rule": "write_only",
+2026-10-02T10:48:12.3040360Z         "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+2026-10-02T10:48:12.3041058Z         "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+2026-10-02T10:48:12.3041799Z         "airlock_hit": true,
+2026-10-02T10:48:12.3042058Z         "expected": true,
+2026-10-02T10:48:12.3042304Z         "envoy_hit": true
+2026-10-02T10:48:12.3042531Z       },
+2026-10-02T10:48:12.3042725Z       {
+2026-10-02T10:48:12.3042929Z         "case": "small",
+2026-10-02T10:48:12.3043183Z         "rule": "bounded",
+2026-10-02T10:48:12.3043600Z         "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+2026-10-02T10:48:12.3044273Z         "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+2026-10-02T10:48:12.3044842Z         "airlock_hit": true,
+2026-10-02T10:48:12.3045107Z         "expected": true,
+2026-10-02T10:48:12.3045473Z         "envoy_hit": true
+2026-10-02T10:48:12.3045700Z       },
+2026-10-02T10:48:12.3045889Z       {
+2026-10-02T10:48:12.3046084Z         "case": "high",
+2026-10-02T10:48:12.3046329Z         "rule": "threshold",
+2026-10-02T10:48:12.3046660Z         "airlock_expression": "changed_rows >= 100",
+2026-10-02T10:48:12.3047101Z         "envoy_expression": "int(request.headers['x-rows']) >= 100",
+2026-10-02T10:48:12.3047478Z         "airlock_hit": true,
+2026-10-02T10:48:12.3047727Z         "expected": true,
+2026-10-02T10:48:12.3047963Z         "envoy_hit": true
+2026-10-02T10:48:12.3048200Z       },
+2026-10-02T10:48:12.3048393Z       {
+2026-10-02T10:48:12.3048586Z         "case": "high",
+2026-10-02T10:48:12.3048822Z         "rule": "write_only",
+2026-10-02T10:48:12.3049235Z         "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+2026-10-02T10:48:12.3049910Z         "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+2026-10-02T10:48:12.3050442Z         "airlock_hit": true,
+2026-10-02T10:48:12.3050694Z         "expected": true,
+2026-10-02T10:48:12.3050939Z         "envoy_hit": true
+2026-10-02T10:48:12.3051158Z       },
+2026-10-02T10:48:12.3051345Z       {
+2026-10-02T10:48:12.3051553Z         "case": "high",
+2026-10-02T10:48:12.3051800Z         "rule": "bounded",
+2026-10-02T10:48:12.3052209Z         "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+2026-10-02T10:48:12.3052888Z         "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+2026-10-02T10:48:12.3053395Z         "airlock_hit": false,
+2026-10-02T10:48:12.3053659Z         "expected": false,
+2026-10-02T10:48:12.3053915Z         "envoy_hit": false
+2026-10-02T10:48:12.3054146Z       },
+2026-10-02T10:48:12.3054335Z       {
+2026-10-02T10:48:12.3054533Z         "case": "read",
+2026-10-02T10:48:12.3054776Z         "rule": "threshold",
+2026-10-02T10:48:12.3055097Z         "airlock_expression": "changed_rows >= 100",
+2026-10-02T10:48:12.3056219Z         "envoy_expression": "int(request.headers['x-rows']) >= 100",
+2026-10-02T10:48:12.3056579Z         "airlock_hit": true,
+2026-10-02T10:48:12.3056828Z         "expected": true,
+2026-10-02T10:48:12.3057071Z         "envoy_hit": true
+2026-10-02T10:48:12.3057292Z       },
+2026-10-02T10:48:12.3057479Z       {
+2026-10-02T10:48:12.3057679Z         "case": "read",
+2026-10-02T10:48:12.3057915Z         "rule": "write_only",
+2026-10-02T10:48:12.3058324Z         "airlock_expression": "operation == \"delete\" && matched_rows != 0",
+2026-10-02T10:48:12.3059011Z         "envoy_expression": "request.headers['x-operation'] == 'delete' && int(request.headers['x-rows']) != 0",
+2026-10-02T10:48:12.3059536Z         "airlock_hit": false,
+2026-10-02T10:48:12.3059792Z         "expected": false,
+2026-10-02T10:48:12.3060030Z         "envoy_hit": false
+2026-10-02T10:48:12.3060280Z       },
+2026-10-02T10:48:12.3060524Z       {
+2026-10-02T10:48:12.3060723Z         "case": "read",
+2026-10-02T10:48:12.3060962Z         "rule": "bounded",
+2026-10-02T10:48:12.3061377Z         "airlock_expression": "!(changed_rows > 5) || operation == \"read\"",
+2026-10-02T10:48:12.3062111Z         "envoy_expression": "!(int(request.headers['x-rows']) > 5) || request.headers['x-operation'] == 'read'",
+2026-10-02T10:48:12.3062807Z         "airlock_hit": true,
+2026-10-02T10:48:12.3063063Z         "expected": true,
+2026-10-02T10:48:12.3063311Z         "envoy_hit": true
+2026-10-02T10:48:12.3063551Z       }
+2026-10-02T10:48:12.3063759Z     ],
+2026-10-02T10:48:12.3063981Z     "status": "PASS",
+2026-10-02T10:48:12.3832123Z     "scope": "Boolean/equality/ordering subset with explicit header-to-variable mapping; access-log filter, not Envoy authorization deployment.",
+2026-10-02T10:48:12.3833025Z     "error_difference": "Missing/invalid Envoy attributes suppress its log. AIRLOCK rejects invalid typed activation and blocks authorization."
+2026-10-02T10:48:12.3833486Z   },
+2026-10-02T10:48:12.3833649Z   "otel": {
+2026-10-02T10:48:12.3833852Z     "status": "PASS",
+2026-10-02T10:48:12.3834105Z     "image": "otel/opentelemetry-collector:0.162.0",
+2026-10-02T10:48:12.3834643Z     "repo_digests": "[\"otel/opentelemetry-collector@sha256:310a800ad69ee430e7c541796852a242c9c7db97aaad4daa5ccf843c525fbdb2\"]",
+2026-10-02T10:48:12.3835142Z     "trace_id": "0285bac389bb4d05a9f22dbde634b593",
+2026-10-02T10:48:12.3835686Z     "result": {
+2026-10-02T10:48:12.3835911Z       "status": "ok",
+2026-10-02T10:48:12.3836169Z       "exported": 1
+2026-10-02T10:48:12.3836391Z     },
+2026-10-02T10:48:12.3836803Z     "scope": "Official Collector accepts OTLP JSON and debug exporter records the actual trace; no production backend claim."
+2026-10-02T10:48:12.3837196Z   }
+2026-10-02T10:48:12.3837389Z }
+2026-10-02T10:48:12.3980340Z ##[group]Run python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements.txt --format json --output evidence/dependency-audit.json
+2026-10-02T10:48:12.3981709Z [36;1mpython scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements.txt --format json --output evidence/dependency-audit.json[0m
+2026-10-02T10:48:12.4039375Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:12.4039673Z env:
+2026-10-02T10:48:12.4039842Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:12.4040086Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:12.4040415Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:12.4040740Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:12.4041034Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:12.4041360Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:12.4041659Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:12.4041902Z ##[endgroup]
+2026-10-02T10:48:19.5626371Z No known vulnerabilities found
+2026-10-02T10:48:19.5742696Z ##[group]Run python scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json
+2026-10-02T10:48:19.5743567Z [36;1mpython scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json[0m
+2026-10-02T10:48:19.5800098Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:19.5800359Z env:
+2026-10-02T10:48:19.5800518Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:19.5800766Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:19.5801097Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:19.5801419Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:19.5801700Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:19.5801978Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:19.5802297Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:19.5802551Z ##[endgroup]
+2026-10-02T10:48:22.5370663Z {
+2026-10-02T10:48:22.5371369Z   "scope": "1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target",
+2026-10-02T10:48:22.5371917Z   "python": "3.13.15",
+2026-10-02T10:48:22.5372182Z   "sqlite": "3.45.1",
+2026-10-02T10:48:22.5372580Z   "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+2026-10-02T10:48:22.5372999Z   "processor": "x86_64",
+2026-10-02T10:48:22.5373281Z   "logical_cpus": 4,
+2026-10-02T10:48:22.5373540Z   "samples": 60,
+2026-10-02T10:48:22.5373783Z   "seed": 2073,
+2026-10-02T10:48:22.5374001Z   "warmup_calls": 10,
+2026-10-02T10:48:22.5374317Z   "first_native_call_ms": 6.376125999992155,
+2026-10-02T10:48:22.5374625Z   "read": {
+2026-10-02T10:48:22.5374849Z     "direct_ms": {
+2026-10-02T10:48:22.5375084Z       "n": 60,
+2026-10-02T10:48:22.5375864Z       "mean": 0.3577368833309909,
+2026-10-02T10:48:22.5376180Z       "p50": 0.35478300000590934,
+2026-10-02T10:48:22.5376529Z       "p95": 0.42206500000929736,
+2026-10-02T10:48:22.5376842Z       "p99": 0.5009529999995266
+2026-10-02T10:48:22.5377111Z     },
+2026-10-02T10:48:22.5377328Z     "proxy_ms": {
+2026-10-02T10:48:22.5377561Z       "n": 60,
+2026-10-02T10:48:22.5377817Z       "mean": 5.845257416667475,
+2026-10-02T10:48:22.5378123Z       "p50": 4.540637000019387,
+2026-10-02T10:48:22.5378415Z       "p95": 11.46411400000602,
+2026-10-02T10:48:22.5378708Z       "p99": 39.272981999999956
+2026-10-02T10:48:22.5378990Z     },
+2026-10-02T10:48:22.5379223Z     "added_ms": {
+2026-10-02T10:48:22.5379454Z       "n": 60,
+2026-10-02T10:48:22.5379729Z       "mean": 5.487520533336483,
+2026-10-02T10:48:22.5379962Z       "p50": 4.173715000007405,
+2026-10-02T10:48:22.5380149Z       "p95": 11.062750999997206,
+2026-10-02T10:48:22.5380341Z       "p99": 38.77202900000043
+2026-10-02T10:48:22.5380520Z     }
+2026-10-02T10:48:22.5380661Z   },
+2026-10-02T10:48:22.5380804Z   "write": {
+2026-10-02T10:48:22.5380987Z     "submit_receipt_ms": {
+2026-10-02T10:48:22.5381168Z       "n": 30,
+2026-10-02T10:48:22.5381346Z       "p50": 13.729951999977175,
+2026-10-02T10:48:22.5381549Z       "p95": 54.4023869999819,
+2026-10-02T10:48:22.5381746Z       "p99": 165.68402400000082
+2026-10-02T10:48:22.5381920Z     },
+2026-10-02T10:48:22.5382102Z     "approval_request_to_effect_ms": {
+2026-10-02T10:48:22.5382304Z       "n": 30,
+2026-10-02T10:48:22.5382472Z       "p50": 18.316026000007923,
+2026-10-02T10:48:22.5382665Z       "p95": 53.74620099999561,
+2026-10-02T10:48:22.5382852Z       "p99": 106.3453589999881
+2026-10-02T10:48:22.5383025Z     },
+2026-10-02T10:48:22.5383176Z     "static_ms": {
+2026-10-02T10:48:22.5383334Z       "n": 30,
+2026-10-02T10:48:22.5383484Z       "p50": 0.069,
+2026-10-02T10:48:22.5383640Z       "p95": 0.094,
+2026-10-02T10:48:22.5383793Z       "p99": 0.111
+2026-10-02T10:48:22.5383946Z     },
+2026-10-02T10:48:22.5384090Z     "preview_ms": {
+2026-10-02T10:48:22.5384244Z       "n": 30,
+2026-10-02T10:48:22.5384389Z       "p50": 7.674,
+2026-10-02T10:48:22.5384816Z       "p95": 8.382,
+2026-10-02T10:48:22.5385103Z       "p99": 8.56
+2026-10-02T10:48:22.5385439Z     },
+2026-10-02T10:48:22.5385608Z     "evaluation_ms": {
+2026-10-02T10:48:22.5385781Z       "n": 30,
+2026-10-02T10:48:22.5385937Z       "p50": 9.609,
+2026-10-02T10:48:22.5386094Z       "p95": 10.28,
+2026-10-02T10:48:22.5386243Z       "p99": 10.321
+2026-10-02T10:48:22.5386391Z     }
+2026-10-02T10:48:22.5386531Z   },
+2026-10-02T10:48:22.5386683Z   "not_measured": [
+2026-10-02T10:48:22.5386846Z     "live LLM latency",
+2026-10-02T10:48:22.5387029Z     "human review latency",
+2026-10-02T10:48:22.5387242Z     "distributed upstream overhead",
+2026-10-02T10:48:22.5387469Z     "cold OS filesystem cache",
+2026-10-02T10:48:22.5387670Z     "production concurrency"
+2026-10-02T10:48:22.5387855Z   ],
+2026-10-02T10:48:22.5388362Z   "measurement_note": "direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows"
+2026-10-02T10:48:22.5388851Z }
+2026-10-02T10:48:22.5501717Z ##[group]Run python scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json
+2026-10-02T10:48:22.5502485Z [36;1mpython scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json[0m
+2026-10-02T10:48:22.5558602Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:22.5558869Z env:
+2026-10-02T10:48:22.5559032Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:22.5559276Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.5559607Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:22.5559930Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.5560237Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.5560529Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.5560854Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:22.5561114Z ##[endgroup]
+2026-10-02T10:48:22.8768279Z {
+2026-10-02T10:48:22.8768600Z   "split": "test",
+2026-10-02T10:48:22.8769120Z   "corpus_sha256": "243854b51e7039324de4c31fa7a67af1a98ddc48b9c9edfbbac581a2c2f73af7",
+2026-10-02T10:48:22.8769665Z   "live_model_requested": false,
+2026-10-02T10:48:22.8769940Z   "limitations": [
+2026-10-02T10:48:22.8770401Z     "Original synthetic corpus is unchanged and has no independent human danger gold.",
+2026-10-02T10:48:22.8770945Z     "The pure model arm measures advice only; it cannot execute or bypass the production gate.",
+2026-10-02T10:48:22.8771463Z     "Live model arms require AIRLOCK-only configuration, key and explicit budget authorization."
+2026-10-02T10:48:22.8771797Z   ],
+2026-10-02T10:48:22.8771945Z   "arms": {
+2026-10-02T10:48:22.8772099Z     "keyword": {
+2026-10-02T10:48:22.8772274Z       "status": "MEASURED",
+2026-10-02T10:48:22.8772453Z       "n": 80
+2026-10-02T10:48:22.8772602Z     },
+2026-10-02T10:48:22.8772853Z     "pure_llm": {
+2026-10-02T10:48:22.8773139Z       "status": "BLOCKED_EXTERNAL",
+2026-10-02T10:48:22.8773412Z       "n": 0
+2026-10-02T10:48:22.8773626Z     },
+2026-10-02T10:48:22.8773811Z     "hybrid_no_preview": {
+2026-10-02T10:48:22.8774015Z       "status": "BLOCKED_EXTERNAL",
+2026-10-02T10:48:22.8774203Z       "n": 0
+2026-10-02T10:48:22.8774344Z     },
+2026-10-02T10:48:22.8774496Z     "hybrid_with_preview": {
+2026-10-02T10:48:22.8774702Z       "status": "BLOCKED_EXTERNAL",
+2026-10-02T10:48:22.8774886Z       "n": 0
+2026-10-02T10:48:22.8775026Z     }
+2026-10-02T10:48:22.8775168Z   }
+2026-10-02T10:48:22.8775606Z }
+2026-10-02T10:48:22.8892409Z ##[group]Run python scripts/run_logged.py evidence/study-analysis.log -- python -m benchmark.research --output evidence/study-analysis.json study evidence/study-automation.json
+2026-10-02T10:48:22.8893329Z [36;1mpython scripts/run_logged.py evidence/study-analysis.log -- python -m benchmark.research --output evidence/study-analysis.json study evidence/study-automation.json[0m
+2026-10-02T10:48:22.8949014Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:22.8949451Z env:
+2026-10-02T10:48:22.8949613Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:22.8949859Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.8950186Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:22.8950508Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.8950790Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.8951104Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:22.8951392Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:22.8951639Z ##[endgroup]
+2026-10-02T10:48:23.0665671Z {
+2026-10-02T10:48:23.0666006Z   "status": "BLOCKED_EXTERNAL",
+2026-10-02T10:48:23.0666271Z   "human_participants": 0,
+2026-10-02T10:48:23.0666469Z   "excluded": [
+2026-10-02T10:48:23.0666632Z     {
+2026-10-02T10:48:23.0666851Z       "participant_id": "automation-browser",
+2026-10-02T10:48:23.0667221Z       "reason": "nonhuman, no consent, duplicate or invalid metadata"
+2026-10-02T10:48:23.0667487Z     }
+2026-10-02T10:48:23.0667637Z   ],
+2026-10-02T10:48:23.0667795Z   "participants": [],
+2026-10-02T10:48:23.0667982Z   "paired_time_delta": {
+2026-10-02T10:48:23.0668166Z     "n": 0,
+2026-10-02T10:48:23.0668320Z     "mean": null,
+2026-10-02T10:48:23.0668485Z     "ci95": null
+2026-10-02T10:48:23.0668642Z   },
+2026-10-02T10:48:23.0668798Z   "paired_accuracy_delta": {
+2026-10-02T10:48:23.0668982Z     "n": 0,
+2026-10-02T10:48:23.0669142Z     "mean": null,
+2026-10-02T10:48:23.0669294Z     "ci95": null
+2026-10-02T10:48:23.0669444Z   },
+2026-10-02T10:48:23.0669641Z   "all_decisions_visible_ms": {
+2026-10-02T10:48:23.0669834Z     "n": 0,
+2026-10-02T10:48:23.0669983Z     "mean": null,
+2026-10-02T10:48:23.0670141Z     "median": null,
+2026-10-02T10:48:23.0670300Z     "p95": null
+2026-10-02T10:48:23.0670453Z   },
+2026-10-02T10:48:23.0670603Z   "correct_decisions": {
+2026-10-02T10:48:23.0670791Z     "numerator": 0,
+2026-10-02T10:48:23.0670954Z     "denominator": 0,
+2026-10-02T10:48:23.0671123Z     "value": null
+2026-10-02T10:48:23.0671274Z   },
+2026-10-02T10:48:23.0671418Z   "limitations": [
+2026-10-02T10:48:23.0671808Z     "No causal efficiency claim without recruitment, business gold, counterbalancing and adequate sample size.",
+2026-10-02T10:48:23.0672367Z     "Exported browser timing and human identity are untrusted telemetry, never authorization.",
+2026-10-02T10:48:23.0672920Z     "Visibility duration excludes hidden tabs; correctness is supplied task gold, not a policy guess."
+2026-10-02T10:48:23.0673272Z   ]
+2026-10-02T10:48:23.0673428Z }
+2026-10-02T10:48:23.0786095Z ##[group]Run python scripts/run_logged.py evidence/comparison.log -- python scripts/demo_comparison.py --output evidence/comparison.json
+2026-10-02T10:48:23.0786811Z [36;1mpython scripts/run_logged.py evidence/comparison.log -- python scripts/demo_comparison.py --output evidence/comparison.json[0m
+2026-10-02T10:48:23.0843402Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:23.0843677Z env:
+2026-10-02T10:48:23.0843839Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:23.0844086Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.0844418Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:23.0844738Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.0845021Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.0845514Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.0845845Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:23.0846095Z ##[endgroup]
+2026-10-02T10:48:23.5757323Z {
+2026-10-02T10:48:23.5757814Z   "scope": "disposable synthetic data; automated independent reviewer fixture; no live model/human",
+2026-10-02T10:48:23.5758200Z   "without_gate": {
+2026-10-02T10:48:23.5758372Z     "before": 1206,
+2026-10-02T10:48:23.5758792Z     "after": 0
+2026-10-02T10:48:23.5758946Z   },
+2026-10-02T10:48:23.5759095Z   "with_gate": {
+2026-10-02T10:48:23.5759337Z     "pending_rows": 1206,
+2026-10-02T10:48:23.5759623Z     "rejected_rows": 1206,
+2026-10-02T10:48:23.5759865Z     "denial": {
+2026-10-02T10:48:23.5760148Z       "id": "03366679fbec489ca52e201a8ee68ab0",
+2026-10-02T10:48:23.5760480Z       "state": "rejected",
+2026-10-02T10:48:23.5760788Z       "decision": "need_approval",
+2026-10-02T10:48:23.5761068Z       "reason_code": "human_rejected",
+2026-10-02T10:48:23.5761279Z       "result": null,
+2026-10-02T10:48:23.5761474Z       "expires_at": 1790938403.483503,
+2026-10-02T10:48:23.5761783Z       "action_id": "03366679fbec489ca52e201a8ee68ab0",
+2026-10-02T10:48:23.5762062Z       "trace_id": "1422713ea3854790939df1b952be7015",
+2026-10-02T10:48:23.5762308Z       "retryable": false,
+2026-10-02T10:48:23.5762519Z       "allowed_alternatives": [
+2026-10-02T10:48:23.5762732Z         "query_original_action",
+2026-10-02T10:48:23.5762932Z         "bounded_read"
+2026-10-02T10:48:23.5763099Z       ],
+2026-10-02T10:48:23.5763277Z       "execution_occurred": false,
+2026-10-02T10:48:23.5763689Z       "next_step": "Use a bounded SELECT or submit a narrower NEW action; do not retry rejected writes blindly."
+2026-10-02T10:48:23.5764058Z     },
+2026-10-02T10:48:23.5764222Z     "safe_alternative": {
+2026-10-02T10:48:23.5764450Z       "id": "a00e5811bedc413c9b6a3a8e71c2db2b",
+2026-10-02T10:48:23.5764674Z       "state": "executed",
+2026-10-02T10:48:23.5764853Z       "decision": "pass",
+2026-10-02T10:48:23.5765057Z       "reason_code": "bounded_read",
+2026-10-02T10:48:23.5770365Z       "result": {
+2026-10-02T10:48:23.5770558Z         "matched_rows": 0,
+2026-10-02T10:48:23.5770739Z         "rows": [
+2026-10-02T10:48:23.5770890Z           {
+2026-10-02T10:48:23.5771049Z             "remaining": 1206
+2026-10-02T10:48:23.5771228Z           }
+2026-10-02T10:48:23.5771379Z         ],
+2026-10-02T10:48:23.5771535Z         "truncated": false
+2026-10-02T10:48:23.5771709Z       },
+2026-10-02T10:48:23.5771885Z       "expires_at": 1790938403.496702,
+2026-10-02T10:48:23.5772139Z       "action_id": "a00e5811bedc413c9b6a3a8e71c2db2b",
+2026-10-02T10:48:23.5772418Z       "trace_id": "78f8af99a6004345bbac86c675536e7f",
+2026-10-02T10:48:23.5772641Z       "retryable": false,
+2026-10-02T10:48:23.5772836Z       "allowed_alternatives": [
+2026-10-02T10:48:23.5773040Z         "query_original_action"
+2026-10-02T10:48:23.5773209Z       ],
+2026-10-02T10:48:23.5773378Z       "execution_occurred": true,
+2026-10-02T10:48:23.5773600Z       "next_step": "Read the result."
+2026-10-02T10:48:23.5773789Z     },
+2026-10-02T10:48:23.5774133Z     "approved_rows": 0,
+2026-10-02T10:48:23.5774324Z     "approved_receipt": {
+2026-10-02T10:48:23.5774543Z       "id": "c7c4e66a35ce4ceb8827b9f849edc9d1",
+2026-10-02T10:48:23.5774790Z       "state": "executed",
+2026-10-02T10:48:23.5774991Z       "decision": "need_approval",
+2026-10-02T10:48:23.5775433Z       "reason_code": "human_approved",
+2026-10-02T10:48:23.5775668Z       "result": {
+2026-10-02T10:48:23.5775837Z         "matched_rows": 1206,
+2026-10-02T10:48:23.5776024Z         "rows": [],
+2026-10-02T10:48:23.5776189Z         "truncated": false
+2026-10-02T10:48:23.5776361Z       },
+2026-10-02T10:48:23.5776539Z       "expires_at": 1790938403.499583,
+2026-10-02T10:48:23.5776786Z       "action_id": "c7c4e66a35ce4ceb8827b9f849edc9d1",
+2026-10-02T10:48:23.5777059Z       "trace_id": "f1fc47f8591d481b86bae2d536572936",
+2026-10-02T10:48:23.5777279Z       "retryable": false,
+2026-10-02T10:48:23.5777476Z       "allowed_alternatives": [
+2026-10-02T10:48:23.5777679Z         "query_original_action"
+2026-10-02T10:48:23.5777863Z       ],
+2026-10-02T10:48:23.5778036Z       "execution_occurred": true,
+2026-10-02T10:48:23.5778254Z       "next_step": "Read the result."
+2026-10-02T10:48:23.5778443Z     }
+2026-10-02T10:48:23.5778582Z   },
+2026-10-02T10:48:23.5778727Z   "audit": {
+2026-10-02T10:48:23.5778888Z     "valid": true,
+2026-10-02T10:48:23.5779048Z     "events": 5,
+2026-10-02T10:48:23.5779474Z     "head": "2d922ec7f76443049d31f389c32af59f673a1c784e48fb6d0a3ef897303caeaa",
+2026-10-02T10:48:23.5779796Z     "anchor_status": "not_configured",
+2026-10-02T10:48:23.5780463Z     "limitation": "Tail truncation after the last independently retained checkpoint remains undetectable. A server with all keys can forge new history; keep checkpoints outside its write authority."
+2026-10-02T10:48:23.5781029Z   }
+2026-10-02T10:48:23.5781169Z }
+2026-10-02T10:48:23.5899712Z ##[group]Run python scripts/verify_evidence.py
+2026-10-02T10:48:23.5899996Z [36;1mpython scripts/verify_evidence.py[0m
+2026-10-02T10:48:23.5956888Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:23.5957152Z env:
+2026-10-02T10:48:23.5957320Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:23.5957562Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.5957911Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:23.5958240Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.5958551Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.5958831Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.5959115Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:23.5959364Z ##[endgroup]
+2026-10-02T10:48:23.6362980Z Verified all 177 JUnit cases, exit receipts, screenshots, Docker and raw benchmark rows.
+2026-10-02T10:48:23.6437916Z ##[group]Run python scripts/evidence_manifest.py
+2026-10-02T10:48:23.6438208Z [36;1mpython scripts/evidence_manifest.py[0m
+2026-10-02T10:48:23.6493008Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-02T10:48:23.6493274Z env:
+2026-10-02T10:48:23.6493432Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:23.6493676Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.6494005Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:23.6494344Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.6494630Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.6494915Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.6495341Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:23.6495654Z ##[endgroup]
+2026-10-02T10:48:23.7249415Z {"commit": "400024bd59133d9e50f8fb00288b9f02693b2153", "artifact_files": 57}
+2026-10-02T10:48:23.7402524Z ##[group]Run actions/upload-artifact@v4
+2026-10-02T10:48:23.7402768Z with:
+2026-10-02T10:48:23.7402940Z   name: acceptance-evidence
+2026-10-02T10:48:23.7403132Z   path: evidence/
+2026-10-02T10:48:23.7403306Z   retention-days: 90
+2026-10-02T10:48:23.7403487Z   if-no-files-found: warn
+2026-10-02T10:48:23.7403673Z   compression-level: 6
+2026-10-02T10:48:23.7403846Z   overwrite: false
+2026-10-02T10:48:23.7404019Z   include-hidden-files: false
+2026-10-02T10:48:23.7404207Z env:
+2026-10-02T10:48:23.7404364Z   NEXT_TELEMETRY_DISABLED: 1
+2026-10-02T10:48:23.7404615Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.7404952Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-10-02T10:48:23.7405493Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.7405883Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.7406172Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-10-02T10:48:23.7406486Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-10-02T10:48:23.7406735Z ##[endgroup]
+2026-10-02T10:48:23.8881881Z (node:6216) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T10:48:23.8884971Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:48:23.9238907Z With the provided path, there will be 194 files uploaded
+2026-10-02T10:48:23.9239594Z Artifact name is valid!
+2026-10-02T10:48:23.9240408Z Root directory input is valid!
+2026-10-02T10:48:24.2793800Z Beginning upload of artifact content to blob storage
+2026-10-02T10:48:24.5241045Z (node:6216) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-02T10:48:25.3022143Z Uploaded bytes 4521492
+2026-10-02T10:48:25.3601274Z Finished uploading artifact content to blob storage!
+2026-10-02T10:48:25.3601871Z SHA256 digest of uploaded artifact zip is be3bb07644f8a056a36e59039c7f52d68b50b6c1da73c1aedfb287e5ef57fc79
+2026-10-02T10:48:25.3602824Z Finalizing artifact upload
+2026-10-02T10:48:25.5996270Z Artifact acceptance-evidence.zip successfully finalized. Artifact ID 11221817634
+2026-10-02T10:48:25.5997407Z Artifact acceptance-evidence has been successfully uploaded! Final size is 4521492 bytes. Artifact ID is 11221817634
+2026-10-02T10:48:25.6002592Z Artifact download URL: https://github.com/Changxin-YR/AIRLOCK/actions/runs/36997232536/artifacts/11221817634
+2026-10-02T10:48:25.6163821Z Post job cleanup.
+2026-10-02T10:48:25.7217740Z (node:6228) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T10:48:25.7218446Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:48:25.7413352Z Post job cleanup.
+2026-10-02T10:48:25.8494044Z (node:6236) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-02T10:48:25.8494706Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-02T10:48:25.8650575Z Post job cleanup.
+2026-10-02T10:48:25.9454667Z [command]/usr/bin/git version
+2026-10-02T10:48:25.9505132Z git version 2.55.0
+2026-10-02T10:48:25.9547440Z Temporarily overriding HOME='/home/runner/work/_temp/a6722644-093c-4a83-a39b-fb1f1c12ddc2' before making global git config changes
+2026-10-02T10:48:25.9548746Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-02T10:48:25.9553919Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/AIRLOCK/AIRLOCK
+2026-10-02T10:48:25.9607928Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-02T10:48:25.9654121Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-02T10:48:25.9944669Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-02T10:48:25.9980667Z http.https://github.com/.extraheader
+2026-10-02T10:48:25.9994520Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-02T10:48:26.0044349Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-02T10:48:26.0355068Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-02T10:48:26.0404535Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-02T10:48:26.0778859Z Cleaning up orphan processes
+2026-10-02T10:48:26.1062594Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

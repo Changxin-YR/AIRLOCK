@@ -1,0 +1,17 @@
+{
+  "commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "files": {
+    "airlock/archive.py": {
+      "sha256": "a90c41ab3ceee70d74cd122c93bbe3e724ca933e6e4655731f4eab728fe4a4ee",
+      "snapshot": "var\\closure2-20261003\\archive\\baseline-archive.py"
+    },
+    "scripts/archive_checkpoint_s3.py": {
+      "sha256": "373f97796e8ccb8a81c4d0e46cd8e9cf49f562b4b4e21b87fbe6f3487fb3dbb1",
+      "snapshot": "var\\closure2-20261003\\archive\\baseline-archive_checkpoint_s3.py"
+    },
+    "tests/test_archive.py": {
+      "sha256": "dee4600ba8f643c88f41620a5055e1e7f3c482dda8aea06a5451da125323681f",
+      "snapshot": "var\\closure2-20261003\\archive\\baseline-test_archive.py"
+    }
+  }
+}

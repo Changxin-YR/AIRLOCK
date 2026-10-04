@@ -1,0 +1,36 @@
+{
+  "baseline_commit": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "files": {
+    "airlock/service.py": {
+      "sha256": "f99c935110b6141c756528f3a305481d068cdef48dbad0163325d5f9f57ed07d",
+      "bytes": 28816,
+      "saved_as": "var\\closure2-20261003\\governance\\baseline-source\\service.py"
+    },
+    "airlock/governance.py": {
+      "sha256": "a7c3af10108ee7e4c58ba363319b875333726e02c25171c75daa22a020ad8a6a",
+      "bytes": 2643,
+      "saved_as": "var\\closure2-20261003\\governance\\baseline-source\\governance.py"
+    },
+    "airlock/models.py": {
+      "sha256": "bb3f31bfec35cdc104f27bab7e419081f5ef781fb730da0ea8141bca0e9887b6",
+      "bytes": 7680,
+      "saved_as": "var\\closure2-20261003\\governance\\baseline-source\\models.py"
+    },
+    "airlock/access.py": {
+      "sha256": "67c75e62d6088266e30c42c87101daf56eb717530cd2169e90c3858ef6f8249d",
+      "bytes": 3398,
+      "saved_as": "var\\closure2-20261003\\governance\\baseline-source\\access.py"
+    },
+    "airlock/recovery.py": {
+      "sha256": "7ddda2fba7948bf9f9dc8a89aa601417463317f7b69a92095ce63beba8846b4d",
+      "bytes": 3766,
+      "saved_as": "var\\closure2-20261003\\governance\\baseline-source\\recovery.py"
+    },
+    "airlock/store.py": {
+      "sha256": "6611ddfe807232d5cb025529f2e2103e284869510b9a16024f9a93aa00b76f45",
+      "bytes": 11070,
+      "saved_as": "var\\closure2-20261003\\governance\\baseline-source\\store.py"
+    }
+  },
+  "scope": "Synthetic isolated fixtures; no production credentials, model calls or user business data."
+}

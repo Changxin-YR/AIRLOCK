@@ -1,0 +1,76 @@
+{
+  "scope": "1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target",
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "logical_cpus": 4,
+  "samples": 60,
+  "seed": 2073,
+  "warmup_calls": 10,
+  "first_native_call_ms": 40.75985200000787,
+  "read": {
+    "direct_ms": {
+      "n": 60,
+      "mean": 0.40339905000147763,
+      "p50": 0.3929640000137624,
+      "p95": 0.4330579999987094,
+      "p99": 0.5740910000326949
+    },
+    "proxy_ms": {
+      "n": 60,
+      "mean": 4.606515950006458,
+      "p50": 4.48676000002024,
+      "p95": 5.070740000007845,
+      "p99": 7.806993999963652
+    },
+    "added_ms": {
+      "n": 60,
+      "mean": 4.203116900004981,
+      "p50": 4.086072999996304,
+      "p95": 4.662358000018685,
+      "p99": 7.384585999943738
+    }
+  },
+  "write": {
+    "submit_receipt_ms": {
+      "n": 30,
+      "p50": 15.398948000040491,
+      "p95": 17.765644000007796,
+      "p99": 18.75222399996801
+    },
+    "approval_request_to_effect_ms": {
+      "n": 30,
+      "p50": 22.749911999994765,
+      "p95": 27.374530000031427,
+      "p99": 44.04022199997826
+    },
+    "static_ms": {
+      "n": 30,
+      "p50": 0.073,
+      "p95": 0.079,
+      "p99": 0.094
+    },
+    "preview_ms": {
+      "n": 30,
+      "p50": 10.034,
+      "p95": 11.638,
+      "p99": 12.098
+    },
+    "evaluation_ms": {
+      "n": 30,
+      "p50": 11.537,
+      "p95": 14.017,
+      "p99": 14.753
+    }
+  },
+  "not_measured": [
+    "live LLM latency",
+    "human review latency",
+    "distributed upstream overhead",
+    "cold OS filesystem cache",
+    "production concurrency"
+  ],
+  "measurement_note": "direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows",
+  "phase_note": "server evaluation ends before final audit/commit/close; HTTP minus evaluation also includes transport, scheduling and serialization, not a pure fsync measurement. Phase data read after all timed requests."
+}

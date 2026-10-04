@@ -1,0 +1,42 @@
+{
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
+  "documents": {
+    "README.md": {
+      "bytes": 7977,
+      "sha256": "3d6a3d013a5ccaece48d7060675749082c4aba68f87f21e7aefc6c8bd8211f8d"
+    },
+    "docs/PLAN.md": {
+      "bytes": 3265,
+      "sha256": "7c561d76ddc8dcf16f6a9b29be288732acd0cd84233a295d7f12ca24d7c9e7a1"
+    },
+    "docs/OPERATIONS.md": {
+      "bytes": 20752,
+      "sha256": "96a252b3ef092809996e69698d233cd9b51cc78ccf35fd470d30677d35920b27"
+    },
+    "docs/acceptance/FINAL_REPORT.md": {
+      "bytes": 5257,
+      "sha256": "28aa05b30956cf9cb41d3920b8399aa440a1e8bf88b1af848cb36fcbdb67d624"
+    },
+    "docs/acceptance/COMPLETION_MATRIX.json": {
+      "bytes": 1112358,
+      "sha256": "929356fe149dcaffaca5064b7921c4ad24d870ff041a66840c6d1feb86d07ede"
+    },
+    "docs/acceptance/COMPLETION_MATRIX.md": {
+      "bytes": 1065272,
+      "sha256": "a86b25e527b2f74263a14b8164fd2d6ebd2a743c3d36123c1cd3962a556db42c"
+    },
+    "docs/acceptance/FINDINGS_AND_FIXES.md": {
+      "bytes": 21366,
+      "sha256": "bdbc334d47a5f5d623c55b48ba0f7d3330d0c9112a9343d70015ea09d998ea18"
+    },
+    "docs/acceptance/DELIVERY_STATE.json": {
+      "bytes": 7229,
+      "sha256": "eb1688166cef54d6c0a0c2bdea198814ffef4723265dd73a3214f2d9bb113026"
+    },
+    "docs/acceptance/EVIDENCE_RETENTION.md": {
+      "bytes": 13313,
+      "sha256": "4d6a58eaf2082a6a59bb21e71b823dd5bdf437ee1abc28adbcae6be553fd3755"
+    }
+  },
+  "matrix_final_receipt": "matrix-final.log.status.json"
+}

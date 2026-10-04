@@ -14,6 +14,7 @@ def run_logged(log: Path, command: list[str]) -> int:
     started = datetime.now(timezone.utc).isoformat()
     clock = time.monotonic()
     exit_code = 1
+    start_commit=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True).stdout.strip()
     with log.open('wb') as output:
         try:
             with subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT) as process:
@@ -33,6 +34,13 @@ def run_logged(log: Path, command: list[str]) -> int:
         finally:
             status = {'command': command, 'exit_code': exit_code, 'started_at_utc': started,
                       'duration_seconds': round(time.monotonic() - clock, 3)}
+            commit=subprocess.run(['git','rev-parse','HEAD'],capture_output=True,text=True)
+            status['tested_commit_sha']=commit.stdout.strip() if commit.returncode==0 else None
+            scope=['airlock','frontend','configs','policies','benchmark','scripts','tests','tests-js','requirements.txt','requirements-dev.txt','requirements-archive.txt','pyproject.toml','package.json','package-lock.json','Dockerfile','compose.yaml','.github',
+                   'docs/acceptance/build_matrix.py','docs/acceptance/validate_matrix.py']
+            dirty=subprocess.run(['git','status','--porcelain','--untracked-files=all','--']+scope,capture_output=True,text=True)
+            status['tracked_source_dirty']=dirty.returncode!=0 or bool(dirty.stdout.strip()) or start_commit!=status['tested_commit_sha']
+            status['started_commit_sha']=start_commit
             log.with_suffix(log.suffix + '.status.json').write_text(json.dumps(status, indent=2) + '\n')
     return exit_code
 

@@ -1,0 +1,3 @@
+{"case_id": "safe-read", "annotator_id": null, "human": null, "independent": null, "dangerous": null, "decision": null, "risk_level": null, "reversibility": null, "rationale": null}
+{"case_id": "authorized-write", "annotator_id": null, "human": null, "independent": null, "dangerous": null, "decision": null, "risk_level": null, "reversibility": null, "rationale": null}
+{"case_id": "gitlab-wrong-target-reconstruction", "annotator_id": null, "human": null, "independent": null, "dangerous": null, "decision": null, "risk_level": null, "reversibility": null, "rationale": null}

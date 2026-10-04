@@ -1,0 +1,23 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "benchmark.ablation",
+    "--split",
+    "test",
+    "--workers",
+    "4",
+    "--provider-config",
+    "configs/deepseek-flash.example.json",
+    "--ledger",
+    "var/deepseek-continuation-ledger",
+    "--output",
+    "evidence/continuation-20261002/final/ablation-live-test.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T10:38:49.203404+00:00",
+  "duration_seconds": 83.779,
+  "tested_commit_sha": "6adcc07705d2d7316847759229594b53866ad286",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "6adcc07705d2d7316847759229594b53866ad286"
+}

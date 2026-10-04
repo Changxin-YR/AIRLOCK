@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="11" skipped="0" tests="16" time="0.592" timestamp="2026-10-04T08:17:55.787413+08:00" hostname="WHHHH"><testcase classname="tests.test_launcher" name="test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[missing]" time="0.008"><failure message="AssertionError: assert ({'AIRLOCK_AGE...sing] (call)'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}&#10;  &#10;  Omitting 3 identical items, use -vv to show&#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[missing] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_explicit_missing0'), {'AIRLOC...file_rejected_before_uvicorn[missing] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BB728E0&gt;)
+target_kind = 'missing'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BB1EF90&gt;
+
+    @pytest.mark.parametrize('target_kind', ['missing', 'directory'])
+    def test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn(isolated_launcher, target_kind, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        environment.update(SYNTHETIC)
+        path = root / 'selected-config.json'
+        if target_kind == 'directory':
+            path.mkdir()
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+        assert error.value.code == 2 and calls == []
+&gt;       assert environment == SYNTHETIC and not (root / 'var').exists()
+E       AssertionError: assert ({'AIRLOCK_AGE...sing] (call)'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[missing] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:47: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[directory]" time="0.003"><failure message="AssertionError: assert ({'AIRLOCK_AGE...tory] (call)'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}&#10;  &#10;  Omitting 3 identical items, use -vv to show&#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[directory] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_explicit_missing1'), {'AIRLOC...le_rejected_before_uvicorn[directory] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BB714E0&gt;)
+target_kind = 'directory'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BB62FD0&gt;
+
+    @pytest.mark.parametrize('target_kind', ['missing', 'directory'])
+    def test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn(isolated_launcher, target_kind, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        environment.update(SYNTHETIC)
+        path = root / 'selected-config.json'
+        if target_kind == 'directory':
+            path.mkdir()
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+        assert error.value.code == 2 and calls == []
+&gt;       assert environment == SYNTHETIC and not (root / 'var').exists()
+E       AssertionError: assert ({'AIRLOCK_AGE...tory] (call)'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[directory] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:47: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_default_missing_config_keeps_environment_only_compatibility" time="0.002" /><testcase classname="tests.test_launcher" name="test_launcher_valid_config_retains_environment_precedence[False-utf-8]" time="0.010" /><testcase classname="tests.test_launcher" name="test_launcher_valid_config_retains_environment_precedence[True-utf-8]" time="0.004" /><testcase classname="tests.test_launcher" name="test_launcher_valid_config_retains_environment_precedence[True-utf-8-sig]" time="0.011" /><testcase classname="tests.test_launcher" name="test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{&quot;AIRLOCK_AGENT_TOKEN&quot;:&quot;synthetic-secret-marker&quot;,]" time="0.010"><failure message="assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...er&quot;,] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{&quot;AIRLOCK_AGENT_TOKEN&quot;:&quot;synthetic-secret-marker&quot;,] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_invalid_configur0'), {'PYTEST...NT_TOKEN":"synthetic-secret-marker",] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BC61F80&gt;)
+contents = b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BD8C690&gt;
+
+    @pytest.mark.parametrize('contents', [
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",',
+        b'\xffsynthetic-secret-marker',
+        b'[]', b'null', b'"synthetic-secret-marker"',
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}',
+    ])
+    def test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge(isolated_launcher, contents, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'invalid.json'
+        path.write_bytes(contents)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...er",] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:92: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[\xffsynthetic-secret-marker]" time="0.010"><failure message="AssertionError: assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...rker] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[\\xffsynthetic-secret-marker] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_invalid_configur1'), {'PYTEST...y_merge[\\xffsynthetic-secret-marker] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BC61D00&gt;)
+contents = b'\xffsynthetic-secret-marker'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BD91480&gt;
+
+    @pytest.mark.parametrize('contents', [
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",',
+        b'\xffsynthetic-secret-marker',
+        b'[]', b'null', b'"synthetic-secret-marker"',
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}',
+    ])
+    def test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge(isolated_launcher, contents, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'invalid.json'
+        path.write_bytes(contents)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       AssertionError: assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...rker] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[\\xffsynthetic-secret-marker] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:92: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[[]]" time="0.004"><failure message="AssertionError: assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...e[[]] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[[]] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_invalid_configur2'), {'PYTEST...ized_and_does_not_partially_merge[[]] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BC62D40&gt;)
+contents = b'[]'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BD91BA0&gt;
+
+    @pytest.mark.parametrize('contents', [
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",',
+        b'\xffsynthetic-secret-marker',
+        b'[]', b'null', b'"synthetic-secret-marker"',
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}',
+    ])
+    def test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge(isolated_launcher, contents, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'invalid.json'
+        path.write_bytes(contents)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       AssertionError: assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...e[[]] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[[]] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:92: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[null]" time="0.003"><failure message="AssertionError: assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...null] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[null] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_invalid_configur3'), {'PYTEST...ed_and_does_not_partially_merge[null] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BC63240&gt;)
+contents = b'null'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BC7CEF0&gt;
+
+    @pytest.mark.parametrize('contents', [
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",',
+        b'\xffsynthetic-secret-marker',
+        b'[]', b'null', b'"synthetic-secret-marker"',
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}',
+    ])
+    def test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge(isolated_launcher, contents, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'invalid.json'
+        path.write_bytes(contents)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       AssertionError: assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...null] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[null] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:92: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[&quot;synthetic-secret-marker&quot;]" time="0.009"><failure message="assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...ker&quot;] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[&quot;synthetic-secret-marker&quot;] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_invalid_configur4'), {'PYTEST...ally_merge["synthetic-secret-marker"] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BC63920&gt;)
+contents = b'"synthetic-secret-marker"'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BC82580&gt;
+
+    @pytest.mark.parametrize('contents', [
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",',
+        b'\xffsynthetic-secret-marker',
+        b'[]', b'null', b'"synthetic-secret-marker"',
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}',
+    ])
+    def test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge(isolated_launcher, contents, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'invalid.json'
+        path.write_bytes(contents)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...ker"] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge["synthetic-secret-marker"] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:92: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{&quot;AIRLOCK_AGENT_TOKEN&quot;:&quot;synthetic-secret-marker&quot;,&quot;AIRLOCK_AUDIT_KEY&quot;:42}]" time="0.009"><failure message="assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...:42}] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{&quot;AIRLOCK_AGENT_TOKEN&quot;:&quot;synthetic-secret-marker&quot;,&quot;AIRLOCK_AUDIT_KEY&quot;:42}] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_invalid_configur5'), {'PYTEST...cret-marker","AIRLOCK_AUDIT_KEY":42}] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BD2C2C0&gt;)
+contents = b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}'
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BC82E00&gt;
+
+    @pytest.mark.parametrize('contents', [
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker",',
+        b'\xffsynthetic-secret-marker',
+        b'[]', b'null', b'"synthetic-secret-marker"',
+        b'{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}',
+    ])
+    def test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge(isolated_launcher, contents, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'invalid.json'
+        path.write_bytes(contents)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...:42}] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{"AIRLOCK_AGENT_TOKEN":"synthetic-secret-marker","AIRLOCK_AUDIT_KEY":42}] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:92: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_unreadable_configuration_does_not_echo_filesystem_error" time="0.003"><failure message="AssertionError: assert (2 == 2 and [] == []&#10; +  where 2 = SystemExit(2).code&#10; +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...error (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_unreadable_configuration_does_not_echo_filesystem_error '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_unreadable_confi0'), {'PYTEST...ration_does_not_echo_filesystem_error (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BD2C9A0&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001F16BD54110&gt;
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BB97850&gt;
+
+    def test_launcher_unreadable_configuration_does_not_echo_filesystem_error(isolated_launcher, monkeypatch, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        path = root / 'unreadable.json'
+        write_config(path)
+        def denied(*args, **kwargs):
+            raise PermissionError('synthetic-private-filesystem-detail')
+        monkeypatch.setattr(Path, 'read_text', denied)
+        with pytest.raises(SystemExit) as error:
+            invoke('serve', '--config', str(path))
+&gt;       assert error.value.code == 2 and calls == [] and environment == {}
+E       AssertionError: assert (2 == 2 and [] == []
+E        +  where 2 = SystemExit(2).code
+E        +    where SystemExit(2) = &lt;ExceptionInfo SystemExit(2) tblen=5&gt;.value
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...error (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_unreadable_configuration_does_not_echo_filesystem_error '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:107: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_default_directory_is_a_controlled_error" time="0.004" /><testcase classname="tests.test_launcher" name="test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[False]" time="0.011"><failure message="AssertionError: assert ({'AIRLOCK_AGE...xxxxxxxxxxxx'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}&#10;  &#10;  Omitting 3 identical items, use -vv to show&#10;  Use -v to get more diff and [] == []&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...alse] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[False] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_init_stays_exclu0'), {'PYTEST...oes_not_rotate_existing_config[False] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BD2D8A0&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001F16BBA3E30&gt;
+explicit = False
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BCFC350&gt;
+
+    @pytest.mark.parametrize('explicit', [False, True])
+    def test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config(isolated_launcher, monkeypatch, explicit, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        counter = iter(SYNTHETIC.values())
+        monkeypatch.setattr(launcher.secrets, 'token_urlsafe', lambda _: next(counter))
+        path = root / ('other/private.json' if explicit else 'var/local.json')
+        arguments = ['init', *(['--config', str(path)] if explicit else [])]
+        invoke(*arguments)
+        before = path.read_bytes()
+&gt;       assert json.loads(before) == SYNTHETIC and calls == [] and environment == {}
+E       AssertionError: assert ({'AIRLOCK_AGE...xxxxxxxxxxxx'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Use -v to get more diff and [] == []
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...alse] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[False] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:129: AssertionError</failure></testcase><testcase classname="tests.test_launcher" name="test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[True]" time="0.005"><failure message="AssertionError: assert ({'AIRLOCK_AGE...xxxxxxxxxxxx'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}&#10;  &#10;  Omitting 3 identical items, use -vv to show&#10;  Use -v to get more diff and [] == []&#10;  &#10;  Use -v to get more diff and {'PYTEST_CURR...True] (call)'} == {}&#10;  &#10;  Left contains 1 more item:&#10;  {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[True] '&#10;                          '(call)'}&#10;  Use -v to get more diff)">isolated_launcher = (WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-472/test_launcher_init_stays_exclu1'), {'PYTEST...does_not_rotate_existing_config[True] (call)'}, [], &lt;function isolated_launcher.&lt;locals&gt;.invoke at 0x000001F16BC61260&gt;)
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001F16BBA3C20&gt;
+explicit = True
+capsys = &lt;_pytest.capture.CaptureFixture object at 0x000001F16BBB7020&gt;
+
+    @pytest.mark.parametrize('explicit', [False, True])
+    def test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config(isolated_launcher, monkeypatch, explicit, capsys):
+        root, environment, calls, invoke = isolated_launcher
+        counter = iter(SYNTHETIC.values())
+        monkeypatch.setattr(launcher.secrets, 'token_urlsafe', lambda _: next(counter))
+        path = root / ('other/private.json' if explicit else 'var/local.json')
+        arguments = ['init', *(['--config', str(path)] if explicit else [])]
+        invoke(*arguments)
+        before = path.read_bytes()
+&gt;       assert json.loads(before) == SYNTHETIC and calls == [] and environment == {}
+E       AssertionError: assert ({'AIRLOCK_AGE...xxxxxxxxxxxx'} == {'AIRLOCK_AGE...xxxxxxxxxxxx'}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Use -v to get more diff and [] == []
+E         
+E         Use -v to get more diff and {'PYTEST_CURR...True] (call)'} == {}
+E         
+E         Left contains 1 more item:
+E         {'PYTEST_CURRENT_TEST': 'tests/test_launcher.py::test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[True] '
+E                                 '(call)'}
+E         Use -v to get more diff)
+
+C:\Users\27363\Desktop\airlock\tests\test_launcher.py:129: AssertionError</failure></testcase></testsuite></testsuites>

@@ -1,0 +1,87 @@
+{
+  "kind": "research_and_delivery_integrity_review",
+  "reviewed_source_sha": "4aca4073114b5b992460903abf33c3721f4f8063",
+  "reviewer": "codex-subagent",
+  "source": "model",
+  "human": false,
+  "status": "FIXED_PENDING_FINAL_VALIDATION",
+  "fix_review_scope": "Reviewed root's working-tree fixes after source 4aca407; final CI/matrix generation and in-memory negative controls are still pending root.",
+  "scope": [
+    "docs/acceptance/build_matrix.py",
+    "docs/acceptance/validate_matrix.py",
+    "var/finalize_autonomous_docs.py",
+    "evidence/autonomous-20261003/models/*",
+    "evidence/autonomous-20261003/github-relay-summary.json"
+  ],
+  "p0_p1_findings": 0,
+  "findings": [
+    {
+      "id": "RESEARCH-FINAL-01",
+      "status": "fixed_pending_final_generation_and_negative_control",
+      "fix_verified": "The same-row clean candidate now requires its tested_commit_sha to equal REPORT.tested_commit_sha. The existing per-receipt loop also checks declared SHA and dirty status against each raw receipt.",
+      "priority": "P2",
+      "file": "docs/acceptance/validate_matrix.py",
+      "lines": [
+        47,
+        48
+      ],
+      "title": "Dirty supporting evidence does not require same-row final-SHA validation",
+      "evidence": "The clean candidate predicate requires tracked_source_dirty=false and an exit-zero receipt, but never binds that candidate's tested_commit_sha to REPORT.tested_commit_sha. A historical clean browser receipt can satisfy the predicate.",
+      "requested_fix": "Require a successful clean executable receipt in the same row whose actual and declared tested_commit_sha equal the matrix final tested_commit_sha; retain original dirty/history receipts and provenance.",
+      "impact": "The current builder intends to include final pytest validation, but the validator does not enforce the final-commit requirement. No fabricated existing outcome was established."
+    },
+    {
+      "id": "RESEARCH-FINAL-02",
+      "status": "fixed_pending_final_generation_and_negative_control",
+      "fix_verified": "Before any output write, finalizer now requires matrix.tested_commit_sha == ci.tested_commit_sha and the CI pytest receipt to have the same SHA, exit_code=0 and tracked_source_dirty=false.",
+      "priority": "P2",
+      "file": "var/finalize_autonomous_docs.py",
+      "lines": [
+        6,
+        12
+      ],
+      "title": "Final report generation does not bind its matrix to the CI source SHA",
+      "evidence": "The pre-write check only requires matrix.target_count=126. The currently generated matrix still refers to 25d4f523bce65f7bb0dd769fa3ba4052b8bf11fb, which is expected while final generation is pending, but would be accepted after a new CI_FINAL.json becomes available.",
+      "requested_fix": "Before writing any report, require matrix.tested_commit_sha == ci.tested_commit_sha and verify the final pytest receipt has the same SHA, tracked_source_dirty=false and exit_code=0.",
+      "impact": "A stale matrix could be embedded in a report claiming final-source validation if generation is invoked out of sequence."
+    }
+  ],
+  "checks": [
+    {
+      "name": "original_target_index",
+      "status": "PASS",
+      "evidence": "All 126 index entries exactly equal the 5ca6fcf baseline; AST comparison found no explicit row status changes or removed explicit rows."
+    },
+    {
+      "name": "human_and_gold_boundaries",
+      "status": "PASS",
+      "evidence": "Models retain human_participants=0, human_gold_records=0, human_cohen_kappa=null and acceptance_metrics=null. Both v2 UI exports have source=automation; model decision/reversibility disagreements remain 0/4 agreement. Human-dependent targets remain externally blocked."
+    },
+    {
+      "name": "v1_blinding_failure_and_v2",
+      "status": "PASS",
+      "evidence": "v1-blinding-failure.json marks INVALID_FOR_BLINDED_COMPARISON; the original v1 report remains preserved. v2 records a distinct codex-blind-subagent-v2 actor and opaque-ID provenance. Its raw-result digest matches PRIVATE_EVIDENCE_INDEX.json. Fresh history is declared in metadata, not proof of statistical independence."
+    },
+    {
+      "name": "model_budget_provenance",
+      "status": "PASS",
+      "evidence": "Actual command receipt uses var/deepseek-continuation-ledger. The raw log records 642 to 650 calls, unchanged budget 3 CNY, and estimate 1.1211824 to 1.13770512. Summary labels estimates as not an invoice; no new paid calls were made by this review."
+    },
+    {
+      "name": "github_and_model_receipt_scope",
+      "status": "PASS",
+      "evidence": "GitHub and paid-model receipts preserve original 5ca6fcf SHA with tracked_source_dirty=true. GitHub summary explicitly states operator_attested, human_reviewers=0, no direct runtime token, target_cas=false and fully_reversible=false. Builder classifies dirty receipts as supporting_precommit_experiment."
+    },
+    {
+      "name": "final_ci_and_generated_matrix",
+      "status": "NOT_RUN",
+      "evidence": "At review time CI_FINAL.json and ci/verified/pytest.log.status.json are absent. Current matrix remains the previous 25d4f52 matrix with 111 IMPLEMENTED / 15 PARTIAL and 105 PASS / 21 BLOCKED_EXTERNAL. Final CI 37087612206 completion, artifact verification and matrix/report generation remain root's responsibility."
+    }
+  ],
+  "limitations": [
+    "Read-only source/evidence review; no docs or application source edited.",
+    "No private credentials, human CSV answers, raw account balances or private ledger database were read.",
+    "No claim of final CI completion or final 126-row matrix acceptance.",
+    "Public summaries and hashes do not independently prove personal participation, fresh-model history, permanent custody or actual billed cost."
+  ]
+}

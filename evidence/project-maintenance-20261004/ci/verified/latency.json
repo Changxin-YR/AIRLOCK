@@ -1,0 +1,1250 @@
+{
+  "scope": "1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target",
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "logical_cpus": 4,
+  "samples": 60,
+  "seed": 2073,
+  "warmup_calls": 10,
+  "first_native_call_ms": 35.33372900000131,
+  "read": {
+    "direct_ms": {
+      "n": 60,
+      "mean": 0.3395040333344923,
+      "p50": 0.3337420000093516,
+      "p95": 0.3847689999929571,
+      "p99": 0.4916699999739649
+    },
+    "proxy_ms": {
+      "n": 60,
+      "mean": 5.613882866667079,
+      "p50": 3.661419999957616,
+      "p95": 4.61619699996163,
+      "p99": 90.88865100000021
+    },
+    "added_ms": {
+      "n": 60,
+      "mean": 5.2743788333325865,
+      "p50": 3.332294000017555,
+      "p95": 4.221732999951655,
+      "p99": 90.58416299995997
+    }
+  },
+  "write": {
+    "submit_receipt_ms": {
+      "n": 30,
+      "p50": 11.6403069999933,
+      "p95": 139.5995819999598,
+      "p99": 151.05113500004563
+    },
+    "approval_request_to_effect_ms": {
+      "n": 30,
+      "p50": 17.732012999999824,
+      "p95": 23.06418699998858,
+      "p99": 25.300122999965424
+    },
+    "static_ms": {
+      "n": 30,
+      "p50": 0.055,
+      "p95": 0.076,
+      "p99": 0.082
+    },
+    "preview_ms": {
+      "n": 30,
+      "p50": 7.323,
+      "p95": 8.007,
+      "p99": 29.159
+    },
+    "evaluation_ms": {
+      "n": 30,
+      "p50": 8.621,
+      "p95": 30.444,
+      "p99": 147.674
+    }
+  },
+  "raw_read_pairs": [
+    {
+      "pair": 0,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 4.3851190000054885,
+      "action_id": "ac970d05220946fe82812c82be3cbd9d",
+      "direct_ms": 0.4916699999739649,
+      "added_ms": 3.8934490000315236,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.222,
+      "http_minus_evaluation_ms": 3.1631190000054885
+    },
+    {
+      "pair": 1,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 4.054912000015065,
+      "action_id": "cfdb24a049aa4b479648b7c533db0bac",
+      "direct_ms": 0.34993699995311545,
+      "added_ms": 3.7049750000619497,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.107,
+      "http_minus_evaluation_ms": 2.947912000015065
+    },
+    {
+      "pair": 2,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 24.099615000011454,
+      "action_id": "fceaf10ba84d4be19511ffd1a89d2ff8",
+      "direct_ms": 0.383526999996775,
+      "added_ms": 23.71608800001468,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 9.195,
+      "http_minus_evaluation_ms": 14.904615000011454
+    },
+    {
+      "pair": 3,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.58577599996579,
+      "action_id": "1c8ac26a28244ffd9436a5fe9545d67f",
+      "direct_ms": 0.3467110000201501,
+      "added_ms": 3.23906499994564,
+      "server_static_ms": 0.036,
+      "server_evaluation_ms": 1.094,
+      "http_minus_evaluation_ms": 2.49177599996579
+    },
+    {
+      "pair": 4,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.4601570000063475,
+      "action_id": "df533018bf5f44db9f7731ba5da5bcbc",
+      "direct_ms": 0.33073800000238407,
+      "added_ms": 3.1294190000039634,
+      "server_static_ms": 0.031,
+      "server_evaluation_ms": 1.058,
+      "http_minus_evaluation_ms": 2.4021570000063477
+    },
+    {
+      "pair": 5,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.668549999986226,
+      "action_id": "9c8a1535f8914dd497d1f14ac623b21f",
+      "direct_ms": 0.3325010000025941,
+      "added_ms": 3.336048999983632,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.076,
+      "http_minus_evaluation_ms": 2.592549999986226
+    },
+    {
+      "pair": 6,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.31697700001132034,
+      "proxy_ms": 3.443881999999121,
+      "action_id": "d7611517bd91409a81c7e877102791ef",
+      "added_ms": 3.1269049999878007,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.105,
+      "http_minus_evaluation_ms": 2.338881999999121
+    },
+    {
+      "pair": 7,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3295249999837324,
+      "proxy_ms": 3.651805999993485,
+      "action_id": "fc24d7a693744804bd2a7746c374e22f",
+      "added_ms": 3.3222810000097525,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.063,
+      "http_minus_evaluation_ms": 2.588805999993485
+    },
+    {
+      "pair": 8,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33452299999225943,
+      "proxy_ms": 3.6257059999798003,
+      "action_id": "ce799cc2dfcb41f89fe3471e4686c6b7",
+      "added_ms": 3.291182999987541,
+      "server_static_ms": 0.031,
+      "server_evaluation_ms": 1.098,
+      "http_minus_evaluation_ms": 2.5277059999798004
+    },
+    {
+      "pair": 9,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.6483210000142208,
+      "action_id": "c3b9a6ed80fe4d3899112546386c1573",
+      "direct_ms": 0.3385599999887745,
+      "added_ms": 3.3097610000254463,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.1,
+      "http_minus_evaluation_ms": 2.5483210000142207
+    },
+    {
+      "pair": 10,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.30600999997432154,
+      "proxy_ms": 3.7062069999933556,
+      "action_id": "cca253a321ca4c918e772fb5155c1ad2",
+      "added_ms": 3.400197000019034,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.234,
+      "http_minus_evaluation_ms": 2.4722069999933556
+    },
+    {
+      "pair": 11,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.624483999999484,
+      "action_id": "0841ecd8ee944744bbd2d8fc2c6645d0",
+      "direct_ms": 0.35632600003054904,
+      "added_ms": 3.2681579999689347,
+      "server_static_ms": 0.037,
+      "server_evaluation_ms": 1.146,
+      "http_minus_evaluation_ms": 2.478483999999484
+    },
+    {
+      "pair": 12,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5913840000034725,
+      "action_id": "4a5f29a9a32b41e085eb95bd59399f5a",
+      "direct_ms": 0.329655999962597,
+      "added_ms": 3.2617280000408755,
+      "server_static_ms": 0.035,
+      "server_evaluation_ms": 1.141,
+      "http_minus_evaluation_ms": 2.4503840000034725
+    },
+    {
+      "pair": 13,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.2990599999748156,
+      "proxy_ms": 3.8499240000078316,
+      "action_id": "283788941fbc493d9be75bb6a22ee803",
+      "added_ms": 3.550864000033016,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.268,
+      "http_minus_evaluation_ms": 2.581924000007832
+    },
+    {
+      "pair": 14,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.9855670000292776,
+      "action_id": "1ec8a487ee8f4b2c89b790072b0cd979",
+      "direct_ms": 0.35904000003483816,
+      "added_ms": 3.6265269999944394,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.168,
+      "http_minus_evaluation_ms": 2.8175670000292774
+    },
+    {
+      "pair": 15,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3013730000134274,
+      "proxy_ms": 3.661419999957616,
+      "action_id": "e324508cf8cb407d9c5c129431508f47",
+      "added_ms": 3.3600469999441884,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.14,
+      "http_minus_evaluation_ms": 2.521419999957616
+    },
+    {
+      "pair": 16,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.32851499997832434,
+      "proxy_ms": 3.605565999976079,
+      "action_id": "db636a29a308459a9dbafc1767ad8054",
+      "added_ms": 3.277050999997755,
+      "server_static_ms": 0.038,
+      "server_evaluation_ms": 1.126,
+      "http_minus_evaluation_ms": 2.4795659999760793
+    },
+    {
+      "pair": 17,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3359760000307688,
+      "proxy_ms": 3.651555000033113,
+      "action_id": "216a940ee29a46ae86320d53655d1a3d",
+      "added_ms": 3.3155790000023444,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.155,
+      "http_minus_evaluation_ms": 2.496555000033113
+    },
+    {
+      "pair": 18,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3258309999978337,
+      "proxy_ms": 3.605886000002556,
+      "action_id": "9d81ef1971da4d24b4cf2b1fd7f609a2",
+      "added_ms": 3.2800550000047224,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.104,
+      "http_minus_evaluation_ms": 2.501886000002556
+    },
+    {
+      "pair": 19,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3311280000275474,
+      "proxy_ms": 3.6436030000004394,
+      "action_id": "43499082e84d472390d54dc818024a41",
+      "added_ms": 3.312474999972892,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.166,
+      "http_minus_evaluation_ms": 2.4776030000004394
+    },
+    {
+      "pair": 20,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5594569999943815,
+      "action_id": "f0d7e32f760f45489a0df56411ebd457",
+      "direct_ms": 0.341273000003639,
+      "added_ms": 3.2181839999907424,
+      "server_static_ms": 0.039,
+      "server_evaluation_ms": 1.161,
+      "http_minus_evaluation_ms": 2.3984569999943814
+    },
+    {
+      "pair": 21,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.30448800004023724,
+      "proxy_ms": 90.88865100000021,
+      "action_id": "b6388d03292f4ff8b13983156af942eb",
+      "added_ms": 90.58416299995997,
+      "server_static_ms": 0.036,
+      "server_evaluation_ms": 2.629,
+      "http_minus_evaluation_ms": 88.2596510000002
+    },
+    {
+      "pair": 22,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.46384799998122617,
+      "proxy_ms": 4.194142000017109,
+      "action_id": "35dd3c55a76f489f8e07705933cad62d",
+      "added_ms": 3.730294000035883,
+      "server_static_ms": 0.04,
+      "server_evaluation_ms": 1.242,
+      "http_minus_evaluation_ms": 2.9521420000171092
+    },
+    {
+      "pair": 23,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.64224100002275,
+      "action_id": "dc103150b73a485db74c59dd7b74c5cc",
+      "direct_ms": 0.34113300000626623,
+      "added_ms": 3.301108000016484,
+      "server_static_ms": 0.046,
+      "server_evaluation_ms": 1.181,
+      "http_minus_evaluation_ms": 2.46124100002275
+    },
+    {
+      "pair": 24,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5474679999651926,
+      "action_id": "a84f32952ca6486496dba0c14793f99e",
+      "direct_ms": 0.33098799997333117,
+      "added_ms": 3.2164799999918614,
+      "server_static_ms": 0.036,
+      "server_evaluation_ms": 1.173,
+      "http_minus_evaluation_ms": 2.3744679999651925
+    },
+    {
+      "pair": 25,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.6357509999902504,
+      "action_id": "745019752a804f64a2db3e03b38f3cbd",
+      "direct_ms": 0.33351199999742676,
+      "added_ms": 3.3022389999928237,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.111,
+      "http_minus_evaluation_ms": 2.5247509999902507
+    },
+    {
+      "pair": 26,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33701700004939994,
+      "proxy_ms": 3.9717570000448177,
+      "action_id": "5ca575ce9ffe40c097183ad8dec3e1a3",
+      "added_ms": 3.6347399999954177,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.56,
+      "http_minus_evaluation_ms": 2.4117570000448176
+    },
+    {
+      "pair": 27,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.6365420000379345,
+      "action_id": "b6c53817cf0e47f89541b1fc3a6e17c7",
+      "direct_ms": 0.3676730000279349,
+      "added_ms": 3.2688690000099996,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.153,
+      "http_minus_evaluation_ms": 2.4835420000379345
+    },
+    {
+      "pair": 28,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.30494899999666814,
+      "proxy_ms": 3.9739399999803027,
+      "action_id": "f739fd5009ed41a8840a142c28e1b0aa",
+      "added_ms": 3.6689909999836345,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.361,
+      "http_minus_evaluation_ms": 2.612939999980303
+    },
+    {
+      "pair": 29,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33403300000145464,
+      "proxy_ms": 3.6663270000190096,
+      "action_id": "e8b7a7f0d46042c8abced00c133d01e6",
+      "added_ms": 3.332294000017555,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.184,
+      "http_minus_evaluation_ms": 2.4823270000190094
+    },
+    {
+      "pair": 30,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33195899999327594,
+      "proxy_ms": 4.542825999976685,
+      "action_id": "39dce695d1a444908a2a118e2eb1cfa5",
+      "added_ms": 4.210866999983409,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 2.032,
+      "http_minus_evaluation_ms": 2.510825999976685
+    },
+    {
+      "pair": 31,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.6682700000483237,
+      "action_id": "25aebab497364517be66351544b1e1d1",
+      "direct_ms": 0.3348639999671832,
+      "added_ms": 3.3334060000811405,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.155,
+      "http_minus_evaluation_ms": 2.5132700000483235
+    },
+    {
+      "pair": 32,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5049539999931767,
+      "action_id": "5141410159e3415abdbf90f3f62cb8c6",
+      "direct_ms": 0.361944999951902,
+      "added_ms": 3.1430090000412747,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.118,
+      "http_minus_evaluation_ms": 2.3869539999931764
+    },
+    {
+      "pair": 33,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.2987789999906454,
+      "proxy_ms": 3.6705630000142264,
+      "action_id": "4b6d082af43d43899d75c708e8cdd4b6",
+      "added_ms": 3.371784000023581,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.255,
+      "http_minus_evaluation_ms": 2.4155630000142265
+    },
+    {
+      "pair": 34,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33624600001758154,
+      "proxy_ms": 3.716062000023612,
+      "action_id": "9e31d9dec2e242078e1f4c50f0391569",
+      "added_ms": 3.3798160000060307,
+      "server_static_ms": 0.037,
+      "server_evaluation_ms": 1.225,
+      "http_minus_evaluation_ms": 2.491062000023612
+    },
+    {
+      "pair": 35,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5700020000035693,
+      "action_id": "566fa315b98a4ad0b632df05ddb47af9",
+      "direct_ms": 0.3371469999819965,
+      "added_ms": 3.2328550000215728,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.106,
+      "http_minus_evaluation_ms": 2.4640020000035694
+    },
+    {
+      "pair": 36,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.2993410000158292,
+      "proxy_ms": 3.555540000036217,
+      "action_id": "4d7e050cfa2b4c12a04a01b3c51109e7",
+      "added_ms": 3.2561990000203878,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.13,
+      "http_minus_evaluation_ms": 2.425540000036217
+    },
+    {
+      "pair": 37,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5913739999955396,
+      "action_id": "c39709d6cb024449b8df38304c157ff3",
+      "direct_ms": 0.36667199998419164,
+      "added_ms": 3.224702000011348,
+      "server_static_ms": 0.031,
+      "server_evaluation_ms": 1.136,
+      "http_minus_evaluation_ms": 2.4553739999955395
+    },
+    {
+      "pair": 38,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.618374999973639,
+      "action_id": "d68106517cab49ddbebaf8111c32413f",
+      "direct_ms": 0.3609230000165553,
+      "added_ms": 3.257451999957084,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.219,
+      "http_minus_evaluation_ms": 2.399374999973639
+    },
+    {
+      "pair": 39,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3119390000279054,
+      "proxy_ms": 3.7447449999490345,
+      "action_id": "c8ae34a11ef24c279043124d0d74beab",
+      "added_ms": 3.432805999921129,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.163,
+      "http_minus_evaluation_ms": 2.5817449999490343
+    },
+    {
+      "pair": 40,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.621749999979329,
+      "action_id": "8ec13a6d20884f2a9431623941a0b087",
+      "direct_ms": 0.3611439999531285,
+      "added_ms": 3.2606060000262005,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.144,
+      "http_minus_evaluation_ms": 2.477749999979329
+    },
+    {
+      "pair": 41,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3002919999630649,
+      "proxy_ms": 3.7424820000069303,
+      "action_id": "7d4060f144b940aeae655dc4c2b834cc",
+      "added_ms": 3.4421900000438654,
+      "server_static_ms": 0.035,
+      "server_evaluation_ms": 1.175,
+      "http_minus_evaluation_ms": 2.5674820000069305
+    },
+    {
+      "pair": 42,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3944640000099753,
+      "proxy_ms": 4.61619699996163,
+      "action_id": "c92675dc167d4e6d934d0d008d6db73d",
+      "added_ms": 4.221732999951655,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.23,
+      "http_minus_evaluation_ms": 3.3861969999616304
+    },
+    {
+      "pair": 43,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3337420000093516,
+      "proxy_ms": 3.8526680000359192,
+      "action_id": "e2b790224dc64fcca9756679f76002c3",
+      "added_ms": 3.5189260000265676,
+      "server_static_ms": 0.037,
+      "server_evaluation_ms": 1.312,
+      "http_minus_evaluation_ms": 2.540668000035919
+    },
+    {
+      "pair": 44,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.7860780000187333,
+      "action_id": "aade959982984385824c15882408034c",
+      "direct_ms": 0.3349240000147802,
+      "added_ms": 3.451154000003953,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.319,
+      "http_minus_evaluation_ms": 2.4670780000187333
+    },
+    {
+      "pair": 45,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3202620000024581,
+      "proxy_ms": 4.280560999973204,
+      "action_id": "4ba9c11b44a24ab9b80ec540d2e85d48",
+      "added_ms": 3.960298999970746,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.678,
+      "http_minus_evaluation_ms": 2.6025609999732042
+    },
+    {
+      "pair": 46,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33173900004612733,
+      "proxy_ms": 3.756823000003351,
+      "action_id": "ed0add5ba908485fba068113cbee6924",
+      "added_ms": 3.4250839999572236,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.171,
+      "http_minus_evaluation_ms": 2.5858230000033506
+    },
+    {
+      "pair": 47,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3314190000196504,
+      "proxy_ms": 3.7416499999949338,
+      "action_id": "df3b2f394d6a4539854cbd04d15cc648",
+      "added_ms": 3.4102309999752833,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.224,
+      "http_minus_evaluation_ms": 2.5176499999949336
+    },
+    {
+      "pair": 48,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.5319950000030076,
+      "action_id": "732a5e103f3842a799c8ef8dde81844c",
+      "direct_ms": 0.3379980000204341,
+      "added_ms": 3.1939969999825735,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.16,
+      "http_minus_evaluation_ms": 2.3719950000030074
+    },
+    {
+      "pair": 49,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.738695999970787,
+      "action_id": "10ed1c5e3733460e8b3d1f7bfe5ee05a",
+      "direct_ms": 0.3336020000119788,
+      "added_ms": 3.405093999958808,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.079,
+      "http_minus_evaluation_ms": 2.659695999970787
+    },
+    {
+      "pair": 50,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.30133400002796407,
+      "proxy_ms": 3.615721000016947,
+      "action_id": "95460a7e16974a8eabab83a32e7e0daa",
+      "added_ms": 3.314386999988983,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.181,
+      "http_minus_evaluation_ms": 2.434721000016947
+    },
+    {
+      "pair": 51,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.33030700001290825,
+      "proxy_ms": 3.6519859999657456,
+      "action_id": "0d59cfc5aada46ba9a9b2ca7125115ef",
+      "added_ms": 3.3216789999528373,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.16,
+      "http_minus_evaluation_ms": 2.4919859999657454
+    },
+    {
+      "pair": 52,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.7461169999915,
+      "action_id": "096d9d2cfd354fa6a4109f521afd2afb",
+      "direct_ms": 0.3847689999929571,
+      "added_ms": 3.361347999998543,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.244,
+      "http_minus_evaluation_ms": 2.5021169999915003
+    },
+    {
+      "pair": 53,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 8.214171000020087,
+      "action_id": "b57a4d1a4c4642aba3ee69683c7f447c",
+      "direct_ms": 0.35611600003448984,
+      "added_ms": 7.8580549999855975,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.458,
+      "http_minus_evaluation_ms": 6.756171000020087
+    },
+    {
+      "pair": 54,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.6926669999957085,
+      "action_id": "072f8ad41bb74c5d8b86aad5ff39744b",
+      "direct_ms": 0.3305779999891456,
+      "added_ms": 3.362089000006563,
+      "server_static_ms": 0.037,
+      "server_evaluation_ms": 1.223,
+      "http_minus_evaluation_ms": 2.4696669999957086
+    },
+    {
+      "pair": 55,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 4.198658000007072,
+      "action_id": "5f7095552d294ee38ed0b1f0d17b7562",
+      "direct_ms": 0.3384890000006635,
+      "added_ms": 3.860169000006408,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.192,
+      "http_minus_evaluation_ms": 3.0066580000070715
+    },
+    {
+      "pair": 56,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.631294000001617,
+      "action_id": "69645fdcc50548eab15083f2b5213bfc",
+      "direct_ms": 0.3281130000232224,
+      "added_ms": 3.3031809999783945,
+      "server_static_ms": 0.033,
+      "server_evaluation_ms": 1.198,
+      "http_minus_evaluation_ms": 2.433294000001617
+    },
+    {
+      "pair": 57,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 0.3222749999736152,
+      "proxy_ms": 3.713598999979695,
+      "action_id": "6ba906e2c0f14e09a722a4b54dd49799",
+      "added_ms": 3.3913240000060796,
+      "server_static_ms": 0.034,
+      "server_evaluation_ms": 1.167,
+      "http_minus_evaluation_ms": 2.546598999979695
+    },
+    {
+      "pair": 58,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.6430020000466357,
+      "action_id": "ed27259ba78545e188ad74fbe2907a8a",
+      "direct_ms": 0.3380389999847466,
+      "added_ms": 3.304963000061889,
+      "server_static_ms": 0.032,
+      "server_evaluation_ms": 1.154,
+      "http_minus_evaluation_ms": 2.4890020000466357
+    },
+    {
+      "pair": 59,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 3.608429999985674,
+      "action_id": "610d249ad9544ef18df4db6c75dd0982",
+      "direct_ms": 0.33432300000413306,
+      "added_ms": 3.274106999981541,
+      "server_static_ms": 0.047,
+      "server_evaluation_ms": 1.172,
+      "http_minus_evaluation_ms": 2.436429999985674
+    }
+  ],
+  "raw_writes": [
+    {
+      "sample": 0,
+      "submit_receipt_ms": 12.18522699997493,
+      "approval_request_to_effect_ms": 20.544835999999123,
+      "static_ms": 0.072,
+      "preview_ms": 8.007,
+      "evaluation_ms": 9.242,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 1,
+      "submit_receipt_ms": 11.49622000002637,
+      "approval_request_to_effect_ms": 17.477711000026375,
+      "static_ms": 0.055,
+      "preview_ms": 7.342,
+      "evaluation_ms": 8.612,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 2,
+      "submit_receipt_ms": 11.637943000039286,
+      "approval_request_to_effect_ms": 25.300122999965424,
+      "static_ms": 0.054,
+      "preview_ms": 7.323,
+      "evaluation_ms": 8.617,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 3,
+      "submit_receipt_ms": 11.505442999975912,
+      "approval_request_to_effect_ms": 17.53996500002586,
+      "static_ms": 0.057,
+      "preview_ms": 7.216,
+      "evaluation_ms": 8.509,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 4,
+      "submit_receipt_ms": 151.05113500004563,
+      "approval_request_to_effect_ms": 17.87589999997863,
+      "static_ms": 0.082,
+      "preview_ms": 7.534,
+      "evaluation_ms": 147.674,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 5,
+      "submit_receipt_ms": 11.41251300003887,
+      "approval_request_to_effect_ms": 17.4628480000365,
+      "static_ms": 0.057,
+      "preview_ms": 7.22,
+      "evaluation_ms": 8.484,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 6,
+      "submit_receipt_ms": 14.099998000006053,
+      "approval_request_to_effect_ms": 18.745267999975113,
+      "static_ms": 0.054,
+      "preview_ms": 7.332,
+      "evaluation_ms": 8.586,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 7,
+      "submit_receipt_ms": 11.547076999988803,
+      "approval_request_to_effect_ms": 17.609488999994483,
+      "static_ms": 0.055,
+      "preview_ms": 7.237,
+      "evaluation_ms": 8.564,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 8,
+      "submit_receipt_ms": 11.66523399996322,
+      "approval_request_to_effect_ms": 17.48226700004807,
+      "static_ms": 0.057,
+      "preview_ms": 7.435,
+      "evaluation_ms": 8.693,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 9,
+      "submit_receipt_ms": 12.45396100000562,
+      "approval_request_to_effect_ms": 22.164863999989848,
+      "static_ms": 0.054,
+      "preview_ms": 7.298,
+      "evaluation_ms": 8.969,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 10,
+      "submit_receipt_ms": 11.97666199999503,
+      "approval_request_to_effect_ms": 18.133237999961693,
+      "static_ms": 0.059,
+      "preview_ms": 7.279,
+      "evaluation_ms": 8.949,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 11,
+      "submit_receipt_ms": 11.53492800000322,
+      "approval_request_to_effect_ms": 17.984883999986323,
+      "static_ms": 0.06,
+      "preview_ms": 7.352,
+      "evaluation_ms": 8.581,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 12,
+      "submit_receipt_ms": 11.594848000015645,
+      "approval_request_to_effect_ms": 17.87875500002656,
+      "static_ms": 0.054,
+      "preview_ms": 7.313,
+      "evaluation_ms": 8.661,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 13,
+      "submit_receipt_ms": 11.6403069999933,
+      "approval_request_to_effect_ms": 17.3265029999925,
+      "static_ms": 0.055,
+      "preview_ms": 7.285,
+      "evaluation_ms": 8.645,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 14,
+      "submit_receipt_ms": 11.923744000000625,
+      "approval_request_to_effect_ms": 18.84379699998817,
+      "static_ms": 0.055,
+      "preview_ms": 7.397,
+      "evaluation_ms": 8.706,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 15,
+      "submit_receipt_ms": 11.477931999991142,
+      "approval_request_to_effect_ms": 18.229953000002297,
+      "static_ms": 0.056,
+      "preview_ms": 7.259,
+      "evaluation_ms": 8.557,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 16,
+      "submit_receipt_ms": 18.654330999993363,
+      "approval_request_to_effect_ms": 17.671011000004455,
+      "static_ms": 0.056,
+      "preview_ms": 7.304,
+      "evaluation_ms": 15.629,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 17,
+      "submit_receipt_ms": 18.881582999995317,
+      "approval_request_to_effect_ms": 17.40879699997322,
+      "static_ms": 0.07,
+      "preview_ms": 7.277,
+      "evaluation_ms": 8.621,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 18,
+      "submit_receipt_ms": 11.582509999982449,
+      "approval_request_to_effect_ms": 17.553294000038022,
+      "static_ms": 0.055,
+      "preview_ms": 7.267,
+      "evaluation_ms": 8.593,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 19,
+      "submit_receipt_ms": 11.594728000034138,
+      "approval_request_to_effect_ms": 18.107729000007566,
+      "static_ms": 0.055,
+      "preview_ms": 7.368,
+      "evaluation_ms": 8.654,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 20,
+      "submit_receipt_ms": 11.574677999988126,
+      "approval_request_to_effect_ms": 17.533806000017194,
+      "static_ms": 0.06,
+      "preview_ms": 7.35,
+      "evaluation_ms": 8.612,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 21,
+      "submit_receipt_ms": 11.871084000006249,
+      "approval_request_to_effect_ms": 23.06418699998858,
+      "static_ms": 0.055,
+      "preview_ms": 7.369,
+      "evaluation_ms": 8.858,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 22,
+      "submit_receipt_ms": 11.643612000000303,
+      "approval_request_to_effect_ms": 17.63269399998535,
+      "static_ms": 0.076,
+      "preview_ms": 7.229,
+      "evaluation_ms": 8.577,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 23,
+      "submit_receipt_ms": 11.553466000009394,
+      "approval_request_to_effect_ms": 17.959115000053316,
+      "static_ms": 0.055,
+      "preview_ms": 7.259,
+      "evaluation_ms": 8.589,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 24,
+      "submit_receipt_ms": 11.644993000004433,
+      "approval_request_to_effect_ms": 17.381926999973984,
+      "static_ms": 0.055,
+      "preview_ms": 7.328,
+      "evaluation_ms": 8.623,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 25,
+      "submit_receipt_ms": 33.82601200002,
+      "approval_request_to_effect_ms": 17.732012999999824,
+      "static_ms": 0.055,
+      "preview_ms": 29.159,
+      "evaluation_ms": 30.444,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 26,
+      "submit_receipt_ms": 12.568322999982229,
+      "approval_request_to_effect_ms": 18.01943600003142,
+      "static_ms": 0.055,
+      "preview_ms": 7.397,
+      "evaluation_ms": 9.621,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 27,
+      "submit_receipt_ms": 11.479946000008567,
+      "approval_request_to_effect_ms": 17.50695399999813,
+      "static_ms": 0.07,
+      "preview_ms": 7.269,
+      "evaluation_ms": 8.53,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 28,
+      "submit_receipt_ms": 11.638653999966664,
+      "approval_request_to_effect_ms": 17.04039300000204,
+      "static_ms": 0.054,
+      "preview_ms": 7.371,
+      "evaluation_ms": 8.612,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 29,
+      "submit_receipt_ms": 139.5995819999598,
+      "approval_request_to_effect_ms": 18.283833999987564,
+      "static_ms": 0.058,
+      "preview_ms": 7.403,
+      "evaluation_ms": 8.651,
+      "reviewer": "automated_fixture; no human waiting measured"
+    }
+  ],
+  "not_measured": [
+    "live LLM latency",
+    "human review latency",
+    "distributed upstream overhead",
+    "cold OS filesystem cache",
+    "production concurrency"
+  ],
+  "measurement_note": "direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows",
+  "phase_note": "server evaluation ends before final audit/commit/close; HTTP minus evaluation also includes transport, scheduling and serialization, not a pure fsync measurement. Phase data read after all timed requests."
+}

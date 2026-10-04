@@ -1,0 +1,433 @@
+{
+  "status": "PASS",
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "working_tree_dirty": true,
+  "source_hashes": {
+    "airlock/github_adapter.py": "f07997fd71c421123ef06fc760c082d9563b5f4bf455307052376af06751c64b",
+    "benchmark/research.py": "a703241cbd3d5bdc439ca814d0aeb4205f644ee809346613052ecb23106fcb8d",
+    "benchmark/closure.py": "f24ae276e3fa63eddec33c47ea83fafb55c43ecf396d75ba1afea1e2c6f77316",
+    "benchmark/pilot.py": "c9342ce3c0e387b4d40b20cc9be23901b456b1f2fc984cc84e464ade4e2ad971"
+  },
+  "checks": [
+    {
+      "name": "direct_identical_effect_preserves_first_github_response",
+      "status": "PASS",
+      "details": {
+        "verification": "github_response"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_repository_node_id",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_repository_full_name",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_issue_node_id",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_receipt_conflict"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_number",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_url",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_title",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_response_rejects_replaced_body",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_response_rejects_operator_attested_relabel",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_receipt_conflict"
+      }
+    },
+    {
+      "name": "github_response_rejects_different_existing_reconcile_target",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "direct_identical_effect_preserves_first_github_readback",
+      "status": "PASS",
+      "details": {
+        "verification": "github_readback"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_repository_node_id",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_repository_full_name",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_issue_node_id",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_receipt_conflict"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_number",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_url",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_title",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_readback_rejects_replaced_body",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "github_readback_rejects_operator_attested_relabel",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_receipt_conflict"
+      }
+    },
+    {
+      "name": "github_readback_rejects_different_existing_reconcile_target",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_observation_mismatch"
+      }
+    },
+    {
+      "name": "simultaneous_direct_completion_has_one_immutable_receipt",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "relay_reference_change_is_not_normalized",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_receipt_conflict"
+      }
+    },
+    {
+      "name": "relay_claim_change_rejected",
+      "status": "PASS",
+      "details": {
+        "exception": "GateError",
+        "code": "github_relay_binding_mismatch"
+      }
+    },
+    {
+      "name": "relay_exact_repeat_preserves_receipt",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "explicit_boolean_utf8_bom_jsonl_accepted",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "annotation_human_rejects_1",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_human_rejects_1.0",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_human_rejects_'true'",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_human_rejects_False",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_human_rejects_None",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_independent_rejects_1",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_independent_rejects_1.0",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_independent_rejects_'true'",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_independent_rejects_False",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "annotation_independent_rejects_None",
+      "status": "PASS",
+      "details": {
+        "exception": "ValidationError",
+        "code": null
+      }
+    },
+    {
+      "name": "strict_json_rejects_ambiguity_35",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "strict_json_rejects_ambiguity_36",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "strict_json_rejects_ambiguity_37",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "legitimate_explicit_csv_is_still_descriptive_pilot",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "gold_recomputes_correctness_and_only_gold_backed_comprehension_denominator",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "study_bound_hash_mismatch",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "nonhuman_or_numeric_consent_never_counted",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "independent_kappa_arithmetic_and_degenerate_denominator",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "governance_rejects_non_calendar_2026-02-29",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_1900-02-29",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_2026-00-01",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_2026-10-32",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_2026-10-03T00:00:00",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_20261003",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_2026-W40-6",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_rejects_non_calendar_2026-10-03 ",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_legitimate_day_groups_two_tasks_2024-02-29",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "governance_legitimate_day_groups_two_tasks_2000-02-29",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "governance_legitimate_day_groups_two_tasks_2026-10-03",
+      "status": "PASS",
+      "details": null
+    },
+    {
+      "name": "governance_exact_task_day_duplicate",
+      "status": "PASS",
+      "details": {
+        "exception": "ValueError",
+        "code": null
+      }
+    },
+    {
+      "name": "governance_numeric_authorization_blank_reference_and_empty_denominator",
+      "status": "PASS",
+      "details": null
+    }
+  ],
+  "check_count": 56,
+  "findings": [],
+  "limitations": [
+    "Synthetic local database and modelled API responses only; no live GitHub mutation or API key.",
+    "All human/authorized_log fixture declarations are automated test data, not genuine participants or business evidence.",
+    "Governance dates are validated as ISO calendar days; source authenticity and study-period eligibility remain external provenance validation."
+  ]
+}

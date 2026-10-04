@@ -1,0 +1,54 @@
+{
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "files": {
+    "baseline-mcp-upstream.py": {
+      "bytes": 5232,
+      "sha256": "d12b48e947d04f3b8011eaf60eee69f5ebd2c288af14f8db92096efdd35d17e8"
+    },
+    "baseline-sse.log": {
+      "bytes": 2914,
+      "sha256": "0853fbd53b8f957f55c2108d66caac44702b11002548beaf090ade1671ba8fa0"
+    },
+    "baseline-sse.log.status.json": {
+      "bytes": 546,
+      "sha256": "57b43bdf2fae67fcd6050a3380337da99cdeb8e4e7a41b6ac5d5f830559c65fe"
+    },
+    "baseline-sse.xml": {
+      "bytes": 2980,
+      "sha256": "df162a938b49e487d7ee34b606be957bb8d52060605a1ba2786ee0caa14a3271"
+    },
+    "first.log": {
+      "bytes": 100,
+      "sha256": "f34bf3b807a4a30bef09e300a51e9984b326027647d7a033d659abb265d340da"
+    },
+    "first.log.status.json": {
+      "bytes": 516,
+      "sha256": "2a34e77654770d294641274e2e4a6ef25fb9c97d007735339645f9495ec64852"
+    },
+    "first.xml": {
+      "bytes": 1801,
+      "sha256": "5c1371735698749800d5d961728891773d2b88b4cde98cdd70fee37642a92a64"
+    },
+    "repaired.log": {
+      "bytes": 100,
+      "sha256": "09601a3acb69eb855fe9296c2b66b94426a80c93310c6b901a2df0ae1f24bcf1"
+    },
+    "repaired.log.status.json": {
+      "bytes": 519,
+      "sha256": "33390aa74f16d094b0650d92788b0c9c6823a917d8d0f93ba6b873a2d97c2434"
+    },
+    "repaired.xml": {
+      "bytes": 1801,
+      "sha256": "e32018672df5c8e3e631f5e070605c00132744ccbc926a1153a0e65286b5a23b"
+    },
+    "RESULT.json": {
+      "bytes": 2550,
+      "sha256": "9058c26071579eda00808c34346e1424bb53aa3a953e4d8e47d8e87d5bc8d3eb"
+    },
+    "test_transport_countercheck.py": {
+      "bytes": 8783,
+      "sha256": "0f12a7803ba88180d56b37cd071e3da48d9fe21f70b3eefbbf3e3d218fb9330d"
+    }
+  }
+}

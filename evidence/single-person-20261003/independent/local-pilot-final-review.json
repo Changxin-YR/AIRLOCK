@@ -1,0 +1,56 @@
+{
+  "kind": "independent_readonly_local_pilot_security_review",
+  "reviewed_at": "2026-10-03T03:36:18.111873+00:00",
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "working_tree_dirty": true,
+  "scope": [
+    "airlock/alert_inbox.py",
+    "airlock/static/alert-inbox.js",
+    "scripts/pilot_server.py"
+  ],
+  "source_sha256": {
+    "airlock/alert_inbox.py": "754cc2e091ba7b413a04b8f69a2e121a16129ba18a4d593c39d481644978e2a7",
+    "airlock/static/alert-inbox.js": "c267bead71cfa2f68e0d93f078fb49ec3cacdd119957d43dafeef3a572feedb4",
+    "scripts/pilot_server.py": "de04401213ec6854776c4a031ccb0e15dc9f3151928a404e34b4dc80dc09bca8"
+  },
+  "unresolved_findings": {
+    "P0": [],
+    "P1": [],
+    "P2": []
+  },
+  "verification": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest var/security-review-20261003/test_local_pilot_boundary_review.py -q",
+      "exit_code": 0,
+      "cases": 3,
+      "raw_log": "var/security-review-20261003/local-pilot-boundaries.log",
+      "receipt": "var/security-review-20261003/local-pilot-boundaries.status.json",
+      "covers": [
+        "credential role separation",
+        "cross-origin rejection",
+        "idempotent replay and conflicting payload rejection",
+        "absence of business mutation endpoints",
+        "authorized chunked slow-body deadline without stored event",
+        "fixed public paths and malicious Host rejection"
+      ]
+    },
+    {
+      "command": "node var/security-review-20261003/inbox_logout_race_review.cjs",
+      "exit_code": 0,
+      "cases": 2,
+      "raw_log": "var/security-review-20261003/inbox-logout-races.log",
+      "receipt": "var/security-review-20261003/inbox-logout-races.status.json",
+      "covers": [
+        "logout before late response headers",
+        "logout during delayed JSON body; ignored AbortSignal still cannot render late data"
+      ]
+    }
+  ],
+  "boundaries": [
+    "Only loopback deployment reviewed; no public-network deployment or remote notification SLA claim.",
+    "Alert inbox stores only allowlisted notification codes and has no approval, reconciliation or tool execution authority.",
+    "Static pilot assets are public and hold no server-side research records; browser exports do not authenticate real-human participation.",
+    "Tests use synthetic throwaway credentials/state and do not read any reviewer, audit or project secrets.",
+    "No production source edits or git commits made during this review."
+  ]
+}

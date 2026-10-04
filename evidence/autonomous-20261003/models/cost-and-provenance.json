@@ -1,0 +1,38 @@
+{
+  "provider": "DeepSeek V4.1 Flash",
+  "model": "deepseek-flash",
+  "before": {
+    "calls": 642,
+    "reserved_or_settled_amount": 1.1211824,
+    "budget": 3.0,
+    "currency": "CNY",
+    "invalidations": 9
+  },
+  "after": {
+    "calls": 650,
+    "reserved_or_settled_amount": 1.13770512,
+    "budget": 3.0,
+    "currency": "CNY",
+    "invalidations": 9
+  },
+  "new_calls": 8,
+  "new_valid_calls": 8,
+  "cumulative_valid": 634,
+  "cumulative_errors": 16,
+  "new_usage_estimate_cny": 0.01652272,
+  "known_usage_estimate_cny": 0.86913512,
+  "same_ledger_reused": true,
+  "ledger_reset": false,
+  "official_balance_api_before_http": 200,
+  "official_balance_api_after_http": 200,
+  "account_balance_values": "private local only",
+  "project_invoice_reconciled": false,
+  "pricing_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+  "billing_api_source": "https://api-docs.deepseek.com/api/get-user-balance",
+  "pricing": "Conservative peak CNY per million input 2 / cached .04 / output 8",
+  "pricing_verified_on": "2026-10-03",
+  "estimates_are_supplier_invoice": false,
+  "human_participants": 0,
+  "human_gold_records": 0,
+  "human_kappa": null
+}

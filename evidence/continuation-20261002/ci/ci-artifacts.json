@@ -1,0 +1,23 @@
+{
+  "artifacts": [
+    {
+      "id": 11221817634,
+      "name": "acceptance-evidence",
+      "size_in_bytes": 4521492,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11221817634",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11221817634/zip",
+      "expired": false,
+      "created_at": "2026-10-02T10:48:25Z",
+      "expires_at": "2026-12-31T10:45:27Z",
+      "updated_at": "2026-10-02T10:48:25Z",
+      "digest": "sha256:be3bb07644f8a056a36e59039c7f52d68b50b6c1da73c1aedfb287e5ef57fc79",
+      "workflow_run": {
+        "id": 36997232536,
+        "repository_id": 1396912712,
+        "head_repository_id": 1396912712,
+        "head_branch": "codex/full-audit-2026-10-02",
+        "head_sha": "400024bd59133d9e50f8fb00288b9f02693b2153"
+      }
+    }
+  ]
+}

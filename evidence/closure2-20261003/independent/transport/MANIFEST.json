@@ -1,0 +1,106 @@
+{
+  "source_commit_at_review": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "note": "Working tree source hashes identify pre-commit validation; not a frozen full-CI claim.",
+  "files": {
+    "baseline-source/mcp_http.py": {
+      "bytes": 1898,
+      "sha256": "033768f7614e4a2c6658b8f9aa3f34ec42d7c0639d32996bc4be211074fd9c20"
+    },
+    "baseline-source/mcp_upstream.py": {
+      "bytes": 5232,
+      "sha256": "d12b48e947d04f3b8011eaf60eee69f5ebd2c288af14f8db92096efdd35d17e8"
+    },
+    "baseline-source/network.py": {
+      "bytes": 4973,
+      "sha256": "142112a068b352f346afc1a03a2dad230892dc07569084c7210d4272681c90da"
+    },
+    "baseline-source/test_transport_hardening.py": {
+      "bytes": 5799,
+      "sha256": "07463212db97468f73c7dfc728ef8425d46c9f9c4ce735c2c0697734378434da"
+    },
+    "baseline-source/upstream.py": {
+      "bytes": 16716,
+      "sha256": "1e9d1739e6d53254a87939a38843f5ae8d767fcda294c0560263e52474c6b3a2"
+    },
+    "baseline.log": {
+      "bytes": 43547,
+      "sha256": "a3f7a84a0be203df722e51f8fd795f746b5f668230ee105fa350a3de60f0a60b"
+    },
+    "baseline.log.status.json": {
+      "bytes": 479,
+      "sha256": "c0e4cb159b1c0b60c6d5e8dba566f5c4259e1707ea0c07ff022990bcfe9f93cd"
+    },
+    "baseline.xml": {
+      "bytes": 47725,
+      "sha256": "da4a42c94d3927771764adc53ff5a9eea13b75a6992096243d095262f72e9d02"
+    },
+    "finalize_reports.py": {
+      "bytes": 6174,
+      "sha256": "45b3ddbfe4f12743ac3e91366c11cf5c3822c5aa5366de63d4d983fd13de0f0b"
+    },
+    "hardening.log": {
+      "bytes": 665,
+      "sha256": "5c23c1c9575a63a8dd9ce6cf4880a199eef7e34a9ab9a4e5134d0b8f29eeef01"
+    },
+    "hardening.log.status.json": {
+      "bytes": 672,
+      "sha256": "9d2c491f3911626c8005106958998acfa74c3b7f765928469dd8eda6aa288485"
+    },
+    "hardening.xml": {
+      "bytes": 11218,
+      "sha256": "0787900ab68ec27543c1eac0caf990cae16a62d759d8cce212751bae0586e02d"
+    },
+    "reconcile-baseline.log": {
+      "bytes": 12753,
+      "sha256": "0899483472de588459d43a9c239a80d9a19c750a5c67d7f8e31db34b296ee64a"
+    },
+    "reconcile-baseline.log.status.json": {
+      "bytes": 517,
+      "sha256": "b32c5483a38b5238877c1a9bd5f7c8d5bfc969d68aeb648da366afc94b73c0e9"
+    },
+    "reconcile-baseline.xml": {
+      "bytes": 12495,
+      "sha256": "a76b041916576f10a260348f79024f748fe1ad866837720b130b2d9601139438"
+    },
+    "reconcile-repaired.log": {
+      "bytes": 597,
+      "sha256": "ffaa8e657ac8c2ac9d32369d78d68049c5580d6babe4ca1f25333bb30c76018a"
+    },
+    "reconcile-repaired.log.status.json": {
+      "bytes": 517,
+      "sha256": "74092e0f34126fa839af61e44a6a0d9fef0b0a7d413cd4b683da6b26ccda783d"
+    },
+    "reconcile-repaired.xml": {
+      "bytes": 759,
+      "sha256": "77d2bc5e9618d19294c31b3df470aef270501e40f1ebc0c397c79e99b3e9e2b9"
+    },
+    "repaired-original-probes.log": {
+      "bytes": 584,
+      "sha256": "c4de7ce26d7297f89753bdf8a00e4b587215f80398ea2ea942a1d2d0be78574e"
+    },
+    "repaired-original-probes.log.status.json": {
+      "bytes": 495,
+      "sha256": "01fa671d1b73bf199be12ac4658abcbebf867f086d5f3482a10aecf76eb722e4"
+    },
+    "repaired-original-probes.xml": {
+      "bytes": 11277,
+      "sha256": "a1a4f20127da3cf735da72c4e030fcdcfa7ed9cb846cbcc3be7ad9281e3ec7b9"
+    },
+    "RESULT.json": {
+      "bytes": 7170,
+      "sha256": "69d9eb6e2e9a4860a780ebe620e22160cb359c4df95161e97af61813aa013d6c"
+    },
+    "shared-client-compatibility.log": {
+      "bytes": 758,
+      "sha256": "3fe2f1004d7358b49731388d213cb791729bfa629a8672c7c1bcc6673c5af028"
+    },
+    "shared-client-compatibility.log.status.json": {
+      "bytes": 672,
+      "sha256": "85ca824e97dff46cf588b8b5f3e2bfbc3ee065ce45bc269ab3da4cbc6038c2ce"
+    },
+    "shared-client-compatibility.xml": {
+      "bytes": 25849,
+      "sha256": "759858010518d13725a49cb036446f04b4badc237de53d0fa1abb40536cb64d5"
+    }
+  }
+}

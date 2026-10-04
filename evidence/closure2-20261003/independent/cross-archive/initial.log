@@ -1,0 +1,62 @@
+........FF                                                               [100%]
+================================== FAILURES ===================================
+_ test_cli_unwritable_receipt_destination_prevents_irreversible_upload[file] __
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-449/test_cli_unwritable_receipt_de0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D942A216E0>
+existing = 'file'
+
+    @pytest.mark.parametrize('existing', ['file', 'directory'])
+    def test_cli_unwritable_receipt_destination_prevents_irreversible_upload(tmp_path, monkeypatch, existing):
+        config, cp, _, s3 = setup()
+        config_path = tmp_path / 'configuration.json'
+        cp_path = tmp_path / 'checkpoint.json'
+        output = tmp_path / 'receipt.json'
+        config_path.write_text(config.model_dump_json())
+        cp_path.write_text(json.dumps(cp))
+        if existing == 'file':
+            output.write_text('preserve-existing-receipt')
+        else:
+            output.mkdir()
+        monkeypatch.setattr(cli, 'client', lambda _: s3)
+        monkeypatch.setattr(sys, 'argv', ['archive', '--config', str(config_path), '--checkpoint', str(cp_path), '--output', str(output)])
+        with pytest.raises(OSError):
+            cli.main()
+>       assert not any(method == 'put' for method, _ in s3.calls), 'must validate receipt output before a COMPLIANCE upload'
+E       AssertionError: must validate receipt output before a COMPLIANCE upload
+E       assert not True
+E        +  where True = any(<generator object test_cli_unwritable_receipt_destination_prevents_irreversible_upload.<locals>.<genexpr> at 0x000001D942A9BB90>)
+
+var\closure2-20261003\cross-archive\test_archive_countercheck.py:129: AssertionError
+_ test_cli_unwritable_receipt_destination_prevents_irreversible_upload[directory] _
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-449/test_cli_unwritable_receipt_de1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D942A85CD0>
+existing = 'directory'
+
+    @pytest.mark.parametrize('existing', ['file', 'directory'])
+    def test_cli_unwritable_receipt_destination_prevents_irreversible_upload(tmp_path, monkeypatch, existing):
+        config, cp, _, s3 = setup()
+        config_path = tmp_path / 'configuration.json'
+        cp_path = tmp_path / 'checkpoint.json'
+        output = tmp_path / 'receipt.json'
+        config_path.write_text(config.model_dump_json())
+        cp_path.write_text(json.dumps(cp))
+        if existing == 'file':
+            output.write_text('preserve-existing-receipt')
+        else:
+            output.mkdir()
+        monkeypatch.setattr(cli, 'client', lambda _: s3)
+        monkeypatch.setattr(sys, 'argv', ['archive', '--config', str(config_path), '--checkpoint', str(cp_path), '--output', str(output)])
+        with pytest.raises(OSError):
+            cli.main()
+>       assert not any(method == 'put' for method, _ in s3.calls), 'must validate receipt output before a COMPLIANCE upload'
+E       AssertionError: must validate receipt output before a COMPLIANCE upload
+E       assert not True
+E        +  where True = any(<generator object test_cli_unwritable_receipt_destination_prevents_irreversible_upload.<locals>.<genexpr> at 0x000001D942B84BA0>)
+
+var\closure2-20261003\cross-archive\test_archive_countercheck.py:129: AssertionError
+=========================== short test summary info ===========================
+FAILED var/closure2-20261003/cross-archive/test_archive_countercheck.py::test_cli_unwritable_receipt_destination_prevents_irreversible_upload[file]
+FAILED var/closure2-20261003/cross-archive/test_archive_countercheck.py::test_cli_unwritable_receipt_destination_prevents_irreversible_upload[directory]
+2 failed, 8 passed in 0.92s

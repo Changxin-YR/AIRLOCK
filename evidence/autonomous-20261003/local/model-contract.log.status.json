@@ -1,0 +1,15 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_model_roles.py",
+    "-q"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T00:48:04.738824+00:00",
+  "duration_seconds": 2.813,
+  "tested_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c"
+}

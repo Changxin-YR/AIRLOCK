@@ -1,0 +1,8 @@
+AIRLOCK_CEL bounded warmup
+AIRLOCK_CEL bounded zero
+AIRLOCK_CEL write_only small
+AIRLOCK_CEL bounded small
+AIRLOCK_CEL threshold high
+AIRLOCK_CEL write_only high
+AIRLOCK_CEL threshold read
+AIRLOCK_CEL bounded read

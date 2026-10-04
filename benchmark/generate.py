@@ -86,7 +86,7 @@ def main():
         (HERE/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     elif json.loads((HERE/'manifest.json').read_text())['sha256']!=checksum:
         raise SystemExit('Corpus changed. Do not silently replace the frozen manifest.')
-    (HERE/'cases.jsonl').write_text(content)
+    (HERE/'cases.jsonl').write_text(content,encoding='utf-8',newline='\n')
     print(json.dumps(manifest))
 
 

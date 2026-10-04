@@ -1,0 +1,204 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+____________ test_reconcile_keeps_original_target_binding[origin] _____________
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_origi...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_original_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000155A6549940>
+change = 'origin'
+
+    @pytest.mark.parametrize('change', ['origin', 'resource', 'removed', 'principal'])
+    def test_reconcile_keeps_original_target_binding(settings, tmp_path, monkeypatch, change):
+        calls = []
+        target = {'effects':0}
+        def request(self, method, path, payload=None):
+            calls.append((method, path, self.url))
+            if path == '/preview':
+                return {'target_version':'v1','impact_units':1,'summary':'synthetic','before':{},'after':{}}
+            if path == '/execute':
+                target['effects'] += 1
+                target['receipt'] = {'action_id':payload['action_id'], 'request_hash':payload['request_hash'],
+                                     'state':'executed', 'result':{'effects':1}}
+                raise GateError('upstream_unavailable', 503)
+            return target['receipt']
+        monkeypatch.setattr(Tool, 'request', request)
+        tool = make_tool()
+        config = tmp_path / 'tools.json'; config.write_text(json.dumps({'tools':[tool.model_dump()]}))
+        gate = Gate(replace(settings, upstream_file=config))
+        action = gate.submit(Invocation(tool=tool.name, arguments={}, idempotency_key='original-target-key'))
+        unknown = gate.decide(action['id'], decision(action))
+        assert unknown['state'] == 'unknown' and target['effects'] == 1
+        if change == 'removed':gate.registry.tools.clear()
+        else:
+            edits = {'origin':{'url':'http://127.0.0.1:2'}, 'resource':{'resource':'synthetic:different'},
+                     'principal':{'principals':['agent:different']}}
+            gate.registry.tools[tool.name] = tool.model_copy(update=edits[change])
+        before = len(calls)
+>       assert gate.remote.reconcile(unknown)['state'] == 'unknown'
+E       AssertionError: assert 'executed' == 'unknown'
+E         
+E         - unknown
+E         + executed
+
+tests\test_transport_hardening.py:145: AssertionError
+___________ test_reconcile_keeps_original_target_binding[resource] ____________
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_origi...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_original_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000155A65496E0>
+change = 'resource'
+
+    @pytest.mark.parametrize('change', ['origin', 'resource', 'removed', 'principal'])
+    def test_reconcile_keeps_original_target_binding(settings, tmp_path, monkeypatch, change):
+        calls = []
+        target = {'effects':0}
+        def request(self, method, path, payload=None):
+            calls.append((method, path, self.url))
+            if path == '/preview':
+                return {'target_version':'v1','impact_units':1,'summary':'synthetic','before':{},'after':{}}
+            if path == '/execute':
+                target['effects'] += 1
+                target['receipt'] = {'action_id':payload['action_id'], 'request_hash':payload['request_hash'],
+                                     'state':'executed', 'result':{'effects':1}}
+                raise GateError('upstream_unavailable', 503)
+            return target['receipt']
+        monkeypatch.setattr(Tool, 'request', request)
+        tool = make_tool()
+        config = tmp_path / 'tools.json'; config.write_text(json.dumps({'tools':[tool.model_dump()]}))
+        gate = Gate(replace(settings, upstream_file=config))
+        action = gate.submit(Invocation(tool=tool.name, arguments={}, idempotency_key='original-target-key'))
+        unknown = gate.decide(action['id'], decision(action))
+        assert unknown['state'] == 'unknown' and target['effects'] == 1
+        if change == 'removed':gate.registry.tools.clear()
+        else:
+            edits = {'origin':{'url':'http://127.0.0.1:2'}, 'resource':{'resource':'synthetic:different'},
+                     'principal':{'principals':['agent:different']}}
+            gate.registry.tools[tool.name] = tool.model_copy(update=edits[change])
+        before = len(calls)
+>       assert gate.remote.reconcile(unknown)['state'] == 'unknown'
+E       AssertionError: assert 'executed' == 'unknown'
+E         
+E         - unknown
+E         + executed
+
+tests\test_transport_hardening.py:145: AssertionError
+____________ test_reconcile_keeps_original_target_binding[removed] ____________
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_origi...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_original_2')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000155A65B79B0>
+change = 'removed'
+
+    @pytest.mark.parametrize('change', ['origin', 'resource', 'removed', 'principal'])
+    def test_reconcile_keeps_original_target_binding(settings, tmp_path, monkeypatch, change):
+        calls = []
+        target = {'effects':0}
+        def request(self, method, path, payload=None):
+            calls.append((method, path, self.url))
+            if path == '/preview':
+                return {'target_version':'v1','impact_units':1,'summary':'synthetic','before':{},'after':{}}
+            if path == '/execute':
+                target['effects'] += 1
+                target['receipt'] = {'action_id':payload['action_id'], 'request_hash':payload['request_hash'],
+                                     'state':'executed', 'result':{'effects':1}}
+                raise GateError('upstream_unavailable', 503)
+            return target['receipt']
+        monkeypatch.setattr(Tool, 'request', request)
+        tool = make_tool()
+        config = tmp_path / 'tools.json'; config.write_text(json.dumps({'tools':[tool.model_dump()]}))
+        gate = Gate(replace(settings, upstream_file=config))
+        action = gate.submit(Invocation(tool=tool.name, arguments={}, idempotency_key='original-target-key'))
+        unknown = gate.decide(action['id'], decision(action))
+        assert unknown['state'] == 'unknown' and target['effects'] == 1
+        if change == 'removed':gate.registry.tools.clear()
+        else:
+            edits = {'origin':{'url':'http://127.0.0.1:2'}, 'resource':{'resource':'synthetic:different'},
+                     'principal':{'principals':['agent:different']}}
+            gate.registry.tools[tool.name] = tool.model_copy(update=edits[change])
+        before = len(calls)
+>       assert gate.remote.reconcile(unknown)['state'] == 'unknown'
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_transport_hardening.py:145: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\upstream.py:240: in reconcile
+    tool=self.gate.registry.get(action['request']['tool'],action['principal'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <airlock.upstream.Registry object at 0x00000155A6457C50>
+name = 'upstream:boundary', principal = 'agent:demo'
+
+    def get(self,name,principal):
+        tool=self.tools.get(name)
+>       if not tool or principal not in tool.principals: raise GateError('tool_not_authorized',403)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       airlock.models.GateError: tool_not_authorized
+
+airlock\upstream.py:110: GateError
+___________ test_reconcile_keeps_original_target_binding[principal] ___________
+
+settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_origi...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-442/test_reconcile_keeps_original_3')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000155A64DB790>
+change = 'principal'
+
+    @pytest.mark.parametrize('change', ['origin', 'resource', 'removed', 'principal'])
+    def test_reconcile_keeps_original_target_binding(settings, tmp_path, monkeypatch, change):
+        calls = []
+        target = {'effects':0}
+        def request(self, method, path, payload=None):
+            calls.append((method, path, self.url))
+            if path == '/preview':
+                return {'target_version':'v1','impact_units':1,'summary':'synthetic','before':{},'after':{}}
+            if path == '/execute':
+                target['effects'] += 1
+                target['receipt'] = {'action_id':payload['action_id'], 'request_hash':payload['request_hash'],
+                                     'state':'executed', 'result':{'effects':1}}
+                raise GateError('upstream_unavailable', 503)
+            return target['receipt']
+        monkeypatch.setattr(Tool, 'request', request)
+        tool = make_tool()
+        config = tmp_path / 'tools.json'; config.write_text(json.dumps({'tools':[tool.model_dump()]}))
+        gate = Gate(replace(settings, upstream_file=config))
+        action = gate.submit(Invocation(tool=tool.name, arguments={}, idempotency_key='original-target-key'))
+        unknown = gate.decide(action['id'], decision(action))
+        assert unknown['state'] == 'unknown' and target['effects'] == 1
+        if change == 'removed':gate.registry.tools.clear()
+        else:
+            edits = {'origin':{'url':'http://127.0.0.1:2'}, 'resource':{'resource':'synthetic:different'},
+                     'principal':{'principals':['agent:different']}}
+            gate.registry.tools[tool.name] = tool.model_copy(update=edits[change])
+        before = len(calls)
+>       assert gate.remote.reconcile(unknown)['state'] == 'unknown'
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_transport_hardening.py:145: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+airlock\upstream.py:240: in reconcile
+    tool=self.gate.registry.get(action['request']['tool'],action['principal'])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <airlock.upstream.Registry object at 0x00000155A66B4770>
+name = 'upstream:boundary', principal = 'agent:demo'
+
+    def get(self,name,principal):
+        tool=self.tools.get(name)
+>       if not tool or principal not in tool.principals: raise GateError('tool_not_authorized',403)
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       airlock.models.GateError: tool_not_authorized
+
+airlock\upstream.py:110: GateError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_transport_hardening.py::test_reconcile_keeps_original_target_binding[origin]
+FAILED tests/test_transport_hardening.py::test_reconcile_keeps_original_target_binding[resource]
+FAILED tests/test_transport_hardening.py::test_reconcile_keeps_original_target_binding[removed]
+FAILED tests/test_transport_hardening.py::test_reconcile_keeps_original_target_binding[principal]
+4 failed, 23 deselected, 1 warning in 0.68s

@@ -1,0 +1,80 @@
+{
+  "scope": "disposable synthetic data; automated independent reviewer fixture; no live model/human",
+  "without_gate": {
+    "before": 1206,
+    "after": 0
+  },
+  "with_gate": {
+    "pending_rows": 1206,
+    "rejected_rows": 1206,
+    "denial": {
+      "id": "e786c3706e8e417eb2eafe013a4b676b",
+      "state": "rejected",
+      "decision": "need_approval",
+      "reason_code": "human_rejected",
+      "result": null,
+      "expires_at": 1790938131.386582,
+      "action_id": "e786c3706e8e417eb2eafe013a4b676b",
+      "trace_id": "30c272cefc284cb88f5a893cea3cadb4",
+      "retryable": false,
+      "allowed_alternatives": [
+        "query_original_action",
+        "bounded_read"
+      ],
+      "execution_occurred": false,
+      "next_step": "Use a bounded SELECT or submit a narrower NEW action; do not retry rejected writes blindly."
+    },
+    "safe_alternative": {
+      "id": "18bcddfa4a1342e48fa7c745a1837621",
+      "state": "executed",
+      "decision": "pass",
+      "reason_code": "bounded_read",
+      "result": {
+        "matched_rows": 0,
+        "rows": [
+          {
+            "remaining": 1206
+          }
+        ],
+        "truncated": false
+      },
+      "expires_at": 1790938131.4161534,
+      "action_id": "18bcddfa4a1342e48fa7c745a1837621",
+      "trace_id": "d129071f9f684995a96c20574abe605c",
+      "retryable": false,
+      "allowed_alternatives": [
+        "query_original_action"
+      ],
+      "execution_occurred": true,
+      "next_step": "Read the result."
+    },
+    "approved_rows": 0,
+    "approved_receipt": {
+      "id": "fe0de9bdeb7246a5988fe49e4699bda3",
+      "state": "executed",
+      "decision": "need_approval",
+      "reason_code": "human_approved",
+      "result": {
+        "matched_rows": 1206,
+        "rows": [],
+        "truncated": false
+      },
+      "expires_at": 1790938131.4252472,
+      "action_id": "fe0de9bdeb7246a5988fe49e4699bda3",
+      "trace_id": "936b7ef6b89d49cb97983b8604934f25",
+      "retryable": false,
+      "allowed_alternatives": [
+        "query_original_action"
+      ],
+      "execution_occurred": true,
+      "next_step": "Read the result."
+    }
+  },
+  "audit": {
+    "valid": true,
+    "events": 5,
+    "head": "1146e67476c14222bcc77235c12a9c7d594dd72f99c28ae82ed8c3b2ad7d01a9",
+    "anchor_status": "not_configured",
+    "limitation": "Tail truncation after the last independently retained checkpoint remains undetectable. A server with all keys can forge new history; keep checkpoints outside its write authority."
+  }
+}

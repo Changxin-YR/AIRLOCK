@@ -1,0 +1,51 @@
+Failed to find real location of C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\python.exe
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\demo_comparison.py", line 21, in run
+    gate=Gate(Settings(Path(directory)/'demo.sqlite','a'*32,'r'*32,'k'*32))
+  File "C:\Users\27363\Desktop\airlock\airlock\service.py", line 24, in __init__
+    self.settings, self.clock, self.store = settings, clock, Store(settings)
+                                                             ~~~~~^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\airlock\store.py", line 44, in __init__
+    fd = os.open(settings.database, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\27363\\AppData\\Local\\Packages\\sandbox.{64298915-91ad-4941-97fa-3eea002fbe53}\\AC\\Temp\\tmpoc09dfkr\\demo.sqlite'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\shutil.py", line 631, in _rmtree_unsafe
+    os.rmdir(path)
+    ~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\27363\\AppData\\Local\\Packages\\sandbox.{64298915-91ad-4941-97fa-3eea002fbe53}\\AC\\Temp\\tmpoc09dfkr'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\27363\Desktop\airlock\scripts\demo_comparison.py", line 41, in <module>
+    result=run();args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+  File "C:\Users\27363\Desktop\airlock\scripts\demo_comparison.py", line 20, in run
+    with tempfile.TemporaryDirectory() as directory:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py", line 952, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py", line 956, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py", line 936, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\shutil.py", line 790, in rmtree
+    return _rmtree_unsafe(path, onexc)
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\shutil.py", line 635, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py", line 908, in onexc
+    _resetperms(path)
+    ~~~~~~~~~~~^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py", line 283, in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py", line 272, in _dont_follow_symlinks
+    func(path, *args, follow_symlinks=False)
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\27363\\AppData\\Local\\Packages\\sandbox.{64298915-91ad-4941-97fa-3eea002fbe53}\\AC\\Temp\\tmpoc09dfkr'

@@ -1,0 +1,77 @@
+{
+  "status": "REPRODUCED",
+  "source_commit": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "source_tar_sha256": "da903ab0b5b9c8025c43608659148ca67d0ccb894ab6473efab6f309037ae067",
+  "cases": [
+    {
+      "case": "numeric_environment",
+      "child_exit_code": 1,
+      "input_marker_in_stderr": true,
+      "traceback_in_stderr": true,
+      "database_created": false
+    },
+    {
+      "case": "origin_port_environment",
+      "child_exit_code": 1,
+      "input_marker_in_stderr": true,
+      "traceback_in_stderr": true,
+      "database_created": false
+    },
+    {
+      "case": "missing_console",
+      "health_status": 200,
+      "health_body": {
+        "status": "ok",
+        "version": "0.1.0"
+      },
+      "homepage_status": 503,
+      "homepage_body": {
+        "error": "console_assets_missing",
+        "next_step": "Run npm ci and npm run build before starting AIRLOCK."
+      },
+      "database_created": true,
+      "seeded_customer_rows": 1206,
+      "seed_marker": "v1",
+      "child_exit_code": 0
+    },
+    {
+      "case": "invalid_csp",
+      "startup_failure": "invalid console script hashes",
+      "database_created": true,
+      "seeded_customer_rows": 1206,
+      "seed_marker": "v1",
+      "child_exit_code": 0
+    }
+  ],
+  "scope": "Frozen Git source copied to disposable directory; only synthetic environment mappings, fresh test databases and local TestClient. No existing config, database or host credential read. No network connections or model calls.",
+  "exit_meaning": "The outer exit0 means all expected baseline defects were observed. Console child exit0 means the defect assertion script completed, not a healthy application.",
+  "findings": [
+    {
+      "id": "START-ENV-LEAK",
+      "severity": "P2",
+      "code": "airlock/models.py:Settings.from_env and airlock/__main__.py:main",
+      "summary": "Malformed numeric/port environment values escape as Uvicorn startup tracebacks containing the original value."
+    },
+    {
+      "id": "START-CONSOLE-READINESS",
+      "severity": "P2",
+      "code": "airlock/api.py:create_app, health, index",
+      "summary": "Missing console index yields HTTP503 while /healthz returns 200 status ok. This is a console-readiness limitation, not an authorization bypass."
+    },
+    {
+      "id": "START-SIDE-EFFECT",
+      "severity": "P2",
+      "code": "airlock/api.py:create_app before console validation; airlock/service.py:Gate.__init__",
+      "summary": "Invalid CSP prevents startup only after the fresh SQLite database has been created, schema installed and 1206 rows seeded."
+    }
+  ],
+  "doctor_counterexample_requirements": [
+    "Invalid environment/config values produce stable field/error codes with no traceback, raw input value, token or path details.",
+    "Detect missing index.html, invalid/missing CSP and missing referenced JS/CSS before declaring console ready; keep liveness separate from readiness.",
+    "Never instantiate Gate, Store or SemanticAdvisor or open any persistent SQLite path; allow only explicit in-memory runtime check.",
+    "Do not create the DB parent, config directory, semantic ledger, WAL, SHM or lock files, including on failed validation.",
+    "No DNS, socket, browser, subprocess server or model call; unavailable external authentication/archive/notifications must remain unverified.",
+    "Use only explicitly selected synthetic config in tests; preserve omitted-config environment compatibility and existing environment precedence.",
+    "A successful preflight is configuration/build readiness, not proof of production permissions, live IdP or successful business execution."
+  ]
+}

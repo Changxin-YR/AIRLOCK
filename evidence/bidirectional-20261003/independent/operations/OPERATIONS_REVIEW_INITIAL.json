@@ -1,0 +1,152 @@
+{
+  "status": "PASS",
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "working_tree_dirty": true,
+  "source_hashes": {
+    "airlock/alert_delivery.py": "3915b0fc8d4c1c8b76a99ff857618d3b8fd7be26dc6c81991897d3a77c0d11c7",
+    "scripts/operational_check.py": "8c57fcec54f2b6a75e9ccfb5e85b7569c470c60e6143fd018d5f986bec6c13a6",
+    "tests/test_alert_delivery.py": "643a672e0e2d2fec29886528b2d14e29b36c5116d740991b32671156a1331b82",
+    "tests/test_alert_inbox.py": "8c8d35606895c875aa39a2d07aa7606bc47f2c5a87a4f9d738842ea3e3ea92a6"
+  },
+  "changed_files": [
+    "airlock/alert_delivery.py",
+    "scripts/operational_check.py",
+    "tests/test_alert_delivery.py",
+    "tests/test_alert_inbox.py"
+  ],
+  "testcase_count": 90,
+  "failures": 0,
+  "errors": 0,
+  "fixes": [
+    {
+      "id": "OPS-1",
+      "severity": "P1",
+      "before": "Dedicated outbox path accepted another SQLite database and added notification tables.",
+      "after": "Runtime preflight and application/schema validation refuse foreign DB before writes; previous dedicated outboxes migrate without losing event IDs.",
+      "baseline": "baseline-results.json#/probes/foreign_database"
+    },
+    {
+      "id": "OPS-2",
+      "severity": "P1",
+      "before": "Out-of-order checked_at=100 healthy observation after 200 alert emitted false recovery.",
+      "after": "Per-target persisted timestamp high-water rejects older or same-time conflicting changes and timestamp removal; older identical state can retry its original event without lowering high-water.",
+      "baseline": "baseline-results.json#/probes/stale_recovery"
+    },
+    {
+      "id": "OPS-3",
+      "severity": "P1",
+      "before": "CLI status=alert with recommended_exit_code=0 returned success; health source failures left no current structured report.",
+      "after": "Validate fixed health codes and observation timestamp, derive exit from status, and record source/auth/schema failure as unknown exit4 without sending a recovery.",
+      "baseline": "baseline-results.json#/probes/false_success_exit"
+    }
+  ],
+  "coverage": [
+    "positive health→CLI→outbox→HTTP inbox→read→recovery",
+    "duplicate id and conflicting payload",
+    "concurrent senders and receivers",
+    "lost response with same-id retry",
+    "state commit failure after remote acknowledgement",
+    "failed recovery retry",
+    "legacy outbox migration",
+    "credential isolation and receiver restart/rotation",
+    "unknown identity/HTTP and malformed body",
+    "out-of-order stale recovery/re-alert",
+    "foreign database/no writes",
+    "runtime before persistent access"
+  ],
+  "independent_chain": "independent-chain.json",
+  "command_receipts": {
+    "baseline-probe-rerun.log.status.json": {
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "var/bidirectional-20261003/operations/baseline_probe.py"
+      ],
+      "exit_code": 0,
+      "started_at_utc": "2026-10-03T05:14:22.112231+00:00",
+      "duration_seconds": 3.206,
+      "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+      "tracked_source_dirty": false,
+      "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+    },
+    "baseline-probe.log.status.json": {
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "var/bidirectional-20261003/operations/baseline_probe.py"
+      ],
+      "exit_code": 1,
+      "started_at_utc": "2026-10-03T05:14:09.943388+00:00",
+      "duration_seconds": 3.837,
+      "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+      "tracked_source_dirty": false,
+      "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+    },
+    "independent-chain.log.status.json": {
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "var/bidirectional-20261003/operations/independent_chain.py"
+      ],
+      "exit_code": 0,
+      "started_at_utc": "2026-10-03T05:19:14.584328+00:00",
+      "duration_seconds": 10.59,
+      "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+      "tracked_source_dirty": true,
+      "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+    },
+    "targeted-tests-rerun.log.status.json": {
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_alert_delivery.py",
+        "tests/test_alert_inbox.py",
+        "tests/test_operations.py",
+        "--junitxml=var/bidirectional-20261003/operations/targeted-tests-rerun.xml"
+      ],
+      "exit_code": 0,
+      "started_at_utc": "2026-10-03T05:18:11.684413+00:00",
+      "duration_seconds": 68.315,
+      "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+      "tracked_source_dirty": true,
+      "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+    },
+    "targeted-tests.log.status.json": {
+      "command": [
+        ".\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_alert_delivery.py",
+        "tests/test_alert_inbox.py",
+        "tests/test_operations.py",
+        "--junitxml=var/bidirectional-20261003/operations/targeted-tests.xml"
+      ],
+      "exit_code": 1,
+      "started_at_utc": "2026-10-03T05:16:27.919843+00:00",
+      "duration_seconds": 67.728,
+      "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+      "tracked_source_dirty": true,
+      "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+    }
+  },
+  "limits": [
+    "Synthetic isolated localhost only; no person or external IdP, cloud retention or paid model validation.",
+    "Legacy/local calls without checked_at are compatible but have no timestamp ordering claim; after a high-water exists removal is refused.",
+    "Notification identities and endpoints remain operator-controlled; this is not protection from a compromised operator or receiver credential.",
+    "No network exactly-once claim; remote acceptance followed by lost response can retry the same event ID.",
+    "No scheduler or permanent service installed; CLI is operator-scheduled."
+  ],
+  "initial_failures": [
+    {
+      "log": "baseline-probe.log",
+      "reason": "Windows temporary directory cleanup ran before a probe SQLite handle was closed; fixed probe handle lifetime; rerun exit0."
+    },
+    {
+      "log": "targeted-tests.log",
+      "reason": "Pytest oversized parameter default ID exceeded Windows environment-variable length; explicit short IDs fixed harness; 90-test rerun exit0. This initial raw error output remains local and may contain environment-name/path excerpts."
+    }
+  ],
+  "unfixed_P0_P1_in_tested_scope": [],
+  "human_validation": "ENVIRONMENT BLOCKED",
+  "committed": false
+}

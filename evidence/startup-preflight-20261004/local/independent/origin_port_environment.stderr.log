@@ -1,0 +1,47 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\27363\AppData\Local\Temp\airlock-startup-countercheck-96huk6t8\baseline\airlock\__main__.py", line 49, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\27363\AppData\Local\Temp\airlock-startup-countercheck-96huk6t8\baseline\airlock\__main__.py", line 45, in main
+    uvicorn.run("airlock.api:create_app", factory=True, host="127.0.0.1", port=8000, access_log=False)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\uvicorn\main.py", line 620, in run
+    server.run()
+    ~~~~~~~~~~^^
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\uvicorn\server.py", line 75, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py", line 196, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py", line 119, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\base_events.py", line 726, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\uvicorn\server.py", line 79, in serve
+    await self._serve(sockets)
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\uvicorn\server.py", line 86, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\uvicorn\config.py", line 484, in load
+    self.loaded_app = self.loaded_app()
+                      ~~~~~~~~~~~~~~~^^
+  File "C:\Users\27363\AppData\Local\Temp\airlock-startup-countercheck-96huk6t8\baseline\airlock\api.py", line 35, in create_app
+    settings = settings or Settings.from_env()
+                           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\27363\AppData\Local\Temp\airlock-startup-countercheck-96huk6t8\baseline\airlock\models.py", line 142, in from_env
+    return cls(
+        database=Path(os.getenv("AIRLOCK_DB", "var/airlock.db")),
+    ...<16 lines>...
+        budget_window_seconds=int(os.getenv('AIRLOCK_BUDGET_WINDOW','86400')),
+    )
+  File "<string>", line 26, in __init__
+  File "C:\Users\27363\AppData\Local\Temp\airlock-startup-countercheck-96huk6t8\baseline\airlock\models.py", line 125, in __post_init__
+    _ = origin.port  # Validate malformed ports before starting the service.
+        ^^^^^^^^^^^
+  File "C:\Users\27363\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\urllib\parse.py", line 182, in port
+    raise ValueError(f"Port could not be cast to integer value as {port!r}")
+ValueError: Port could not be cast to integer value as 'synthetic-private-port-marker'

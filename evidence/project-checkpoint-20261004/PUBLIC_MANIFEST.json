@@ -1,0 +1,70 @@
+{
+  "baseline_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
+  "files": {
+    ".gitattributes": {
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    "AIRLOCK-project-baseline-699adbd.zip": {
+      "bytes": 2835750,
+      "sha256": "60bd67a5db7aa28c86f6b8743ce052b6a8986821bf0cf371257645ef5f87717e"
+    },
+    "ARCHIVE.json": {
+      "bytes": 3221,
+      "sha256": "da75615935b47e6a2b31599102f46a458b3eab92584ba9a53937ce8523ffe926"
+    },
+    "checkpoint-validation.log": {
+      "bytes": 339,
+      "sha256": "25f0143ca20fe57108627176c37e25025937a4d3ed139d77504db65a4af2ab90"
+    },
+    "checkpoint-validation.log.status.json": {
+      "bytes": 398,
+      "sha256": "6bbd857f07573a1a6edd523f21746626c62c0b8966479534a75b6da8b6bd7937"
+    },
+    "comparison-rerun.log": {
+      "bytes": 2589,
+      "sha256": "d132a1d3d9b0efaed5302b7ad7889bffd86cb1d12fd04b5a1877744d9209205f"
+    },
+    "comparison-rerun.log.status.json": {
+      "bytes": 443,
+      "sha256": "60ca858df0ba7afabd4eca1c31e47ed566939bbc092e421703b4c7fe0d737cd9"
+    },
+    "comparison.json": {
+      "bytes": 2589,
+      "sha256": "d132a1d3d9b0efaed5302b7ad7889bffd86cb1d12fd04b5a1877744d9209205f"
+    },
+    "comparison.log": {
+      "bytes": 3638,
+      "sha256": "48694d315eeda56da27872a6f54f3861716e5e43f54f3bc873489a55f9147450"
+    },
+    "comparison.log.status.json": {
+      "bytes": 445,
+      "sha256": "d2b30a231961cd4eb4275d18e0829ddc2c67ca4ba9a9e828c3c26b3b786773ec"
+    },
+    "PREVIOUS_MANIFEST.json": {
+      "bytes": 2212,
+      "sha256": "b0c58b3553c6799b6f5e314e0d40ad5bdb5be44d5ec06ab779b39cbb02063f72"
+    },
+    "PROVENANCE.json": {
+      "bytes": 440,
+      "sha256": "f515cf3a037e16da24645b499411a57b50f30503dc53fef848d4f764bac6c9a1"
+    },
+    "README.md": {
+      "bytes": 2727,
+      "sha256": "156cedd75034544a7c3415b410f61b2ffb016cc576c2d825023b93fadd3f86d3"
+    },
+    "validation.log": {
+      "bytes": 441,
+      "sha256": "514453744b1217f577899b00a16cf3330959bd4d51cc2e28441e7c52efc5c701"
+    },
+    "validation.log.status.json": {
+      "bytes": 395,
+      "sha256": "38a5a875c2b2731673df2e02cdec166986aff2c6d002af6ae2692d4c469c2652"
+    },
+    "verify_archive.py": {
+      "bytes": 4262,
+      "sha256": "b7ffdbd13d47155881779a762de260691f715154ad0a7cfcd48a4a7b1c68d63c"
+    }
+  },
+  "scope": "Current checkpoint payloads. Previous byte identities are verified from their historical Git commit."
+}

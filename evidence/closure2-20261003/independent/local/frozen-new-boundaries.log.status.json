@@ -1,0 +1,20 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_archive_integrity.py",
+    "tests/test_governance_integrity.py",
+    "tests/test_identity_boundaries.py",
+    "tests/test_telemetry_integrity.py",
+    "tests/test_transport_hardening.py",
+    "-q",
+    "--junitxml=var/closure2-20261003/local/frozen-new-boundaries.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T10:55:36.586682+00:00",
+  "duration_seconds": 22.353,
+  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+}

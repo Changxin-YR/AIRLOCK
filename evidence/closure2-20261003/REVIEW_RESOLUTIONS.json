@@ -1,0 +1,15 @@
+{
+  "source_commit": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "review": "independent/final-review.json",
+  "publication_notes_resolved": [
+    {
+      "item": "F042 scope",
+      "resolution": "FINDINGS_AND_FIXES and FINAL_REPORT explicitly limit reservation preservation to network/verification failures before final receipt writing; filesystem crash atomicity is not claimed."
+    },
+    {
+      "item": "CI publication timing",
+      "resolution": "CI 37117971834 completed success; full ZIP and payloads now downloaded, digest/commit verified and functional verifier exit 0.",
+      "evidence": "CI_FINAL.json"
+    }
+  ]
+}

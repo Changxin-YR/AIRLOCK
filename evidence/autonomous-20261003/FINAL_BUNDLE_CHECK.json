@@ -1,0 +1,25 @@
+{
+  "tested_commit_sha": "4aca4073114b5b992460903abf33c3721f4f8063",
+  "matrix_records": 126,
+  "matrix_matches_ci": true,
+  "application_source_unchanged": true,
+  "inspected_payloads_including_archives": 783,
+  "credential_prefix_matches": 0,
+  "unexpected_private_payload_paths": 0,
+  "scope": "File-type, path, known credential-prefix and provenance checks; not a comprehensive secret scanner or production security certification",
+  "research_review_closure": {
+    "review": "independent/research-final-review.json",
+    "original_review_preserved": true,
+    "final_matrix_validation": "matrix-validator-final.log.status.json",
+    "negative_controls": "independent/methodology-provenance-counterexamples.json",
+    "remaining_p0_p1": [],
+    "two_provenance_p2": "fixed_and_negative_controls_passed"
+  },
+  "reports": {
+    "COMPLETION_MATRIX.json": "205e05e2e193a7e814af6dab0cb0f821d48dbf5be9b94dbe9176e7d126e620fa",
+    "DELIVERY_STATE.json": "c5f781741c6e6a8412a69f04a1f2e057ab3ce54c501d373d20cd4788f1e8c666",
+    "EVIDENCE_RETENTION.md": "41ff462c9f54e8f5d0652886f8a653183857cb87777603b97fc22d96b82a760f",
+    "FINAL_REPORT.md": "d6a2bfd39a9bb1330332c4f41ea039a33b67f14bb89041773b20f2bf07a7a254",
+    "FINDINGS_AND_FIXES.md": "60186ccb9f5c195ec6b3f241ea44bb87c9878e1753eef5a746b007f49d2b66ae"
+  }
+}

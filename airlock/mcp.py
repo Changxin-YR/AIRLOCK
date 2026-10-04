@@ -64,7 +64,18 @@ class Bridge:
         elif not self.ready:
             return self.error(identifier, -32002, "Initialize first")
         elif method == "tools/list":
-            result = {"tools": TOOLS}
+            try:
+                response=self.client.get('/v1/tools',headers={'Authorization':'Bearer '+self.token})
+                response.raise_for_status()
+                upstream=response.json()['items']
+                extra=[{'name':t['name'],'description':t['description'],'inputSchema':{'type':'object',
+                    'properties':{'arguments':{'type':'object','properties':{k:{'type':v} for k,v in t['arguments'].items()},
+                        'required':list(t['arguments']),'additionalProperties':False},
+                        'idempotency_key':{'type':'string','minLength':8,'maxLength':128}},
+                    'required':['arguments','idempotency_key'],'additionalProperties':False}} for t in upstream]
+                result = {"tools": TOOLS+extra}
+            except (httpx.HTTPError,ValueError,KeyError,TypeError):
+                return self.error(identifier,-32000,'Tool discovery unavailable')
         elif method == "tools/call":
             try:
                 args = params.get("arguments", {})
@@ -74,6 +85,10 @@ class Bridge:
                         raise ValueError("invalid tool arguments")
                     call = Invocation.model_validate(args)
                     response = self.client.post("/v1/actions", json=call.model_dump(), headers=headers)
+                elif isinstance(params.get('name'),str) and params['name'].startswith('upstream:'):
+                    if not isinstance(args,dict) or set(args)!={'arguments','idempotency_key'}: raise ValueError('invalid arguments')
+                    call=Invocation(tool=params['name'],**args)
+                    response=self.client.post('/v1/actions',json=call.model_dump(),headers=headers)
                 elif params.get("name") == "action_status":
                     if not isinstance(args, dict) or set(args) != {"action_id"} or not isinstance(args["action_id"], str) or not re.fullmatch(r"[a-f0-9]{32}", args["action_id"]):
                         raise ValueError("invalid action id")
@@ -95,6 +110,9 @@ class Bridge:
 
 
 def main():
+    # MCP stdio is UTF-8, independently of the host console code page.
+    sys.stdin.reconfigure(encoding="utf-8", errors="strict")
+    sys.stdout.reconfigure(encoding="utf-8", errors="strict")
     url = os.getenv("AIRLOCK_URL", "http://127.0.0.1:8000")
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"} or (parsed.scheme == "http" and parsed.hostname not in {"localhost", "127.0.0.1", "::1"}):

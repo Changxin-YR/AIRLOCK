@@ -1,0 +1,13 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-c",
+    "from pathlib import Path; import json; from airlock.diagnostics import validate_console; hashes=validate_console(Path(\"airlock/console\")); print(json.dumps({\"status\":\"PASS\",\"scope\":\"existing_local_packaged_console\",\"validated_script_hash_count\":len(hashes),\"service_started\":False,\"persistent_database_opened\":False}))"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T01:09:13.641138+00:00",
+  "duration_seconds": 1.027,
+  "tested_commit_sha": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "f27b447e268209a8b8f480111e55a3f6bb1bedce"
+}

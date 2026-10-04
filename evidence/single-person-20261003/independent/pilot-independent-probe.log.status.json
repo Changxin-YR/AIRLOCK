@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "var/single-person-20261003/pilot-independent-probe.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:32:00.163429+00:00",
+  "duration_seconds": 1.02,
+  "tested_commit_sha": "31cf0e76156f0b5a408756d45068f1a318cf856c",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "31cf0e76156f0b5a408756d45068f1a318cf856c"
+}

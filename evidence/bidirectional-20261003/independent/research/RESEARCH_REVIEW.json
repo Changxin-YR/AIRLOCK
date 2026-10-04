@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "source_dirty": true,
+  "source_hashes": {
+    "benchmark/research.py": "a703241cbd3d5bdc439ca814d0aeb4205f644ee809346613052ecb23106fcb8d",
+    "benchmark/closure.py": "f24ae276e3fa63eddec33c47ea83fafb55c43ecf396d75ba1afea1e2c6f77316",
+    "tests/test_research_integrity.py": "baab71d0e414dc82c2d7a0febbf59a675bc8fd38470297a74aff550825b773f9"
+  },
+  "baseline": "baseline.json",
+  "baseline_raw_receipt": "baseline.log.status.json",
+  "countercheck": "countercheck.json",
+  "countercheck_raw_receipt": "countercheck.log.status.json",
+  "validation": [
+    {
+      "log": "targeted-final.log",
+      "receipt": "targeted-final.log.status.json",
+      "junit": "targeted-final.xml",
+      "exit_code": 0,
+      "tests": 128
+    },
+    {
+      "log": "pipeline.log",
+      "receipt": "pipeline.log.status.json",
+      "report": "pipeline/report.json",
+      "exit_code": 0,
+      "checks": 6
+    }
+  ],
+  "findings": [
+    {
+      "id": "RESEARCH-01",
+      "severity": "P2",
+      "before": "Literal[True] accepted human=1 and independent=1; whitespace-only rationale accepted",
+      "after": "Explicit true boolean and nonblank rationale required; ambiguous whitespace identities rejected",
+      "status": "FIXED"
+    },
+    {
+      "id": "RESEARCH-02",
+      "severity": "P2",
+      "before": "Formal JSON/JSONL parsers silently overwrote contradictory duplicate human/source/authorized fields",
+      "after": "Shared strict loader rejects duplicate keys recursively and nonfinite constants in formal imports",
+      "status": "FIXED"
+    },
+    {
+      "id": "RESEARCH-03",
+      "severity": "P2",
+      "before": "Tasks without comprehension gold admitted browser-supplied comprehension_correct into a gold-recomputed report",
+      "after": "Recomputed report removes browser field and counts only tasks with comprehension gold; absent denominator remains null",
+      "status": "FIXED"
+    },
+    {
+      "id": "RESEARCH-04",
+      "severity": "P2",
+      "before": "Invalid dates such as 2026-99-99 counted as active user days",
+      "after": "Actual canonical ISO calendar date and valid participant/task identities required; grouping uses tuples",
+      "status": "FIXED"
+    }
+  ],
+  "coverage": [
+    "formal booleans, duplicate keys, ambiguous identity, empty rationale",
+    "normal and reverse study CLI import/output with task hash binding",
+    "single participant n=1 no population confidence interval or formal acceptance",
+    "model/automation records excluded; labels remain declarations rather than authenticated identity",
+    "normal corpus prediction pipeline and no target writes",
+    "pilot CSV/JSONL private roundtrip, source override rejection, incomplete and unknown labels",
+    "worklog trace/snapshot separation, unknown outcome preservation, duplicate effect counting, private provenance hashes"
+  ],
+  "unchanged_modules": [
+    "benchmark/pilot.py",
+    "benchmark/worklog.py"
+  ],
+  "limitations": [
+    "Synthetic fixtures only; zero real participants or paid model calls",
+    "Formal human validation remains ENVIRONMENT BLOCKED; no claim of representative log coverage",
+    "Windows local checks supplement final frozen commit CI; working tree was dirty due concurrent authorized changes"
+  ],
+  "unfixed_known_p0_p1_in_scope": []
+}

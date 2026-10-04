@@ -1,0 +1,76 @@
+{
+  "source_commit": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "purpose": "Frozen startup baseline independent reproduction; not repair acceptance",
+  "files": [
+    {
+      "path": "baseline-source.tar",
+      "bytes": 358400,
+      "sha256": "da903ab0b5b9c8025c43608659148ca67d0ccb894ab6473efab6f309037ae067"
+    },
+    {
+      "path": "baseline.log",
+      "bytes": 3698,
+      "sha256": "0c7b381fbdfa81900063e53928505de12b5d5b023ce7ac23da5fef23e81fa3e1"
+    },
+    {
+      "path": "baseline.log.status.json",
+      "bytes": 400,
+      "sha256": "7d3397388e65e5e275774f0fe102c1414d36665ebeb9c5582be787dc5e789dc2"
+    },
+    {
+      "path": "console_countercheck_child.py",
+      "bytes": 1508,
+      "sha256": "222b864d7136b2ef66163b4689c0298210eeb48c1c736785cbbe951e6aa75985"
+    },
+    {
+      "path": "invalid_csp.stderr.log",
+      "bytes": 262,
+      "sha256": "ce0810f5dfb3d09c053f0494e7ed4971c92d3724ddda15cf020581506fb7929f"
+    },
+    {
+      "path": "invalid_csp.stdout.log",
+      "bytes": 154,
+      "sha256": "93f69fb560a18d41f23b8355e6a4ec59b168caf1f12728514383b26e58530331"
+    },
+    {
+      "path": "missing_console.stderr.log",
+      "bytes": 262,
+      "sha256": "ce0810f5dfb3d09c053f0494e7ed4971c92d3724ddda15cf020581506fb7929f"
+    },
+    {
+      "path": "missing_console.stdout.log",
+      "bytes": 329,
+      "sha256": "3a4298938500c5e44a556938e5c3722a792828596a30366dfd6ae37f372ad322"
+    },
+    {
+      "path": "numeric_environment.stderr.log",
+      "bytes": 2584,
+      "sha256": "24748202b6b64530563b286c9ac01f241d49c68d5f0238f21269b7cf932d69a8"
+    },
+    {
+      "path": "numeric_environment.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "origin_port_environment.stderr.log",
+      "bytes": 3150,
+      "sha256": "2b0ffe069a4130ac042953b02c243afe5f49b4a320291d658f38de48d01c0582"
+    },
+    {
+      "path": "origin_port_environment.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reproduce.py",
+      "bytes": 7356,
+      "sha256": "2d076abf8ccd798cc1436cafeef7575dbe6ea28fe460a637b7971a7d332d9d97"
+    },
+    {
+      "path": "RESULT.json",
+      "bytes": 3698,
+      "sha256": "0c7b381fbdfa81900063e53928505de12b5d5b023ce7ac23da5fef23e81fa3e1"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "documents": {
+    "docs/acceptance/FINAL_REPORT.md": {
+      "sha256": "57fb47e2f03374e6781e68a1849cc0d82038c2f55b7125e2658563be8b36acd7",
+      "bytes": 6939
+    },
+    "docs/acceptance/COMPLETION_MATRIX.json": {
+      "sha256": "9423690090aa356bee4ebaf821f68e7d7273061ac53e7ebcfc5e4d0e82550011",
+      "bytes": 1023432
+    },
+    "docs/acceptance/COMPLETION_MATRIX.md": {
+      "sha256": "2cbe19c5a25e87a6897604c8fada1a4ccb73637f3c746175095d836c95a64a34",
+      "bytes": 980487
+    },
+    "docs/acceptance/FINDINGS_AND_FIXES.md": {
+      "sha256": "59dfa242b91203d12e79240719eae5be6c60d53b516248e63aa0568f57c2c660",
+      "bytes": 16838
+    },
+    "docs/acceptance/EVIDENCE_RETENTION.md": {
+      "sha256": "87f5cfb9c1c76acbe14cade594697a09de30854da65d3a8183da7e4fe78c1e5f",
+      "bytes": 10507
+    },
+    "docs/acceptance/DELIVERY_STATE.json": {
+      "sha256": "b4b0f2e4ef4748fcae2f303c5e5829440377566e3385f950edab587594b5d4d2",
+      "bytes": 6003
+    },
+    "docs/START_WITH_ONE_PERSON.md": {
+      "sha256": "e51b8fc435b443090ee87b230815f5bc776650691d0644e810bdd09a01dbec95",
+      "bytes": 10264
+    },
+    "CODEX_REVIEW.md": {
+      "sha256": "9575b82b5a4fe1ffa0a542548be55c64037bb1393273cd3ae0b273d2092d1919",
+      "bytes": 5847
+    }
+  },
+  "matrix_final_receipt": "matrix-final.log.status.json"
+}

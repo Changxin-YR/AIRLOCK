@@ -1,0 +1,9 @@
+{
+  "synthetic_only": true,
+  "schema_lookalike_alert_result": {
+    "status": "unchanged",
+    "event_ids": [],
+    "pending_count": 0
+  },
+  "source_hash": "3915b0fc8d4c1c8b76a99ff857618d3b8fd7be26dc6c81991897d3a77c0d11c7"
+}

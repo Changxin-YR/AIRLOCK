@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "var/bidirectional-20261003/operations/baseline_probe.py"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-03T05:14:09.943388+00:00",
+  "duration_seconds": 3.837,
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+}

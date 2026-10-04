@@ -1,0 +1,37 @@
+{
+  "head": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "dirty": [
+    " M airlock/github_adapter.py",
+    " M tests/test_github_adapter.py"
+  ],
+  "source_sha256": "f07997fd71c421123ef06fc760c082d9563b5f4bf455307052376af06751c64b",
+  "observations": [
+    {
+      "first": "readback",
+      "execution": {
+        "state": "executed"
+      },
+      "reconciliation": {
+        "state": "executed"
+      },
+      "stored_state": "executed",
+      "stored_verification": "github_readback",
+      "synthetic_effects": 1,
+      "replay_equals_receipt": true
+    },
+    {
+      "first": "response",
+      "execution": {
+        "state": "executed"
+      },
+      "reconciliation": {
+        "state": "executed"
+      },
+      "stored_state": "executed",
+      "stored_verification": "github_response",
+      "synthetic_effects": 1,
+      "replay_equals_receipt": true
+    }
+  ],
+  "network_calls": 0
+}

@@ -1,0 +1,21 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_research.py",
+    "tests/test_research_closure.py",
+    "tests/test_research_integrity.py",
+    "tests/test_pilot.py",
+    "tests/test_worklog.py",
+    "tests/test_model_roles.py",
+    "--junitxml=var/bidirectional-20261003/research/targeted-final.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T05:19:51.891233+00:00",
+  "duration_seconds": 8.409,
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+}

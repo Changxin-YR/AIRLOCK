@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.945" timestamp="2026-10-03T18:49:57.485006+08:00" hostname="WHHHH"><testcase classname="var.closure2-20261003.cross-transport.test_transport_countercheck" name="test_sse_mixed_newlines_bom_unicode_all_two_chunk_splits" time="0.014"><failure message="json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 19 (char 18)">def test_sse_mixed_newlines_bom_unicode_all_two_chunk_splits():
+        wire = ('\ufeff: hello\r\ndata: {"jsonrpc":"2.0",\rdata: "id":1,"result":{"text":"中文"}}\r\n\r'
+            'data: {"jsonrpc":"2.0","id":2,"result":{}}\n\n').encode('utf-8')
+        expected = [{'jsonrpc': '2.0', 'id': 1, 'result': {'text': '中文'}},
+            {'jsonrpc': '2.0', 'id': 2, 'result': {}}]
+        # All split positions, including UTF-8 BOM/codepoint and CRLF boundaries.
+        for split in range(1, len(wire)):
+            response = httpx.Response(200, headers={'content-type': 'text/event-stream'},
+                stream=Fragmented([wire[:split], wire[split:]]))
+&gt;           assert list(response_messages(response, time.monotonic() + 5)) == expected, split
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+var\closure2-20261003\cross-transport\test_transport_countercheck.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+baseline-mcp-upstream.py:response_messages:14: in response_messages
+    ???
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\json\__init__.py:352: in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\json\decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;json.decoder.JSONDecoder object at 0x0000022DE1F9CC20&gt;
+s = '{"jsonrpc":"2.0",\rdata: "id":1,"result":{"text":"中文"}}', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+    
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+    
+        """
+        try:
+&gt;           obj, end = self.scan_once(s, idx)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+E           json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 19 (char 18)
+
+..\..\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\json\decoder.py:361: JSONDecodeError</failure></testcase></testsuite></testsuites>

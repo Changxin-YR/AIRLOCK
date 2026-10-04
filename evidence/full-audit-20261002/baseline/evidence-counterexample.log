@@ -1,0 +1,1 @@
+{"counterexample": "required named tests pass but another JUnit testcase fails; fabricated incomplete benchmark and missing screenshots", "verifier_exit_code": 0, "stdout": "Required exit codes, tests, native browser, Docker and benchmark artifacts verified.\n", "stderr": ""}

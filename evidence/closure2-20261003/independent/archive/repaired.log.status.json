@@ -1,0 +1,17 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_archive_integrity.py",
+    "tests/test_archive.py",
+    "-q",
+    "--junitxml=var/closure2-20261003/archive/repaired.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T10:42:48.177782+00:00",
+  "duration_seconds": 3.095,
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+}

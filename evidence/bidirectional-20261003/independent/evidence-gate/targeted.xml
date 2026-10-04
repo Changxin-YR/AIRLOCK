@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="36" time="1.390" timestamp="2026-10-03T13:22:19.005918+08:00" hostname="WHHHH"><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_ledger_positive_control_keeps_external_blockers" time="0.413" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[count-summary counts]" time="0.011" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[all_goals-all-goals]" time="0.007" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[row_sha-row SHA]" time="0.009" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[unrecorded-missing process receipt]" time="0.012" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[ci_only-no successful frozen receipt]" time="0.011" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[parent_commands-parent command]" time="0.032" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[parent_exits-parent exit]" time="0.033" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[parent_flag-parent aggregation]" time="0.034" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[criterion-criterion changed]" time="0.010" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[absolute_path-inside repository]" time="0.009"><failure message="AssertionError: Regex pattern did not match.&#10;  Expected regex: 'inside repository'&#10;  Actual message: 'invalid evidence path'">ledger = ({'baseline_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', 'counts': {'implementation': {'IMPLEMENTED': 111, 'PA...EXTERNAL'], 'generated_date': '2026-10-02', 'historical_base_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', ...})
+mutation = 'absolute_path', expected = 'inside repository'
+
+    @pytest.mark.parametrize('mutation,expected', [
+        ('count', 'summary counts'), ('all_goals', 'all-goals'), ('row_sha', 'row SHA'),
+        ('unrecorded', 'missing process receipt'), ('ci_only', 'no successful frozen receipt'),
+        ('parent_commands', 'parent command'), ('parent_exits', 'parent exit'),
+        ('parent_flag', 'parent aggregation'), ('criterion', 'criterion changed'),
+        ('absolute_path', 'inside repository'), ('traversal', 'inside repository'),
+        ('manual_function', 'invalid manual evidence'),
+    ])
+    def test_acceptance_rejects_false_closure_mutations(ledger, mutation, expected):
+        report, index = ledger
+        row = report['targets'][0]
+        parent = next(item for item in report['targets'] if item['id'] == 'C1')
+        if mutation == 'count': report['counts']['verification']['PASS'] = 126
+        elif mutation == 'all_goals': report['original_goals_all_satisfied'] = True
+        elif mutation == 'row_sha': row['tested_commit_sha'] = '0' * 40
+        elif mutation == 'unrecorded': row['commands'] = [{'command': ['never', 'executed']}]
+        elif mutation == 'ci_only':
+            row['commands'] = [{'command': 'CI green', 'tested_commit_sha': report['tested_commit_sha'],
+                                'run_url': 'https://github.com/Changxin-YR/AIRLOCK/actions/runs/123'}]
+        elif mutation == 'parent_commands': parent['commands'] = [{'child_id': 'C1.1', 'commands': []}]
+        elif mutation == 'parent_exits': parent['exit_codes'] = []
+        elif mutation == 'parent_flag': parent['derived_parent'] = False
+        elif mutation == 'criterion': row['criterion'] = 'Only require the tool to exit zero.'
+        elif mutation == 'absolute_path': row['evidence'] = [str(ROOT / 'README.md')]
+        elif mutation == 'traversal': row['evidence'] = ['../airlock/README.md']
+        elif mutation == 'manual_function':
+            row['commands'] = [{'command': 'manual says safe', 'process_exit_code_applicable': False,
+                                'receipt': row['evidence'][0]}]
+        with pytest.raises(ValueError, match=expected):
+&gt;           validate(report, index)
+
+tests\test_acceptance_matrix.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+docs\acceptance\validate_matrix.py:104: in validate
+    file(name)
+docs\acceptance\validate_matrix.py:35: in file
+    require(isinstance(name, str) and name and chr(92) not in name, 'invalid evidence path')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+condition = False, message = 'invalid evidence path'
+
+    def require(condition, message):
+        if not condition:
+&gt;           raise ValueError(message)
+E           ValueError: invalid evidence path
+
+docs\acceptance\validate_matrix.py:18: ValueError
+
+During handling of the above exception, another exception occurred:
+
+ledger = ({'baseline_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', 'counts': {'implementation': {'IMPLEMENTED': 111, 'PA...EXTERNAL'], 'generated_date': '2026-10-02', 'historical_base_commit': '704b5035cf69f9a6c40c44eecd84c0d0741de849', ...})
+mutation = 'absolute_path', expected = 'inside repository'
+
+    @pytest.mark.parametrize('mutation,expected', [
+        ('count', 'summary counts'), ('all_goals', 'all-goals'), ('row_sha', 'row SHA'),
+        ('unrecorded', 'missing process receipt'), ('ci_only', 'no successful frozen receipt'),
+        ('parent_commands', 'parent command'), ('parent_exits', 'parent exit'),
+        ('parent_flag', 'parent aggregation'), ('criterion', 'criterion changed'),
+        ('absolute_path', 'inside repository'), ('traversal', 'inside repository'),
+        ('manual_function', 'invalid manual evidence'),
+    ])
+    def test_acceptance_rejects_false_closure_mutations(ledger, mutation, expected):
+        report, index = ledger
+        row = report['targets'][0]
+        parent = next(item for item in report['targets'] if item['id'] == 'C1')
+        if mutation == 'count': report['counts']['verification']['PASS'] = 126
+        elif mutation == 'all_goals': report['original_goals_all_satisfied'] = True
+        elif mutation == 'row_sha': row['tested_commit_sha'] = '0' * 40
+        elif mutation == 'unrecorded': row['commands'] = [{'command': ['never', 'executed']}]
+        elif mutation == 'ci_only':
+            row['commands'] = [{'command': 'CI green', 'tested_commit_sha': report['tested_commit_sha'],
+                                'run_url': 'https://github.com/Changxin-YR/AIRLOCK/actions/runs/123'}]
+        elif mutation == 'parent_commands': parent['commands'] = [{'child_id': 'C1.1', 'commands': []}]
+        elif mutation == 'parent_exits': parent['exit_codes'] = []
+        elif mutation == 'parent_flag': parent['derived_parent'] = False
+        elif mutation == 'criterion': row['criterion'] = 'Only require the tool to exit zero.'
+        elif mutation == 'absolute_path': row['evidence'] = [str(ROOT / 'README.md')]
+        elif mutation == 'traversal': row['evidence'] = ['../airlock/README.md']
+        elif mutation == 'manual_function':
+            row['commands'] = [{'command': 'manual says safe', 'process_exit_code_applicable': False,
+                                'receipt': row['evidence'][0]}]
+&gt;       with pytest.raises(ValueError, match=expected):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'inside repository'
+E         Actual message: 'invalid evidence path'
+
+tests\test_acceptance_matrix.py:52: AssertionError</failure></testcase><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[traversal-inside repository]" time="0.010" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_false_closure_mutations[manual_function-invalid manual evidence]" time="0.011" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_junit_failure_even_when_test_names_match[failure]" time="0.009" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_junit_failure_even_when_test_names_match[error]" time="0.009" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_junit_failure_even_when_test_names_match[skipped]" time="0.008" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_duplicate_json_keys" time="0.011" /><testcase classname="tests.test_acceptance_matrix" name="test_acceptance_rejects_changed_archived_log" time="0.013" /><testcase classname="tests.test_evidence_gate" name="test_evidence_rejects_any_failed_or_skipped_case[failure]" time="0.018" /><testcase classname="tests.test_evidence_gate" name="test_evidence_rejects_any_failed_or_skipped_case[error]" time="0.008" /><testcase classname="tests.test_evidence_gate" name="test_evidence_rejects_any_failed_or_skipped_case[skipped]" time="0.009" /><testcase classname="tests.test_evidence_gate" name="test_evidence_checks_survive_python_optimization" time="0.360" /><testcase classname="tests.test_evidence_gate" name="test_evidence_recomputes_prediction_metrics" time="0.000" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_recomputes_preserved_real_samples" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[raw_slow]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[false_summary]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[missing_pair]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[duplicate_pair]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[duplicate_action]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[broken_pair]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[nan]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[negative_duration]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[false_count]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[missing_write]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_rejects_false_pass[bool_value]" time="0.001" /><testcase classname="tests.test_evidence_gate" name="test_latency_gate_keeps_negative_paired_differences" time="0.000" /></testsuite></testsuites>

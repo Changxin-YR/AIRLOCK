@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="0.621" timestamp="2026-10-03T18:41:23.086779+08:00" hostname="WHHHH"><testcase classname="tests.test_governance_integrity" name="test_batch_invalid_reason_is_rejected_before_member_decisions[   ]" time="0.202"><failure message="assert 500 == 422&#10; +  where 500 = &lt;Response [500 Internal Server Error]&gt;.status_code">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-424/test_batch_invalid_reason_...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+reason = '   '
+
+    @pytest.mark.parametrize('reason', ['   ', '\t\r\n', 'review \ud800'])
+    def test_batch_invalid_reason_is_rejected_before_member_decisions(settings, reason):
+        with TestClient(create_app(settings), base_url=settings.origin, raise_server_exceptions=False) as client:
+            gate = client.app.state.gate
+            gate.clock = lambda: 1000.0
+            action = gate.submit(call())
+            group = gate.groups('reviewer:owner')[0]
+            body = batch(group).model_dump()
+            body['reason'] = reason
+            response = client.post('/v1/groups/decision', content=json.dumps(body),
+                headers={'Authorization': 'Bearer ' + settings.reviewer_token, 'Content-Type': 'application/json'})
+&gt;           assert response.status_code == 422
+E           assert 500 == 422
+E            +  where 500 = &lt;Response [500 Internal Server Error]&gt;.status_code
+
+tests\test_governance_integrity.py:56: AssertionError</failure></testcase><testcase classname="tests.test_governance_integrity" name="test_batch_invalid_reason_is_rejected_before_member_decisions[\t\r\n]" time="0.072"><failure message="assert 500 == 422&#10; +  where 500 = &lt;Response [500 Internal Server Error]&gt;.status_code">settings = Settings(database=WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-424/test_batch_invalid_reason_...one, audit_anchor_file=None, otlp_url=None, otlp_allow_loopback=False, budget_units=10000, budget_window_seconds=86400)
+reason = '\t\r\n'
+
+    @pytest.mark.parametrize('reason', ['   ', '\t\r\n', 'review \ud800'])
+    def test_batch_invalid_reason_is_rejected_before_member_decisions(settings, reason):
+        with TestClient(create_app(settings), base_url=settings.origin, raise_server_exceptions=False) as client:
+            gate = client.app.state.gate
+            gate.clock = lambda: 1000.0
+            action = gate.submit(call())
+            group = gate.groups('reviewer:owner')[0]
+            body = batch(group).model_dump()
+            body['reason'] = reason
+            response = client.post('/v1/groups/decision', content=json.dumps(body),
+                headers={'Authorization': 'Bearer ' + settings.reviewer_token, 'Content-Type': 'application/json'})
+&gt;           assert response.status_code == 422
+E           assert 500 == 422
+E            +  where 500 = &lt;Response [500 Internal Server Error]&gt;.status_code
+
+tests\test_governance_integrity.py:56: AssertionError</failure></testcase><testcase classname="tests.test_governance_integrity" name="test_batch_invalid_reason_is_rejected_before_member_decisions[review \ud800]" time="0.063" /></testsuite></testsuites>

@@ -1,0 +1,50 @@
+{
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "source_hashes": {
+    "airlock/alert_delivery.py": "3915b0fc8d4c1c8b76a99ff857618d3b8fd7be26dc6c81991897d3a77c0d11c7",
+    "scripts/operational_check.py": "8c57fcec54f2b6a75e9ccfb5e85b7569c470c60e6143fd018d5f986bec6c13a6"
+  },
+  "synthetic_only": true,
+  "real_http_chain": [
+    {
+      "check": "alert_delivery",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "status": "alert",
+      "posts": 1,
+      "passed": true
+    },
+    {
+      "check": "identity_failure_no_recovery",
+      "exit_code": 4,
+      "expected_exit_code": 4,
+      "status": "unknown",
+      "posts": 1,
+      "passed": true
+    },
+    {
+      "check": "stale_recovery_rejected",
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "status": "ok",
+      "posts": 1,
+      "passed": true
+    },
+    {
+      "check": "fresh_recovery",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "status": "ok",
+      "posts": 2,
+      "passed": true
+    }
+  ],
+  "schema_lookalike": {
+    "result": "ACCEPTED",
+    "file_changed": true
+  },
+  "invalid_high_water": {
+    "exception": "TypeError"
+  },
+  "source_dirty": true
+}

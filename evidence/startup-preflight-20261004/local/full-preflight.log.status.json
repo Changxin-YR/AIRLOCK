@@ -1,0 +1,15 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "--junitxml=var/startup-preflight-20261004/full-preflight.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T01:11:43.591825+00:00",
+  "duration_seconds": 198.048,
+  "tested_commit_sha": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "f27b447e268209a8b8f480111e55a3f6bb1bedce"
+}

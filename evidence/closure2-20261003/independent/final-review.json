@@ -1,0 +1,489 @@
+{
+  "reviewer": "identity_export_audit",
+  "mode": "read_only_final_delivery_consistency",
+  "source_commit": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "application_worktree_diff": "",
+  "indexed_payloads_checked": 171,
+  "receipts_checked": 42,
+  "runs": [
+    {
+      "receipt": "independent/archive/after-cross-review.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 46,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/archive/baseline.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 21,
+      "failures": 19,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/archive/final-targeted.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/archive/repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 33,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-archive/final.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-archive/initial.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 10,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-archive/repaired-original.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-identity/baseline.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 7,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-identity/final.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-identity/repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-telemetry/first.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 9,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-telemetry/repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-transport/baseline-sse.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-transport/first.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/cross-transport/repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/baseline-batch-input.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 3,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/baseline-batch-route.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/final-targeted.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 44,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/intermediate-route-window.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/repaired-batch-input.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/repaired-batch-route.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/governance/repaired-route-window.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/baseline.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 6,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/final-targeted.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 64,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/governance-cross-complete-final.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/governance-cross-complete.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 5,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/governance-cross-final.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/governance-cross.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 4,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/identity/repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/local/final-targeted.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 63,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/local/frontend-check.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    {
+      "receipt": "independent/local/frontend-tests.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true
+    },
+    {
+      "receipt": "independent/local/frozen-new-boundaries.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tracked_source_dirty": false,
+      "tests": 99,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/local/pytest-preflight.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 683,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/telemetry/baseline.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 5,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/telemetry/repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/transport/baseline.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 23,
+      "failures": 17,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/transport/hardening.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 81,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/transport/reconcile-baseline.log.status.json",
+      "exit_code": 1,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 4,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/transport/reconcile-repaired.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/transport/repaired-original-probes.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 23,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "receipt": "independent/transport/shared-client-compatibility.log.status.json",
+      "exit_code": 0,
+      "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+      "tracked_source_dirty": true,
+      "tests": 179,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "nested_manifests": [
+    {
+      "path": "independent/cross-archive/MANIFEST.json",
+      "verified_payloads": 12
+    },
+    {
+      "path": "independent/cross-identity/MANIFEST.json",
+      "verified_payloads": 12
+    },
+    {
+      "path": "independent/cross-telemetry/MANIFEST.json",
+      "verified_payloads": 8
+    },
+    {
+      "path": "independent/cross-transport/MANIFEST.json",
+      "verified_payloads": 12
+    },
+    {
+      "path": "independent/governance/MANIFEST.json",
+      "verified_payloads": 29
+    },
+    {
+      "path": "independent/identity/MANIFEST.json",
+      "verified_payloads": 28
+    },
+    {
+      "path": "independent/transport/baseline-source/MANIFEST.json",
+      "verified_payloads": 0
+    },
+    {
+      "path": "independent/transport/MANIFEST.json",
+      "verified_payloads": 25
+    }
+  ],
+  "mechanical_issues": [],
+  "status": "PASS",
+  "scope": "F035-F042 evidence and implementation; old FINAL_REPORT intentionally excluded; CI still pending at assignment.",
+  "manual_review": {
+    "unresolved_p0_p1": [],
+    "finding_coverage": {
+      "F035": "Single-cursor scoped audit query; identity baseline 2 FAIL/4 PASS -> 64 related PASS; separate 7-case cross replay 2 FAIL -> 7 PASS.",
+      "F036": "Aggregate critical ContextVar is checked alongside member scope in one current accounts snapshot; original/intermediate failures retained; final 44 related and independent 5 PASS.",
+      "F037": "Socket/TLS deadline, bounded DNS workers, strict JSON and SSE newline/UTF-8 handling match code; original 17 FAIL/6 PASS -> 23 PASS; 81 related and 179 shared-client compatibility PASS; 9 independent PASS.",
+      "F038": "Receipt shape/type/key/version/body identity and active-retention binding match code; 19 FAIL/2 PASS -> 43 related PASS; synthetic method fixtures are distinguished from container S3 integration.",
+      "F039": "Strict acknowledgement, identity encoding negotiation and actual durable deletion row count match implementation; baseline 5 FAIL -> 8 related PASS; gzip cross failure retained then 9 PASS.",
+      "F040": "BatchDecision reuses meaningful_reason; initial 2 FAIL/1 PASS -> 3 PASS; rejected before member side effects.",
+      "F041": "Read-only reconcile checks original upstream digest and access registration before sending; 4 original failures -> 4 PASS; unknown is preserved on drift/revocation.",
+      "F042": "Exclusive output reservation precedes client creation/upload; initial 2 FAIL/8 PASS -> unchanged 10 PASS; final 11 independent PASS covers complete receipt with no residual marker."
+    },
+    "source_and_counts": "Frozen 533726a has 99 clean new-boundary tests. Local 683 preflight is explicitly dirty and is not relabelled as final frozen full CI. No test counts are added together.",
+    "fixture_failures": "Two identity/governance cross-probe fixture mistakes (short key, import path) remain as failed raw runs and are explicitly identified as fixture mistakes, not product findings.",
+    "publication_notes": [
+      {
+        "severity": "documentation_precision",
+        "path": "docs/acceptance/FINDINGS_AND_FIXES.md:F042",
+        "observation": "The phrase about retaining unknown_if_interrupted on exception should be scoped to failure before final receipt writing. The final seek/write/flush/fsync overwrite is not independently shown crash-atomic.",
+        "requested_wording": "State that network/verification failure before final receipt writing retains the reservation; do not claim filesystem crash atomicity."
+      },
+      {
+        "severity": "publication_timing",
+        "path": "evidence/closure2-20261003/README.md",
+        "observation": "The successful CI ZIP paragraph describes a pending delivery artifact at review time; the ci directory was not present at initial inspection.",
+        "closure": "Publish this paragraph after the successful CI archive is actually downloaded and independently verified."
+      }
+    ],
+    "limits": "Read-only delivery review; no new tests executed, no application code changed, no live cloud/identity/human/model claim. CI completion and final report remain parent task responsibility."
+  }
+}

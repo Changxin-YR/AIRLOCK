@@ -1,0 +1,22 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tests/test_transport_hardening.py",
+    "tests/test_network.py",
+    "tests/test_upstream.py",
+    "tests/test_mcp.py",
+    "tests/test_mcp_http.py",
+    "tests/test_mcp_streamable.py",
+    "tests/test_new_boundaries.py",
+    "-q",
+    "--junitxml=var/closure2-20261003/transport/hardening.xml"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T10:49:28.245350+00:00",
+  "duration_seconds": 30.904,
+  "tested_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "758202b4631c5f530e48ab07aa07cd90bfbe58e0"
+}

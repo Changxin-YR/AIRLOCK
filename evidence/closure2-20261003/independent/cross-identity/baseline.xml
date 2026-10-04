@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="7" time="1.366" timestamp="2026-10-03T18:46:30.349883+08:00" hostname="WHHHH"><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_linked_invisible_action_prefix_does_not_starve_page" time="0.206"><failure message="assert 0 == 1&#10; +  where 0 = len([])">scoped = (&lt;airlock.service.Gate object at 0x000001B240E21FD0&gt;, WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/p...v': 'AIRLOCK_REVIEWER_SECOND_LARGE', 'id': 'reviewer:large', 'resources': ['customers'], 'risks': ['critical'], ...}]})
+
+    def test_linked_invisible_action_prefix_does_not_starve_page(scoped):
+        gate, _, _ = scoped
+        hidden = gate.submit(request('counter-hidden', 'UPDATE customers SET balance=balance+1'))
+        assert hidden['risk'] == 'critical'
+        for _ in range(12):
+            append_event(gate, hidden['id'])
+        visible = gate.submit(request('counter-visible'))
+        gate.decide(visible['id'], Decision(decision='reject', review_digest=visible['review_digest'],
+            expected_version=visible['version'], reason='Synthetic independent countercheck'), 'reviewer:small')
+        original = gate.store.audit_events(limit=100)
+        with gate.store.connection() as conn:
+            before = snapshot(conn)
+        page1 = gate.audit_events('reviewer:small', after=0, limit=1)
+&gt;       assert len(page1) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+var\closure2-20261003\cross-identity\test_audit_countercheck.py:70: AssertionError</failure></testcase><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_scan_uses_one_database_read_snapshot_during_concurrent_append" time="0.054" /><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_route_revocation_during_scan_stops_later_visible_events" time="0.044" /><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_owner_sees_governance_but_not_orphan_action_events" time="0.062"><failure message="AssertionError: assert [{'action_id'...fde728', ...}] == [{'action_id'...03d376', ...}]&#10;  &#10;  Right contains 2 more items, first extra item: {'action_id': 'governance:second-author-4', 'event': {'at': 1000.0, 'detail': {'countercheck': True}, 'kind': 'governa..._probe'}, 'key_id': 'legacy', 'previous_hash': '555dd698b365bfd05c934f2de86259f5c1e2524f17058faf667ae63923884e70', ...}&#10;  Use -v to get more diff">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-438/test_owner_sees_governance_but0')
+
+    def test_owner_sees_governance_but_not_orphan_action_events(tmp_path):
+        gate = Gate(Settings(tmp_path / 'owner.db', 'a' * 32, 'b' * 32, 'c' * 32, max_actions=1, seed_rows=3))
+        for index in range(6):
+            append_event(gate, f'governance:second-author-{index}', kind='governance.changed')
+        append_event(gate, 'nonexistent-action')
+        original = gate.store.audit_events(limit=100)
+&gt;       assert gate.audit_events('reviewer:owner', limit=100) == original[:6]
+E       AssertionError: assert [{'action_id'...fde728', ...}] == [{'action_id'...03d376', ...}]
+E         
+E         Right contains 2 more items, first extra item: {'action_id': 'governance:second-author-4', 'event': {'at': 1000.0, 'detail': {'countercheck': True}, 'kind': 'governa..._probe'}, 'key_id': 'legacy', 'previous_hash': '555dd698b365bfd05c934f2de86259f5c1e2524f17058faf667ae63923884e70', ...}
+E         Use -v to get more diff
+
+var\closure2-20261003\cross-identity\test_audit_countercheck.py:133: AssertionError</failure></testcase><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_action_filter_does_not_broaden_scope[' OR 1=1 --]" time="0.040" /><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_action_filter_does_not_broaden_scope[unknown-action]" time="0.043" /><testcase classname="var.closure2-20261003.cross-identity.test_audit_countercheck" name="test_action_filter_does_not_broaden_scope[governance:cache]" time="0.042" /></testsuite></testsuites>

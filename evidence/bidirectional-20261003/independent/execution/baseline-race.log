@@ -1,0 +1,34 @@
+{
+  "head": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "dirty": [],
+  "source_sha256": "911bccc5068288901ef8601c522e66023fed8c9b1f3b8d7c41dec1d7abbca663",
+  "observations": [
+    {
+      "first": "readback",
+      "execution": {
+        "error": "github_receipt_conflict"
+      },
+      "reconciliation": {
+        "state": "executed"
+      },
+      "stored_state": "executed",
+      "stored_verification": "github_readback",
+      "synthetic_effects": 1,
+      "replay_equals_receipt": true
+    },
+    {
+      "first": "response",
+      "execution": {
+        "state": "executed"
+      },
+      "reconciliation": {
+        "error": "github_receipt_conflict"
+      },
+      "stored_state": "executed",
+      "stored_verification": "github_response",
+      "synthetic_effects": 1,
+      "replay_equals_receipt": true
+    }
+  ],
+  "network_calls": 0
+}

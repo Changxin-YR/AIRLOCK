@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\27363\\Desktop\\airlock\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-rA",
+    "-c",
+    "C:\\Users\\27363\\AppData\\Local\\Temp\\airlock-preflight-retest-k25gagxb\\pytest.ini",
+    "--rootdir",
+    "C:\\Users\\27363\\AppData\\Local\\Temp\\airlock-preflight-retest-k25gagxb",
+    "--junitxml=C:\\Users\\27363\\Desktop\\airlock\\var\\startup-preflight-20261004\\independent-retest\\first-corrected\\pytest.xml",
+    "C:\\Users\\27363\\Desktop\\airlock\\var\\startup-preflight-20261004\\independent-retest\\test_countercheck.py"
+  ],
+  "child_exit_code": 1,
+  "source_snapshot": "first-source.zip",
+  "scope": "isolated synthetic environment; no host credentials or databases"
+}

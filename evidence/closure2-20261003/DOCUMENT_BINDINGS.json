@@ -1,0 +1,46 @@
+{
+  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "documents": {
+    "docs/acceptance/FINAL_REPORT.md": {
+      "sha256": "5b7dccb4b068e2e20d168e38f1575830ae355ed24a54152ad18d2525ad9a71a2",
+      "bytes": 7836
+    },
+    "docs/acceptance/COMPLETION_MATRIX.json": {
+      "sha256": "cd5eb394280461c75229176fce5ae93c74450d90cfff1e67bf82490ff9072f04",
+      "bytes": 1102336
+    },
+    "docs/acceptance/COMPLETION_MATRIX.md": {
+      "sha256": "dd0cedeaeaa58d2394932ebb67b9ae543acbf8e2c6f3cf511584e6c4d768c009",
+      "bytes": 1055273
+    },
+    "docs/acceptance/FINDINGS_AND_FIXES.md": {
+      "sha256": "7c8759d7894f4b52932141067f56902af9f180299c132dc1aff7172ea53ccde9",
+      "bytes": 20406
+    },
+    "docs/acceptance/EVIDENCE_RETENTION.md": {
+      "sha256": "92b8b4ca207698d325b943c816d46b7f7cca62189f7f76cc07e781d8a7e8360f",
+      "bytes": 11949
+    },
+    "docs/acceptance/DELIVERY_STATE.json": {
+      "sha256": "d3b9a17cfa86c3925ec30e48f1156b32a40a4519d4e000505a29bb658f2a595a",
+      "bytes": 6665
+    },
+    "docs/START_WITH_ONE_PERSON.md": {
+      "sha256": "e51b8fc435b443090ee87b230815f5bc776650691d0644e810bdd09a01dbec95",
+      "bytes": 10264
+    },
+    "CODEX_REVIEW.md": {
+      "sha256": "9575b82b5a4fe1ffa0a542548be55c64037bb1393273cd3ae0b273d2092d1919",
+      "bytes": 5847
+    },
+    "docs/CLOSURE_RUNBOOK.md": {
+      "sha256": "5ebe650156749c06efe534ba860583c6e3b3080e6afe9c574c7fd1b7ddbf9e04",
+      "bytes": 8404
+    },
+    "docs/OPERATIONS.md": {
+      "sha256": "84d4f8c097e92b63f75a582e280807ff7955fbce58efef6e1aa5c49160e07a01",
+      "bytes": 20236
+    }
+  },
+  "matrix_final_receipt": "matrix-final.log.status.json"
+}

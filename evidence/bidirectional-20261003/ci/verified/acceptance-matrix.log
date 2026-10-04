@@ -1,0 +1,1 @@
+{"target_records": 126, "unique_receipts_checked": 29, "counts": {"implementation": {"IMPLEMENTED": 111, "PARTIAL": 15}, "verification": {"PASS": 105, "BLOCKED_EXTERNAL": 21}}, "original_goals_all_satisfied": false, "meaning": "bidirectional structure and provenance only; not functional or human acceptance"}

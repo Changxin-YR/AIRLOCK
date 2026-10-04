@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "var/security-review-20261003/guard_before_database_probe.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T01:41:01.411419+00:00",
+  "duration_seconds": 3.008,
+  "tested_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "a68b11b39c2c2ed41e18d9001b90b66dcb652ba4"
+}

@@ -12,22 +12,37 @@ defaults:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Snapshot source
         run: |
           mkdir -p evidence
-          git archive --format=zip HEAD -o evidence/source.zip
+          python3 scripts/archive_source.py
           git rev-parse HEAD > evidence/commit.txt
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Build verified SQLite runtime
+        run: |
+          python scripts/run_logged.py evidence/sqlite-runtime-build.log -- python scripts/build_sqlite_runtime.py --prefix "$RUNNER_TEMP/airlock-sqlite-runtime" --output evidence/sqlite-runtime-build.json
+          printf '%s\n' "$RUNNER_TEMP/airlock-sqlite-runtime/lib" | sudo tee /etc/ld.so.conf.d/00-airlock-sqlite.conf > /dev/null
+          sudo ldconfig
+      - name: Verify Python loads pinned SQLite
+        run: python scripts/run_logged.py evidence/sqlite-runtime-linked.log -- env -u LD_LIBRARY_PATH python -m airlock.sqlite_runtime --pin-file configs/sqlite-runtime.json --build-report evidence/sqlite-runtime-build.json --output evidence/sqlite-runtime-linked.json
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - run: python -m pip install -r requirements-dev.txt
+      - run: npm ci
+      - run: python scripts/run_logged.py evidence/next-build.log -- npm run build
+      - run: python scripts/run_logged.py evidence/npm-audit.log -- npm audit --omit=dev
       - run: python scripts/run_logged.py evidence/pytest.log -- python -m pytest -q --junitxml=evidence/pytest.xml
+      - run: python scripts/run_logged.py evidence/acceptance-matrix.log -- python docs/acceptance/validate_matrix.py
       - run: python scripts/run_logged.py evidence/frontend-check.log -- npm run check
       - run: python scripts/run_logged.py evidence/frontend-tests.log -- npm test
       - run: python -m benchmark.generate
@@ -36,7 +51,23 @@ jobs:
       - run: python scripts/run_logged.py evidence/benchmark-test.log -- python -m benchmark.evaluate --split test --output evidence/benchmark-test.json
       - run: python -m playwright install --with-deps chromium
       - run: python scripts/run_logged.py evidence/browser-native.log -- python scripts/browser_smoke.py
+      - run: python scripts/run_logged.py evidence/browser-edges.log -- python scripts/browser_edges.py
+      - run: python scripts/run_logged.py evidence/pilot-browser.log -- python scripts/pilot_browser.py
       - run: python scripts/run_logged.py evidence/docker-smoke.log -- python scripts/docker_smoke.py
+      - run: python scripts/run_logged.py evidence/upstream-isolation.log -- python scripts/upstream_isolation.py
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.24.8'
+          cache: false
+      - run: python scripts/run_logged.py evidence/archive-build.log -- python scripts/build_archive_fixture.py --output evidence/archive-image.json
+      - run: python scripts/run_logged.py evidence/archive-integration.log -- python scripts/archive_integration.py --output evidence/archive-integration.json
+      - run: python scripts/run_logged.py evidence/research-pipeline.log -- python scripts/research_pipeline.py --output evidence/research-pipeline
+      - run: python scripts/run_logged.py evidence/container-integrations.log -- python scripts/container_integrations.py
+      - run: python scripts/run_logged.py evidence/dependency-audit.log -- python -m pip_audit -r requirements-archive.txt --format json --output evidence/dependency-audit.json
+      - run: python scripts/run_logged.py evidence/latency.log -- python scripts/measure_latency.py --samples 60 --output evidence/latency.json
+      - run: python scripts/run_logged.py evidence/ablation.log -- python -m benchmark.ablation --split test --output evidence/ablation.json
+      - run: python scripts/run_logged.py evidence/study-analysis.log -- python -m benchmark.research --output evidence/study-analysis.json study evidence/study-automation.json
+      - run: python scripts/run_logged.py evidence/comparison.log -- python scripts/demo_comparison.py --output evidence/comparison.json
       - run: python scripts/verify_evidence.py
       - name: Inventory evidence
         if: always()
@@ -45,4 +76,7 @@ jobs:
         if: always()
         with:
           name: acceptance-evidence
-          path: evidence/
+          path: |
+            evidence/*.*
+            evidence/research-pipeline/
+          retention-days: 90

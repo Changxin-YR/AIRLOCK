@@ -1,0 +1,40 @@
+{
+  "commit": "17ccd2c5942aa316ee94509109cc01fbca925a26",
+  "github_run_id": null,
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "packages": {
+    "fastapi": "0.142.2",
+    "starlette": "1.7.0",
+    "pydantic": "2.13.5",
+    "uvicorn": "0.48.0",
+    "httpx": "0.28.1",
+    "pytest": "9.0.2",
+    "playwright": "1.57.0",
+    "mcp": "1.26.0",
+    "anyio": "4.15.1",
+    "cel-python": "0.4.0",
+    "PyYAML": "6.0.3",
+    "pip-audit": "2.10.1"
+  },
+  "files": {
+    "pytest.log": {
+      "bytes": 747,
+      "sha256": "6d66c45771c34d6f34a68401d1f5e793d3d82f76028ab7ba5c9919cb019c857f"
+    },
+    "pytest.log.status.json": {
+      "bytes": 449,
+      "sha256": "1260a5dc100fadc2cadc164e8888253031679441ea59d8f770a5131269abfe4a"
+    },
+    "pytest.xml": {
+      "bytes": 20904,
+      "sha256": "3606a3d5932e21928ef42ab3393c8ad8df84ac64352302c25f3327a0108a91e6"
+    }
+  },
+  "not_claimed": [
+    "live LLM validation",
+    "human A/B study",
+    "production security certification"
+  ],
+  "warning": "File existence and hashes are not proof of success. Read exit codes, raw logs and GitHub job results."
+}

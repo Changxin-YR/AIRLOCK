@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "airlock",
+    "serve"
+  ],
+  "child_exit_code": 2,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "457055cbf9efde6774d9ebac68a8f07e68a5c61ec04861655883f5ba590a1555"
+}

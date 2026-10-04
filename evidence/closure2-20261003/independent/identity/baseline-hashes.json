@@ -1,0 +1,32 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "67C75E62D6088266E30C42C87101DAF56EB717530CD2169E90C3858EF6F8249D",
+    "Path": "C:\\Users\\27363\\Desktop\\airlock\\airlock\\access.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8941EE2B0087DDA7CE33A3B05CD7B664DAE06282DFA01EA061620488590CD58F",
+    "Path": "C:\\Users\\27363\\Desktop\\airlock\\airlock\\oidc.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5E9A3775B7FD9B915980A4D8C3362415BCCBB4AA10E24AA3349A6DB63F187F55",
+    "Path": "C:\\Users\\27363\\Desktop\\airlock\\airlock\\oidc_login.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "C29F4378A0C6ABECFE4C967DA331F177BB8DBD298B6E1BBA0451350E0DC2C25E",
+    "Path": "C:\\Users\\27363\\Desktop\\airlock\\airlock\\export.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "22680482773667EB6A8DF39EBE1B75D8535F689F558E80B07C740DF31FE73449",
+    "Path": "C:\\Users\\27363\\Desktop\\airlock\\airlock\\service.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "3C35FA6F3DFE162E76D32D6F20C5B3FF1E18B9C0FFC82D553C863A01E1120445",
+    "Path": "C:\\Users\\27363\\Desktop\\airlock\\tests\\test_identity_boundaries.py"
+  }
+]

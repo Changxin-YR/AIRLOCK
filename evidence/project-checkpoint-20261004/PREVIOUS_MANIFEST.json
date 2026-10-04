@@ -1,0 +1,64 @@
+{
+  "baseline_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
+  "files": {
+    ".gitattributes": {
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    "AIRLOCK-resume-baseline-699adbd.zip": {
+      "bytes": 2835771,
+      "sha256": "1ec0d00025e4a9b059f6e80de6bb052db345b59c2486f3a80d41a47374b678f4"
+    },
+    "ARCHIVE.json": {
+      "bytes": 3245,
+      "sha256": "034ac06e09d5fb4aab1b2f7f3129c748031098f691be577cd5a62bebb32d5ff3"
+    },
+    "comparison-rerun.log": {
+      "bytes": 2589,
+      "sha256": "d132a1d3d9b0efaed5302b7ad7889bffd86cb1d12fd04b5a1877744d9209205f"
+    },
+    "comparison-rerun.log.status.json": {
+      "bytes": 443,
+      "sha256": "60ca858df0ba7afabd4eca1c31e47ed566939bbc092e421703b4c7fe0d737cd9"
+    },
+    "comparison.json": {
+      "bytes": 2589,
+      "sha256": "d132a1d3d9b0efaed5302b7ad7889bffd86cb1d12fd04b5a1877744d9209205f"
+    },
+    "comparison.log": {
+      "bytes": 3638,
+      "sha256": "48694d315eeda56da27872a6f54f3861716e5e43f54f3bc873489a55f9147450"
+    },
+    "comparison.log.status.json": {
+      "bytes": 445,
+      "sha256": "d2b30a231961cd4eb4275d18e0829ddc2c67ca4ba9a9e828c3c26b3b786773ec"
+    },
+    "README.md": {
+      "bytes": 2616,
+      "sha256": "82af8f85d08f6c6dbd5cc5c3a7996d7d72c338754fd6de5dcf888ceda94bc6e6"
+    },
+    "validation.log": {
+      "bytes": 441,
+      "sha256": "514453744b1217f577899b00a16cf3330959bd4d51cc2e28441e7c52efc5c701"
+    },
+    "validation.log.status.json": {
+      "bytes": 395,
+      "sha256": "38a5a875c2b2731673df2e02cdec166986aff2c6d002af6ae2692d4c469c2652"
+    },
+    "verify_archive.py": {
+      "bytes": 4029,
+      "sha256": "2047aa8318882972f98237638030342860e67eb1b5de4fcd032ca1660ba6842a"
+    }
+  },
+  "documents": {
+    "README.md": {
+      "bytes": 8783,
+      "sha256": "384381d48286cce1437e26c8dc12ee4742c9d2858d94a282af02b510daada9d3"
+    },
+    "docs/RESUME_PORTFOLIO.md": {
+      "bytes": 7680,
+      "sha256": "c3a3cf585fd4dd73cb7793075f767b7912f0423b29af8a2fe0c920fbc23217f2"
+    }
+  },
+  "scope": "Public archive, original failure and successful rerun, documentation. Excludes this manifest itself; historical CI remains historical."
+}

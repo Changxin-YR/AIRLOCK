@@ -1,0 +1,82 @@
+{
+  "reviewed_at_utc": "2026-10-03T05:49:55.707493+00:00",
+  "status": "PASS",
+  "head": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "scope": "Read-only cross-author final report, matrix and downloaded evidence review; no tests or external/model calls executed.",
+  "checks": {
+    "python_tests": 588,
+    "javascript_tests": 6,
+    "browser_checks": 31,
+    "browser_breakdown": [
+      14,
+      9,
+      8
+    ],
+    "actual_exit_receipts_checked": 24,
+    "all_required_exit_codes": 0,
+    "all_required_receipts_source_clean": true,
+    "matrix": {
+      "target_records": 126,
+      "unique_receipts_checked": 30,
+      "counts": {
+        "implementation": {
+          "IMPLEMENTED": 111,
+          "PARTIAL": 15
+        },
+        "verification": {
+          "PASS": 105,
+          "BLOCKED_EXTERNAL": 21
+        }
+      },
+      "original_goals_all_satisfied": false,
+      "meaning": "bidirectional structure and provenance only; not functional or human acceptance"
+    },
+    "latency_recomputed": {
+      "added_ms_p95": 4.291405999993003,
+      "static_ms_p95": 0.08,
+      "preview_ms_p95": 8.374
+    },
+    "zip_sha256": "68335fca51e8c0cc61b959f32aeb94018557983b1af1fc332a123d3099e5406a",
+    "zip_bytes": 1875653,
+    "manifest_payload_count": 94,
+    "independently_checked_zip_payloads": [
+      "pytest.xml",
+      "pytest.log",
+      "pytest.log.status.json",
+      "frontend-tests.log",
+      "frontend-tests.log.status.json",
+      "browser-report.json",
+      "browser-edges.json",
+      "pilot-browser.json",
+      "latency.json",
+      "latency.log.status.json",
+      "docker-smoke.log.status.json",
+      "upstream-isolation.log.status.json",
+      "archive-integration.log.status.json",
+      "acceptance-matrix.log.status.json",
+      "source.zip"
+    ],
+    "source_zip_comment_matches_sha": true,
+    "new_human_records": 0,
+    "new_provider_calls": 0,
+    "historical_model_counts_distinguished": true,
+    "p0_p1_claim_limited_to_known_reproducible_tested_scope": true,
+    "all_original_goals_claimed_complete": false,
+    "long_term_idp_cloud_external_notification_limits_preserved": true
+  },
+  "findings": [],
+  "delivery_note": "Report/matrix/evidence are still local uncommitted delivery materials at review time. Report explicitly assigns the final delivery SHA to the subsequent commit and memory/progress. Verify final commit/push separately.",
+  "basis_limits": [
+    "No independent proof of nonexistence of undiscovered P0/P1; wording is appropriately scoped.",
+    "No new human/model validation is inferred from CI or metadata.",
+    "Hash agreement proves byte binding, not independent truth of every research claim."
+  ],
+  "file_sha256": {
+    "docs/acceptance/FINAL_REPORT.md": "57fb47e2f03374e6781e68a1849cc0d82038c2f55b7125e2658563be8b36acd7",
+    "docs/acceptance/COMPLETION_MATRIX.json": "9423690090aa356bee4ebaf821f68e7d7273061ac53e7ebcfc5e4d0e82550011",
+    "docs/acceptance/DELIVERY_STATE.json": "b4b0f2e4ef4748fcae2f303c5e5829440377566e3385f950edab587594b5d4d2",
+    "evidence/bidirectional-20261003/CI_FINAL.json": "765baec16239909b86a526c4781e88be9c388071a0d099d380fa125a71ec9ea9"
+  },
+  "actual_review_exit_code": 0
+}

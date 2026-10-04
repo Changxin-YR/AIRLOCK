@@ -1,0 +1,18 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/github_live_relay.py",
+    "--config",
+    "var/real-work/github-20261003/live-config.json",
+    "--task",
+    "var/real-work/github-20261003/live-task.json",
+    "--output",
+    "var/real-work/github-20261003/live-relay"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T01:06:17.768765+00:00",
+  "duration_seconds": 48.952,
+  "tested_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "5ca6fcf4acb5e4483a5bf2d6c995a62c0068184c"
+}

@@ -1,0 +1,6 @@
+{
+  "endpoint": "https://alerts.example.invalid/airlock",
+  "address_pins": ["93.184.215.14"],
+  "allow_loopback_fixture": false,
+  "timeout_seconds": 5.0
+}

@@ -1,0 +1,11 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/browser_smoke.py",
+    "--output",
+    "evidence/full-audit-20261002/fixes"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-02T07:32:14.428811+00:00",
+  "duration_seconds": 7.921
+}

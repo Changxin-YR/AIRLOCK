@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIRLOCK · 本机通知收件箱</title>
+  <link rel="stylesheet" href="/static/alert-inbox.css">
+  <script src="/static/alert-inbox.js" defer></script>
+</head>
+<body>
+  <main>
+    <header><p class="brand">AIRLOCK <span>本机通知</span></p><h1>通知收件箱</h1>
+      <p class="muted">查看本机健康提醒与恢复记录。接收时间表示本机入库时间。</p></header>
+    <section id="login" class="card" aria-labelledby="login-heading">
+      <h2 id="login-heading">使用只读令牌查看</h2>
+      <form id="login-form">
+        <label for="read-token">AIRLOCK_INBOX_READ_TOKEN</label>
+        <input id="read-token" type="password" autocomplete="off" spellcheck="false" required maxlength="4096">
+        <button type="submit">打开收件箱</button>
+      </form>
+      <p class="muted">令牌只保存在当前页面内存中。刷新或退出后需要重新输入。</p>
+    </section>
+    <section id="inbox" hidden>
+      <div class="toolbar"><h2>已接收事件</h2><div><button id="refresh" type="button">刷新</button><button id="logout" type="button" class="secondary">退出</button></div></div>
+      <div id="events" aria-label="通知列表"></div>
+      <button id="load-more" type="button" class="secondary" hidden>查看更早记录</button>
+    </section>
+    <p id="inbox-status" role="status" aria-live="polite"></p>
+    <footer>本机健康提醒 · 事件按 ID 去重 · 云端长期送达与保留需另行验证</footer>
+  </main>
+</body>
+</html>

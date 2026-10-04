@@ -1,0 +1,36 @@
+{
+  "replayed": 10,
+  "schema_errors": [
+    null,
+    null,
+    null,
+    null,
+    [
+      {
+        "loc": [
+          "reason"
+        ],
+        "type": "string_too_long"
+      }
+    ],
+    null,
+    null,
+    null,
+    null,
+    [
+      {
+        "loc": [
+          "reason"
+        ],
+        "type": "string_too_long"
+      }
+    ]
+  ],
+  "ledger": {
+    "calls": 628,
+    "reserved_or_settled_amount": 1.10099624,
+    "budget": 3.0,
+    "currency": "CNY",
+    "invalidations": 9
+  }
+}

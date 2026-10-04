@@ -14,7 +14,7 @@ export function el(tag, attributes = {}, ...children) {
   return element;
 }
 export const states = { pending: '等待审批', executed: '已执行', blocked: '策略阻断', rejected: '已拒绝',
-  expired: '已过期', stale: '快照失效', failed: '执行失败' };
+  expired: '已过期', stale: '快照失效', failed: '执行失败', executing:'执行中', unknown:'结果未知 · 需对账' };
 export const risks = { critical: '高影响', high: '需审查', low: '只读', blocked: '不支持 / 禁止' };
 export const number = value => value == null ? '—' : Number(value).toLocaleString('zh-CN');
 export const short = value => (value || '').slice(0, 10);

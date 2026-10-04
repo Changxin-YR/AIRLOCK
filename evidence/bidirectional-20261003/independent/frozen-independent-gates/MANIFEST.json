@@ -1,0 +1,29 @@
+{
+  "tested_commit_sha": "096b9bbbf9c113471eda1a713f9d0c860c95a348",
+  "files": {
+    "counterchecks.log": {
+      "bytes": 3211,
+      "sha256": "56057b21bf7baf20a1af15f792e28e70df4f0dc7bb094a2be17d02cb1678368b"
+    },
+    "counterchecks.log.status.json": {
+      "bytes": 418,
+      "sha256": "e10c327892d8141d7a219026e2e177af073221aec12bd5e65ab753fe26ba5889"
+    },
+    "counterchecks.py": {
+      "bytes": 5361,
+      "sha256": "9937e3ec67f500da19d17f7bfd9ee90bd779db091e91819c37f7a8c9d707dea4"
+    },
+    "RESULT.json": {
+      "bytes": 1298,
+      "sha256": "0081f950069368d74e033a1f5e44cff4cd03c892abd8dd0e9acb8b3fb9171d69"
+    },
+    "SOURCE_BINDING.json": {
+      "bytes": 484,
+      "sha256": "67461af1a7854bf79082c3ff749d034b08f2d46f4699fb35cdb7c04365d0e28a"
+    },
+    "SOURCE_BINDING_V2.json": {
+      "bytes": 524,
+      "sha256": "56136ef942a3ec4e93cba87a430071a51161db5d8771b359a15aa02dd24df543"
+    }
+  }
+}

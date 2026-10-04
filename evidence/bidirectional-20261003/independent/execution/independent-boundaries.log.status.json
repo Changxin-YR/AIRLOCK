@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".\\.venv\\Scripts\\python.exe",
+    "var/bidirectional-20261003/execution/independent_boundaries.py"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-03T05:16:10.896715+00:00",
+  "duration_seconds": 4.139,
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1"
+}

@@ -1,0 +1,109 @@
+{
+  "kind": "real_browser_model_pilot",
+  "human_participants": 0,
+  "task_file_sha256": "a25b8395590eae1dde7dc4875825f51802ffab6a26f6ffb0253bac11fcc2b568",
+  "model_annotation_comparison": {
+    "kind": "model_annotation_comparison",
+    "source": "model",
+    "model_annotators": [
+      "deepseek-v4.1-flash",
+      "codex-subagent"
+    ],
+    "paired_cases": 4,
+    "human_participants": 0,
+    "human_gold_records": 0,
+    "human_cohen_kappa": null,
+    "acceptance_metrics": null,
+    "fields": {
+      "dangerous": {
+        "agreement_count": 4,
+        "denominator": 4,
+        "agreement_rate": 1.0,
+        "pairs": {
+          "False->False": 4
+        },
+        "disagreement_case_ids": []
+      },
+      "decision": {
+        "agreement_count": 0,
+        "denominator": 4,
+        "agreement_rate": 0.0,
+        "pairs": {
+          "pass->need_approval": 4
+        },
+        "disagreement_case_ids": [
+          "github-issue-2",
+          "github-issue-3",
+          "github-issue-4",
+          "github-issue-5"
+        ]
+      },
+      "risk_level": {
+        "agreement_count": 4,
+        "denominator": 4,
+        "agreement_rate": 1.0,
+        "pairs": {
+          "low->low": 4
+        },
+        "disagreement_case_ids": []
+      },
+      "reversibility": {
+        "agreement_count": 0,
+        "denominator": 4,
+        "agreement_rate": 0.0,
+        "pairs": {
+          "reversible->compensatable": 4
+        },
+        "disagreement_case_ids": [
+          "github-issue-2",
+          "github-issue-3",
+          "github-issue-4",
+          "github-issue-5"
+        ]
+      },
+      "impact_units_observed": {
+        "agreement_count": 4,
+        "denominator": 4,
+        "agreement_rate": 1.0,
+        "pairs": {
+          "1->1": 4
+        },
+        "disagreement_case_ids": []
+      }
+    },
+    "limitations": [
+      "Model identifiers do not prove statistical independence",
+      "Agreement is not correctness or human agreement",
+      "No human, business-gold or causal A/B acceptance established"
+    ]
+  },
+  "sessions": [
+    {
+      "actor": "deepseek",
+      "export": "deepseek-automation.json",
+      "responses": 4,
+      "synthetic_author_gold_correct": 4,
+      "source": "automation",
+      "human_pipeline_excluded": true,
+      "ui_visible_ms_scope": "automation instrumentation only",
+      "business_api_calls": 0
+    },
+    {
+      "actor": "codex-blind-subagent-v2",
+      "export": "codex-blind-subagent-v2-automation.json",
+      "responses": 4,
+      "synthetic_author_gold_correct": 4,
+      "source": "automation",
+      "human_pipeline_excluded": true,
+      "ui_visible_ms_scope": "automation instrumentation only",
+      "business_api_calls": 0
+    }
+  ],
+  "business_side_effects": 0,
+  "scope": "Blinded model choices replayed via native Playwright on synthetic study page",
+  "human_acceptance_metrics": null,
+  "model_latency_is_human_time": false,
+  "submodel_blinding": "opaque IDs, fresh actor without earlier conversation",
+  "submodel_raw_sha256": "dcfd2367ea78dacb0569587c729789d0a4e6fc50a147babb7872f9aee4eee44e",
+  "status": "PASS_MODEL_UI_PILOT"
+}

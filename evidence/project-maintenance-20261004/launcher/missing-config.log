@@ -1,0 +1,15 @@
+{
+  "finding": "explicit_missing_config_is_silently_ignored",
+  "status": "REPRODUCED",
+  "requested_config_exists": false,
+  "database_opened": false,
+  "real_environment_read": false,
+  "uvicorn_spy_calls": [
+    {
+      "target": "airlock.api:create_app",
+      "host": "127.0.0.1",
+      "port": 8000,
+      "environment_only_settings_valid": true
+    }
+  ]
+}

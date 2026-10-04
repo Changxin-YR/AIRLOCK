@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "raw",
+    "observed": null,
+    "script_text": "window.lineProbe=1;\nwindow.lineProbe=2;",
+    "console": [
+      {
+        "type": "error",
+        "text": "Executing inline script violates the following Content Security Policy directive 'script-src 'sha256-dQK9Y9+luNu0ilg7YOr0kmAsXY9j0mx5HDkMkmb1e9c=''. Either the 'unsafe-inline' keyword, a hash ('sha256-tpgKsWQXAXuKCsYL82TttUh/+bwOLZPPlGWTh4d4mTM='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked."
+      }
+    ],
+    "csp_events": [
+      {
+        "directive": "script-src-elem",
+        "blockedURI": "inline"
+      }
+    ]
+  },
+  {
+    "mode": "normalized",
+    "observed": 2,
+    "script_text": "window.lineProbe=1;\nwindow.lineProbe=2;",
+    "console": [],
+    "csp_events": []
+  }
+]

@@ -1,0 +1,4 @@
+
+> airlock-review-console@0.1.0 check
+> node --check airlock/static/app.js && node --check airlock/static/review.js && node --check airlock/static/api.js && node --check airlock/static/lib.js
+

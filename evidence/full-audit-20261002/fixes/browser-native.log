@@ -1,0 +1,17 @@
+{
+  "mode": "native_browser_e2e",
+  "passed": [
+    "agent_credential_rejected_by_reviewer_console",
+    "pending_queue_survives_more_than_100_newer_reads",
+    "approval_disabled_without_informed_confirmation",
+    "browser_rejection_preserves_all_1206_rows",
+    "browser_approval_executes_real_update_once",
+    "critical_action_requires_exact_1206_scope_phrase",
+    "390px_mobile_has_no_horizontal_overflow",
+    "audit_replay_and_hmac_verification_render",
+    "logout_removes_authenticated_console",
+    "no_browser_javascript_errors"
+  ],
+  "errors": [],
+  "not_proven": []
+}

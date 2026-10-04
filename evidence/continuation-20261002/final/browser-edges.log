@@ -1,0 +1,16 @@
+{
+  "mode": "native_next_browser_real_http",
+  "passed": [
+    "stale_cas_never_overwrites_new_data",
+    "execution_failure_rolls_back_and_renders",
+    "unknown_requires_original_receipt_reconciliation",
+    "untrusted_long_text_is_escaped_and_mobile_bounded",
+    "expired_action_has_no_decision_controls",
+    "hard_block_has_no_override_controls",
+    "keyboard_login_and_logout_clear_memory_credentials",
+    "next_hydration_and_strict_csp_have_no_errors"
+  ],
+  "errors": [],
+  "csp_violations": [],
+  "human_participants": 0
+}

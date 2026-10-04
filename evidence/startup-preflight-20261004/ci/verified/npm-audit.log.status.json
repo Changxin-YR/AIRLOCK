@@ -1,0 +1,13 @@
+{
+  "command": [
+    "npm",
+    "audit",
+    "--omit=dev"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T01:27:04.784647+00:00",
+  "duration_seconds": 0.372,
+  "tested_commit_sha": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "7dcea8ab94b60753391e0d90a73179684fc39fe1"
+}

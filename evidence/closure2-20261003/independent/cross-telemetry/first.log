@@ -1,0 +1,28 @@
+F........                                                                [100%]
+================================== FAILURES ===================================
+______ test_normal_collector_negotiates_identity_so_ack_is_not_rejected _______
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/pytest-of-27363/pytest-454/test_normal_collector_negotiat0')
+
+    def test_normal_collector_negotiates_identity_so_ack_is_not_rejected(tmp_path):
+        encodings=[]
+        def handle(http,body):
+            encoding=http.headers.get('Accept-Encoding','');encodings.append(encoding)
+            compressed='gzip' in encoding
+            send(http,gzip.compress(b'{}') if compressed else b'{}',headers={'Content-Encoding':'gzip' if compressed else 'identity'})
+        with collector(handle) as url:
+            gate=make_gate(tmp_path,url);action=submit(gate)
+>           assert telemetry.export(gate.store)=={'status':'ok','exported':1}
+E           AssertionError: assert {'exported': ...ryable_error'} == {'exported': ...status': 'ok'}
+E             
+E             Differing items:
+E             {'status': 'retryable_error'} != {'status': 'ok'}
+E             {'exported': 0} != {'exported': 1}
+E             Left contains 1 more item:
+E             {'retained': 1}
+E             Use -v to get more diff
+
+var\closure2-20261003\cross-telemetry\test_independent.py:60: AssertionError
+=========================== short test summary info ===========================
+FAILED var/closure2-20261003/cross-telemetry/test_independent.py::test_normal_collector_negotiates_identity_so_ack_is_not_rejected
+1 failed, 8 passed in 6.72s

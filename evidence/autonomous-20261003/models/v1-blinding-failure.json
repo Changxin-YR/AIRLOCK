@@ -1,0 +1,10 @@
+{
+  "status": "INVALID_FOR_BLINDED_COMPARISON",
+  "human_participants": 0,
+  "defect": "Codex actor saw source task IDs containing authorized/unauthorized; answers may have been cued.",
+  "original_report_preserved": true,
+  "deepseek_provider_received_task_ids": false,
+  "correction": "Fresh actor with fork_turns=none received only opaque study-001..004 IDs. Original outputs were not rewritten.",
+  "retest": "models/v2/model-pilot-report.json",
+  "added_paid_calls_for_retest": 0
+}

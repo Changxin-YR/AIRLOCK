@@ -1,0 +1,1009 @@
+{
+  "scope": "1206-row synthetic SQLite; concurrency 1; warm HTTP client; same host and target",
+  "python": "3.13.15",
+  "sqlite": "3.53.1",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "processor": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+  "logical_cpus": 32,
+  "samples": 60,
+  "seed": 2073,
+  "warmup_calls": 10,
+  "first_native_call_ms": 14.464899999438785,
+  "read": {
+    "direct_ms": {
+      "n": 60,
+      "mean": 2.680141666375372,
+      "p50": 2.717899998970097,
+      "p95": 3.606899997976143,
+      "p99": 3.8609000002907123
+    },
+    "proxy_ms": {
+      "n": 60,
+      "mean": 11.518345000088933,
+      "p50": 11.232299999392126,
+      "p95": 14.638799999374896,
+      "p99": 15.109299998584902
+    },
+    "added_ms": {
+      "n": 60,
+      "mean": 8.83820333371356,
+      "p50": 8.597299998655217,
+      "p95": 11.368499999662163,
+      "p99": 12.195200000860495
+    }
+  },
+  "write": {
+    "submit_receipt_ms": {
+      "n": 30,
+      "p50": 21.03069999793661,
+      "p95": 25.77960000053281,
+      "p99": 26.458699998329394
+    },
+    "approval_request_to_effect_ms": {
+      "n": 30,
+      "p50": 30.454799998551607,
+      "p95": 34.72420000252896,
+      "p99": 57.78669999926933
+    },
+    "static_ms": {
+      "n": 30,
+      "p50": 0.08,
+      "p95": 0.102,
+      "p99": 0.131
+    },
+    "preview_ms": {
+      "n": 30,
+      "p50": 7.647,
+      "p95": 11.125,
+      "p99": 11.78
+    },
+    "evaluation_ms": {
+      "n": 30,
+      "p50": 15.206,
+      "p95": 19.137,
+      "p99": 19.245
+    }
+  },
+  "raw_read_pairs": [
+    {
+      "pair": 0,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.968300000968156,
+      "direct_ms": 3.284399997937726,
+      "added_ms": 7.6839000030304305
+    },
+    {
+      "pair": 1,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.701100000209408,
+      "direct_ms": 2.8457999978854787,
+      "added_ms": 8.85530000232393
+    },
+    {
+      "pair": 2,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.741099998995196,
+      "direct_ms": 2.5706999986141454,
+      "added_ms": 8.17040000038105
+    },
+    {
+      "pair": 3,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.727199998655124,
+      "direct_ms": 2.523700000892859,
+      "added_ms": 8.203499997762265
+    },
+    {
+      "pair": 4,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 12.993699998332886,
+      "direct_ms": 3.320499999972526,
+      "added_ms": 9.67319999836036
+    },
+    {
+      "pair": 5,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 15.109299998584902,
+      "direct_ms": 3.6194999993313104,
+      "added_ms": 11.489799999253592
+    },
+    {
+      "pair": 6,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.292099998361664,
+      "proxy_ms": 14.087999999901513,
+      "added_ms": 10.795900001539849
+    },
+    {
+      "pair": 7,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.8609000002907123,
+      "proxy_ms": 13.306700002431171,
+      "added_ms": 9.445800002140459
+    },
+    {
+      "pair": 8,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.2363999998779036,
+      "proxy_ms": 13.983400000142865,
+      "added_ms": 10.747000000264961
+    },
+    {
+      "pair": 9,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 14.455399999860674,
+      "direct_ms": 2.7322999994794372,
+      "added_ms": 11.723100000381237
+    },
+    {
+      "pair": 10,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.666500000283122,
+      "proxy_ms": 11.382600001525134,
+      "added_ms": 9.716100001242012
+    },
+    {
+      "pair": 11,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.910899997019442,
+      "direct_ms": 2.9185999992478173,
+      "added_ms": 8.992299997771624
+    },
+    {
+      "pair": 12,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 12.470499998016749,
+      "direct_ms": 3.4360999998170882,
+      "added_ms": 9.03439999819966
+    },
+    {
+      "pair": 13,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.089400000841124,
+      "proxy_ms": 12.74080000075628,
+      "added_ms": 10.651399999915157
+    },
+    {
+      "pair": 14,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.192900001333328,
+      "direct_ms": 2.750300001935102,
+      "added_ms": 8.442599999398226
+    },
+    {
+      "pair": 15,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.9737000002351124,
+      "proxy_ms": 13.059200002317084,
+      "added_ms": 11.085500002081972
+    },
+    {
+      "pair": 16,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.095000000030268,
+      "proxy_ms": 11.288800000329502,
+      "added_ms": 8.193800000299234
+    },
+    {
+      "pair": 17,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.785500000754837,
+      "proxy_ms": 11.382799999410054,
+      "added_ms": 8.597299998655217
+    },
+    {
+      "pair": 18,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.744199999142438,
+      "proxy_ms": 10.489700001926394,
+      "added_ms": 7.745500002783956
+    },
+    {
+      "pair": 19,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.7902999972866382,
+      "proxy_ms": 10.773300000437303,
+      "added_ms": 7.983000003150664
+    },
+    {
+      "pair": 20,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.511999997106614,
+      "direct_ms": 2.609600000141654,
+      "added_ms": 7.902399996964959
+    },
+    {
+      "pair": 21,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.9312999975227285,
+      "proxy_ms": 9.286700002121506,
+      "added_ms": 7.355400004598778
+    },
+    {
+      "pair": 22,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.1337999971583486,
+      "proxy_ms": 9.995500000513857,
+      "added_ms": 6.861700003355509
+    },
+    {
+      "pair": 23,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.50030000260449,
+      "direct_ms": 2.489800001058029,
+      "added_ms": 8.010500001546461
+    },
+    {
+      "pair": 24,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 9.712099999887869,
+      "direct_ms": 2.638699999806704,
+      "added_ms": 7.073400000081165
+    },
+    {
+      "pair": 25,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 9.283700001105899,
+      "direct_ms": 2.498999998351792,
+      "added_ms": 6.784700002754107
+    },
+    {
+      "pair": 26,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.706499999272637,
+      "proxy_ms": 9.138500001427019,
+      "added_ms": 7.432000002154382
+    },
+    {
+      "pair": 27,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 9.85239999863552,
+      "direct_ms": 2.8421000024536625,
+      "added_ms": 7.010299996181857
+    },
+    {
+      "pair": 28,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.11699999999837,
+      "proxy_ms": 10.435799998958828,
+      "added_ms": 8.318799998960458
+    },
+    {
+      "pair": 29,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.4703999990597367,
+      "proxy_ms": 11.527999999088934,
+      "added_ms": 8.057600000029197
+    },
+    {
+      "pair": 30,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.874600002542138,
+      "proxy_ms": 9.887800002616132,
+      "added_ms": 7.013200000073994
+    },
+    {
+      "pair": 31,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.740399997506756,
+      "direct_ms": 2.7972999996563885,
+      "added_ms": 8.943099997850368
+    },
+    {
+      "pair": 32,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 9.96350000059465,
+      "direct_ms": 2.3022999994282145,
+      "added_ms": 7.661200001166435
+    },
+    {
+      "pair": 33,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.7283000015595462,
+      "proxy_ms": 10.982600000716047,
+      "added_ms": 9.254299999156501
+    },
+    {
+      "pair": 34,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.717899998970097,
+      "proxy_ms": 10.524599998461781,
+      "added_ms": 7.806699999491684
+    },
+    {
+      "pair": 35,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.397800000646384,
+      "direct_ms": 2.422699999442557,
+      "added_ms": 7.975100001203828
+    },
+    {
+      "pair": 36,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.9087999971816316,
+      "proxy_ms": 11.612999998760642,
+      "added_ms": 9.70420000157901
+    },
+    {
+      "pair": 37,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.276299999735784,
+      "direct_ms": 2.8461000001698267,
+      "added_ms": 8.430199999565957
+    },
+    {
+      "pair": 38,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 9.77719999718829,
+      "direct_ms": 2.78950000210898,
+      "added_ms": 6.987699995079311
+    },
+    {
+      "pair": 39,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.076900000247406,
+      "proxy_ms": 11.049000000639353,
+      "added_ms": 8.972100000391947
+    },
+    {
+      "pair": 40,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 12.388200000714278,
+      "direct_ms": 2.9074999984004535,
+      "added_ms": 9.480700002313824
+    },
+    {
+      "pair": 41,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.8687999981921166,
+      "proxy_ms": 11.262099997111363,
+      "added_ms": 9.393299998919247
+    },
+    {
+      "pair": 42,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 3.158100000291597,
+      "proxy_ms": 11.207700001250487,
+      "added_ms": 8.04960000095889
+    },
+    {
+      "pair": 43,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.609799998026574,
+      "proxy_ms": 10.57310000032885,
+      "added_ms": 7.963300002302276
+    },
+    {
+      "pair": 44,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.714700001903111,
+      "direct_ms": 2.8300999983912334,
+      "added_ms": 8.884600003511878
+    },
+    {
+      "pair": 45,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.065500000753673,
+      "proxy_ms": 10.262600000714883,
+      "added_ms": 8.19709999996121
+    },
+    {
+      "pair": 46,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.821800000674557,
+      "proxy_ms": 10.769500000606058,
+      "added_ms": 7.947699999931501
+    },
+    {
+      "pair": 47,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.700500001083128,
+      "proxy_ms": 9.166499999992084,
+      "added_ms": 6.465999998908956
+    },
+    {
+      "pair": 48,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.232299999392126,
+      "direct_ms": 2.3986999985936563,
+      "added_ms": 8.83360000079847
+    },
+    {
+      "pair": 49,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 10.216500002570683,
+      "direct_ms": 2.543800001149066,
+      "added_ms": 7.672700001421617
+    },
+    {
+      "pair": 50,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.7948999993677717,
+      "proxy_ms": 10.815599998750258,
+      "added_ms": 9.020699999382487
+    },
+    {
+      "pair": 51,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 2.4247000001196284,
+      "proxy_ms": 11.779300002672244,
+      "added_ms": 9.354600002552615
+    },
+    {
+      "pair": 52,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 11.983200001850491,
+      "direct_ms": 2.6887000021815766,
+      "added_ms": 9.294499999668915
+    },
+    {
+      "pair": 53,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 12.071599998307647,
+      "direct_ms": 2.625700002681697,
+      "added_ms": 9.44589999562595
+    },
+    {
+      "pair": 54,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 12.897200002043974,
+      "direct_ms": 2.6890000008279458,
+      "added_ms": 10.208200001216028
+    },
+    {
+      "pair": 55,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 12.446199998521479,
+      "direct_ms": 2.753699998720549,
+      "added_ms": 9.69249999980093
+    },
+    {
+      "pair": 56,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 14.638799999374896,
+      "direct_ms": 3.606899997976143,
+      "added_ms": 11.031900001398753
+    },
+    {
+      "pair": 57,
+      "order": [
+        "direct",
+        "proxy"
+      ],
+      "temperature": "warm",
+      "direct_ms": 1.9367999993846752,
+      "proxy_ms": 14.13200000024517,
+      "added_ms": 12.195200000860495
+    },
+    {
+      "pair": 58,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 14.653900001576403,
+      "direct_ms": 3.646699999080738,
+      "added_ms": 11.007200002495665
+    },
+    {
+      "pair": 59,
+      "order": [
+        "proxy",
+        "direct"
+      ],
+      "temperature": "warm",
+      "proxy_ms": 14.666799997939961,
+      "direct_ms": 3.2982999982777983,
+      "added_ms": 11.368499999662163
+    }
+  ],
+  "raw_writes": [
+    {
+      "sample": 0,
+      "submit_receipt_ms": 22.759200001019053,
+      "approval_request_to_effect_ms": 32.97729999758303,
+      "static_ms": 0.07,
+      "preview_ms": 8.135,
+      "evaluation_ms": 15.206,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 1,
+      "submit_receipt_ms": 20.972999998775776,
+      "approval_request_to_effect_ms": 32.937600000877865,
+      "static_ms": 0.08,
+      "preview_ms": 7.479,
+      "evaluation_ms": 14.559,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 2,
+      "submit_receipt_ms": 21.440599997731624,
+      "approval_request_to_effect_ms": 33.64270000020042,
+      "static_ms": 0.1,
+      "preview_ms": 6.893,
+      "evaluation_ms": 15.241,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 3,
+      "submit_receipt_ms": 25.640799998654984,
+      "approval_request_to_effect_ms": 29.697600002691615,
+      "static_ms": 0.089,
+      "preview_ms": 11.78,
+      "evaluation_ms": 19.137,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 4,
+      "submit_receipt_ms": 19.045100001676474,
+      "approval_request_to_effect_ms": 31.291999999666587,
+      "static_ms": 0.054,
+      "preview_ms": 6.957,
+      "evaluation_ms": 13.402,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 5,
+      "submit_receipt_ms": 20.457300000998657,
+      "approval_request_to_effect_ms": 32.049499997810926,
+      "static_ms": 0.08,
+      "preview_ms": 7.023,
+      "evaluation_ms": 14.321,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 6,
+      "submit_receipt_ms": 21.679099998436868,
+      "approval_request_to_effect_ms": 27.886299998499453,
+      "static_ms": 0.08,
+      "preview_ms": 8.376,
+      "evaluation_ms": 15.475,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 7,
+      "submit_receipt_ms": 16.81829999870388,
+      "approval_request_to_effect_ms": 23.005699997156626,
+      "static_ms": 0.051,
+      "preview_ms": 5.695,
+      "evaluation_ms": 11.944,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 8,
+      "submit_receipt_ms": 16.845900001499103,
+      "approval_request_to_effect_ms": 24.766899998212466,
+      "static_ms": 0.055,
+      "preview_ms": 6.096,
+      "evaluation_ms": 12.154,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 9,
+      "submit_receipt_ms": 23.39340000253287,
+      "approval_request_to_effect_ms": 30.08860000045388,
+      "static_ms": 0.075,
+      "preview_ms": 10.437,
+      "evaluation_ms": 17.397,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 10,
+      "submit_receipt_ms": 19.115200000669574,
+      "approval_request_to_effect_ms": 25.163500002236106,
+      "static_ms": 0.08,
+      "preview_ms": 6.789,
+      "evaluation_ms": 13.723,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 11,
+      "submit_receipt_ms": 16.330900001776172,
+      "approval_request_to_effect_ms": 33.60340000290307,
+      "static_ms": 0.05,
+      "preview_ms": 5.629,
+      "evaluation_ms": 11.793,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 12,
+      "submit_receipt_ms": 22.671299997455208,
+      "approval_request_to_effect_ms": 26.15739999964717,
+      "static_ms": 0.102,
+      "preview_ms": 9.17,
+      "evaluation_ms": 16.441,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 13,
+      "submit_receipt_ms": 17.252699999517063,
+      "approval_request_to_effect_ms": 32.661599998391466,
+      "static_ms": 0.055,
+      "preview_ms": 5.874,
+      "evaluation_ms": 12.252,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 14,
+      "submit_receipt_ms": 24.83339999889722,
+      "approval_request_to_effect_ms": 26.029900000139605,
+      "static_ms": 0.09,
+      "preview_ms": 10.749,
+      "evaluation_ms": 18.755,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 15,
+      "submit_receipt_ms": 20.42760000040289,
+      "approval_request_to_effect_ms": 32.51769999769749,
+      "static_ms": 0.088,
+      "preview_ms": 7.647,
+      "evaluation_ms": 14.471,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 16,
+      "submit_receipt_ms": 18.986999999469845,
+      "approval_request_to_effect_ms": 25.69949999815435,
+      "static_ms": 0.06,
+      "preview_ms": 7.081,
+      "evaluation_ms": 13.568,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 17,
+      "submit_receipt_ms": 22.586700000829296,
+      "approval_request_to_effect_ms": 30.454799998551607,
+      "static_ms": 0.083,
+      "preview_ms": 8.882,
+      "evaluation_ms": 15.792,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 18,
+      "submit_receipt_ms": 19.83920000202488,
+      "approval_request_to_effect_ms": 26.30019999924116,
+      "static_ms": 0.057,
+      "preview_ms": 7.468,
+      "evaluation_ms": 14.202,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 19,
+      "submit_receipt_ms": 17.82690000254661,
+      "approval_request_to_effect_ms": 31.308599998737918,
+      "static_ms": 0.053,
+      "preview_ms": 6.07,
+      "evaluation_ms": 12.419,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 20,
+      "submit_receipt_ms": 24.833999999827938,
+      "approval_request_to_effect_ms": 33.384999998816056,
+      "static_ms": 0.08,
+      "preview_ms": 8.858,
+      "evaluation_ms": 17.898,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 21,
+      "submit_receipt_ms": 26.458699998329394,
+      "approval_request_to_effect_ms": 29.01919999931124,
+      "static_ms": 0.131,
+      "preview_ms": 10.787,
+      "evaluation_ms": 19.245,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 22,
+      "submit_receipt_ms": 20.254099999874597,
+      "approval_request_to_effect_ms": 29.75519999745302,
+      "static_ms": 0.066,
+      "preview_ms": 6.73,
+      "evaluation_ms": 13.83,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 23,
+      "submit_receipt_ms": 24.278500000946224,
+      "approval_request_to_effect_ms": 27.657999999064486,
+      "static_ms": 0.081,
+      "preview_ms": 10.455,
+      "evaluation_ms": 17.722,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 24,
+      "submit_receipt_ms": 23.463000001356704,
+      "approval_request_to_effect_ms": 34.72420000252896,
+      "static_ms": 0.063,
+      "preview_ms": 10.417,
+      "evaluation_ms": 17.721,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 25,
+      "submit_receipt_ms": 23.833200000808574,
+      "approval_request_to_effect_ms": 28.49860000060289,
+      "static_ms": 0.08,
+      "preview_ms": 9.933,
+      "evaluation_ms": 18.163,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 26,
+      "submit_receipt_ms": 21.03069999793661,
+      "approval_request_to_effect_ms": 30.76629999850411,
+      "static_ms": 0.052,
+      "preview_ms": 8.75,
+      "evaluation_ms": 15.568,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 27,
+      "submit_receipt_ms": 21.91070000117179,
+      "approval_request_to_effect_ms": 57.78669999926933,
+      "static_ms": 0.067,
+      "preview_ms": 9.271,
+      "evaluation_ms": 15.989,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 28,
+      "submit_receipt_ms": 25.77960000053281,
+      "approval_request_to_effect_ms": 30.980999999883352,
+      "static_ms": 0.085,
+      "preview_ms": 11.125,
+      "evaluation_ms": 18.934,
+      "reviewer": "automated_fixture; no human waiting measured"
+    },
+    {
+      "sample": 29,
+      "submit_receipt_ms": 20.649099998991005,
+      "approval_request_to_effect_ms": 32.136400001036236,
+      "static_ms": 0.09,
+      "preview_ms": 7.014,
+      "evaluation_ms": 14.639,
+      "reviewer": "automated_fixture; no human waiting measured"
+    }
+  ],
+  "not_measured": [
+    "live LLM latency",
+    "human review latency",
+    "distributed upstream overhead",
+    "cold OS filesystem cache",
+    "production concurrency"
+  ],
+  "measurement_note": "direct includes SQLite connect/query; proxy includes HTTP, server admission, persistence and audit; negative deltas retained in raw rows"
+}

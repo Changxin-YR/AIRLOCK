@@ -1,0 +1,8 @@
+{
+  "branch": "codex/full-audit-2026-10-02",
+  "head": "661cf9024e56df4dd88a6d789be25d46c7c8eace",
+  "main": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
+  "memory": "659b2a35ca26fbdbec220d4420d0d37bf89b18d5",
+  "worktree": "?? evidence/closure-20261002/",
+  "application_diff_from_tested": ""
+}

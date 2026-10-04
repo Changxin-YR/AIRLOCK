@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "evidence/single-person-20261003/independent/single_participant_baseline_replay.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-03T03:39:46.013842+00:00",
+  "duration_seconds": 1.253,
+  "tested_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "0d9be52e58c06601341c9ebbd8f50a2686ea1ebb"
+}

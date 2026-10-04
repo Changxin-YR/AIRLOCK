@@ -1,0 +1,5 @@
+{
+  "checked": "evidence text for common credential literals",
+  "matches": [],
+  "limitation": "pattern scan is not comprehensive secret-detection certification"
+}

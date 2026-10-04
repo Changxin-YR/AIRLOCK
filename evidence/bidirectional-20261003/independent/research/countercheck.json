@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "check": "human_numeric_true",
+      "status": "PASS"
+    },
+    {
+      "check": "independent_numeric_true",
+      "status": "PASS"
+    },
+    {
+      "check": "blank_formal_rationale",
+      "status": "PASS"
+    },
+    {
+      "check": "duplicate_false_to_true_json",
+      "status": "PASS"
+    },
+    {
+      "check": "only_actual_comprehension_gold_in_denominator",
+      "status": "PASS"
+    },
+    {
+      "check": "model_automation_excluded",
+      "status": "PASS"
+    },
+    {
+      "check": "impossible_active_day",
+      "status": "PASS"
+    },
+    {
+      "check": "valid_day_and_zero_baseline",
+      "status": "PASS"
+    }
+  ],
+  "baseline_commit": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "tested_commit_sha": "4e512df4c65e9b94b7f210ed5483e612efb5eec1",
+  "dirty": " M airlock/alert_delivery.py\n M airlock/github_adapter.py\n M benchmark/closure.py\n M benchmark/research.py\n M docs/acceptance/validate_matrix.py\n M scripts/operational_check.py\n M tests/test_alert_delivery.py\n M tests/test_alert_inbox.py\n M tests/test_github_adapter.py\n?? tests/test_research_integrity.py\n",
+  "source_hashes": {
+    "benchmark/research.py": "a703241cbd3d5bdc439ca814d0aeb4205f644ee809346613052ecb23106fcb8d",
+    "benchmark/closure.py": "f24ae276e3fa63eddec33c47ea83fafb55c43ecf396d75ba1afea1e2c6f77316",
+    "benchmark/pilot.py": "c9342ce3c0e387b4d40b20cc9be23901b456b1f2fc984cc84e464ade4e2ad971",
+    "benchmark/worklog.py": "cc3405c60a693d48ea617d2ccda7bcb4579c924366b1ed0f4b8e690da78cc0d5",
+    "tests/test_research_integrity.py": "baab71d0e414dc82c2d7a0febbf59a675bc8fd38470297a74aff550825b773f9"
+  },
+  "synthetic_only": true,
+  "real_participants_observed": 0,
+  "paid_model_calls": 0,
+  "formal_human_validation": "ENVIRONMENT BLOCKED",
+  "scope": "offline research import and analysis integrity; declarations do not authenticate humans"
+}
