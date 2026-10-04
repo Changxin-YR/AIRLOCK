@@ -2,14 +2,14 @@
   "schema_version": 5,
   "updated_date": "2026-10-04",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "project_maintenance_complete_in_tested_scope",
+  "phase": "startup_preflight_source_pushed_ci_pending",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "working_commit": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
   "code_and_evidence_commit": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
   "tested_commit": "7073fb76a2e46365fabe6f51a3765de267863890",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "0b0b5d2aef4d032d10dd81a15d330c09b7213511",
+  "previous_memory_commit": "c9d2f680c86e78a9db1726c30ae664c78d5b44da",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -421,5 +421,40 @@
     "checkpoint_git_payloads_verified": 16,
     "delivery_ci_metadata": "PROJECT_MAINTENANCE_DELIVERY_CI_20261004.json",
     "independent_review": "PROJECT_MAINTENANCE_INDEPENDENT_REVIEW_20261004.json"
+  },
+  "startup_preflight": {
+    "baseline": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+    "source_commit": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
+    "source_pushed": true,
+    "source_ci_run": 37167936489,
+    "source_ci_status": "in_progress",
+    "findings": [
+      "F044",
+      "F045",
+      "F046"
+    ],
+    "local_full_preflight": {
+      "passed": 793,
+      "dirty": true,
+      "exit_code": 0
+    },
+    "frozen_targeted": {
+      "passed": 142,
+      "environment_blocked_windows_symlink_cases": 3,
+      "exit_code": 0
+    },
+    "independent_counterchecks": {
+      "passed": 28,
+      "environment_blocked_windows_file_symlink": 1,
+      "exit_code": 0,
+      "dirty_snapshot_matches_frozen_application": true
+    },
+    "source_evidence": "var/startup-preflight-20261004",
+    "public_evidence": "evidence/startup-preflight-20261004",
+    "imported_raw_files": 120,
+    "evidence_pushed": false,
+    "new_model_calls": 0,
+    "human_completed": 0,
+    "next": "Verify Linux CI, archive original results, update all126 target bindings and final delivery."
   }
 }
