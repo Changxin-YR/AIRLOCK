@@ -1,3 +1,13 @@
+# 工程交付已推送，最终提交 CI 待核验（2026-10-04）
+
+源码 7073fb76a2e46365fabe6f51a3765de267863890 的完整 CI 37164846361 / job 111325559836 已下载核验：703 Python、6 JS、31 浏览器，官方 MCP SDK、冻结 benchmark/消融、隔离 Docker/网络、S3 Object Lock、Envoy/OTel 与依赖/证据门禁通过。GitHub digest、94 载荷、源码 ZIP 提交和真实退出码一致，下载后 verify_evidence exit 0。
+
+最终工作分支提交 f27b447e268209a8b8f480111e55a3f6bb1bedce 已推送；相对源码应用与可执行验收代码 diff 为空。最终提交 CI 37165779509 尚待核验，不声明此 SHA 的新完整 CI 已通过。main 仍 704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1 draft/open/unmerged。
+
+源码完整 ZIP 与失败/成功原始收据已存工作分支 evidence/project-maintenance-20261004。ZIP SHA256 fb98b56d111cae2c1e318b012e6d0703022d4b62e938801e1a79872963a4b190，Actions 原副本到期 2027-01-02T00:24:25Z；Git 无自动到期，非 WORM。交付后按 Git 对象核对 125 证据载荷、9 文档绑定及 16 工程快照载荷，exit 0。
+
+126 项记录已逐项绑定新源码，30 唯一收据校验 exit 0：111 IMPLEMENTED / 15 PARTIAL，105 限定 PASS / 21 BLOCKED_EXTERNAL。原始标准与受阻条件保留。独立只读复核未发现 P0/P1 或计数、来源错误；启动配置 F043 的 16 回归、7 真实子进程反例和 52 定点均通过。真人完成 0，本轮模型 API 调用 0。项目持续以具体使用场景、完整权限闭环、诊断和维护质量为优先级。
+
 # 项目维护：启动配置修复与工程文档（2026-10-04）
 
 当前按实际工具调用场景、安装配置、权限与业务闭环、故障诊断和维护质量推进。公开入口为README、docs/PLAN.md、OPERATIONS及技术契约；工程归档位于evidence/project-checkpoint-20261004，原始执行日志/收据和已发布产物Git来源保留。
