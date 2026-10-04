@@ -1,3 +1,19 @@
+# 启动前诊断交付完成，源码与交付提交两轮复验通过（2026-10-04）
+
+工作分支 codex/full-audit-2026-10-02 本地及远端为 7088ffbb9a5b38636240f226a885f1467b58f7b9。源码 7dcea8ab94b60753391e0d90a73179684fc39fe1；应用及可执行验收代码 diff 为空。实际 main 仍 704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1 已更新并回读，draft/open/unmerged。
+
+新增 python -m airlock doctor [--config ...] [--json]，只读检查配置、内存 SQLite 和静态审批台，明确列出未检查范围。F044 修复环境错误原值泄漏，F045 使损坏控制台在 Gate/持久库初始化前失败，F046 修复浏览器 CRLF/CR 哈希解释差异并拒绝 NUL。保留环境优先级、独占初始化、已有数据、API-only 与服务端批准下限。
+
+源码 CI 37167936489/job111334729986 和最终交付 CI 37168715642/job111337055425 均完整成功：各796 Python、6 JavaScript、31原生浏览器，以及官方MCP SDK、冻结benchmark/消融、隔离Docker/上游网络、S3 Object Lock、Envoy/OTel和依赖/证据门禁。三项Linux真实符号链接全部通过。两个ZIP下载后均核验GitHub digest、94载荷、source.zip commit和24份exit0/干净源码收据，verify_evidence均exit0。
+
+修改中全量793通过；作者诊断59通过；冻结定点142通过/3 Windows环境受限；另一实现者反例28通过/1 Windows文件链接受限，含原生浏览器CRLF语义。独立82文件应用快照与冻结应用逐hash一致。最初夹具失败和四项语义反例失败保留，修复后原断言通过。只读报告复核未发现实质不一致；从交付Git对象重读228证据载荷、9文档绑定、16工程快照载荷通过。
+
+完整源码CI包已进入工作分支Git：evidence/startup-preflight-20261004/ci/acceptance-7dcea8a.zip，1963487字节，SHA256 fe6bf15b99c9902da6f87b6b36bebcfe9692f457fe00d36d0017c47d6d270b21；Actions11290722179到期2027-01-02T01:24:55Z。Git保留120份原始本地导入及完整冻结CI，无自动到期、依赖历史/备份，非WORM。
+
+最终重复CI包 artifact11290733328，1972472字节，SHA256 0c5d6351923c1dda34385d4a88dc12db9bc67e45ce023a59888bc01b1fb07676，到期2027-01-02T01:40:18Z；完整重复ZIP仅Actions与var/delivery-ci-7088ffb缓存，无永久保证。其原始job、下载核验、真实退出收据、PR回读及元数据保存在memory/progress的STARTUP_PREFLIGHT_*文件。真实凭据、个人日志和数据库不入公开Git。
+
+126原目标保持111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL，30唯一矩阵收据校验exit0。当前实测声明范围无已知未修复P0/P1；所有原始目标仍未全部满足。真人完成0、新增付费模型API调用0、真实业务新操作0，真实研究数据/参与者、部署身份、独立云保管和通知等外部条件不改写。下一步继续围绕明确支持的工具调用场景、故障诊断与维护质量推进。
+
 # 启动前诊断与原始证据已交付，最终提交CI待复验（2026-10-04）
 
 工作分支最终交付 7088ffbb9a5b38636240f226a885f1467b58f7b9 已推送；应用与可执行验收代码相对冻结源码7dcea8ab94b60753391e0d90a73179684fc39fe1的diff为空。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1草稿未合并。最终提交CI37168715642运行中，尚未声称该提交的新完整CI通过。
