@@ -40,10 +40,13 @@ python -m pip install -r requirements-dev.txt
 npm ci
 npm run build
 python -m airlock init
+python -m airlock doctor
 python -m airlock serve
 ```
 
 `serve --config path/to/config.json` 显式选择的文件必须存在、可读且为 UTF-8 JSON 对象，否则在启动服务前退出 2。省略 `--config` 时读取默认 `var/local.json`（如存在），也支持纯环境配置；已设置的环境变量保持优先。
+
+`doctor` 在启动前检查有效配置、内存中的 SQLite 运行时及审批台 HTML/CSP/引用的 JS、CSS 文件。通过退出 0，失败退出 2；`python -m airlock doctor --json` 输出固定结构的诊断结果。它不启动服务、不打开持久数据库、不连接外部系统，也不会修改环境变量；检查不包含已有库的内容、可选集成配置或真实外部服务。非法环境参数会在启动前脱敏报错；已安装但损坏的审批台构建在数据库初始化前拒绝。
 
 打开 `http://127.0.0.1:8000`。操作者本人在本机查看 `var/local.json`，将 reviewer token 输入审批台。Agent 进程只配置 agent token；数据库、审核凭据和审计密钥留在服务端。
 

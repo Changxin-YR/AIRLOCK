@@ -2,7 +2,6 @@
 import asyncio
 import json
 import secrets
-import re
 import sqlite3
 import uuid
 from pathlib import Path
@@ -33,13 +32,20 @@ class ConsoleAssets(StaticFiles):
 
 def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or Settings.from_env()
+    # A partially built console must fail before Gate can initialize a new
+    # database or recover an existing WAL. API-only startup remains supported
+    # when neither console entry point nor CSP manifest is installed.
+    from .diagnostics import ConsoleValidationError, validate_console
+    console_hashes = []
+    try:
+        if any(path.exists() or path.is_symlink() for path in (CONSOLE/'index.html', CONSOLE/'csp.json')):
+            console_hashes = validate_console(CONSOLE)
+    except (ConsoleValidationError, OSError):
+        raise ValueError('console build is incomplete or invalid; run npm ci and npm run build') from None
     gate = Gate(settings)
     app = FastAPI(title="Airlock", version="0.1.0", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.gate = gate
-    # Hashes come from the local, reviewed static build, never a request header.
-    console_hashes = json.loads((CONSOLE/'csp.json').read_text())['script_hashes'] if (CONSOLE/'csp.json').exists() else []
-    if not isinstance(console_hashes,list) or any(not isinstance(h,str) or not re.fullmatch(r"'sha256-[A-Za-z0-9+/]{43}='",h) for h in console_hashes):
-        raise ValueError('invalid console script hashes')
+    # Hashes come from the validated local build, never a request header.
     script_policy = "script-src 'self' " + ' '.join(console_hashes)
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=[urlparse(settings.origin).hostname] + ([settings.internal_host] if settings.internal_host else []))
 

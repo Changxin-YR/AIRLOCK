@@ -13,10 +13,26 @@ python -m pip install -r requirements-dev.txt
 npm ci
 npm run build
 python -m airlock init
+python -m airlock doctor
 python -m airlock serve
 ```
 
 显式 `serve --config <path>` 要求可读的普通 UTF-8 JSON 配置文件，支持 UTF-8 BOM；文件缺失、目录、读取/格式错误或凭据值类型错误在启动 Uvicorn 前以 exit2 拒绝，错误不回显配置内容。省略参数时保留默认 `var/local.json` 与纯环境配置兼容；已有环境变量优先，配置只补充三个凭据字段，数据库路径仍由 `AIRLOCK_DB` 设置。`init` 使用独占创建，已有文件不会被覆盖。
+
+### 启动前诊断
+
+```sh
+python -m airlock doctor
+python -m airlock doctor --config path/to/local.json --json
+```
+
+诊断与 `serve` 使用同一份配置选择和环境优先级规则。配置文件上限 16 KiB，拒绝重复 JSON 键、非有限常量与过深嵌套；环境中的凭据、Origin、TTL 和预算数值通过同一 `Settings` 校验。失败输出固定错误码，不回显原值、配置路径或异常文本。`--json` 仅用于 doctor；检查通过退出 0，任一检查失败退出 2。
+
+返回 `scope=local_startup_preflight`、`status`、`checks`、`not_checked` 和 `service_started=false`。三项检查分别是 `configuration`、`sqlite_runtime`、`console`：SQLite 只打开 `:memory:`；审批台检查有界 HTML/CSP、内联脚本哈希，以及引用的同目录 JS/CSS。缺文件、路径越界或软链接构建会失败。控制台文件应通过现有 `npm ci`、`npm run build` 重新生成。
+
+doctor 不实例化 Gate/Store，不创建目录、播种数据库、修改环境变量或请求网络。`not_checked` 保留 `persistent_database`、`remote_services`、`optional_integrations`；通过只证明这三项本地预检，不能证明持久库、扩展配置、网络权限或外部身份/通知/归档可用。
+
+`/healthz` 表示已启动 HTTP 服务存活。未安装审批台时，API-only 服务仍可启动且首页返回 `console_assets_missing` / 503；doctor 会明确报告控制台缺失。如果发现 `index.html` 或 `csp.json` 但整个构建不完整，启动会在 Gate 和数据库初始化前失败，保留已有库原状。
 
 `init` 生成的本机配置含凭据；终端只显示文件路径和保密提醒。配置按现有 CLI 指引在本地使用，不上传。默认监听 `127.0.0.1:8000`。浏览器输入 reviewer 凭据；Agent 只得到 `AIRLOCK_AGENT_TOKEN`。刷新页面需重新登录，凭据只存在内存。合成数据不是生产备份；整个开发 shell 不属于敌对 Agent 沙箱。要验证旁路隔离，运行 `python scripts/docker_smoke.py --output evidence/<独立目录>`，使用 Compose 的隔离 Agent 容器。
 

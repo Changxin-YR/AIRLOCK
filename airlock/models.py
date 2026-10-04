@@ -6,7 +6,7 @@ import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Mapping
 from urllib.parse import urlparse
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator, model_validator
 
@@ -138,27 +138,35 @@ class Settings:
             raise ValueError('invalid risk budget')
 
     @classmethod
-    def from_env(cls) -> Settings:
-        return cls(
-            database=Path(os.getenv("AIRLOCK_DB", "var/airlock.db")),
-            agent_token=os.environ["AIRLOCK_AGENT_TOKEN"],
-            reviewer_token=os.environ["AIRLOCK_REVIEWER_TOKEN"],
-            audit_key=os.environ["AIRLOCK_AUDIT_KEY"],
-            origin=os.getenv("AIRLOCK_ORIGIN", "http://127.0.0.1:8000"),
-            ttl_seconds=int(os.getenv("AIRLOCK_TTL", "300")),
-            internal_host=os.getenv("AIRLOCK_INTERNAL_HOST"),
-            policy_file=Path(os.environ['AIRLOCK_POLICY_FILE']) if os.getenv('AIRLOCK_POLICY_FILE') else None,
-            reviewer_file=Path(os.environ['AIRLOCK_REVIEWER_FILE']) if os.getenv('AIRLOCK_REVIEWER_FILE') else None,
-            oidc_file=Path(os.environ['AIRLOCK_OIDC_FILE']) if os.getenv('AIRLOCK_OIDC_FILE') else None,
-            upstream_file=Path(os.environ['AIRLOCK_UPSTREAM_FILE']) if os.getenv('AIRLOCK_UPSTREAM_FILE') else None,
-            semantic_file=Path(os.environ['AIRLOCK_SEMANTIC_FILE']) if os.getenv('AIRLOCK_SEMANTIC_FILE') else None,
-            audit_key_file=Path(os.environ['AIRLOCK_AUDIT_KEY_FILE']) if os.getenv('AIRLOCK_AUDIT_KEY_FILE') else None,
-            audit_anchor_file=Path(os.environ['AIRLOCK_AUDIT_ANCHOR_FILE']) if os.getenv('AIRLOCK_AUDIT_ANCHOR_FILE') else None,
-            otlp_url=os.getenv('AIRLOCK_OTLP_URL'),
-            otlp_allow_loopback=os.getenv('AIRLOCK_OTLP_ALLOW_LOOPBACK')=='1',
-            budget_units=int(os.getenv('AIRLOCK_BUDGET_UNITS','10000')),
-            budget_window_seconds=int(os.getenv('AIRLOCK_BUDGET_WINDOW','86400')),
-        )
+    def from_env(cls, environ: Mapping[str, str] | None = None) -> Settings:
+        # An explicit mapping permits offline validation without changing the
+        # process environment or constructing a Gate/Store.
+        env = os.environ if environ is None else environ
+        try:
+            return cls(
+                database=Path(env.get("AIRLOCK_DB", "var/airlock.db")),
+                agent_token=env["AIRLOCK_AGENT_TOKEN"],
+                reviewer_token=env["AIRLOCK_REVIEWER_TOKEN"],
+                audit_key=env["AIRLOCK_AUDIT_KEY"],
+                origin=env.get("AIRLOCK_ORIGIN", "http://127.0.0.1:8000"),
+                ttl_seconds=int(env.get("AIRLOCK_TTL", "300")),
+                internal_host=env.get("AIRLOCK_INTERNAL_HOST"),
+                policy_file=Path(env['AIRLOCK_POLICY_FILE']) if env.get('AIRLOCK_POLICY_FILE') else None,
+                reviewer_file=Path(env['AIRLOCK_REVIEWER_FILE']) if env.get('AIRLOCK_REVIEWER_FILE') else None,
+                oidc_file=Path(env['AIRLOCK_OIDC_FILE']) if env.get('AIRLOCK_OIDC_FILE') else None,
+                upstream_file=Path(env['AIRLOCK_UPSTREAM_FILE']) if env.get('AIRLOCK_UPSTREAM_FILE') else None,
+                semantic_file=Path(env['AIRLOCK_SEMANTIC_FILE']) if env.get('AIRLOCK_SEMANTIC_FILE') else None,
+                audit_key_file=Path(env['AIRLOCK_AUDIT_KEY_FILE']) if env.get('AIRLOCK_AUDIT_KEY_FILE') else None,
+                audit_anchor_file=Path(env['AIRLOCK_AUDIT_ANCHOR_FILE']) if env.get('AIRLOCK_AUDIT_ANCHOR_FILE') else None,
+                otlp_url=env.get('AIRLOCK_OTLP_URL'),
+                otlp_allow_loopback=env.get('AIRLOCK_OTLP_ALLOW_LOOPBACK')=='1',
+                budget_units=int(env.get('AIRLOCK_BUDGET_UNITS','10000')),
+                budget_window_seconds=int(env.get('AIRLOCK_BUDGET_WINDOW','86400')),
+            )
+        except (KeyError, ValueError, TypeError, AttributeError, OverflowError):
+            # int()/urlparse() errors can contain the original environment
+            # value. This path also serves direct ASGI factory startup.
+            raise ValueError('invalid AIRLOCK environment configuration; check credentials, origin and limits') from None
 
     @property
     def policy_version(self) -> str:

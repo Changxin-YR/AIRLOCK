@@ -12,8 +12,8 @@ ROOT=Path(__file__).resolve().parents[2]
 BASE=ROOT/'evidence/autonomous-20261003'
 CLOSURE=ROOT/'evidence/closure-20261002'
 LEGACY=ROOT/'evidence/continuation-20261002'
-FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/project-maintenance-20261004/ci/verified')
-CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/project-maintenance-20261004/CI_FINAL.json')
+FINAL=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_FINAL','evidence/startup-preflight-20261004/ci/verified')
+CI_META=ROOT/os.environ.get('AIRLOCK_ACCEPTANCE_CI','evidence/startup-preflight-20261004/CI_FINAL.json')
 SHA=json.loads((FINAL/'pytest.log.status.json').read_text())['tested_commit_sha']
 LOG_PATHS={name:LEGACY/'final'/(name+'.log') for name in ('live-validation','ablation-live-dev','ablation-live-test','model-diagnostics')}
 LOG_PATHS.update({'model-contract-recheck':LEGACY/'retest/model-contract-recheck.log','live-upstream':CLOSURE/'final/live-upstream.log','sse-identity-replay':CLOSURE/'sse-identity-replay.log',
@@ -31,7 +31,7 @@ def row(id,implementation,verification,scope,missing,files,tests='',logs='pytest
 
 
 I='IMPLEMENTED';P='PARTIAL';M='MISSING';PASS='PASS';EXT='BLOCKED_EXTERNAL';NOT='NOT_RUN'
-row('G1',I,PASS,'本地项目可运行；显式配置错误启动前阻断，默认环境启动兼容；Linux CI真实容器，成本/依赖边界已写明。','不代表生产部署或实际付费模型成本。','README.md docs/OPERATIONS.md airlock/__main__.py','test_sdk_interop test_gate test_launcher', 'pytest browser-native dependency-audit')
+row('G1',I,PASS,'本地项目可运行；doctor只读检查配置、内存SQLite及审批台产物；无效配置脱敏拒绝，损坏构建在持久库初始化前拒绝，默认环境/API-only启动兼容；Linux CI真实容器。','doctor不检查持久库、可选集成或外部服务；不代表生产部署或实际付费模型成本。','README.md docs/OPERATIONS.md airlock/__main__.py airlock/diagnostics.py airlock/api.py airlock/models.py','test_sdk_interop test_gate test_launcher test_diagnostics test_startup_preflight', 'pytest browser-native dependency-audit')
 row('G2',I,PASS,'简历描述绑定实际代码路径和合成证据。','用户本人是否能独立复现需实际演示。','docs/INTERVIEW.md README.md','test_gate test_upstream','pytest comparison')
 row('G3',I,PASS,'创新定位为服务端绑定、影响证据与治理组合；核对现有 HITL/审批实现。','没有性能横评、行业首创或外部采用结论。','docs/RESEARCH.md docs/INTERVIEW.md',logs='')
 row('G4',I,EXT,'已交付 17 组问答、追问、运行命令和限制。','用户现场讲解、答辩与独立操作能力未验证。','docs/INTERVIEW.md docs/OPERATIONS.md',logs='')

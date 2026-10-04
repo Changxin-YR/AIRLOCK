@@ -104,7 +104,7 @@ def test_launcher_unreadable_configuration_does_not_echo_filesystem_error(isolat
     write_config(path)
     def denied(*args, **kwargs):
         raise PermissionError('synthetic-private-filesystem-detail')
-    monkeypatch.setattr(Path, 'read_text', denied)
+    monkeypatch.setattr(Path, 'open', denied)
     with pytest.raises(SystemExit) as error:
         invoke('serve', '--config', str(path))
     assert error.value.code == 2 and calls == [] and environment == {}
@@ -135,3 +135,108 @@ def test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config(isola
     with pytest.raises(FileExistsError):
         invoke(*arguments)
     assert path.read_bytes() == before and calls == []
+
+
+@pytest.mark.parametrize('name,value', [
+    ('AIRLOCK_TTL', 'synthetic-input-marker'),
+    ('AIRLOCK_ORIGIN', 'http://localhost:synthetic-input-marker'),
+    ('AIRLOCK_BUDGET_UNITS', 'synthetic-input-marker'),
+    ('AIRLOCK_BUDGET_WINDOW', 'synthetic-input-marker'),
+    ('AIRLOCK_AGENT_TOKEN', ''),
+])
+def test_launcher_invalid_environment_fails_before_start_without_merging_credentials(
+        isolated_launcher, name, value, capsys):
+    root, environment, calls, invoke = isolated_launcher
+    path = root / 'config.json'
+    write_config(path)
+    environment[name] = value
+    before = dict(environment)
+    with pytest.raises(SystemExit) as error:
+        invoke('serve', '--config', str(path))
+    assert error.value.code == 2 and calls == [] and environment == before
+    output = capsys.readouterr()
+    assert 'invalid AIRLOCK environment configuration' in output.err
+    assert 'synthetic-input-marker' not in output.err and 'Traceback' not in output.err
+    assert not (root / 'var').exists()
+
+
+@pytest.mark.parametrize('contents', [
+    b'{"AIRLOCK_AGENT_TOKEN":"a","AIRLOCK_AGENT_TOKEN":"b"}',
+    b'{"unrecognized":NaN}',
+    b'{' + b' ' * launcher.MAX_CONFIG_BYTES + b'}',
+    b'[' * 1200 + b']' * 1200,
+])
+def test_launcher_rejects_ambiguous_or_unbounded_json_before_start(isolated_launcher, contents):
+    root, environment, calls, invoke = isolated_launcher
+    environment.update(SYNTHETIC)
+    path = root / 'invalid.json'
+    path.write_bytes(contents)
+    with pytest.raises(SystemExit) as error:
+        invoke('serve', '--config', str(path))
+    assert error.value.code == 2 and calls == [] and environment == SYNTHETIC
+
+
+@pytest.mark.parametrize('status', ['PASS', 'FAIL'])
+def test_doctor_json_preserves_environment_and_never_invokes_uvicorn(
+        isolated_launcher, monkeypatch, status, capsys):
+    from airlock import diagnostics
+    root, environment, calls, invoke = isolated_launcher
+    path = root / 'config.json'
+    write_config(path)
+    environment['AIRLOCK_AGENT_TOKEN'] = 'synthetic-environment-' + 'z' * 32
+    before = dict(environment)
+    report = {'scope': 'local_startup_preflight', 'status': status,
+              'checks': [{'id': 'configuration', 'status': status, 'code': 'test_status'}],
+              'not_checked': ['persistent_database', 'remote_services', 'optional_integrations'],
+              'service_started': False}
+    received = []
+    def collect(mapping):
+        received.append(dict(mapping))
+        return report
+    monkeypatch.setattr(diagnostics, 'collect_checks', collect)
+    if status == 'PASS':
+        invoke('doctor', '--json', '--config', str(path))
+    else:
+        with pytest.raises(SystemExit) as error:
+            invoke('doctor', '--json', '--config', str(path))
+        assert error.value.code == 2
+    output = capsys.readouterr()
+    assert json.loads(output.out) == report and output.err == ''
+    assert received == [{**SYNTHETIC, **before}]
+    assert environment == before and calls == [] and not (root / 'var').exists()
+    assert not any(secret in output.out for secret in (*SYNTHETIC.values(), *before.values()))
+
+
+def test_doctor_invalid_file_json_is_controlled_even_with_valid_environment(isolated_launcher, capsys):
+    root, environment, calls, invoke = isolated_launcher
+    environment.update(SYNTHETIC)
+    with pytest.raises(SystemExit) as error:
+        invoke('doctor', '--json', '--config', str(root / 'missing.json'))
+    assert error.value.code == 2 and calls == [] and environment == SYNTHETIC
+    output = capsys.readouterr()
+    report = json.loads(output.out)
+    assert report['status'] == 'FAIL' and report['checks'][0]['code'] == 'configuration_file_invalid'
+    assert report['service_started'] is False and output.err == ''
+
+
+def test_doctor_text_describes_scope_without_values(isolated_launcher, monkeypatch, capsys):
+    from airlock import diagnostics
+    root, environment, calls, invoke = isolated_launcher
+    monkeypatch.setattr(diagnostics, 'collect_checks', lambda _: {
+        'scope': 'local_startup_preflight', 'status': 'FAIL',
+        'checks': [{'id': 'console', 'status': 'FAIL', 'code': 'console_missing'}],
+        'not_checked': ['persistent_database', 'remote_services', 'optional_integrations'],
+        'service_started': False})
+    with pytest.raises(SystemExit) as error:
+        invoke('doctor')
+    assert error.value.code == 2 and calls == [] and not list(root.iterdir())
+    output = capsys.readouterr()
+    assert 'console_missing' in output.out and 'persistent_database' in output.out
+    assert 'No service was started' in output.out and output.err == ''
+
+
+def test_json_switch_does_not_initialize_configuration(isolated_launcher):
+    root, environment, calls, invoke = isolated_launcher
+    with pytest.raises(SystemExit) as error:
+        invoke('init', '--json')
+    assert error.value.code == 2 and not list(root.iterdir()) and environment == {} and calls == []
