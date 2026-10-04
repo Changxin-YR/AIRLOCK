@@ -1,3 +1,13 @@
+# 启动前诊断与原始证据已交付，最终提交CI待复验（2026-10-04）
+
+工作分支最终交付 7088ffbb9a5b38636240f226a885f1467b58f7b9 已推送；应用与可执行验收代码相对冻结源码7dcea8ab94b60753391e0d90a73179684fc39fe1的diff为空。main仍704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1草稿未合并。最终提交CI37168715642运行中，尚未声称该提交的新完整CI通过。
+
+源码CI37167936489/job111334729986完整通过，下载后核验796 Python、6 JavaScript、31原生浏览器、官方MCP SDK、冻结benchmark/消融、隔离Docker/网络、S3 Object Lock、Envoy/OTel与依赖/证据门禁。Linux三个真实符号链接均实际通过；24份退出收据exit0/干净源码，ZIP的94载荷/source.zip commit及GitHub digest一致，verify_evidence exit0。
+
+完整包evidence/startup-preflight-20261004/ci/acceptance-7dcea8a.zip已在工作分支Git：1963487字节，SHA256 fe6bf15b99c9902da6f87b6b36bebcfe9692f457fe00d36d0017c47d6d270b21。Actions11290722179原副本到期2027-01-02T01:24:55Z；Git无自动到期，非WORM。120份原始导入保留基线、所有失败/修复、源码快照和浏览器记录。交付后从Git对象重读228证据载荷、9文档绑定、16工程快照载荷均通过。
+
+126目标矩阵更新至7dcea8a、30唯一收据校验exit0，仍111 IMPLEMENTED/15 PARTIAL、105限定PASS/21 BLOCKED_EXTERNAL。报告只读复核未发现实质不一致；F044—F046描述和doctor只读范围符合原始材料。真人完成0、本轮模型调用0，实际部署/研究外部条件不变。源码完整通过与最终提交正在运行分列记录。
+
 # 启动前诊断源码已推送（2026-10-04）
 
 工作分支新源码 7dcea8ab94b60753391e0d90a73179684fc39fe1 已推送，main 仍 704b5035cf69f9a6c40c44eecd84c0d0741de849。当前交付保持 PR #1 draft/open/unmerged。新源码 CI 37167936489 / job 111334729986 正在运行，尚未声称这个 SHA 全套通过；上次完整验证仍见之前的7073fb7/f27b447记录。

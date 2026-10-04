@@ -1,0 +1,12 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "C:/Users/27363/Desktop/airlock-memory-progress/VERIFY_STARTUP_PREFLIGHT_20261004.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T01:40:09.299206+00:00",
+  "duration_seconds": 11.301,
+  "tested_commit_sha": "7088ffbb9a5b38636240f226a885f1467b58f7b9",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "7088ffbb9a5b38636240f226a885f1467b58f7b9"
+}
