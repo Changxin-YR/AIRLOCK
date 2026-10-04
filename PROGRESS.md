@@ -1,3 +1,17 @@
+# 工程维护交付完成，源码与最终提交双重复验通过（2026-10-04）
+
+当前工作分支 codex/full-audit-2026-10-02 本地与远端为 f27b447e268209a8b8f480111e55a3f6bb1bedce。main 仍为 704b5035cf69f9a6c40c44eecd84c0d0741de849；PR #1 已更新并回读，draft/open/unmerged。源码 7073fb76a2e46365fabe6f51a3765de267863890 与最终交付之间，应用及可执行验收代码 diff 为空。
+
+源码 CI 37164846361 和最终交付 CI 37165779509 / job 111328248726 均通过：各 703 Python、6 JavaScript、31 原生浏览器检查，以及官方 MCP SDK、冻结 benchmark/消融、隔离 Docker/网络、S3 Object Lock、Envoy/OTel、依赖和证据门禁。两个完整 ZIP 均下载核对 GitHub SHA256、94 载荷与 source.zip commit；真实子退出码和独立 verify_evidence 均为 0。最终包的 24 份收据均绑定 f27b447、干净源码与 exit 0。
+
+本次修复 F043：显式缺失或损坏配置在启动前受控 exit 2，保留默认环境启动与初始化防覆盖。16 新回归、7 独立真实子进程反例和 52 相关定点通过；首次夹具失败保留。独立只读复核核对实现、原始日志和归档，未发现 P0/P1；一处 init 输出措辞已按实际行为修正。交付后从 Git 对象重读 125 证据载荷、9 文档绑定、16 工程快照载荷均一致。
+
+源码完整原始证据包已进入工作分支 Git：evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip，SHA256 fb98b56d111cae2c1e318b012e6d0703022d4b62e938801e1a79872963a4b190；Actions 原副本到期 2027-01-02T00:24:25Z。最终重复包 artifact 11289188978 为 1,945,832 bytes，SHA256 1a5a590bd944364434bf310c17353ce90037060bf70a288e466aa499636bf351，到期 2027-01-02T00:42:44Z；完整重复包仅 Actions 与 var/delivery-ci-f27b447 本机缓存，无永久保证。其原始 job 日志、下载核验、真实退出收据、PR 回读和元数据已保存到 memory/progress 的 PROJECT_MAINTENANCE_* 文件。Git 副本无自动到期，非 WORM。
+
+126 原目标全部保留：111 IMPLEMENTED / 15 PARTIAL、105 限定 PASS / 21 BLOCKED_EXTERNAL。原始目标尚未全部满足；当前声明测试范围无已知未修复 P0/P1。真人完成 0、本轮模型 API 调用 0。真实独立参与者、代表性业务数据、部署身份/独立云保管/通知与用户暂缓事项保持真实状态。
+
+项目入口按实际用途、安装配置、接口、权限、运维与开发顺序维护。下一步围绕具体工具调用闭环、可诊断性与维护质量选择工程任务；每个扩展先建立授权、影响、幂等、收据和恢复契约，再以正反例验证。当前总报告、126 项矩阵和工程快照均已推送。
+
 # 工程交付已推送，最终提交 CI 待核验（2026-10-04）
 
 源码 7073fb76a2e46365fabe6f51a3765de267863890 的完整 CI 37164846361 / job 111325559836 已下载核验：703 Python、6 JS、31 浏览器，官方 MCP SDK、冻结 benchmark/消融、隔离 Docker/网络、S3 Object Lock、Envoy/OTel 与依赖/证据门禁通过。GitHub digest、94 载荷、源码 ZIP 提交和真实退出码一致，下载后 verify_evidence exit 0。
