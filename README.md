@@ -91,7 +91,7 @@ python scripts/browser_edges.py
 
 完整命令、官方 MCP SDK、容器集成、故障注入与产物门禁见 [CODEX_REVIEW.md](CODEX_REVIEW.md)。CI 保存真实子进程退出码、JUnit、源码 ZIP、逐例结果、截图和哈希清单。曾出现的 tee 掩盖 Docker 失败记录继续保留；每个结果都以对应源码和原始收据为依据。
 
-已核验源码 `533726a` 及交付 `699adbd` 的完整流水线各通过 687 项 Python、6 项 JavaScript、31 项原生浏览器检查。当前范围、原始目标和未完成验证见[验收报告](docs/acceptance/FINAL_REPORT.md)及[逐项矩阵](docs/acceptance/COMPLETION_MATRIX.md)。工程快照见[项目归档](evidence/project-checkpoint-20261004/README.md)。
+已核验源码 `7073fb7` 的完整流水线通过 703 项 Python、6 项 JavaScript、31 项原生浏览器检查。当前范围、原始目标和未完成验证见[验收报告](docs/acceptance/FINAL_REPORT.md)及[逐项矩阵](docs/acceptance/COMPLETION_MATRIX.md)。工程快照见[项目归档](evidence/project-checkpoint-20261004/README.md)。
 
 200 条 / 40 模板族的 benchmark 为作者构造的合成策略回归，按族划分 dev/test。真实模型合成实验、协议互通、部署隔离和真人业务效果分别记账；合成一致率不代表真实危险召回率。
 

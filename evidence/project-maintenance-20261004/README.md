@@ -6,4 +6,4 @@ F043：显式指定的配置路径不存在时，旧启动器会继续使用环�
 
 independent/launcher-countercheck.log通过真实子进程验证6类错误均exit2且未创建数据库，help正常exit0；independent/targeted.log记录52项启动、证据门禁和矩阵定点检查通过。所有身份和路径为隔离合成夹具，没有真实环境凭据或已有数据库访问。IMPORT_INDEX保留原命令路径、退出码、SHA和dirty状态。
 
-当前源冻结与完整CI结果将分别由CI_FINAL.json、源码归档和实际日志标识。原始126目标与外部条件继续按原标准验收。
+冻结源码7073fb7的完整CI37164846361成功；703项Python、6项JS、31项原生浏览器及全部隔离集成通过。完整ZIP、94载荷、源码提交和真实退出码下载核验，独立verify_evidence exit0；元数据见CI_FINAL.json。原始126目标与外部条件继续按原标准验收。

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "benchmark.research",
+    "--output",
+    "evidence/study-analysis.json",
+    "study",
+    "evidence/study-automation.json"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-10-04T00:32:01.669715+00:00",
+  "duration_seconds": 0.128,
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
+  "tracked_source_dirty": false,
+  "started_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
+}

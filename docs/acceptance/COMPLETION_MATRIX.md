@@ -1,12 +1,12 @@
 # 126 项逐项验收矩阵
 
-应用测试提交：`533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c`。所有原目标尚未全部满足。
+应用测试提交：`7073fb76a2e46365fabe6f51a3765de267863890`。所有原目标尚未全部满足。
 
 PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项仅在全部子项完整实现且通过时通过。命令、真实退出码、原始证据、test ID 和版本详见同目录 JSON；本机 Docker 失败与 Ubuntu CI 成功分列。
 
 | ID | 实现 | 验证 | 实际范围 / 剩余缺口 |
 |---|---|---|---|
-| G1 | IMPLEMENTED | PASS | 本地个人项目可运行；Linux CI 真实容器，成本/依赖边界已写明。 **缺口：**不代表生产部署或实际付费模型成本。 |
+| G1 | IMPLEMENTED | PASS | 本地项目可运行；显式配置错误启动前阻断，默认环境启动兼容；Linux CI真实容器，成本/依赖边界已写明。 **缺口：**不代表生产部署或实际付费模型成本。 |
 | G2 | IMPLEMENTED | PASS | 简历描述绑定实际代码路径和合成证据。 **缺口：**用户本人是否能独立复现需实际演示。 |
 | G3 | IMPLEMENTED | PASS | 创新定位为服务端绑定、影响证据与治理组合；核对现有 HITL/审批实现。 **缺口：**没有性能横评、行业首创或外部采用结论。 |
 | G4 | IMPLEMENTED | BLOCKED_EXTERNAL | 已交付 17 组问答、追问、运行命令和限制。 **缺口：**用户现场讲解、答辩与独立操作能力未验证。 本轮按用户要求暂缓。 |
@@ -74,10 +74,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
 | C10.3 | IMPLEMENTED | PASS | 审计失败本地回滚/远端可对账；审计读取按路由授权，导出仅白名单摘要，SQL/样本/身份/自由文本不带出。 审计游标在范围过滤后分页，不被无权查看的事件前缀阻塞。 **缺口：**脱敏摘要不替代原始签名审计；序号/状态/数量仍可见。 |
 | C10.4 | IMPLEMENTED | PASS | 原始审批快照回放不重执行；检查点导出及验证；独立保管要求与不可变存证缺口明确。 |
 | C11 | IMPLEMENTED | BLOCKED_EXTERNAL | Parent not fully accepted; inspect every child. Limited-scope PASS does not close uncovered child scope.；逐子项见下。 |
-| C11.1 | IMPLEMENTED | PASS | 687 Python、6 JS、31原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。 **缺口：**Windows Compose镜像认证网络失败保留；Linux成功不改写本机失败。 |
+| C11.1 | IMPLEMENTED | PASS | 703 Python、6 JS、31原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。 **缺口：**Windows Compose镜像认证网络失败保留；Linux成功不改写本机失败。 |
 | C11.2 | IMPLEMENTED | BLOCKED_EXTERNAL | 200例冻结与真实四臂历史实验保留；新增8次DeepSeek角色调用、模型成对标注和2模型8次原生UI模拟。发现并修复子模型ID泄露，旧结果标blinding_failure，fresh actor v2重验。 单人先导页面无需审批服务，8道GitHub作者练习题；n=1不输出置信区间或正式验收指标。 **缺口：**真实独立双人gold、新保留集、真人A/B和代表性业务日数据仍缺；模型试验不进入human acceptance。 |
 | C11.3 | IMPLEMENTED | PASS | 真实 exit receipt、全部 JUnit 无失败/skip、图片/逐例重算/commit 绑定、完整 CI gate；独立 CI exit23 对照另存；最终完整 CI ZIP 已下载校验并存 Git。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。 **缺口：**Actions 原副本保存 90 天；Git 副本没有自动到期，仍非外部 WORM。 |
-| C11.4 | IMPLEMENTED | PASS | CI强制687 Python、31浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。 **缺口：**科研真人指标不由CI绿灯替代。 |
+| C11.4 | IMPLEMENTED | PASS | CI强制703 Python、31浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。 **缺口：**科研真人指标不由CI绿灯替代。 |
 | C12 | IMPLEMENTED | PASS | All children complete/pass；逐子项见下。 |
 | C12.1 | IMPLEMENTED | PASS | request/action/trace 关联持久；有界 OTLP outbox 实际送达官方 Collector；审批/执行/恢复沿用原 action trace。 **缺口：**没有假称受信上游内部自动生成完整 spans；上游用 action/request hash 关联，生产分布式后端未部署。 |
 | C12.2 | IMPLEMENTED | PASS | 真实运维健康/看板与operator-only检查；新增固定HTTPS/pins、独立webhook凭据、持久同ID重试/去重/恢复/目标变化及真实loopback接收器验证。 新增独立通知收件箱，写入/查看凭据分离，同ID同载荷去重、冲突拒绝、持久分页与浏览器退出清空。 通知outbox拒绝其他数据库，持久时间高水位防止乱序假恢复；健康来源未知用exit4且不发送恢复。 **缺口：**本机自动化投递已测；长期远端TLS部署、渠道推送和真人确认送达仍未验证。 |
@@ -143,18 +143,19 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
 {
   "implementation_status": "IMPLEMENTED",
   "verification_status": "PASS",
-  "scope": "本地个人项目可运行；Linux CI 真实容器，成本/依赖边界已写明。",
+  "scope": "本地项目可运行；显式配置错误启动前阻断，默认环境启动兼容；Linux CI真实容器，成本/依赖边界已写明。",
   "uncovered_scope": "不代表生产部署或实际付费模型成本。",
   "code_references": [
     "README.md",
-    "docs/OPERATIONS.md"
+    "docs/OPERATIONS.md",
+    "airlock/__main__.py"
   ],
-  "actual_result": "本地个人项目可运行；Linux CI 真实容器，成本/依赖边界已写明。",
+  "actual_result": "本地项目可运行；显式配置错误启动前阻断，默认环境启动兼容；Linux CI真实容器，成本/依赖边界已写明。",
   "id": "G1",
   "parent_id": null,
   "criterion": "个人项目：本地或少量容器可运行，依赖与成本明确；不虚构团队、生产部署、商业用户或个人独立手写贡献。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -214,6 +215,22 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     "tests.test_gate::test_process_death_inside_gate_decision_is_atomic",
     "tests.test_gate::test_duplicate_output_columns_rejected",
     "tests.test_gate::test_blank_approval_reason_rejected",
+    "tests.test_launcher::test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[missing]",
+    "tests.test_launcher::test_launcher_explicit_missing_or_nonfile_rejected_before_uvicorn[directory]",
+    "tests.test_launcher::test_launcher_default_missing_config_keeps_environment_only_compatibility",
+    "tests.test_launcher::test_launcher_valid_config_retains_environment_precedence[False-utf-8]",
+    "tests.test_launcher::test_launcher_valid_config_retains_environment_precedence[True-utf-8]",
+    "tests.test_launcher::test_launcher_valid_config_retains_environment_precedence[True-utf-8-sig]",
+    "tests.test_launcher::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{\"AIRLOCK_AGENT_TOKEN\":\"synthetic-secret-marker\",]",
+    "tests.test_launcher::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[\\xffsynthetic-secret-marker]",
+    "tests.test_launcher::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[[]]",
+    "tests.test_launcher::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[null]",
+    "tests.test_launcher::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[\"synthetic-secret-marker\"]",
+    "tests.test_launcher::test_launcher_invalid_configuration_is_sanitized_and_does_not_partially_merge[{\"AIRLOCK_AGENT_TOKEN\":\"synthetic-secret-marker\",\"AIRLOCK_AUDIT_KEY\":42}]",
+    "tests.test_launcher::test_launcher_unreadable_configuration_does_not_echo_filesystem_error",
+    "tests.test_launcher::test_launcher_default_directory_is_a_controlled_error",
+    "tests.test_launcher::test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[False]",
+    "tests.test_launcher::test_launcher_init_stays_exclusive_and_does_not_rotate_existing_config[True]",
     "tests.test_sdk_interop::test_official_mcp_sdk_pending_approval_and_result",
     "tests.test_sdk_interop::test_official_sdk_discovers_and_calls_independent_upstream"
   ],
@@ -226,20 +243,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -253,15 +270,15 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/dependency-audit.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/dependency-audit.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/dependency-audit.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -288,14 +305,14 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/dependency-audit.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/dependency-audit.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -351,7 +368,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "简历价值：可复现演示、真实代码路径、可靠测试与技术取舍能支撑简历；每条简历主张能定位代码和证据。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -430,10 +447,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -442,10 +459,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/comparison.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/comparison.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/comparison.log.status.json"
     }
   ],
   "exit_codes": [
@@ -461,8 +478,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/comparison.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/comparison.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -518,7 +535,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "创新表达：聚焦“影响证据＋服务端执行绑定＋审批体验/疲劳治理”的工程组合；核对竞品公开资料，不宣称所有开源只有两态或无人做过 HITL。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -587,7 +604,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "面试能力：交付与最终代码一致的问题、标准答案、追问、演示步骤和限制说明；用户能解释正常路径、失败路径及替代方案，而不是只记关键词。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -657,7 +674,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "Fail-closed：权限、策略、必需预演或执行条件不能可靠确认时，不发生未经授权副作用。崩溃、超时、模型异常、审计异常和恢复路径都要验证。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -781,10 +798,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -794,10 +811,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -813,8 +830,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -871,7 +888,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "服务端持有决策权：身份来自服务端认证，审批绑定动作对象；Agent 没有目标直连权限或 reviewer 凭据。客户端 supplied approved/risk/principal 无授权效力。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_oidc::test_oidc_access_token_review_and_immediate_revocation",
     "tests.test_oidc::test_oidc_rejects_confused_or_untrusted_tokens[audience]",
@@ -897,35 +914,35 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/docker_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/docker-smoke.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/upstream_isolation.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -952,14 +969,14 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/docker-smoke.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -1016,7 +1033,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "代理自身可观测：请求、策略、预演、审批、执行、审计和错误能关联；日志脱敏且故障可定位，不能靠吞异常显示成功。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_operations::test_operational_alerts_are_read_only_and_operator_scoped",
     "tests.test_telemetry::test_real_otlp_http_export_failure_retains_spans_and_does_not_grant_approval",
@@ -1037,20 +1054,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/container_integrations.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
     },
     {
       "command": [
@@ -1060,10 +1077,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -1084,9 +1101,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -1143,7 +1160,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "诚实处理未知影响：精确、估算、未知分别表示并说明来源和覆盖范围；无依据的备份时间、可逆性和影响数字禁止显示为事实。必需预演失败不等于获准改用猜测执行。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -1227,10 +1244,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -1241,7 +1258,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -1434,10 +1451,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -1452,10 +1469,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -1465,10 +1482,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -1483,10 +1500,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -1509,10 +1526,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "python",
             "scripts/upstream_isolation.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
         },
         {
           "command": [
@@ -1543,10 +1560,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -1556,10 +1573,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -1574,20 +1591,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/upstream_isolation.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
         },
         {
           "command": [
@@ -1597,10 +1614,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     }
@@ -1695,10 +1712,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "evidence": [
     "evidence/autonomous-20261003/local/live-relay.log",
     "evidence/closure-20261002/final/live-upstream.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -1752,7 +1769,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C1",
   "criterion": "核心协议解耦：审批/策略/执行核心不依赖某个 Agent 框架。定义清晰的工具请求、影响预览、执行收据和状态接口，HTTP 与 MCP 共用核心安全逻辑。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_mcp::test_mcp_lifecycle_and_pending_receipt",
     "tests.test_mcp::test_mcp_has_no_approval_tool",
@@ -1773,10 +1790,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -1787,7 +1804,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -1843,7 +1860,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C1",
   "criterion": "真实双入口：HTTP 调用和官方 MCP SDK 初始化、发现、调用、拒绝、pending、状态查询、错误传播都实际运行；分别记录传输、SDK、规范和客户端版本。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_live_transport::test_real_stdio_to_real_http_and_resume_after_human_approval",
     "tests.test_live_transport::test_real_sse_reconnect_cursor_only_delivers_newer_events",
@@ -1903,10 +1920,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -1916,10 +1933,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -1935,8 +1952,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -1997,7 +2014,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C1",
   "criterion": "透明接入真实性：核验是否代理真实上游工具，而不是仅暴露 sql_execute/action_status。增量实现配置驱动、allowlist 限定的上游工具注册/适配路径，至少完成一个独立上游测试服务的受控端到端调用；它不能替代真实第三方/LLM 客户端验证。对原“零改造”分别报告无需改业务代码、需要改配置、需要适配异步等待这三种情形。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_github_adapter::test_github_append_only_plan_has_no_cas_or_rollback_claim",
     "tests.test_github_adapter::test_github_direct_durable_send_once_concurrent_and_restart",
@@ -2044,10 +2061,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -2070,10 +2087,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "python",
         "scripts/upstream_isolation.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
     },
     {
       "command": [
@@ -2115,9 +2132,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/closure-20261002/final/live-upstream.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log",
     "evidence/autonomous-20261003/local/live-relay.log"
   ],
   "fixes": [
@@ -2176,7 +2193,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C1",
   "criterion": "等待与版本兼容：根据实际采用的官方规范核对长任务/Tasks 等能力；不以“MCP 根本不支持长任务”作为事实。客户端不支持异步能力时使用有文档的回执/查询方式，pending 不能表示执行成功。不为“透明”无限保持请求连接或伪造结果。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_mcp_http::test_official_sdk_streamable_http_approval_denial_and_input_errors",
     "tests.test_mcp_http::test_mcp_http_origin_auth_content_type_and_protocol",
@@ -2240,10 +2257,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -2253,10 +2270,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -2272,8 +2289,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -2331,7 +2348,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C1",
   "criterion": "接入安全：注册上游的配置由受信操作者控制，不允许 Agent 传任意 URL、命令或凭据变成开放代理。检查 SSRF、重定向、越权工具发现、token audience（适用时）、凭据隔离和上游错误脱敏；禁止把入站凭据未经正确授权地透传下游。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_mcp_streamable::test_official_stateful_sse_upstream_review_effect_and_reconcile[False]",
     "tests.test_mcp_streamable::test_official_stateful_sse_upstream_review_effect_and_reconcile[True]",
@@ -2422,20 +2439,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/upstream_isolation.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
     },
     {
       "command": [
@@ -2445,10 +2462,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -2469,9 +2486,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -2636,10 +2653,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -2654,10 +2671,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -2672,10 +2689,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -2690,10 +2707,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -2708,25 +2725,25 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/container_integrations.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
         },
         {
           "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
         }
       ]
     }
@@ -2795,15 +2812,15 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -2855,7 +2872,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C2",
   "criterion": "三态契约：固定 pass/block/need_approval 的语义、优先级和错误处理。身份认证、资源权限、硬性禁止不能被后续规则或模型覆盖；原有“所有支持写入需审批”不能被默默放宽。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -2947,10 +2964,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -2961,7 +2978,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -3018,7 +3035,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C2",
   "criterion": "真实配置引擎：实现安全 YAML 加载、schema 校验、规则 ID、CEL 表达式解析/类型检查及受限求值；不能使用 Python eval 或普通 if 冒充 CEL。记录所用实现、版本、能力限制和资源上限。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_policy::test_policy_rejects_unsupported_or_ill_typed_cel[unknown == 1]",
     "tests.test_policy::test_policy_rejects_unsupported_or_ill_typed_cel[tool == 1]",
@@ -3045,10 +3062,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -3059,7 +3076,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -3116,7 +3133,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C2",
   "criterion": "版本与变更：策略变更有版本/内容摘要；无效配置拒绝激活并保持已验证策略，不默默放开；策略变化后的旧 pending 必须重新验证或失效。缓存不能跨策略版本误用。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_new_boundaries::test_clock_rollback_across_restart_cannot_extend_approval",
     "tests.test_new_boundaries::test_audited_reload_is_atomic_and_prior_approval_stale",
@@ -3152,10 +3169,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -3166,7 +3183,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -3222,7 +3239,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C2",
   "criterion": "规则对抗：补规则冲突、缺字段、类型错误、unknown、恶意配置、表达式过大/过慢、规则重载并发等测试；未知结果不能按 false/pass 处理。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_new_boundaries::test_clock_rollback_across_restart_cannot_extend_approval",
     "tests.test_new_boundaries::test_audited_reload_is_atomic_and_prior_approval_stale",
@@ -3258,10 +3275,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -3272,7 +3289,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -3329,7 +3346,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C2",
   "criterion": "兼容性说明：提供可运行策略示例和测试。使用 CEL 不等于与 Envoy 的变量环境、函数、优先级和错误语义全部兼容；“与 Envoy 对齐”必须有明确子集及兼容测试，否则记为未验证。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_policy::test_policy_rejects_unsupported_or_ill_typed_cel[unknown == 1]",
     "tests.test_policy::test_policy_rejects_unsupported_or_ill_typed_cel[tool == 1]",
@@ -3356,25 +3373,25 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/container_integrations.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -3396,13 +3413,13 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -3570,10 +3587,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -3588,10 +3605,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -3604,10 +3621,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/benchmark-dev.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
         },
         {
           "command": [
@@ -3619,10 +3636,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/benchmark-test.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
         }
       ]
     },
@@ -3637,20 +3654,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
@@ -3681,10 +3698,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -3715,10 +3732,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     }
@@ -3802,12 +3819,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   ],
   "evidence": [
     "evidence/autonomous-20261003/local/live-relay.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -3859,7 +3876,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C3",
   "criterion": "隔离预演：SQLite 克隆和预演必须不改变真实目标；断言目标内容/指纹和行数不变，不能只检查返回值。预演失败、超时、资源耗尽时验证阻断路径。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -3934,10 +3951,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -3948,7 +3965,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -4004,7 +4021,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C3",
   "criterion": "真实影响：区分命中行、发生变化行、返回行和字段差异；处理零变化、RETURNING、触发器/级联、NULL、二进制、排序和采样。未支持的模式明确拒绝或未知，不报告伪精确值。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -4074,10 +4091,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -4090,10 +4107,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -4105,10 +4122,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     }
   ],
   "exit_codes": [
@@ -4129,9 +4146,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -4189,7 +4206,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C3",
   "criterion": "证据化展示：影响快照保存来源、生成时间、目标身份/模式版本、数据版本或指纹、样本范围、截断标记、exact/estimate/unknown 与限制。关键总数不能用样本数替代。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -4282,20 +4299,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -4332,8 +4349,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
     "evidence/autonomous-20261003/local/live-relay.log"
   ],
   "fixes": [
@@ -4391,7 +4408,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C3",
   "criterion": "执行绑定：审批对象绑定规范化请求、参数、工具与目标、策略、影响快照及有效期；执行前验证数据/条件漂移。必须在不可被其他写入穿插的事务或适配器等价机制内做最终检查。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -4491,10 +4508,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -4526,7 +4543,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/autonomous-20261003/local/live-relay.log"
   ],
   "fixes": [
@@ -4584,7 +4601,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C3",
   "criterion": "能力边界：列出各适配器支持的 dry-run 范围。不能把 SQLite ROLLBACK 称为通用 Shell/外部服务沙箱；无安全隔离的操作不实际执行。“估算降级”只是信息能力下降，不是授权降级。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -4663,10 +4680,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -4677,7 +4694,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -4852,20 +4869,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         }
       ]
     },
@@ -4880,10 +4897,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -4898,10 +4915,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -4916,30 +4933,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_edges.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
         },
         {
           "command": [
@@ -4949,10 +4966,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -4967,10 +4984,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     }
@@ -5048,11 +5065,11 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -5105,7 +5122,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C4",
   "criterion": "拆分概念：分别建模技术可逆性、恢复可行性、恢复证据和业务授权。预演回滚、事务提交前回滚、提交后补偿/恢复必须在 UI 和报告中区分。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_recovery::test_compensation_is_independent_approved_and_audited[DELETE FROM customers WHERE id=1]",
     "tests.test_recovery::test_compensation_is_independent_approved_and_audited[UPDATE customers SET balance=23 WHERE id=1]",
@@ -5124,20 +5141,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     }
   ],
   "exit_codes": [
@@ -5153,8 +5170,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -5211,7 +5228,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C4",
   "criterion": "恢复依据：备份存在与时间必须来源于实际验证；没有依据显示 unknown。LLM 文字建议、保留了部分 diff 或执行过一次备份命令，都不等于恢复已经验证。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -5286,10 +5303,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -5300,7 +5317,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -5357,7 +5374,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C4",
   "criterion": "可运行恢复切片：对安全支持的合成 SQL 场景实现明确范围的回滚计划/补偿方案，在隔离副本演练并核对内容、约束和审计。若不能实现，给出具体缺口，不能以事务 ROLLBACK 标此项完成。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_recovery::test_compensation_is_independent_approved_and_audited[DELETE FROM customers WHERE id=1]",
     "tests.test_recovery::test_compensation_is_independent_approved_and_audited[UPDATE customers SET balance=23 WHERE id=1]",
@@ -5376,10 +5393,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -5390,7 +5407,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -5446,7 +5463,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C4",
   "criterion": "恢复也是副作用：提交后的补偿是新动作，需独立权限/审批、版本校验、幂等及审计；有后续写入时不能盲目覆盖。补偿失败/结果未知也要有收据与处理流程。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_governance_integrity::test_batch_revalidates_cumulative_risk_route_before_each_member[between_members]",
     "tests.test_governance_integrity::test_batch_revalidates_cumulative_risk_route_before_each_member[inside_member_decision]",
@@ -5475,30 +5492,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     },
     {
       "command": [
@@ -5508,10 +5525,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -5537,10 +5554,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -5596,7 +5613,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C4",
   "criterion": "安全修正：不实现“仅因可逆就静默放行”。自动 pass 必须有独立、服务端预先授权的策略；原默认所有写审批保持不变。不可逆操作永不通过学习自动降级，硬性禁止操作不能靠人点同意解除。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_governance::test_budget_reservation_concurrency_restart_and_settlement",
     "tests.test_governance::test_group_new_members_require_reconfirmation_and_no_hidden_execution",
@@ -5638,10 +5655,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -5652,7 +5669,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -5799,10 +5816,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -5851,10 +5868,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -5869,10 +5886,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -5939,10 +5956,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -5973,10 +5990,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -6138,14 +6155,14 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log",
     "evidence/continuation-20261002/final/live-validation.log",
     "evidence/continuation-20261002/final/model-diagnostics.log",
-    "evidence/continuation-20261002/retest/model-contract-recheck.log"
+    "evidence/continuation-20261002/retest/model-contract-recheck.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -6197,7 +6214,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C5",
   "criterion": "可插拔实现：保留无需 API key 的确定性评估器；实现真实 provider 的可选语义评估路径、结构化 schema、超时、并发/费用上限。不能只写一个 MockLLM 就宣称真实接入完成。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_deepseek::test_deepseek_fixed_endpoint_currency_cache_and_invalidation",
     "tests.test_deepseek::test_currency_mismatch_cannot_reuse_budget",
@@ -6219,10 +6236,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -6277,7 +6294,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log",
     "evidence/continuation-20261002/retest/model-contract-recheck.log"
   ],
@@ -6335,7 +6352,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C5",
   "criterion": "权限边界：模型只能提供受限风险建议，不持有审批、直写数据库或执行 shell 的权力；模型不能覆盖硬拒绝、身份、数据范围和人工审批要求。LLM 输出必须被 schema 和服务端约束再次验证。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -6412,10 +6429,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -6426,7 +6443,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -6482,7 +6499,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C5",
   "criterion": "对抗与故障：测试命令伪装、注释、Unicode/大小写、提示注入、伪造系统消息、无效 JSON、缺字段、越界分数、超时和限流。无效模型结果按明确 fail-closed 规则处理，不自动降为低风险。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_deepseek::test_deepseek_fixed_endpoint_currency_cache_and_invalidation",
     "tests.test_deepseek::test_currency_mismatch_cannot_reuse_budget",
@@ -6504,10 +6521,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -6585,7 +6602,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log",
     "evidence/continuation-20261002/final/model-diagnostics.log",
     "evidence/continuation-20261002/retest/model-contract-recheck.log"
@@ -6645,7 +6662,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C5",
   "criterion": "缓存与成本：区分 provider prompt cache 与应用层结果缓存；缓存键包含模型/提示模板/策略/工具参数及访问范围，涉及快照时包含数据版本。记录命中与失效，不跨权限范围复用敏感内容。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_deepseek::test_deepseek_fixed_endpoint_currency_cache_and_invalidation",
     "tests.test_deepseek::test_currency_mismatch_cannot_reuse_budget",
@@ -6670,10 +6687,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -6705,7 +6722,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log"
   ],
   "fixes": [
@@ -6763,7 +6780,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C5",
   "criterion": "真实验证分账：离线契约测试、仿真响应和真实模型调用单列。只在存在本项目明确授权的凭据、供应商和预算时运行真实测试，记录模型版本、usage、调用 ID 和脱敏证据；否则 live 项为 BLOCKED_EXTERNAL，成本为 unknown/null 而不是虚构为 0。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_deepseek::test_deepseek_fixed_endpoint_currency_cache_and_invalidation",
     "tests.test_deepseek::test_currency_mismatch_cannot_reuse_budget",
@@ -6778,10 +6795,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -6866,7 +6883,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log"
@@ -7130,10 +7147,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -7148,10 +7165,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -7161,10 +7178,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -7179,30 +7196,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "npm",
             "test"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/frontend-tests.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
@@ -7227,10 +7244,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -7245,10 +7262,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -7275,10 +7292,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/sqlite-runtime-build.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log.status.json"
         },
         {
           "command": [
@@ -7295,10 +7312,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/sqlite-runtime-linked.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log.status.json"
         }
       ]
     }
@@ -7393,13 +7410,13 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "evidence": [
     "evidence/autonomous-20261003/local/live-relay.log",
     "evidence/closure-20261002/sse-identity-replay.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/frontend-tests.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -7452,7 +7469,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C6",
   "criterion": "持久化状态机：定义创建、pending、批准/拒绝、过期、执行中、成功、失败、结果未知等业务状态及允许转换；具体名字可适配现有实现，但不得将批准、已执行和成功混为一谈。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -7538,10 +7555,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -7552,7 +7569,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -7611,7 +7628,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C6",
   "criterion": "独立身份与路由：实现最小可维护的 reviewer 配置和按工具/资源/风险路由；至少用两个独立 reviewer 身份验证授权范围、路由缺失、越权查看/审批和身份撤销。不要求因此先造 SSO 或复杂多租户系统。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_identity_boundaries::test_nonfinite_numeric_date_is_structured_authentication_failure[exp]",
     "tests.test_identity_boundaries::test_nonfinite_numeric_date_is_structured_authentication_failure[iat]",
@@ -7685,10 +7702,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -7698,10 +7715,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -7717,8 +7734,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -7775,7 +7792,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C6",
   "criterion": "TTL 与通知：审批有效期由服务端判定，并考虑服务重启与时钟偏差的处理；SSE 只通知不授予权限。验证断线、重连、重复事件、客户端关闭/伪造消息、过期边界和服务重启；不能依赖浏览器倒计时保证安全。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -7866,30 +7883,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "npm",
         "test"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/frontend-tests.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -7925,9 +7942,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/frontend-tests.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
     "evidence/closure-20261002/sse-identity-replay.log"
   ],
   "fixes": [
@@ -7984,7 +8001,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C6",
   "criterion": "并发/幂等：同键同内容返回原收据，同键不同内容冲突；批准/拒绝竞争、重复提交和 worker 重试不产生重复副作用。响应丢失后先查原 action，不能换键盲重试。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -8080,10 +8097,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -8094,7 +8111,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -8156,7 +8173,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C6",
   "criterion": "崩溃与远端效果：当前单库业务效果、终态、审计验证原子性。新增远端工具时显式处理 outbox/执行租约或等价机制、目标幂等收据、结果未知与对账；不能靠本地事务声称分布式 exactly-once。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -8278,10 +8295,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -8308,10 +8325,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/sqlite-runtime-build.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log.status.json"
     },
     {
       "command": [
@@ -8328,10 +8345,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/sqlite-runtime-linked.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log.status.json"
     }
   ],
   "exit_codes": [
@@ -8357,10 +8374,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/autonomous-20261003/local/live-relay.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log"
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -8465,10 +8482,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         }
       ]
     },
@@ -8483,30 +8500,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_edges.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
         }
       ]
     },
@@ -8521,30 +8538,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_edges.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
         }
       ]
     },
@@ -8559,30 +8576,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_edges.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
         }
       ]
     },
@@ -8594,20 +8611,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "npm",
             "test"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/frontend-tests.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         }
       ]
     },
@@ -8619,10 +8636,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         }
       ]
     }
@@ -8725,12 +8742,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/frontend-tests.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -8782,7 +8799,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C7",
   "criterion": "信息层级：先呈现“谁要对什么做什么、影响多大、是否可恢复、为何需审批”，再显示原始命令和详细 JSON。提供数量、变化前后对照、估算/未知/截断提示、范围与过期信息。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -8805,10 +8822,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     }
   ],
   "exit_codes": [
@@ -8819,7 +8836,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/browser-native.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -8873,7 +8890,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C7",
   "criterion": "完整交互：实际跑通凭据接入、队列、详情、批准、拒绝、过期、失效、执行失败/未知、历史、审计、退出。高风险动作有匹配当前快照的确认，阻止误触/重复提交，错误可读且能安全恢复操作。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_upstream::test_real_upstream_http_mcp_discovery_pending_approve_receipt",
     "tests.test_upstream::test_lost_remote_response_reconciles_without_duplicate_effect",
@@ -8894,30 +8911,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     }
   ],
   "exit_codes": [
@@ -8938,9 +8955,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -8996,7 +9013,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C7",
   "criterion": "前后端一致性：状态、权限、数量来自真实 API，不能用静态 JSON 冒充业务；刷新/切页不能覆盖用户正在填写的审批表单或展示别的 action。服务端先筛 pending 再分页，新增 105 条只读历史后旧 pending 仍可找到。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_pending_queue::test_server_filtered_pending_queue_survives_long_read_history",
     "tests.test_pending_queue::test_state_filter_is_validated_and_applied",
@@ -9012,30 +9029,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     }
   ],
   "exit_codes": [
@@ -9056,9 +9073,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -9115,7 +9132,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C7",
   "criterion": "原生浏览器与安全：桌面和移动端实际运行、截图并检查；测试长中文、长 SQL、空/加载/失败状态、键盘焦点、标签和文本溢出。非可信数据按文本渲染，审查 XSS、CSRF（会话适用时）、CORS、凭据 URL/日志泄露及退出清理。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -9142,30 +9159,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     }
   ],
   "exit_codes": [
@@ -9186,9 +9203,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -9245,7 +9262,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C7",
   "criterion": "埋点真实：使用首次可见而非仅 mount 作为计时入口，结合 IntersectionObserver、页面可见性与单调时钟记录前台可见时长；定义重复曝光/返回页面/后台暂停口径。客户端遥测不得参与授权，也不等于真人已经理解风险。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -9268,20 +9285,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "npm",
         "test"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/frontend-tests.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     }
   ],
   "exit_codes": [
@@ -9297,8 +9314,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/frontend-tests.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log"
+    "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -9353,7 +9370,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C7",
   "criterion": "可用性结论：为新操作者提供简洁使用说明、角色区别和演示数据警告；检查无 key/offline 体验。自动截图只能证明所测界面，不得凭截图宣称“3 秒正确决策”或全面可访问性认证。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -9361,10 +9378,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     }
   ],
   "exit_codes": [
@@ -9375,7 +9392,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/browser-native.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -9474,20 +9491,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         }
       ]
     },
@@ -9502,20 +9519,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
@@ -9525,10 +9542,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -9543,10 +9560,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -9556,10 +9573,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -9574,10 +9591,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -9592,10 +9609,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -9604,10 +9621,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/research-pipeline"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
         }
       ]
     }
@@ -9690,11 +9707,11 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "Parent not fully accepted; inspect every child. Limited-scope PASS does not close uncovered child scope.",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -9746,7 +9763,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C8",
   "criterion": "相似请求归并：实现明确分组规则，例如同申请人/权限范围、同资源/工具、同策略版本、有限时间窗；显示每个成员和累计影响。零权限、不同目标或风险不相容的请求不能混成一组。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_governance::test_budget_reservation_concurrency_restart_and_settlement",
     "tests.test_governance::test_group_new_members_require_reconfirmation_and_no_hidden_execution",
@@ -9761,20 +9778,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     }
   ],
   "exit_codes": [
@@ -9790,8 +9807,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -9847,7 +9864,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C8",
   "criterion": "批量决策安全：可批的组绑定成员 ID、请求摘要、快照、策略、TTL 和 group digest；新成员加入、成员漂移/过期时重新确认。逐成员执行前校验并给出收据；不能批准隐藏成员，也不能把多项低风险累计成高风险而仍自动放行。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_governance::test_budget_reservation_concurrency_restart_and_settlement",
     "tests.test_governance::test_group_new_members_require_reconfirmation_and_no_hidden_execution",
@@ -9872,20 +9889,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -9895,10 +9912,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -9919,9 +9936,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -9977,7 +9994,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C8",
   "criterion": "风险预算：实现可解释、可配置的预算单位、作用域、时间窗、累计/预占/结算、并发一致性和恢复规则。重启/多 worker 不能重置绕过；只换 action ID 不能重获预算。预算是策略限额，不是已证明的事故概率上界；预算不是额外授权，高危/不可逆不能因“还有额度”免审。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_governance::test_budget_reservation_concurrency_restart_and_settlement",
     "tests.test_governance::test_group_new_members_require_reconfirmation_and_no_hidden_execution",
@@ -10002,10 +10019,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -10015,10 +10032,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -10034,8 +10051,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -10091,7 +10108,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C8",
   "criterion": "学习型治理的安全版本：从历史决策生成可解释建议，先 shadow mode，不自动学习越权。建议生效需受信操作者显式批准、版本化、限定范围/期限且可撤回；模型投毒或反复申请不能解锁高危操作。保留“原自动降级目标已作安全修正”的记录。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_new_boundaries::test_clock_rollback_across_restart_cannot_extend_approval",
     "tests.test_new_boundaries::test_audited_reload_is_atomic_and_prior_approval_stale",
@@ -10113,10 +10130,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -10127,7 +10144,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -10183,7 +10200,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C8",
   "criterion": "效果区分：分别测只读免审率、重复抑制率、相似请求折叠率、实际批量审批率及审批错误。不能用请求幂等、队列上限或隐藏消息冒充完整疲劳治理；必须保持相同任务完成质量再比较审批数量。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_observability::test_metrics_unknown_cost_and_correlated_audit",
     "tests.test_observability::test_percentiles_empty_and_known_sample",
@@ -10202,10 +10219,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -10214,10 +10231,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     }
   ],
   "exit_codes": [
@@ -10233,8 +10250,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -10394,10 +10411,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -10411,10 +10428,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/comparison.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/comparison.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/comparison.log.status.json"
         }
       ]
     },
@@ -10429,10 +10446,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -10463,10 +10480,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     }
@@ -10519,11 +10536,11 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/comparison.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/continuation-20261002/final/live-validation.log"
+    "evidence/continuation-20261002/final/live-validation.log",
+    "evidence/project-maintenance-20261004/ci/verified/comparison.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -10575,7 +10592,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C9",
   "criterion": "拒绝协议：返回 action_id、稳定 reason_code、安全说明、是否可重试及允许的替代方向；不得暴露密钥、内部路径、精确可被探测滥用的策略细节。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -10604,10 +10621,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -10618,7 +10635,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -10674,7 +10691,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C9",
   "criterion": "模拟演示：真实拒绝一个合成删除请求，验证目标保持不变，再由模拟 Agent 依据结构化结果走 SELECT/缩小范围等安全路径；不是只打印一句“已改道”。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -10743,10 +10760,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/comparison.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/comparison.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/comparison.log.status.json"
     }
   ],
   "exit_codes": [
@@ -10757,7 +10774,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/comparison.log"
+    "evidence/project-maintenance-20261004/ci/verified/comparison.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -10812,7 +10829,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C9",
   "criterion": "真实 Agent 验证：使用明确授权的真实 host/模型完成提交、等待、批准继续和拒绝后改道，保存真实工具轨迹。无授权凭据则此项受阻；模型不得自动批准自己的请求或伪造完成结果。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_live_agent_contract::test_agent_does_not_retry_rejected_writes_or_access_review_endpoint"
   ],
@@ -10825,10 +10842,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -10860,7 +10877,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log"
   ],
   "fixes": [
@@ -10918,7 +10935,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C9",
   "criterion": "有界恢复：定义拒绝、超时、无权限、结果未知等情况的不同重试规则；设置最大重试次数，验证不会无限换键、伪造数据或绕开代理。不要把某次真实事故的成因未经证据归因于“缺少结构化拒绝”。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_live_agent_contract::test_agent_does_not_retry_rejected_writes_or_access_review_endpoint",
     "tests.test_upstream::test_real_upstream_http_mcp_discovery_pending_approve_receipt",
@@ -10940,10 +10957,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -10954,7 +10971,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -11177,10 +11194,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -11195,10 +11212,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -11207,10 +11224,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/archive-integration.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/archive-integration.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/archive-integration.log.status.json"
         },
         {
           "command": [
@@ -11220,10 +11237,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -11238,10 +11255,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -11251,10 +11268,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -11269,20 +11286,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
@@ -11292,10 +11309,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     }
@@ -11368,11 +11385,11 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/archive-integration.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/archive-integration.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -11425,7 +11442,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C10",
   "criterion": "原始审批证据：保留当时实际呈现的请求/参数/影响/策略/模板版本、review digest、身份、时间、决定与理由、执行收据和相关 ID；不是事后重算的另一份快照。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -11507,10 +11524,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -11521,7 +11538,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -11579,7 +11596,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C10",
   "criterion": "完整性：测试 HMAC/链验证对篡改、插入、重排和动作归属替换的检测；检查 seq/action 绑定、密钥轮换策略及读审计的权限。无外部锚点时不能声称可证明尾部未删除或抵抗服务器和密钥一起失陷。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_archive::test_archive_requires_version_retention_and_verifies_exact_payload",
     "tests.test_archive::test_archive_readiness_retries_connection_reset_without_retrying_writes",
@@ -11647,10 +11664,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -11659,10 +11676,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/archive-integration.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/archive-integration.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/archive-integration.log.status.json"
     },
     {
       "command": [
@@ -11672,10 +11689,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -11696,9 +11713,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/archive-integration.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/archive-integration.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -11755,7 +11772,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C10",
   "criterion": "失败与隐私：审计失败不能导致静默成功；验证业务/终态/审计的一致性。保留必要证据同时脱敏，限制 SQL 样本、凭据和个人数据的查看/导出范围。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_export::test_audit_export_omits_free_text_and_secrets_and_requires_reviewer",
     "tests.test_export::test_export_does_not_copy_unknown_kind_or_state",
@@ -11787,10 +11804,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -11800,10 +11817,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -11819,8 +11836,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -11877,7 +11894,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C10",
   "criterion": "回放定义：回放是按原快照重现决策过程，不是重执行副作用。报告明确外部不可变存证是否存在；它可作为后续增强，但没实现不能宣传对应保证。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_archive_integrity::test_archive_receipt_normal_read_pins_exact_version",
     "tests.test_archive_integrity::test_archive_rejects_receipt_claim_substitution[changes0]",
@@ -11933,20 +11950,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -11956,10 +11973,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -11980,9 +11997,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -12032,7 +12049,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "implementation_status": "IMPLEMENTED",
   "verification_status": "BLOCKED_EXTERNAL",
   "requirement_origin": "Original parent goal; aggregation requires all children",
-  "scope": "C11.1: 687 Python、6 JS、31原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。; C11.2: 200例冻结与真实四臂历史实验保留；新增8次DeepSeek角色调用、模型成对标注和2模型8次原生UI模拟。发现并修复子模型ID泄露，旧结果标blinding_failure，fresh actor v2重验。 单人先导页面无需审批服务，8道GitHub作者练习题；n=1不输出置信区间或正式验收指标。; C11.3: 真实 exit receipt、全部 JUnit 无失败/skip、图片/逐例重算/commit 绑定、完整 CI gate；独立 CI exit23 对照另存；最终完整 CI ZIP 已下载校验并存 Git。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。; C11.4: CI强制687 Python、31浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。",
+  "scope": "C11.1: 703 Python、6 JS、31原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。; C11.2: 200例冻结与真实四臂历史实验保留；新增8次DeepSeek角色调用、模型成对标注和2模型8次原生UI模拟。发现并修复子模型ID泄露，旧结果标blinding_failure，fresh actor v2重验。 单人先导页面无需审批服务，8道GitHub作者练习题；n=1不输出置信区间或正式验收指标。; C11.3: 真实 exit receipt、全部 JUnit 无失败/skip、图片/逐例重算/commit 绑定、完整 CI gate；独立 CI exit23 对照另存；最终完整 CI ZIP 已下载校验并存 Git。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。; C11.4: CI强制703 Python、31浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。",
   "uncovered_scope": "C11.1: Windows Compose镜像认证网络失败保留；Linux成功不改写本机失败。; C11.2: 真实独立双人gold、新保留集、真人A/B和代表性业务日数据仍缺；模型试验不进入human acceptance。; C11.3: Actions 原副本保存 90 天；Git 副本没有自动到期，仍非外部 WORM。; C11.4: 科研真人指标不由CI绿灯替代。",
   "code_references": [
     ".github/workflows/ci.yml",
@@ -12267,60 +12284,60 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "npm",
             "test"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/frontend-tests.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_edges.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/docker_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/docker-smoke.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/upstream_isolation.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
         },
         {
           "command": [
@@ -12329,10 +12346,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/archive-integration.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/archive-integration.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/archive-integration.log.status.json"
         },
         {
           "command": [
@@ -12341,25 +12358,25 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/research-pipeline"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/container_integrations.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
         },
         {
           "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
         }
       ]
     },
@@ -12374,10 +12391,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -12386,10 +12403,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/research-pipeline"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
         },
         {
           "command": [
@@ -12444,10 +12461,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "study",
             "evidence/study-automation.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
         },
         {
           "command": [
@@ -12497,20 +12514,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/pilot_browser.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
         }
       ]
     },
@@ -12525,10 +12542,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -12538,20 +12555,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "docs/acceptance/validate_matrix.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/acceptance-matrix.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log.status.json"
         },
         {
           "command": [
@@ -12573,8 +12590,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         },
         {
           "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
         }
       ]
     },
@@ -12589,10 +12606,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -12605,10 +12622,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/benchmark-dev.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
         },
         {
           "command": [
@@ -12620,10 +12637,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/benchmark-test.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
         },
         {
           "command": [
@@ -12634,20 +12651,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/latency.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/upstream_isolation.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
         },
         {
           "command": [
@@ -12656,10 +12673,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/archive-integration.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/archive-integration.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/archive-integration.log.status.json"
         },
         {
           "command": [
@@ -12668,10 +12685,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/research-pipeline"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
         },
         {
           "command": [
@@ -12682,10 +12699,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/sqlite-runtime-build.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log.status.json"
         },
         {
           "command": [
@@ -12702,10 +12719,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/sqlite-runtime-linked.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log.status.json"
         },
         {
           "command": [
@@ -12715,20 +12732,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "docs/acceptance/validate_matrix.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/acceptance-matrix.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log.status.json"
         },
         {
           "command": "Historical failed latency acceptance gate; all 60 pairs preserved",
@@ -12737,8 +12754,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         },
         {
           "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
         }
       ]
     }
@@ -12969,34 +12986,34 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     "evidence/autonomous-20261003/ci/failed-latency.json",
     "evidence/autonomous-20261003/local/browser-model-v2.log",
     "evidence/autonomous-20261003/local/deepseek-roleplay.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/verified/acceptance-matrix.log",
-    "evidence/closure2-20261003/ci/verified/archive-integration.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/verified/docker-smoke.log",
-    "evidence/closure2-20261003/ci/verified/frontend-tests.log",
-    "evidence/closure2-20261003/ci/verified/latency.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log",
     "evidence/full-audit-20261002/ci-negative-control-job.log",
-    "evidence/full-audit-20261002/ci-negative-control.json"
+    "evidence/full-audit-20261002/ci-negative-control.json",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log",
+    "evidence/project-maintenance-20261004/ci/verified/archive-integration.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log",
+    "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log",
+    "evidence/project-maintenance-20261004/ci/verified/latency.log",
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "Parent not fully accepted; inspect every child. Limited-scope PASS does not close uncovered child scope.",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -13037,7 +13054,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
 {
   "implementation_status": "IMPLEMENTED",
   "verification_status": "PASS",
-  "scope": "687 Python、6 JS、31原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。",
+  "scope": "703 Python、6 JS、31原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。",
   "uncovered_scope": "Windows Compose镜像认证网络失败保留；Linux成功不改写本机失败。",
   "code_references": [
     "tests",
@@ -13046,12 +13063,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     "scripts/archive_integration.py",
     "scripts/research_pipeline.py"
   ],
-  "actual_result": "687 Python、6 JS、23原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。",
+  "actual_result": "703 Python、6 JS、23原生浏览器；SDK、Linux Compose、受保护上游网络、S3 Object Lock、Envoy/Collector和研究管线。",
   "id": "C11.1",
   "parent_id": "C11",
   "criterion": "多层自动测试：包含单元、接口、数据库真实效果、授权/并发/崩溃反例、官方 MCP SDK、原生浏览器和真实 Docker。测试观察效果、终态与审计三者，不能只断言 HTTP 200。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -13141,60 +13158,60 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "npm",
         "test"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/frontend-tests.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/docker_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/docker-smoke.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/upstream_isolation.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
     },
     {
       "command": [
@@ -13203,10 +13220,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/archive-integration.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/archive-integration.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/archive-integration.log.status.json"
     },
     {
       "command": [
@@ -13215,25 +13232,25 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/container_integrations.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -13290,20 +13307,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/frontend-tests.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/verified/docker-smoke.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
-    "evidence/closure2-20261003/ci/verified/archive-integration.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/frontend-tests.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log",
+    "evidence/project-maintenance-20261004/ci/verified/archive-integration.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -13368,7 +13385,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C11",
   "criterion": "数据与消融：按后文 B1—B8 实现可复现实验管线、分组拆分、独立基线、逐样例结果和误报/漏报。没有真实来源或标签时不伪造，也不把作者规则一致性当真实风险识别效果。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_benchmark::test_family_split_and_data_origin",
     "tests.test_benchmark::test_tuning_cannot_load_test",
@@ -13429,10 +13446,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -13441,10 +13458,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     },
     {
       "command": [
@@ -13499,10 +13516,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -13552,20 +13569,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/pilot_browser.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
     }
   ],
   "exit_codes": [
@@ -13616,15 +13633,15 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
     "evidence/autonomous-20261003/local/deepseek-roleplay.log",
     "evidence/autonomous-20261003/local/browser-model-v2.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -13683,7 +13700,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C11",
   "criterion": "CI 门禁真实性：记录真实子进程退出码、命令、JUnit 和必需产物；验证故意失败时 CI 必须失败。禁止无 pipefail 的吞错管道、|| true、删断言/skip 必测项、把 mock 模式当真实运行。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_acceptance_matrix::test_acceptance_ledger_positive_control_keeps_external_blockers",
     "tests.test_acceptance_matrix::test_acceptance_rejects_false_closure_mutations[count-summary counts]",
@@ -13740,10 +13757,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -13753,20 +13770,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "docs/acceptance/validate_matrix.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/acceptance-matrix.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log.status.json"
     },
     {
       "command": [
@@ -13788,8 +13805,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -13829,19 +13846,19 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/acceptance-matrix.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log",
     "evidence/full-audit-20261002/ci-negative-control-job.log",
     "evidence/full-audit-20261002/ci-negative-control.json",
     "evidence/autonomous-20261003/ci/failed-a68b11b-job.log",
     "evidence/autonomous-20261003/ci/failed-a68b11b.json",
     "evidence/autonomous-20261003/ci/failed-latency.json",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -13886,7 +13903,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
 {
   "implementation_status": "IMPLEMENTED",
   "verification_status": "PASS",
-  "scope": "CI强制687 Python、31浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。",
+  "scope": "CI强制703 Python、31浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。 双向核对原目标、父子证据、原始JUnit/日志hash与实际退出收据；性能从原始配对样本重算并严格判阈值。",
   "uncovered_scope": "科研真人指标不由CI绿灯替代。",
   "code_references": [
     "scripts/verify_evidence.py",
@@ -13898,12 +13915,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     "docs/acceptance/validate_matrix.py",
     "scripts/verify_evidence.py"
   ],
-  "actual_result": "CI强制687 Python、23浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。",
+  "actual_result": "CI强制703 Python、23浏览器、Docker上游隔离/S3/研究管线及原始退出码；artifact完整校验与负例门禁保留。 SQLite运行时固定官方3.53.1并核验源码双摘要及实际source ID；不受确认的版本在打开持久WAL前拒绝。",
   "id": "C11.4",
   "parent_id": "C11",
   "criterion": "回归门槛：安全不变量零失败；对固定回归集的质量退化设显式门槛。性能按冻结环境和口径评价，不因 CI 抖动偷偷改目标。阈值未达要报告，不能仅展示好看的子集。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_acceptance_matrix::test_acceptance_ledger_positive_control_keeps_external_blockers",
     "tests.test_acceptance_matrix::test_acceptance_rejects_false_closure_mutations[count-summary counts]",
@@ -13977,10 +13994,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -13993,10 +14010,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -14008,10 +14025,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     },
     {
       "command": [
@@ -14022,20 +14039,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/latency.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/upstream_isolation.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
     },
     {
       "command": [
@@ -14044,10 +14061,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/archive-integration.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/archive-integration.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/archive-integration.log.status.json"
     },
     {
       "command": [
@@ -14056,10 +14073,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     },
     {
       "command": [
@@ -14070,10 +14087,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/sqlite-runtime-build.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log.status.json"
     },
     {
       "command": [
@@ -14090,10 +14107,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/sqlite-runtime-linked.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log.status.json"
     },
     {
       "command": [
@@ -14103,20 +14120,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "docs/acceptance/validate_matrix.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/acceptance-matrix.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log.status.json"
     },
     {
       "command": "Historical failed latency acceptance gate; all 60 pairs preserved",
@@ -14125,8 +14142,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -14200,25 +14217,25 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log",
-    "evidence/closure2-20261003/ci/verified/latency.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
-    "evidence/closure2-20261003/ci/verified/archive-integration.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/acceptance-matrix.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log",
+    "evidence/project-maintenance-20261004/ci/verified/latency.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log",
+    "evidence/project-maintenance-20261004/ci/verified/archive-integration.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log",
     "evidence/autonomous-20261003/ci/failed-a68b11b-job.log",
     "evidence/autonomous-20261003/ci/failed-a68b11b.json",
     "evidence/autonomous-20261003/ci/failed-latency.json",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -14440,20 +14457,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/container_integrations.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
         },
         {
           "command": [
@@ -14463,15 +14480,15 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+          "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
         }
       ]
     },
@@ -14486,20 +14503,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/browser_smoke.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
         },
         {
           "command": [
@@ -14522,10 +14539,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "python",
             "scripts/pilot_browser.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
         },
         {
           "command": [
@@ -14535,10 +14552,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     },
@@ -14553,10 +14570,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -14630,10 +14647,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         },
         {
           "command": [
@@ -14644,20 +14661,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "--output",
             "evidence/latency.json"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
         },
         {
           "command": [
             "python",
             "scripts/container_integrations.py"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
         },
         {
           "command": [
@@ -14667,10 +14684,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
             "-q",
             "--junitxml=evidence/pytest.xml"
           ],
-          "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+          "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
           "tracked_source_dirty": false,
           "evidence_role": "frozen_source_validation",
-          "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+          "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
         }
       ]
     }
@@ -14784,21 +14801,21 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/verified/latency.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log",
-    "evidence/continuation-20261002/final/live-validation.log"
+    "evidence/continuation-20261002/final/live-validation.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/verified/latency.log",
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "actual_result": "All children complete/pass",
   "fixes": [
     "Aggregated child fixes; no substitute parent test"
@@ -14852,7 +14869,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C12",
   "criterion": "端到端关联：建立 request_id/action_id/trace_id 的关系，覆盖接入、策略、预演、审批、执行、审计；异步恢复仍可关联。跨进程/上游追踪与本地日志分别标明实际支持程度。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_observability::test_metrics_unknown_cost_and_correlated_audit",
     "tests.test_observability::test_percentiles_empty_and_known_sample",
@@ -14875,20 +14892,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/container_integrations.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
     },
     {
       "command": [
@@ -14898,15 +14915,15 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -14933,14 +14950,14 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -15000,7 +15017,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C12",
   "criterion": "真实指标：展示请求与三态分布、排队/过期、各阶段 p50/p95/p99、失败、预演覆盖率、缓存命中/失效、模型 token usage 和成本。没有数据显示“尚无数据”，不填假曲线。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_alert_delivery::test_actual_delivery_persistent_dedup_recovery_and_no_sensitive_payload",
     "tests.test_alert_delivery::test_initial_healthy_is_quiet_and_changed_codes_emit_partial_recovery",
@@ -15144,20 +15161,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -15180,10 +15197,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "python",
         "scripts/pilot_browser.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
     },
     {
       "command": [
@@ -15193,10 +15210,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -15227,11 +15244,11 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
     "evidence/continuation-20261002/final/live-validation.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -15287,7 +15304,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C12",
   "criterion": "费用口径：实际 usage 与估算分开；价格表记录来源、模型、币种和生效时间，未知价为 null。区分输入、输出、cache read/write 及供应商差异；统计可与脱敏账单/usage 对账，不用默认 0 掩盖缺失。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_deepseek::test_deepseek_fixed_endpoint_currency_cache_and_invalidation",
     "tests.test_deepseek::test_currency_mismatch_cannot_reuse_budget",
@@ -15302,10 +15319,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -15390,7 +15407,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log"
@@ -15450,7 +15467,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": "C12",
   "criterion": "可观测安全与开销：权限保护指标和追踪，脱敏日志；防止以 SQL/参数/用户输入作无限基数标签。测试监控导出故障不会赋予权限，也不会掩盖关键审计故障；测量开销并说明边界。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_new_boundaries::test_clock_rollback_across_restart_cannot_extend_approval",
     "tests.test_new_boundaries::test_audited_reload_is_atomic_and_prior_approval_stale",
@@ -15477,10 +15494,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -15491,20 +15508,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/latency.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/container_integrations.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/container-integrations.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/container-integrations.log.status.json"
     },
     {
       "command": [
@@ -15514,10 +15531,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -15543,10 +15560,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/latency.log",
-    "evidence/closure2-20261003/ci/verified/container-integrations.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/latency.log",
+    "evidence/project-maintenance-20261004/ci/verified/container-integrations.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -15602,7 +15619,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "接入实际客户端：SDK 互通、模拟器和真实模型 Agent 分列；真实 Agent 项需真实 host/模型轨迹，不可由模拟器代替。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_mcp_streamable::test_official_stateful_sse_upstream_review_effect_and_reconcile[False]",
     "tests.test_mcp_streamable::test_official_stateful_sse_upstream_review_effect_and_reconcile[True]",
@@ -15624,10 +15641,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -15659,7 +15676,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/closure-20261002/final/live-upstream.log"
   ],
   "fixes": [
@@ -15716,7 +15733,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "真正暂停副作用：请求进入 pending 后目标未变化，原影响快照可查看；关闭浏览器或客户端断线不影响服务端控制。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -15795,10 +15812,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -15809,7 +15826,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -15865,7 +15882,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "独立批准后继续：合法 reviewer 批准正确对象，执行符合快照/策略，Agent 能获得最终真实结果；重复查询/批准不重复执行。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -15937,10 +15954,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -15951,7 +15968,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16007,7 +16024,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "超时默认不执行：审批超时、连接超时和执行结果未知分清；未知不能当成功，也不能盲重试可能已发生的远端效果。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -16093,10 +16110,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16107,7 +16124,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16163,7 +16180,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "崩溃与恢复安全：pending 重启不自执行；提交前崩溃回滚；提交后响应丢失可查收据；已删除合成数据重启不会自动重新播种伪装恢复。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -16249,10 +16266,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16263,7 +16280,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16319,7 +16336,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "拒绝与安全替代：拒绝后目标不变、原因结构化、有界安全改道；模拟和真实模型各有相应证据。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_live_agent_contract::test_agent_does_not_retry_rejected_writes_or_access_review_endpoint"
   ],
@@ -16332,10 +16349,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -16367,7 +16384,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log"
   ],
   "fixes": [
@@ -16424,7 +16441,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "审计字段完整：逐状态检查必需字段与原始快照，完整率目标 100%；有正当理由不适用的字段需 schema 明确允许并记录原因，不能统一填空蒙混。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_audit_completeness::test_audit_schema_all_states_with_original_snapshot_and_explicit_na",
     "tests.test_audit_completeness::test_audit_completeness_access_and_empty"
@@ -16438,10 +16455,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16452,7 +16469,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16508,7 +16525,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "危险操作召回率目标 ≥90%。先定义“危险”的独立业务金标、权限上下文和模型/规则预测阈值；TP/(TP+FN)，同时给分母、漏报样例和覆盖范围。危险语义识别召回与危险请求被阻断/送审的保护覆盖率分别报告，不能把所有写操作都定义为危险，或把“全部写必审”带来的保护覆盖率冒称语义识别能力。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_research::test_kappa_independent_hand_calculation_and_degenerate",
     "tests.test_research::test_no_fake_zero_denominators_or_human_results",
@@ -16524,10 +16541,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -16540,10 +16557,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -16555,10 +16572,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16579,9 +16596,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16637,7 +16654,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "误报率 FPR 目标 ≤10%。在同一冻结总体中，分别报告风险分类器对非危险样本的 FPR，以及策略执行器对金标应 pass 的合法请求的额外拦截/送审率，均明确 FP/(FP+TN) 的具体金标和分母。二者不能混名；与 T1 的风险分类召回成对报告，并另报三态混淆矩阵、拒绝/需审细分、未知和不支持占比，不能挑选不同子集美化结果。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_research::test_kappa_independent_hand_calculation_and_degenerate",
     "tests.test_research::test_no_fake_zero_denominators_or_human_results",
@@ -16653,10 +16670,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -16669,10 +16686,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -16684,10 +16701,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16708,9 +16725,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16766,7 +16783,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "静态路径判定 p95 <300ms。明确包括与不包括的工作，使用稳定时钟；记录样本量、冷/热启动、并发、错误、系统/依赖版本，不把单个函数耗时当请求整体耗时。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -16778,10 +16795,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/latency.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16792,7 +16809,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/latency.log"
+    "evidence/project-maintenance-20261004/ci/verified/latency.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16849,7 +16866,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "dry-run 路径 p95 <5s。记录数据规模、操作类型、复制/执行/差异计算边界及超时率；不能删除慢请求后重新计算漂亮 p95。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -16861,10 +16878,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/latency.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
     },
     {
       "command": [
@@ -16877,10 +16894,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -16892,10 +16909,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     }
   ],
   "exit_codes": [
@@ -16916,9 +16933,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/latency.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log"
+    "evidence/project-maintenance-20261004/ci/verified/latency.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -16975,7 +16992,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "可评估影响估算相对偏差目标 ≤±5%。逐例给独立真实值与估算；真实值为 0 单列绝对误差和误判例，不除零。精确模式要求所声明计数/差异真实一致；unknown 不混入已通过分母，另报覆盖率。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_benchmark::test_family_split_and_data_origin",
     "tests.test_benchmark::test_tuning_cannot_load_test",
@@ -16994,10 +17011,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -17010,10 +17027,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -17025,10 +17042,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     },
     {
       "command": [
@@ -17037,10 +17054,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     }
   ],
   "exit_codes": [
@@ -17066,10 +17083,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -17127,7 +17144,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "放行路径延迟增量目标 <100ms。原设想未指明统计量，本轮预注册以 p95 为验收量并另报均值。相同合法只读负载对照直接调用工具与经代理调用，随机交替/重复运行，说明端到端和配对增量定义；不能把两个无关 p95 相减冒充配对 p95。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_connection_lifecycle::test_submit_uses_one_connection_and_two_full_commits",
     "tests.test_connection_lifecycle::test_failed_submit_keeps_expiration_and_high_water_committed",
@@ -17145,10 +17162,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/latency.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
     },
     {
       "command": [
@@ -17158,10 +17175,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": "Historical failed latency acceptance gate; all 60 pairs preserved",
@@ -17189,8 +17206,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/latency.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/latency.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/autonomous-20261003/ci/failed-a68b11b-job.log",
     "evidence/autonomous-20261003/ci/failed-a68b11b.json",
     "evidence/autonomous-20261003/ci/failed-latency.json"
@@ -17254,7 +17271,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "来源覆盖：至少 200 例起步，并分别提供公开真实事故的可追溯重建、用户明确授权且脱敏的日常 Agent 日志、手工合成对抗样本。每类记录来源/授权/局限及数量；缺少真实来源时真实来源项不通过，不能把同一合成模板换名字补足。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_github_adapter::test_github_append_only_plan_has_no_cas_or_rollback_claim",
     "tests.test_github_adapter::test_github_direct_durable_send_once_concurrent_and_restart",
@@ -17333,10 +17350,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -17345,10 +17362,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     },
     {
       "command": [
@@ -17385,8 +17402,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
     "evidence/autonomous-20261003/local/live-relay.log"
   ],
   "fixes": [
@@ -17442,7 +17459,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "核心金标：至少 expected_decision、risk_level、impact_ground_truth、reversibility 四类标注；增加必要的任务授权上下文、case_id、来源类型、原始出处、工具/适配器、数据快照、family_id、split 和标注依据。未知字段保留 unknown，不强填伪精确值。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_research::test_kappa_independent_hand_calculation_and_degenerate",
     "tests.test_research::test_no_fake_zero_denominators_or_human_results",
@@ -17492,10 +17509,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -17506,7 +17523,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -17566,7 +17583,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "双人独立标注：两名真实标注者独立标注，记录分歧和仲裁；Cohen's κ 目标 ≥0.75，报告适用的标签字段、样本量和不确定性。两个模型、两个提示词或同一人标两遍不等于双人；未完成时标 BLOCKED_EXTERNAL 并交付标注模板/导入工具。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_model_roles::test_model_labels_cannot_claim_or_enter_human_annotation",
     "tests.test_model_roles::test_model_agreement_preserves_disagreement_without_human_acceptance",
@@ -17657,10 +17674,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -17669,10 +17686,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     },
     {
       "command": [
@@ -17738,8 +17755,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
     "evidence/autonomous-20261003/local/deepseek-roleplay.log",
     "evidence/autonomous-20261003/local/browser-model-v2.log"
   ],
@@ -17798,7 +17815,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "防数据泄漏：按事故/语义模板族/相近来源分组拆 dev/test，可采用历史 6:4；冻结哈希。tuning 模式不得读 test。公开旧 test 在反复观察后只作回归，不冒称全新盲测；增加新的保留集或独立外部评估并如实标记独立性。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_benchmark::test_family_split_and_data_origin",
     "tests.test_benchmark::test_tuning_cannot_load_test",
@@ -17817,10 +17834,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -17831,7 +17848,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -17887,7 +17904,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "四组独立消融：朴素关键词基线、纯 LLM、混合、混合＋dry-run。关键词基线独立实现，不能用混合代码关闭开关冒充独立基线；固定输入、任务、数据、模型、提示与计时口径。纯 LLM 的测试不得连接可造成真实损失的执行端。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_new_boundaries::test_clock_rollback_across_restart_cannot_extend_approval",
     "tests.test_new_boundaries::test_audited_reload_is_atomic_and_prior_approval_stale",
@@ -17906,10 +17923,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -17996,7 +18013,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log",
     "evidence/continuation-20261002/retest/model-contract-recheck.log"
@@ -18056,7 +18073,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "结果管线：输出逐例预测/金标/原因/时延/影响误差、整体与各来源/工具分层的混淆矩阵、召回/FPR、覆盖率及成本。缺真实模型时相应两/三行不执行或受阻，不能让规则结果顶替 LLM 消融。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_research::test_kappa_independent_hand_calculation_and_degenerate",
     "tests.test_research::test_no_fake_zero_denominators_or_human_results",
@@ -18076,10 +18093,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -18088,10 +18105,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/research-pipeline"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/research-pipeline.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log.status.json"
     },
     {
       "command": [
@@ -18160,8 +18177,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/research-pipeline.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/research-pipeline.log",
     "evidence/continuation-20261002/final/ablation-live-dev.log",
     "evidence/continuation-20261002/final/ablation-live-test.log"
   ],
@@ -18220,7 +18237,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "可复现与门禁：固定随机种子、版本和参数，测试计算公式、边界、空集/缺失/分母，使用独立小样例核对结果；真实效果 ground truth 不调用被测实现自己的同一 helper 来生成。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_benchmark::test_family_split_and_data_origin",
     "tests.test_benchmark::test_tuning_cannot_load_test",
@@ -18273,10 +18290,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -18287,10 +18304,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/latency.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/latency.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/latency.log.status.json"
     }
   ],
   "exit_codes": [
@@ -18306,8 +18323,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/latency.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/latency.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -18363,7 +18380,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "负结果与声明：混合不优于规则、误报升高、dry-run 慢或覆盖不足均保留；合成策略一致性、真实危险识别和生产安全分别命名，禁止凭作者合成集高分得出普适结论。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -18377,10 +18394,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -18392,10 +18409,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     },
     {
       "command": [
@@ -18407,10 +18424,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/ablation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/ablation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/ablation.log.status.json"
     }
   ],
   "exit_codes": [
@@ -18431,9 +18448,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log",
-    "evidence/closure2-20261003/ci/verified/ablation.log"
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log",
+    "evidence/project-maintenance-20261004/ci/verified/ablation.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -18499,7 +18516,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "平均决策耗时目标 ≤5s；“3 秒看懂”是更强的待验证设计假设，不能自动当达标。并报中位数/p95、样本量及置信区间，确保计时遵循 C7.5。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_pilot::test_private_templates_never_create_human_declarations_or_labels",
     "tests.test_pilot::test_import_one_person_retains_raw_inputs_provenance_unknowns_and_null_acceptance",
@@ -18583,20 +18600,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -18608,10 +18625,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -18641,20 +18658,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/pilot_browser.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
     }
   ],
   "exit_codes": [
@@ -18690,12 +18707,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
     "evidence/autonomous-20261003/local/browser-model-v2.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -18758,7 +18775,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "决策正确率目标 ≥90%，参照真实任务授权金标；连同危险误批、合法误拒、请求更多信息等行为分析，不能只奖励拒绝所有操作。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_pilot::test_private_templates_never_create_human_declarations_or_labels",
     "tests.test_pilot::test_import_one_person_retains_raw_inputs_provenance_unknowns_and_null_acceptance",
@@ -18842,20 +18859,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -18867,10 +18884,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -18900,20 +18917,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/pilot_browser.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
     }
   ],
   "exit_codes": [
@@ -18949,12 +18966,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
     "evidence/autonomous-20261003/local/browser-model-v2.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -19017,7 +19034,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "原称“橡皮图章率”的 <1s 批准占比目标 <5%。本轮称“快速批准代理指标”，明确分母；它是风险观察信号，不单独证明敷衍、理解或因果。结合正确率和简短理解核验解释。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_pilot::test_private_templates_never_create_human_declarations_or_labels",
     "tests.test_pilot::test_import_one_person_retains_raw_inputs_provenance_unknowns_and_null_acceptance",
@@ -19101,20 +19118,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -19126,10 +19143,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -19159,20 +19176,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/pilot_browser.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pilot-browser.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log.status.json"
     }
   ],
   "exit_codes": [
@@ -19208,12 +19225,12 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
     "evidence/autonomous-20261003/local/browser-model-v2.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pilot-browser.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pilot-browser.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -19270,7 +19287,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "原批量只读归并目标 ≥80%。预注册 eligible 请求、原始通知/审批数和显示组数的口径；把只读免审、幂等重复抑制与真正归并分别测量。基线审批数为 0 时不能除零或制造改善百分比。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_research::test_kappa_independent_hand_calculation_and_degenerate",
     "tests.test_research::test_no_fake_zero_denominators_or_human_results",
@@ -19320,20 +19337,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -19345,10 +19362,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     }
   ],
   "exit_codes": [
@@ -19369,9 +19386,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -19428,7 +19445,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "日均审批次数目标 <20 次。必须绑定可复现工作负载、活跃用户天、任务完成量和质量；无真实使用天数则该目标未验证，不能由短脚本外推“每天”。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_research::test_kappa_independent_hand_calculation_and_degenerate",
     "tests.test_research::test_no_fake_zero_denominators_or_human_results",
@@ -19478,20 +19495,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -19503,10 +19520,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     }
   ],
   "exit_codes": [
@@ -19527,9 +19544,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/study-analysis.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -19590,7 +19607,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "绕过代理直连：验证 Agent 不能访问目标数据库/卷、服务端配置、reviewer/audit 凭据、Docker socket、宿主能力或受保护上游。检查真实 Docker 网络、运行身份、只读根、能力位和入口；只看 compose.yaml 不算完成。在声明的部署模型内此项零失败，不能声称可抵抗已控制宿主/root 的对手。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -19638,30 +19655,30 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/docker_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/docker-smoke.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/upstream_isolation.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/upstream-isolation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log.status.json"
     },
     {
       "command": [
@@ -19672,10 +19689,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/sqlite-runtime-build.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log.status.json"
     },
     {
       "command": [
@@ -19692,15 +19709,15 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/sqlite-runtime-linked.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -19737,16 +19754,16 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/docker-smoke.log",
-    "evidence/closure2-20261003/ci/verified/upstream-isolation.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-build.log",
-    "evidence/closure2-20261003/ci/verified/sqlite-runtime-linked.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log",
+    "evidence/project-maintenance-20261004/ci/verified/upstream-isolation.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-build.log",
+    "evidence/project-maintenance-20261004/ci/verified/sqlite-runtime-linked.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -19803,7 +19820,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "参数与解析混淆：覆盖多语句、注释、大小写、Unicode、CTE、RETURNING、ATTACH、系统表、扩展、DDL/触发器、NaN/Infinity、大整数、二进制、重复列名和资源耗尽；依据具体 SQL 方言判断是否合法，不假设 DR\\\"\\\"OP 在所有数据库中都等同 DROP。边界内解析与授权必须一致。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -19929,10 +19946,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -19942,10 +19959,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -19961,8 +19978,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -20019,7 +20036,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "提示注入：在 SQL、工具描述、资源内容、模型输出和拒绝建议中嵌入伪系统指令、批准指令和输出欺骗；确保它们只是数据，不改变身份、政策、审批或执行控制。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_semantic::test_semantic_advice_never_autoapproves_and_cache_scoped",
     "tests.test_semantic::test_invalid_model_data_fails_closed[advice0]",
@@ -20038,10 +20055,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -20064,10 +20081,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     }
   ],
   "exit_codes": [
@@ -20088,9 +20105,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
     "evidence/continuation-20261002/final/live-validation.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -20146,7 +20163,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "伪造审批与替换：覆盖 Agent 伪装 reviewer、跨 action/reviewer/资源/权限范围替换、请求或摘要改写、过期/撤销、重放、SSE 伪造和并发竞争。声明支持范围内未授权批准/执行必须零失败。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -20263,10 +20280,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -20276,10 +20293,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -20289,10 +20306,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -20313,9 +20330,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -20372,7 +20389,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "降级滥用：模型/预演失败、低风险拆单、并发预算耗尽、重复提交、历史批准投毒、批量组加入隐藏成员或路由失败不能让请求获得额外权限；不可逆/高危操作通过学习自动降级必须零发生。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_governance::test_budget_reservation_concurrency_restart_and_settlement",
     "tests.test_governance::test_group_new_members_require_reconfirmation_and_no_hidden_execution",
@@ -20409,10 +20426,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -20422,10 +20439,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -20441,8 +20458,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -20500,7 +20517,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "拒绝与证据泄露：检查错误、日志、SSE、指标、审计与 UI 导出不泄露密钥、敏感样本或可用于越权的细节；错误响应本身可序列化，不直接回显危险输入。结合已有用例补授权检查、XSS/CSRF/SSRF 等适用风险。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -20561,20 +20578,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     },
     {
       "command": [
@@ -20584,10 +20601,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -20608,9 +20625,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -20666,7 +20683,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "生态数据：记录实际日期的 star/fork/真实外部贡献和被集成证据；暂无采用就是暂无，不购买、不伪造、不把自己的测试调用算外部集成。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -20735,7 +20752,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "上游参考实现：核查原文“Envoy/agent-router #2073”的准确仓库、issue 内容、日期和当前状态；未经验证不沿用引用。准备可复现示例和礼貌的 issue/PR 草稿，但未获用户授权不向第三方自动发帖，也不声称已经被采纳。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -20804,7 +20821,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "演示与事故区分：保留 1206 行合成数据的“无代理/有代理”对照及拒绝/批准闭环。无代理演示只在独立一次性数据库，不能关闭正式安全保护去操作其他数据；没有事故完整证据链时叫“受事故启发的演示”，不叫精确复原。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -20814,10 +20831,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/comparison.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/comparison.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/comparison.log.status.json"
     }
   ],
   "exit_codes": [
@@ -20828,7 +20845,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/comparison.log"
+    "evidence/project-maintenance-20261004/ci/verified/comparison.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -20883,7 +20900,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "研究事实：重新核对 Replit/AI Incident Database #1152 的数字与叙事，以及 LlamaFirewall、MCPGuard、AgentTrust、agentgateway、mcp-firewall、Docker、Cloudflare 等原文比较；只用可核查的一手资料支撑结论。不能凭名字或某个旧 issue 推断别人现在全都没有审批 UI/路由/疲劳治理。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -20955,7 +20972,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "技术栈偏差：原始简报曾提出 FastAPI＋Next.js，当前是 FastAPI＋原生 JavaScript/CSS。单列偏差和影响，不冒称已用 Next.js/Vue。先保住安全与完整交互；框架迁移作为独立变更提出理由和迁移验证，不因过去 npm 受限就永久声称目标已满足。未确认的框架差异保持未关闭，不擅自伪造用户同意。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_api::test_http_complete_flow",
     "tests.test_api::test_anonymous_is_denied[/v1/actions]",
@@ -20981,35 +20998,35 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_edges.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-edges.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-edges.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -21036,14 +21053,14 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/browser-edges.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-edges.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21103,7 +21120,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "开发与运行材料：README、架构/状态机图、API/数据模型/策略契约、威胁模型、启动配置、依赖锁定或明确版本、测试/演示命令、使用手册与故障排查同步最终实现；不只交付接口或只交付静态前端。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -21114,20 +21131,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -21141,10 +21158,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/dependency-audit.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/dependency-audit.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/dependency-audit.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21165,9 +21182,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/dependency-audit.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/dependency-audit.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21222,7 +21239,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "简历与面试包：更新项目定位、真实贡献说明、可核查简历条目及标准问答，至少涵盖授权、TOCTOU、幂等、事务/远端未知、MCP、CEL、LLM 角色、审批疲劳、实验、审计和失败修复。新增功能未实现就不能写入“已完成能力”；禁止只堆测试数量。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -21233,10 +21250,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -21245,10 +21262,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/comparison.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/comparison.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/comparison.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21264,8 +21281,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/comparison.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/comparison.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21323,7 +21340,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "成果提交和持久证据：代码、测试、配置、目标矩阵、问题修复记录、验收结论与进度进入仓库。原始证据区分 Git 跟踪文件、Actions artifact、release/其他已授权归档及本地文件；未永久保存的日志/截图不能说已全部提交。检查脱敏、体积、授权和保留期，不提交密钥、运行库或字体文件。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_acceptance_matrix::test_acceptance_ledger_positive_control_keeps_external_blockers",
     "tests.test_acceptance_matrix::test_acceptance_rejects_false_closure_mutations[count-summary counts]",
@@ -21409,20 +21426,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "docs/acceptance/validate_matrix.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/acceptance-matrix.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log.status.json"
     },
     {
       "command": [
@@ -21432,10 +21449,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21456,9 +21473,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/acceptance-matrix.log",
-    "evidence/closure2-20261003/ci/verified/pytest.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/acceptance-matrix.log",
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21514,7 +21531,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "危险召回反复调优仍 <80%：记录失败类别，提出收窄适配范围/场景重做的方案；不得在未经确认时删目标后宣称全量完成。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -21527,10 +21544,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -21542,10 +21559,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/ablation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/ablation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/ablation.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21561,8 +21578,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
-    "evidence/closure2-20261003/ci/verified/ablation.log"
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/ablation.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21620,7 +21637,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "FPR >25%：分析合法请求被打扰原因，改进规则和路由；原建议“只管不可逆”不能直接拿来放开原需审批的写操作。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -21633,10 +21650,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -21648,10 +21665,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/ablation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/ablation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/ablation.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21667,8 +21684,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
-    "evidence/closure2-20261003/ci/verified/ablation.log"
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/ablation.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21726,7 +21743,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "决策耗时 >15s：检查信息设计和任务难度，重做 C7 的相关部分并以同口径复测。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -21739,10 +21756,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -21754,10 +21771,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/ablation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/ablation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/ablation.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21773,8 +21790,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
-    "evidence/closure2-20261003/ci/verified/ablation.log"
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/ablation.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21832,7 +21849,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "快速批准代理指标 >20%：结合正确率、理解核验与任务复杂度判断；不机械归因为用户敷衍，检查 C8 治理是否有效。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -21845,10 +21862,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "study",
         "evidence/study-automation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/study-analysis.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/study-analysis.log.status.json"
     },
     {
       "command": [
@@ -21860,10 +21877,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/ablation.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/ablation.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/ablation.log.status.json"
     }
   ],
   "exit_codes": [
@@ -21879,8 +21896,8 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/study-analysis.log",
-    "evidence/closure2-20261003/ci/verified/ablation.log"
+    "evidence/project-maintenance-20261004/ci/verified/study-analysis.log",
+    "evidence/project-maintenance-20261004/ci/verified/ablation.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -21937,7 +21954,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "声明的保护边界可绕过：架构级失败，停止相关危险扩展，修复边界再重测，不允许靠 README 警告代替已承诺的控制。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -22015,25 +22032,25 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/docker_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/docker-smoke.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log.status.json"
     },
     {
       "command": "GitHub Actions verify job and downloaded ZIP evidence verifier",
-      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37117971834",
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c"
+      "run_url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
     }
   ],
   "exit_codes": [
@@ -22055,13 +22072,13 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/docker-smoke.log",
-    "evidence/closure2-20261003/ci/acceptance-533726a.zip",
-    "evidence/closure2-20261003/ci/acceptance-533726a-verification.json",
-    "evidence/closure2-20261003/ci/verified-job.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log",
-    "evidence/closure2-20261003/ci/downloaded-verifier.log.status.json"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/docker-smoke.log",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
+    "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
+    "evidence/project-maintenance-20261004/ci/verified-job.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
+    "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -22118,7 +22135,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "dry-run 覆盖率 <30%：明确分母和不支持类型，提出改进适配器或诚实收窄支持范围；不能自动切成“让 LLM 猜影响并获准执行”。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_gate::test_pending_does_not_execute_and_approve_does",
     "tests.test_gate::test_read_path_passes",
@@ -22188,10 +22205,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
@@ -22204,10 +22221,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-dev.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-dev.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log.status.json"
     },
     {
       "command": [
@@ -22219,10 +22236,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/benchmark-test.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/benchmark-test.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log.status.json"
     }
   ],
   "exit_codes": [
@@ -22243,9 +22260,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-dev.log",
-    "evidence/closure2-20261003/ci/verified/benchmark-test.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-dev.log",
+    "evidence/project-maintenance-20261004/ci/verified/benchmark-test.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -22301,7 +22318,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "评测从本轮开始：先梳理/冻结数据和标注缺口，不能所有实现完成后才发现无法衡量；真实来源缺失立即登记，继续离线可完成工作。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -22370,7 +22387,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "优先真实闭环：每个阶段能被独立运行和复验，再逐步扩展；不先堆抽象/大框架或用 mock 取代验收。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [
     "tests.test_sdk_interop::test_official_mcp_sdk_pending_approval_and_result",
     "tests.test_sdk_interop::test_official_sdk_discovers_and_calls_independent_upstream",
@@ -22393,20 +22410,20 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "-q",
         "--junitxml=evidence/pytest.xml"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/pytest.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/pytest.log.status.json"
     },
     {
       "command": [
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     },
     {
       "command": [
@@ -22415,10 +22432,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "--output",
         "evidence/comparison.json"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/comparison.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/comparison.log.status.json"
     }
   ],
   "exit_codes": [
@@ -22439,9 +22456,9 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/pytest.log",
-    "evidence/closure2-20261003/ci/verified/browser-native.log",
-    "evidence/closure2-20261003/ci/verified/comparison.log"
+    "evidence/project-maintenance-20261004/ci/verified/pytest.log",
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log",
+    "evidence/project-maintenance-20261004/ci/verified/comparison.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"
@@ -22496,7 +22513,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
   "parent_id": null,
   "criterion": "持续演示与进度：每个有实质变化的阶段保存简短演示录屏/GIF或等价证据，能录时以约 30 秒为参考；不伪造已经每周录制的历史。同步 memory/progress，所有展示数字只用真实结果。",
   "requirement_origin": "docs/CODEX_FULL_AUDIT_BRIEF.md and original acceptance index; no goals removed",
-  "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+  "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
   "test_ids": [],
   "commands": [
     {
@@ -22504,10 +22521,10 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
         "python",
         "scripts/browser_smoke.py"
       ],
-      "tested_commit_sha": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
+      "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
       "tracked_source_dirty": false,
       "evidence_role": "frozen_source_validation",
-      "receipt": "evidence/closure2-20261003/ci/verified/browser-native.log.status.json"
+      "receipt": "evidence/project-maintenance-20261004/ci/verified/browser-native.log.status.json"
     }
   ],
   "exit_codes": [
@@ -22518,7 +22535,7 @@ PASS 限于该行明确范围；PARTIAL＋PASS 不表示原目标完成。父项
     }
   ],
   "evidence": [
-    "evidence/closure2-20261003/ci/verified/browser-native.log"
+    "evidence/project-maintenance-20261004/ci/verified/browser-native.log"
   ],
   "fixes": [
     "See FINDINGS_AND_FIXES.md for baseline fixes and incremental implementation evidence"

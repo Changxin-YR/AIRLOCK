@@ -97,3 +97,11 @@ preflight、final、retest、final-code、final-17ccd2c分别代表各自源状�
 - independent/保留171份作者/另一作者的原始失败、成功、源码和收据，以及最终只读审查报告；IMPORT_INDEX映射原路径，DOCUMENT_BINDINGS绑定文档，ARCHIVE_MANIFEST记录最终公开载荷hash。中间dirty测试不冒充冻结CI。
 - 本轮S3 Object Lock只验证临时隔离服务的真实API语义，测试容器随后清理，不构成长期云归档。完整ZIP与结果在Git，生产WORM尚未部署。
 - 本机var临时文件/数据库不归档，历史个人原始日志与凭据仍不入Git；本轮新增真人记录0、付费模型调用0。此前失败CI与原保留说明继续有效。
+
+## 项目维护归档（2026-10-04）
+
+- 源码7073fb76a2e46365fabe6f51a3765de267863890，完整CI37164846361/job111325559836。下载后核验94载荷、source.zip commit、703条JUnit和真实退出码，verify_evidence exit0。
+- 完整成功包进入工作分支Git：evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip，1,940,695字节，SHA256 fb98b56d111cae2c1e318b012e6d0703022d4b62e938801e1a79872963a4b190。Git无自动到期，依赖历史/备份，非WORM；Actions原副本11288478711到期2027-01-02T00:24:25Z。
+- 作者原始复现、16项回归、测试夹具错误及修复、独立7项子进程检查、52项定点与矩阵验证均保存真实SHA/dirty和退出码。最终交付重复CI的元数据/job日志/验证收据保存于memory/progress；重复完整ZIP仅Actions和本机临时副本，期限单独记账。
+- 工程基线包evidence/project-checkpoint-20261004/AIRLOCK-project-baseline-699adbd.zip，2,835,750字节，SHA256 60bd67a5db7aa28c86f6b8743ce052b6a8986821bf0cf371257645ef5f87717e。该包仍绑定699adbd历史源码；历史已发布产物、原命令路径和hash由PROVENANCE.json/PREVIOUS_MANIFEST.json及原Git提交保存，未改写原始收据。
+- 原目标、失败CI、真人0/模型本轮调用0和外部验证条件保持。个人日志、真实凭据、数据库和var临时文件不入Git。
