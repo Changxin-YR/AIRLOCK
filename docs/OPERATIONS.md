@@ -18,7 +18,7 @@ python -m airlock serve
 
 显式 `serve --config <path>` 要求可读的普通 UTF-8 JSON 配置文件，支持 UTF-8 BOM；文件缺失、目录、读取/格式错误或凭据值类型错误在启动 Uvicorn 前以 exit2 拒绝，错误不回显配置内容。省略参数时保留默认 `var/local.json` 与纯环境配置兼容；已有环境变量优先，配置只补充三个凭据字段，数据库路径仍由 `AIRLOCK_DB` 设置。`init` 使用独占创建，已有文件不会被覆盖。
 
-`init` 的输出和本机配置均属于凭据；按现有 CLI 指引在本地使用，不上传。默认监听 `127.0.0.1:8000`。浏览器输入 reviewer 凭据；Agent 只得到 `AIRLOCK_AGENT_TOKEN`。刷新页面需重新登录，凭据只存在内存。合成数据不是生产备份；整个开发 shell 不属于敌对 Agent 沙箱。要验证旁路隔离，运行 `python scripts/docker_smoke.py --output evidence/<独立目录>`，使用 Compose 的隔离 Agent 容器。
+`init` 生成的本机配置含凭据；终端只显示文件路径和保密提醒。配置按现有 CLI 指引在本地使用，不上传。默认监听 `127.0.0.1:8000`。浏览器输入 reviewer 凭据；Agent 只得到 `AIRLOCK_AGENT_TOKEN`。刷新页面需重新登录，凭据只存在内存。合成数据不是生产备份；整个开发 shell 不属于敌对 Agent 沙箱。要验证旁路隔离，运行 `python scripts/docker_smoke.py --output evidence/<独立目录>`，使用 Compose 的隔离 Agent 容器。
 
 ```sh
 python scripts/demo_agent.py --scenario delete --wait 330
