@@ -1,0 +1,1 @@
+{"case": "missing_console", "health_status": 200, "health_body": {"status": "ok", "version": "0.1.0"}, "homepage_status": 503, "homepage_body": {"error": "console_assets_missing", "next_step": "Run npm ci and npm run build before starting AIRLOCK."}, "database_created": true, "seeded_customer_rows": 1206, "seed_marker": "v1"}

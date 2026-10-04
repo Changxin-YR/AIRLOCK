@@ -105,3 +105,11 @@ preflight、final、retest、final-code、final-17ccd2c分别代表各自源状�
 - 作者原始复现、16项回归、测试夹具错误及修复、独立7项子进程检查、52项定点与矩阵验证均保存真实SHA/dirty和退出码。最终交付重复CI的元数据/job日志/验证收据保存于memory/progress；重复完整ZIP仅Actions和本机临时副本，期限单独记账。
 - 工程基线包evidence/project-checkpoint-20261004/AIRLOCK-project-baseline-699adbd.zip，2,835,750字节，SHA256 60bd67a5db7aa28c86f6b8743ce052b6a8986821bf0cf371257645ef5f87717e。该包仍绑定699adbd历史源码；历史已发布产物、原命令路径和hash由PROVENANCE.json/PREVIOUS_MANIFEST.json及原Git提交保存，未改写原始收据。
 - 原目标、失败CI、真人0/模型本轮调用0和外部验证条件保持。个人日志、真实凭据、数据库和var临时文件不入Git。
+
+## 启动前诊断交付（2026-10-04）
+
+- 源码7dcea8ab94b60753391e0d90a73179684fc39fe1；完整CI37167936489/job111334729986。下载后核验94载荷、source.zip commit、796条JUnit、24份真实退出收据，独立verify_evidence exit0。
+- 完整成功包进入工作分支Git：evidence/startup-preflight-20261004/ci/acceptance-7dcea8a.zip，1963487字节，SHA256 fe6bf15b99c9902da6f87b6b36bebcfe9692f457fe00d36d0017c47d6d270b21。Git无自动到期，依赖历史/备份，非WORM；Actions原副本11290722179到期2027-01-02T01:24:55Z。
+- local/及IMPORT_INDEX保留120份原始基线、失败/修复、独立反例、源码快照、浏览器语义记录和冻结定点来源。Windows符号链接环境受限与Linux实际通过分列；旧dirty测试不会改写为冻结测试。DOCUMENT_BINDINGS与ARCHIVE_MANIFEST绑定最终公开载荷。
+- 最终交付重复CI的元数据、job原日志、下载核验和退出收据存memory/progress；重复ZIP仅Actions及本机var缓存，无永久保留保证。其编号和到期时间独立记录。
+- 无新真人研究或模型API调用；doctor本身无网络/持久库副作用。个人日志、真实凭据、数据库和var临时目录不归档；旧失败CI和原始126目标全部保留。

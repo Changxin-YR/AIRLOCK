@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="5" skipped="3" tests="29" time="42.003" timestamp="2026-10-04T09:13:26.309399+08:00" hostname="WHHHH"><testcase classname="" name="test_serve_real_subprocess_redacts_configuration[AIRLOCK_TTL-synthetic-secret-numeric-marker]" time="0.696" /><testcase classname="" name="test_serve_real_subprocess_redacts_configuration[AIRLOCK_ORIGIN-http://127.0.0.1:synthetic-secret-port-marker]" time="0.662" /><testcase classname="" name="test_api_invalid_console_precedes_gate[False-bad_csp]" time="0.018" /><testcase classname="" name="test_api_invalid_console_precedes_gate[False-missing_js]" time="0.014" /><testcase classname="" name="test_api_invalid_console_precedes_gate[False-index_only]" time="0.006" /><testcase classname="" name="test_api_invalid_console_precedes_gate[False-csp_only]" time="0.004" /><testcase classname="" name="test_api_invalid_console_precedes_gate[False-entity_traversal]" time="0.012" /><testcase classname="" name="test_api_invalid_console_precedes_gate[False-plain_traversal]" time="0.013" /><testcase classname="" name="test_api_invalid_console_precedes_gate[True-bad_csp]" time="0.014" /><testcase classname="" name="test_api_invalid_console_precedes_gate[True-missing_js]" time="0.011" /><testcase classname="" name="test_api_invalid_console_precedes_gate[True-index_only]" time="0.008" /><testcase classname="" name="test_api_invalid_console_precedes_gate[True-csp_only]" time="0.007" /><testcase classname="" name="test_api_invalid_console_precedes_gate[True-entity_traversal]" time="0.012" /><testcase classname="" name="test_api_invalid_console_precedes_gate[True-plain_traversal]" time="0.010" /><testcase classname="" name="test_headless_liveness_compatibility" time="0.137" /><testcase classname="" name="test_doctor_real_subprocess_is_read_only[config]" time="0.782" /><testcase classname="" name="test_doctor_real_subprocess_is_read_only[environment]" time="0.728" /><testcase classname="" name="test_doctor_real_subprocess_is_read_only[bad_config]" time="0.330" /><testcase classname="" name="test_doctor_real_subprocess_is_read_only[bad_environment]" time="0.743" /><testcase classname="" name="test_collect_checks_never_constructs_gate_store_or_reads_integrations" time="0.008" /><testcase classname="" name="test_character_entities_in_asset_and_inline_body" time="0.020" /><testcase classname="" name="test_noncanonical_raw_script_hash_is_rejected[\r\n]" time="0.022"><failure message="Failed: DID NOT RAISE &lt;class 'airlock.diagnostics.ConsoleValidationError'&gt;">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-fimesl2d/pytest-of-unknown/pytest-0/test_noncanonical_raw_script_h0')
+separator = '\r\n'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_noncanonical_raw_script_hash_is_rejected(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        root=console_at(tmp_path/'console','&lt;html&gt;&lt;script&gt;'+body+'&lt;/script&gt;&lt;/html&gt;',[digest(body)])
+&gt;       with pytest.raises(ConsoleValidationError): validate_console(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'airlock.diagnostics.ConsoleValidationError'&gt;
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:184: Failed</failure></testcase><testcase classname="" name="test_noncanonical_raw_script_hash_is_rejected[\r]" time="0.020"><failure message="Failed: DID NOT RAISE &lt;class 'airlock.diagnostics.ConsoleValidationError'&gt;">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-fimesl2d/pytest-of-unknown/pytest-0/test_noncanonical_raw_script_h1')
+separator = '\r'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_noncanonical_raw_script_hash_is_rejected(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        root=console_at(tmp_path/'console','&lt;html&gt;&lt;script&gt;'+body+'&lt;/script&gt;&lt;/html&gt;',[digest(body)])
+&gt;       with pytest.raises(ConsoleValidationError): validate_console(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE &lt;class 'airlock.diagnostics.ConsoleValidationError'&gt;
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:184: Failed</failure></testcase><testcase classname="" name="test_browser_normalized_script_hash_is_accepted[\r\n]" time="0.013"><failure message="airlock.diagnostics.ConsoleValidationError: console_csp_mismatch">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-fimesl2d/pytest-of-unknown/pytest-0/test_browser_normalized_script0')
+separator = '\r\n'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_browser_normalized_script_hash_is_accepted(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        expected=digest(body.replace('\r\n','\n').replace('\r','\n'))
+        root=console_at(tmp_path/'console','&lt;html&gt;&lt;script&gt;'+body+'&lt;/script&gt;&lt;/html&gt;',[expected])
+&gt;       assert validate_console(root)==[expected]
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+source\airlock\diagnostics.py:199: in validate_console
+    _fail('console_csp_mismatch')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+code = 'console_csp_mismatch'
+
+    def _fail(code):
+&gt;       raise ConsoleValidationError(code)
+E       airlock.diagnostics.ConsoleValidationError: console_csp_mismatch
+
+source\airlock\diagnostics.py:40: ConsoleValidationError</failure></testcase><testcase classname="" name="test_browser_normalized_script_hash_is_accepted[\r]" time="0.008"><failure message="airlock.diagnostics.ConsoleValidationError: console_csp_mismatch">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-fimesl2d/pytest-of-unknown/pytest-0/test_browser_normalized_script1')
+separator = '\r'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_browser_normalized_script_hash_is_accepted(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        expected=digest(body.replace('\r\n','\n').replace('\r','\n'))
+        root=console_at(tmp_path/'console','&lt;html&gt;&lt;script&gt;'+body+'&lt;/script&gt;&lt;/html&gt;',[expected])
+&gt;       assert validate_console(root)==[expected]
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+source\airlock\diagnostics.py:199: in validate_console
+    _fail('console_csp_mismatch')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+code = 'console_csp_mismatch'
+
+    def _fail(code):
+&gt;       raise ConsoleValidationError(code)
+E       airlock.diagnostics.ConsoleValidationError: console_csp_mismatch
+
+source\airlock\diagnostics.py:40: ConsoleValidationError</failure></testcase><testcase classname="" name="test_symlinks_do_not_escape_console[asset]" time="0.004"><skipped type="pytest.skip" message="ENVIRONMENT BLOCKED: synthetic symlink unavailable, OSError">C:\Users\27363\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:207: ENVIRONMENT BLOCKED: synthetic symlink unavailable, OSError</skipped></testcase><testcase classname="" name="test_symlinks_do_not_escape_console[directory]" time="0.004"><skipped type="pytest.skip" message="ENVIRONMENT BLOCKED: synthetic symlink unavailable, OSError">C:\Users\27363\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:207: ENVIRONMENT BLOCKED: synthetic symlink unavailable, OSError</skipped></testcase><testcase classname="" name="test_symlinks_do_not_escape_console[root]" time="0.004"><skipped type="pytest.skip" message="ENVIRONMENT BLOCKED: synthetic symlink unavailable, OSError">C:\Users\27363\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:207: ENVIRONMENT BLOCKED: synthetic symlink unavailable, OSError</skipped></testcase><testcase classname="" name="test_native_browser_confirms_crlf_hash_semantics" time="36.398"><failure message="TypeError: Browser.close: can only concatenate str (not &quot;Request&quot;) to str">tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-fimesl2d/pytest-of-unknown/pytest-0/test_native_browser_confirms_c0')
+
+    def test_native_browser_confirms_crlf_hash_semantics(tmp_path):
+        from playwright.sync_api import sync_playwright
+        body='window.lineProbe=1;\r\nwindow.lineProbe=2;'
+        html='&lt;html&gt;&lt;script&gt;'+body+'&lt;/script&gt;&lt;/html&gt;'
+        results=[]
+        with sync_playwright() as engine:
+            browser=engine.chromium.launch(headless=True)
+            try:
+                for mode,hash_value,expected in [('raw',digest(body),None),('normalized',digest(body.replace('\r\n','\n')),2)]:
+                    context=browser.new_context(service_workers='block')
+                    context.route('**/*',lambda route,hash_value=hash_value:route.fulfill(status=200,
+                        headers={'content-type':'text/html; charset=utf-8','content-security-policy':"default-src 'none'; script-src "+hash_value},body=html))
+                    page=context.new_page();logs=[]
+                    page.on('console',lambda message:logs.append({'type':message.type,'text':message.text}))
+                    page.goto('https://airlock-synthetic.invalid/');page.wait_for_load_state('networkidle')
+                    observed=page.evaluate('window.lineProbe ?? null')
+                    normalized=page.locator('script').text_content()
+                    results.append({'mode':mode,'observed':observed,'script_text':normalized,'console':logs})
+                    assert observed==expected
+                    assert normalized==body.replace('\r\n','\n')
+                    context.close()
+&gt;           finally: browser.close()
+                     ^^^^^^^^^^^^^^^
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:232: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\Desktop\airlock\.venv\Lib\site-packages\playwright\sync_api\_generated.py:14335: in close
+    return mapping.from_maybe_impl(self._sync(self._impl_obj.close(reason=reason)))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\..\..\Desktop\airlock\.venv\Lib\site-packages\playwright\_impl\_browser.py:241: in close
+    raise e
+..\..\..\..\Desktop\airlock\.venv\Lib\site-packages\playwright\_impl\_browser.py:238: in close
+    await self._channel.send("close", None, {"reason": reason})
+..\..\..\..\Desktop\airlock\.venv\Lib\site-packages\playwright\_impl\_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;playwright._impl._connection.Connection object at 0x00000229D3874050&gt;
+cb = &lt;function Channel.send.&lt;locals&gt;.&lt;lambda&gt; at 0x00000229D3C74C20&gt;
+is_internal = False, title = None
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None
+    ) -&gt; Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(
+            task, "__pw_stack__", None
+        ) or inspect.stack(0)
+    
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+&gt;           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           TypeError: Browser.close: can only concatenate str (not "Request") to str
+
+..\..\..\..\Desktop\airlock\.venv\Lib\site-packages\playwright\_impl\_connection.py:559: TypeError</failure></testcase></testsuite></testsuites>

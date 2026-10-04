@@ -2,7 +2,7 @@
   "record_type": "code_validation_and_delivery_anchor",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "tested_commit": "7073fb76a2e46365fabe6f51a3765de267863890",
+  "tested_commit": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
   "code_push_confirmed": true,
   "documentation_commit": "Exact final pushed delivery SHA is recorded on memory/progress STATE.json.",
   "pr": {
@@ -13,51 +13,53 @@
     "merged": false
   },
   "ci": {
-    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37164846361",
-    "run_id": 37164846361,
-    "job_id": 111325559836,
-    "tested_commit_sha": "7073fb76a2e46365fabe6f51a3765de267863890",
+    "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37167936489",
+    "run_id": 37167936489,
+    "job_id": 111334729986,
+    "tested_commit_sha": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
     "status": "completed",
     "conclusion": "success",
     "artifact": {
-      "id": 11288478711,
+      "id": 11290722179,
       "name": "acceptance-evidence",
-      "size_in_bytes": 1940695,
-      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11288478711",
-      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11288478711/zip",
+      "size_in_bytes": 1963487,
+      "url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11290722179",
+      "archive_download_url": "https://api.github.com/repos/Changxin-YR/AIRLOCK/actions/artifacts/11290722179/zip",
       "expired": false,
-      "created_at": "2026-10-04T00:32:03Z",
-      "expires_at": "2027-01-02T00:24:25Z",
-      "updated_at": "2026-10-04T00:32:03Z",
-      "digest": "sha256:fb98b56d111cae2c1e318b012e6d0703022d4b62e938801e1a79872963a4b190",
+      "created_at": "2026-10-04T01:34:17Z",
+      "expires_at": "2027-01-02T01:24:55Z",
+      "updated_at": "2026-10-04T01:34:17Z",
+      "digest": "sha256:fe6bf15b99c9902da6f87b6b36bebcfe9692f457fe00d36d0017c47d6d270b21",
       "workflow_run": {
-        "id": 37164846361,
+        "id": 37167936489,
         "repository_id": 1396912712,
         "head_repository_id": 1396912712,
         "head_branch": "codex/full-audit-2026-10-02",
-        "head_sha": "7073fb76a2e46365fabe6f51a3765de267863890"
+        "head_sha": "7dcea8ab94b60753391e0d90a73179684fc39fe1"
       }
     },
     "git_evidence": [
-      "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
-      "evidence/project-maintenance-20261004/ci/acceptance-7073fb7-verification.json",
-      "evidence/project-maintenance-20261004/ci/verified-job.log",
-      "evidence/project-maintenance-20261004/ci/downloaded-verifier.log",
-      "evidence/project-maintenance-20261004/ci/downloaded-verifier.log.status.json"
+      "evidence/startup-preflight-20261004/ci/acceptance-7dcea8a.zip",
+      "evidence/startup-preflight-20261004/ci/acceptance-7dcea8a-verification.json",
+      "evidence/startup-preflight-20261004/ci/verified-job.log",
+      "evidence/startup-preflight-20261004/ci/downloaded-verifier.log",
+      "evidence/startup-preflight-20261004/ci/downloaded-verifier.log.status.json"
     ],
-    "zip_git_path": "evidence/project-maintenance-20261004/ci/acceptance-7073fb7.zip",
-    "zip_sha256": "fb98b56d111cae2c1e318b012e6d0703022d4b62e938801e1a79872963a4b190",
+    "zip_git_path": "evidence/startup-preflight-20261004/ci/acceptance-7dcea8a.zip",
+    "zip_sha256": "fe6bf15b99c9902da6f87b6b36bebcfe9692f457fe00d36d0017c47d6d270b21",
     "downloaded_sha256_verified": true,
     "manifest_files_verified": 94,
-    "junit_tests": 703,
+    "junit_tests": 796,
     "javascript_tests": 6,
     "native_browser_checks": 31,
+    "linux_symlink_cases": 3,
+    "clean_source_exit_receipts_verified": 24,
     "downloaded_functional_verifier_exit_code": 0,
     "source_archive_commit_verified": true,
     "retention": {
-      "actions_expires_at": "2027-01-02T00:24:25Z",
+      "actions_expires_at": "2027-01-02T01:24:55Z",
       "git": "No automatic expiry; repository history/backups; not WORM",
-      "private": "Local temporary caches have no retention guarantee; private data and credentials excluded."
+      "private": "Local temporary caches have no retention guarantee; private data, credentials and databases excluded."
     }
   },
   "target_count": 126,
@@ -203,5 +205,27 @@
     "original_acceptance_criteria_preserved": true,
     "evidence_directory": "evidence/project-maintenance-20261004",
     "project_checkpoint": "evidence/project-checkpoint-20261004/README.md"
+  },
+  "startup_preflight": {
+    "baseline": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+    "source_commit": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
+    "source_ci_run": 37167936489,
+    "findings": [
+      "F044",
+      "F045",
+      "F046"
+    ],
+    "doctor_scope": "configuration, in-memory SQLite and static console; no persistent database or external integration checks",
+    "local_preflight_tests": 793,
+    "frozen_targeted_passed": 142,
+    "windows_targeted_environment_blocked": 3,
+    "independent_checks_passed": 28,
+    "windows_independent_environment_blocked": 1,
+    "linux_symlinks_passed": 3,
+    "ci_tests": 796,
+    "imported_raw_files": 120,
+    "new_model_calls": 0,
+    "human_completed": 0,
+    "evidence_directory": "evidence/startup-preflight-20261004"
   }
 }

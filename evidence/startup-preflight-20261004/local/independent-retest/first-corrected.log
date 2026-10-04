@@ -1,0 +1,120 @@
+.....................FFFFs...                                            [100%]
+================================== FAILURES ===================================
+_____________ test_noncanonical_raw_script_hash_is_rejected[\r\n] _____________
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-k25gagxb/pytest-of-unknown/pytest-0/test_noncanonical_raw_script_h0')
+separator = '\r\n'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_noncanonical_raw_script_hash_is_rejected(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        root=console_at(tmp_path/'console','<html><script>'+body+'</script></html>',[digest(body)])
+>       with pytest.raises(ConsoleValidationError): validate_console(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.diagnostics.ConsoleValidationError'>
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:184: Failed
+______________ test_noncanonical_raw_script_hash_is_rejected[\r] ______________
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-k25gagxb/pytest-of-unknown/pytest-0/test_noncanonical_raw_script_h1')
+separator = '\r'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_noncanonical_raw_script_hash_is_rejected(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        root=console_at(tmp_path/'console','<html><script>'+body+'</script></html>',[digest(body)])
+>       with pytest.raises(ConsoleValidationError): validate_console(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'airlock.diagnostics.ConsoleValidationError'>
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:184: Failed
+____________ test_browser_normalized_script_hash_is_accepted[\r\n] ____________
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-k25gagxb/pytest-of-unknown/pytest-0/test_browser_normalized_script0')
+separator = '\r\n'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_browser_normalized_script_hash_is_accepted(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        expected=digest(body.replace('\r\n','\n').replace('\r','\n'))
+        root=console_at(tmp_path/'console','<html><script>'+body+'</script></html>',[expected])
+>       assert validate_console(root)==[expected]
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+source\airlock\diagnostics.py:199: in validate_console
+    _fail('console_csp_mismatch')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+code = 'console_csp_mismatch'
+
+    def _fail(code):
+>       raise ConsoleValidationError(code)
+E       airlock.diagnostics.ConsoleValidationError: console_csp_mismatch
+
+source\airlock\diagnostics.py:40: ConsoleValidationError
+_____________ test_browser_normalized_script_hash_is_accepted[\r] _____________
+
+tmp_path = WindowsPath('C:/Users/27363/AppData/Local/Temp/airlock-preflight-retest-k25gagxb/pytest-of-unknown/pytest-0/test_browser_normalized_script1')
+separator = '\r'
+
+    @pytest.mark.parametrize('separator',['\r\n','\r'])
+    def test_browser_normalized_script_hash_is_accepted(tmp_path,separator):
+        body='window.lineProbe=1;'+separator+'window.lineProbe=2;'
+        expected=digest(body.replace('\r\n','\n').replace('\r','\n'))
+        root=console_at(tmp_path/'console','<html><script>'+body+'</script></html>',[expected])
+>       assert validate_console(root)==[expected]
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:192: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+source\airlock\diagnostics.py:199: in validate_console
+    _fail('console_csp_mismatch')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+code = 'console_csp_mismatch'
+
+    def _fail(code):
+>       raise ConsoleValidationError(code)
+E       airlock.diagnostics.ConsoleValidationError: console_csp_mismatch
+
+source\airlock\diagnostics.py:40: ConsoleValidationError
+============================== warnings summary ===============================
+::test_headless_liveness_compatibility
+  C:\Users\27363\Desktop\airlock\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=================================== PASSES ====================================
+=========================== short test summary info ===========================
+PASSED ::test_serve_real_subprocess_redacts_configuration[AIRLOCK_TTL-synthetic-secret-numeric-marker]
+PASSED ::test_serve_real_subprocess_redacts_configuration[AIRLOCK_ORIGIN-http://127.0.0.1:synthetic-secret-port-marker]
+PASSED ::test_api_invalid_console_precedes_gate[False-bad_csp]
+PASSED ::test_api_invalid_console_precedes_gate[False-missing_js]
+PASSED ::test_api_invalid_console_precedes_gate[False-index_only]
+PASSED ::test_api_invalid_console_precedes_gate[False-csp_only]
+PASSED ::test_api_invalid_console_precedes_gate[False-entity_traversal]
+PASSED ::test_api_invalid_console_precedes_gate[False-plain_traversal]
+PASSED ::test_api_invalid_console_precedes_gate[True-bad_csp]
+PASSED ::test_api_invalid_console_precedes_gate[True-missing_js]
+PASSED ::test_api_invalid_console_precedes_gate[True-index_only]
+PASSED ::test_api_invalid_console_precedes_gate[True-csp_only]
+PASSED ::test_api_invalid_console_precedes_gate[True-entity_traversal]
+PASSED ::test_api_invalid_console_precedes_gate[True-plain_traversal]
+PASSED ::test_headless_liveness_compatibility
+PASSED ::test_doctor_real_subprocess_is_read_only[config]
+PASSED ::test_doctor_real_subprocess_is_read_only[environment]
+PASSED ::test_doctor_real_subprocess_is_read_only[bad_config]
+PASSED ::test_doctor_real_subprocess_is_read_only[bad_environment]
+PASSED ::test_collect_checks_never_constructs_gate_store_or_reads_integrations
+PASSED ::test_character_entities_in_asset_and_inline_body
+PASSED ::test_symlinks_do_not_escape_console[directory]
+PASSED ::test_symlinks_do_not_escape_console[root]
+PASSED ::test_native_browser_confirms_crlf_hash_semantics
+SKIPPED [1] ..\..\..\..\Desktop\airlock\var\startup-preflight-20261004\independent-retest\test_countercheck.py:208: ENVIRONMENT BLOCKED: synthetic file symlink unavailable, OSError
+FAILED ::test_noncanonical_raw_script_hash_is_rejected[\r\n] - Failed: DID NO...
+FAILED ::test_noncanonical_raw_script_hash_is_rejected[\r] - Failed: DID NOT ...
+FAILED ::test_browser_normalized_script_hash_is_accepted[\r\n] - airlock.diag...
+FAILED ::test_browser_normalized_script_hash_is_accepted[\r] - airlock.diagno...
+4 failed, 24 passed, 1 skipped, 1 warning in 8.07s

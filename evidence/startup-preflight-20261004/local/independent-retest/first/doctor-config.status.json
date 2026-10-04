@@ -1,0 +1,14 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "airlock",
+    "doctor",
+    "--json",
+    "--config",
+    "C:\\Users\\27363\\AppData\\Local\\Temp\\airlock-preflight-retest-fimesl2d\\pytest-of-unknown\\pytest-0\\test_doctor_real_subprocess_is0\\synthetic.json"
+  ],
+  "child_exit_code": 0,
+  "stdout_sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

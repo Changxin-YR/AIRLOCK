@@ -1,0 +1,14 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "var/startup-preflight-20261004/independent-retest/run_countercheck.py",
+    "first-corrected",
+    "first"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-10-04T01:15:37.579389+00:00",
+  "duration_seconds": 10.066,
+  "tested_commit_sha": "f27b447e268209a8b8f480111e55a3f6bb1bedce",
+  "tracked_source_dirty": true,
+  "started_commit_sha": "f27b447e268209a8b8f480111e55a3f6bb1bedce"
+}

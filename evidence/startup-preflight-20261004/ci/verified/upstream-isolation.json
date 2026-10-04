@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "mode": "real_docker_protected_upstream",
+  "image": "sha256:ced10441c30ec6ee8b0e0a1bf91d419d772a81f319564557616e87bd6816dd1f",
+  "probe": {
+    "action_id": "21a874facbdf47979b028ac5662e4b0c",
+    "checks": [
+      "no_upstream_dns",
+      "no_direct_ip_access",
+      "no_upstream_or_review_secret",
+      "no_server_volume_or_socket",
+      "single_internal_agent_network",
+      "write_waits_for_reviewer"
+    ]
+  },
+  "checks": [
+    "rejection_preserves_remote_value",
+    "separate_approval_executes_once",
+    "separate_compensation_restores_value",
+    "audit_chain_valid"
+  ],
+  "network_boundary": "Agent only on internal ingress; upstream only on distinct internal target network; gate on both; no upstream published port",
+  "limitations": [
+    "Synthetic remote CAS counter, scripted reviewer; not a human study",
+    "Dedicated pinned private HTTP in isolated fixture; production untrusted networks require TLS",
+    "Host administrator and container escape outside tested boundary"
+  ]
+}

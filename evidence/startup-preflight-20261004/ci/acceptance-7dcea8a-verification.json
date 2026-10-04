@@ -1,0 +1,8 @@
+{
+  "zip_sha256": "fe6bf15b99c9902da6f87b6b36bebcfe9692f457fe00d36d0017c47d6d270b21",
+  "manifest_files_verified": 94,
+  "tested_commit_sha": "7dcea8ab94b60753391e0d90a73179684fc39fe1",
+  "source_zip_commit_verified": true,
+  "github_run_id": "37167936489",
+  "scope": "Hash/provenance verification; functional result must be checked independently."
+}

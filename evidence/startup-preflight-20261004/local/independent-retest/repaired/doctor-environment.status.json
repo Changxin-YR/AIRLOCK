@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "airlock",
+    "doctor",
+    "--json"
+  ],
+  "child_exit_code": 0,
+  "stdout_sha256": "21620f3cd71e882d5bef0e73169136152a09c5b3ba8df2ae9660a01f6ff34422",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
