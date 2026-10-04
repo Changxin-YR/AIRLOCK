@@ -1,15 +1,15 @@
 {
   "schema_version": 5,
-  "updated_date": "2026-10-03",
+  "updated_date": "2026-10-04",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "closure2_complete_in_tested_scope_external_targets_open",
+  "phase": "resume_portfolio_prepared_original_acceptance_preserved",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
-  "code_and_evidence_commit": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
+  "working_commit": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
+  "code_and_evidence_commit": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
   "tested_commit": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "126c3497a9ce81802fbbf5c4371156acf73832d7",
+  "previous_memory_commit": "a6b56d11ce93c1847d61e3199d2f4b8d5ef5ad41",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -175,7 +175,9 @@
   "reports": [
     "docs/acceptance/FINAL_REPORT.md",
     "docs/acceptance/COMPLETION_MATRIX.json",
-    "docs/START_WITH_ONE_PERSON.md"
+    "docs/START_WITH_ONE_PERSON.md",
+    "docs/RESUME_PORTFOLIO.md",
+    "evidence/resume-archive-20261004/README.md"
   ],
   "delivery_ci": {
     "run_id": 37118762214,
@@ -362,5 +364,28 @@
     "delivery_ci_run": 37118762214,
     "delivery_ci_metadata": "CLOSURE2_DELIVERY_CI_20261003.json",
     "summary": "F035-F042 repaired, independently counterchecked, frozen source CI and final delivery CI verified from downloaded raw artifacts. Public evidence committed and pushed; original external blockers retained."
+  },
+  "resume_portfolio": {
+    "archive_baseline": "699adbd7c421f0c80fd0339ff69f892929cb28bd",
+    "delivery_commit": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
+    "pushed": true,
+    "scope": "Resume presentation, archive and deterministic synthetic demo; no application edits or changes to original acceptance criteria.",
+    "archive": "evidence/resume-archive-20261004/AIRLOCK-resume-baseline-699adbd.zip",
+    "archive_sha256": "1ec0d00025e4a9b059f6e80de6bb052db345b59c2486f3a80d41a47374b678f4",
+    "guide": "docs/RESUME_PORTFOLIO.md",
+    "new_demo_exit_code": 0,
+    "initial_sandbox_demo_exit_code": 1,
+    "validation_exit_code": 0,
+    "git_payloads_checked": 12,
+    "document_bindings_checked": 2,
+    "human_completed": 0,
+    "new_model_calls": 0,
+    "full_ci": {
+      "run_id": 37163463753,
+      "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37163463753",
+      "status_at_checkpoint": "in_progress",
+      "new_full_pass_claimed": false
+    },
+    "next": "Owner runs browser rejection/approval walkthrough and explains transaction, authority, idempotency and unknown-state handling; extend only for concrete demo/job needs."
   }
 }

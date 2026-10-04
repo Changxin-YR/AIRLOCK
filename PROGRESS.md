@@ -1,3 +1,17 @@
+# 简历阶段归档与演示材料已交付（2026-10-04，Asia/Shanghai）
+
+用户将当前重点转为简历用途。本次归档699adbd7c421f0c80fd0339ff69f892929cb28bd工程基线，并准备核心功能取舍、三条简历条目、一分钟介绍、五分钟演示和已有面试材料入口。原始126项目标和105限定PASS/21 BLOCKED_EXTERNAL结论保留，不将展示优先级当作原目标验收通过。
+
+当前工作分支codex/full-audit-2026-10-02本地/远端为d0e8cd7b72d68a9dffad38e6d572a921bb864d94；main仍704b5035cf69f9a6c40c44eecd84c0d0741de849，PR #1 draft/open/unmerged。应用/测试/可执行验收源码未变，历史完整通过仍锚定533726a与699adbd的两次CI。此次文档归档触发CI37163463753，当前运行中，未读取新原始artifact，不宣称新全套通过。
+
+归档evidence/resume-archive-20261004/AIRLOCK-resume-baseline-699adbd.zip，2,835,771 bytes，SHA256 1ec0d00025e4a9b059f6e80de6bb052db345b59c2486f3a80d41a47374b678f4。包内有排除历史evidence的Git源码ZIP、上一轮完整源码CI ZIP、原任务/126索引/矩阵/报告/保留说明快照。其他历史证据留Git；个人日志、var、数据库、真实凭据不打包。Git无自动到期但非WORM；两份原Actions副本到期时间仍为2027-01-01T10:55:17Z和T11:09:37Z。
+
+本轮命令：scripts/demo_comparison.py --output evidence/resume-archive-20261004/comparison.json，经run_logged收据留存；首次受限Windows临时目录权限失败exit1，自动审批后普通用户环境原脚本重跑exit0。一次性合成数据：无闸门1206→0，有闸门pending/reject均1206，安全读1206，另一明确批准请求后0，审计valid=true。未访问旧demo/live库或真实凭据，真人0/模型新调用0。
+
+归档验脚本evidence/resume-archive-20261004/verify_archive.py经run_logged exit0：10包内载荷、94历史CI载荷、源码SHA、23本地文档链接和演示效果/终态/审计一致；提交后重读12公开Git载荷与2文档hash一致。初始失败保留，不算产品缺陷或真人效果。旧本机代理7897不可用，git -c http.proxy= push成功，未更改全局配置。
+
+下一步按docs/RESUME_PORTFOLIO.md做本人页面演示和讲解练习。生产SSO/多租户/云保管/真人研究等可后置，已实现能力不删、原未完成项不关；不要继续无目标地扩功能。本人实际操作与掌握仍NOT RUN，不能由自动化代填。
+
 # AIRLOCK 修复与双重验证交付完成（2026-10-03）
 
 实际main为704b5035cf69f9a6c40c44eecd84c0d0741de849，未合并。远端工作分支codex/full-audit-2026-10-02及本地HEAD为699adbd7c421f0c80fd0339ff69f892929cb28bd；源码533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c，应用及可执行验收代码diff为空。PR #1仍draft/open/unmerged。
