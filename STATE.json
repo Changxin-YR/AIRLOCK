@@ -2,14 +2,14 @@
   "schema_version": 5,
   "updated_date": "2026-10-04",
   "repository": "Changxin-YR/AIRLOCK",
-  "phase": "resume_portfolio_prepared_original_acceptance_preserved",
+  "phase": "project_maintenance_source_pushed_ci_pending",
   "actual_main_sha": "704b5035cf69f9a6c40c44eecd84c0d0741de849",
   "working_branch": "codex/full-audit-2026-10-02",
-  "working_commit": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
+  "working_commit": "7073fb76a2e46365fabe6f51a3765de267863890",
   "code_and_evidence_commit": "d0e8cd7b72d68a9dffad38e6d572a921bb864d94",
   "tested_commit": "533726aa72eeeb71d5c28d81ac84ad7b1a23dd3c",
   "application_diff_tested_to_delivery": [],
-  "previous_memory_commit": "a6b56d11ce93c1847d61e3199d2f4b8d5ef5ad41",
+  "previous_memory_commit": "a21451efc5cb5de59797744588c662a786bb7f02",
   "remote_sync": {
     "working_branch_pushed": true,
     "main_merged": false,
@@ -176,8 +176,8 @@
     "docs/acceptance/FINAL_REPORT.md",
     "docs/acceptance/COMPLETION_MATRIX.json",
     "docs/START_WITH_ONE_PERSON.md",
-    "docs/RESUME_PORTFOLIO.md",
-    "evidence/resume-archive-20261004/README.md"
+    "docs/PLAN.md",
+    "evidence/project-checkpoint-20261004/README.md"
   ],
   "delivery_ci": {
     "run_id": 37118762214,
@@ -384,8 +384,34 @@
       "run_id": 37163463753,
       "url": "https://github.com/Changxin-YR/AIRLOCK/actions/runs/37163463753",
       "status_at_checkpoint": "in_progress",
-      "new_full_pass_claimed": false
+      "new_full_pass_claimed": false,
+      "status_at_latest_check": "completed",
+      "conclusion": "success",
+      "raw_artifact_download_verified": false
     },
-    "next": "Owner runs browser rejection/approval walkthrough and explains transaction, authority, idempotency and unknown-state handling; extend only for concrete demo/job needs."
+    "next": "Owner runs browser rejection/approval walkthrough and explains transaction, authority, idempotency and unknown-state handling; extend only for concrete demo/job needs.",
+    "historical": true,
+    "superseded_by": "project_maintenance"
+  },
+  "project_maintenance": {
+    "source_commit": "7073fb76a2e46365fabe6f51a3765de267863890",
+    "source_pushed": true,
+    "source_ci_run": 37164846361,
+    "source_ci_status": "in_progress",
+    "current_direction": "Build AIRLOCK around actual controlled tool-call workflows, installation, diagnostics, operation and maintenance.",
+    "changes": [
+      "Explicit startup configuration validation before Uvicorn",
+      "Project use-case/setup/architecture documentation",
+      "Engineering checkpoint with preserved original evidence provenance"
+    ],
+    "local_targeted_tests": 52,
+    "local_targeted_exit": 0,
+    "independent_child_process_checks": 7,
+    "new_model_calls": 0,
+    "human_completed": 0,
+    "checkpoint": "evidence/project-checkpoint-20261004/AIRLOCK-project-baseline-699adbd.zip",
+    "checkpoint_sha256": "60bd67a5db7aa28c86f6b8743ce052b6a8986821bf0cf371257645ef5f87717e",
+    "evidence": "evidence/project-maintenance-20261004",
+    "next": "Verify frozen CI, update per-target evidence and finish delivery; maintain core workflows and practical integration contracts."
   }
 }
